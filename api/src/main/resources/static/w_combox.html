@@ -1,0 +1,51 @@
+<h2 class="contentTitle">下拉菜单</h2>
+
+<div class="pageContent" layoutH="56">
+    <select class="combox" name="province" ref="w_combox_city" refUrl="demo/combox/city_{value}.html">
+        <option value="all">所有省市</option>
+        <option value="bj">北京</option>
+        <option value="sh">上海</option>
+        <option value="zj">浙江省</option>
+    </select>
+    <select class="combox" name="city" id="w_combox_city" ref="w_combox_region"
+            refUrl="demo/combox/region_{value}.html">
+        <option value="all">所有城市</option>
+    </select>
+    <select class="combox" name="region" id="w_combox_region">
+        <option value="all">所有区县</option>
+    </select>
+
+    <div class="divider"></div>
+
+    <select class="combox" name="test" id="combox_test_demo">
+        <option value="1">test1</option>
+        <option value="2">test2</option>
+    </select>
+
+    <button onclick="comboxRefreshTest();">comboxRefresh</button>
+    <button onclick="comboxDisableTest();">comboxDisable</button>
+    <button onclick="comboxEnableTest();">comboxEnable</button>
+</div>
+
+<script type="text/javascript">
+    function comboxRefreshTest() {
+
+        var count = Math.round(Math.random() * 10);
+        var testJson = [];
+
+        for (var index = 1; index < count; index++) {
+            testJson.push(['' + index, 'test' + index]);
+        }
+
+        $('#combox_test_demo').comboxRefresh(testJson);
+    }
+
+    function comboxDisableTest() {
+        $('#combox_test_demo').comboxDisable();
+    }
+
+    function comboxEnableTest() {
+        $('#combox_test_demo').comboxEnable();
+    }
+</script>
+
