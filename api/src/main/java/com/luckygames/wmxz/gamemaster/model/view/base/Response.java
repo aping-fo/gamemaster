@@ -51,6 +51,11 @@ public class Response extends ModelAndView {
         return this;
     }
 
+    public Response request(Object request) {
+        this.addObject("request", request);
+        return this;
+    }
+
     public Response pager(Pager pager) {
         this.addObject("Pager", pager);
         return this;

@@ -22,9 +22,9 @@ public class RechargeDaily extends BaseEntity {
 
     private Integer goldAppend;
 
-    private BigDecimal apruSum;
+    private BigDecimal arpuSum;
 
-    private BigDecimal apruAppend;
+    private BigDecimal arpuAppend;
 
     public Long getChannelId() {
         return channelId;
@@ -98,19 +98,19 @@ public class RechargeDaily extends BaseEntity {
         this.goldAppend = goldAppend;
     }
 
-    public BigDecimal getApruSum() {
-        return apruSum;
+    public BigDecimal getArpuSum() {
+        return arpuSum;
     }
 
-    public void setApruSum(BigDecimal apruSum) {
-        this.apruSum = apruSum;
+    public void setArpuSum(BigDecimal arpuSum) {
+        this.arpuSum = arpuSum;
     }
 
-    public BigDecimal getApruAppend() {
-        return apruAppend;
+    public BigDecimal getArpuAppend() {
+        return arpuAppend;
     }
 
-    public void setApruAppend(BigDecimal apruAppend) {
-        this.apruAppend = apruAppend;
+    public void setArpuAppend(BigDecimal arpuAppend) {
+        this.arpuAppend = arpuAppend;
     }
 }

@@ -13,8 +13,8 @@ public class CommonController extends BaseController {
         return "index";
     }
 
-    @GetMapping("/error")
-    public String error() {
-        return "error";
-    }
+//    @GetMapping("/error")
+//    public String error() {
+//        return "error";
+//    }
 }

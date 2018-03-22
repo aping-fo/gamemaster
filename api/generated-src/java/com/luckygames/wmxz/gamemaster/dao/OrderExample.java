@@ -297,66 +297,6 @@ public class OrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andServerIdIsNull() {
-            addCriterion("server_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andServerIdIsNotNull() {
-            addCriterion("server_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andServerIdEqualTo(Long value) {
-            addCriterion("server_id =", value, "serverId");
-            return (Criteria) this;
-        }
-
-        public Criteria andServerIdNotEqualTo(Long value) {
-            addCriterion("server_id <>", value, "serverId");
-            return (Criteria) this;
-        }
-
-        public Criteria andServerIdGreaterThan(Long value) {
-            addCriterion("server_id >", value, "serverId");
-            return (Criteria) this;
-        }
-
-        public Criteria andServerIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("server_id >=", value, "serverId");
-            return (Criteria) this;
-        }
-
-        public Criteria andServerIdLessThan(Long value) {
-            addCriterion("server_id <", value, "serverId");
-            return (Criteria) this;
-        }
-
-        public Criteria andServerIdLessThanOrEqualTo(Long value) {
-            addCriterion("server_id <=", value, "serverId");
-            return (Criteria) this;
-        }
-
-        public Criteria andServerIdIn(List<Long> values) {
-            addCriterion("server_id in", values, "serverId");
-            return (Criteria) this;
-        }
-
-        public Criteria andServerIdNotIn(List<Long> values) {
-            addCriterion("server_id not in", values, "serverId");
-            return (Criteria) this;
-        }
-
-        public Criteria andServerIdBetween(Long value1, Long value2) {
-            addCriterion("server_id between", value1, value2, "serverId");
-            return (Criteria) this;
-        }
-
-        public Criteria andServerIdNotBetween(Long value1, Long value2) {
-            addCriterion("server_id not between", value1, value2, "serverId");
-            return (Criteria) this;
-        }
-
         public Criteria andChannelIdIsNull() {
             addCriterion("channel_id is null");
             return (Criteria) this;
@@ -484,6 +424,136 @@ public class OrderExample {
 
         public Criteria andChannelNameNotBetween(String value1, String value2) {
             addCriterion("channel_name not between", value1, value2, "channelName");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdIsNull() {
+            addCriterion("server_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdIsNotNull() {
+            addCriterion("server_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdEqualTo(Long value) {
+            addCriterion("server_id =", value, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdNotEqualTo(Long value) {
+            addCriterion("server_id <>", value, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdGreaterThan(Long value) {
+            addCriterion("server_id >", value, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("server_id >=", value, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdLessThan(Long value) {
+            addCriterion("server_id <", value, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdLessThanOrEqualTo(Long value) {
+            addCriterion("server_id <=", value, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdIn(List<Long> values) {
+            addCriterion("server_id in", values, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdNotIn(List<Long> values) {
+            addCriterion("server_id not in", values, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdBetween(Long value1, Long value2) {
+            addCriterion("server_id between", value1, value2, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerIdNotBetween(Long value1, Long value2) {
+            addCriterion("server_id not between", value1, value2, "serverId");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerNameIsNull() {
+            addCriterion("server_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerNameIsNotNull() {
+            addCriterion("server_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerNameEqualTo(String value) {
+            addCriterion("server_name =", value, "serverName");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerNameNotEqualTo(String value) {
+            addCriterion("server_name <>", value, "serverName");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerNameGreaterThan(String value) {
+            addCriterion("server_name >", value, "serverName");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerNameGreaterThanOrEqualTo(String value) {
+            addCriterion("server_name >=", value, "serverName");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerNameLessThan(String value) {
+            addCriterion("server_name <", value, "serverName");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerNameLessThanOrEqualTo(String value) {
+            addCriterion("server_name <=", value, "serverName");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerNameLike(String value) {
+            addCriterion("server_name like", value, "serverName");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerNameNotLike(String value) {
+            addCriterion("server_name not like", value, "serverName");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerNameIn(List<String> values) {
+            addCriterion("server_name in", values, "serverName");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerNameNotIn(List<String> values) {
+            addCriterion("server_name not in", values, "serverName");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerNameBetween(String value1, String value2) {
+            addCriterion("server_name between", value1, value2, "serverName");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerNameNotBetween(String value1, String value2) {
+            addCriterion("server_name not between", value1, value2, "serverName");
             return (Criteria) this;
         }
 

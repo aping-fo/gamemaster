@@ -11,9 +11,10 @@
             <table class="searchContent">
                 <tr>
                     <td>
-                        <div class="button">
+                        <div>
                             <div class="buttonContent">
-                                <button type="reset">筛选</button>
+                                <a class="button" href="tools/serverchannelselect" target="dialog"
+                                   rel="serverchannelselect" mask="true"><span>区服/渠道筛选</span></a>
                             </div>
                         </div>
                     </td>
@@ -64,12 +65,12 @@
             <th width="100" align="right">新增充值金额</th>
             <th width="80" align="right">充值元宝（总）</th>
             <th width="80" align="right">新增充值元宝</th>
-            <th width="80" align="right">APRU（总）</th>
-            <th width="80" align="right">新增APRU</th>
+            <th width="80" align="right">ARPU（总）</th>
+            <th width="80" align="right">新增ARPU</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="row,iterStat:${rechargeDailies}">
+        <tr th:each="row,iterStat:${rechargeDailyList}">
             <td th:text="${row.reportDate}"></td>
             <td th:text="${row.rechargeSum}"></td>
             <td th:text="${row.rechargeAmount}"></td>
@@ -77,8 +78,8 @@
             <td th:text="${row.appendAmount}"></td>
             <td th:text="${row.goldSum}"></td>
             <td th:text="${row.goldAppend}"></td>
-            <td th:text="${row.apruSum}"></td>
-            <td th:text="${row.apruAppend}"></td>
+            <td th:text="${row.arpuSum}"></td>
+            <td th:text="${row.arpuAppend}"></td>
         </tr>
         </tbody>
     </table>

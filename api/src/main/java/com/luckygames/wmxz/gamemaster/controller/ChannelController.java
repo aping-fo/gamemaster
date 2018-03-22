@@ -2,10 +2,10 @@ package com.luckygames.wmxz.gamemaster.controller;
 
 import com.github.pagehelper.Page;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
-import com.luckygames.wmxz.gamemaster.dao.Server;
+import com.luckygames.wmxz.gamemaster.dao.Channel;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
-import com.luckygames.wmxz.gamemaster.model.view.request.ServerSearchRequest;
-import com.luckygames.wmxz.gamemaster.service.ServerService;
+import com.luckygames.wmxz.gamemaster.model.view.request.ChannelSearchRequest;
+import com.luckygames.wmxz.gamemaster.service.ChannelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,22 +14,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 @Controller
-@RequestMapping("/server")
-public class ServerController extends BaseController {
+@RequestMapping("/channel")
+public class ChannelController extends BaseController {
     @Autowired
-    private ServerService serverService;
+    private ChannelService channelService;
 
     @RequestMapping(value = "/select", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response search(ServerSearchRequest request) {
-        Response r = new Response("server/select")
+    public Response search(ChannelSearchRequest request) {
+        Response r = new Response("channel/select")
                 .request(request);
 
         if (request.getPageNum() == null) {
-            List<Server> serverList = serverService.searchList(request);
-            r.data("serverList", serverList);
+            List<Channel> channelList = channelService.searchList(request);
+            r.data("channelList", channelList);
         } else {
-            Page<Server> serverList = serverService.searchPage(request);
-            r.data("serverList", serverList);
+            Page<Channel> channelList = channelService.searchPage(request);
+            r.data("channelList", channelList);
         }
 
         return r;

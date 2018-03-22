@@ -8,6 +8,8 @@ public class PlayerCharacter extends BaseEntity {
 
     private Long serverId;
 
+    private String serverName;
+
     private Long charId;
 
     private String charName;
@@ -60,6 +62,14 @@ public class PlayerCharacter extends BaseEntity {
 
     public void setServerId(Long serverId) {
         this.serverId = serverId;
+    }
+
+    public String getServerName() {
+        return serverName;
+    }
+
+    public void setServerName(String serverName) {
+        this.serverName = serverName == null ? null : serverName.trim();
     }
 
     public Long getCharId() {

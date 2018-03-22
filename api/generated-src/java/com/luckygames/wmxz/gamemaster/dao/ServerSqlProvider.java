@@ -40,14 +40,6 @@ public class ServerSqlProvider {
             sql.VALUES("server_name", "#{serverName,jdbcType=VARCHAR}");
         }
         
-        if (record.getChannelId() != null) {
-            sql.VALUES("channel_id", "#{channelId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getChannelName() != null) {
-            sql.VALUES("channel_name", "#{channelName,jdbcType=VARCHAR}");
-        }
-        
         if (record.getOpenDate() != null) {
             sql.VALUES("open_date", "#{openDate,jdbcType=TIMESTAMP}");
         }
@@ -80,8 +72,6 @@ public class ServerSqlProvider {
         }
         sql.SELECT("server_id");
         sql.SELECT("server_name");
-        sql.SELECT("channel_id");
-        sql.SELECT("channel_name");
         sql.SELECT("open_date");
         sql.SELECT("server_type");
         sql.SELECT("status");
@@ -116,14 +106,6 @@ public class ServerSqlProvider {
             sql.SET("server_name = #{record.serverName,jdbcType=VARCHAR}");
         }
         
-        if (record.getChannelId() != null) {
-            sql.SET("channel_id = #{record.channelId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getChannelName() != null) {
-            sql.SET("channel_name = #{record.channelName,jdbcType=VARCHAR}");
-        }
-        
         if (record.getOpenDate() != null) {
             sql.SET("open_date = #{record.openDate,jdbcType=TIMESTAMP}");
         }
@@ -155,8 +137,6 @@ public class ServerSqlProvider {
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
         sql.SET("server_name = #{record.serverName,jdbcType=VARCHAR}");
-        sql.SET("channel_id = #{record.channelId,jdbcType=BIGINT}");
-        sql.SET("channel_name = #{record.channelName,jdbcType=VARCHAR}");
         sql.SET("open_date = #{record.openDate,jdbcType=TIMESTAMP}");
         sql.SET("server_type = #{record.serverType,jdbcType=VARCHAR}");
         sql.SET("status = #{record.status,jdbcType=INTEGER}");

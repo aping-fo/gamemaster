@@ -717,123 +717,123 @@ public class RechargeDailyExample {
             return (Criteria) this;
         }
 
-        public Criteria andApruSumIsNull() {
-            addCriterion("apru_sum is null");
+        public Criteria andArpuSumIsNull() {
+            addCriterion("arpu_sum is null");
             return (Criteria) this;
         }
 
-        public Criteria andApruSumIsNotNull() {
-            addCriterion("apru_sum is not null");
+        public Criteria andArpuSumIsNotNull() {
+            addCriterion("arpu_sum is not null");
             return (Criteria) this;
         }
 
-        public Criteria andApruSumEqualTo(BigDecimal value) {
-            addCriterion("apru_sum =", value, "apruSum");
+        public Criteria andArpuSumEqualTo(BigDecimal value) {
+            addCriterion("arpu_sum =", value, "arpuSum");
             return (Criteria) this;
         }
 
-        public Criteria andApruSumNotEqualTo(BigDecimal value) {
-            addCriterion("apru_sum <>", value, "apruSum");
+        public Criteria andArpuSumNotEqualTo(BigDecimal value) {
+            addCriterion("arpu_sum <>", value, "arpuSum");
             return (Criteria) this;
         }
 
-        public Criteria andApruSumGreaterThan(BigDecimal value) {
-            addCriterion("apru_sum >", value, "apruSum");
+        public Criteria andArpuSumGreaterThan(BigDecimal value) {
+            addCriterion("arpu_sum >", value, "arpuSum");
             return (Criteria) this;
         }
 
-        public Criteria andApruSumGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("apru_sum >=", value, "apruSum");
+        public Criteria andArpuSumGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("arpu_sum >=", value, "arpuSum");
             return (Criteria) this;
         }
 
-        public Criteria andApruSumLessThan(BigDecimal value) {
-            addCriterion("apru_sum <", value, "apruSum");
+        public Criteria andArpuSumLessThan(BigDecimal value) {
+            addCriterion("arpu_sum <", value, "arpuSum");
             return (Criteria) this;
         }
 
-        public Criteria andApruSumLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("apru_sum <=", value, "apruSum");
+        public Criteria andArpuSumLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("arpu_sum <=", value, "arpuSum");
             return (Criteria) this;
         }
 
-        public Criteria andApruSumIn(List<BigDecimal> values) {
-            addCriterion("apru_sum in", values, "apruSum");
+        public Criteria andArpuSumIn(List<BigDecimal> values) {
+            addCriterion("arpu_sum in", values, "arpuSum");
             return (Criteria) this;
         }
 
-        public Criteria andApruSumNotIn(List<BigDecimal> values) {
-            addCriterion("apru_sum not in", values, "apruSum");
+        public Criteria andArpuSumNotIn(List<BigDecimal> values) {
+            addCriterion("arpu_sum not in", values, "arpuSum");
             return (Criteria) this;
         }
 
-        public Criteria andApruSumBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("apru_sum between", value1, value2, "apruSum");
+        public Criteria andArpuSumBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("arpu_sum between", value1, value2, "arpuSum");
             return (Criteria) this;
         }
 
-        public Criteria andApruSumNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("apru_sum not between", value1, value2, "apruSum");
+        public Criteria andArpuSumNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("arpu_sum not between", value1, value2, "arpuSum");
             return (Criteria) this;
         }
 
-        public Criteria andApruAppendIsNull() {
-            addCriterion("apru_append is null");
+        public Criteria andArpuAppendIsNull() {
+            addCriterion("arpu_append is null");
             return (Criteria) this;
         }
 
-        public Criteria andApruAppendIsNotNull() {
-            addCriterion("apru_append is not null");
+        public Criteria andArpuAppendIsNotNull() {
+            addCriterion("arpu_append is not null");
             return (Criteria) this;
         }
 
-        public Criteria andApruAppendEqualTo(BigDecimal value) {
-            addCriterion("apru_append =", value, "apruAppend");
+        public Criteria andArpuAppendEqualTo(BigDecimal value) {
+            addCriterion("arpu_append =", value, "arpuAppend");
             return (Criteria) this;
         }
 
-        public Criteria andApruAppendNotEqualTo(BigDecimal value) {
-            addCriterion("apru_append <>", value, "apruAppend");
+        public Criteria andArpuAppendNotEqualTo(BigDecimal value) {
+            addCriterion("arpu_append <>", value, "arpuAppend");
             return (Criteria) this;
         }
 
-        public Criteria andApruAppendGreaterThan(BigDecimal value) {
-            addCriterion("apru_append >", value, "apruAppend");
+        public Criteria andArpuAppendGreaterThan(BigDecimal value) {
+            addCriterion("arpu_append >", value, "arpuAppend");
             return (Criteria) this;
         }
 
-        public Criteria andApruAppendGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("apru_append >=", value, "apruAppend");
+        public Criteria andArpuAppendGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("arpu_append >=", value, "arpuAppend");
             return (Criteria) this;
         }
 
-        public Criteria andApruAppendLessThan(BigDecimal value) {
-            addCriterion("apru_append <", value, "apruAppend");
+        public Criteria andArpuAppendLessThan(BigDecimal value) {
+            addCriterion("arpu_append <", value, "arpuAppend");
             return (Criteria) this;
         }
 
-        public Criteria andApruAppendLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("apru_append <=", value, "apruAppend");
+        public Criteria andArpuAppendLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("arpu_append <=", value, "arpuAppend");
             return (Criteria) this;
         }
 
-        public Criteria andApruAppendIn(List<BigDecimal> values) {
-            addCriterion("apru_append in", values, "apruAppend");
+        public Criteria andArpuAppendIn(List<BigDecimal> values) {
+            addCriterion("arpu_append in", values, "arpuAppend");
             return (Criteria) this;
         }
 
-        public Criteria andApruAppendNotIn(List<BigDecimal> values) {
-            addCriterion("apru_append not in", values, "apruAppend");
+        public Criteria andArpuAppendNotIn(List<BigDecimal> values) {
+            addCriterion("arpu_append not in", values, "arpuAppend");
             return (Criteria) this;
         }
 
-        public Criteria andApruAppendBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("apru_append between", value1, value2, "apruAppend");
+        public Criteria andArpuAppendBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("arpu_append between", value1, value2, "arpuAppend");
             return (Criteria) this;
         }
 
-        public Criteria andApruAppendNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("apru_append not between", value1, value2, "apruAppend");
+        public Criteria andArpuAppendNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("arpu_append not between", value1, value2, "arpuAppend");
             return (Criteria) this;
         }
 

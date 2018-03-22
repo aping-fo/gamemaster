@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/../../../api/src/main/java/com/luckygames/wmxz/gamemaster/common/configuration/WebSecurityConfig.java</file>
+          <file>file://$MODULE_DIR$/../../../api/src/main/java/com/luckygames/wmxz/gamemaster/common/configuration/ReportProperties.java</file>
+          <file>file://$MODULE_DIR$/../../../api/src/main/java/com/luckygames/wmxz/gamemaster/common/configuration/GlobalProperties.java</file>
+          <file>file://$MODULE_DIR$/../../../api/src/main/java/com/luckygames/wmxz/gamemaster/GamemasterApplication.java</file>
+        </fileset>
+      </configuration>
+    </facet>
+  </component>
+</module>

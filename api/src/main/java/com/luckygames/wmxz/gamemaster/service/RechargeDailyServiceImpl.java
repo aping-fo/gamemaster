@@ -11,13 +11,15 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("rechargeDailyService")
 public class RechargeDailyServiceImpl implements RechargeDailyService {
     @Autowired
     private RechargeDailyMapper rechargeDailyMapper;
 
     @Override
-    public Page<RechargeDaily> search(RechargeDailySearchRequest request) {
+    public Page<RechargeDaily> searchPage(RechargeDailySearchRequest request) {
         RechargeDailyExample example = new RechargeDailyExample();
         RechargeDailyExample.Criteria criteria = example.createCriteria();
         criteria.andStatusEqualTo(Status.NORMAL);
@@ -33,7 +35,29 @@ public class RechargeDailyServiceImpl implements RechargeDailyService {
         if (StringUtils.isNotBlank(request.getEndDate())) {
             criteria.andReportDateLessThanOrEqualTo(request.getStartDate());
         }
-
+        if (request.getPageNum() == null) {
+            request.setPageNum(1);
+        }
         return PageHelper.startPage(request.getPageNum(), request.getPageSize()).doSelectPage(() -> rechargeDailyMapper.selectByExample(example));
+    }
+
+    @Override
+    public List<RechargeDaily> searchList(RechargeDailySearchRequest request) {
+        RechargeDailyExample example = new RechargeDailyExample();
+        RechargeDailyExample.Criteria criteria = example.createCriteria();
+        criteria.andStatusEqualTo(Status.NORMAL);
+        if (request.getChannelId() != null && request.getChannelId() != 0) {
+            criteria.andChannelIdEqualTo(request.getChannelId());
+        }
+        if (request.getServerId() != null && request.getServerId() != 0) {
+            criteria.andServerIdEqualTo(request.getServerId());
+        }
+        if (StringUtils.isNotBlank(request.getStartDate())) {
+            criteria.andReportDateGreaterThanOrEqualTo(request.getStartDate());
+        }
+        if (StringUtils.isNotBlank(request.getEndDate())) {
+            criteria.andReportDateLessThanOrEqualTo(request.getStartDate());
+        }
+        return rechargeDailyMapper.selectByExample(example);
     }
 }

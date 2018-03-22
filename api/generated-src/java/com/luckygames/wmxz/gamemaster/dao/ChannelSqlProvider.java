@@ -1,43 +1,35 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
-import com.luckygames.wmxz.gamemaster.dao.Order;
-import com.luckygames.wmxz.gamemaster.dao.OrderExample.Criteria;
-import com.luckygames.wmxz.gamemaster.dao.OrderExample.Criterion;
-import com.luckygames.wmxz.gamemaster.dao.OrderExample;
+import com.luckygames.wmxz.gamemaster.dao.Channel;
+import com.luckygames.wmxz.gamemaster.dao.ChannelExample.Criteria;
+import com.luckygames.wmxz.gamemaster.dao.ChannelExample.Criterion;
+import com.luckygames.wmxz.gamemaster.dao.ChannelExample;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.jdbc.SQL;
 
-public class OrderSqlProvider {
+public class ChannelSqlProvider {
 
-    public String countByExample(OrderExample example) {
+    public String countByExample(ChannelExample example) {
         SQL sql = new SQL();
-        sql.SELECT("count(*)").FROM("order");
+        sql.SELECT("count(*)").FROM("channel");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String deleteByExample(OrderExample example) {
+    public String deleteByExample(ChannelExample example) {
         SQL sql = new SQL();
-        sql.DELETE_FROM("order");
+        sql.DELETE_FROM("channel");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String insertSelective(Order record) {
+    public String insertSelective(Channel record) {
         SQL sql = new SQL();
-        sql.INSERT_INTO("order");
+        sql.INSERT_INTO("channel");
         
         if (record.getId() != null) {
             sql.VALUES("id", "#{id,jdbcType=BIGINT}");
-        }
-        
-        if (record.getOrderId() != null) {
-            sql.VALUES("order_id", "#{orderId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getOrderCode() != null) {
-            sql.VALUES("order_code", "#{orderCode,jdbcType=VARCHAR}");
         }
         
         if (record.getChannelId() != null) {
@@ -48,72 +40,12 @@ public class OrderSqlProvider {
             sql.VALUES("channel_name", "#{channelName,jdbcType=VARCHAR}");
         }
         
-        if (record.getServerId() != null) {
-            sql.VALUES("server_id", "#{serverId,jdbcType=BIGINT}");
+        if (record.getOpenDate() != null) {
+            sql.VALUES("open_date", "#{openDate,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getServerName() != null) {
-            sql.VALUES("server_name", "#{serverName,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getPlayerId() != null) {
-            sql.VALUES("player_id", "#{playerId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getCharId() != null) {
-            sql.VALUES("char_id", "#{charId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getItemId() != null) {
-            sql.VALUES("item_id", "#{itemId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getItemPrice() != null) {
-            sql.VALUES("item_price", "#{itemPrice,jdbcType=DECIMAL}");
-        }
-        
-        if (record.getAmount() != null) {
-            sql.VALUES("amount", "#{amount,jdbcType=DECIMAL}");
-        }
-        
-        if (record.getGoldQuantity() != null) {
-            sql.VALUES("gold_quantity", "#{goldQuantity,jdbcType=INTEGER}");
-        }
-        
-        if (record.getOrderType() != null) {
-            sql.VALUES("order_type", "#{orderType,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getOrderStatus() != null) {
-            sql.VALUES("order_status", "#{orderStatus,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getSyncStatus() != null) {
-            sql.VALUES("sync_status", "#{syncStatus,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getCharLevel() != null) {
-            sql.VALUES("char_level", "#{charLevel,jdbcType=INTEGER}");
-        }
-        
-        if (record.getCharGold() != null) {
-            sql.VALUES("char_gold", "#{charGold,jdbcType=INTEGER}");
-        }
-        
-        if (record.getCharName() != null) {
-            sql.VALUES("char_name", "#{charName,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getItemName() != null) {
-            sql.VALUES("item_name", "#{itemName,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getPaidDate() != null) {
-            sql.VALUES("paid_date", "#{paidDate,jdbcType=TIMESTAMP}");
-        }
-        
-        if (record.getRechargedDate() != null) {
-            sql.VALUES("recharged_date", "#{rechargedDate,jdbcType=TIMESTAMP}");
+        if (record.getChannelType() != null) {
+            sql.VALUES("channel_type", "#{channelType,jdbcType=VARCHAR}");
         }
         
         if (record.getStatus() != null) {
@@ -131,38 +63,21 @@ public class OrderSqlProvider {
         return sql.toString();
     }
 
-    public String selectByExample(OrderExample example) {
+    public String selectByExample(ChannelExample example) {
         SQL sql = new SQL();
         if (example != null && example.isDistinct()) {
             sql.SELECT_DISTINCT("id");
         } else {
             sql.SELECT("id");
         }
-        sql.SELECT("order_id");
-        sql.SELECT("order_code");
         sql.SELECT("channel_id");
         sql.SELECT("channel_name");
-        sql.SELECT("server_id");
-        sql.SELECT("server_name");
-        sql.SELECT("player_id");
-        sql.SELECT("char_id");
-        sql.SELECT("item_id");
-        sql.SELECT("item_price");
-        sql.SELECT("amount");
-        sql.SELECT("gold_quantity");
-        sql.SELECT("order_type");
-        sql.SELECT("order_status");
-        sql.SELECT("sync_status");
-        sql.SELECT("char_level");
-        sql.SELECT("char_gold");
-        sql.SELECT("char_name");
-        sql.SELECT("item_name");
-        sql.SELECT("paid_date");
-        sql.SELECT("recharged_date");
+        sql.SELECT("open_date");
+        sql.SELECT("channel_type");
         sql.SELECT("status");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
-        sql.FROM("order");
+        sql.FROM("channel");
         applyWhere(sql, example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -173,22 +88,14 @@ public class OrderSqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        Order record = (Order) parameter.get("record");
-        OrderExample example = (OrderExample) parameter.get("example");
+        Channel record = (Channel) parameter.get("record");
+        ChannelExample example = (ChannelExample) parameter.get("example");
         
         SQL sql = new SQL();
-        sql.UPDATE("order");
+        sql.UPDATE("channel");
         
         if (record.getId() != null) {
             sql.SET("id = #{record.id,jdbcType=BIGINT}");
-        }
-        
-        if (record.getOrderId() != null) {
-            sql.SET("order_id = #{record.orderId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getOrderCode() != null) {
-            sql.SET("order_code = #{record.orderCode,jdbcType=VARCHAR}");
         }
         
         if (record.getChannelId() != null) {
@@ -199,72 +106,12 @@ public class OrderSqlProvider {
             sql.SET("channel_name = #{record.channelName,jdbcType=VARCHAR}");
         }
         
-        if (record.getServerId() != null) {
-            sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
+        if (record.getOpenDate() != null) {
+            sql.SET("open_date = #{record.openDate,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getServerName() != null) {
-            sql.SET("server_name = #{record.serverName,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getPlayerId() != null) {
-            sql.SET("player_id = #{record.playerId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getCharId() != null) {
-            sql.SET("char_id = #{record.charId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getItemId() != null) {
-            sql.SET("item_id = #{record.itemId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getItemPrice() != null) {
-            sql.SET("item_price = #{record.itemPrice,jdbcType=DECIMAL}");
-        }
-        
-        if (record.getAmount() != null) {
-            sql.SET("amount = #{record.amount,jdbcType=DECIMAL}");
-        }
-        
-        if (record.getGoldQuantity() != null) {
-            sql.SET("gold_quantity = #{record.goldQuantity,jdbcType=INTEGER}");
-        }
-        
-        if (record.getOrderType() != null) {
-            sql.SET("order_type = #{record.orderType,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getOrderStatus() != null) {
-            sql.SET("order_status = #{record.orderStatus,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getSyncStatus() != null) {
-            sql.SET("sync_status = #{record.syncStatus,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getCharLevel() != null) {
-            sql.SET("char_level = #{record.charLevel,jdbcType=INTEGER}");
-        }
-        
-        if (record.getCharGold() != null) {
-            sql.SET("char_gold = #{record.charGold,jdbcType=INTEGER}");
-        }
-        
-        if (record.getCharName() != null) {
-            sql.SET("char_name = #{record.charName,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getItemName() != null) {
-            sql.SET("item_name = #{record.itemName,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getPaidDate() != null) {
-            sql.SET("paid_date = #{record.paidDate,jdbcType=TIMESTAMP}");
-        }
-        
-        if (record.getRechargedDate() != null) {
-            sql.SET("recharged_date = #{record.rechargedDate,jdbcType=TIMESTAMP}");
+        if (record.getChannelType() != null) {
+            sql.SET("channel_type = #{record.channelType,jdbcType=VARCHAR}");
         }
         
         if (record.getStatus() != null) {
@@ -285,40 +132,23 @@ public class OrderSqlProvider {
 
     public String updateByExample(Map<String, Object> parameter) {
         SQL sql = new SQL();
-        sql.UPDATE("order");
+        sql.UPDATE("channel");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
-        sql.SET("order_id = #{record.orderId,jdbcType=BIGINT}");
-        sql.SET("order_code = #{record.orderCode,jdbcType=VARCHAR}");
         sql.SET("channel_id = #{record.channelId,jdbcType=BIGINT}");
         sql.SET("channel_name = #{record.channelName,jdbcType=VARCHAR}");
-        sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
-        sql.SET("server_name = #{record.serverName,jdbcType=VARCHAR}");
-        sql.SET("player_id = #{record.playerId,jdbcType=BIGINT}");
-        sql.SET("char_id = #{record.charId,jdbcType=BIGINT}");
-        sql.SET("item_id = #{record.itemId,jdbcType=BIGINT}");
-        sql.SET("item_price = #{record.itemPrice,jdbcType=DECIMAL}");
-        sql.SET("amount = #{record.amount,jdbcType=DECIMAL}");
-        sql.SET("gold_quantity = #{record.goldQuantity,jdbcType=INTEGER}");
-        sql.SET("order_type = #{record.orderType,jdbcType=VARCHAR}");
-        sql.SET("order_status = #{record.orderStatus,jdbcType=VARCHAR}");
-        sql.SET("sync_status = #{record.syncStatus,jdbcType=VARCHAR}");
-        sql.SET("char_level = #{record.charLevel,jdbcType=INTEGER}");
-        sql.SET("char_gold = #{record.charGold,jdbcType=INTEGER}");
-        sql.SET("char_name = #{record.charName,jdbcType=VARCHAR}");
-        sql.SET("item_name = #{record.itemName,jdbcType=VARCHAR}");
-        sql.SET("paid_date = #{record.paidDate,jdbcType=TIMESTAMP}");
-        sql.SET("recharged_date = #{record.rechargedDate,jdbcType=TIMESTAMP}");
+        sql.SET("open_date = #{record.openDate,jdbcType=TIMESTAMP}");
+        sql.SET("channel_type = #{record.channelType,jdbcType=VARCHAR}");
         sql.SET("status = #{record.status,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         
-        OrderExample example = (OrderExample) parameter.get("example");
+        ChannelExample example = (ChannelExample) parameter.get("example");
         applyWhere(sql, example, true);
         return sql.toString();
     }
 
-    protected void applyWhere(SQL sql, OrderExample example, boolean includeExamplePhrase) {
+    protected void applyWhere(SQL sql, ChannelExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }

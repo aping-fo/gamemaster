@@ -20,11 +20,14 @@ public class RechargeController extends BaseController {
 
     @RequestMapping(value = "/daily", method = {RequestMethod.GET, RequestMethod.POST})
     public Response dailyRecharge(RechargeDailySearchRequest rechargeDailySearchRequest) {
-        Page<RechargeDaily> rechargeDailies = rechargeDailyService.search(rechargeDailySearchRequest);
+        if (rechargeDailySearchRequest.getPageNum() == null) {
+            rechargeDailySearchRequest.setPageNum(1);
+        }
+        Page<RechargeDaily> rechargeDailies = rechargeDailyService.searchPage(rechargeDailySearchRequest);
 
         Response r = new Response("recharge/daily")
-                .data("rechargeDailies", rechargeDailies)
-                .data("request", rechargeDailySearchRequest);
+                .request(rechargeDailySearchRequest)
+                .data("rechargeDailyList", rechargeDailies);
         System.out.println(r);
         return r;
     }

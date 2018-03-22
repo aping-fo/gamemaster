@@ -40,6 +40,10 @@ public class PlayerCharacterSqlProvider {
             sql.VALUES("server_id", "#{serverId,jdbcType=BIGINT}");
         }
         
+        if (record.getServerName() != null) {
+            sql.VALUES("server_name", "#{serverName,jdbcType=VARCHAR}");
+        }
+        
         if (record.getCharId() != null) {
             sql.VALUES("char_id", "#{charId,jdbcType=BIGINT}");
         }
@@ -140,6 +144,7 @@ public class PlayerCharacterSqlProvider {
         }
         sql.SELECT("player_id");
         sql.SELECT("server_id");
+        sql.SELECT("server_name");
         sql.SELECT("char_id");
         sql.SELECT("char_name");
         sql.SELECT("sex");
@@ -189,6 +194,10 @@ public class PlayerCharacterSqlProvider {
         
         if (record.getServerId() != null) {
             sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
+        }
+        
+        if (record.getServerName() != null) {
+            sql.SET("server_name = #{record.serverName,jdbcType=VARCHAR}");
         }
         
         if (record.getCharId() != null) {
@@ -290,6 +299,7 @@ public class PlayerCharacterSqlProvider {
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("player_id = #{record.playerId,jdbcType=BIGINT}");
         sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
+        sql.SET("server_name = #{record.serverName,jdbcType=VARCHAR}");
         sql.SET("char_id = #{record.charId,jdbcType=BIGINT}");
         sql.SET("char_name = #{record.charName,jdbcType=VARCHAR}");
         sql.SET("sex = #{record.sex,jdbcType=VARCHAR}");

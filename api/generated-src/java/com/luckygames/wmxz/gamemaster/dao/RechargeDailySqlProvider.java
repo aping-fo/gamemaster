@@ -68,12 +68,12 @@ public class RechargeDailySqlProvider {
             sql.VALUES("gold_append", "#{goldAppend,jdbcType=INTEGER}");
         }
         
-        if (record.getApruSum() != null) {
-            sql.VALUES("apru_sum", "#{apruSum,jdbcType=DECIMAL}");
+        if (record.getArpuSum() != null) {
+            sql.VALUES("arpu_sum", "#{arpuSum,jdbcType=DECIMAL}");
         }
         
-        if (record.getApruAppend() != null) {
-            sql.VALUES("apru_append", "#{apruAppend,jdbcType=DECIMAL}");
+        if (record.getArpuAppend() != null) {
+            sql.VALUES("arpu_append", "#{arpuAppend,jdbcType=DECIMAL}");
         }
         
         if (record.getStatus() != null) {
@@ -107,8 +107,8 @@ public class RechargeDailySqlProvider {
         sql.SELECT("append_amount");
         sql.SELECT("gold_sum");
         sql.SELECT("gold_append");
-        sql.SELECT("apru_sum");
-        sql.SELECT("apru_append");
+        sql.SELECT("arpu_sum");
+        sql.SELECT("arpu_append");
         sql.SELECT("status");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
@@ -169,12 +169,12 @@ public class RechargeDailySqlProvider {
             sql.SET("gold_append = #{record.goldAppend,jdbcType=INTEGER}");
         }
         
-        if (record.getApruSum() != null) {
-            sql.SET("apru_sum = #{record.apruSum,jdbcType=DECIMAL}");
+        if (record.getArpuSum() != null) {
+            sql.SET("arpu_sum = #{record.arpuSum,jdbcType=DECIMAL}");
         }
         
-        if (record.getApruAppend() != null) {
-            sql.SET("apru_append = #{record.apruAppend,jdbcType=DECIMAL}");
+        if (record.getArpuAppend() != null) {
+            sql.SET("arpu_append = #{record.arpuAppend,jdbcType=DECIMAL}");
         }
         
         if (record.getStatus() != null) {
@@ -207,8 +207,8 @@ public class RechargeDailySqlProvider {
         sql.SET("append_amount = #{record.appendAmount,jdbcType=DECIMAL}");
         sql.SET("gold_sum = #{record.goldSum,jdbcType=INTEGER}");
         sql.SET("gold_append = #{record.goldAppend,jdbcType=INTEGER}");
-        sql.SET("apru_sum = #{record.apruSum,jdbcType=DECIMAL}");
-        sql.SET("apru_append = #{record.apruAppend,jdbcType=DECIMAL}");
+        sql.SET("arpu_sum = #{record.arpuSum,jdbcType=DECIMAL}");
+        sql.SET("arpu_append = #{record.arpuAppend,jdbcType=DECIMAL}");
         sql.SET("status = #{record.status,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");

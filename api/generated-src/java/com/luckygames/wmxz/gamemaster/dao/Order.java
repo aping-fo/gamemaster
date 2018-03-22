@@ -9,11 +9,13 @@ public class Order extends BaseEntity {
 
     private String orderCode;
 
-    private Long serverId;
-
     private Long channelId;
 
     private String channelName;
+
+    private Long serverId;
+
+    private String serverName;
 
     private Long playerId;
 
@@ -61,14 +63,6 @@ public class Order extends BaseEntity {
         this.orderCode = orderCode == null ? null : orderCode.trim();
     }
 
-    public Long getServerId() {
-        return serverId;
-    }
-
-    public void setServerId(Long serverId) {
-        this.serverId = serverId;
-    }
-
     public Long getChannelId() {
         return channelId;
     }
@@ -83,6 +77,22 @@ public class Order extends BaseEntity {
 
     public void setChannelName(String channelName) {
         this.channelName = channelName == null ? null : channelName.trim();
+    }
+
+    public Long getServerId() {
+        return serverId;
+    }
+
+    public void setServerId(Long serverId) {
+        this.serverId = serverId;
+    }
+
+    public String getServerName() {
+        return serverName;
+    }
+
+    public void setServerName(String serverName) {
+        this.serverName = serverName == null ? null : serverName.trim();
     }
 
     public Long getPlayerId() {
