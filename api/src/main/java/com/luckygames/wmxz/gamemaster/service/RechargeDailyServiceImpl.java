@@ -23,11 +23,11 @@ public class RechargeDailyServiceImpl implements RechargeDailyService {
         RechargeDailyExample example = new RechargeDailyExample();
         RechargeDailyExample.Criteria criteria = example.createCriteria();
         criteria.andStatusEqualTo(Status.NORMAL);
-        if (request.getChannelId() != null && request.getChannelId() != 0) {
-            criteria.andChannelIdEqualTo(request.getChannelId());
+        if (request.getChannelId() != null && !request.getChannelId().isEmpty()) {
+            criteria.andChannelIdIn(request.getChannelId());
         }
-        if (request.getServerId() != null && request.getServerId() != 0) {
-            criteria.andServerIdEqualTo(request.getServerId());
+        if (request.getServerId() != null && !request.getServerId().isEmpty()) {
+            criteria.andServerIdIn(request.getServerId());
         }
         if (StringUtils.isNotBlank(request.getStartDate())) {
             criteria.andReportDateGreaterThanOrEqualTo(request.getStartDate());
@@ -46,11 +46,11 @@ public class RechargeDailyServiceImpl implements RechargeDailyService {
         RechargeDailyExample example = new RechargeDailyExample();
         RechargeDailyExample.Criteria criteria = example.createCriteria();
         criteria.andStatusEqualTo(Status.NORMAL);
-        if (request.getChannelId() != null && request.getChannelId() != 0) {
-            criteria.andChannelIdEqualTo(request.getChannelId());
+        if (request.getChannelId() != null && !request.getChannelId().isEmpty()) {
+            criteria.andChannelIdIn(request.getChannelId());
         }
-        if (request.getServerId() != null && request.getServerId() != 0) {
-            criteria.andServerIdEqualTo(request.getServerId());
+        if (request.getServerId() != null && !request.getServerId().isEmpty()) {
+            criteria.andServerIdIn(request.getServerId());
         }
         if (StringUtils.isNotBlank(request.getStartDate())) {
             criteria.andReportDateGreaterThanOrEqualTo(request.getStartDate());

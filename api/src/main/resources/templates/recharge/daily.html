@@ -1,8 +1,8 @@
 <div class="pageHeader">
     <form id="pagerForm" onsubmit="return navTabSearch(this);" action="recharge/daily" method="post"
           onreset="$(this).find('select.combox').comboxReset()">
-        <input type="hidden" name="serverId" th:value="${request.serverId}"/>
-        <input type="hidden" name="channelId" th:value="${request.channelId}"/>
+        <input type="hidden" name="serverId" th:value="${#strings.listJoin(request.serverId,',')}"/>
+        <input type="hidden" name="channelId" th:value="${#strings.listJoin(request.channelId,',')}"/>
         <input type="hidden" name="orderField" value="${request.orderField}"/>
         <input type="hidden" name="orderDirection" value="${request.orderDirection}"/>
         <input type="hidden" name="pageNum" th:value="${Pager.pageNum}"/>
@@ -13,8 +13,16 @@
                     <td>
                         <div>
                             <div class="buttonContent">
-                                <a class="button" href="tools/serverchannelselect" target="dialog"
-                                   rel="serverchannelselect" mask="true"><span>区服/渠道筛选</span></a>
+                                <a class="button" href="server/select"
+                                   rel="serverselect" mask="true" lookupGroup=""><span>区服筛选</span></a>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <div class="buttonContent">
+                                <a class="button" href="channel/select"
+                                   rel="channelselect" mask="true" lookupGroup=""><span>渠道筛选</span></a>
                             </div>
                         </div>
                     </td>

@@ -2,25 +2,27 @@ package com.luckygames.wmxz.gamemaster.model.view.request;
 
 import com.luckygames.wmxz.gamemaster.model.view.base.PageRequest;
 
+import java.util.List;
+
 public class RechargeDailySearchRequest extends PageRequest {
-    private Long serverId;
-    private Long channelId;
+    private List<Long> serverId;
+    private List<Long> channelId;
     private String startDate;
     private String endDate;
 
-    public Long getServerId() {
+    public List<Long> getServerId() {
         return serverId;
     }
 
-    public void setServerId(Long serverId) {
+    public void setServerId(List<Long> serverId) {
         this.serverId = serverId;
     }
 
-    public Long getChannelId() {
+    public List<Long> getChannelId() {
         return channelId;
     }
 
-    public void setChannelId(Long channelId) {
+    public void setChannelId(List<Long> channelId) {
         this.channelId = channelId;
     }
 

@@ -1,10 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-渠道选择
-</body>
-</html>
+<div class="pageContent">
+    <div class="pageFormContent" layoutH="57">
+        <div>
+            <div layoutH="138">
+                <div class="col-md-2" th:each="channel:${channelList}">
+                    <input type="checkbox" name="channelId" th:value="'{channelId:'+${channel.channelId}+'}'"/><span
+                        th:text="${channel.channelName}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="formBar">
+        <ul>
+            <li>
+                <input type="checkbox" class="checkboxCtrl" group="channelId"/>全选
+                <button type="button" class="checkboxCtrl" group="channelId" selectType="invert">反选</button>
+            </li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li>
+                <div class="button">
+                    <div class="buttonContent">
+                        <button type="button" multLookup="channelId" warn="请选择区服">选好了</button>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="button">
+                    <div class="buttonContent">
+                        <button class="close">取消</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
