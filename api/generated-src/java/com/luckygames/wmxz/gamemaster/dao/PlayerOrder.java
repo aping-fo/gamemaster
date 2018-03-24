@@ -4,7 +4,7 @@ import com.luckygames.wmxz.gamemaster.model.entity.base.BaseEntity;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Order extends BaseEntity {
+public class PlayerOrder extends BaseEntity {
     private Long orderId;
 
     private String orderCode;

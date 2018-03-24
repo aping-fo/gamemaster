@@ -41,7 +41,7 @@ public class PlayerCharacterSqlProvider {
         }
         
         if (record.getServerName() != null) {
-            sql.VALUES("server_name", "#{serverName,jdbcType=VARCHAR}");
+            sql.VALUES("`server_name`", "#{serverName,jdbcType=VARCHAR}");
         }
         
         if (record.getCharId() != null) {
@@ -57,7 +57,7 @@ public class PlayerCharacterSqlProvider {
         }
         
         if (record.getLevel() != null) {
-            sql.VALUES("level", "#{level,jdbcType=INTEGER}");
+            sql.VALUES("`level`", "#{level,jdbcType=INTEGER}");
         }
         
         if (record.getVipLevel() != null) {
@@ -65,7 +65,7 @@ public class PlayerCharacterSqlProvider {
         }
         
         if (record.getPower() != null) {
-            sql.VALUES("power", "#{power,jdbcType=INTEGER}");
+            sql.VALUES("`power`", "#{power,jdbcType=INTEGER}");
         }
         
         if (record.getFactionId() != null) {
@@ -81,7 +81,7 @@ public class PlayerCharacterSqlProvider {
         }
         
         if (record.getExp() != null) {
-            sql.VALUES("exp", "#{exp,jdbcType=INTEGER}");
+            sql.VALUES("`exp`", "#{exp,jdbcType=INTEGER}");
         }
         
         if (record.getRechargeGold() != null) {
@@ -121,7 +121,7 @@ public class PlayerCharacterSqlProvider {
         }
         
         if (record.getStatus() != null) {
-            sql.VALUES("status", "#{status,jdbcType=INTEGER}");
+            sql.VALUES("`status`", "#{status,jdbcType=INTEGER}");
         }
         
         if (record.getCreateTime() != null) {
@@ -144,17 +144,17 @@ public class PlayerCharacterSqlProvider {
         }
         sql.SELECT("player_id");
         sql.SELECT("server_id");
-        sql.SELECT("server_name");
+        sql.SELECT("`server_name`");
         sql.SELECT("char_id");
         sql.SELECT("char_name");
         sql.SELECT("sex");
-        sql.SELECT("level");
+        sql.SELECT("`level`");
         sql.SELECT("vip_level");
-        sql.SELECT("power");
+        sql.SELECT("`power`");
         sql.SELECT("faction_id");
         sql.SELECT("faction_name");
         sql.SELECT("job");
-        sql.SELECT("exp");
+        sql.SELECT("`exp`");
         sql.SELECT("recharge_gold");
         sql.SELECT("recharge_times");
         sql.SELECT("first_recharge_time");
@@ -164,7 +164,7 @@ public class PlayerCharacterSqlProvider {
         sql.SELECT("used_special_gold");
         sql.SELECT("left_coin");
         sql.SELECT("used_coin");
-        sql.SELECT("status");
+        sql.SELECT("`status`");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
         sql.FROM("player_character");
@@ -197,7 +197,7 @@ public class PlayerCharacterSqlProvider {
         }
         
         if (record.getServerName() != null) {
-            sql.SET("server_name = #{record.serverName,jdbcType=VARCHAR}");
+            sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");
         }
         
         if (record.getCharId() != null) {
@@ -213,7 +213,7 @@ public class PlayerCharacterSqlProvider {
         }
         
         if (record.getLevel() != null) {
-            sql.SET("level = #{record.level,jdbcType=INTEGER}");
+            sql.SET("`level` = #{record.level,jdbcType=INTEGER}");
         }
         
         if (record.getVipLevel() != null) {
@@ -221,7 +221,7 @@ public class PlayerCharacterSqlProvider {
         }
         
         if (record.getPower() != null) {
-            sql.SET("power = #{record.power,jdbcType=INTEGER}");
+            sql.SET("`power` = #{record.power,jdbcType=INTEGER}");
         }
         
         if (record.getFactionId() != null) {
@@ -237,7 +237,7 @@ public class PlayerCharacterSqlProvider {
         }
         
         if (record.getExp() != null) {
-            sql.SET("exp = #{record.exp,jdbcType=INTEGER}");
+            sql.SET("`exp` = #{record.exp,jdbcType=INTEGER}");
         }
         
         if (record.getRechargeGold() != null) {
@@ -277,7 +277,7 @@ public class PlayerCharacterSqlProvider {
         }
         
         if (record.getStatus() != null) {
-            sql.SET("status = #{record.status,jdbcType=INTEGER}");
+            sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         }
         
         if (record.getCreateTime() != null) {
@@ -299,17 +299,17 @@ public class PlayerCharacterSqlProvider {
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("player_id = #{record.playerId,jdbcType=BIGINT}");
         sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
-        sql.SET("server_name = #{record.serverName,jdbcType=VARCHAR}");
+        sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");
         sql.SET("char_id = #{record.charId,jdbcType=BIGINT}");
         sql.SET("char_name = #{record.charName,jdbcType=VARCHAR}");
         sql.SET("sex = #{record.sex,jdbcType=VARCHAR}");
-        sql.SET("level = #{record.level,jdbcType=INTEGER}");
+        sql.SET("`level` = #{record.level,jdbcType=INTEGER}");
         sql.SET("vip_level = #{record.vipLevel,jdbcType=INTEGER}");
-        sql.SET("power = #{record.power,jdbcType=INTEGER}");
+        sql.SET("`power` = #{record.power,jdbcType=INTEGER}");
         sql.SET("faction_id = #{record.factionId,jdbcType=INTEGER}");
         sql.SET("faction_name = #{record.factionName,jdbcType=VARCHAR}");
         sql.SET("job = #{record.job,jdbcType=VARCHAR}");
-        sql.SET("exp = #{record.exp,jdbcType=INTEGER}");
+        sql.SET("`exp` = #{record.exp,jdbcType=INTEGER}");
         sql.SET("recharge_gold = #{record.rechargeGold,jdbcType=INTEGER}");
         sql.SET("recharge_times = #{record.rechargeTimes,jdbcType=INTEGER}");
         sql.SET("first_recharge_time = #{record.firstRechargeTime,jdbcType=TIMESTAMP}");
@@ -319,7 +319,7 @@ public class PlayerCharacterSqlProvider {
         sql.SET("used_special_gold = #{record.usedSpecialGold,jdbcType=INTEGER}");
         sql.SET("left_coin = #{record.leftCoin,jdbcType=BIGINT}");
         sql.SET("used_coin = #{record.usedCoin,jdbcType=BIGINT}");
-        sql.SET("status = #{record.status,jdbcType=INTEGER}");
+        sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         

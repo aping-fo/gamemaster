@@ -1,7 +1,7 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
-import com.luckygames.wmxz.gamemaster.dao.Order;
-import com.luckygames.wmxz.gamemaster.dao.OrderExample;
+import com.luckygames.wmxz.gamemaster.dao.PlayerOrder;
+import com.luckygames.wmxz.gamemaster.dao.PlayerOrderExample;
 import java.util.List;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.Insert;
@@ -15,5 +15,5 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.type.JdbcType;
 import tk.mybatis.mapper.common.Mapper;
 
-public interface OrderMapper extends Mapper<Order> {
+public interface PlayerOrderMapper extends Mapper<PlayerOrder> {
 }

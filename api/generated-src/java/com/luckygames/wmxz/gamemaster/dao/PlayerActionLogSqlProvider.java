@@ -37,7 +37,7 @@ public class PlayerActionLogSqlProvider {
         }
         
         if (record.getAction() != null) {
-            sql.VALUES("action", "#{action,jdbcType=INTEGER}");
+            sql.VALUES("`action`", "#{action,jdbcType=INTEGER}");
         }
         
         if (record.getActionDate() != null) {
@@ -61,7 +61,7 @@ public class PlayerActionLogSqlProvider {
         }
         
         if (record.getStatus() != null) {
-            sql.VALUES("status", "#{status,jdbcType=INTEGER}");
+            sql.VALUES("`status`", "#{status,jdbcType=INTEGER}");
         }
         
         if (record.getCreateTime() != null) {
@@ -83,13 +83,13 @@ public class PlayerActionLogSqlProvider {
             sql.SELECT("id");
         }
         sql.SELECT("device_id");
-        sql.SELECT("action");
+        sql.SELECT("`action`");
         sql.SELECT("action_date");
         sql.SELECT("channel_id");
         sql.SELECT("server_id");
         sql.SELECT("player_id");
         sql.SELECT("char_id");
-        sql.SELECT("status");
+        sql.SELECT("`status`");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
         sql.FROM("player_action_log");
@@ -118,7 +118,7 @@ public class PlayerActionLogSqlProvider {
         }
         
         if (record.getAction() != null) {
-            sql.SET("action = #{record.action,jdbcType=INTEGER}");
+            sql.SET("`action` = #{record.action,jdbcType=INTEGER}");
         }
         
         if (record.getActionDate() != null) {
@@ -142,7 +142,7 @@ public class PlayerActionLogSqlProvider {
         }
         
         if (record.getStatus() != null) {
-            sql.SET("status = #{record.status,jdbcType=INTEGER}");
+            sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         }
         
         if (record.getCreateTime() != null) {
@@ -163,13 +163,13 @@ public class PlayerActionLogSqlProvider {
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("device_id = #{record.deviceId,jdbcType=VARCHAR}");
-        sql.SET("action = #{record.action,jdbcType=INTEGER}");
+        sql.SET("`action` = #{record.action,jdbcType=INTEGER}");
         sql.SET("action_date = #{record.actionDate,jdbcType=TIMESTAMP}");
         sql.SET("channel_id = #{record.channelId,jdbcType=BIGINT}");
         sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
         sql.SET("player_id = #{record.playerId,jdbcType=BIGINT}");
         sql.SET("char_id = #{record.charId,jdbcType=BIGINT}");
-        sql.SET("status = #{record.status,jdbcType=INTEGER}");
+        sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         

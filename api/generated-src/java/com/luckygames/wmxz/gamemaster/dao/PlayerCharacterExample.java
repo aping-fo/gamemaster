@@ -287,72 +287,72 @@ public class PlayerCharacterExample {
         }
 
         public Criteria andServerNameIsNull() {
-            addCriterion("server_name is null");
+            addCriterion("`server_name` is null");
             return (Criteria) this;
         }
 
         public Criteria andServerNameIsNotNull() {
-            addCriterion("server_name is not null");
+            addCriterion("`server_name` is not null");
             return (Criteria) this;
         }
 
         public Criteria andServerNameEqualTo(String value) {
-            addCriterion("server_name =", value, "serverName");
+            addCriterion("`server_name` =", value, "serverName");
             return (Criteria) this;
         }
 
         public Criteria andServerNameNotEqualTo(String value) {
-            addCriterion("server_name <>", value, "serverName");
+            addCriterion("`server_name` <>", value, "serverName");
             return (Criteria) this;
         }
 
         public Criteria andServerNameGreaterThan(String value) {
-            addCriterion("server_name >", value, "serverName");
+            addCriterion("`server_name` >", value, "serverName");
             return (Criteria) this;
         }
 
         public Criteria andServerNameGreaterThanOrEqualTo(String value) {
-            addCriterion("server_name >=", value, "serverName");
+            addCriterion("`server_name` >=", value, "serverName");
             return (Criteria) this;
         }
 
         public Criteria andServerNameLessThan(String value) {
-            addCriterion("server_name <", value, "serverName");
+            addCriterion("`server_name` <", value, "serverName");
             return (Criteria) this;
         }
 
         public Criteria andServerNameLessThanOrEqualTo(String value) {
-            addCriterion("server_name <=", value, "serverName");
+            addCriterion("`server_name` <=", value, "serverName");
             return (Criteria) this;
         }
 
         public Criteria andServerNameLike(String value) {
-            addCriterion("server_name like", value, "serverName");
+            addCriterion("`server_name` like", value, "serverName");
             return (Criteria) this;
         }
 
         public Criteria andServerNameNotLike(String value) {
-            addCriterion("server_name not like", value, "serverName");
+            addCriterion("`server_name` not like", value, "serverName");
             return (Criteria) this;
         }
 
         public Criteria andServerNameIn(List<String> values) {
-            addCriterion("server_name in", values, "serverName");
+            addCriterion("`server_name` in", values, "serverName");
             return (Criteria) this;
         }
 
         public Criteria andServerNameNotIn(List<String> values) {
-            addCriterion("server_name not in", values, "serverName");
+            addCriterion("`server_name` not in", values, "serverName");
             return (Criteria) this;
         }
 
         public Criteria andServerNameBetween(String value1, String value2) {
-            addCriterion("server_name between", value1, value2, "serverName");
+            addCriterion("`server_name` between", value1, value2, "serverName");
             return (Criteria) this;
         }
 
         public Criteria andServerNameNotBetween(String value1, String value2) {
-            addCriterion("server_name not between", value1, value2, "serverName");
+            addCriterion("`server_name` not between", value1, value2, "serverName");
             return (Criteria) this;
         }
 
@@ -557,62 +557,62 @@ public class PlayerCharacterExample {
         }
 
         public Criteria andLevelIsNull() {
-            addCriterion("level is null");
+            addCriterion("`level` is null");
             return (Criteria) this;
         }
 
         public Criteria andLevelIsNotNull() {
-            addCriterion("level is not null");
+            addCriterion("`level` is not null");
             return (Criteria) this;
         }
 
         public Criteria andLevelEqualTo(Integer value) {
-            addCriterion("level =", value, "level");
+            addCriterion("`level` =", value, "level");
             return (Criteria) this;
         }
 
         public Criteria andLevelNotEqualTo(Integer value) {
-            addCriterion("level <>", value, "level");
+            addCriterion("`level` <>", value, "level");
             return (Criteria) this;
         }
 
         public Criteria andLevelGreaterThan(Integer value) {
-            addCriterion("level >", value, "level");
+            addCriterion("`level` >", value, "level");
             return (Criteria) this;
         }
 
         public Criteria andLevelGreaterThanOrEqualTo(Integer value) {
-            addCriterion("level >=", value, "level");
+            addCriterion("`level` >=", value, "level");
             return (Criteria) this;
         }
 
         public Criteria andLevelLessThan(Integer value) {
-            addCriterion("level <", value, "level");
+            addCriterion("`level` <", value, "level");
             return (Criteria) this;
         }
 
         public Criteria andLevelLessThanOrEqualTo(Integer value) {
-            addCriterion("level <=", value, "level");
+            addCriterion("`level` <=", value, "level");
             return (Criteria) this;
         }
 
         public Criteria andLevelIn(List<Integer> values) {
-            addCriterion("level in", values, "level");
+            addCriterion("`level` in", values, "level");
             return (Criteria) this;
         }
 
         public Criteria andLevelNotIn(List<Integer> values) {
-            addCriterion("level not in", values, "level");
+            addCriterion("`level` not in", values, "level");
             return (Criteria) this;
         }
 
         public Criteria andLevelBetween(Integer value1, Integer value2) {
-            addCriterion("level between", value1, value2, "level");
+            addCriterion("`level` between", value1, value2, "level");
             return (Criteria) this;
         }
 
         public Criteria andLevelNotBetween(Integer value1, Integer value2) {
-            addCriterion("level not between", value1, value2, "level");
+            addCriterion("`level` not between", value1, value2, "level");
             return (Criteria) this;
         }
 
@@ -677,62 +677,62 @@ public class PlayerCharacterExample {
         }
 
         public Criteria andPowerIsNull() {
-            addCriterion("power is null");
+            addCriterion("`power` is null");
             return (Criteria) this;
         }
 
         public Criteria andPowerIsNotNull() {
-            addCriterion("power is not null");
+            addCriterion("`power` is not null");
             return (Criteria) this;
         }
 
         public Criteria andPowerEqualTo(Integer value) {
-            addCriterion("power =", value, "power");
+            addCriterion("`power` =", value, "power");
             return (Criteria) this;
         }
 
         public Criteria andPowerNotEqualTo(Integer value) {
-            addCriterion("power <>", value, "power");
+            addCriterion("`power` <>", value, "power");
             return (Criteria) this;
         }
 
         public Criteria andPowerGreaterThan(Integer value) {
-            addCriterion("power >", value, "power");
+            addCriterion("`power` >", value, "power");
             return (Criteria) this;
         }
 
         public Criteria andPowerGreaterThanOrEqualTo(Integer value) {
-            addCriterion("power >=", value, "power");
+            addCriterion("`power` >=", value, "power");
             return (Criteria) this;
         }
 
         public Criteria andPowerLessThan(Integer value) {
-            addCriterion("power <", value, "power");
+            addCriterion("`power` <", value, "power");
             return (Criteria) this;
         }
 
         public Criteria andPowerLessThanOrEqualTo(Integer value) {
-            addCriterion("power <=", value, "power");
+            addCriterion("`power` <=", value, "power");
             return (Criteria) this;
         }
 
         public Criteria andPowerIn(List<Integer> values) {
-            addCriterion("power in", values, "power");
+            addCriterion("`power` in", values, "power");
             return (Criteria) this;
         }
 
         public Criteria andPowerNotIn(List<Integer> values) {
-            addCriterion("power not in", values, "power");
+            addCriterion("`power` not in", values, "power");
             return (Criteria) this;
         }
 
         public Criteria andPowerBetween(Integer value1, Integer value2) {
-            addCriterion("power between", value1, value2, "power");
+            addCriterion("`power` between", value1, value2, "power");
             return (Criteria) this;
         }
 
         public Criteria andPowerNotBetween(Integer value1, Integer value2) {
-            addCriterion("power not between", value1, value2, "power");
+            addCriterion("`power` not between", value1, value2, "power");
             return (Criteria) this;
         }
 
@@ -937,62 +937,62 @@ public class PlayerCharacterExample {
         }
 
         public Criteria andExpIsNull() {
-            addCriterion("exp is null");
+            addCriterion("`exp` is null");
             return (Criteria) this;
         }
 
         public Criteria andExpIsNotNull() {
-            addCriterion("exp is not null");
+            addCriterion("`exp` is not null");
             return (Criteria) this;
         }
 
         public Criteria andExpEqualTo(Integer value) {
-            addCriterion("exp =", value, "exp");
+            addCriterion("`exp` =", value, "exp");
             return (Criteria) this;
         }
 
         public Criteria andExpNotEqualTo(Integer value) {
-            addCriterion("exp <>", value, "exp");
+            addCriterion("`exp` <>", value, "exp");
             return (Criteria) this;
         }
 
         public Criteria andExpGreaterThan(Integer value) {
-            addCriterion("exp >", value, "exp");
+            addCriterion("`exp` >", value, "exp");
             return (Criteria) this;
         }
 
         public Criteria andExpGreaterThanOrEqualTo(Integer value) {
-            addCriterion("exp >=", value, "exp");
+            addCriterion("`exp` >=", value, "exp");
             return (Criteria) this;
         }
 
         public Criteria andExpLessThan(Integer value) {
-            addCriterion("exp <", value, "exp");
+            addCriterion("`exp` <", value, "exp");
             return (Criteria) this;
         }
 
         public Criteria andExpLessThanOrEqualTo(Integer value) {
-            addCriterion("exp <=", value, "exp");
+            addCriterion("`exp` <=", value, "exp");
             return (Criteria) this;
         }
 
         public Criteria andExpIn(List<Integer> values) {
-            addCriterion("exp in", values, "exp");
+            addCriterion("`exp` in", values, "exp");
             return (Criteria) this;
         }
 
         public Criteria andExpNotIn(List<Integer> values) {
-            addCriterion("exp not in", values, "exp");
+            addCriterion("`exp` not in", values, "exp");
             return (Criteria) this;
         }
 
         public Criteria andExpBetween(Integer value1, Integer value2) {
-            addCriterion("exp between", value1, value2, "exp");
+            addCriterion("`exp` between", value1, value2, "exp");
             return (Criteria) this;
         }
 
         public Criteria andExpNotBetween(Integer value1, Integer value2) {
-            addCriterion("exp not between", value1, value2, "exp");
+            addCriterion("`exp` not between", value1, value2, "exp");
             return (Criteria) this;
         }
 
@@ -1537,62 +1537,62 @@ public class PlayerCharacterExample {
         }
 
         public Criteria andStatusIsNull() {
-            addCriterion("status is null");
+            addCriterion("`status` is null");
             return (Criteria) this;
         }
 
         public Criteria andStatusIsNotNull() {
-            addCriterion("status is not null");
+            addCriterion("`status` is not null");
             return (Criteria) this;
         }
 
         public Criteria andStatusEqualTo(Status value) {
-            addCriterion("status =", value, "status");
+            addCriterion("`status` =", value, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusNotEqualTo(Status value) {
-            addCriterion("status <>", value, "status");
+            addCriterion("`status` <>", value, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusGreaterThan(Status value) {
-            addCriterion("status >", value, "status");
+            addCriterion("`status` >", value, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusGreaterThanOrEqualTo(Status value) {
-            addCriterion("status >=", value, "status");
+            addCriterion("`status` >=", value, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusLessThan(Status value) {
-            addCriterion("status <", value, "status");
+            addCriterion("`status` <", value, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusLessThanOrEqualTo(Status value) {
-            addCriterion("status <=", value, "status");
+            addCriterion("`status` <=", value, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusIn(List<Status> values) {
-            addCriterion("status in", values, "status");
+            addCriterion("`status` in", values, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusNotIn(List<Status> values) {
-            addCriterion("status not in", values, "status");
+            addCriterion("`status` not in", values, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusBetween(Status value1, Status value2) {
-            addCriterion("status between", value1, value2, "status");
+            addCriterion("`status` between", value1, value2, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusNotBetween(Status value1, Status value2) {
-            addCriterion("status not between", value1, value2, "status");
+            addCriterion("`status` not between", value1, value2, "status");
             return (Criteria) this;
         }
 

@@ -77,7 +77,7 @@ public class RechargeDailySqlProvider {
         }
         
         if (record.getStatus() != null) {
-            sql.VALUES("status", "#{status,jdbcType=INTEGER}");
+            sql.VALUES("`status`", "#{status,jdbcType=INTEGER}");
         }
         
         if (record.getCreateTime() != null) {
@@ -109,7 +109,7 @@ public class RechargeDailySqlProvider {
         sql.SELECT("gold_append");
         sql.SELECT("arpu_sum");
         sql.SELECT("arpu_append");
-        sql.SELECT("status");
+        sql.SELECT("`status`");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
         sql.FROM("recharge_daily");
@@ -178,7 +178,7 @@ public class RechargeDailySqlProvider {
         }
         
         if (record.getStatus() != null) {
-            sql.SET("status = #{record.status,jdbcType=INTEGER}");
+            sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         }
         
         if (record.getCreateTime() != null) {
@@ -209,7 +209,7 @@ public class RechargeDailySqlProvider {
         sql.SET("gold_append = #{record.goldAppend,jdbcType=INTEGER}");
         sql.SET("arpu_sum = #{record.arpuSum,jdbcType=DECIMAL}");
         sql.SET("arpu_append = #{record.arpuAppend,jdbcType=DECIMAL}");
-        sql.SET("status = #{record.status,jdbcType=INTEGER}");
+        sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         

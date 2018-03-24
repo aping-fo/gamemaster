@@ -73,7 +73,7 @@ public class PlayerSqlProvider {
         }
         
         if (record.getStatus() != null) {
-            sql.VALUES("status", "#{status,jdbcType=INTEGER}");
+            sql.VALUES("`status`", "#{status,jdbcType=INTEGER}");
         }
         
         if (record.getCreateTime() != null) {
@@ -104,7 +104,7 @@ public class PlayerSqlProvider {
         sql.SELECT("create_device");
         sql.SELECT("create_version");
         sql.SELECT("create_mac");
-        sql.SELECT("status");
+        sql.SELECT("`status`");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
         sql.FROM("player");
@@ -169,7 +169,7 @@ public class PlayerSqlProvider {
         }
         
         if (record.getStatus() != null) {
-            sql.SET("status = #{record.status,jdbcType=INTEGER}");
+            sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         }
         
         if (record.getCreateTime() != null) {
@@ -199,7 +199,7 @@ public class PlayerSqlProvider {
         sql.SET("create_device = #{record.createDevice,jdbcType=VARCHAR}");
         sql.SET("create_version = #{record.createVersion,jdbcType=VARCHAR}");
         sql.SET("create_mac = #{record.createMac,jdbcType=VARCHAR}");
-        sql.SET("status = #{record.status,jdbcType=INTEGER}");
+        sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         

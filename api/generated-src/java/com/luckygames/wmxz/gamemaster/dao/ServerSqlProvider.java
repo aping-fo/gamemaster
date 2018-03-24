@@ -37,7 +37,7 @@ public class ServerSqlProvider {
         }
         
         if (record.getServerName() != null) {
-            sql.VALUES("server_name", "#{serverName,jdbcType=VARCHAR}");
+            sql.VALUES("`server_name`", "#{serverName,jdbcType=VARCHAR}");
         }
         
         if (record.getOpenDate() != null) {
@@ -49,7 +49,7 @@ public class ServerSqlProvider {
         }
         
         if (record.getStatus() != null) {
-            sql.VALUES("status", "#{status,jdbcType=INTEGER}");
+            sql.VALUES("`status`", "#{status,jdbcType=INTEGER}");
         }
         
         if (record.getCreateTime() != null) {
@@ -71,10 +71,10 @@ public class ServerSqlProvider {
             sql.SELECT("id");
         }
         sql.SELECT("server_id");
-        sql.SELECT("server_name");
+        sql.SELECT("`server_name`");
         sql.SELECT("open_date");
         sql.SELECT("server_type");
-        sql.SELECT("status");
+        sql.SELECT("`status`");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
         sql.FROM("server");
@@ -103,7 +103,7 @@ public class ServerSqlProvider {
         }
         
         if (record.getServerName() != null) {
-            sql.SET("server_name = #{record.serverName,jdbcType=VARCHAR}");
+            sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");
         }
         
         if (record.getOpenDate() != null) {
@@ -115,7 +115,7 @@ public class ServerSqlProvider {
         }
         
         if (record.getStatus() != null) {
-            sql.SET("status = #{record.status,jdbcType=INTEGER}");
+            sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         }
         
         if (record.getCreateTime() != null) {
@@ -136,10 +136,10 @@ public class ServerSqlProvider {
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
-        sql.SET("server_name = #{record.serverName,jdbcType=VARCHAR}");
+        sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");
         sql.SET("open_date = #{record.openDate,jdbcType=TIMESTAMP}");
         sql.SET("server_type = #{record.serverType,jdbcType=VARCHAR}");
-        sql.SET("status = #{record.status,jdbcType=INTEGER}");
+        sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         

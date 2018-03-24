@@ -49,7 +49,7 @@ public class ChannelSqlProvider {
         }
         
         if (record.getStatus() != null) {
-            sql.VALUES("status", "#{status,jdbcType=INTEGER}");
+            sql.VALUES("`status`", "#{status,jdbcType=INTEGER}");
         }
         
         if (record.getCreateTime() != null) {
@@ -74,7 +74,7 @@ public class ChannelSqlProvider {
         sql.SELECT("channel_name");
         sql.SELECT("open_date");
         sql.SELECT("channel_type");
-        sql.SELECT("status");
+        sql.SELECT("`status`");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
         sql.FROM("channel");
@@ -115,7 +115,7 @@ public class ChannelSqlProvider {
         }
         
         if (record.getStatus() != null) {
-            sql.SET("status = #{record.status,jdbcType=INTEGER}");
+            sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         }
         
         if (record.getCreateTime() != null) {
@@ -139,7 +139,7 @@ public class ChannelSqlProvider {
         sql.SET("channel_name = #{record.channelName,jdbcType=VARCHAR}");
         sql.SET("open_date = #{record.openDate,jdbcType=TIMESTAMP}");
         sql.SET("channel_type = #{record.channelType,jdbcType=VARCHAR}");
-        sql.SET("status = #{record.status,jdbcType=INTEGER}");
+        sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         

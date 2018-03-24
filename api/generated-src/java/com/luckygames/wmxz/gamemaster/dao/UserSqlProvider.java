@@ -37,11 +37,11 @@ public class UserSqlProvider {
         }
         
         if (record.getPassword() != null) {
-            sql.VALUES("password", "#{password,jdbcType=VARCHAR}");
+            sql.VALUES("`password`", "#{password,jdbcType=VARCHAR}");
         }
         
         if (record.getName() != null) {
-            sql.VALUES("name", "#{name,jdbcType=VARCHAR}");
+            sql.VALUES("`name`", "#{name,jdbcType=VARCHAR}");
         }
         
         if (record.getUserType() != null) {
@@ -57,7 +57,7 @@ public class UserSqlProvider {
         }
         
         if (record.getStatus() != null) {
-            sql.VALUES("status", "#{status,jdbcType=INTEGER}");
+            sql.VALUES("`status`", "#{status,jdbcType=INTEGER}");
         }
         
         if (record.getCreateTime() != null) {
@@ -79,12 +79,12 @@ public class UserSqlProvider {
             sql.SELECT("id");
         }
         sql.SELECT("username");
-        sql.SELECT("password");
-        sql.SELECT("name");
+        sql.SELECT("`password`");
+        sql.SELECT("`name`");
         sql.SELECT("user_type");
         sql.SELECT("last_login");
         sql.SELECT("first_login");
-        sql.SELECT("status");
+        sql.SELECT("`status`");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
         sql.FROM("user");
@@ -113,11 +113,11 @@ public class UserSqlProvider {
         }
         
         if (record.getPassword() != null) {
-            sql.SET("password = #{record.password,jdbcType=VARCHAR}");
+            sql.SET("`password` = #{record.password,jdbcType=VARCHAR}");
         }
         
         if (record.getName() != null) {
-            sql.SET("name = #{record.name,jdbcType=VARCHAR}");
+            sql.SET("`name` = #{record.name,jdbcType=VARCHAR}");
         }
         
         if (record.getUserType() != null) {
@@ -133,7 +133,7 @@ public class UserSqlProvider {
         }
         
         if (record.getStatus() != null) {
-            sql.SET("status = #{record.status,jdbcType=INTEGER}");
+            sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         }
         
         if (record.getCreateTime() != null) {
@@ -154,12 +154,12 @@ public class UserSqlProvider {
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("username = #{record.username,jdbcType=VARCHAR}");
-        sql.SET("password = #{record.password,jdbcType=VARCHAR}");
-        sql.SET("name = #{record.name,jdbcType=VARCHAR}");
+        sql.SET("`password` = #{record.password,jdbcType=VARCHAR}");
+        sql.SET("`name` = #{record.name,jdbcType=VARCHAR}");
         sql.SET("user_type = #{record.userType,jdbcType=INTEGER}");
         sql.SET("last_login = #{record.lastLogin,jdbcType=TIMESTAMP}");
         sql.SET("first_login = #{record.firstLogin,jdbcType=TIMESTAMP}");
-        sql.SET("status = #{record.status,jdbcType=INTEGER}");
+        sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         

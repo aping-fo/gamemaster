@@ -1,32 +1,32 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
-import com.luckygames.wmxz.gamemaster.dao.Order;
-import com.luckygames.wmxz.gamemaster.dao.OrderExample.Criteria;
-import com.luckygames.wmxz.gamemaster.dao.OrderExample.Criterion;
-import com.luckygames.wmxz.gamemaster.dao.OrderExample;
+import com.luckygames.wmxz.gamemaster.dao.PlayerOrder;
+import com.luckygames.wmxz.gamemaster.dao.PlayerOrderExample.Criteria;
+import com.luckygames.wmxz.gamemaster.dao.PlayerOrderExample.Criterion;
+import com.luckygames.wmxz.gamemaster.dao.PlayerOrderExample;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.jdbc.SQL;
 
-public class OrderSqlProvider {
+public class PlayerOrderSqlProvider {
 
-    public String countByExample(OrderExample example) {
+    public String countByExample(PlayerOrderExample example) {
         SQL sql = new SQL();
-        sql.SELECT("count(*)").FROM("order");
+        sql.SELECT("count(*)").FROM("player_order");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String deleteByExample(OrderExample example) {
+    public String deleteByExample(PlayerOrderExample example) {
         SQL sql = new SQL();
-        sql.DELETE_FROM("order");
+        sql.DELETE_FROM("player_order");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String insertSelective(Order record) {
+    public String insertSelective(PlayerOrder record) {
         SQL sql = new SQL();
-        sql.INSERT_INTO("order");
+        sql.INSERT_INTO("player_order");
         
         if (record.getId() != null) {
             sql.VALUES("id", "#{id,jdbcType=BIGINT}");
@@ -53,7 +53,7 @@ public class OrderSqlProvider {
         }
         
         if (record.getServerName() != null) {
-            sql.VALUES("server_name", "#{serverName,jdbcType=VARCHAR}");
+            sql.VALUES("`server_name`", "#{serverName,jdbcType=VARCHAR}");
         }
         
         if (record.getPlayerId() != null) {
@@ -117,7 +117,7 @@ public class OrderSqlProvider {
         }
         
         if (record.getStatus() != null) {
-            sql.VALUES("status", "#{status,jdbcType=INTEGER}");
+            sql.VALUES("`status`", "#{status,jdbcType=INTEGER}");
         }
         
         if (record.getCreateTime() != null) {
@@ -131,7 +131,7 @@ public class OrderSqlProvider {
         return sql.toString();
     }
 
-    public String selectByExample(OrderExample example) {
+    public String selectByExample(PlayerOrderExample example) {
         SQL sql = new SQL();
         if (example != null && example.isDistinct()) {
             sql.SELECT_DISTINCT("id");
@@ -143,7 +143,7 @@ public class OrderSqlProvider {
         sql.SELECT("channel_id");
         sql.SELECT("channel_name");
         sql.SELECT("server_id");
-        sql.SELECT("server_name");
+        sql.SELECT("`server_name`");
         sql.SELECT("player_id");
         sql.SELECT("char_id");
         sql.SELECT("item_id");
@@ -159,10 +159,10 @@ public class OrderSqlProvider {
         sql.SELECT("item_name");
         sql.SELECT("paid_date");
         sql.SELECT("recharged_date");
-        sql.SELECT("status");
+        sql.SELECT("`status`");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
-        sql.FROM("order");
+        sql.FROM("player_order");
         applyWhere(sql, example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -173,11 +173,11 @@ public class OrderSqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        Order record = (Order) parameter.get("record");
-        OrderExample example = (OrderExample) parameter.get("example");
+        PlayerOrder record = (PlayerOrder) parameter.get("record");
+        PlayerOrderExample example = (PlayerOrderExample) parameter.get("example");
         
         SQL sql = new SQL();
-        sql.UPDATE("order");
+        sql.UPDATE("player_order");
         
         if (record.getId() != null) {
             sql.SET("id = #{record.id,jdbcType=BIGINT}");
@@ -204,7 +204,7 @@ public class OrderSqlProvider {
         }
         
         if (record.getServerName() != null) {
-            sql.SET("server_name = #{record.serverName,jdbcType=VARCHAR}");
+            sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");
         }
         
         if (record.getPlayerId() != null) {
@@ -268,7 +268,7 @@ public class OrderSqlProvider {
         }
         
         if (record.getStatus() != null) {
-            sql.SET("status = #{record.status,jdbcType=INTEGER}");
+            sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         }
         
         if (record.getCreateTime() != null) {
@@ -285,7 +285,7 @@ public class OrderSqlProvider {
 
     public String updateByExample(Map<String, Object> parameter) {
         SQL sql = new SQL();
-        sql.UPDATE("order");
+        sql.UPDATE("player_order");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("order_id = #{record.orderId,jdbcType=BIGINT}");
@@ -293,7 +293,7 @@ public class OrderSqlProvider {
         sql.SET("channel_id = #{record.channelId,jdbcType=BIGINT}");
         sql.SET("channel_name = #{record.channelName,jdbcType=VARCHAR}");
         sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
-        sql.SET("server_name = #{record.serverName,jdbcType=VARCHAR}");
+        sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");
         sql.SET("player_id = #{record.playerId,jdbcType=BIGINT}");
         sql.SET("char_id = #{record.charId,jdbcType=BIGINT}");
         sql.SET("item_id = #{record.itemId,jdbcType=BIGINT}");
@@ -309,16 +309,16 @@ public class OrderSqlProvider {
         sql.SET("item_name = #{record.itemName,jdbcType=VARCHAR}");
         sql.SET("paid_date = #{record.paidDate,jdbcType=TIMESTAMP}");
         sql.SET("recharged_date = #{record.rechargedDate,jdbcType=TIMESTAMP}");
-        sql.SET("status = #{record.status,jdbcType=INTEGER}");
+        sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         
-        OrderExample example = (OrderExample) parameter.get("example");
+        PlayerOrderExample example = (PlayerOrderExample) parameter.get("example");
         applyWhere(sql, example, true);
         return sql.toString();
     }
 
-    protected void applyWhere(SQL sql, OrderExample example, boolean includeExamplePhrase) {
+    protected void applyWhere(SQL sql, PlayerOrderExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }

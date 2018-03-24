@@ -237,62 +237,62 @@ public class PlayerActionLogExample {
         }
 
         public Criteria andActionIsNull() {
-            addCriterion("action is null");
+            addCriterion("`action` is null");
             return (Criteria) this;
         }
 
         public Criteria andActionIsNotNull() {
-            addCriterion("action is not null");
+            addCriterion("`action` is not null");
             return (Criteria) this;
         }
 
         public Criteria andActionEqualTo(Integer value) {
-            addCriterion("action =", value, "action");
+            addCriterion("`action` =", value, "action");
             return (Criteria) this;
         }
 
         public Criteria andActionNotEqualTo(Integer value) {
-            addCriterion("action <>", value, "action");
+            addCriterion("`action` <>", value, "action");
             return (Criteria) this;
         }
 
         public Criteria andActionGreaterThan(Integer value) {
-            addCriterion("action >", value, "action");
+            addCriterion("`action` >", value, "action");
             return (Criteria) this;
         }
 
         public Criteria andActionGreaterThanOrEqualTo(Integer value) {
-            addCriterion("action >=", value, "action");
+            addCriterion("`action` >=", value, "action");
             return (Criteria) this;
         }
 
         public Criteria andActionLessThan(Integer value) {
-            addCriterion("action <", value, "action");
+            addCriterion("`action` <", value, "action");
             return (Criteria) this;
         }
 
         public Criteria andActionLessThanOrEqualTo(Integer value) {
-            addCriterion("action <=", value, "action");
+            addCriterion("`action` <=", value, "action");
             return (Criteria) this;
         }
 
         public Criteria andActionIn(List<Integer> values) {
-            addCriterion("action in", values, "action");
+            addCriterion("`action` in", values, "action");
             return (Criteria) this;
         }
 
         public Criteria andActionNotIn(List<Integer> values) {
-            addCriterion("action not in", values, "action");
+            addCriterion("`action` not in", values, "action");
             return (Criteria) this;
         }
 
         public Criteria andActionBetween(Integer value1, Integer value2) {
-            addCriterion("action between", value1, value2, "action");
+            addCriterion("`action` between", value1, value2, "action");
             return (Criteria) this;
         }
 
         public Criteria andActionNotBetween(Integer value1, Integer value2) {
-            addCriterion("action not between", value1, value2, "action");
+            addCriterion("`action` not between", value1, value2, "action");
             return (Criteria) this;
         }
 
@@ -597,62 +597,62 @@ public class PlayerActionLogExample {
         }
 
         public Criteria andStatusIsNull() {
-            addCriterion("status is null");
+            addCriterion("`status` is null");
             return (Criteria) this;
         }
 
         public Criteria andStatusIsNotNull() {
-            addCriterion("status is not null");
+            addCriterion("`status` is not null");
             return (Criteria) this;
         }
 
         public Criteria andStatusEqualTo(Status value) {
-            addCriterion("status =", value, "status");
+            addCriterion("`status` =", value, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusNotEqualTo(Status value) {
-            addCriterion("status <>", value, "status");
+            addCriterion("`status` <>", value, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusGreaterThan(Status value) {
-            addCriterion("status >", value, "status");
+            addCriterion("`status` >", value, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusGreaterThanOrEqualTo(Status value) {
-            addCriterion("status >=", value, "status");
+            addCriterion("`status` >=", value, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusLessThan(Status value) {
-            addCriterion("status <", value, "status");
+            addCriterion("`status` <", value, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusLessThanOrEqualTo(Status value) {
-            addCriterion("status <=", value, "status");
+            addCriterion("`status` <=", value, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusIn(List<Status> values) {
-            addCriterion("status in", values, "status");
+            addCriterion("`status` in", values, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusNotIn(List<Status> values) {
-            addCriterion("status not in", values, "status");
+            addCriterion("`status` not in", values, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusBetween(Status value1, Status value2) {
-            addCriterion("status between", value1, value2, "status");
+            addCriterion("`status` between", value1, value2, "status");
             return (Criteria) this;
         }
 
         public Criteria andStatusNotBetween(Status value1, Status value2) {
-            addCriterion("status not between", value1, value2, "status");
+            addCriterion("`status` not between", value1, value2, "status");
             return (Criteria) this;
         }
 
