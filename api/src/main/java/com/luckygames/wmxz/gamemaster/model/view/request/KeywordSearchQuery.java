@@ -1,19 +1,19 @@
 package com.luckygames.wmxz.gamemaster.model.view.request;
 
-import com.luckygames.wmxz.gamemaster.model.view.base.PageRequest;
+import com.luckygames.wmxz.gamemaster.model.view.base.PageQuery;
 
-public class KeywordSearchRequest extends PageRequest {
+public class KeywordSearchQuery extends PageQuery {
     private String keyword;
 
-    public KeywordSearchRequest() {
+    public KeywordSearchQuery() {
 
     }
 
-    public KeywordSearchRequest(String keyword) {
+    public KeywordSearchQuery(String keyword) {
         this.keyword = keyword;
     }
 
-    public KeywordSearchRequest(Integer pageNum, Integer pageSize, String orderField, String orderDirection, String keyword) {
+    public KeywordSearchQuery(Integer pageNum, Integer pageSize, String orderField, String orderDirection, String keyword) {
         super(pageNum, pageSize, orderField, orderDirection);
         this.keyword = keyword;
     }

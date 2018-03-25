@@ -2,9 +2,9 @@ package com.luckygames.wmxz.gamemaster.controller;
 
 import com.github.pagehelper.Page;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
-import com.luckygames.wmxz.gamemaster.dao.Server;
+import com.luckygames.wmxz.gamemaster.model.entity.Server;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
-import com.luckygames.wmxz.gamemaster.model.view.request.ServerSearchRequest;
+import com.luckygames.wmxz.gamemaster.model.view.request.ServerSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.ServerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +20,7 @@ public class ServerController extends BaseController {
     private ServerService serverService;
 
     @RequestMapping(value = "/select", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response search(ServerSearchRequest request) {
+    public Response search(ServerSearchQuery request) {
         Response r = new Response("server/select")
                 .request(request);
 

@@ -2,17 +2,17 @@ package com.luckygames.wmxz.gamemaster.model.view.base;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
-public class PageRequest {
+public class PageQuery {
     private Integer pageNum;
     private Integer pageSize = 50;
     private String orderField;
     private String orderDirection = "ASC";
 
-    public PageRequest() {
+    public PageQuery() {
 
     }
 
-    public PageRequest(Integer pageNum, Integer pageSize, String orderField, String orderDirection) {
+    public PageQuery(Integer pageNum, Integer pageSize, String orderField, String orderDirection) {
         this.pageNum = pageNum;
         this.pageSize = pageSize;
         this.orderField = orderField;

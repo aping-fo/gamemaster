@@ -6,23 +6,14 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties(prefix = "report")
 public class ReportProperties {
-    private CronSetting cityAccount;
-    private CronSetting update;
+    private CronSetting rechargeDaily;
 
-    public CronSetting getCityAccount() {
-        return cityAccount;
+    public CronSetting getRechargeDaily() {
+        return rechargeDaily;
     }
 
-    public void setCityAccount(CronSetting cityAccount) {
-        this.cityAccount = cityAccount;
-    }
-
-    public CronSetting getUpdate() {
-        return update;
-    }
-
-    public void setUpdate(CronSetting update) {
-        this.update = update;
+    public void setRechargeDaily(CronSetting rechargeDaily) {
+        this.rechargeDaily = rechargeDaily;
     }
 
     public static class CronSetting {

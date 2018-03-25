@@ -1,13 +1,13 @@
 package com.luckygames.wmxz.gamemaster.service;
 
 import com.github.pagehelper.Page;
-import com.luckygames.wmxz.gamemaster.dao.Channel;
-import com.luckygames.wmxz.gamemaster.model.view.request.ChannelSearchRequest;
+import com.luckygames.wmxz.gamemaster.model.entity.Channel;
+import com.luckygames.wmxz.gamemaster.model.view.request.ChannelSearchQuery;
 
 import java.util.List;
 
 public interface ChannelService {
-    List<Channel> searchList(ChannelSearchRequest request);
+    List<Channel> searchList(ChannelSearchQuery request);
 
-    Page<Channel> searchPage(ChannelSearchRequest request);
+    Page<Channel> searchPage(ChannelSearchQuery request);
 }

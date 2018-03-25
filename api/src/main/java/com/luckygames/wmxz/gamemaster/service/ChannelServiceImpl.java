@@ -2,11 +2,12 @@ package com.luckygames.wmxz.gamemaster.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.luckygames.wmxz.gamemaster.dao.Channel;
 import com.luckygames.wmxz.gamemaster.dao.ChannelExample;
-import com.luckygames.wmxz.gamemaster.dao.ChannelMapper;
+import com.luckygames.wmxz.gamemaster.dao.mapper.ChannelMapper;
+import com.luckygames.wmxz.gamemaster.model.entity.Channel;
 import com.luckygames.wmxz.gamemaster.model.enums.Status;
-import com.luckygames.wmxz.gamemaster.model.view.request.ChannelSearchRequest;
+import com.luckygames.wmxz.gamemaster.model.view.request.ChannelSearchQuery;
+import com.luckygames.wmxz.gamemaster.utils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class ChannelServiceImpl implements ChannelService {
     private ChannelMapper channelMapper;
 
     @Override
-    public List<Channel> searchList(ChannelSearchRequest request) {
+    public List<Channel> searchList(ChannelSearchQuery request) {
         ChannelExample example = new ChannelExample();
         ChannelExample.Criteria criteria = example.createCriteria();
         criteria.andStatusEqualTo(Status.NORMAL);
@@ -29,11 +30,11 @@ public class ChannelServiceImpl implements ChannelService {
             criteria.andChannelNameLike(request.getKeyword());
         }
 
-        return channelMapper.selectByExample(example);
+        return BeanUtils.copyListProperties(channelMapper.selectByExample(example), Channel.class);
     }
 
     @Override
-    public Page<Channel> searchPage(ChannelSearchRequest request) {
+    public Page<Channel> searchPage(ChannelSearchQuery request) {
         ChannelExample example = new ChannelExample();
         ChannelExample.Criteria criteria = example.createCriteria();
         criteria.andStatusEqualTo(Status.NORMAL);

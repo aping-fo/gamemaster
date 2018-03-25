@@ -1,12 +1,12 @@
 package com.luckygames.wmxz.gamemaster.controller;
 
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
-import com.luckygames.wmxz.gamemaster.dao.Channel;
-import com.luckygames.wmxz.gamemaster.dao.Server;
+import com.luckygames.wmxz.gamemaster.model.entity.Channel;
+import com.luckygames.wmxz.gamemaster.model.entity.Server;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
-import com.luckygames.wmxz.gamemaster.model.view.request.ChannelSearchRequest;
-import com.luckygames.wmxz.gamemaster.model.view.request.KeywordSearchRequest;
-import com.luckygames.wmxz.gamemaster.model.view.request.ServerSearchRequest;
+import com.luckygames.wmxz.gamemaster.model.view.request.ChannelSearchQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.KeywordSearchQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.ServerSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.ChannelService;
 import com.luckygames.wmxz.gamemaster.service.ServerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +25,11 @@ public class ToolsController extends BaseController {
     private ChannelService channelService;
 
     @RequestMapping(value = "serverchannelselect", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response ServerChannelSelect(KeywordSearchRequest request) {
+    public Response ServerChannelSelect(KeywordSearchQuery request) {
         Response r = new Response("tools/server_channel_select")
                 .request(request);
-        List<Server> serverList = serverService.searchList(new ServerSearchRequest(request));
-        List<Channel> channelList = channelService.searchList(new ChannelSearchRequest(request));
+        List<Server> serverList = serverService.searchList(new ServerSearchQuery(request));
+        List<Channel> channelList = channelService.searchList(new ChannelSearchQuery(request));
 
         r.data("serverList", serverList).data("channelList", channelList);
         return r;

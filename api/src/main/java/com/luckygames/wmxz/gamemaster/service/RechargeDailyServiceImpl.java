@@ -2,15 +2,19 @@ package com.luckygames.wmxz.gamemaster.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.luckygames.wmxz.gamemaster.dao.RechargeDaily;
+import com.luckygames.wmxz.gamemaster.dao.RechargeDailyEntity;
 import com.luckygames.wmxz.gamemaster.dao.RechargeDailyExample;
-import com.luckygames.wmxz.gamemaster.dao.RechargeDailyMapper;
+import com.luckygames.wmxz.gamemaster.dao.mapper.RechargeDailyMapper;
+import com.luckygames.wmxz.gamemaster.model.entity.RechargeDaily;
 import com.luckygames.wmxz.gamemaster.model.enums.Status;
-import com.luckygames.wmxz.gamemaster.model.view.request.RechargeDailySearchRequest;
-import org.apache.commons.lang3.StringUtils;
+import com.luckygames.wmxz.gamemaster.model.view.request.RechargeDailySearchQuery;
+import com.luckygames.wmxz.gamemaster.utils.BeanUtils;
+import com.luckygames.wmxz.gamemaster.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service("rechargeDailyService")
@@ -19,45 +23,79 @@ public class RechargeDailyServiceImpl implements RechargeDailyService {
     private RechargeDailyMapper rechargeDailyMapper;
 
     @Override
-    public Page<RechargeDaily> searchPage(RechargeDailySearchRequest request) {
-        RechargeDailyExample example = new RechargeDailyExample();
-        RechargeDailyExample.Criteria criteria = example.createCriteria();
-        criteria.andStatusEqualTo(Status.NORMAL);
-        if (request.getChannelId() != null && !request.getChannelId().isEmpty()) {
-            criteria.andChannelIdIn(request.getChannelId());
+    public Page<RechargeDaily> searchPage(RechargeDailySearchQuery query) {
+        if (query.getPageNum() == null) {
+            query.setPageNum(1);
         }
-        if (request.getServerId() != null && !request.getServerId().isEmpty()) {
-            criteria.andServerIdIn(request.getServerId());
-        }
-        if (StringUtils.isNotBlank(request.getStartDate())) {
-            criteria.andReportDateGreaterThanOrEqualTo(request.getStartDate());
-        }
-        if (StringUtils.isNotBlank(request.getEndDate())) {
-            criteria.andReportDateLessThanOrEqualTo(request.getStartDate());
-        }
-        if (request.getPageNum() == null) {
-            request.setPageNum(1);
-        }
-        return PageHelper.startPage(request.getPageNum(), request.getPageSize()).doSelectPage(() -> rechargeDailyMapper.selectByExample(example));
+        return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> rechargeDailyMapper.queryRechargeDailyReport(query));
     }
 
     @Override
-    public List<RechargeDaily> searchList(RechargeDailySearchRequest request) {
+    public List<RechargeDaily> searchList(RechargeDailySearchQuery query) {
+        return BeanUtils.copyListProperties(rechargeDailyMapper.queryRechargeDailyReport(query), RechargeDaily.class);
+    }
+
+    @Override
+    public RechargeDaily findOne(Long channelId, Long serverId, Date date) {
+        return findOne(channelId, serverId, DateUtils.DateToString(date));
+    }
+
+    @Override
+    public RechargeDaily findOne(Long channelId, Long serverId, String date) {
         RechargeDailyExample example = new RechargeDailyExample();
         RechargeDailyExample.Criteria criteria = example.createCriteria();
-        criteria.andStatusEqualTo(Status.NORMAL);
-        if (request.getChannelId() != null && !request.getChannelId().isEmpty()) {
-            criteria.andChannelIdIn(request.getChannelId());
+        criteria.andStatusEqualTo(Status.NORMAL)
+                .andChannelIdEqualTo(channelId)
+                .andServerIdEqualTo(serverId)
+                .andReportDateEqualTo(date);
+        List<RechargeDailyEntity> rechargeDailyList = rechargeDailyMapper.selectByExample(example);
+        if (rechargeDailyList == null || rechargeDailyList.isEmpty()) {
+            return null;
         }
-        if (request.getServerId() != null && !request.getServerId().isEmpty()) {
-            criteria.andServerIdIn(request.getServerId());
+        return BeanUtils.copyProperties(rechargeDailyList.get(0), RechargeDaily.class);
+    }
+
+    @Override
+    @Transactional
+    public void generateRechargeDailyReportToday() {
+        List<RechargeDaily> list = rechargeDailyMapper.queryRechargeDailyReportFromOrderSingleDate(new Date());
+        if (list == null || list.isEmpty()) {
+            return;
         }
-        if (StringUtils.isNotBlank(request.getStartDate())) {
-            criteria.andReportDateGreaterThanOrEqualTo(request.getStartDate());
+        list.forEach(r -> {
+            RechargeDaily rechargeDaily = findOne(r.getChannelId(), r.getServerId(), r.getReportDate());
+            if (rechargeDaily == null) {
+                rechargeDaily = new RechargeDaily();
+            }
+            Long id = rechargeDaily.getId();
+            BeanUtils.copyProperties(r, rechargeDaily);
+            if (r.getId() == null) {
+                rechargeDailyMapper.insertSelective(r);
+            } else {
+                rechargeDailyMapper.updateByPrimaryKeySelective(r);
+            }
+        });
+    }
+
+    @Override
+    @Transactional
+    public void generateRechargeDailyReportYesterDay() {
+        List<RechargeDaily> list = rechargeDailyMapper.queryRechargeDailyReportFromOrderSingleDate(org.apache.commons.lang3.time.DateUtils.addDays(new Date(), -1));
+        if (list == null || list.isEmpty()) {
+            return;
         }
-        if (StringUtils.isNotBlank(request.getEndDate())) {
-            criteria.andReportDateLessThanOrEqualTo(request.getStartDate());
-        }
-        return rechargeDailyMapper.selectByExample(example);
+        list.forEach(r -> {
+            RechargeDaily rechargeDaily = findOne(r.getChannelId(), r.getServerId(), r.getReportDate());
+            if (rechargeDaily == null) {
+                rechargeDaily = new RechargeDaily();
+            }
+            Long id = rechargeDaily.getId();
+            BeanUtils.copyProperties(r, rechargeDaily);
+            if (r.getId() == null) {
+                rechargeDailyMapper.insertSelective(r);
+            } else {
+                rechargeDailyMapper.updateByPrimaryKeySelective(r);
+            }
+        });
     }
 }

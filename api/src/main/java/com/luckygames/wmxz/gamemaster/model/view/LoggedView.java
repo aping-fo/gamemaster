@@ -1,15 +1,17 @@
 package com.luckygames.wmxz.gamemaster.model.view;
 
+import com.luckygames.wmxz.gamemaster.model.entity.User;
+
 import java.io.Serializable;
 
 public class LoggedView implements Serializable {
     private String token;
-    private UserView userInfo;
+    private User userInfo;
 
     public LoggedView() {
     }
 
-    public LoggedView(String token, UserView userInfo) {
+    public LoggedView(String token, User userInfo) {
         this.token = token;
         this.userInfo = userInfo;
     }
@@ -22,11 +24,11 @@ public class LoggedView implements Serializable {
         this.token = token;
     }
 
-    public UserView getUserInfo() {
+    public User getUserInfo() {
         return userInfo;
     }
 
-    public void setUserInfo(UserView userInfo) {
+    public void setUserInfo(User userInfo) {
         this.userInfo = userInfo;
     }
 }

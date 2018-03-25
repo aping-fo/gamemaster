@@ -1,10 +1,10 @@
 package com.luckygames.wmxz.gamemaster.model.view.request;
 
-import com.luckygames.wmxz.gamemaster.model.view.base.PageRequest;
+import com.luckygames.wmxz.gamemaster.model.view.base.PageQuery;
 
 import java.util.List;
 
-public class RechargeDailySearchRequest extends PageRequest {
+public class RechargeDailySearchQuery extends PageQuery {
     private List<Long> serverId;
     private List<Long> channelId;
     private String startDate;

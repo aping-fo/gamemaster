@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableAutoConfiguration
 @EnableConfigurationProperties
 @EnableScheduling
-@tk.mybatis.spring.annotation.MapperScan(basePackages = "com.luckygames.wmxz.gamemaster.dao")
+@tk.mybatis.spring.annotation.MapperScan(basePackages = "com.luckygames.wmxz.gamemaster.dao.mapper")
 @SpringBootApplication
 public class GamemasterApplication {
 

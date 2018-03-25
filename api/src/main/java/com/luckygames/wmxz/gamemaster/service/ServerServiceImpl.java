@@ -2,11 +2,12 @@ package com.luckygames.wmxz.gamemaster.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.luckygames.wmxz.gamemaster.dao.Server;
 import com.luckygames.wmxz.gamemaster.dao.ServerExample;
-import com.luckygames.wmxz.gamemaster.dao.ServerMapper;
+import com.luckygames.wmxz.gamemaster.dao.mapper.ServerMapper;
+import com.luckygames.wmxz.gamemaster.model.entity.Server;
 import com.luckygames.wmxz.gamemaster.model.enums.Status;
-import com.luckygames.wmxz.gamemaster.model.view.request.ServerSearchRequest;
+import com.luckygames.wmxz.gamemaster.model.view.request.ServerSearchQuery;
+import com.luckygames.wmxz.gamemaster.utils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class ServerServiceImpl implements ServerService {
     private ServerMapper serverMapper;
 
     @Override
-    public List<Server> searchList(ServerSearchRequest request) {
+    public List<Server> searchList(ServerSearchQuery request) {
         ServerExample example = new ServerExample();
         ServerExample.Criteria criteria = example.createCriteria();
         criteria.andStatusEqualTo(Status.NORMAL);
@@ -29,11 +30,11 @@ public class ServerServiceImpl implements ServerService {
             criteria.andServerNameLike(request.getKeyword());
         }
 
-        return serverMapper.selectByExample(example);
+        return BeanUtils.copyListProperties(serverMapper.selectByExample(example), Server.class);
     }
 
     @Override
-    public Page<Server> searchPage(ServerSearchRequest request) {
+    public Page<Server> searchPage(ServerSearchQuery request) {
         ServerExample example = new ServerExample();
         ServerExample.Criteria criteria = example.createCriteria();
         criteria.andStatusEqualTo(Status.NORMAL);
