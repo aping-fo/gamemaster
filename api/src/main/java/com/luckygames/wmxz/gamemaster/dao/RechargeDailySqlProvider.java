@@ -18,7 +18,8 @@ public class RechargeDailySqlProvider {
                 "sum(CASE WHEN (po.paid_date=pc.first_recharge_time) THEN po.amount ELSE 0 END) appendAmount,  " +
                 "sum(CASE WHEN (po.paid_date=pc.first_recharge_time) THEN 1 ELSE 0 END) appendSum,  " +
                 "sum(CASE WHEN (po.paid_date=pc.first_recharge_time) THEN 1 ELSE 0 END) goldAppend,  " +
-                "sum(CASE WHEN (po.paid_date=pc.first_recharge_time) THEN po.amount ELSE 0 END)/sum(CASE WHEN (po.paid_date=pc.first_recharge_time) THEN 1 ELSE 0 END) arpuAppend  " +
+                "sum(CASE WHEN (po.paid_date=pc.first_recharge_time) THEN po.amount ELSE 0 END)/sum(CASE WHEN (po.paid_date=pc.first_recharge_time) THEN 1 ELSE 0 END) arpuAppend,  " +
+                "now() updateTime  " +
                 "FROM  " +
                 "player_order po  " +
                 "left JOIN  " +

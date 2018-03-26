@@ -31,7 +31,7 @@ public class BeanUtils {
 
 
     public static void copyProperties(Object fromObj, Object toObj) throws BeanCopyException {
-        copyProperties(fromObj, toObj, false);
+        copyProperties(fromObj, toObj, true);
     }
 
     public static void copyProperties(Object fromObj, Object toObj, boolean ignoreNull) throws BeanCopyException {
@@ -70,6 +70,10 @@ public class BeanUtils {
     }
 
     public static <T> T copyProperties(Object from, Class<T> toClass) throws BeanCopyException {
+        return copyProperties(from, toClass, true);
+    }
+
+    public static <T> T copyProperties(Object from, Class<T> toClass, boolean ignoreNull) throws BeanCopyException {
         if (from == null) {
             return null;
         }
@@ -77,7 +81,7 @@ public class BeanUtils {
         T to;
         try {
             to = toClass.newInstance();
-            copyProperties(from, to);
+            copyProperties(from, to, ignoreNull);
         } catch (InstantiationException e) {
             throw new BeanCopyException(e);
         } catch (IllegalAccessException e) {
@@ -87,13 +91,17 @@ public class BeanUtils {
     }
 
     public static <T> List<T> copyListProperties(Collection<? extends Object> fromList, Class<T> toClass) throws BeanCopyException {
+        return copyListProperties(fromList, toClass, true);
+    }
+
+    public static <T> List<T> copyListProperties(Collection<? extends Object> fromList, Class<T> toClass, boolean ignoreNull) throws BeanCopyException {
         if (fromList == null) {
             return null;
         }
 
         List<T> result = new ArrayList<T>(fromList.size());
         for (Object from : fromList) {
-            T to = copyProperties(from, toClass);
+            T to = copyProperties(from, toClass, ignoreNull);
             result.add(to);
         }
         return result;

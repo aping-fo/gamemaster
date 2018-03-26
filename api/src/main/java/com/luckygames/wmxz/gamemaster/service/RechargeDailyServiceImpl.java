@@ -62,13 +62,17 @@ public class RechargeDailyServiceImpl implements RechargeDailyService {
         if (list == null || list.isEmpty()) {
             return;
         }
+        saveRechargeDailyReport(list);
+    }
+
+    private void saveRechargeDailyReport(List<RechargeDaily> list) {
         list.forEach(r -> {
             RechargeDaily rechargeDaily = findOne(r.getChannelId(), r.getServerId(), r.getReportDate());
             if (rechargeDaily == null) {
                 rechargeDaily = new RechargeDaily();
             }
             Long id = rechargeDaily.getId();
-            BeanUtils.copyProperties(r, rechargeDaily);
+            BeanUtils.copyProperties(rechargeDaily, r);
             if (r.getId() == null) {
                 rechargeDailyMapper.insertSelective(r);
             } else {
@@ -84,18 +88,6 @@ public class RechargeDailyServiceImpl implements RechargeDailyService {
         if (list == null || list.isEmpty()) {
             return;
         }
-        list.forEach(r -> {
-            RechargeDaily rechargeDaily = findOne(r.getChannelId(), r.getServerId(), r.getReportDate());
-            if (rechargeDaily == null) {
-                rechargeDaily = new RechargeDaily();
-            }
-            Long id = rechargeDaily.getId();
-            BeanUtils.copyProperties(r, rechargeDaily);
-            if (r.getId() == null) {
-                rechargeDailyMapper.insertSelective(r);
-            } else {
-                rechargeDailyMapper.updateByPrimaryKeySelective(r);
-            }
-        });
+        saveRechargeDailyReport(list);
     }
 }
