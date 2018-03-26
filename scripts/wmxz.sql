@@ -2,9 +2,9 @@ DROP INDEX `idx_server_id` ON `server`;
 DROP INDEX `idx_player_id` ON `player`;
 DROP INDEX `idx_player_char_id` ON `player_character`;
 DROP INDEX `idx_char_id` ON `player_character`;
-DROP INDEX `idx_order_id` ON `order`;
-DROP INDEX `idx_order` ON `order`;
-DROP INDEX `idx_order_date` ON `order`;
+DROP INDEX `idx_order_id` ON `player_order`;
+DROP INDEX `idx_order` ON `player_order`;
+DROP INDEX `idx_order_date` ON `player_order`;
 DROP INDEX `idx_player_action` ON `player_action_log`;
 DROP INDEX `idx_user` ON `user`;
 DROP INDEX `idx_recharge_daily` ON `recharge_daily`;
@@ -13,7 +13,7 @@ DROP INDEX `idx_channel` ON `channel`;
 DROP TABLE `server`;
 DROP TABLE `player`;
 DROP TABLE `player_character`;
-DROP TABLE `order`;
+DROP TABLE `player_order`;
 DROP TABLE `player_action_log`;
 DROP TABLE `user`;
 DROP TABLE `recharge_daily`;
@@ -83,7 +83,7 @@ INDEX `idx_player_char_id` (`player_id` ASC, `char_id` ASC, `char_name` ASC, `se
 INDEX `idx_char_id` (`char_id` ASC, `status` ASC)
 );
 
-CREATE TABLE `order` (
+CREATE TABLE `player_order` (
 `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '自增主键',
 `order_id` bigint(20) NULL COMMENT '订单ID',
 `order_code` varchar(255) NULL COMMENT '订单号',
