@@ -1,8 +1,6 @@
 <div class="pageHeader">
-    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="/recharge/order" method="post"
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="/recharge/statics" method="post"
           onreset="$(this).find('select.combox').comboxReset()">
-        <input type="hidden" name="serverId" th:value="${#strings.listJoin(request.serverId,',')}"/>
-        <input type="hidden" name="channelId" th:value="${#strings.listJoin(request.channelId,',')}"/>
         <input type="hidden" name="orderField" value="${request.orderField}"/>
         <input type="hidden" name="orderDirection" value="${request.orderDirection}"/>
         <input type="hidden" name="pageNum" th:value="${Pager.pageNum}"/>
@@ -57,28 +55,18 @@
     <table class="table" width="100%" layoutH="112">
         <thead>
         <tr>
-            <th width="120" align="right">订单ID</th>
-            <th width="120" align="right">订单号</th>
-            <th width="100" align="right">玩家ID</th>
-            <th width="100" align="right">角色ID</th>
-            <th width="100" align="right">角色名称</th>
-            <th width="80" align="right">购买商品ID</th>
-            <th width="80" align="right">订单金额</th>
-            <th width="80" align="right">支付成功时间</th>
-            <th width="80" align="right">充值成功时间</th>
+            <th width="120" align="right">渠道ID</th>
+            <th width="120" align="right">区服ID</th>
+            <th width="100" align="right">累计总充值</th>
+            <th width="100" align="right">goldSum</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="row,iterStat:${orderList}">
-            <td th:text="${row.orderId}"></td>
-            <td th:text="${row.orderCode}"></td>
-            <td th:text="${row.playerId}"></td>
-            <td th:text="${row.charId}"></td>
-            <td th:text="${row.charName}"></td>
-            <td th:text="${row.itemId}"></td>
-            <td th:text="${row.amount}"></td>
-            <td th:text="${row.paidDate}"></td>
-            <td th:text="${row.rechargedDate}"></td>
+        <tr th:each="row,iterStat:${statics}">
+            <td th:text="${row.channelId}"></td>
+            <td th:text="${row.serverId}"></td>
+            <td th:text="${row.rechargeAmount}"></td>
+            <td th:text="${row.goldSum}"></td>
         </tr>
         </tbody>
     </table>

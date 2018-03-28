@@ -4,11 +4,15 @@ import com.github.pagehelper.Page;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.model.entity.PlayerOrder;
 import com.luckygames.wmxz.gamemaster.model.entity.RechargeDaily;
+import com.luckygames.wmxz.gamemaster.model.entity.RechargeStatics;
+import com.luckygames.wmxz.gamemaster.model.view.base.PageQuery;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
+import com.luckygames.wmxz.gamemaster.model.view.request.CommonSearchQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.PlayerOrderSearchQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.RechargeDailySearchQuery;
 import com.luckygames.wmxz.gamemaster.service.PlayerOrderService;
 import com.luckygames.wmxz.gamemaster.service.RechargeDailyService;
+import com.luckygames.wmxz.gamemaster.service.RechargeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +26,8 @@ public class RechargeController extends BaseController {
     private RechargeDailyService rechargeDailyService;
     @Autowired
     private PlayerOrderService playerOrderService;
+    @Autowired
+    private RechargeService rechargeService;
 
     @RequestMapping(value = "/daily", method = {RequestMethod.GET, RequestMethod.POST})
     public Response dailyRecharge(RechargeDailySearchQuery rechargeDailySearchRequest) {
@@ -46,6 +52,19 @@ public class RechargeController extends BaseController {
         Response r = new Response("/recharge/order")
                 .request(playerOrderSearchQuery)
                 .data("orderList", orderDailies);
+        return r;
+    }
+
+    @RequestMapping(value = "/statics", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response queryOrderStatics(CommonSearchQuery pageQuery) {
+        if (pageQuery.getPageNum() == null) {
+            pageQuery.setPageNum(1);
+        }
+        Page<RechargeStatics> orderStatics = rechargeService.queryServerRechargeTotal(pageQuery);
+
+        Response r = new Response("/recharge/statics")
+                .request(pageQuery)
+                .data("statics", orderStatics);
         return r;
     }
 }
