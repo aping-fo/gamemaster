@@ -36,7 +36,7 @@ public class RechargeController extends BaseController {
         }
         Page<RechargeDaily> rechargeDailies = rechargeDailyService.searchPage(rechargeDailySearchRequest);
 
-        Response r = new Response("/recharge/daily")
+        Response r = new Response("recharge/daily")
                 .request(rechargeDailySearchRequest)
                 .data("rechargeDailyList", rechargeDailies);
         return r;
@@ -49,21 +49,21 @@ public class RechargeController extends BaseController {
         }
         Page<PlayerOrder> orderDailies = playerOrderService.searchPage(playerOrderSearchQuery);
 
-        Response r = new Response("/recharge/order")
+        Response r = new Response("recharge/order")
                 .request(playerOrderSearchQuery)
                 .data("orderList", orderDailies);
         return r;
     }
 
     @RequestMapping(value = "/statics", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response queryOrderStatics(CommonSearchQuery pageQuery) {
-        if (pageQuery.getPageNum() == null) {
-            pageQuery.setPageNum(1);
+    public Response queryOrderStatics(CommonSearchQuery pageQueryRequest) {
+        if (pageQueryRequest.getPageNum() == null) {
+            pageQueryRequest.setPageNum(1);
         }
-        Page<RechargeStatics> orderStatics = rechargeService.queryServerRechargeTotal(pageQuery);
+        Page<RechargeStatics> orderStatics = rechargeService.queryServerRechargeTotal(pageQueryRequest);
 
-        Response r = new Response("/recharge/statics")
-                .request(pageQuery)
+        Response r = new Response("recharge/statics")
+                .request(pageQueryRequest)
                 .data("statics", orderStatics);
         return r;
     }

@@ -43,7 +43,6 @@ public class PlayerOrderServiceImpl implements PlayerOrderService {
             ZonedDateTime zdtEnd = endLocalDateTime.atZone(zoneId);
             criteria.andRechargedDateBetween(Date.from(zdtStart.toInstant()), Date.from(zdtEnd.toInstant()));
         }
-
         return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> playerOrderMapper.selectByExample(example));
     }
 }
