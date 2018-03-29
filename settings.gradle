@@ -1,0 +1,5 @@
+rootProject.name = 'gamemaster'
+
+include 'api'
+include 'generator'
+

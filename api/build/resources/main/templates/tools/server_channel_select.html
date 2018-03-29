@@ -1,0 +1,67 @@
+<div class="pageContent">
+    <div class="pageFormContent" layoutH="57">
+        <div class="tabs" currentIndex="0" eventType="click">
+            <div class="tabsHeader">
+                <div class="tabsHeaderContent">
+                    <ul>
+                        <li>
+                            <a href="#"><span>区服</span></a>
+                        </li>
+                        <li><a href="#"><span>渠道</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="tabsContent" layoutH="100">
+                <!--server-->
+                <div>
+                    <div layoutH="138">
+                        <div class="col-md-2" th:each="server:${serverList}">
+                            <input type="checkbox" name="serverIds[]" th:value="${server.serverId}"/><span
+                                th:text="${server.serverName}"/>
+                        </div>
+                    </div>
+                    <div class="formBar">
+                        <input type="checkbox" class="checkboxCtrl" group="serverIds[]"/>全选
+                        <button type="button" class="checkboxCtrl" group="serverIds[]" selectType="invert">反选</button>
+                    </div>
+                </div>
+                <!--channel-->
+                <div>
+                    <div layoutH="138">
+                        <div class="col-md-2" th:each="channel:${channelList}">
+                            <input type="checkbox" name="channelIds[]" th:value="${channel.channelId}"/><span
+                                th:text="${channel.channelName}"/>
+                        </div>
+                    </div>
+                    <div class="formBar">
+                        <input type="checkbox" class="checkboxCtrl" group="channelIds[]"/>全选
+                        <button type="button" class="checkboxCtrl" group="channelIds[]" selectType="invert">反选</button>
+                    </div>
+                </div>
+            </div>
+            <div class="tabsFooter">
+                <div class="tabsFooterContent">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="formBar">
+        <ul>
+            <li>
+                <div class="button">
+                    <div class="buttonContent">
+                        <button>确定</button>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="button">
+                    <div class="buttonContent">
+                        <button class="close">取消</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

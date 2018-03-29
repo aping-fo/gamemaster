@@ -1,0 +1,67 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="player/character" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <input type="hidden" name="orderField" value="${request.orderField}"/>
+        <input type="hidden" name="orderDirection" value="${request.orderDirection}"/>
+        <input type="hidden" name="pageNum" th:value="${Pager.pageNum}"/>
+        <input type="hidden" name="pageSize" th:value="${Pager.pageSize}"/>
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td class="dateRange">
+                        日期:
+                    </td>
+                    <td>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">检索</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li>
+                <a class="icon" href="recharge/daily/export" target="dwzExport" targetType="navTab" title="确实要导出这些记录吗?"><span>导出EXCEL</span></a>
+            </li>
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="112">
+        <thead>
+        <tr>
+            <th width="120">玩家ID</th>
+            <th width="120" align="right">服务器ID</th>
+            <th width="120" align="right">服务器名</th>
+            <th width="100" align="right">角色ID</th>
+            <th width="100" align="right">角色名</th>
+            <th width="80" align="right">角色等级</th>
+            <th width="80" align="right">VIP等级</th>
+            <th width="80" align="right">角色战力</th>
+            <th width="80" align="right">当前经验</th>
+            <th width="80" align="right">剩余元宝</th>
+            <th width="80" align="right">创建时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${characters}">
+            <td th:text="${row.playerId}"></td>
+            <td th:text="${row.serverId}"></td>
+            <td th:text="${row.serverName}"></td>
+            <td th:text="${row.charId}"></td>
+            <td th:text="${row.charName}"></td>
+            <td th:text="${row.level}"></td>
+            <td th:text="${row.vipLevel}"></td>
+            <td th:text="${row.power}"></td>
+            <td th:text="${row.exp}"></td>
+            <td th:text="${row.leftGold}"></td>
+            <td th:text="${row.createTime}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>
