@@ -14,6 +14,7 @@ public class GMQuery {
                 boolean flag = f.isAccessible();
                 f.setAccessible(true);
                 sb.append(f.getName()).append("=").append(f.get(this)).append("&");
+                f.setAccessible(flag);
             }
             sb.deleteCharAt(sb.length() - 1);
         } catch (Exception e) {
