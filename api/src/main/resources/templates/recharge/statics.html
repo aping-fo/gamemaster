@@ -1,0 +1,74 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="/recharge/statics" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <input type="hidden" name="orderField" value="${request.orderField}"/>
+        <input type="hidden" name="orderDirection" value="${request.orderDirection}"/>
+        <input type="hidden" name="pageNum" th:value="${Pager.pageNum}"/>
+        <input type="hidden" name="pageSize" th:value="${Pager.pageSize}"/>
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>
+                        <div>
+                            <div class="buttonContent">
+                                <a class="button" href="server/select"
+                                   rel="serverselect" mask="true" lookupGroup=""><span>区服筛选</span></a>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <div class="buttonContent">
+                                <a class="button" href="channel/select"
+                                   rel="channelselect" mask="true" lookupGroup=""><span>渠道筛选</span></a>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="dateRange">
+                        日期:
+                        <input name="startDate" class="date readonly" readonly="readonly" type="text" value=""
+                               th:value="${request.startDate}">
+                        <span class="limit">-</span>
+                        <input name="endDate" class="date readonly" readonly="readonly" type="text" value=""
+                               th:value="${request.endDate}">
+                    </td>
+                    <td>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">检索</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li>
+                <a class="icon" href="recharge/daily/export" target="dwzExport" targetType="navTab" title="确实要导出这些记录吗?"><span>导出EXCEL</span></a>
+            </li>
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="112">
+        <thead>
+        <tr>
+            <th width="120" align="right">渠道ID</th>
+            <th width="120" align="right">区服ID</th>
+            <th width="100" align="right">累计总充值</th>
+            <th width="100" align="right">goldSum</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${statics}">
+            <td th:text="${row.channelId}"></td>
+            <td th:text="${row.serverId}"></td>
+            <td th:text="${row.rechargeAmount}"></td>
+            <td th:text="${row.goldSum}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>
