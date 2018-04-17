@@ -1,5 +1,5 @@
 <div class="pageHeader">
-    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="recharge/daily" method="post"
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="/recharge/daily" method="post"
           onreset="$(this).find('select.combox').comboxReset()">
         <input type="hidden" name="serverId" th:value="${#strings.listJoin(request.serverId,',')}"/>
         <input type="hidden" name="channelId" th:value="${#strings.listJoin(request.channelId,',')}"/>
