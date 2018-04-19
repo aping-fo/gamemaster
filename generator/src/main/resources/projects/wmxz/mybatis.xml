@@ -25,14 +25,14 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
         <javaModelGenerator targetPackage="com.luckygames.wmxz.gamemaster.dao"
-                            targetProject="/code/idea/lucky/gamemaster/api/generated-src/java">
+                            targetProject="api/generated-src/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
             <property name="rootClass" value="com.luckygames.wmxz.gamemaster.model.entity.base.BaseEntity"/>
         </javaModelGenerator>
         <javaClientGenerator type="ANNOTATEDMAPPER"
                              targetPackage="com.luckygames.wmxz.gamemaster.dao"
-                             targetProject="/code/idea/lucky/gamemaster/api/generated-src/java">
+                             targetProject="api/generated-src/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 

@@ -6,19 +6,27 @@ import javax.persistence.Table;
 
 @Table(name="player_action_log")
 public class PlayerActionLogEntity extends BaseEntity {
+    //private Integer id;
+
     private String deviceId;
 
     private Integer action;
 
     private Date actionDate;
 
-    private Long channelId;
+    private Integer serverId;
 
-    private Long serverId;
+    private Integer playerId;
 
-    private Long playerId;
+    private Integer charId;
 
-    private Long charId;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getDeviceId() {
         return deviceId;
@@ -44,35 +52,27 @@ public class PlayerActionLogEntity extends BaseEntity {
         this.actionDate = actionDate;
     }
 
-    public Long getChannelId() {
-        return channelId;
-    }
-
-    public void setChannelId(Long channelId) {
-        this.channelId = channelId;
-    }
-
-    public Long getServerId() {
+    public Integer getServerId() {
         return serverId;
     }
 
-    public void setServerId(Long serverId) {
+    public void setServerId(Integer serverId) {
         this.serverId = serverId;
     }
 
-    public Long getPlayerId() {
+    public Integer getPlayerId() {
         return playerId;
     }
 
-    public void setPlayerId(Long playerId) {
+    public void setPlayerId(Integer playerId) {
         this.playerId = playerId;
     }
 
-    public Long getCharId() {
+    public Integer getCharId() {
         return charId;
     }
 
-    public void setCharId(Long charId) {
+    public void setCharId(Integer charId) {
         this.charId = charId;
     }
 }

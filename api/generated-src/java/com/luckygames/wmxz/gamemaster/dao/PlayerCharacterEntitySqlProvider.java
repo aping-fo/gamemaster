@@ -29,23 +29,19 @@ public class PlayerCharacterEntitySqlProvider {
         sql.INSERT_INTO("player_character");
         
         if (record.getId() != null) {
-            sql.VALUES("id", "#{id,jdbcType=BIGINT}");
+            sql.VALUES("id", "#{id,jdbcType=INTEGER}");
         }
         
         if (record.getPlayerId() != null) {
-            sql.VALUES("player_id", "#{playerId,jdbcType=BIGINT}");
+            sql.VALUES("player_id", "#{playerId,jdbcType=INTEGER}");
         }
         
         if (record.getServerId() != null) {
-            sql.VALUES("server_id", "#{serverId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getServerName() != null) {
-            sql.VALUES("`server_name`", "#{serverName,jdbcType=VARCHAR}");
+            sql.VALUES("server_id", "#{serverId,jdbcType=INTEGER}");
         }
         
         if (record.getCharId() != null) {
-            sql.VALUES("char_id", "#{charId,jdbcType=BIGINT}");
+            sql.VALUES("char_id", "#{charId,jdbcType=INTEGER}");
         }
         
         if (record.getCharName() != null) {
@@ -120,18 +116,6 @@ public class PlayerCharacterEntitySqlProvider {
             sql.VALUES("used_coin", "#{usedCoin,jdbcType=BIGINT}");
         }
         
-        if (record.getStatus() != null) {
-            sql.VALUES("`status`", "#{status,jdbcType=INTEGER}");
-        }
-        
-        if (record.getCreateTime() != null) {
-            sql.VALUES("create_time", "#{createTime,jdbcType=TIMESTAMP}");
-        }
-        
-        if (record.getUpdateTime() != null) {
-            sql.VALUES("update_time", "#{updateTime,jdbcType=TIMESTAMP}");
-        }
-        
         return sql.toString();
     }
 
@@ -144,7 +128,6 @@ public class PlayerCharacterEntitySqlProvider {
         }
         sql.SELECT("player_id");
         sql.SELECT("server_id");
-        sql.SELECT("`server_name`");
         sql.SELECT("char_id");
         sql.SELECT("char_name");
         sql.SELECT("sex");
@@ -164,9 +147,6 @@ public class PlayerCharacterEntitySqlProvider {
         sql.SELECT("used_special_gold");
         sql.SELECT("left_coin");
         sql.SELECT("used_coin");
-        sql.SELECT("`status`");
-        sql.SELECT("create_time");
-        sql.SELECT("update_time");
         sql.FROM("player_character");
         applyWhere(sql, example, false);
         
@@ -185,23 +165,19 @@ public class PlayerCharacterEntitySqlProvider {
         sql.UPDATE("player_character");
         
         if (record.getId() != null) {
-            sql.SET("id = #{record.id,jdbcType=BIGINT}");
+            sql.SET("id = #{record.id,jdbcType=INTEGER}");
         }
         
         if (record.getPlayerId() != null) {
-            sql.SET("player_id = #{record.playerId,jdbcType=BIGINT}");
+            sql.SET("player_id = #{record.playerId,jdbcType=INTEGER}");
         }
         
         if (record.getServerId() != null) {
-            sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getServerName() != null) {
-            sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");
+            sql.SET("server_id = #{record.serverId,jdbcType=INTEGER}");
         }
         
         if (record.getCharId() != null) {
-            sql.SET("char_id = #{record.charId,jdbcType=BIGINT}");
+            sql.SET("char_id = #{record.charId,jdbcType=INTEGER}");
         }
         
         if (record.getCharName() != null) {
@@ -276,18 +252,6 @@ public class PlayerCharacterEntitySqlProvider {
             sql.SET("used_coin = #{record.usedCoin,jdbcType=BIGINT}");
         }
         
-        if (record.getStatus() != null) {
-            sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
-        }
-        
-        if (record.getCreateTime() != null) {
-            sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
-        }
-        
-        if (record.getUpdateTime() != null) {
-            sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
-        }
-        
         applyWhere(sql, example, true);
         return sql.toString();
     }
@@ -296,11 +260,10 @@ public class PlayerCharacterEntitySqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("player_character");
         
-        sql.SET("id = #{record.id,jdbcType=BIGINT}");
-        sql.SET("player_id = #{record.playerId,jdbcType=BIGINT}");
-        sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
-        sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");
-        sql.SET("char_id = #{record.charId,jdbcType=BIGINT}");
+        sql.SET("id = #{record.id,jdbcType=INTEGER}");
+        sql.SET("player_id = #{record.playerId,jdbcType=INTEGER}");
+        sql.SET("server_id = #{record.serverId,jdbcType=INTEGER}");
+        sql.SET("char_id = #{record.charId,jdbcType=INTEGER}");
         sql.SET("char_name = #{record.charName,jdbcType=VARCHAR}");
         sql.SET("sex = #{record.sex,jdbcType=VARCHAR}");
         sql.SET("`level` = #{record.level,jdbcType=INTEGER}");
@@ -319,9 +282,6 @@ public class PlayerCharacterEntitySqlProvider {
         sql.SET("used_special_gold = #{record.usedSpecialGold,jdbcType=INTEGER}");
         sql.SET("left_coin = #{record.leftCoin,jdbcType=BIGINT}");
         sql.SET("used_coin = #{record.usedCoin,jdbcType=BIGINT}");
-        sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
-        sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
-        sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         
         PlayerCharacterEntityExample example = (PlayerCharacterEntityExample) parameter.get("example");
         applyWhere(sql, example, true);

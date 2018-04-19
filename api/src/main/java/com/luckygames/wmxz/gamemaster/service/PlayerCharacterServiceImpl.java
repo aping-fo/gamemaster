@@ -24,7 +24,7 @@ public class PlayerCharacterServiceImpl implements PlayerCharacterService {
         PlayerCharacterEntityExample.Criteria criteria = example.createCriteria();
 
         if (query.getCharId() != null) {
-            criteria.andCharIdEqualTo(query.getCharId());
+            //criteria.andCharIdEqualTo(query.getCharId());
         }
         return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> playerCharacterMapper.selectByExample(example));
     }

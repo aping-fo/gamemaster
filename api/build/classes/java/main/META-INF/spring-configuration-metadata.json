@@ -1,0 +1,53 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.luckygames.wmxz.gamemaster.common.configuration.GlobalProperties",
+      "name": "global",
+      "type": "com.luckygames.wmxz.gamemaster.common.configuration.GlobalProperties"
+    },
+    {
+      "sourceType": "com.luckygames.wmxz.gamemaster.common.configuration.ReportProperties",
+      "name": "report",
+      "type": "com.luckygames.wmxz.gamemaster.common.configuration.ReportProperties"
+    },
+    {
+      "sourceType": "com.luckygames.wmxz.gamemaster.common.configuration.ReportProperties",
+      "name": "report.recharge-daily",
+      "sourceMethod": "getRechargeDaily()",
+      "type": "com.luckygames.wmxz.gamemaster.common.configuration.ReportProperties$CronSetting"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.luckygames.wmxz.gamemaster.common.configuration.GlobalProperties",
+      "name": "global.host",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.luckygames.wmxz.gamemaster.common.configuration.GlobalProperties",
+      "name": "global.image-clean-cron",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.luckygames.wmxz.gamemaster.common.configuration.ReportProperties$CronSetting",
+      "name": "report.recharge-daily.last-month-cron",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.luckygames.wmxz.gamemaster.common.configuration.ReportProperties$CronSetting",
+      "name": "report.recharge-daily.last-week-cron",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.luckygames.wmxz.gamemaster.common.configuration.ReportProperties$CronSetting",
+      "name": "report.recharge-daily.today-cron",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.luckygames.wmxz.gamemaster.common.configuration.ReportProperties$CronSetting",
+      "name": "report.recharge-daily.yesterday-cron",
+      "type": "java.lang.String"
+    }
+  ]
+}

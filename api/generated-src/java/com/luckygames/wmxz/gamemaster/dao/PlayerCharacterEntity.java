@@ -6,13 +6,13 @@ import javax.persistence.Table;
 
 @Table(name="player_character")
 public class PlayerCharacterEntity extends BaseEntity {
-    private Long playerId;
+    //private Integer id;
 
-    private Long serverId;
+    private Integer playerId;
 
-    private String serverName;
+    private Integer serverId;
 
-    private Long charId;
+    private Integer charId;
 
     private String charName;
 
@@ -50,35 +50,35 @@ public class PlayerCharacterEntity extends BaseEntity {
 
     private Long usedCoin;
 
-    public Long getPlayerId() {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getPlayerId() {
         return playerId;
     }
 
-    public void setPlayerId(Long playerId) {
+    public void setPlayerId(Integer playerId) {
         this.playerId = playerId;
     }
 
-    public Long getServerId() {
+    public Integer getServerId() {
         return serverId;
     }
 
-    public void setServerId(Long serverId) {
+    public void setServerId(Integer serverId) {
         this.serverId = serverId;
     }
 
-    public String getServerName() {
-        return serverName;
-    }
-
-    public void setServerName(String serverName) {
-        this.serverName = serverName == null ? null : serverName.trim();
-    }
-
-    public Long getCharId() {
+    public Integer getCharId() {
         return charId;
     }
 
-    public void setCharId(Long charId) {
+    public void setCharId(Integer charId) {
         this.charId = charId;
     }
 
