@@ -127,6 +127,7 @@ CREATE TABLE `player_action_log` (
 `status` int(11) NULL DEFAULT 1 COMMENT '状态',
 `create_time` datetime NULL COMMENT '创建时间',
 `update_time` datetime NULL COMMENT '更新时间',
+`online_time` bigint(20) NULL DEFAULT NULL COMMENT '在线时长',
 PRIMARY KEY (`id`) ,
 INDEX `idx_player_action` (`device_id` ASC, `action` ASC, `status` ASC)
 );
