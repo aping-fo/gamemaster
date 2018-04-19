@@ -27,7 +27,7 @@ CREATE TABLE `server` (
 `server_type` varchar(10) NULL COMMENT '服务器类型',
 `status` int(11) NULL DEFAULT 1 COMMENT '状态',
 `create_time` datetime NULL COMMENT '创建时间',
-`update_time` datetime NULL COMMENT '更新时间',
+`update_time` datetime NULL COMMENT '更新时间a',
 PRIMARY KEY (`id`) ,
 INDEX `idx_server_id` (`server_id` ASC, `status` ASC)
 );
