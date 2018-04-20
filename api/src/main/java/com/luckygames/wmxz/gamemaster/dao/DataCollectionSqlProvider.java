@@ -8,7 +8,7 @@ import java.util.Date;
 public class DataCollectionSqlProvider {
     public String queryDataCollectionReportFromOrderSingleDate(Date singleDate) {
         String sql = "SELECT \n" +
-                "now() report_date,IFNULL(t1.channel_id,0) channel_id,IFNULL(t1.server_id,0) server_id,IFNULL(t1.register_number,0) register_number,IFNULL(t2.role_number,0) role_number,IFNULL(t3.login_number,0) login_number,IFNULL(t4.active_number,0) active_number,IFNULL(t5.old_player_number,0) old_player_number,IFNULL(t6.pay_number,0) pay_number,IFNULL(t7.recharge_amount,0.00) recharge_amount,\n" +
+                "now() report_date,IFNULL(t1.channel_id,0) channel_id,IFNULL(t1.server_id,0) server_id,IFNULL(t18.register_number,0) register_number,IFNULL(t2.role_number,0) role_number,IFNULL(t3.login_number,0) login_number,IFNULL(t4.active_number,0) active_number,IFNULL(t5.old_player_number,0) old_player_number,IFNULL(t6.pay_number,0) pay_number,IFNULL(t7.recharge_amount,0.00) recharge_amount,\n" +
                 "IFNULL(format(t6.pay_number/t3.login_number,4),0.00) pay_rate, -- 登录付费率\n" +
                 "IFNULL(t7.recharge_amount/t6.pay_number,0.00) pay_arpu, -- 付费ARPU\n" +
                 "IFNULL(t8.new_pay_number,0) new_pay_number,IFNULL(t9.new_recharge_amount,0.00) new_recharge_amount,\n" +
@@ -21,8 +21,10 @@ public class DataCollectionSqlProvider {
                 "IFNULL(format(t14.login_number/t15.login_number,4),0.00) three_day_avg, -- 三留\n" +
                 "IFNULL(format(t16.login_number/t17.login_number,4),0.00) seven_day_avg -- 七留\n" +
                 "FROM\n" +
-                "(SELECT t1.channel_id,t2.server_id,COUNT(*) register_number FROM(SELECT channel_id,player_id FROM player WHERE TO_DAYS(create_time)=TO_DAYS(now())) t1 \n" +
-                "RIGHT JOIN (SELECT DISTINCT server_id,player_id FROM player_character WHERE TO_DAYS(create_time)=TO_DAYS(now())) t2 on t1.player_id=t2.player_id GROUP BY t1.channel_id,t2.server_id) t1 -- 注册数\n" +
+                "(SELECT t1.channel_id,t2.server_id from channel t1,server t2 GROUP BY t1.channel_id,t2.server_id) t1 -- 渠道和区服\n" +
+                "LEFT JOIN(SELECT t1.channel_id,t2.server_id,COUNT(*) register_number FROM(SELECT channel_id,player_id FROM player WHERE TO_DAYS(create_time)=TO_DAYS(now())) t1 \n" +
+                "RIGHT JOIN (SELECT DISTINCT server_id,player_id FROM player_character WHERE TO_DAYS(create_time)=TO_DAYS(now())) t2 on t1.player_id=t2.player_id GROUP BY t1.channel_id,t2.server_id) t18 -- 注册数\n" +
+                "ON t1.channel_id=t18.channel_id AND t1.server_id=t18.server_id\n" +
                 "LEFT JOIN (SELECT t1.channel_id,t2.server_id,COUNT(*) role_number FROM(SELECT channel_id,player_id FROM player WHERE TO_DAYS(create_time)=TO_DAYS(now())) t1 \n" +
                 "RIGHT JOIN (SELECT server_id,player_id FROM player_character WHERE TO_DAYS(create_time)=TO_DAYS(now())) t2 on t1.player_id=t2.player_id GROUP BY t1.channel_id,t2.server_id) t2 -- 创角数\n" +
                 "ON t1.channel_id=t2.channel_id AND t1.server_id=t2.server_id\n" +
@@ -83,7 +85,7 @@ public class DataCollectionSqlProvider {
         }
         sql += "GROUP BY   " +
                 "report_date,channel_id,server_id  " +
-                "order by report_date  ";
+                "order by report_date  desc";
         return sql;
     }
 }
