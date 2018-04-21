@@ -72,6 +72,10 @@ public class PlayerActionLogEntitySqlProvider {
             sql.VALUES("update_time", "#{updateTime,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getOnlineTime() != null) {
+            sql.VALUES("online_time", "#{onlineTime,jdbcType=BIGINT}");
+        }
+        
         return sql.toString();
     }
 
@@ -92,6 +96,7 @@ public class PlayerActionLogEntitySqlProvider {
         sql.SELECT("`status`");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
+        sql.SELECT("online_time");
         sql.FROM("player_action_log");
         applyWhere(sql, example, false);
         
@@ -153,6 +158,10 @@ public class PlayerActionLogEntitySqlProvider {
             sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getOnlineTime() != null) {
+            sql.SET("online_time = #{record.onlineTime,jdbcType=BIGINT}");
+        }
+        
         applyWhere(sql, example, true);
         return sql.toString();
     }
@@ -172,6 +181,7 @@ public class PlayerActionLogEntitySqlProvider {
         sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
+        sql.SET("online_time = #{record.onlineTime,jdbcType=BIGINT}");
         
         PlayerActionLogEntityExample example = (PlayerActionLogEntityExample) parameter.get("example");
         applyWhere(sql, example, true);

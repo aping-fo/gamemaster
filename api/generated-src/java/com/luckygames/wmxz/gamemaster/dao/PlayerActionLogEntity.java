@@ -20,6 +20,8 @@ public class PlayerActionLogEntity extends BaseEntity {
 
     private Long charId;
 
+    private Long onlineTime;
+
     public String getDeviceId() {
         return deviceId;
     }
@@ -74,5 +76,13 @@ public class PlayerActionLogEntity extends BaseEntity {
 
     public void setCharId(Long charId) {
         this.charId = charId;
+    }
+
+    public Long getOnlineTime() {
+        return onlineTime;
+    }
+
+    public void setOnlineTime(Long onlineTime) {
+        this.onlineTime = onlineTime;
     }
 }
