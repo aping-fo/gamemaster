@@ -31,7 +31,6 @@ Temporary Items
 *.class
 
 # Log file
-*.log
 logs/
 
 # BlueJ files
@@ -57,7 +56,6 @@ hs_err_pid*
 .idea/
 
 # User-specific stuff:
-.idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/dictionaries
 
@@ -68,10 +66,7 @@ hs_err_pid*
 .idea/**/dataSources.local.xml
 .idea/**/sqlDataSources.xml
 .idea/**/dynamic.xml
-.idea/**/uiDesigner.xml
-
 # Gradle:
-.idea/**/gradle.xml
 .idea/**/libraries
 
 # CMake
@@ -103,5 +98,4 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
-*.iml
 .gradle/
