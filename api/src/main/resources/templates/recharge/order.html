@@ -1,49 +1,34 @@
 <div class="pageHeader">
-    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="/recharge/order" method="post"
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="recharge/order" method="post"
           onreset="$(this).find('select.combox').comboxReset()">
-        <input type="hidden" name="serverId" th:value="${#strings.listJoin(request.serverId,',')}"/>
-        <input type="hidden" name="channelId" th:value="${#strings.listJoin(request.channelId,',')}"/>
-        <input type="hidden" name="orderField" value="${request.orderField}"/>
-        <input type="hidden" name="orderDirection" value="${request.orderDirection}"/>
-        <input type="hidden" name="pageNum" th:value="${Pager.pageNum}"/>
-        <input type="hidden" name="pageSize" th:value="${Pager.pageSize}"/>
         <div class="searchBar">
             <table class="searchContent">
                 <tr>
                     <td>
-                        <div>
-                            <div class="buttonContent">
-                                <a class="button" href="server/select"
-                                   rel="serverselect" mask="true" lookupGroup=""><span>区服筛选</span></a>
-                            </div>
-                        </div>
+                        订单号：
+                        <input name="orderCode" type="text" value="" th:value="${request.orderCode}" placeholder="订单号"
+                               size="15">
                     </td>
                     <td>
-                        <div>
-                            <div class="buttonContent">
-                                <a class="button" href="channel/select"
-                                   rel="channelselect" mask="true" lookupGroup=""><span>渠道筛选</span></a>
-                            </div>
-                        </div>
+                        账号：
+                        <input name="player" type="text" value="" th:value="${request.player}" placeholder="账号/手机/身份证"
+                               size="15">
                     </td>
-                    <td class="dateRange">
-                        日期:
-                        <input name="startDate" class="date readonly" readonly="readonly" type="text" value=""
-                               th:value="${request.startDate}">
+                    <td>
+                        角色名：
+                        <input name="character" type="text" value="" th:value="${request.character}" placeholder="角色"
+                               size="15">
+                    </td>
+                    <td>
+                        元宝：
+                        <input name="goldFrom" type="number" value="" th:value="${request.goldFrom}" size="10">
                         <span class="limit">-</span>
-                        <input name="endDate" class="date readonly" readonly="readonly" type="text" value=""
-                               th:value="${request.endDate}">
-                    </td>
-                    <td>
-                        <div class="buttonActive">
-                            <div class="buttonContent">
-                                <button type="submit">检索</button>
-                            </div>
-                        </div>
+                        <input name="goldTo" type="number" value="" th:value="${request.goldTo}" size="10">
                     </td>
                 </tr>
             </table>
         </div>
+        <div th:replace="_include/searchBar"></div>
     </form>
 </div>
 <div class="pageContent">
@@ -54,31 +39,31 @@
             </li>
         </ul>
     </div>
-    <table class="table" width="100%" layoutH="112">
+    <table class="table" width="100%" layoutH="137">
         <thead>
         <tr>
-            <th width="120" align="right">订单ID</th>
-            <th width="120" align="right">订单号</th>
-            <th width="100" align="right">玩家ID</th>
-            <th width="100" align="right">角色ID</th>
-            <th width="100" align="right">角色名称</th>
-            <th width="80" align="right">购买商品ID</th>
-            <th width="80" align="right">订单金额</th>
-            <th width="80" align="right">支付成功时间</th>
-            <th width="80" align="right">充值成功时间</th>
+            <th width="120">订单号</th>
+            <th width="100">区服</th>
+            <th width="100">渠道</th>
+            <th width="100">账号</th>
+            <th width="100">角色名</th>
+            <th width="80" align="right">等级</th>
+            <th width="80" align="right">元宝</th>
+            <th width="80" align="right">金额</th>
+            <th width="80" align="right">时间</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="row,iterStat:${orderList}">
-            <td th:text="${row.orderId}"></td>
             <td th:text="${row.orderCode}"></td>
-            <td th:text="${row.playerId}"></td>
-            <td th:text="${row.charId}"></td>
+            <td th:text="${row.serverName}"></td>
+            <td th:text="${row.channelName}"></td>
+            <td th:text="${row.username}"></td>
             <td th:text="${row.charName}"></td>
-            <td th:text="${row.itemId}"></td>
+            <td th:text="${row.charLevel}"></td>
+            <td th:text="${row.goldQuantity}"></td>
             <td th:text="${row.amount}"></td>
-            <td th:text="${row.paidDate}"></td>
-            <td th:text="${row.rechargedDate}"></td>
+            <td th:text="${#dates.format(row.rechargedDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
         </tr>
         </tbody>
     </table>

@@ -2,20 +2,23 @@ package com.luckygames.wmxz.gamemaster.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.luckygames.wmxz.gamemaster.dao.ChannelEntity;
 import com.luckygames.wmxz.gamemaster.dao.ChannelExample;
 import com.luckygames.wmxz.gamemaster.dao.mapper.ChannelMapper;
 import com.luckygames.wmxz.gamemaster.model.entity.Channel;
 import com.luckygames.wmxz.gamemaster.model.enums.Status;
 import com.luckygames.wmxz.gamemaster.model.view.request.ChannelSearchQuery;
+import com.luckygames.wmxz.gamemaster.service.base.BaseServiceImpl;
 import com.luckygames.wmxz.gamemaster.utils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
 
 @Service("channelService")
-public class ChannelServiceImpl implements ChannelService {
+public class ChannelServiceImpl extends BaseServiceImpl<ChannelEntity> implements ChannelService {
 
     @Autowired
     private ChannelMapper channelMapper;
@@ -44,5 +47,26 @@ public class ChannelServiceImpl implements ChannelService {
         }
 
         return PageHelper.startPage(request.getPageNum(), request.getPageSize()).doSelectPage(() -> channelMapper.selectByExample(example));
+    }
+
+    @Override
+    public Channel getByChannelId(Long channelId) {
+        ChannelEntity channelEntity = channelMapper.selectOne(new ChannelEntity() {{
+            setChannelId(channelId);
+            setStatus(Status.NORMAL);
+        }});
+        return BeanUtils.copyProperties(channelEntity, Channel.class);
+    }
+
+    @Override
+    public long countChannles() {
+        return this.channelMapper.selectCount(new ChannelEntity() {{
+            setStatus(Status.NORMAL);
+        }});
+    }
+
+    @Override
+    public Mapper<ChannelEntity> getMapper() {
+        return this.channelMapper;
     }
 }

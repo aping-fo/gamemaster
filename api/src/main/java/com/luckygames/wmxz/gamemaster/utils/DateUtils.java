@@ -4,6 +4,8 @@ import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 
 import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 public class DateUtils {
@@ -48,5 +50,9 @@ public class DateUtils {
 
     public static Date RandomDateTime(Date from, Date to) {
         return new Date(RandomUtils.nextLong(from.getTime(), to.getTime()));
+    }
+
+    public static Date now() {
+        return Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
     }
 }

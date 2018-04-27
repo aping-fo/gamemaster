@@ -1,7 +1,10 @@
 import com.luckygames.wmxz.gamemaster.GamemasterApplication;
-import com.luckygames.wmxz.gamemaster.dao.mapper.PlayerOrderMapper;
+import com.luckygames.wmxz.gamemaster.model.entity.Channel;
+import com.luckygames.wmxz.gamemaster.model.entity.PlayerCharacter;
 import com.luckygames.wmxz.gamemaster.model.entity.PlayerOrder;
+import com.luckygames.wmxz.gamemaster.model.entity.Server;
 import com.luckygames.wmxz.gamemaster.model.enums.Status;
+import com.luckygames.wmxz.gamemaster.service.*;
 import com.luckygames.wmxz.gamemaster.utils.DateUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Test;
@@ -14,39 +17,63 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GamemasterApplication.class)
 @Transactional(propagation = Propagation.REQUIRED)
 public class orderDataGenerator {
     @Autowired
-    private PlayerOrderMapper playerOrderMapper;
+    private PlayerOrderService playerOrderService;
+    @Autowired
+    private ServerService serverService;
+    @Autowired
+    private ChannelService channelService;
+    @Autowired
+    private PlayerService playerService;
+    @Autowired
+    private PlayerCharacterService playerCharacterService;
 
     @Test
     @Transactional
     @Commit
     public void generateOrderData() {
-        for (int i = 0; i < 500; i++) {
-            Date date = new Date();
+        long channelCount = this.channelService.countChannles();
+        long serverCount = this.serverService.countServers();
+        long playerCount = this.playerService.countPlayers();
+
+        for (int i = 0; i < 5000; i++) {
             PlayerOrder playerOrder = new PlayerOrder();
-            playerOrder.setOrderCode(DateUtils.DateTimeToStringCompact(date));
-            playerOrder.setChannelId(RandomUtils.nextLong(1, 4));
-            playerOrder.setServerId(RandomUtils.nextLong(1, 4));
-            playerOrder.setPlayerId(RandomUtils.nextLong(1, 900));
-            playerOrder.setCharId((long) (i+1));
-            playerOrder.setAmount(BigDecimal.valueOf(RandomUtils.nextDouble(100, 5000)));
+            playerOrder.setRechargedDate(DateUtils.RandomDateTime(DateUtils.StringToDate("2018-03-01"), DateUtils.StringToDate("2018-06-01")));
+
+            playerOrder.setOrderCode(DateUtils.DateTimeToStringCompact(playerOrder.getRechargedDate()));
+            playerOrder.setChannelId(RandomUtils.nextLong(1, channelCount));
+            Channel channel = this.channelService.getByChannelId(playerOrder.getChannelId());
+            if (channel != null) {
+                playerOrder.setChannelName(channel.getChannelName());
+            }
+            playerOrder.setServerId(RandomUtils.nextLong(1, serverCount));
+            Server server = this.serverService.getByServerId(playerOrder.getServerId());
+            if (channel != null) {
+                playerOrder.setServerName(server.getServerName());
+            }
+            playerOrder.setPlayerId(RandomUtils.nextLong(1, playerCount));
+            playerOrder.setCharId(playerOrder.getPlayerId());
+            PlayerCharacter playerCharacter = this.playerCharacterService.getByCharId(playerOrder.getCharId());
+            if (playerCharacter != null) {
+                playerOrder.setCharGold(playerCharacter.getLeftGold());
+                playerOrder.setCharLevel(playerCharacter.getLevel());
+                playerOrder.setCharName(playerCharacter.getCharName());
+            }
+            playerOrder.setAmount(BigDecimal.valueOf(Math.round(RandomUtils.nextDouble(40, 700))));
             playerOrder.setGoldQuantity((int) Math.round(playerOrder.getAmount().doubleValue() * 10));
             playerOrder.setOrderType("TEST");
             playerOrder.setOrderStatus("TEST");
-            playerOrder.setRechargedDate(date);
             playerOrder.setPaidDate(playerOrder.getRechargedDate());
             playerOrder.setStatus(Status.NORMAL);
-            playerOrder.setCharGold(RandomUtils.nextInt(0, 5000));
-            playerOrder.setCharLevel(RandomUtils.nextInt(10, 80));
-            playerOrderMapper.insertSelective(playerOrder);
+            this.playerOrderService.save(playerOrder);
+
             playerOrder.setOrderId(playerOrder.getId());
-            playerOrderMapper.updateByPrimaryKeySelective(playerOrder);
+            this.playerOrderService.save(playerOrder);
         }
 
     }

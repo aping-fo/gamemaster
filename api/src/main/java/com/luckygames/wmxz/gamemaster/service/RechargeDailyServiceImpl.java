@@ -58,7 +58,7 @@ public class RechargeDailyServiceImpl implements RechargeDailyService {
     @Override
     @Transactional
     public void generateRechargeDailyReportToday() {
-        List<RechargeDaily> list = rechargeDailyMapper.queryRechargeDailyReportFromOrderSingleDate(new Date());
+        List<RechargeDaily> list = rechargeDailyMapper.queryRechargeDailyReportFromOrderSingleDate(DateUtils.now());
         if (list == null || list.isEmpty()) {
             return;
         }
@@ -84,7 +84,7 @@ public class RechargeDailyServiceImpl implements RechargeDailyService {
     @Override
     @Transactional
     public void generateRechargeDailyReportYesterDay() {
-        List<RechargeDaily> list = rechargeDailyMapper.queryRechargeDailyReportFromOrderSingleDate(org.apache.commons.lang3.time.DateUtils.addDays(new Date(), -1));
+        List<RechargeDaily> list = rechargeDailyMapper.queryRechargeDailyReportFromOrderSingleDate(org.apache.commons.lang3.time.DateUtils.addDays(DateUtils.now(), -1));
         if (list == null || list.isEmpty()) {
             return;
         }

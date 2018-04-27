@@ -4,18 +4,15 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.luckygames.wmxz.gamemaster.dao.DataCollectionEntity;
 import com.luckygames.wmxz.gamemaster.dao.DataCollectionEntityExample;
-import com.luckygames.wmxz.gamemaster.dao.RechargeDailyEntity;
-import com.luckygames.wmxz.gamemaster.dao.RechargeDailyExample;
 import com.luckygames.wmxz.gamemaster.dao.mapper.DataCollectionMapper;
 import com.luckygames.wmxz.gamemaster.model.entity.DataCollection;
-import com.luckygames.wmxz.gamemaster.model.entity.RechargeDaily;
 import com.luckygames.wmxz.gamemaster.model.enums.Status;
 import com.luckygames.wmxz.gamemaster.model.view.request.DataCollectionSearchQuery;
 import com.luckygames.wmxz.gamemaster.utils.BeanUtils;
+import com.luckygames.wmxz.gamemaster.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service("reportService")
@@ -33,7 +30,7 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public void generateDataCollectionReportToday() {
-        List<DataCollection> list = dataCollectionMapper.queryDataCollectionReportFromOrderSingleDate(new Date());
+        List<DataCollection> list = dataCollectionMapper.queryDataCollectionReportFromOrderSingleDate(DateUtils.now());
         if (list == null || list.isEmpty()) {
             return;
         }
