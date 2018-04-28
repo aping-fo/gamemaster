@@ -127,7 +127,7 @@ public class RechargeMonthlyServiceImpl extends BaseServiceImpl<RechargeMonthlyE
             List<RechargeMonthlyDay> rechargeMonthlyDayList = this.rechargeMonthlyDayService.findByRechargeMonthlyId(r.getId());
             if (rechargeMonthlyDayList != null && !rechargeMonthlyDayList.isEmpty()) {
                 rechargeMonthlyDayList.forEach(rd -> {
-                    amountMonthly.set(rd.getRechargeDay(), rd.getAmount());
+                    amountMonthly.set(rd.getRechargeDay() - 1, rd.getAmount());
                 });
             }
             r.setAmountMonthly(amountMonthly);
