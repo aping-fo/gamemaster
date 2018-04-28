@@ -20,5 +20,5 @@ public interface RechargeDailyService {
 
     void generateRechargeDailyReportYesterDay();
 
-
+    List<RechargeDaily> findByOneDate(String date);
 }

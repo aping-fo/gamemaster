@@ -12,8 +12,8 @@ public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseServi
     @Override
     public Long create(T entity) {
         entity.setStatus(Status.NORMAL);
-        entity.setCreateTime(DateUtils.now());
-        entity.setUpdateTime(DateUtils.now());
+        entity.setCreateTime(DateUtils.Now());
+        entity.setUpdateTime(DateUtils.Now());
 
         this.getMapper().insertSelective(entity);
 
@@ -23,7 +23,7 @@ public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseServi
     @Override
     public void update(T entity) {
         //BaseEntity entity = BeanUtils.copyProperties(obj, BaseEntity.class);
-        entity.setUpdateTime(DateUtils.now());
+        entity.setUpdateTime(DateUtils.Now());
         this.getMapper().updateByPrimaryKeySelective(entity);
     }
 

@@ -5,7 +5,7 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 public class PageQuery {
     private Integer pageNum;
     private Integer pageSize = 50;
-    private String orderField;
+    private String orderField = "";
     private String orderDirection = "ASC";
 
     public PageQuery() {

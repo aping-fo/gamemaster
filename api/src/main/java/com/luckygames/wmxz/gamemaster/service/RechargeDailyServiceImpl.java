@@ -58,7 +58,7 @@ public class RechargeDailyServiceImpl implements RechargeDailyService {
     @Override
     @Transactional
     public void generateRechargeDailyReportToday() {
-        List<RechargeDaily> list = rechargeDailyMapper.queryRechargeDailyReportFromOrderSingleDate(DateUtils.now());
+        List<RechargeDaily> list = rechargeDailyMapper.queryRechargeDailyReportFromOrderSingleDate(DateUtils.Now());
         if (list == null || list.isEmpty()) {
             return;
         }
@@ -84,10 +84,19 @@ public class RechargeDailyServiceImpl implements RechargeDailyService {
     @Override
     @Transactional
     public void generateRechargeDailyReportYesterDay() {
-        List<RechargeDaily> list = rechargeDailyMapper.queryRechargeDailyReportFromOrderSingleDate(org.apache.commons.lang3.time.DateUtils.addDays(DateUtils.now(), -1));
+        List<RechargeDaily> list = rechargeDailyMapper.queryRechargeDailyReportFromOrderSingleDate(org.apache.commons.lang3.time.DateUtils.addDays(DateUtils.Now(), -1));
         if (list == null || list.isEmpty()) {
             return;
         }
         saveRechargeDailyReport(list);
+    }
+
+    @Override
+    public List<RechargeDaily> findByOneDate(String date) {
+        List<RechargeDailyEntity> rechargeDailyEntities = this.rechargeDailyMapper.select(new RechargeDailyEntity() {{
+            setStatus(Status.NORMAL);
+            setReportDate(date);
+        }});
+        return BeanUtils.copyListProperties(rechargeDailyEntities, RechargeDaily.class);
     }
 }

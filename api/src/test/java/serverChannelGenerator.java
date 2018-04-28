@@ -172,7 +172,7 @@ public class serverChannelGenerator {
             if (server == null) {
                 server = new Server();
                 server.setServerId((long) i + 1);
-                server.setOpenDate(DateUtils.now());
+                server.setOpenDate(DateUtils.Now());
             }
             server.setServerName(serverNames[i]);
             this.serverService.save(server);
@@ -188,7 +188,7 @@ public class serverChannelGenerator {
             if (channel == null) {
                 channel = new Channel();
                 channel.setChannelId((long) i + 1);
-                channel.setOpenDate(DateUtils.now());
+                channel.setOpenDate(DateUtils.Now());
             }
             channel.setChannelName(channelNames[i]);
             this.channelService.save(channel);

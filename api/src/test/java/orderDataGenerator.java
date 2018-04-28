@@ -43,7 +43,7 @@ public class orderDataGenerator {
 
         for (int i = 0; i < 5000; i++) {
             PlayerOrder playerOrder = new PlayerOrder();
-            playerOrder.setRechargedDate(DateUtils.RandomDateTime(DateUtils.StringToDate("2018-03-01"), DateUtils.StringToDate("2018-06-01")));
+            playerOrder.setRechargedDate(DateUtils.RandomDateTime(DateUtils.StringToDate("2018-04-01"), DateUtils.StringToDate("2018-06-01")));
 
             playerOrder.setOrderCode(DateUtils.DateTimeToStringCompact(playerOrder.getRechargedDate()));
             playerOrder.setChannelId(RandomUtils.nextLong(1, channelCount));

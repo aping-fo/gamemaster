@@ -30,7 +30,7 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public void generateDataCollectionReportToday() {
-        List<DataCollection> list = dataCollectionMapper.queryDataCollectionReportFromOrderSingleDate(DateUtils.now());
+        List<DataCollection> list = dataCollectionMapper.queryDataCollectionReportFromOrderSingleDate(DateUtils.Now());
         if (list == null || list.isEmpty()) {
             return;
         }
