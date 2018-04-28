@@ -14,4 +14,6 @@ public interface RechargeMonthlyService extends BaseService<RechargeMonthlyEntit
     RechargeMonthly findOne(Long channelId, Long serverId, int year, int month);
 
     Page<RechargeMonthly> searchPage(RechargeMonthlySearchQuery query);
+
+    void generateRechargeMonthlyReportByDay(String date);
 }

@@ -55,16 +55,6 @@ public class RechargeDailyServiceImpl implements RechargeDailyService {
         return BeanUtils.copyProperties(rechargeDailyList.get(0), RechargeDaily.class);
     }
 
-    @Override
-    @Transactional
-    public void generateRechargeDailyReportToday() {
-        List<RechargeDaily> list = rechargeDailyMapper.queryRechargeDailyReportFromOrderSingleDate(DateUtils.Now());
-        if (list == null || list.isEmpty()) {
-            return;
-        }
-        saveRechargeDailyReport(list);
-    }
-
     private void saveRechargeDailyReport(List<RechargeDaily> list) {
         list.forEach(r -> {
             RechargeDaily rechargeDaily = findOne(r.getChannelId(), r.getServerId(), r.getReportDate());
@@ -82,21 +72,34 @@ public class RechargeDailyServiceImpl implements RechargeDailyService {
     }
 
     @Override
-    @Transactional
-    public void generateRechargeDailyReportYesterDay() {
-        List<RechargeDaily> list = rechargeDailyMapper.queryRechargeDailyReportFromOrderSingleDate(org.apache.commons.lang3.time.DateUtils.addDays(DateUtils.Now(), -1));
-        if (list == null || list.isEmpty()) {
-            return;
-        }
-        saveRechargeDailyReport(list);
-    }
-
-    @Override
     public List<RechargeDaily> findByOneDate(String date) {
         List<RechargeDailyEntity> rechargeDailyEntities = this.rechargeDailyMapper.select(new RechargeDailyEntity() {{
             setStatus(Status.NORMAL);
             setReportDate(date);
         }});
         return BeanUtils.copyListProperties(rechargeDailyEntities, RechargeDaily.class);
+    }
+
+    @Override
+    @Transactional
+    public void generateRechargeDailyReportToday() {
+        generateRechargeDailyReportByDay(DateUtils.Now());
+    }
+
+    @Override
+    @Transactional
+    public void generateRechargeDailyReportYesterDay() {
+        generateRechargeDailyReportByDay(org.apache.commons.lang3.time.DateUtils.addDays(DateUtils.Now(), -1));
+    }
+
+    @Override
+    //@Transactional
+    public void generateRechargeDailyReportByDay(Date date) {
+        List<RechargeDaily> list = rechargeDailyMapper.queryRechargeDailyReportFromOrderSingleDate(date);
+        if (list == null || list.isEmpty()) {
+            return;
+        }
+        saveRechargeDailyReport(list);
+
     }
 }

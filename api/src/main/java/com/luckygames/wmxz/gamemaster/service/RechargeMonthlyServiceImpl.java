@@ -39,8 +39,8 @@ public class RechargeMonthlyServiceImpl extends BaseServiceImpl<RechargeMonthlyE
     }
 
     @Override
-    public void generateRechargeMonthlyReportToday() {
-        List<RechargeDaily> rechargeDailies = this.rechargeDailyService.findByOneDate(DateUtils.TodayString());
+    public void generateRechargeMonthlyReportByDay(String date) {
+        List<RechargeDaily> rechargeDailies = this.rechargeDailyService.findByOneDate(date);
         if (rechargeDailies == null || rechargeDailies.isEmpty()) {
             return;
         }
@@ -48,12 +48,13 @@ public class RechargeMonthlyServiceImpl extends BaseServiceImpl<RechargeMonthlyE
     }
 
     @Override
+    public void generateRechargeMonthlyReportToday() {
+        generateRechargeMonthlyReportByDay(DateUtils.TodayString());
+    }
+
+    @Override
     public void generateRechargeMonthlyReportYesterday() {
-        List<RechargeDaily> rechargeDailies = this.rechargeDailyService.findByOneDate(DateUtils.YesterdayString());
-        if (rechargeDailies == null || rechargeDailies.isEmpty()) {
-            return;
-        }
-        saveRechargeMonthlyReport(rechargeDailies);
+        generateRechargeMonthlyReportByDay(DateUtils.YesterdayString());
     }
 
     private void saveRechargeMonthlyReport(List<RechargeDaily> list) {
@@ -134,4 +135,5 @@ public class RechargeMonthlyServiceImpl extends BaseServiceImpl<RechargeMonthlyE
         });
         return rechargeMonthlyPage;
     }
+
 }
