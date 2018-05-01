@@ -24,21 +24,25 @@ public class PlayerActionDailySqlProvider extends PlayerActionDailyEntitySqlProv
         StringBuilder sql = new StringBuilder(" select pa.channel_id ")
                 .append(" , sum(pa.player_count) player_count ")
                 .append(" , pa.report_date ")
+                .append(" , c.channel_name ")
                 .append(" from player_action_daily pa ")
+                .append(" inner join channel c on c.channel_id=pa.channel_id ")
                 .append(" where 1=1 ");
 
         if (query.getChannelIds() != null && !query.getChannelIds().isEmpty()) {
             String ids = StringUtils.join(query.getChannelIds(), ",");
-            sql.append(" and channel_id in (" + ids + ") ");
+            sql.append(" and pa.channel_id in (" + ids + ") ");
         }
         if (StringUtils.isNotBlank(query.getStartDate())) {
-            sql.append(" and report_date >= #{startDate} ");
+            sql.append(" and pa.report_date >= #{startDate} ");
         }
         if (StringUtils.isNotBlank(query.getEndDate())) {
-            sql.append(" and report_date < #{endDate} )");
+            sql.append(" and pa.report_date < #{endDate} ");
         }
 
-        sql.append(" group by pa.channel_id, pa.report_date ").append(" order by report_date ");
+        sql.append(" group by pa.channel_id, pa.report_date ")
+                .append(" ,c.channel_name ")
+                .append(" order by pa.channel_id, pa.report_date  ");
 
         return sql.toString();
     }

@@ -15,12 +15,14 @@
     <table class="table" layoutH="112">
         <thead>
         <tr>
+            <th width="120">渠道</th>
             <th width="120">日期</th>
             <th width="120" align="right">注册数</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="row,iterStat:${playerActionDailyList}">
+            <td th:text="${row.channelName}"></td>
             <td th:text="${row.reportDate}"></td>
             <td th:text="${row.playerCount}"></td>
         </tr>
