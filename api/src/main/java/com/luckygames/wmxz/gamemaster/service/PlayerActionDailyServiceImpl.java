@@ -1,10 +1,13 @@
 package com.luckygames.wmxz.gamemaster.service;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.luckygames.wmxz.gamemaster.dao.PlayerActionDailyEntity;
 import com.luckygames.wmxz.gamemaster.dao.PlayerActionDailyExample;
 import com.luckygames.wmxz.gamemaster.dao.mapper.PlayerActionDailyMapper;
 import com.luckygames.wmxz.gamemaster.model.entity.PlayerActionDaily;
 import com.luckygames.wmxz.gamemaster.model.enums.Status;
+import com.luckygames.wmxz.gamemaster.model.view.request.CommonSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.base.BaseServiceImpl;
 import com.luckygames.wmxz.gamemaster.utils.BeanUtils;
 import com.luckygames.wmxz.gamemaster.utils.DateUtils;
@@ -74,5 +77,13 @@ public class PlayerActionDailyServiceImpl extends BaseServiceImpl<PlayerActionDa
         }
         return BeanUtils.copyProperties(list.get(0), PlayerActionDaily.class);
 
+    }
+
+    @Override
+    public Page<PlayerActionDaily> searchRegisterPage(CommonSearchQuery query) {
+        if (query.getPageNum() == null) {
+            query.setPageNum(1);
+        }
+        return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> playerActionDailyMapper.queryPlayerActionDailyRegisterReport(query));
     }
 }

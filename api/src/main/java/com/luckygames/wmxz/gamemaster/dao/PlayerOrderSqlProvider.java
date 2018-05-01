@@ -12,12 +12,12 @@ public class PlayerOrderSqlProvider {
                 .append(" inner join player_character pc on pc.char_id=po.char_id ")
                 .append(" where 1=1 ");
 
-        if (query.getChannelId() != null && !query.getChannelId().isEmpty()) {
-            String ids = StringUtils.join(query.getChannelId(), ",");
+        if (query.getChannelIds() != null && !query.getChannelIds().isEmpty()) {
+            String ids = StringUtils.join(query.getChannelIds(), ",");
             sql.append(" and po.channel_id in (").append(ids).append(")  ");
         }
-        if (query.getServerId() != null && !query.getServerId().isEmpty()) {
-            String ids = StringUtils.join(query.getServerId(), ",");
+        if (query.getServerIds() != null && !query.getServerIds().isEmpty()) {
+            String ids = StringUtils.join(query.getServerIds(), ",");
             sql.append(" and po.server_id in (").append(ids).append(")  ");
         }
 

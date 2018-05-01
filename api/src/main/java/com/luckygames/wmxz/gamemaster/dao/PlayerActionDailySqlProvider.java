@@ -1,5 +1,8 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
+import com.luckygames.wmxz.gamemaster.model.view.request.CommonSearchQuery;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Date;
 
 public class PlayerActionDailySqlProvider extends PlayerActionDailyEntitySqlProvider {
@@ -14,6 +17,29 @@ public class PlayerActionDailySqlProvider extends PlayerActionDailyEntitySqlProv
                 .append(" where ")
                 .append(" pa.action_date between DATE(#{date}) and DATE(DATE_ADD(#{date},INTERVAL 1 DAY))")
                 .append(" group by pa.channel_id,pa.server_id,report_date ");
+        return sql.toString();
+    }
+
+    public String queryPlayerActionDailyRegisterReport(CommonSearchQuery query) {
+        StringBuilder sql = new StringBuilder(" select pa.channel_id ")
+                .append(" , sum(pa.player_count) player_count ")
+                .append(" , pa.report_date ")
+                .append(" from player_action_daily pa ")
+                .append(" where 1=1 ");
+
+        if (query.getChannelIds() != null && !query.getChannelIds().isEmpty()) {
+            String ids = StringUtils.join(query.getChannelIds(), ",");
+            sql.append(" and channel_id in (" + ids + ") ");
+        }
+        if (StringUtils.isNotBlank(query.getStartDate())) {
+            sql.append(" and report_date >= #{startDate} ");
+        }
+        if (StringUtils.isNotBlank(query.getEndDate())) {
+            sql.append(" and report_date < #{endDate} )");
+        }
+
+        sql.append(" group by pa.channel_id, pa.report_date ").append(" order by report_date ");
+
         return sql.toString();
     }
 }

@@ -1,4 +1,6 @@
 <div th:fragment="searchBar">
+    <input type="hidden" name="serverIds" th:value="${#strings.listJoin(request.serverIds,',')}"/>
+    <input type="hidden" name="channelIds" th:value="${#strings.listJoin(request.channelIds,',')}"/>
     <input type="hidden" name="orderField" th:value="${request.orderField}"/>
     <input type="hidden" name="orderDirection" th:value="${request.orderDirection}"/>
     <input type="hidden" name="pageNum" th:value="${Pager.pageNum}"/>

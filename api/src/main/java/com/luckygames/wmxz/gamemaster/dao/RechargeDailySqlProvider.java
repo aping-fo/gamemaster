@@ -49,12 +49,12 @@ public class RechargeDailySqlProvider {
                 "recharge_daily  " +
                 "where   " +
                 "1=1  ";
-        if (query.getChannelId() != null && !query.getChannelId().isEmpty()) {
-            String ids = StringUtils.join(query.getChannelId(), ",");
+        if (query.getChannelIds() != null && !query.getChannelIds().isEmpty()) {
+            String ids = StringUtils.join(query.getChannelIds(), ",");
             sql += "and channel_id in (" + ids + ")  ";
         }
-        if (query.getServerId() != null && !query.getServerId().isEmpty()) {
-            String ids = StringUtils.join(query.getServerId(), ",");
+        if (query.getServerIds() != null && !query.getServerIds().isEmpty()) {
+            String ids = StringUtils.join(query.getServerIds(), ",");
             sql += "and server_id in (" + ids + ")  ";
         }
         if (StringUtils.isNotBlank(query.getStartDate())) {
