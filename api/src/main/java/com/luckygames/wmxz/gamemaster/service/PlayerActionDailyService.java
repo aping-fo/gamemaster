@@ -7,11 +7,14 @@ import com.luckygames.wmxz.gamemaster.service.base.BaseService;
 import java.util.Date;
 
 public interface PlayerActionDailyService extends BaseService<PlayerActionDailyEntity> {
-    void generatePlayerDailyReportToday();
+    void generatePlayerActionDailyReportToday();
 
-    void generatePlayerDailyReportYesterday();
+    void generatePlayerActionDailyReportYesterday();
 
-    void generatePlayerDailyReportByDay(Date date);
+    void generatePlayerActionDailyReportByDay(Date date);
+
+    void generatePlayerActionDailyReportByDay(String date);
 
     PlayerActionDaily findOne(Long channelId, Long serverId, String reportDate);
+
 }

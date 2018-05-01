@@ -12,6 +12,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GamemasterApplication.class)
 @Transactional(propagation = Propagation.REQUIRED)
@@ -53,6 +57,26 @@ public class playerActionLogDataGenerator {
     @Test
     @Commit
     public void generatePlayerActionDailyReportToday() {
-        playerActionDailyService.generatePlayerDailyReportToday();
+        playerActionDailyService.generatePlayerActionDailyReportToday();
     }
+
+    @Test
+    @Commit
+    public void generatePlayerActionDailyReportYesterday() {
+        playerActionDailyService.generatePlayerActionDailyReportYesterday();
+    }
+
+    @Test
+    @Commit
+    public void generatePlayerActionDailyReportAll() {
+        LocalDate startDate = LocalDate.parse("2018-03-01", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDate endDate = LocalDate.parse("2018-05-31", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDateTime localDate = startDate.atStartOfDay();
+        while (!localDate.isAfter(endDate.atStartOfDay())) {
+            playerActionDailyService.generatePlayerActionDailyReportByDay(localDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            localDate = localDate.plusDays(1);
+        }
+
+    }
+
 }
