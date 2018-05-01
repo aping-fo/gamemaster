@@ -7,6 +7,15 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "report")
 public class ReportProperties {
     private CronSetting rechargeDaily;
+    private CronSetting playerAction;
+
+    public CronSetting getPlayerAction() {
+        return playerAction;
+    }
+
+    public void setPlayerAction(CronSetting playerAction) {
+        this.playerAction = playerAction;
+    }
 
     public CronSetting getRechargeDaily() {
         return rechargeDaily;

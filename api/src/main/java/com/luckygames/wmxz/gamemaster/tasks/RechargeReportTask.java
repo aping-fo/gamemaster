@@ -8,7 +8,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
-public class rechargeReportTask extends BaseTask {
+public class RechargeReportTask extends BaseTask {
     @Autowired
     private RechargeDailyService rechargeDailyService;
     @Autowired

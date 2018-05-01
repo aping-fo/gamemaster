@@ -1,9 +1,6 @@
 import com.luckygames.wmxz.gamemaster.GamemasterApplication;
 import com.luckygames.wmxz.gamemaster.model.entity.PlayerActionLog;
-import com.luckygames.wmxz.gamemaster.service.ChannelService;
-import com.luckygames.wmxz.gamemaster.service.PlayerActionLogService;
-import com.luckygames.wmxz.gamemaster.service.PlayerService;
-import com.luckygames.wmxz.gamemaster.service.ServerService;
+import com.luckygames.wmxz.gamemaster.service.*;
 import com.luckygames.wmxz.gamemaster.utils.DateUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Test;
@@ -21,6 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class playerActionLogDataGenerator {
     @Autowired
     private PlayerActionLogService playerActionLogService;
+    @Autowired
+    private PlayerActionDailyService playerActionDailyService;
     @Autowired
     private ChannelService channelService;
     @Autowired
@@ -49,5 +48,11 @@ public class playerActionLogDataGenerator {
             }
             playerActionLogService.save(playerActionLog);
         }
+    }
+
+    @Test
+    @Commit
+    public void generatePlayerActionDailyReportToday() {
+        playerActionDailyService.generatePlayerDailyReportToday();
     }
 }

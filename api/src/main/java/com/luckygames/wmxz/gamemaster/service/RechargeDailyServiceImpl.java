@@ -8,19 +8,26 @@ import com.luckygames.wmxz.gamemaster.dao.mapper.RechargeDailyMapper;
 import com.luckygames.wmxz.gamemaster.model.entity.RechargeDaily;
 import com.luckygames.wmxz.gamemaster.model.enums.Status;
 import com.luckygames.wmxz.gamemaster.model.view.request.RechargeDailySearchQuery;
+import com.luckygames.wmxz.gamemaster.service.base.BaseServiceImpl;
 import com.luckygames.wmxz.gamemaster.utils.BeanUtils;
 import com.luckygames.wmxz.gamemaster.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tk.mybatis.mapper.common.Mapper;
 
 import java.util.Date;
 import java.util.List;
 
 @Service("rechargeDailyService")
-public class RechargeDailyServiceImpl implements RechargeDailyService {
+public class RechargeDailyServiceImpl extends BaseServiceImpl<RechargeDailyEntity> implements RechargeDailyService {
     @Autowired
     private RechargeDailyMapper rechargeDailyMapper;
+
+    @Override
+    public Mapper<RechargeDailyEntity> getMapper() {
+        return rechargeDailyMapper;
+    }
 
     @Override
     public Page<RechargeDaily> searchPage(RechargeDailySearchQuery query) {
@@ -61,13 +68,8 @@ public class RechargeDailyServiceImpl implements RechargeDailyService {
             if (rechargeDaily == null) {
                 rechargeDaily = new RechargeDaily();
             }
-            Long id = rechargeDaily.getId();
-            BeanUtils.copyProperties(rechargeDaily, r);
-            if (r.getId() == null) {
-                rechargeDailyMapper.insertSelective(r);
-            } else {
-                rechargeDailyMapper.updateByPrimaryKeySelective(r);
-            }
+            BeanUtils.copyProperties(r, rechargeDaily);
+            save(rechargeDaily);
         });
     }
 
@@ -102,4 +104,5 @@ public class RechargeDailyServiceImpl implements RechargeDailyService {
         saveRechargeDailyReport(list);
 
     }
+
 }

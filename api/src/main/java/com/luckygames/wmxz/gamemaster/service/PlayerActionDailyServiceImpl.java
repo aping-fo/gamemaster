@@ -1,11 +1,19 @@
 package com.luckygames.wmxz.gamemaster.service;
 
 import com.luckygames.wmxz.gamemaster.dao.PlayerActionDailyEntity;
+import com.luckygames.wmxz.gamemaster.dao.PlayerActionDailyExample;
 import com.luckygames.wmxz.gamemaster.dao.mapper.PlayerActionDailyMapper;
+import com.luckygames.wmxz.gamemaster.model.entity.PlayerActionDaily;
+import com.luckygames.wmxz.gamemaster.model.enums.Status;
 import com.luckygames.wmxz.gamemaster.service.base.BaseServiceImpl;
+import com.luckygames.wmxz.gamemaster.utils.BeanUtils;
+import com.luckygames.wmxz.gamemaster.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
+
+import java.util.Date;
+import java.util.List;
 
 @Service("playerActionDailyService")
 public class PlayerActionDailyServiceImpl extends BaseServiceImpl<PlayerActionDailyEntity> implements PlayerActionDailyService {
@@ -15,5 +23,51 @@ public class PlayerActionDailyServiceImpl extends BaseServiceImpl<PlayerActionDa
     @Override
     public Mapper<PlayerActionDailyEntity> getMapper() {
         return playerActionDailyMapper;
+    }
+
+    @Override
+    public void generatePlayerDailyReportToday() {
+        generatePlayerDailyReportByDay(DateUtils.Now());
+    }
+
+    @Override
+    public void generatePlayerDailyReportYesterday() {
+        generatePlayerDailyReportByDay(DateUtils.AddDays(DateUtils.Now(), -1));
+    }
+
+    @Override
+    public void generatePlayerDailyReportByDay(Date date) {
+        List<PlayerActionDaily> list = this.playerActionDailyMapper.queryPlayerDailyReportSingleDate(date);
+        if (list == null || list.isEmpty()) {
+            return;
+        }
+        savePlayerActionDailyReport(list);
+    }
+
+    private void savePlayerActionDailyReport(List<PlayerActionDaily> list) {
+        list.forEach(r -> {
+            PlayerActionDaily playerActionDaily = findOne(r.getChannelId(), r.getServerId(), r.getReportDate());
+            if (playerActionDaily == null) {
+                playerActionDaily = new PlayerActionDaily();
+            }
+            BeanUtils.copyProperties(r, playerActionDaily);
+            save(playerActionDaily);
+        });
+    }
+
+    @Override
+    public PlayerActionDaily findOne(Long channelId, Long serverId, String reportDate) {
+        PlayerActionDailyExample example = new PlayerActionDailyExample();
+        PlayerActionDailyExample.Criteria criteria = example.createCriteria();
+        criteria.andStatusEqualTo(Status.NORMAL)
+                .andChannelIdEqualTo(channelId)
+                .andServerIdEqualTo(serverId)
+                .andReportDateEqualTo(reportDate);
+        List<PlayerActionDailyEntity> list = playerActionDailyMapper.selectByExample(example);
+        if (list == null || list.isEmpty()) {
+            return null;
+        }
+        return BeanUtils.copyProperties(list.get(0), PlayerActionDaily.class);
+
     }
 }

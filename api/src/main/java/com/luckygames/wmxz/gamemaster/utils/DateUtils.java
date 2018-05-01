@@ -91,4 +91,8 @@ public class DateUtils {
         }
         return LocalDate.parse(s, DateTimeFormatter.ofPattern(DATE_FORMAT)).getYear();
     }
+
+    public static Date AddDays(Date date, int days) {
+        return org.apache.commons.lang3.time.DateUtils.addDays(date, days);
+    }
 }
