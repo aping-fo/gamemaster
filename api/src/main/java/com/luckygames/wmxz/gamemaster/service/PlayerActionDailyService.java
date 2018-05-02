@@ -20,4 +20,6 @@ public interface PlayerActionDailyService extends BaseService<PlayerActionDailyE
     PlayerActionDaily findOne(Long channelId, Long serverId, String reportDate);
 
     Page<PlayerActionDaily> searchRegisterPage(CommonSearchQuery commonSearchQuery);
+
+    Page<PlayerActionDaily> searchCharacterPage(CommonSearchQuery commonSearchQuery);
 }

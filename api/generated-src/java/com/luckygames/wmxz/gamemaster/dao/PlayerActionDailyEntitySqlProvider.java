@@ -64,6 +64,10 @@ public class PlayerActionDailyEntitySqlProvider {
             sql.VALUES("online_time", "#{onlineTime,jdbcType=BIGINT}");
         }
         
+        if (record.getDeviceCount() != null) {
+            sql.VALUES("device_count", "#{deviceCount,jdbcType=INTEGER}");
+        }
+        
         if (record.getStatus() != null) {
             sql.VALUES("`status`", "#{status,jdbcType=INTEGER}");
         }
@@ -94,6 +98,7 @@ public class PlayerActionDailyEntitySqlProvider {
         sql.SELECT("login_count");
         sql.SELECT("logoff_count");
         sql.SELECT("online_time");
+        sql.SELECT("device_count");
         sql.SELECT("`status`");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
@@ -150,6 +155,10 @@ public class PlayerActionDailyEntitySqlProvider {
             sql.SET("online_time = #{record.onlineTime,jdbcType=BIGINT}");
         }
         
+        if (record.getDeviceCount() != null) {
+            sql.SET("device_count = #{record.deviceCount,jdbcType=INTEGER}");
+        }
+        
         if (record.getStatus() != null) {
             sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         }
@@ -179,6 +188,7 @@ public class PlayerActionDailyEntitySqlProvider {
         sql.SET("login_count = #{record.loginCount,jdbcType=INTEGER}");
         sql.SET("logoff_count = #{record.logoffCount,jdbcType=INTEGER}");
         sql.SET("online_time = #{record.onlineTime,jdbcType=BIGINT}");
+        sql.SET("device_count = #{record.deviceCount,jdbcType=INTEGER}");
         sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");

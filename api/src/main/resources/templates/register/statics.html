@@ -1,32 +1,27 @@
-<div class="pageHeader">
-    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="register/statics" method="post"
-          onreset="$(this).find('select.combox').comboxReset()">
-        <div th:replace="_include/searchBar"></div>
-    </form>
-</div>
 <div class="pageContent">
-    <div class="panelBar">
-        <ul class="toolBar">
-            <li>
-                <a class="icon" href="recharge/daily/export" target="dwzExport" targetType="navTab" title="确实要导出这些记录吗?"><span>导出EXCEL</span></a>
-            </li>
-        </ul>
+    <div class="tabs" currentIndex="0" eventType="click">
+        <div class="tabsHeader">
+            <div class="tabsHeaderContent">
+                <ul>
+                    <li>
+                        <a href="#"><span>设备数</span></a>
+                    </li>
+                    <li>
+                        <a href="register/statics_register" class="j-ajax"><span>注册数</span></a>
+                    </li>
+                    <li>
+                        <a href="register/statics_character" class="j-ajax"><span>创角数</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="tabsContent">
+            <div>设备数</div>
+            <div>注册数</div>
+            <div>创角数</div>
+        </div>
+        <div class="tabsFooter">
+            <div class="tabsFooterContent"></div>
+        </div>
     </div>
-    <table class="table" layoutH="112">
-        <thead>
-        <tr>
-            <th width="120">渠道</th>
-            <th width="120">日期</th>
-            <th width="120" align="right">注册数</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="row,iterStat:${playerActionDailyList}">
-            <td th:text="${row.channelName}"></td>
-            <td th:text="${row.reportDate}"></td>
-            <td th:text="${row.playerCount}"></td>
-        </tr>
-        </tbody>
-    </table>
-    <div th:replace="_include/pager"></div>
 </div>

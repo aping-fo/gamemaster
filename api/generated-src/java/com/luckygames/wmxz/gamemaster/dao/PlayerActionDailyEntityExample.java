@@ -656,6 +656,66 @@ public class PlayerActionDailyEntityExample {
             return (Criteria) this;
         }
 
+        public Criteria andDeviceCountIsNull() {
+            addCriterion("device_count is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeviceCountIsNotNull() {
+            addCriterion("device_count is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeviceCountEqualTo(Integer value) {
+            addCriterion("device_count =", value, "deviceCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeviceCountNotEqualTo(Integer value) {
+            addCriterion("device_count <>", value, "deviceCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeviceCountGreaterThan(Integer value) {
+            addCriterion("device_count >", value, "deviceCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeviceCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("device_count >=", value, "deviceCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeviceCountLessThan(Integer value) {
+            addCriterion("device_count <", value, "deviceCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeviceCountLessThanOrEqualTo(Integer value) {
+            addCriterion("device_count <=", value, "deviceCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeviceCountIn(List<Integer> values) {
+            addCriterion("device_count in", values, "deviceCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeviceCountNotIn(List<Integer> values) {
+            addCriterion("device_count not in", values, "deviceCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeviceCountBetween(Integer value1, Integer value2) {
+            addCriterion("device_count between", value1, value2, "deviceCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeviceCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("device_count not between", value1, value2, "deviceCount");
+            return (Criteria) this;
+        }
+
         public Criteria andStatusIsNull() {
             addCriterion("`status` is null");
             return (Criteria) this;

@@ -18,14 +18,32 @@ public class RegisterController extends BaseController {
     private PlayerActionDailyService playerActionDailyService;
 
     @RequestMapping(value = "/statics", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response queryOrderStatics(CommonSearchQuery commonSearchQuery) {
+    public Response registerStatics() {
+        return new Response("register/statics");
+    }
+
+    @RequestMapping(value = "/statics_register", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response staticsRegister(CommonSearchQuery commonSearchQuery) {
         if (commonSearchQuery.getPageNum() == null) {
             commonSearchQuery.setPageNum(1);
         }
 
         Page<PlayerActionDaily> playerActionDailyPage = playerActionDailyService.searchRegisterPage(commonSearchQuery);
 
-        return new Response("register/statics")
+        return new Response("register/statics_register")
+                .request(commonSearchQuery)
+                .data("playerActionDailyList", playerActionDailyPage);
+    }
+
+    @RequestMapping(value = "/statics_character", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response staticsCharacter(CommonSearchQuery commonSearchQuery) {
+        if (commonSearchQuery.getPageNum() == null) {
+            commonSearchQuery.setPageNum(1);
+        }
+
+        Page<PlayerActionDaily> playerActionDailyPage = playerActionDailyService.searchCharacterPage(commonSearchQuery);
+
+        return new Response("register/statics_character")
                 .request(commonSearchQuery)
                 .data("playerActionDailyList", playerActionDailyPage);
     }

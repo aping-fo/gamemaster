@@ -21,6 +21,8 @@ public class PlayerActionDailyEntity extends BaseEntity {
 
     private Long onlineTime;
 
+    private Integer deviceCount;
+
     public Long getChannelId() {
         return channelId;
     }
@@ -83,5 +85,13 @@ public class PlayerActionDailyEntity extends BaseEntity {
 
     public void setOnlineTime(Long onlineTime) {
         this.onlineTime = onlineTime;
+    }
+
+    public Integer getDeviceCount() {
+        return deviceCount;
+    }
+
+    public void setDeviceCount(Integer deviceCount) {
+        this.deviceCount = deviceCount;
     }
 }
