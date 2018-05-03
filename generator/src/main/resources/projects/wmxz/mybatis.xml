@@ -81,6 +81,15 @@
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
         </table>
+        <table schema="wmxz" tableName="pay_ltv" domainObjectName="PayLTVEntity">
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
+        </table>
+        <table schema="wmxz" tableName="pay_ltv_day" domainObjectName="PayLTVDayEntity">
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
+            <columnOverride column="days" javaType="com.luckygames.wmxz.gamemaster.model.enums.LTVDaysType"/>
+        </table>
     </context>
 
 
