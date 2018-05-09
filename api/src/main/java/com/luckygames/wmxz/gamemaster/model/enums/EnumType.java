@@ -1,11 +1,18 @@
 package com.luckygames.wmxz.gamemaster.model.enums;
 
 public interface EnumType {
-    public int code();
+    int code();
 
-    public String name();
+    String name();
 
-    public String text();
+    String text();
 
-    public String textEn();
+    String textEn();
+
+    int getCode();
+
+    String getText();
+
+    String getTextEn();
+
 }

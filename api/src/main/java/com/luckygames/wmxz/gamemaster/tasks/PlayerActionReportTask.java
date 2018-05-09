@@ -16,9 +16,19 @@ public class PlayerActionReportTask extends BaseTask {
     private PlayerActionDailyService playerActionDailyService;
 
     @Scheduled(cron = "#{@reportProperties.playerAction.todayCron}")
-    public void generateRechargeDailyReportToday() {
+    public void generatePlayerActionDailyReportToday() {
         try {
             playerActionDailyService.generatePlayerActionDailyReportToday();
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error("Task failed :{}", e.getMessage());
+        }
+    }
+
+    @Scheduled(cron = "#{@reportProperties.playerAction.yesterdayCron}")
+    public void generatePlayerActionDailyReportYesterday() {
+        try {
+            playerActionDailyService.generatePlayerActionDailyReportYesterday();
         } catch (Exception e) {
             e.printStackTrace();
             logger.error("Task failed :{}", e.getMessage());

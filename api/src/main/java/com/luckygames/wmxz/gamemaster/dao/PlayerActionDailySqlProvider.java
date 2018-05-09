@@ -3,10 +3,8 @@ package com.luckygames.wmxz.gamemaster.dao;
 import com.luckygames.wmxz.gamemaster.model.view.request.CommonSearchQuery;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Date;
-
 public class PlayerActionDailySqlProvider extends PlayerActionDailyEntitySqlProvider {
-    public String queryPlayerDailyReportSingleDate(Date date) {
+    public String queryPlayerDailyReportSingleDate(String date) {
         StringBuilder sql = new StringBuilder(" select pa.channel_id, pa.server_id, DATE_FORMAT(pa.action_date,'%Y-%m-%d') report_date ")
                 .append(" , sum(case when (pa.action =2) then 1 else 0 end) player_count ")
                 .append(" , sum(case when (pa.action =3) then 1 else 0 end) char_count ")
@@ -16,7 +14,7 @@ public class PlayerActionDailySqlProvider extends PlayerActionDailyEntitySqlProv
                 .append(" , count(distinct(case when (pa.action =3) then device_id end)) device_count ")
                 .append(" from player_action_log pa ")
                 .append(" where ")
-                .append(" pa.action_date between DATE(#{date}) and DATE(DATE_ADD(#{date},INTERVAL 1 DAY)) ")
+                .append(" pa.action_date between DATE(#{date}) and DATE_ADD(DATE(#{date}),INTERVAL 1 DAY) ")
                 .append(" group by pa.channel_id,pa.server_id,report_date ");
         return sql.toString();
     }

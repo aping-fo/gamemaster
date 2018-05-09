@@ -6,6 +6,7 @@ import com.luckygames.wmxz.gamemaster.model.entity.Server;
 import com.luckygames.wmxz.gamemaster.model.view.request.ServerSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.base.BaseService;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ServerService extends BaseService<ServerEntity> {
@@ -16,4 +17,6 @@ public interface ServerService extends BaseService<ServerEntity> {
     Server getByServerId(Long serverId);
 
     long countServers();
+
+    Server fixOpenDate(Long serverId, Date date);
 }

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("register")
+@RequestMapping("/register")
 public class RegisterController extends BaseController {
     @Autowired
     private PlayerActionDailyService playerActionDailyService;

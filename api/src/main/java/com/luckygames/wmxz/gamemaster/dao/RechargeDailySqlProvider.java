@@ -3,10 +3,8 @@ package com.luckygames.wmxz.gamemaster.dao;
 import com.luckygames.wmxz.gamemaster.model.view.request.RechargeDailySearchQuery;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Date;
-
 public class RechargeDailySqlProvider {
-    public String queryRechargeDailyReportFromOrderSingleDate(Date singleDate) {
+    public String queryRechargeDailyReportFromOrderSingleDate(String singleDate) {
         String sql = "SELECT  " +
                 "po.channel_id,  " +
                 "po.server_id,  " +
@@ -25,7 +23,7 @@ public class RechargeDailySqlProvider {
                 "left JOIN  " +
                 "player_character pc on po.char_id=pc.char_id   " +
                 "where   " +
-                "po.paid_date between DATE(#{singleDate}) and DATE(DATE_ADD(#{singleDate},INTERVAL 1 DAY))  " +
+                "po.paid_date between DATE(#{singleDate}) and DATE_ADD(DATE(#{singleDate}),INTERVAL 1 DAY)  " +
                 "GROUP BY   " +
                 "po.channel_id,  " +
                 "po.server_id,  " +

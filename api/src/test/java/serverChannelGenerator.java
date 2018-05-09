@@ -4,18 +4,20 @@ import com.luckygames.wmxz.gamemaster.model.entity.Server;
 import com.luckygames.wmxz.gamemaster.service.ChannelService;
 import com.luckygames.wmxz.gamemaster.service.ServerService;
 import com.luckygames.wmxz.gamemaster.utils.DateUtils;
+import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GamemasterApplication.class)
-@Transactional(propagation = Propagation.REQUIRED)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@Ignore
 public class serverChannelGenerator {
 
     private static String[] channelNames = {
@@ -164,10 +166,10 @@ public class serverChannelGenerator {
     private ChannelService channelService;
 
     @Test
-    @Transactional
     @Commit
+    //@Ignore
     public void generateServerData() {
-        for (int i = 0; i < serverNames.length; i++) {
+        for (int i = 0; i < 2/*serverNames.length*/; i++) {
             Server server = this.serverService.getByServerId((long) i + 1);
             if (server == null) {
                 server = new Server();
@@ -180,10 +182,10 @@ public class serverChannelGenerator {
     }
 
     @Test
-    @Transactional
     @Commit
+    //@Ignore
     public void generateChannelData() {
-        for (int i = 0; i < channelNames.length; i++) {
+        for (int i = 0; i < 2/*channelNames.length*/; i++) {
             Channel channel = this.channelService.getByChannelId((long) i + 1);
             if (channel == null) {
                 channel = new Channel();

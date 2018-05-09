@@ -1,0 +1,32 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="paid/ltv" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div th:replace="_include/searchBar"></div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li>
+                <a class="icon" href="recharge/daily/export" target="dwzExport" targetType="navTab" title="确实要导出这些记录吗?"><span>导出EXCEL</span></a>
+            </li>
+        </ul>
+    </div>
+    <table class="table" layoutH="112">
+        <thead>
+        <tr>
+            <th width="80">开始日期</th>
+            <th width="80">当日创角数</th>
+            <th width="60" align="right" th:each="d:${days}" th:text="${d.code}"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${payLTVList}">
+            <td th:text="${row.reportDate}"></td>
+            <td th:text="${row.charCount}"></td>
+            <td align="right" th:each="d:${days}" th:text="${row.daysMap.get(d)?.summary}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>

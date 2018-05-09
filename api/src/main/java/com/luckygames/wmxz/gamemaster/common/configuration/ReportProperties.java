@@ -8,6 +8,15 @@ import org.springframework.context.annotation.Configuration;
 public class ReportProperties {
     private CronSetting rechargeDaily;
     private CronSetting playerAction;
+    private CronSetting payLtv;
+
+    public CronSetting getPayLtv() {
+        return payLtv;
+    }
+
+    public void setPayLtv(CronSetting payLtv) {
+        this.payLtv = payLtv;
+    }
 
     public CronSetting getPlayerAction() {
         return playerAction;

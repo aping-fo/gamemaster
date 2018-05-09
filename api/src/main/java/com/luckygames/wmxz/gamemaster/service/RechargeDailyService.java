@@ -25,4 +25,6 @@ public interface RechargeDailyService extends BaseService<RechargeDailyEntity> {
     List<RechargeDaily> findByOneDate(String date);
 
     void generateRechargeDailyReportByDay(Date date);
+
+    void generateRechargeDailyReportByDay(String date);
 }

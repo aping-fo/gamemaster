@@ -30,7 +30,7 @@ public class LTVDaysTypeHandler implements TypeHandler<LTVDaysType> {
 
     @Override
     public void setParameter(PreparedStatement ps, int i, LTVDaysType param, JdbcType jdbcType) throws SQLException {
-        ps.setByte(i, (byte) param.code());
+        ps.setInt(i, (byte) param.code());
     }
 
 }

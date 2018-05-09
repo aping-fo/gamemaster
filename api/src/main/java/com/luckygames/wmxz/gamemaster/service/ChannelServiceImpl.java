@@ -10,11 +10,13 @@ import com.luckygames.wmxz.gamemaster.model.enums.Status;
 import com.luckygames.wmxz.gamemaster.model.view.request.ChannelSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.base.BaseServiceImpl;
 import com.luckygames.wmxz.gamemaster.utils.BeanUtils;
+import com.luckygames.wmxz.gamemaster.utils.DateUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
+import java.util.Date;
 import java.util.List;
 
 @Service("channelService")
@@ -63,6 +65,22 @@ public class ChannelServiceImpl extends BaseServiceImpl<ChannelEntity> implement
         return this.channelMapper.selectCount(new ChannelEntity() {{
             setStatus(Status.NORMAL);
         }});
+    }
+
+    @Override
+    public Channel fixOpenDate(Long channelId, Date registerDate) {
+        if (channelId == null || channelId <= 0 || registerDate == null) {
+            return null;
+        }
+        Channel channel = getByChannelId(channelId);
+        if (channel == null) {
+            return null;
+        }
+        if (channel.getOpenDate() == null || channel.getOpenDate().after(registerDate)) {
+            channel.setOpenDate(DateUtils.AddDays(registerDate, -1));
+            save(channel);
+        }
+        return channel;
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.luckygames.wmxz.gamemaster.model.enums;
 
 
 public enum LTVDaysType implements EnumType {
-    UNKNOWN(0, "未知", "Unknown"),
     ONE(1, "1天", "1 day"),
     TWO(2, "2天", "2 days"),
     THREE(3, "3天", "3 days"),
@@ -36,7 +35,7 @@ public enum LTVDaysType implements EnumType {
 
     public static LTVDaysType codeOf(int code) {
         if (code < 0) {
-            return LTVDaysType.UNKNOWN;
+            return LTVDaysType.ONE;
         }
 
         for (LTVDaysType value : values()) {
@@ -61,5 +60,20 @@ public enum LTVDaysType implements EnumType {
     @Override
     public String textEn() {
         return this.textEn;
+    }
+
+    @Override
+    public int getCode() {
+        return code;
+    }
+
+    @Override
+    public String getText() {
+        return text;
+    }
+
+    @Override
+    public String getTextEn() {
+        return textEn;
     }
 }

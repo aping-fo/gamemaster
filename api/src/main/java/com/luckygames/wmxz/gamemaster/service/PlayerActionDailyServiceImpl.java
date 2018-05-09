@@ -30,16 +30,16 @@ public class PlayerActionDailyServiceImpl extends BaseServiceImpl<PlayerActionDa
 
     @Override
     public void generatePlayerActionDailyReportToday() {
-        generatePlayerActionDailyReportByDay(DateUtils.Now());
+        generatePlayerActionDailyReportByDay(DateUtils.TodayString());
     }
 
     @Override
     public void generatePlayerActionDailyReportYesterday() {
-        generatePlayerActionDailyReportByDay(DateUtils.AddDays(DateUtils.Now(), -1));
+        generatePlayerActionDailyReportByDay(DateUtils.YesterdayString());
     }
 
     @Override
-    public void generatePlayerActionDailyReportByDay(Date date) {
+    public void generatePlayerActionDailyReportByDay(String date) {
         List<PlayerActionDaily> list = this.playerActionDailyMapper.queryPlayerDailyReportSingleDate(date);
         if (list == null || list.isEmpty()) {
             return;
@@ -48,8 +48,8 @@ public class PlayerActionDailyServiceImpl extends BaseServiceImpl<PlayerActionDa
     }
 
     @Override
-    public void generatePlayerActionDailyReportByDay(String date) {
-        generatePlayerActionDailyReportByDay(DateUtils.StringToDate(date));
+    public void generatePlayerActionDailyReportByDay(Date date) {
+        generatePlayerActionDailyReportByDay(DateUtils.DateToString(date));
     }
 
     private void savePlayerActionDailyReport(List<PlayerActionDaily> list) {

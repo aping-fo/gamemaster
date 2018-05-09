@@ -10,11 +10,13 @@ import com.luckygames.wmxz.gamemaster.model.enums.Status;
 import com.luckygames.wmxz.gamemaster.model.view.request.ServerSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.base.BaseServiceImpl;
 import com.luckygames.wmxz.gamemaster.utils.BeanUtils;
+import com.luckygames.wmxz.gamemaster.utils.DateUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
+import java.util.Date;
 import java.util.List;
 
 @Service("serverService")
@@ -63,6 +65,22 @@ public class ServerServiceImpl extends BaseServiceImpl<ServerEntity> implements 
         return this.serverMapper.selectCount(new ServerEntity() {{
             setStatus(Status.NORMAL);
         }});
+    }
+
+    @Override
+    public Server fixOpenDate(Long serverId, Date date) {
+        if (serverId == null || serverId <= 0 || date == null) {
+            return null;
+        }
+        Server server = getByServerId(serverId);
+        if (server == null) {
+            return null;
+        }
+        if (server.getOpenDate() == null || server.getOpenDate().after(date)) {
+            server.setOpenDate(DateUtils.AddDays(date, -1));
+            save(server);
+        }
+        return server;
     }
 
     @Override

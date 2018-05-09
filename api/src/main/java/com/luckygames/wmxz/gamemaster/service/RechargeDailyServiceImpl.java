@@ -13,7 +13,6 @@ import com.luckygames.wmxz.gamemaster.utils.BeanUtils;
 import com.luckygames.wmxz.gamemaster.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.Date;
@@ -83,26 +82,27 @@ public class RechargeDailyServiceImpl extends BaseServiceImpl<RechargeDailyEntit
     }
 
     @Override
-    @Transactional
     public void generateRechargeDailyReportToday() {
-        generateRechargeDailyReportByDay(DateUtils.Now());
+        generateRechargeDailyReportByDay(DateUtils.TodayString());
     }
 
     @Override
-    @Transactional
     public void generateRechargeDailyReportYesterDay() {
-        generateRechargeDailyReportByDay(org.apache.commons.lang3.time.DateUtils.addDays(DateUtils.Now(), -1));
+        generateRechargeDailyReportByDay(DateUtils.YesterdayString());
     }
 
     @Override
-    //@Transactional
     public void generateRechargeDailyReportByDay(Date date) {
+        generateRechargeDailyReportByDay(DateUtils.DateToString(date));
+    }
+
+    @Override
+    public void generateRechargeDailyReportByDay(String date) {
         List<RechargeDaily> list = rechargeDailyMapper.queryRechargeDailyReportFromOrderSingleDate(date);
         if (list == null || list.isEmpty()) {
             return;
         }
         saveRechargeDailyReport(list);
-
     }
 
 }
