@@ -7,7 +7,7 @@ import java.util.List;
  * Created by lucky on 2018/3/29.
  */
 public class GMQuery {
-    private List<Long> serverId;
+    private List<Long> serverId; //服务器ID
 
     public List<Long> getServerId() {
         return serverId;
