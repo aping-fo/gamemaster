@@ -1,19 +1,18 @@
 package com.luckygames.wmxz.gamemaster.model.view.base;
 
 import java.lang.reflect.Field;
-import java.util.List;
 
 /**
  * Created by lucky on 2018/3/29.
  */
 public class GMQuery {
-    private List<Long> serverId; //服务器ID
+    Long serverId; //服务器ID
 
-    public List<Long> getServerId() {
+    public Long getServerId() {
         return serverId;
     }
 
-    public void setServerId(List<Long> serverId) {
+    public void setServerId(Long serverId) {
         this.serverId = serverId;
     }
 

@@ -21,6 +21,27 @@ public class ServerServiceImpl implements ServerService {
     private ServerMapper serverMapper;
 
     @Override
+    public List<Server> searchList(List<Long> serverIds) {
+        ServerExample example = new ServerExample();
+        ServerExample.Criteria criteria = example.createCriteria();
+        criteria.andStatusEqualTo(Status.NORMAL);
+        if (!serverIds.isEmpty()) {
+            criteria.andServerIdIn(serverIds);
+        }
+
+        return BeanUtils.copyListProperties(serverMapper.selectByExample(example), Server.class);
+    }
+
+    @Override
+    public Server searchOne(Long serverId) {
+        ServerExample example = new ServerExample();
+        ServerExample.Criteria criteria = example.createCriteria();
+        criteria.andStatusEqualTo(Status.NORMAL);
+        criteria.andServerIdEqualTo(serverId);
+        return BeanUtils.copyProperties(serverMapper.selectOneByExample(example), Server.class);
+    }
+
+    @Override
     public List<Server> searchList(ServerSearchQuery request) {
         ServerExample example = new ServerExample();
         ServerExample.Criteria criteria = example.createCriteria();

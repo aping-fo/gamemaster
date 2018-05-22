@@ -49,10 +49,10 @@ public interface AdminService {
     /**
      * 查询玩家信息
      *
-     * @param content
+     * @param  query {@link com.luckygames.wmxz.gamemaster.model.view.request.RoleInfoQuery}
      * @return
      */
-    public String queryRoleInfo(String content);
+    public String queryRoleInfo(GMQuery query);
 
 
     /**
@@ -77,9 +77,11 @@ public interface AdminService {
      * @param host
      * @return
      */
-    default String commonRequest(String reqParams, RestTemplate restTemplate, String host, String url) {
+    default String commonRequest(String reqParams, RestTemplate restTemplate, String host,int port, String url) {
         //String strParams = encodeReqParams(reqParams);
-        ResponseEntity<String> result = restTemplate.getForEntity(host + url + reqParams, String.class);
+        //http://127.0.0.1:20010
+        String http = "http://" + host + ":" + port;
+        ResponseEntity<String> result = restTemplate.getForEntity(http + url + reqParams, String.class);
         System.out.println(result.getBody());
         return result.getBody();
     }

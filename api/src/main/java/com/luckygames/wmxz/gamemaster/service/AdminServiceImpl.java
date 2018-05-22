@@ -1,6 +1,8 @@
 package com.luckygames.wmxz.gamemaster.service;
 
 import com.luckygames.wmxz.gamemaster.common.constants.AdminUrl;
+import com.luckygames.wmxz.gamemaster.dao.mapper.ServerMapper;
+import com.luckygames.wmxz.gamemaster.model.entity.Server;
 import com.luckygames.wmxz.gamemaster.model.view.base.GMQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,6 +10,8 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 /**
  * Created by lucky on 2018/3/29.
@@ -19,7 +23,8 @@ import org.springframework.web.client.RestTemplate;
 public class AdminServiceImpl implements AdminService {
     @Autowired
     private RestTemplate restTemplate;
-
+    @Autowired
+    private ServerService serverService;
     @Value("${global.gmHost}")
     private String host;
 
@@ -37,7 +42,11 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public String sendBroadcast(GMQuery query) {
-        return commonRequest(query.encodeReqParams(), restTemplate, host, AdminUrl.MESSAGE.getUrl());
+        Server server = serverService.searchOne(query.getServerId());
+        if (server != null) {
+            return commonRequest(query.encodeReqParams(), restTemplate, server.getServerIp(), server.getServerPort(), AdminUrl.MESSAGE.getUrl());
+        }
+        return "failed";
     }
 
 
@@ -49,7 +58,11 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public String sendMail(GMQuery query) {
-        return commonRequest(query.encodeReqParams(), restTemplate, host, AdminUrl.MAIL.getUrl());
+        Server server = serverService.searchOne(query.getServerId());
+        if (server != null) {
+            return commonRequest(query.encodeReqParams(), restTemplate, server.getServerIp(), server.getServerPort(), AdminUrl.MAIL.getUrl());
+        }
+        return "failed";
     }
 
     /**
@@ -60,11 +73,19 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public String banRole(GMQuery query) {
-        return commonRequest(query.encodeReqParams(), restTemplate, host, AdminUrl.BAN.getUrl());
+        Server server = serverService.searchOne(query.getServerId());
+        if (server != null) {
+            return commonRequest(query.encodeReqParams(), restTemplate, server.getServerIp(), server.getServerPort(), AdminUrl.BAN.getUrl());
+        }
+        return "failed";
     }
 
     @Override
-    public String queryRoleInfo(String content) {
-        return null;
+    public String queryRoleInfo(GMQuery query) {
+        Server server = serverService.searchOne(query.getServerId());
+        if (server != null) {
+            return commonRequest(query.encodeReqParams(), restTemplate, server.getServerIp(), server.getServerPort(), AdminUrl.GETINFO.getUrl());
+        }
+        return "failed";
     }
 }
