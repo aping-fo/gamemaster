@@ -28,6 +28,8 @@ CREATE TABLE `server` (
 `status` int(11) NULL DEFAULT 1 COMMENT '状态',
 `create_time` datetime NULL COMMENT '创建时间',
 `update_time` datetime NULL COMMENT '更新时间',
+`server_ip` varchar(255) DEFAULT NULL COMMENT '服务器IP',
+`server_port` int(11) DEFAULT NULL COMMENT '服务器端口',
 PRIMARY KEY (`id`) ,
 INDEX `idx_server_id` (`server_id` ASC, `status` ASC)
 );
