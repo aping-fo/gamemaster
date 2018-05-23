@@ -596,6 +596,66 @@ public class PlayerActionLogEntityExample {
             return (Criteria) this;
         }
 
+        public Criteria andOnlineTimeIsNull() {
+            addCriterion("online_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnlineTimeIsNotNull() {
+            addCriterion("online_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnlineTimeEqualTo(Long value) {
+            addCriterion("online_time =", value, "onlineTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnlineTimeNotEqualTo(Long value) {
+            addCriterion("online_time <>", value, "onlineTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnlineTimeGreaterThan(Long value) {
+            addCriterion("online_time >", value, "onlineTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnlineTimeGreaterThanOrEqualTo(Long value) {
+            addCriterion("online_time >=", value, "onlineTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnlineTimeLessThan(Long value) {
+            addCriterion("online_time <", value, "onlineTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnlineTimeLessThanOrEqualTo(Long value) {
+            addCriterion("online_time <=", value, "onlineTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnlineTimeIn(List<Long> values) {
+            addCriterion("online_time in", values, "onlineTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnlineTimeNotIn(List<Long> values) {
+            addCriterion("online_time not in", values, "onlineTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnlineTimeBetween(Long value1, Long value2) {
+            addCriterion("online_time between", value1, value2, "onlineTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnlineTimeNotBetween(Long value1, Long value2) {
+            addCriterion("online_time not between", value1, value2, "onlineTime");
+            return (Criteria) this;
+        }
+
         public Criteria andStatusIsNull() {
             addCriterion("`status` is null");
             return (Criteria) this;
@@ -773,66 +833,6 @@ public class PlayerActionLogEntityExample {
 
         public Criteria andUpdateTimeNotBetween(Date value1, Date value2) {
             addCriterion("update_time not between", value1, value2, "updateTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOnlineTimeIsNull() {
-            addCriterion("online_time is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOnlineTimeIsNotNull() {
-            addCriterion("online_time is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOnlineTimeEqualTo(Long value) {
-            addCriterion("online_time =", value, "onlineTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOnlineTimeNotEqualTo(Long value) {
-            addCriterion("online_time <>", value, "onlineTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOnlineTimeGreaterThan(Long value) {
-            addCriterion("online_time >", value, "onlineTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOnlineTimeGreaterThanOrEqualTo(Long value) {
-            addCriterion("online_time >=", value, "onlineTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOnlineTimeLessThan(Long value) {
-            addCriterion("online_time <", value, "onlineTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOnlineTimeLessThanOrEqualTo(Long value) {
-            addCriterion("online_time <=", value, "onlineTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOnlineTimeIn(List<Long> values) {
-            addCriterion("online_time in", values, "onlineTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOnlineTimeNotIn(List<Long> values) {
-            addCriterion("online_time not in", values, "onlineTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOnlineTimeBetween(Long value1, Long value2) {
-            addCriterion("online_time between", value1, value2, "onlineTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOnlineTimeNotBetween(Long value1, Long value2) {
-            addCriterion("online_time not between", value1, value2, "onlineTime");
             return (Criteria) this;
         }
     }

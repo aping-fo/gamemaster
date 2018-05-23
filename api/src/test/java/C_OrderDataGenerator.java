@@ -20,7 +20,7 @@ import java.math.BigDecimal;
 @SpringBootTest(classes = GamemasterApplication.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @Ignore
-public class C_orderDataGenerator {
+public class C_OrderDataGenerator {
     @Autowired
     private PlayerOrderService playerOrderService;
     @Autowired

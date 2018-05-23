@@ -21,7 +21,7 @@ import java.util.Date;
 @SpringBootTest(classes = GamemasterApplication.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @Ignore
-public class E_payLTVDataGenerator {
+public class E_PayLTVDataGenerator {
     @Autowired
     private PayLTVService payLTVService;
     @Autowired

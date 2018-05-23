@@ -44,6 +44,13 @@ public class PlayerCharacterServiceImpl extends BaseServiceImpl<PlayerCharacterE
     }
 
     @Override
+    public long countCharaters() {
+        return this.playerCharacterMapper.selectCount(new PlayerCharacterEntity() {{
+            setStatus(Status.NORMAL);
+        }});
+    }
+
+    @Override
     public Mapper<PlayerCharacterEntity> getMapper() {
         return playerCharacterMapper;
     }

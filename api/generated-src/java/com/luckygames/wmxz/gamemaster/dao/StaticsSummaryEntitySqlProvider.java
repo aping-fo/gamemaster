@@ -1,47 +1,35 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
-import com.luckygames.wmxz.gamemaster.dao.PlayerActionLogEntity;
-import com.luckygames.wmxz.gamemaster.dao.PlayerActionLogEntityExample.Criteria;
-import com.luckygames.wmxz.gamemaster.dao.PlayerActionLogEntityExample.Criterion;
-import com.luckygames.wmxz.gamemaster.dao.PlayerActionLogEntityExample;
+import com.luckygames.wmxz.gamemaster.dao.StaticsSummaryEntity;
+import com.luckygames.wmxz.gamemaster.dao.StaticsSummaryEntityExample.Criteria;
+import com.luckygames.wmxz.gamemaster.dao.StaticsSummaryEntityExample.Criterion;
+import com.luckygames.wmxz.gamemaster.dao.StaticsSummaryEntityExample;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.jdbc.SQL;
 
-public class PlayerActionLogEntitySqlProvider {
+public class StaticsSummaryEntitySqlProvider {
 
-    public String countByExample(PlayerActionLogEntityExample example) {
+    public String countByExample(StaticsSummaryEntityExample example) {
         SQL sql = new SQL();
-        sql.SELECT("count(*)").FROM("player_action_log");
+        sql.SELECT("count(*)").FROM("statics_summary");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String deleteByExample(PlayerActionLogEntityExample example) {
+    public String deleteByExample(StaticsSummaryEntityExample example) {
         SQL sql = new SQL();
-        sql.DELETE_FROM("player_action_log");
+        sql.DELETE_FROM("statics_summary");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String insertSelective(PlayerActionLogEntity record) {
+    public String insertSelective(StaticsSummaryEntity record) {
         SQL sql = new SQL();
-        sql.INSERT_INTO("player_action_log");
+        sql.INSERT_INTO("statics_summary");
         
         if (record.getId() != null) {
             sql.VALUES("id", "#{id,jdbcType=BIGINT}");
-        }
-        
-        if (record.getDeviceId() != null) {
-            sql.VALUES("device_id", "#{deviceId,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getAction() != null) {
-            sql.VALUES("`action`", "#{action,jdbcType=INTEGER}");
-        }
-        
-        if (record.getActionDate() != null) {
-            sql.VALUES("action_date", "#{actionDate,jdbcType=TIMESTAMP}");
         }
         
         if (record.getChannelId() != null) {
@@ -52,16 +40,60 @@ public class PlayerActionLogEntitySqlProvider {
             sql.VALUES("server_id", "#{serverId,jdbcType=BIGINT}");
         }
         
-        if (record.getPlayerId() != null) {
-            sql.VALUES("player_id", "#{playerId,jdbcType=BIGINT}");
+        if (record.getReportDate() != null) {
+            sql.VALUES("report_date", "#{reportDate,jdbcType=VARCHAR}");
         }
         
-        if (record.getCharId() != null) {
-            sql.VALUES("char_id", "#{charId,jdbcType=BIGINT}");
+        if (record.getPlayerCount() != null) {
+            sql.VALUES("player_count", "#{playerCount,jdbcType=INTEGER}");
         }
         
-        if (record.getOnlineTime() != null) {
-            sql.VALUES("online_time", "#{onlineTime,jdbcType=BIGINT}");
+        if (record.getCharCount() != null) {
+            sql.VALUES("char_count", "#{charCount,jdbcType=INTEGER}");
+        }
+        
+        if (record.getLoginCount() != null) {
+            sql.VALUES("login_count", "#{loginCount,jdbcType=INTEGER}");
+        }
+        
+        if (record.getOnlineCount() != null) {
+            sql.VALUES("online_count", "#{onlineCount,jdbcType=INTEGER}");
+        }
+        
+        if (record.getActiveCharCount() != null) {
+            sql.VALUES("active_char_count", "#{activeCharCount,jdbcType=INTEGER}");
+        }
+        
+        if (record.getRechargeSum() != null) {
+            sql.VALUES("recharge_sum", "#{rechargeSum,jdbcType=DECIMAL}");
+        }
+        
+        if (record.getRechargeCount() != null) {
+            sql.VALUES("recharge_count", "#{rechargeCount,jdbcType=INTEGER}");
+        }
+        
+        if (record.getArpu() != null) {
+            sql.VALUES("arpu", "#{arpu,jdbcType=DECIMAL}");
+        }
+        
+        if (record.getNewRechargeCount() != null) {
+            sql.VALUES("new_recharge_count", "#{newRechargeCount,jdbcType=INTEGER}");
+        }
+        
+        if (record.getNewRechargeRate() != null) {
+            sql.VALUES("new_recharge_rate", "#{newRechargeRate,jdbcType=DECIMAL}");
+        }
+        
+        if (record.getStay2d() != null) {
+            sql.VALUES("stay2d", "#{stay2d,jdbcType=DECIMAL}");
+        }
+        
+        if (record.getStay3d() != null) {
+            sql.VALUES("stay3d", "#{stay3d,jdbcType=DECIMAL}");
+        }
+        
+        if (record.getStay7d() != null) {
+            sql.VALUES("stay7d", "#{stay7d,jdbcType=DECIMAL}");
         }
         
         if (record.getStatus() != null) {
@@ -79,25 +111,33 @@ public class PlayerActionLogEntitySqlProvider {
         return sql.toString();
     }
 
-    public String selectByExample(PlayerActionLogEntityExample example) {
+    public String selectByExample(StaticsSummaryEntityExample example) {
         SQL sql = new SQL();
         if (example != null && example.isDistinct()) {
             sql.SELECT_DISTINCT("id");
         } else {
             sql.SELECT("id");
         }
-        sql.SELECT("device_id");
-        sql.SELECT("`action`");
-        sql.SELECT("action_date");
         sql.SELECT("channel_id");
         sql.SELECT("server_id");
-        sql.SELECT("player_id");
-        sql.SELECT("char_id");
-        sql.SELECT("online_time");
+        sql.SELECT("report_date");
+        sql.SELECT("player_count");
+        sql.SELECT("char_count");
+        sql.SELECT("login_count");
+        sql.SELECT("online_count");
+        sql.SELECT("active_char_count");
+        sql.SELECT("recharge_sum");
+        sql.SELECT("recharge_count");
+        sql.SELECT("arpu");
+        sql.SELECT("new_recharge_count");
+        sql.SELECT("new_recharge_rate");
+        sql.SELECT("stay2d");
+        sql.SELECT("stay3d");
+        sql.SELECT("stay7d");
         sql.SELECT("`status`");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
-        sql.FROM("player_action_log");
+        sql.FROM("statics_summary");
         applyWhere(sql, example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -108,26 +148,14 @@ public class PlayerActionLogEntitySqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        PlayerActionLogEntity record = (PlayerActionLogEntity) parameter.get("record");
-        PlayerActionLogEntityExample example = (PlayerActionLogEntityExample) parameter.get("example");
+        StaticsSummaryEntity record = (StaticsSummaryEntity) parameter.get("record");
+        StaticsSummaryEntityExample example = (StaticsSummaryEntityExample) parameter.get("example");
         
         SQL sql = new SQL();
-        sql.UPDATE("player_action_log");
+        sql.UPDATE("statics_summary");
         
         if (record.getId() != null) {
             sql.SET("id = #{record.id,jdbcType=BIGINT}");
-        }
-        
-        if (record.getDeviceId() != null) {
-            sql.SET("device_id = #{record.deviceId,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getAction() != null) {
-            sql.SET("`action` = #{record.action,jdbcType=INTEGER}");
-        }
-        
-        if (record.getActionDate() != null) {
-            sql.SET("action_date = #{record.actionDate,jdbcType=TIMESTAMP}");
         }
         
         if (record.getChannelId() != null) {
@@ -138,16 +166,60 @@ public class PlayerActionLogEntitySqlProvider {
             sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
         }
         
-        if (record.getPlayerId() != null) {
-            sql.SET("player_id = #{record.playerId,jdbcType=BIGINT}");
+        if (record.getReportDate() != null) {
+            sql.SET("report_date = #{record.reportDate,jdbcType=VARCHAR}");
         }
         
-        if (record.getCharId() != null) {
-            sql.SET("char_id = #{record.charId,jdbcType=BIGINT}");
+        if (record.getPlayerCount() != null) {
+            sql.SET("player_count = #{record.playerCount,jdbcType=INTEGER}");
         }
         
-        if (record.getOnlineTime() != null) {
-            sql.SET("online_time = #{record.onlineTime,jdbcType=BIGINT}");
+        if (record.getCharCount() != null) {
+            sql.SET("char_count = #{record.charCount,jdbcType=INTEGER}");
+        }
+        
+        if (record.getLoginCount() != null) {
+            sql.SET("login_count = #{record.loginCount,jdbcType=INTEGER}");
+        }
+        
+        if (record.getOnlineCount() != null) {
+            sql.SET("online_count = #{record.onlineCount,jdbcType=INTEGER}");
+        }
+        
+        if (record.getActiveCharCount() != null) {
+            sql.SET("active_char_count = #{record.activeCharCount,jdbcType=INTEGER}");
+        }
+        
+        if (record.getRechargeSum() != null) {
+            sql.SET("recharge_sum = #{record.rechargeSum,jdbcType=DECIMAL}");
+        }
+        
+        if (record.getRechargeCount() != null) {
+            sql.SET("recharge_count = #{record.rechargeCount,jdbcType=INTEGER}");
+        }
+        
+        if (record.getArpu() != null) {
+            sql.SET("arpu = #{record.arpu,jdbcType=DECIMAL}");
+        }
+        
+        if (record.getNewRechargeCount() != null) {
+            sql.SET("new_recharge_count = #{record.newRechargeCount,jdbcType=INTEGER}");
+        }
+        
+        if (record.getNewRechargeRate() != null) {
+            sql.SET("new_recharge_rate = #{record.newRechargeRate,jdbcType=DECIMAL}");
+        }
+        
+        if (record.getStay2d() != null) {
+            sql.SET("stay2d = #{record.stay2d,jdbcType=DECIMAL}");
+        }
+        
+        if (record.getStay3d() != null) {
+            sql.SET("stay3d = #{record.stay3d,jdbcType=DECIMAL}");
+        }
+        
+        if (record.getStay7d() != null) {
+            sql.SET("stay7d = #{record.stay7d,jdbcType=DECIMAL}");
         }
         
         if (record.getStatus() != null) {
@@ -168,27 +240,35 @@ public class PlayerActionLogEntitySqlProvider {
 
     public String updateByExample(Map<String, Object> parameter) {
         SQL sql = new SQL();
-        sql.UPDATE("player_action_log");
+        sql.UPDATE("statics_summary");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
-        sql.SET("device_id = #{record.deviceId,jdbcType=VARCHAR}");
-        sql.SET("`action` = #{record.action,jdbcType=INTEGER}");
-        sql.SET("action_date = #{record.actionDate,jdbcType=TIMESTAMP}");
         sql.SET("channel_id = #{record.channelId,jdbcType=BIGINT}");
         sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
-        sql.SET("player_id = #{record.playerId,jdbcType=BIGINT}");
-        sql.SET("char_id = #{record.charId,jdbcType=BIGINT}");
-        sql.SET("online_time = #{record.onlineTime,jdbcType=BIGINT}");
+        sql.SET("report_date = #{record.reportDate,jdbcType=VARCHAR}");
+        sql.SET("player_count = #{record.playerCount,jdbcType=INTEGER}");
+        sql.SET("char_count = #{record.charCount,jdbcType=INTEGER}");
+        sql.SET("login_count = #{record.loginCount,jdbcType=INTEGER}");
+        sql.SET("online_count = #{record.onlineCount,jdbcType=INTEGER}");
+        sql.SET("active_char_count = #{record.activeCharCount,jdbcType=INTEGER}");
+        sql.SET("recharge_sum = #{record.rechargeSum,jdbcType=DECIMAL}");
+        sql.SET("recharge_count = #{record.rechargeCount,jdbcType=INTEGER}");
+        sql.SET("arpu = #{record.arpu,jdbcType=DECIMAL}");
+        sql.SET("new_recharge_count = #{record.newRechargeCount,jdbcType=INTEGER}");
+        sql.SET("new_recharge_rate = #{record.newRechargeRate,jdbcType=DECIMAL}");
+        sql.SET("stay2d = #{record.stay2d,jdbcType=DECIMAL}");
+        sql.SET("stay3d = #{record.stay3d,jdbcType=DECIMAL}");
+        sql.SET("stay7d = #{record.stay7d,jdbcType=DECIMAL}");
         sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         
-        PlayerActionLogEntityExample example = (PlayerActionLogEntityExample) parameter.get("example");
+        StaticsSummaryEntityExample example = (StaticsSummaryEntityExample) parameter.get("example");
         applyWhere(sql, example, true);
         return sql.toString();
     }
 
-    protected void applyWhere(SQL sql, PlayerActionLogEntityExample example, boolean includeExamplePhrase) {
+    protected void applyWhere(SQL sql, StaticsSummaryEntityExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }

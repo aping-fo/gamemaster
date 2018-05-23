@@ -52,6 +52,11 @@ public class DateUtils {
     }
 
     public static Date RandomDateTime(Date from, Date to) {
+        if (from.after(to)) {
+            Date t = to;
+            to = from;
+            from = t;
+        }
         return new Date(RandomUtils.nextLong(from.getTime(), to.getTime()));
     }
 
@@ -94,5 +99,9 @@ public class DateUtils {
 
     public static Date AddDays(Date date, int days) {
         return org.apache.commons.lang3.time.DateUtils.addDays(date, days);
+    }
+
+    public static Date addSeconds(Date date, int seconds) {
+        return org.apache.commons.lang3.time.DateUtils.addSeconds(date, seconds);
     }
 }

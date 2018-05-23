@@ -21,7 +21,7 @@ import java.util.Date;
 @SpringBootTest(classes = GamemasterApplication.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @Ignore
-public class D_rechargeDailyTest {
+public class D_RechargeDailyGenerator {
 
     @Autowired
     private RechargeDailyService rechargeDailyService;

@@ -22,7 +22,7 @@ import java.util.Date;
 @SpringBootTest(classes = GamemasterApplication.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @Ignore
-public class A_playerDataGenerator {
+public class A_PlayerDataGenerator {
     @Autowired
     private PlayerService playerService;
     @Autowired
