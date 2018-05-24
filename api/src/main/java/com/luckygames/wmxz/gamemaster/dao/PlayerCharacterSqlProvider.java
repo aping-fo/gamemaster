@@ -34,6 +34,20 @@ public class PlayerCharacterSqlProvider extends PlayerCharacterEntitySqlProvider
                 .append(" char_id  ")
                 .append(" ) cd ON pc.char_id = cd.char_id ");
 
+        sql.append(" INNER JOIN player p on pc.player_id = p.player_id ")
+                .append(" WHERE 1=1 ");
+
+        if (query.getSearchKey() != null && StringUtils.isNotBlank(query.getKeyword())) {
+            if (query.getSearchKey() == 1) {
+                sql.append(" and pc.char_name like \"%\"#{keyword}\"%\" ");
+            } else if (query.getSearchKey() == 2) {
+                sql.append(" and (p.username like \"%\"#{keyword}\"%\" or p.mobile like \"%\"#{keyword}\"%\" or p.id_card like \"%\"#{keyword}\"%\" )");
+            } else if (query.getSearchKey() == 3) {
+                sql.append(" and pc.char_id = #{keyword} ");
+            }
+        }
+
+
         return sql.toString();
     }
 }
