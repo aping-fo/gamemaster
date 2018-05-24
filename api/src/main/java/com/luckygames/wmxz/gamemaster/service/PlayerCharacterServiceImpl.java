@@ -47,6 +47,14 @@ public class PlayerCharacterServiceImpl extends BaseServiceImpl<PlayerCharacterE
     }
 
     @Override
+    public Page<PlayerCharacter> searchPage(PlayerCharacterSearchQuery query) {
+        if (query.getPageNum() == null) {
+            query.setPageNum(1);
+        }
+        return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> playerCharacterMapper.searchPlayerCharacter(query));
+    }
+
+    @Override
     public Mapper<PlayerCharacterEntity> getMapper() {
         return playerCharacterMapper;
     }

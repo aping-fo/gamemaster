@@ -47,6 +47,19 @@ public class PlayerCharacterController extends BaseController {
                 .data("", null);
     }
 
+    @RequestMapping(value = "/info", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response queryPlayer(PlayerCharacterSearchQuery playerCharacterSearchQuery) {
+        if (playerCharacterSearchQuery.getPageNum() == null) {
+            playerCharacterSearchQuery.setPageNum(1);
+        }
+        Page<PlayerCharacter> characters = playerCharacterService.searchPage(playerCharacterSearchQuery);
+
+        Response r = new Response("player/info")
+                .request(playerCharacterSearchQuery)
+                .data("characters", characters);
+        return r;
+    }
+
     @RequestMapping(value = "/gm", method = {RequestMethod.GET})
     public String gm() {
         Map<String, String> reqParams = new HashMap<>();

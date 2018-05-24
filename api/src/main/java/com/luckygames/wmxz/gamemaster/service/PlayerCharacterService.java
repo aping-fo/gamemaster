@@ -15,4 +15,6 @@ public interface PlayerCharacterService extends BaseService<PlayerCharacterEntit
     PlayerCharacter getByCharId(long playerId);
 
     long countCharaters();
+
+    Page<PlayerCharacter> searchPage(PlayerCharacterSearchQuery query);
 }

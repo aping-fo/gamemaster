@@ -50,4 +50,66 @@ public class PlayerCharacterSqlProvider extends PlayerCharacterEntitySqlProvider
 
         return sql.toString();
     }
+
+    public String searchPlayerCharacter(PlayerCharacterSearchQuery query) {
+        StringBuilder sql = new StringBuilder(" select ")
+                .append(" pc.* ")
+                .append(" ,p.username username ")
+                .append(" ,p.channel_id channel_id")
+                .append(" ,p.channel_name channel_name")
+                .append(" from player_character pc ")
+                .append(" inner join player p on pc.player_id=p.player_id ")
+                .append(" where 1=1 ");
+
+        if (query.getChannelIds() != null && !query.getChannelIds().isEmpty()) {
+            String ids = StringUtils.join(query.getChannelIds(), ",");
+            sql.append("and p.channel_id in (" + ids + ")  ");
+        }
+        if (query.getServerIds() != null && !query.getServerIds().isEmpty()) {
+            String ids = StringUtils.join(query.getServerIds(), ",");
+            sql.append("and pc.server_id in (" + ids + ")  ");
+        }
+        if (StringUtils.isNotBlank(query.getStartDate())) {
+            sql.append("and pc.create_time >= #{startDate}  ");
+        }
+        if (StringUtils.isNotBlank(query.getEndDate())) {
+            sql.append("and pc.create_time < #{endDate}  ");
+        }
+
+        if (query.getSearchKey() != null && StringUtils.isNotBlank(query.getKeyword())) {
+            if (query.getSearchKey() == 1) {
+                sql.append(" and pc.char_name like \"%\"#{keyword}\"%\" ");
+            } else if (query.getSearchKey() == 2) {
+                sql.append(" and (p.username like \"%\"#{keyword}\"%\" or p.mobile like \"%\"#{keyword}\"%\" or p.id_card like \"%\"#{keyword}\"%\" )");
+            } else if (query.getSearchKey() == 3) {
+                sql.append(" and pc.char_id = #{keyword} ");
+            }
+        }
+
+        if (StringUtils.isNotBlank(query.getSex())) {
+            sql.append(" and pc.sex = #{sex} ");
+        }
+
+        if (StringUtils.isNotBlank(query.getJob())) {
+            sql.append(" and pc.job = #{job} ");
+        }
+
+        if (query.getLevelStart() != null && query.getLevelStart() > 0) {
+            sql.append(" and pc.level >= #{levelStart} ");
+        }
+        if (query.getLevelEnd() != null && query.getLevelEnd() > 0) {
+            sql.append(" and pc.level < #{levelEnd} ");
+        }
+
+        if (query.getGoldStart() != null && query.getGoldStart() > 0) {
+            sql.append(" and pc.left_gold >= #{goldStart} ");
+        }
+        if (query.getGoldEnd() != null && query.getGoldEnd() > 0) {
+            sql.append(" and pc.left_gold < #{goldEnd} ");
+        }
+
+
+        return sql.toString();
+
+    }
 }

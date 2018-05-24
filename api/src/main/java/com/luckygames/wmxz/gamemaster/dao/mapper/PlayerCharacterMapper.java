@@ -12,4 +12,7 @@ import java.util.List;
 public interface PlayerCharacterMapper extends PlayerCharacterEntityMapper<PlayerCharacterEntity> {
     @SelectProvider(type = PlayerCharacterSqlProvider.class, method = "queryCharacterDailyReport")
     List<PlayerCharacter> queryCharacterDailyReport(PlayerCharacterSearchQuery query);
+
+    @SelectProvider(type = PlayerCharacterSqlProvider.class, method = "searchPlayerCharacter")
+    List<PlayerCharacter> searchPlayerCharacter(PlayerCharacterSearchQuery query);
 }
