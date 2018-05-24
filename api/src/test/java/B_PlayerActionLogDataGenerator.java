@@ -39,6 +39,8 @@ public class B_PlayerActionLogDataGenerator {
     private PlayerService playerService;
     @Autowired
     private PlayerCharacterService playerCharacterService;
+    @Autowired
+    private CharacterDailyService characterDailyService;
 
 //    @Test
 //    @Commit
@@ -115,7 +117,7 @@ public class B_PlayerActionLogDataGenerator {
             actionLog.setServerId(character.getServerId());
             actionLog.setChannelId(player.getChannelId());
             actionLog.setActionDate(actionDate);
-            actionLog.setAction(ActionType.ONLINE.code());
+            actionLog.setAction(ActionType.ONLINE);
             actionLog.setDeviceId(player.getCreateDevice());
             actionLog.setStatus(Status.NORMAL);
             playerActionLogService.save(actionLog);
@@ -124,7 +126,7 @@ public class B_PlayerActionLogDataGenerator {
             actionDate = DateUtils.addSeconds(actionDate, onlineTime);
             actionLog.setId(null);
             actionLog.setActionDate(actionDate);
-            actionLog.setAction(ActionType.OFFLINE.code());
+            actionLog.setAction(ActionType.OFFLINE);
             actionLog.setOnlineTime((long) onlineTime);
             playerActionLogService.save(actionLog);
 
@@ -158,4 +160,16 @@ public class B_PlayerActionLogDataGenerator {
 
     }
 
+    @Test
+    @Commit
+    public void B06_generateCharacterDailyReportAll() {
+        LocalDate startDate = LocalDate.parse("2018-01-01", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDate endDate = LocalDate.parse("2018-06-01", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDateTime localDate = startDate.atStartOfDay();
+        while (!localDate.isAfter(endDate.atStartOfDay())) {
+            characterDailyService.generateCharacterDailyReportByDate(localDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            localDate = localDate.plusDays(1);
+        }
+
+    }
 }

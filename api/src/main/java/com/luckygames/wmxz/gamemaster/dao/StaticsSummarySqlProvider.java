@@ -61,8 +61,8 @@ public class StaticsSummarySqlProvider {
                 "   pal2d.channel_id, " +
                 "   pal2d.server_id, " +
                 "   CASE WHEN datediff( pal2d.action_date, #{reportDate} ) = 1 THEN 1 ELSE 0 END stay2d, " +
-                "   CASE WHEN datediff( pal2d.action_date, #{reportDate} ) = 3 THEN 1 ELSE 0 END stay3d, " +
-                "   CASE WHEN datediff( pal2d.action_date, #{reportDate} ) = 7 THEN 1 ELSE 0 END stay7d " +
+                "   CASE WHEN datediff( pal2d.action_date, #{reportDate} ) = 2 THEN 1 ELSE 0 END stay3d, " +
+                "   CASE WHEN datediff( pal2d.action_date, #{reportDate} ) = 6 THEN 1 ELSE 0 END stay7d " +
                 "  FROM " +
                 "   player_action_log pal2d " +
                 "  WHERE " +

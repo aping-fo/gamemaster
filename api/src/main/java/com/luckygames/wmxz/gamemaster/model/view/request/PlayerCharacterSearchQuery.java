@@ -1,8 +1,6 @@
 package com.luckygames.wmxz.gamemaster.model.view.request;
 
-import com.luckygames.wmxz.gamemaster.model.view.base.PageQuery;
-
-public class PlayerCharacterSearchQuery extends PageQuery {
+public class PlayerCharacterSearchQuery extends CommonSearchQuery {
     private Long charId;
 
     public Long getCharId() {

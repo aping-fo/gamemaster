@@ -55,6 +55,7 @@
         <table schema="wmxz" tableName="player_action_log" domainObjectName="PlayerActionLogEntity">
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
+            <columnOverride column="action" javaType="com.luckygames.wmxz.gamemaster.model.enums.ActionType"/>
         </table>
         <table schema="wmxz" tableName="player_character" domainObjectName="PlayerCharacterEntity">
             <property name="useActualColumnNames" value="false"/>
@@ -91,6 +92,22 @@
             <columnOverride column="days" javaType="com.luckygames.wmxz.gamemaster.model.enums.LTVDaysType"/>
         </table>
         <table schema="wmxz" tableName="statics_summary" domainObjectName="StaticsSummaryEntity">
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
+        </table>
+        <table schema="wmxz" tableName="server_online_log" domainObjectName="ServerOnlineLogEntity">
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
+        </table>
+        <table schema="wmxz" tableName="forbidden_log" domainObjectName="ForbiddenLogEntity">
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
+            <columnOverride column="forbidden_type"
+                            javaType="com.luckygames.wmxz.gamemaster.model.enums.ForbiddenType"/>
+            <columnOverride column="operate_type"
+                            javaType="com.luckygames.wmxz.gamemaster.model.enums.ForbiddenOperationType"/>
+        </table>
+        <table schema="wmxz" tableName="character_daily" domainObjectName="CharacterDailyEntity">
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
         </table>

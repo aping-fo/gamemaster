@@ -30,7 +30,7 @@ public class PlayerActionLogServiceImpl extends BaseServiceImpl<PlayerActionLogE
         PlayerActionLogEntityExample.Criteria criteria = example.createCriteria();
         criteria.andStatusEqualTo(Status.NORMAL)
                 .andCharIdEqualTo(charId)
-                .andActionEqualTo(ActionType.OFFLINE.code());
+                .andActionEqualTo(ActionType.OFFLINE);
         example.setOrderByClause("action_date desc");
         List<PlayerActionLogEntity> playerActionLogEntities = playerActionLogMapper.selectByExample(example);
         if (CollectionUtils.isEmpty(playerActionLogEntities)) {

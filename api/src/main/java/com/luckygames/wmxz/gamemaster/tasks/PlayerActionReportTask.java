@@ -1,5 +1,6 @@
 package com.luckygames.wmxz.gamemaster.tasks;
 
+import com.luckygames.wmxz.gamemaster.service.CharacterDailyService;
 import com.luckygames.wmxz.gamemaster.service.PlayerActionDailyService;
 import com.luckygames.wmxz.gamemaster.service.PlayerActionLogService;
 import com.luckygames.wmxz.gamemaster.tasks.base.BaseTask;
@@ -14,11 +15,14 @@ public class PlayerActionReportTask extends BaseTask {
     private PlayerActionLogService playerActionLogService;
     @Autowired
     private PlayerActionDailyService playerActionDailyService;
+    @Autowired
+    private CharacterDailyService characterDailyService;
 
     @Scheduled(cron = "#{@reportProperties.playerAction.todayCron}")
     public void generatePlayerActionDailyReportToday() {
         try {
             playerActionDailyService.generatePlayerActionDailyReportToday();
+            characterDailyService.generateCharacterDailyReportToday();
         } catch (Exception e) {
             e.printStackTrace();
             logger.error("Task failed :{}", e.getMessage());
@@ -29,6 +33,7 @@ public class PlayerActionReportTask extends BaseTask {
     public void generatePlayerActionDailyReportYesterday() {
         try {
             playerActionDailyService.generatePlayerActionDailyReportYesterday();
+            characterDailyService.generateCharacterDailyReportYesterday();
         } catch (Exception e) {
             e.printStackTrace();
             logger.error("Task failed :{}", e.getMessage());

@@ -10,7 +10,7 @@ import com.luckygames.wmxz.gamemaster.service.base.BaseService;
  * Created by lucky on 2018/3/28.
  */
 public interface PlayerCharacterService extends BaseService<PlayerCharacterEntity> {
-    Page<PlayerCharacter> queryCharacter(PlayerCharacterSearchQuery query);
+    Page<PlayerCharacter> queryCharacterDailyReport(PlayerCharacterSearchQuery query);
 
     PlayerCharacter getByCharId(long playerId);
 

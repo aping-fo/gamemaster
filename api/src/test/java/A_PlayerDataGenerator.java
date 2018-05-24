@@ -108,7 +108,7 @@ public class A_PlayerDataGenerator {
             this.playerCharacterService.save(playerCharacter);
 
             PlayerActionLog playerActionLog = new PlayerActionLog();
-            playerActionLog.setAction(ActionType.ACTIVATE.code());
+            playerActionLog.setAction(ActionType.ACTIVATE);
             playerActionLog.setActionDate(player.getCreateTime());
             playerActionLog.setChannelId(player.getChannelId());
             playerActionLog.setServerId(playerCharacter.getServerId());
@@ -119,11 +119,11 @@ public class A_PlayerDataGenerator {
             playerActionLogService.save(playerActionLog);
 
             playerActionLog.setId(null);
-            playerActionLog.setAction(ActionType.NEW_PLAYER.code());
+            playerActionLog.setAction(ActionType.NEW_PLAYER);
             playerActionLogService.save(playerActionLog);
 
             playerActionLog.setId(null);
-            playerActionLog.setAction(ActionType.NEW_CHAR.code());
+            playerActionLog.setAction(ActionType.NEW_CHAR);
             playerActionLogService.save(playerActionLog);
         }
     }

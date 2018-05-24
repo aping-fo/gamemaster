@@ -42,8 +42,11 @@ public class Response extends ModelAndView {
     }
 
     public Response data(String name, Object value) {
+        if (name == null || "".equals(name.trim()) || value == null) {
+            return this;
+        }
         this.addObject(name, value);
-        if (value != null && value instanceof Page) {
+        if (value instanceof Page) {
             Page m = (Page) value;
             Pager pager = new Pager(m.getPageNum(), m.getPageSize(), m.getTotal());
             this.addObject("Pager", pager);

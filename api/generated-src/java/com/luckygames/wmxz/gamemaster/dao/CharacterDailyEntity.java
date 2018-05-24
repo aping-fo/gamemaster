@@ -1,23 +1,35 @@
-package com.luckygames.wmxz.gamemaster.model.entity;
+package com.luckygames.wmxz.gamemaster.dao;
 
-import com.luckygames.wmxz.gamemaster.dao.PlayerCharacterEntity;
-
+import com.luckygames.wmxz.gamemaster.model.entity.base.BaseEntity;
 import java.math.BigDecimal;
+import javax.persistence.Table;
 
-public class PlayerCharacter extends PlayerCharacterEntity {
+@Table(name="character_daily")
+public class CharacterDailyEntity extends BaseEntity {
+    private Long charId;
+
+    private String reportDate;
+
     private Integer loginTimes;
-    private Integer loginDays;
 
     private Integer onlineTime;
 
     private BigDecimal rechargeAmount;
 
-    public Integer getLoginDays() {
-        return loginDays;
+    public Long getCharId() {
+        return charId;
     }
 
-    public void setLoginDays(Integer loginDays) {
-        this.loginDays = loginDays;
+    public void setCharId(Long charId) {
+        this.charId = charId;
+    }
+
+    public String getReportDate() {
+        return reportDate;
+    }
+
+    public void setReportDate(String reportDate) {
+        this.reportDate = reportDate == null ? null : reportDate.trim();
     }
 
     public Integer getLoginTimes() {

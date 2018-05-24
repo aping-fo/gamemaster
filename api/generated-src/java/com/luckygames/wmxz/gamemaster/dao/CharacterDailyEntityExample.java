@@ -1,19 +1,19 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
-import com.luckygames.wmxz.gamemaster.model.enums.ActionType;
 import com.luckygames.wmxz.gamemaster.model.enums.Status;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class PlayerActionLogEntityExample {
+public class CharacterDailyEntityExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public PlayerActionLogEntityExample() {
+    public CharacterDailyEntityExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -167,376 +167,6 @@ public class PlayerActionLogEntityExample {
             return (Criteria) this;
         }
 
-        public Criteria andDeviceIdIsNull() {
-            addCriterion("device_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceIdIsNotNull() {
-            addCriterion("device_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceIdEqualTo(String value) {
-            addCriterion("device_id =", value, "deviceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceIdNotEqualTo(String value) {
-            addCriterion("device_id <>", value, "deviceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceIdGreaterThan(String value) {
-            addCriterion("device_id >", value, "deviceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceIdGreaterThanOrEqualTo(String value) {
-            addCriterion("device_id >=", value, "deviceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceIdLessThan(String value) {
-            addCriterion("device_id <", value, "deviceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceIdLessThanOrEqualTo(String value) {
-            addCriterion("device_id <=", value, "deviceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceIdLike(String value) {
-            addCriterion("device_id like", value, "deviceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceIdNotLike(String value) {
-            addCriterion("device_id not like", value, "deviceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceIdIn(List<String> values) {
-            addCriterion("device_id in", values, "deviceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceIdNotIn(List<String> values) {
-            addCriterion("device_id not in", values, "deviceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceIdBetween(String value1, String value2) {
-            addCriterion("device_id between", value1, value2, "deviceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceIdNotBetween(String value1, String value2) {
-            addCriterion("device_id not between", value1, value2, "deviceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andActionIsNull() {
-            addCriterion("`action` is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andActionIsNotNull() {
-            addCriterion("`action` is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andActionEqualTo(ActionType value) {
-            addCriterion("`action` =", value, "action");
-            return (Criteria) this;
-        }
-
-        public Criteria andActionNotEqualTo(ActionType value) {
-            addCriterion("`action` <>", value, "action");
-            return (Criteria) this;
-        }
-
-        public Criteria andActionGreaterThan(ActionType value) {
-            addCriterion("`action` >", value, "action");
-            return (Criteria) this;
-        }
-
-        public Criteria andActionGreaterThanOrEqualTo(ActionType value) {
-            addCriterion("`action` >=", value, "action");
-            return (Criteria) this;
-        }
-
-        public Criteria andActionLessThan(ActionType value) {
-            addCriterion("`action` <", value, "action");
-            return (Criteria) this;
-        }
-
-        public Criteria andActionLessThanOrEqualTo(ActionType value) {
-            addCriterion("`action` <=", value, "action");
-            return (Criteria) this;
-        }
-
-        public Criteria andActionIn(List<ActionType> values) {
-            addCriterion("`action` in", values, "action");
-            return (Criteria) this;
-        }
-
-        public Criteria andActionNotIn(List<ActionType> values) {
-            addCriterion("`action` not in", values, "action");
-            return (Criteria) this;
-        }
-
-        public Criteria andActionBetween(ActionType value1, ActionType value2) {
-            addCriterion("`action` between", value1, value2, "action");
-            return (Criteria) this;
-        }
-
-        public Criteria andActionNotBetween(ActionType value1, ActionType value2) {
-            addCriterion("`action` not between", value1, value2, "action");
-            return (Criteria) this;
-        }
-
-        public Criteria andActionDateIsNull() {
-            addCriterion("action_date is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andActionDateIsNotNull() {
-            addCriterion("action_date is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andActionDateEqualTo(Date value) {
-            addCriterion("action_date =", value, "actionDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andActionDateNotEqualTo(Date value) {
-            addCriterion("action_date <>", value, "actionDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andActionDateGreaterThan(Date value) {
-            addCriterion("action_date >", value, "actionDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andActionDateGreaterThanOrEqualTo(Date value) {
-            addCriterion("action_date >=", value, "actionDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andActionDateLessThan(Date value) {
-            addCriterion("action_date <", value, "actionDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andActionDateLessThanOrEqualTo(Date value) {
-            addCriterion("action_date <=", value, "actionDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andActionDateIn(List<Date> values) {
-            addCriterion("action_date in", values, "actionDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andActionDateNotIn(List<Date> values) {
-            addCriterion("action_date not in", values, "actionDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andActionDateBetween(Date value1, Date value2) {
-            addCriterion("action_date between", value1, value2, "actionDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andActionDateNotBetween(Date value1, Date value2) {
-            addCriterion("action_date not between", value1, value2, "actionDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelIdIsNull() {
-            addCriterion("channel_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelIdIsNotNull() {
-            addCriterion("channel_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelIdEqualTo(Long value) {
-            addCriterion("channel_id =", value, "channelId");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelIdNotEqualTo(Long value) {
-            addCriterion("channel_id <>", value, "channelId");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelIdGreaterThan(Long value) {
-            addCriterion("channel_id >", value, "channelId");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("channel_id >=", value, "channelId");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelIdLessThan(Long value) {
-            addCriterion("channel_id <", value, "channelId");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelIdLessThanOrEqualTo(Long value) {
-            addCriterion("channel_id <=", value, "channelId");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelIdIn(List<Long> values) {
-            addCriterion("channel_id in", values, "channelId");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelIdNotIn(List<Long> values) {
-            addCriterion("channel_id not in", values, "channelId");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelIdBetween(Long value1, Long value2) {
-            addCriterion("channel_id between", value1, value2, "channelId");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelIdNotBetween(Long value1, Long value2) {
-            addCriterion("channel_id not between", value1, value2, "channelId");
-            return (Criteria) this;
-        }
-
-        public Criteria andServerIdIsNull() {
-            addCriterion("server_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andServerIdIsNotNull() {
-            addCriterion("server_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andServerIdEqualTo(Long value) {
-            addCriterion("server_id =", value, "serverId");
-            return (Criteria) this;
-        }
-
-        public Criteria andServerIdNotEqualTo(Long value) {
-            addCriterion("server_id <>", value, "serverId");
-            return (Criteria) this;
-        }
-
-        public Criteria andServerIdGreaterThan(Long value) {
-            addCriterion("server_id >", value, "serverId");
-            return (Criteria) this;
-        }
-
-        public Criteria andServerIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("server_id >=", value, "serverId");
-            return (Criteria) this;
-        }
-
-        public Criteria andServerIdLessThan(Long value) {
-            addCriterion("server_id <", value, "serverId");
-            return (Criteria) this;
-        }
-
-        public Criteria andServerIdLessThanOrEqualTo(Long value) {
-            addCriterion("server_id <=", value, "serverId");
-            return (Criteria) this;
-        }
-
-        public Criteria andServerIdIn(List<Long> values) {
-            addCriterion("server_id in", values, "serverId");
-            return (Criteria) this;
-        }
-
-        public Criteria andServerIdNotIn(List<Long> values) {
-            addCriterion("server_id not in", values, "serverId");
-            return (Criteria) this;
-        }
-
-        public Criteria andServerIdBetween(Long value1, Long value2) {
-            addCriterion("server_id between", value1, value2, "serverId");
-            return (Criteria) this;
-        }
-
-        public Criteria andServerIdNotBetween(Long value1, Long value2) {
-            addCriterion("server_id not between", value1, value2, "serverId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlayerIdIsNull() {
-            addCriterion("player_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlayerIdIsNotNull() {
-            addCriterion("player_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlayerIdEqualTo(Long value) {
-            addCriterion("player_id =", value, "playerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlayerIdNotEqualTo(Long value) {
-            addCriterion("player_id <>", value, "playerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlayerIdGreaterThan(Long value) {
-            addCriterion("player_id >", value, "playerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlayerIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("player_id >=", value, "playerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlayerIdLessThan(Long value) {
-            addCriterion("player_id <", value, "playerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlayerIdLessThanOrEqualTo(Long value) {
-            addCriterion("player_id <=", value, "playerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlayerIdIn(List<Long> values) {
-            addCriterion("player_id in", values, "playerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlayerIdNotIn(List<Long> values) {
-            addCriterion("player_id not in", values, "playerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlayerIdBetween(Long value1, Long value2) {
-            addCriterion("player_id between", value1, value2, "playerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPlayerIdNotBetween(Long value1, Long value2) {
-            addCriterion("player_id not between", value1, value2, "playerId");
-            return (Criteria) this;
-        }
-
         public Criteria andCharIdIsNull() {
             addCriterion("char_id is null");
             return (Criteria) this;
@@ -597,6 +227,136 @@ public class PlayerActionLogEntityExample {
             return (Criteria) this;
         }
 
+        public Criteria andReportDateIsNull() {
+            addCriterion("report_date is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReportDateIsNotNull() {
+            addCriterion("report_date is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReportDateEqualTo(String value) {
+            addCriterion("report_date =", value, "reportDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andReportDateNotEqualTo(String value) {
+            addCriterion("report_date <>", value, "reportDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andReportDateGreaterThan(String value) {
+            addCriterion("report_date >", value, "reportDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andReportDateGreaterThanOrEqualTo(String value) {
+            addCriterion("report_date >=", value, "reportDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andReportDateLessThan(String value) {
+            addCriterion("report_date <", value, "reportDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andReportDateLessThanOrEqualTo(String value) {
+            addCriterion("report_date <=", value, "reportDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andReportDateLike(String value) {
+            addCriterion("report_date like", value, "reportDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andReportDateNotLike(String value) {
+            addCriterion("report_date not like", value, "reportDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andReportDateIn(List<String> values) {
+            addCriterion("report_date in", values, "reportDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andReportDateNotIn(List<String> values) {
+            addCriterion("report_date not in", values, "reportDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andReportDateBetween(String value1, String value2) {
+            addCriterion("report_date between", value1, value2, "reportDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andReportDateNotBetween(String value1, String value2) {
+            addCriterion("report_date not between", value1, value2, "reportDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTimesIsNull() {
+            addCriterion("login_times is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTimesIsNotNull() {
+            addCriterion("login_times is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTimesEqualTo(Integer value) {
+            addCriterion("login_times =", value, "loginTimes");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTimesNotEqualTo(Integer value) {
+            addCriterion("login_times <>", value, "loginTimes");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTimesGreaterThan(Integer value) {
+            addCriterion("login_times >", value, "loginTimes");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTimesGreaterThanOrEqualTo(Integer value) {
+            addCriterion("login_times >=", value, "loginTimes");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTimesLessThan(Integer value) {
+            addCriterion("login_times <", value, "loginTimes");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTimesLessThanOrEqualTo(Integer value) {
+            addCriterion("login_times <=", value, "loginTimes");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTimesIn(List<Integer> values) {
+            addCriterion("login_times in", values, "loginTimes");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTimesNotIn(List<Integer> values) {
+            addCriterion("login_times not in", values, "loginTimes");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTimesBetween(Integer value1, Integer value2) {
+            addCriterion("login_times between", value1, value2, "loginTimes");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTimesNotBetween(Integer value1, Integer value2) {
+            addCriterion("login_times not between", value1, value2, "loginTimes");
+            return (Criteria) this;
+        }
+
         public Criteria andOnlineTimeIsNull() {
             addCriterion("online_time is null");
             return (Criteria) this;
@@ -607,53 +367,113 @@ public class PlayerActionLogEntityExample {
             return (Criteria) this;
         }
 
-        public Criteria andOnlineTimeEqualTo(Long value) {
+        public Criteria andOnlineTimeEqualTo(Integer value) {
             addCriterion("online_time =", value, "onlineTime");
             return (Criteria) this;
         }
 
-        public Criteria andOnlineTimeNotEqualTo(Long value) {
+        public Criteria andOnlineTimeNotEqualTo(Integer value) {
             addCriterion("online_time <>", value, "onlineTime");
             return (Criteria) this;
         }
 
-        public Criteria andOnlineTimeGreaterThan(Long value) {
+        public Criteria andOnlineTimeGreaterThan(Integer value) {
             addCriterion("online_time >", value, "onlineTime");
             return (Criteria) this;
         }
 
-        public Criteria andOnlineTimeGreaterThanOrEqualTo(Long value) {
+        public Criteria andOnlineTimeGreaterThanOrEqualTo(Integer value) {
             addCriterion("online_time >=", value, "onlineTime");
             return (Criteria) this;
         }
 
-        public Criteria andOnlineTimeLessThan(Long value) {
+        public Criteria andOnlineTimeLessThan(Integer value) {
             addCriterion("online_time <", value, "onlineTime");
             return (Criteria) this;
         }
 
-        public Criteria andOnlineTimeLessThanOrEqualTo(Long value) {
+        public Criteria andOnlineTimeLessThanOrEqualTo(Integer value) {
             addCriterion("online_time <=", value, "onlineTime");
             return (Criteria) this;
         }
 
-        public Criteria andOnlineTimeIn(List<Long> values) {
+        public Criteria andOnlineTimeIn(List<Integer> values) {
             addCriterion("online_time in", values, "onlineTime");
             return (Criteria) this;
         }
 
-        public Criteria andOnlineTimeNotIn(List<Long> values) {
+        public Criteria andOnlineTimeNotIn(List<Integer> values) {
             addCriterion("online_time not in", values, "onlineTime");
             return (Criteria) this;
         }
 
-        public Criteria andOnlineTimeBetween(Long value1, Long value2) {
+        public Criteria andOnlineTimeBetween(Integer value1, Integer value2) {
             addCriterion("online_time between", value1, value2, "onlineTime");
             return (Criteria) this;
         }
 
-        public Criteria andOnlineTimeNotBetween(Long value1, Long value2) {
+        public Criteria andOnlineTimeNotBetween(Integer value1, Integer value2) {
             addCriterion("online_time not between", value1, value2, "onlineTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andRechargeAmountIsNull() {
+            addCriterion("recharge_amount is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRechargeAmountIsNotNull() {
+            addCriterion("recharge_amount is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRechargeAmountEqualTo(BigDecimal value) {
+            addCriterion("recharge_amount =", value, "rechargeAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andRechargeAmountNotEqualTo(BigDecimal value) {
+            addCriterion("recharge_amount <>", value, "rechargeAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andRechargeAmountGreaterThan(BigDecimal value) {
+            addCriterion("recharge_amount >", value, "rechargeAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andRechargeAmountGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("recharge_amount >=", value, "rechargeAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andRechargeAmountLessThan(BigDecimal value) {
+            addCriterion("recharge_amount <", value, "rechargeAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andRechargeAmountLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("recharge_amount <=", value, "rechargeAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andRechargeAmountIn(List<BigDecimal> values) {
+            addCriterion("recharge_amount in", values, "rechargeAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andRechargeAmountNotIn(List<BigDecimal> values) {
+            addCriterion("recharge_amount not in", values, "rechargeAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andRechargeAmountBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("recharge_amount between", value1, value2, "rechargeAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andRechargeAmountNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("recharge_amount not between", value1, value2, "rechargeAmount");
             return (Criteria) this;
         }
 

@@ -3,7 +3,6 @@ package com.luckygames.wmxz.gamemaster.service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.luckygames.wmxz.gamemaster.dao.PlayerCharacterEntity;
-import com.luckygames.wmxz.gamemaster.dao.PlayerCharacterEntityExample;
 import com.luckygames.wmxz.gamemaster.dao.mapper.PlayerCharacterMapper;
 import com.luckygames.wmxz.gamemaster.model.entity.PlayerCharacter;
 import com.luckygames.wmxz.gamemaster.model.enums.Status;
@@ -24,14 +23,11 @@ public class PlayerCharacterServiceImpl extends BaseServiceImpl<PlayerCharacterE
     private PlayerCharacterMapper playerCharacterMapper;
 
     @Override
-    public Page<PlayerCharacter> queryCharacter(PlayerCharacterSearchQuery query) {
-        PlayerCharacterEntityExample example = new PlayerCharacterEntityExample();
-        PlayerCharacterEntityExample.Criteria criteria = example.createCriteria();
-
-        if (query.getCharId() != null) {
-            criteria.andCharIdEqualTo(query.getCharId());
+    public Page<PlayerCharacter> queryCharacterDailyReport(PlayerCharacterSearchQuery query) {
+        if (query.getPageNum() == null) {
+            query.setPageNum(1);
         }
-        return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> playerCharacterMapper.selectByExample(example));
+        return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> playerCharacterMapper.queryCharacterDailyReport(query));
     }
 
     @Override
