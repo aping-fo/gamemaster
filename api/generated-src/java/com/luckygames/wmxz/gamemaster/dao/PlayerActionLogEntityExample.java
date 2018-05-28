@@ -1,5 +1,6 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
+import com.luckygames.wmxz.gamemaster.model.enums.ActionType;
 import com.luckygames.wmxz.gamemaster.model.enums.Status;
 import java.util.ArrayList;
 import java.util.Date;
@@ -246,52 +247,52 @@ public class PlayerActionLogEntityExample {
             return (Criteria) this;
         }
 
-        public Criteria andActionEqualTo(Integer value) {
+        public Criteria andActionEqualTo(ActionType value) {
             addCriterion("`action` =", value, "action");
             return (Criteria) this;
         }
 
-        public Criteria andActionNotEqualTo(Integer value) {
+        public Criteria andActionNotEqualTo(ActionType value) {
             addCriterion("`action` <>", value, "action");
             return (Criteria) this;
         }
 
-        public Criteria andActionGreaterThan(Integer value) {
+        public Criteria andActionGreaterThan(ActionType value) {
             addCriterion("`action` >", value, "action");
             return (Criteria) this;
         }
 
-        public Criteria andActionGreaterThanOrEqualTo(Integer value) {
+        public Criteria andActionGreaterThanOrEqualTo(ActionType value) {
             addCriterion("`action` >=", value, "action");
             return (Criteria) this;
         }
 
-        public Criteria andActionLessThan(Integer value) {
+        public Criteria andActionLessThan(ActionType value) {
             addCriterion("`action` <", value, "action");
             return (Criteria) this;
         }
 
-        public Criteria andActionLessThanOrEqualTo(Integer value) {
+        public Criteria andActionLessThanOrEqualTo(ActionType value) {
             addCriterion("`action` <=", value, "action");
             return (Criteria) this;
         }
 
-        public Criteria andActionIn(List<Integer> values) {
+        public Criteria andActionIn(List<ActionType> values) {
             addCriterion("`action` in", values, "action");
             return (Criteria) this;
         }
 
-        public Criteria andActionNotIn(List<Integer> values) {
+        public Criteria andActionNotIn(List<ActionType> values) {
             addCriterion("`action` not in", values, "action");
             return (Criteria) this;
         }
 
-        public Criteria andActionBetween(Integer value1, Integer value2) {
+        public Criteria andActionBetween(ActionType value1, ActionType value2) {
             addCriterion("`action` between", value1, value2, "action");
             return (Criteria) this;
         }
 
-        public Criteria andActionNotBetween(Integer value1, Integer value2) {
+        public Criteria andActionNotBetween(ActionType value1, ActionType value2) {
             addCriterion("`action` not between", value1, value2, "action");
             return (Criteria) this;
         }
@@ -593,6 +594,66 @@ public class PlayerActionLogEntityExample {
 
         public Criteria andCharIdNotBetween(Long value1, Long value2) {
             addCriterion("char_id not between", value1, value2, "charId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnlineTimeIsNull() {
+            addCriterion("online_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnlineTimeIsNotNull() {
+            addCriterion("online_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnlineTimeEqualTo(Long value) {
+            addCriterion("online_time =", value, "onlineTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnlineTimeNotEqualTo(Long value) {
+            addCriterion("online_time <>", value, "onlineTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnlineTimeGreaterThan(Long value) {
+            addCriterion("online_time >", value, "onlineTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnlineTimeGreaterThanOrEqualTo(Long value) {
+            addCriterion("online_time >=", value, "onlineTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnlineTimeLessThan(Long value) {
+            addCriterion("online_time <", value, "onlineTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnlineTimeLessThanOrEqualTo(Long value) {
+            addCriterion("online_time <=", value, "onlineTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnlineTimeIn(List<Long> values) {
+            addCriterion("online_time in", values, "onlineTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnlineTimeNotIn(List<Long> values) {
+            addCriterion("online_time not in", values, "onlineTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnlineTimeBetween(Long value1, Long value2) {
+            addCriterion("online_time between", value1, value2, "onlineTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnlineTimeNotBetween(Long value1, Long value2) {
+            addCriterion("online_time not between", value1, value2, "onlineTime");
             return (Criteria) this;
         }
 

@@ -60,6 +60,10 @@ public class PlayerActionLogEntitySqlProvider {
             sql.VALUES("char_id", "#{charId,jdbcType=BIGINT}");
         }
         
+        if (record.getOnlineTime() != null) {
+            sql.VALUES("online_time", "#{onlineTime,jdbcType=BIGINT}");
+        }
+        
         if (record.getStatus() != null) {
             sql.VALUES("`status`", "#{status,jdbcType=INTEGER}");
         }
@@ -89,6 +93,7 @@ public class PlayerActionLogEntitySqlProvider {
         sql.SELECT("server_id");
         sql.SELECT("player_id");
         sql.SELECT("char_id");
+        sql.SELECT("online_time");
         sql.SELECT("`status`");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
@@ -141,6 +146,10 @@ public class PlayerActionLogEntitySqlProvider {
             sql.SET("char_id = #{record.charId,jdbcType=BIGINT}");
         }
         
+        if (record.getOnlineTime() != null) {
+            sql.SET("online_time = #{record.onlineTime,jdbcType=BIGINT}");
+        }
+        
         if (record.getStatus() != null) {
             sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         }
@@ -169,6 +178,7 @@ public class PlayerActionLogEntitySqlProvider {
         sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
         sql.SET("player_id = #{record.playerId,jdbcType=BIGINT}");
         sql.SET("char_id = #{record.charId,jdbcType=BIGINT}");
+        sql.SET("online_time = #{record.onlineTime,jdbcType=BIGINT}");
         sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");

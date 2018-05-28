@@ -1,6 +1,7 @@
 <div class="pageHeader">
     <form id="pagerForm" onsubmit="return navTabSearch(this);" action="recharge/statics" method="post"
           onreset="$(this).find('select.combox').comboxReset()">
+<<<<<<< HEAD
         <input type="hidden" name="serverId" th:value="${#strings.listJoin(request.serverId,',')}"/>
         <input type="hidden" name="channelId" th:value="${#strings.listJoin(request.channelId,',')}"/>
         <input type="hidden" name="orderField" value="${request.orderField}"/>
@@ -44,6 +45,9 @@
                 </tr>
             </table>
         </div>
+=======
+        <div th:replace="_include/searchBar"></div>
+>>>>>>> origin/william
     </form>
 </div>
 <div class="pageContent">
@@ -54,21 +58,23 @@
             </li>
         </ul>
     </div>
-    <table class="table" width="100%" layoutH="112">
+    <table class="table" layoutH="112">
         <thead>
         <tr>
-            <th width="120" align="right">渠道ID</th>
-            <th width="120" align="right">区服ID</th>
-            <th width="100" align="right">累计总充值</th>
-            <th width="100" align="right">goldSum</th>
+            <th width="100">区服</th>
+            <th width="80">开服日期</th>
+            <th width="100">渠道</th>
+            <!--<th width="60" align="right">充值（总）</th>-->
+            <th width="60" align="right" th:each="i:${#numbers.sequence(1,31)}" th:text="${i}"></th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="row,iterStat:${statics}">
-            <td th:text="${row.channelId}"></td>
-            <td th:text="${row.serverId}"></td>
-            <td th:text="${row.rechargeAmount}"></td>
-            <td th:text="${row.goldSum}"></td>
+        <tr th:each="row,iterStat:${rechargeMonthlyList}">
+            <td th:text="${row.serverName}"></td>
+            <td th:text="${#dates.format(row.openDate, 'yyyy-MM-dd')}"></td>
+            <td th:text="${row.channelName}"></td>
+            <!--<td align="right" th:text="${row.rechargeAmount}"></td>-->
+            <td align="right" th:each="d:${row.amountMonthly}" th:text="${d}"></td>
         </tr>
         </tbody>
     </table>
