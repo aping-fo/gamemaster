@@ -1,44 +1,49 @@
 package com.luckygames.wmxz.gamemaster.model.view.request;
 
-import com.luckygames.wmxz.gamemaster.model.view.base.PageQuery;
+public class PlayerOrderSearchQuery extends CommonSearchQuery {
+    private String orderCode;
+    private String player;
+    private String character;
+    private Integer goldFrom;
+    private Integer goldTo;
 
-import java.util.List;
-
-public class PlayerOrderSearchQuery extends PageQuery {
-    private List<Long> serverId;
-    private List<Long> channelId;
-    private String startDate;
-    private String endDate;
-
-    public List<Long> getServerId() {
-        return serverId;
+    public String getOrderCode() {
+        return orderCode;
     }
 
-    public void setServerId(List<Long> serverId) {
-        this.serverId = serverId;
+    public void setOrderCode(String orderCode) {
+        this.orderCode = orderCode;
     }
 
-    public List<Long> getChannelId() {
-        return channelId;
+    public String getPlayer() {
+        return player;
     }
 
-    public void setChannelId(List<Long> channelId) {
-        this.channelId = channelId;
+    public void setPlayer(String player) {
+        this.player = player;
     }
 
-    public String getStartDate() {
-        return startDate;
+    public String getCharacter() {
+        return character;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
+    public void setCharacter(String character) {
+        this.character = character;
     }
 
-    public String getEndDate() {
-        return endDate;
+    public Integer getGoldFrom() {
+        return goldFrom;
     }
 
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
+    public void setGoldFrom(Integer goldFrom) {
+        this.goldFrom = goldFrom;
+    }
+
+    public Integer getGoldTo() {
+        return goldTo;
+    }
+
+    public void setGoldTo(Integer goldTo) {
+        this.goldTo = goldTo;
     }
 }

@@ -8,25 +8,25 @@ import java.util.List;
  * Created by lucky on 2018/3/28.
  */
 public class CommonSearchQuery extends PageQuery {
-    private List<Long> serverId;
-    private List<Long> channelId;
+    private List<Long> serverIds;
+    private List<Long> channelIds;
     private String startDate;
     private String endDate;
 
-    public List<Long> getServerId() {
-        return serverId;
+    public List<Long> getServerIds() {
+        return serverIds;
     }
 
-    public void setServerId(List<Long> serverId) {
-        this.serverId = serverId;
+    public void setServerIds(List<Long> serverIds) {
+        this.serverIds = serverIds;
     }
 
-    public List<Long> getChannelId() {
-        return channelId;
+    public List<Long> getChannelIds() {
+        return channelIds;
     }
 
-    public void setChannelId(List<Long> channelId) {
-        this.channelId = channelId;
+    public void setChannelIds(List<Long> channelIds) {
+        this.channelIds = channelIds;
     }
 
     public String getStartDate() {

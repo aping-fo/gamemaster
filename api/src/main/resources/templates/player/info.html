@@ -1,0 +1,82 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="player/info" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>
+                        <select name="searchKey" class="combox">
+                            <option value="1" th:selected="(${request.searchKey} == 1)">角色名</option>
+                            <option value="2" th:selected="(${request.searchKey} == 2)">账号</option>
+                            <option value="3" th:selected="(${request.searchKey} == 3)">角色ID</option>
+                        </select>
+                        <input name="keyword" th:value="${request.keyword}"/>
+                    </td>
+                    <td>
+                        <select name="sex" class="combox">
+                            <option value="">-性别-</option>
+                            <option value="男" th:selected="(${request.sex}=='男')">男</option>
+                            <option value="女" th:selected="(${request.sex}=='女')">女</option>
+                        </select>
+                    </td>
+                    <td>
+                        等级：
+                        <input type="number" name="levelStart" th:value="${request.levelStart}"/>
+                        -
+                        <input type="number" name="levelEnd" th:value="${request.levelEnd}"/>
+                    </td>
+                    <td>
+                        元宝：
+                        <input type="number" name="goldStart" th:value="${request.goldStart}"/>
+                        -
+                        <input type="number" name="goldEnd" th:value="${request.goldEnd}"/>
+                    </td>
+                    <td>
+                        <select name="job" class="combox">
+                            <option value="">-职业-</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div th:replace="_include/searchBar"></div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li>
+                <a class="icon" href="recharge/daily/export" target="dwzExport" targetType="navTab" title="确实要导出这些记录吗?"><span>导出EXCEL</span></a>
+            </li>
+        </ul>
+    </div>
+    <table class="table" layoutH="137">
+        <thead>
+        <tr>
+            <th width="120">区服</th>
+            <th width="120">渠道</th>
+            <th width="120">账号</th>
+            <th width="120">角色名</th>
+            <th width="120">职业</th>
+            <th width="120">性别</th>
+            <th width="80" align="right">角色等级</th>
+            <th width="80" align="right">剩余元宝</th>
+            <th width="120">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${characters}">
+            <td th:text="${row.serverName}"></td>
+            <td th:text="${row.channelName}"></td>
+            <td th:text="${row.username}"></td>
+            <td th:text="${row.charName}"></td>
+            <td th:text="${row.job}"></td>
+            <td th:text="${row.sex}"></td>
+            <td th:text="${row.level}"></td>
+            <td th:text="${row.leftGold}"></td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>

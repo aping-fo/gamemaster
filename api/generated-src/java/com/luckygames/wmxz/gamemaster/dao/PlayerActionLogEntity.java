@@ -1,32 +1,27 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
 import com.luckygames.wmxz.gamemaster.model.entity.base.BaseEntity;
+import com.luckygames.wmxz.gamemaster.model.enums.ActionType;
 import java.util.Date;
 import javax.persistence.Table;
 
 @Table(name="player_action_log")
 public class PlayerActionLogEntity extends BaseEntity {
-    //private Integer id;
-
     private String deviceId;
 
-    private Integer action;
+    private ActionType action;
 
     private Date actionDate;
 
-    private Integer serverId;
+    private Long channelId;
 
-    private Integer playerId;
+    private Long serverId;
 
-    private Integer charId;
+    private Long playerId;
 
-    public Long getId() {
-        return id;
-    }
+    private Long charId;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private Long onlineTime;
 
     public String getDeviceId() {
         return deviceId;
@@ -36,11 +31,11 @@ public class PlayerActionLogEntity extends BaseEntity {
         this.deviceId = deviceId == null ? null : deviceId.trim();
     }
 
-    public Integer getAction() {
+    public ActionType getAction() {
         return action;
     }
 
-    public void setAction(Integer action) {
+    public void setAction(ActionType action) {
         this.action = action;
     }
 
@@ -52,27 +47,43 @@ public class PlayerActionLogEntity extends BaseEntity {
         this.actionDate = actionDate;
     }
 
-    public Integer getServerId() {
+    public Long getChannelId() {
+        return channelId;
+    }
+
+    public void setChannelId(Long channelId) {
+        this.channelId = channelId;
+    }
+
+    public Long getServerId() {
         return serverId;
     }
 
-    public void setServerId(Integer serverId) {
+    public void setServerId(Long serverId) {
         this.serverId = serverId;
     }
 
-    public Integer getPlayerId() {
+    public Long getPlayerId() {
         return playerId;
     }
 
-    public void setPlayerId(Integer playerId) {
+    public void setPlayerId(Long playerId) {
         this.playerId = playerId;
     }
 
-    public Integer getCharId() {
+    public Long getCharId() {
         return charId;
     }
 
-    public void setCharId(Integer charId) {
+    public void setCharId(Long charId) {
         this.charId = charId;
+    }
+
+    public Long getOnlineTime() {
+        return onlineTime;
+    }
+
+    public void setOnlineTime(Long onlineTime) {
+        this.onlineTime = onlineTime;
     }
 }

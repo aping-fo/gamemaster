@@ -1,388 +1,107 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
 import com.luckygames.wmxz.gamemaster.model.entity.base.BaseEntity;
-import java.util.Date;
 import javax.persistence.Table;
 
 @Table(name="player")
 public class PlayerEntity extends BaseEntity {
-    private Integer playerid;
+    private Long playerId;
 
-    private String accname;
+    private Long channelId;
 
-    private String name;
+    private String channelName;
 
-    private Byte sex;
+    private String username;
 
-    private Byte vocation;
+    private String mobile;
 
-    private Integer exp;
+    private String idCard;
 
-    private Integer coin;
+    private String createIp;
 
-    private Integer diamond;
+    private String createDevice;
 
-    private Integer chargediamond;
+    private String createVersion;
 
-    private Integer vip;
+    private String createMac;
 
-    private Integer energy;
-
-    private Short serverid;
-
-    private Date regtime;
-
-    private Date lastlogintime;
-
-    private Date lastlogouttime;
-
-    private String ip;
-
-    private Integer sceneid;
-
-    private Float x;
-
-    private Float y;
-
-    private Integer lastsceneid;
-
-    private Short lev;
-
-    private Integer crit;
-
-    private Integer hp;
-
-    private Integer symptom;
-
-    private Integer fu;
-
-    private Integer fight;
-
-    private Float z;
-
-    private Integer fashionid;
-
-    private Integer gangid;
-
-    private Integer totalcoin;
-
-    private Integer weaponid;
-
-    private Long energytime;
-
-    private Integer totaldiamond;
-
-    private String channel;
-
-    private Integer attack;
-
-    private Integer defense;
-
-    private Integer title;
-
-    private Integer achievement;
-
-    public Integer getPlayerid() {
-        return playerid;
-    }
-
-    public void setPlayerid(Integer playerid) {
-        this.playerid = playerid;
-    }
-
-    public String getAccname() {
-        return accname;
-    }
-
-    public void setAccname(String accname) {
-        this.accname = accname == null ? null : accname.trim();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
-
-    public Byte getSex() {
-        return sex;
-    }
-
-    public void setSex(Byte sex) {
-        this.sex = sex;
-    }
-
-    public Byte getVocation() {
-        return vocation;
-    }
-
-    public void setVocation(Byte vocation) {
-        this.vocation = vocation;
-    }
-
-    public Integer getExp() {
-        return exp;
-    }
-
-    public void setExp(Integer exp) {
-        this.exp = exp;
-    }
-
-    public Integer getCoin() {
-        return coin;
-    }
-
-    public void setCoin(Integer coin) {
-        this.coin = coin;
-    }
-
-    public Integer getDiamond() {
-        return diamond;
-    }
-
-    public void setDiamond(Integer diamond) {
-        this.diamond = diamond;
-    }
-
-    public Integer getChargediamond() {
-        return chargediamond;
-    }
-
-    public void setChargediamond(Integer chargediamond) {
-        this.chargediamond = chargediamond;
-    }
-
-    public Integer getVip() {
-        return vip;
-    }
-
-    public void setVip(Integer vip) {
-        this.vip = vip;
-    }
-
-    public Integer getEnergy() {
-        return energy;
-    }
-
-    public void setEnergy(Integer energy) {
-        this.energy = energy;
-    }
-
-    public Short getServerid() {
-        return serverid;
-    }
-
-    public void setServerid(Short serverid) {
-        this.serverid = serverid;
-    }
-
-    public Date getRegtime() {
-        return regtime;
-    }
-
-    public void setRegtime(Date regtime) {
-        this.regtime = regtime;
-    }
-
-    public Date getLastlogintime() {
-        return lastlogintime;
-    }
-
-    public void setLastlogintime(Date lastlogintime) {
-        this.lastlogintime = lastlogintime;
-    }
-
-    public Date getLastlogouttime() {
-        return lastlogouttime;
-    }
-
-    public void setLastlogouttime(Date lastlogouttime) {
-        this.lastlogouttime = lastlogouttime;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip == null ? null : ip.trim();
-    }
-
-    public Integer getSceneid() {
-        return sceneid;
-    }
-
-    public void setSceneid(Integer sceneid) {
-        this.sceneid = sceneid;
-    }
-
-    public Float getX() {
-        return x;
-    }
-
-    public void setX(Float x) {
-        this.x = x;
-    }
-
-    public Float getY() {
-        return y;
-    }
-
-    public void setY(Float y) {
-        this.y = y;
-    }
-
-    public Integer getLastsceneid() {
-        return lastsceneid;
-    }
-
-    public void setLastsceneid(Integer lastsceneid) {
-        this.lastsceneid = lastsceneid;
-    }
-
-    public Short getLev() {
-        return lev;
-    }
-
-    public void setLev(Short lev) {
-        this.lev = lev;
-    }
-
-    public Integer getCrit() {
-        return crit;
-    }
-
-    public void setCrit(Integer crit) {
-        this.crit = crit;
-    }
-
-    public Integer getHp() {
-        return hp;
-    }
-
-    public void setHp(Integer hp) {
-        this.hp = hp;
-    }
-
-    public Integer getSymptom() {
-        return symptom;
-    }
-
-    public void setSymptom(Integer symptom) {
-        this.symptom = symptom;
-    }
-
-    public Integer getFu() {
-        return fu;
-    }
-
-    public void setFu(Integer fu) {
-        this.fu = fu;
-    }
-
-    public Integer getFight() {
-        return fight;
-    }
-
-    public void setFight(Integer fight) {
-        this.fight = fight;
-    }
-
-    public Float getZ() {
-        return z;
-    }
-
-    public void setZ(Float z) {
-        this.z = z;
-    }
-
-    public Integer getFashionid() {
-        return fashionid;
-    }
-
-    public void setFashionid(Integer fashionid) {
-        this.fashionid = fashionid;
-    }
-
-    public Integer getGangid() {
-        return gangid;
+    public Long getPlayerId() {
+        return playerId;
     }
 
-    public void setGangid(Integer gangid) {
-        this.gangid = gangid;
+    public void setPlayerId(Long playerId) {
+        this.playerId = playerId;
     }
 
-    public Integer getTotalcoin() {
-        return totalcoin;
+    public Long getChannelId() {
+        return channelId;
     }
 
-    public void setTotalcoin(Integer totalcoin) {
-        this.totalcoin = totalcoin;
+    public void setChannelId(Long channelId) {
+        this.channelId = channelId;
     }
 
-    public Integer getWeaponid() {
-        return weaponid;
+    public String getChannelName() {
+        return channelName;
     }
 
-    public void setWeaponid(Integer weaponid) {
-        this.weaponid = weaponid;
+    public void setChannelName(String channelName) {
+        this.channelName = channelName == null ? null : channelName.trim();
     }
 
-    public Long getEnergytime() {
-        return energytime;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEnergytime(Long energytime) {
-        this.energytime = energytime;
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
     }
 
-    public Integer getTotaldiamond() {
-        return totaldiamond;
+    public String getMobile() {
+        return mobile;
     }
 
-    public void setTotaldiamond(Integer totaldiamond) {
-        this.totaldiamond = totaldiamond;
+    public void setMobile(String mobile) {
+        this.mobile = mobile == null ? null : mobile.trim();
     }
 
-    public String getChannel() {
-        return channel;
+    public String getIdCard() {
+        return idCard;
     }
 
-    public void setChannel(String channel) {
-        this.channel = channel == null ? null : channel.trim();
+    public void setIdCard(String idCard) {
+        this.idCard = idCard == null ? null : idCard.trim();
     }
 
-    public Integer getAttack() {
-        return attack;
+    public String getCreateIp() {
+        return createIp;
     }
 
-    public void setAttack(Integer attack) {
-        this.attack = attack;
+    public void setCreateIp(String createIp) {
+        this.createIp = createIp == null ? null : createIp.trim();
     }
 
-    public Integer getDefense() {
-        return defense;
+    public String getCreateDevice() {
+        return createDevice;
     }
 
-    public void setDefense(Integer defense) {
-        this.defense = defense;
+    public void setCreateDevice(String createDevice) {
+        this.createDevice = createDevice == null ? null : createDevice.trim();
     }
 
-    public Integer getTitle() {
-        return title;
+    public String getCreateVersion() {
+        return createVersion;
     }
 
-    public void setTitle(Integer title) {
-        this.title = title;
+    public void setCreateVersion(String createVersion) {
+        this.createVersion = createVersion == null ? null : createVersion.trim();
     }
 
-    public Integer getAchievement() {
-        return achievement;
+    public String getCreateMac() {
+        return createMac;
     }
 
-    public void setAchievement(Integer achievement) {
-        this.achievement = achievement;
+    public void setCreateMac(String createMac) {
+        this.createMac = createMac == null ? null : createMac.trim();
     }
 }

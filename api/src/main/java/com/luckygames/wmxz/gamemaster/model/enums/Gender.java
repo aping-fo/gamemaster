@@ -45,10 +45,12 @@ public enum Gender implements EnumType {
         return UNKNOWN;
     }
 
+    @Override
     public int code() {
         return code;
     }
 
+    @Override
     public String text() {
         return text;
     }
@@ -56,5 +58,20 @@ public enum Gender implements EnumType {
     @Override
     public String textEn() {
         return this.textEn;
+    }
+
+    @Override
+    public int getCode() {
+        return code;
+    }
+
+    @Override
+    public String getText() {
+        return text;
+    }
+
+    @Override
+    public String getTextEn() {
+        return textEn;
     }
 }
