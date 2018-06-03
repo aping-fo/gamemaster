@@ -19,4 +19,6 @@ public interface ServerService extends BaseService<ServerEntity> {
     long countServers();
 
     Server fixOpenDate(Long serverId, Date date);
+
+    List<Server> searchList();
 }

@@ -26,13 +26,20 @@ public class ServerServiceImpl extends BaseServiceImpl<ServerEntity> implements 
     private ServerMapper serverMapper;
 
     @Override
+    public List<Server> searchList() {
+        return searchList(null);
+    }
+
+    @Override
     public List<Server> searchList(ServerSearchQuery request) {
         ServerExample example = new ServerExample();
         ServerExample.Criteria criteria = example.createCriteria();
         criteria.andStatusEqualTo(Status.NORMAL);
 
-        if (StringUtils.isNotBlank(request.getKeyword())) {
-            criteria.andServerNameLike(request.getKeyword());
+        if (request != null) {
+            if (StringUtils.isNotBlank(request.getKeyword())) {
+                criteria.andServerNameLike(request.getKeyword());
+            }
         }
 
         return BeanUtils.copyListProperties(serverMapper.selectByExample(example), Server.class);
@@ -77,7 +84,7 @@ public class ServerServiceImpl extends BaseServiceImpl<ServerEntity> implements 
             return null;
         }
         if (server.getOpenDate() == null || server.getOpenDate().after(date)) {
-            server.setOpenDate(DateUtils.AddDays(date, -1));
+            server.setOpenDate(DateUtils.addDays(date, -1));
             save(server);
         }
         return server;

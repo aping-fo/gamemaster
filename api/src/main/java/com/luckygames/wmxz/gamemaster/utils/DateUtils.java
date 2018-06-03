@@ -97,11 +97,15 @@ public class DateUtils {
         return LocalDate.parse(s, DateTimeFormatter.ofPattern(DATE_FORMAT)).getYear();
     }
 
-    public static Date AddDays(Date date, int days) {
+    public static Date addDays(Date date, int days) {
         return org.apache.commons.lang3.time.DateUtils.addDays(date, days);
     }
 
     public static Date addSeconds(Date date, int seconds) {
         return org.apache.commons.lang3.time.DateUtils.addSeconds(date, seconds);
+    }
+
+    public static Date addHours(Date date, int seconds) {
+        return org.apache.commons.lang3.time.DateUtils.addHours(date, seconds);
     }
 }

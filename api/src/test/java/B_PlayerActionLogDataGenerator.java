@@ -60,7 +60,7 @@ public class B_PlayerActionLogDataGenerator {
 //            if (channel != null) {
 //                boolean needSave = false;
 //                if (channel.getOpenDate() == null || channel.getOpenDate().after(playerActionLog.getActionDate())) {
-//                    channel.setOpenDate(DateUtils.AddDays(playerActionLog.getActionDate(), -2));
+//                    channel.setOpenDate(DateUtils.addDays(playerActionLog.getActionDate(), -2));
 //                    needSave = true;
 //                }
 //                if (needSave) {
@@ -72,7 +72,7 @@ public class B_PlayerActionLogDataGenerator {
 //            if (channel != null) {
 //                boolean needSave = false;
 //                if (server.getOpenDate() == null || server.getOpenDate().after(playerActionLog.getActionDate())) {
-//                    server.setOpenDate(DateUtils.AddDays(playerActionLog.getActionDate(), -2));
+//                    server.setOpenDate(DateUtils.addDays(playerActionLog.getActionDate(), -2));
 //                    needSave = true;
 //                }
 //                if (needSave) {

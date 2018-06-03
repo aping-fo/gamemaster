@@ -77,7 +77,7 @@ public class ChannelServiceImpl extends BaseServiceImpl<ChannelEntity> implement
             return null;
         }
         if (channel.getOpenDate() == null || channel.getOpenDate().after(registerDate)) {
-            channel.setOpenDate(DateUtils.AddDays(registerDate, -1));
+            channel.setOpenDate(DateUtils.addDays(registerDate, -1));
             save(channel);
         }
         return channel;

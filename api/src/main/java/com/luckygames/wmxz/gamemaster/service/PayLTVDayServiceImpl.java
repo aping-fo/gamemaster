@@ -81,7 +81,7 @@ public class PayLTVDayServiceImpl extends BaseServiceImpl<PayLTVDayEntity> imple
     @Override
     public void generatePayLTVDayReportByDate(String date) {
         for (LTVDaysType ltvDaysType : LTVDaysType.values()) {
-            String reportDate = DateUtils.DateToString(DateUtils.AddDays(DateUtils.StringToDate(date), -1 * ltvDaysType.code()));
+            String reportDate = DateUtils.DateToString(DateUtils.addDays(DateUtils.StringToDate(date), -1 * ltvDaysType.code()));
             List<PayLTV> payLTVList = payLTVService.findByDate(reportDate);
             if (payLTVList == null || payLTVList.isEmpty()) {
                 continue;
