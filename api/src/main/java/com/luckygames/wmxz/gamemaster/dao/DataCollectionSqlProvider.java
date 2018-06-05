@@ -1,5 +1,11 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
+import com.luckygames.wmxz.gamemaster.model.view.request.ChannelDataSearchQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.DataCollectionSearchQuery;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Date;
+import com.luckygames.wmxz.gamemaster.model.view.request.ChannelDataSearchQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.DataCollectionSearchQuery;
 import org.apache.commons.lang3.StringUtils;
 
@@ -87,5 +93,36 @@ public class DataCollectionSqlProvider {
                 "report_date,channel_id,server_id  " +
                 "order by report_date  desc";
         return sql;
+    }
+
+    public String queryChannelDataReport(ChannelDataSearchQuery query) {
+        StringBuilder sql = new StringBuilder("SELECT channel_id,sum( recharge_amount ) recharge_amount,sum( register_number ) register_number,sum( role_number ) role_number,sum( pay_number ) pay_number FROM comprehensive_report_data_collection  where 1=1 ");
+        if (query.getChannelIds() != null && !query.getChannelIds().isEmpty()) {
+            String ids = StringUtils.join(query.getChannelIds(), ",");
+            sql.append(" and channel_id in (").append(ids).append(")  ");
+        }
+        if (query.getServerIds() != null && !query.getServerIds().isEmpty()) {
+            String ids = StringUtils.join(query.getServerIds(), ",");
+            sql.append(" and server_id in (").append(ids).append(")  ");
+        }
+        if (StringUtils.isNotBlank(query.getStartDate())) {
+            sql.append(" and report_date >= #{startDate}  ");
+        }
+        if (StringUtils.isNotBlank(query.getEndDate())) {
+            sql.append(" and report_date < #{endDate}  ");
+        }
+        sql.append("GROUP BY channel_id");
+        return sql.toString();
+    }
+
+    public String queryChannelDailyReport(ChannelDataSearchQuery query){
+        StringBuilder sql = new StringBuilder("SELECT t2.datelist report_date,IFNULL(t1.channel_id,0) channel_id,IFNULL(t1.recharge_amount,0) recharge_amount FROM (SELECT channel_id,sum(recharge_amount) recharge_amount,report_date FROM comprehensive_report_data_collection t1 GROUP BY channel_id) t1  RIGHT JOIN  (SELECT datelist FROM calendar t1 WHERE 1=1 ");
+        if(StringUtils.isNotBlank(query.getReportDate())){
+            sql.append(" AND datelist<=(select last_day(#{reportDate})) AND datelist>=(select DATE_ADD(#{reportDate},interval -day(#{reportDate})+1 day))) t2 ");
+        }else{
+            sql.append(" AND datelist<=(select last_day(curdate())) AND datelist>=(select DATE_ADD(curdate(),interval -day(curdate())+1 day))) t2 ");
+        }
+        sql.append(" ON DATE_FORMAT(t1.report_date,'%Y-%m-%d')=t2.datelist ");
+        return sql.toString();
     }
 }

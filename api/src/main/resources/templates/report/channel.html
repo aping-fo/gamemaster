@@ -1,0 +1,36 @@
+<div class="pageHeader" xmlns:th="http://www.w3.org/1999/xhtml">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="report/channel" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div th:replace="_include/searchBar"></div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li>
+                <a class="icon" href="recharge/daily/export" target="dwzExport" targetType="navTab" title="确实要导出这些记录吗?"><span>导出EXCEL</span></a>
+            </li>
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="137">
+    <thead>
+        <tr>
+            <th width="100">渠道</th>
+            <th width="100">总收入</th>
+            <th width="100">总注册</th>
+            <th width="100">总充值账户(排重)</th>
+            <th width="100">总充值角色(排重)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${channelDataList}">
+            <td th:text="${row.channelId}"></td>
+            <td th:text="${row.rechargeAmount}"></td>
+            <td th:text="${row.registerNumber}"></td>
+            <td th:text="${row.roleNumber}"></td>
+            <td th:text="${row.payNumber}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>

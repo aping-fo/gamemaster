@@ -15,25 +15,25 @@ public class PayLTVReportTask extends BaseTask {
     @Autowired
     private PayLTVDayService payLTVDayService;
 
-    @Scheduled(cron = "#{@reportProperties.payLtv.todayCron}")
-    public void generatePayLTVDailyReportToday() {
-        try {
-            payLTVService.generatePayLTVDailyReportToday();
-            payLTVDayService.generatePayLTVDayReportToday();
-        } catch (Exception e) {
-            e.printStackTrace();
-            logger.error("Task failed :{}", e.getMessage());
-        }
-    }
+//    @Scheduled(cron = "#{@reportProperties.payLtv.todayCron}")
+//    public void generatePayLTVDailyReportToday() {
+//        try {
+//            payLTVService.generatePayLTVDailyReportToday();
+//            payLTVDayService.generatePayLTVDayReportToday();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            logger.error("Task failed :{}", e.getMessage());
+//        }
+//    }
 
-    @Scheduled(cron = "#{@reportProperties.payLtv.yesterdayCron}")
-    public void generatePayLTVDailyReportYesterday() {
-        try {
-            payLTVService.generatePayLTVDailyReportYesterday();
-            payLTVDayService.generatePayLTVDayReportYesterday();
-        } catch (Exception e) {
-            e.printStackTrace();
-            logger.error("Task failed :{}", e.getMessage());
-        }
-    }
+//    @Scheduled(cron = "#{@reportProperties.payLtv.yesterdayCron}")
+//    public void generatePayLTVDailyReportYesterday() {
+//        try {
+//            payLTVService.generatePayLTVDailyReportYesterday();
+//            payLTVDayService.generatePayLTVDayReportYesterday();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            logger.error("Task failed :{}", e.getMessage());
+//        }
+//    }
 }

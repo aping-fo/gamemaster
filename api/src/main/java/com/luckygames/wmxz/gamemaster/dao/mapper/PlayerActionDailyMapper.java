@@ -18,4 +18,7 @@ public interface PlayerActionDailyMapper extends PlayerActionLogEntityMapper<Pla
 
     @SelectProvider(type = PlayerActionDailySqlProvider.class, method = "queryPlayerActionDailyCharacterReport")
     List<PlayerActionDaily> queryPlayerActionDailyCharacterReport(CommonSearchQuery query);
+
+    @SelectProvider(type = PlayerActionDailySqlProvider.class, method = "queryPlayerActionDailyCharacterAnalysisReport")
+    List<PlayerActionDaily> queryPlayerActionDailyCharacterAnalysisReport(CommonSearchQuery query);
 }

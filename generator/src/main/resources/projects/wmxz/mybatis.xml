@@ -19,95 +19,81 @@
         </commentGenerator>
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
                         connectionURL="jdbc:mysql://127.0.0.1:3306/wmxz?useUnicode=true&amp;character_set_server=utf8mb4&amp;serverTimezone=PRC&amp;useSSL=false&amp;zeroDateTimeBehavior=round&amp;autoReconnect=true"
-                        userId="wmxz" password="wmxz">
+                        userId="root" password="root">
         </jdbcConnection>
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
         <javaModelGenerator targetPackage="com.luckygames.wmxz.gamemaster.dao"
-                            targetProject="/code/idea/lucky/gamemaster/api/generated-src/java">
+                            targetProject="/001project/001wmxz.gamemaster/api/generated-src/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
             <property name="rootClass" value="com.luckygames.wmxz.gamemaster.model.entity.base.BaseEntity"/>
         </javaModelGenerator>
         <javaClientGenerator type="ANNOTATEDMAPPER"
                              targetPackage="com.luckygames.wmxz.gamemaster.dao"
-                             targetProject="/code/idea/lucky/gamemaster/api/generated-src/java">
+                             targetProject="/001project/001wmxz.gamemaster/api/generated-src/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table schema="wmxz" tableName="server" domainObjectName="ServerEntity">
+        <table schema="wmxz" tableName="recharge_failed_order" domainObjectName="RechargeFailedOrderEntity">
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
+            <!--<columnOverride column="reason" javaType="com.luckygames.wmxz.gamemaster.model.enums.OrderFailureReason"/>-->
+        </table>
+        <table schema="wmxz" tableName="recharge_erroneous_order" domainObjectName="RechargeErroneousOrderEntity">
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
         </table>
-        <table schema="wmxz" tableName="channel" domainObjectName="ChannelEntity">
+        <table schema="wmxz" tableName="online_now" domainObjectName="OnlineNowEntity">
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
         </table>
-        <table schema="wmxz" tableName="player_order" domainObjectName="PlayerOrderEntity">
+        <table schema="wmxz" tableName="pay_retention_rate" domainObjectName="PayRetentionRateEntity">
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
         </table>
-        <table schema="wmxz" tableName="player" domainObjectName="PlayerEntity">
+        <table schema="wmxz" tableName="giftpackage_sync" domainObjectName="GiftpackageSyncEntity">
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
         </table>
-        <table schema="wmxz" tableName="player_action_log" domainObjectName="PlayerActionLogEntity">
-            <property name="useActualColumnNames" value="false"/>
-            <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
-            <columnOverride column="action" javaType="com.luckygames.wmxz.gamemaster.model.enums.ActionType"/>
-        </table>
-        <table schema="wmxz" tableName="player_character" domainObjectName="PlayerCharacterEntity">
+        <table schema="wmxz" tableName="giftpackage_add" domainObjectName="GiftpackageAddEntity">
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
         </table>
-        <table schema="wmxz" tableName="user" domainObjectName="UserEntity">
-            <property name="useActualColumnNames" value="false"/>
-            <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
-            <columnOverride column="user_type" javaType="com.luckygames.wmxz.gamemaster.model.enums.UserType"/>
-        </table>
-        <table schema="wmxz" tableName="recharge_daily" domainObjectName="RechargeDailyEntity">
+        <table schema="wmxz" tableName="prop_flow" domainObjectName="PropFlowEntity">
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
         </table>
-        <table schema="wmxz" tableName="recharge_monthly" domainObjectName="RechargeMonthlyEntity">
+        <table schema="wmxz" tableName="online" domainObjectName="OnlineEntity">
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
         </table>
-        <table schema="wmxz" tableName="recharge_monthly_day" domainObjectName="RechargeMonthlyDayEntity">
+        <table schema="wmxz" tableName="registered_data" domainObjectName="RegisteredDataEntity">
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
         </table>
-        <table schema="wmxz" tableName="player_action_daily" domainObjectName="PlayerActionDailyEntity">
+        <table schema="wmxz" tableName="integrated_online" domainObjectName="IntegratedOnlineEntity">
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
         </table>
-        <table schema="wmxz" tableName="pay_ltv" domainObjectName="PayLTVEntity">
+        <table schema="wmxz" tableName="angle_number_analysis" domainObjectName="AngleNumberAnalysisEntity">
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
         </table>
-        <table schema="wmxz" tableName="pay_ltv_day" domainObjectName="PayLTVDayEntity">
-            <property name="useActualColumnNames" value="false"/>
-            <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
-            <columnOverride column="days" javaType="com.luckygames.wmxz.gamemaster.model.enums.LTVDaysType"/>
-        </table>
-        <table schema="wmxz" tableName="statics_summary" domainObjectName="StaticsSummaryEntity">
+        <table schema="wmxz" tableName="integrated_online_service" domainObjectName="IntegratedOnlineServiceEntity">
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
         </table>
-        <table schema="wmxz" tableName="server_online_log" domainObjectName="ServerOnlineLogEntity">
+        <table schema="wmxz" tableName="new_user" domainObjectName="NewUserEntity">
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
         </table>
-        <table schema="wmxz" tableName="forbidden_log" domainObjectName="ForbiddenLogEntity">
+        <table schema="wmxz" tableName="logon_statistics" domainObjectName="LogonStatisticsEntity">
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
-            <columnOverride column="forbidden_type"
-                            javaType="com.luckygames.wmxz.gamemaster.model.enums.ForbiddenType"/>
-            <columnOverride column="operate_type"
-                            javaType="com.luckygames.wmxz.gamemaster.model.enums.ForbiddenOperationType"/>
         </table>
-        <table schema="wmxz" tableName="character_daily" domainObjectName="CharacterDailyEntity">
+        <table schema="wmxz" tableName="base_information" domainObjectName="BaseInformationEntity">
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
         </table>
