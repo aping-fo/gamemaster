@@ -48,6 +48,14 @@ public class ServerEntitySqlProvider {
             sql.VALUES("server_type", "#{serverType,jdbcType=VARCHAR}");
         }
         
+        if (record.getIp() != null) {
+            sql.VALUES("ip", "#{ip,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getPort() != null) {
+            sql.VALUES("port", "#{port,jdbcType=INTEGER}");
+        }
+        
         if (record.getStatus() != null) {
             sql.VALUES("`status`", "#{status,jdbcType=INTEGER}");
         }
@@ -74,6 +82,8 @@ public class ServerEntitySqlProvider {
         sql.SELECT("`server_name`");
         sql.SELECT("open_date");
         sql.SELECT("server_type");
+        sql.SELECT("ip");
+        sql.SELECT("port");
         sql.SELECT("`status`");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
@@ -114,6 +124,14 @@ public class ServerEntitySqlProvider {
             sql.SET("server_type = #{record.serverType,jdbcType=VARCHAR}");
         }
         
+        if (record.getIp() != null) {
+            sql.SET("ip = #{record.ip,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getPort() != null) {
+            sql.SET("port = #{record.port,jdbcType=INTEGER}");
+        }
+        
         if (record.getStatus() != null) {
             sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         }
@@ -139,6 +157,8 @@ public class ServerEntitySqlProvider {
         sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");
         sql.SET("open_date = #{record.openDate,jdbcType=TIMESTAMP}");
         sql.SET("server_type = #{record.serverType,jdbcType=VARCHAR}");
+        sql.SET("ip = #{record.ip,jdbcType=VARCHAR}");
+        sql.SET("port = #{record.port,jdbcType=INTEGER}");
         sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");

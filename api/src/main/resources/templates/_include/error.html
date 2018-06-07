@@ -1,0 +1,4 @@
+<div th:fragment="errorInfo">
+    <div th:if="${(statusCode >0 && statusCode !=200)}"><span
+            th:text="'发生错误：' + ${message}+ '(' + ${statusCode} + ')'"></span></div>
+</div>
