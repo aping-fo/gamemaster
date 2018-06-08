@@ -1,6 +1,7 @@
 package com.luckygames.wmxz.gamemaster.service;
 
 import com.luckygames.wmxz.gamemaster.common.constants.AdminUrl;
+import com.luckygames.wmxz.gamemaster.model.entity.Server;
 import com.luckygames.wmxz.gamemaster.model.view.base.GMQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,6 +20,8 @@ import org.springframework.web.client.RestTemplate;
 public class AdminServiceImpl implements AdminService {
     @Autowired
     private RestTemplate restTemplate;
+    @Autowired
+    private ServerService serverService;
 
     @Value("${global.gmHost}")
     private String host;
@@ -37,7 +40,7 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public String sendBroadcast(GMQuery query) {
-        return commonRequest(query.encodeReqParams(), restTemplate, host, AdminUrl.MESSAGE.getUrl());
+        return commonRequest(query.encodeReqParams(), restTemplate, query.getServerId(), AdminUrl.MESSAGE.getUrl());
     }
 
 
@@ -49,7 +52,13 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public String sendMail(GMQuery query) {
-        return commonRequest(query.encodeReqParams(), restTemplate, host, AdminUrl.MAIL.getUrl());
+        return commonRequest(query.encodeReqParams(), restTemplate, query.getServerId(), AdminUrl.MAIL.getUrl());
+    }
+
+    @Override
+    public String getHost(Long serverId) {
+        Server server = serverService.getByServerId(serverId);
+        return "http://"+server.getIp()+":"+server.getPort();
     }
 
     /**
@@ -60,7 +69,7 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public String banRole(GMQuery query) {
-        return commonRequest(query.encodeReqParams(), restTemplate, host, AdminUrl.BAN.getUrl());
+        return commonRequest(query.encodeReqParams(), restTemplate, query.getServerId(), AdminUrl.BAN.getUrl());
     }
 
     @Override

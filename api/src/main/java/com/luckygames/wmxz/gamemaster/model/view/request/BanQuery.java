@@ -7,6 +7,18 @@ import com.luckygames.wmxz.gamemaster.model.view.base.GMQuery;
  * 封禁
  */
 public class BanQuery extends GMQuery {
+    public BanQuery() {
+        super(0L);
+    }
+
+    public BanQuery(Integer ban, Integer type, Long id, Integer hour,Long serverId) {
+        super(serverId);
+        this.ban = ban;
+        this.type = type;
+        this.id = id;
+        this.hour = hour;
+    }
+
     /**
      * 封禁类型，1：禁止登录，2：禁止聊天
      */

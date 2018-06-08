@@ -3,10 +3,10 @@ package com.luckygames.wmxz.gamemaster.model.enums;
 import org.apache.commons.lang3.StringUtils;
 
 public enum ForbiddenOperationType implements EnumType {
-    // * 封禁类型，0：封禁，1：解封
+    // * 封禁类型，0：解禁，1：封封
     UNKNOWN(-1, "未知", "Unknown"),
-    FORBIDDEN(0, "封禁", "Forbidden"),
-    ALLOWED(1, "解封", "Allowed"),;
+    FORBIDDEN(1, "封禁", "Forbidden"),
+    ALLOWED(0, "解封", "Allowed"),;
 
     private final int code;
     private final String text;

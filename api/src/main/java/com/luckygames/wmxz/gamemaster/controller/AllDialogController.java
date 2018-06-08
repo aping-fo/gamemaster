@@ -13,9 +13,9 @@ import com.luckygames.wmxz.gamemaster.service.ForbiddenLogService;
 import com.luckygames.wmxz.gamemaster.service.PlayerCharacterService;
 import com.luckygames.wmxz.gamemaster.service.ServerService;
 import com.luckygames.wmxz.gamemaster.utils.DateUtils;
-import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -72,12 +72,13 @@ public class AllDialogController extends BaseController {
 
         try {
             forbiddenRequest.getCharIds().forEach(f -> {
-                String result = adminService.banRole(new BanQuery() {{
-                    setBan(forbiddenRequest.getForbiddenType().getCode());
-                    setHour(forbiddenRequest.getHour());
-                    setId(f);
-                    setType(forbiddenRequest.getForbiddenOperationType().getCode());
-                }});
+                String result = adminService.banRole(new BanQuery (
+                        forbiddenRequest.getForbiddenOperationType().getCode(),
+                        forbiddenRequest.getForbiddenType().getCode(),
+                        f,
+                        forbiddenRequest.getHour(),
+                        forbiddenRequest.getServerId()
+                ));
                 logger.debug("调用封禁接口返回：{}", result);
                 //TODO:检查返回值是否成功
                 if (true) {
