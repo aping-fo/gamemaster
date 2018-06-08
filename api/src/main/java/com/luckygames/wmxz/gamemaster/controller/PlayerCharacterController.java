@@ -55,8 +55,16 @@ public class PlayerCharacterController extends BaseController {
     }
 
     @RequestMapping(value = "/info", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response infoStatics() {
-        return new Response("player/info");
+    public Response queryPlayer2(PlayerCharacterSearchQuery playerCharacterSearchQuery) {
+        if (playerCharacterSearchQuery.getPageNum() == null) {
+            playerCharacterSearchQuery.setPageNum(1);
+        }
+        Page<PlayerCharacter> characters = playerCharacterService.searchPage(playerCharacterSearchQuery);
+
+        Response r = new Response("player/info")
+                .request(playerCharacterSearchQuery)
+                .data("characters", characters);
+        return r;
     }
 
     @RequestMapping(value = "/info_playerList", method = {RequestMethod.GET, RequestMethod.POST})
