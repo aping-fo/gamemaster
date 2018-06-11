@@ -23,7 +23,7 @@
         </thead>
         <tbody>
         <tr th:each="row,iterStat:${equipmentCountList}">
-            <td th:text="${#dates.format(row.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${#dates.format(row.updateTime, 'yyyy-MM-dd')}"></td>
             <td th:text="${row.equipmentCount}"></td>
             <td th:text="${row.activationCount}"></td>
             <td th:text="${#strings.append(#strings.substring(row.lossRate*100,0,#strings.length(row.lossRate*100)-2),'%')}"></td>

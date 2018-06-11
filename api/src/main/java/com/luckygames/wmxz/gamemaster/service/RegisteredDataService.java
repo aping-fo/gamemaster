@@ -11,4 +11,5 @@ import java.util.Date;
 
 public interface RegisteredDataService extends BaseService<RegisteredDataEntity> {
     Page<RegisteredData> searchPage(CommonSearchQuery query);
+    void save(RegisteredData registeredData);
 }

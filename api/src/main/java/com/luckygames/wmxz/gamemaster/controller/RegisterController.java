@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/register")
@@ -79,5 +80,20 @@ public class RegisterController extends BaseController {
         return new Response("register/statics_character_analysis")
                 .request(query)
                 .data("angleNumberAnalysisList", angleNumberAnalysisPage);
+    }
+
+    //保存设备数
+    @RequestMapping(value = "/save_equipment", method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public void saveEquipment(Long channelId,Boolean isActivated) {
+        //http://192.168.6.190:7777/register/save_equipment?channelId=1&isActivated=true
+        RegisteredData registeredData=new RegisteredData();
+        registeredData.setChannelId(channelId);
+        if(!isActivated){
+            registeredData.setEquipmentCount(1);
+        }else{
+            registeredData.setActivationCount(1);
+        }
+        registeredDataService.save(registeredData);
     }
 }

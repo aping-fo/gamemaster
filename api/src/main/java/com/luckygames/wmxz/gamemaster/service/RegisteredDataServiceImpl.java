@@ -35,4 +35,9 @@ public class RegisteredDataServiceImpl extends BaseServiceImpl<RegisteredDataEnt
         }
         return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> RegisteredDataMapper.searchPage(query));
     }
+
+    @Override
+    public void save(RegisteredData registeredData) {
+        RegisteredDataMapper.save(registeredData);
+    }
 }
