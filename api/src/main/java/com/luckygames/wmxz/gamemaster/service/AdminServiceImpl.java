@@ -58,7 +58,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public String getHost(Long serverId) {
         Server server = serverService.getByServerId(serverId);
-        return "http://"+server.getIp()+":"+server.getPort();
+        return "http://" + server.getIp() + ":" + server.getPort();
     }
 
     /**

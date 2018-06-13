@@ -11,7 +11,7 @@ public class BanQuery extends GMQuery {
         super(0L);
     }
 
-    public BanQuery(Integer ban, Integer type, Long id, Integer hour,Long serverId) {
+    public BanQuery(Integer ban, Integer type, Long id, Integer hour, Long serverId) {
         super(serverId);
         this.ban = ban;
         this.type = type;

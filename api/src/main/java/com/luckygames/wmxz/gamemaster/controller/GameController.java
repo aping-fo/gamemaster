@@ -8,7 +8,10 @@ import com.luckygames.wmxz.gamemaster.model.entity.GiftpackageSync;
 import com.luckygames.wmxz.gamemaster.model.entity.Server;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
 import com.luckygames.wmxz.gamemaster.model.view.request.*;
-import com.luckygames.wmxz.gamemaster.service.*;
+import com.luckygames.wmxz.gamemaster.service.ChannelService;
+import com.luckygames.wmxz.gamemaster.service.GiftpackageAddService;
+import com.luckygames.wmxz.gamemaster.service.GiftpackageSyncService;
+import com.luckygames.wmxz.gamemaster.service.ServerService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -89,19 +92,19 @@ public class GameController extends BaseController {
     //奥林匹克活动列表
     @RequestMapping(value = "/olympics_activity_list", method = {RequestMethod.GET, RequestMethod.POST})
     public Response activityList(ActivitySearchQuery query) {
-        if(query.getId()!=null){
+        if (query.getId() != null) {
             activityService.update(query);
         }
         Page<Activity> activityPage = activityService.searchPage(query);
         return new Response("activity/olympics_activity_list")
                 .request(query)
-                .data("activityList",activityPage);
+                .data("activityList", activityPage);
     }
 
     //奥林匹克活动设置
     @RequestMapping(value = "/olympics_activity_setting", method = {RequestMethod.GET, RequestMethod.POST})
     public Response activitySetting(Activity activity) {
-        if(StringUtils.isNotBlank(activity.getTitle())){
+        if (StringUtils.isNotBlank(activity.getTitle())) {
             activityService.add(activity);
         }
         return new Response("activity/olympics_activity_setting");
@@ -121,6 +124,6 @@ public class GameController extends BaseController {
         Page<Activity> activityPage = activityService.searchPage(query);
         return new Response("activity/olympics_activity_audit")
                 .request(query)
-                .data("activityList",activityPage);
+                .data("activityList", activityPage);
     }
 }

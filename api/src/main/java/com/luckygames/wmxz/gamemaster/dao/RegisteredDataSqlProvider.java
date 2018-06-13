@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class RegisteredDataSqlProvider {
     public String save(RegisteredData registeredData) {
-        StringBuilder sql = new StringBuilder("INSERT INTO registered_data(channel_id,equipment_count,activation_count,create_time,update_time) VALUES("+registeredData.getChannelId()+","+registeredData.getEquipmentCount()+","+registeredData.getActivationCount()+",now(),now())");
+        StringBuilder sql = new StringBuilder("INSERT INTO registered_data(channel_id,equipment_count,activation_count,create_time,update_time) VALUES(" + registeredData.getChannelId() + "," + registeredData.getEquipmentCount() + "," + registeredData.getActivationCount() + ",now(),now())");
         return sql.toString();
     }
     public String searchPage(CommonSearchQuery query) {

@@ -83,13 +83,13 @@ public class RegisterController extends BaseController {
     //保存设备数
     @RequestMapping(value = "/save_equipment", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
-    public void saveEquipment(Long channelId,Boolean isActivated) {
+    public void saveEquipment(Long channelId, Boolean isActivated) {
         //http://192.168.6.190:7777/register/save_equipment?channelId=1&isActivated=true
-        RegisteredData registeredData=new RegisteredData();
+        RegisteredData registeredData = new RegisteredData();
         registeredData.setChannelId(channelId);
-        if(!isActivated){
+        if (!isActivated) {
             registeredData.setEquipmentCount(1);
-        }else{
+        } else {
             registeredData.setActivationCount(1);
         }
         registeredDataService.save(registeredData);

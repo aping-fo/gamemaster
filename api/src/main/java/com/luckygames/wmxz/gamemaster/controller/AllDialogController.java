@@ -72,7 +72,7 @@ public class AllDialogController extends BaseController {
 
         try {
             forbiddenRequest.getCharIds().forEach(f -> {
-                String result = adminService.banRole(new BanQuery (
+                String result = adminService.banRole(new BanQuery(
                         forbiddenRequest.getForbiddenOperationType().getCode(),
                         forbiddenRequest.getForbiddenType().getCode(),
                         f,
