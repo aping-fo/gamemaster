@@ -10,5 +10,6 @@ import java.util.Date;
 
 public interface PlayerActionLogService extends BaseService<PlayerActionLogEntity> {
     Date getCharaterLastLogout(Long charId);
+
     Page<PlayerActionLog> searchEquipmentCountPage(CommonSearchQuery query);
 }

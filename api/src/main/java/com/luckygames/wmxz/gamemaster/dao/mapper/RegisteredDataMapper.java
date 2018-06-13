@@ -5,7 +5,6 @@ import com.luckygames.wmxz.gamemaster.dao.RegisteredDataEntityMapper;
 import com.luckygames.wmxz.gamemaster.dao.RegisteredDataSqlProvider;
 import com.luckygames.wmxz.gamemaster.model.entity.RegisteredData;
 import com.luckygames.wmxz.gamemaster.model.view.request.CommonSearchQuery;
-import com.luckygames.wmxz.gamemaster.model.view.request.RegisteredDataSearchQuery;
 import org.apache.ibatis.annotations.SelectProvider;
 
 import java.util.List;

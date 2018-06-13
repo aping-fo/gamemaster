@@ -7,7 +7,6 @@ import com.luckygames.wmxz.gamemaster.model.view.request.RechargeFailedOrderSear
 import com.luckygames.wmxz.gamemaster.service.base.BaseService;
 
 import java.util.Date;
-import java.util.List;
 
 public interface RechargeFailedOrderService extends BaseService<RechargeFailedOrderEntity> {
     Page<RechargeFailedOrder> searchPage(RechargeFailedOrderSearchQuery rechargeFailedOrderSearchRequest);

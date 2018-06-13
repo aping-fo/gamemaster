@@ -10,12 +10,12 @@ public class NewUserSqlProvider {
         sql.append("(SELECT datelist FROM calendar WHERE 1=1 ");
         if (StringUtils.isNotBlank(query.getStartDate())) {
             sql.append(" and datelist >= #{startDate}  ");
-        }else{
+        } else {
             sql.append(" and datelist>= DATE_SUB(CURDATE(), INTERVAL 30 DAY)  ");
         }
         if (StringUtils.isNotBlank(query.getEndDate())) {
             sql.append(" and datelist < #{endDate}  ");
-        }else{
+        } else {
             sql.append(" and datelist<=now()  ");
         }
         sql.append(") t2 ON DATE_FORMAT(t1.report_date,'%Y-%m-%d')=t2.datelist ");

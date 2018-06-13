@@ -5,11 +5,6 @@ import com.luckygames.wmxz.gamemaster.model.view.request.DataCollectionSearchQue
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Date;
-import com.luckygames.wmxz.gamemaster.model.view.request.ChannelDataSearchQuery;
-import com.luckygames.wmxz.gamemaster.model.view.request.DataCollectionSearchQuery;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.Date;
 
 public class DataCollectionSqlProvider {
     public String queryDataCollectionReportFromOrderSingleDate(Date singleDate) {
@@ -115,11 +110,11 @@ public class DataCollectionSqlProvider {
         return sql.toString();
     }
 
-    public String queryChannelDailyReport(ChannelDataSearchQuery query){
+    public String queryChannelDailyReport(ChannelDataSearchQuery query) {
         StringBuilder sql = new StringBuilder("SELECT t2.datelist report_date,IFNULL(t1.channel_id,0) channel_id,IFNULL(t1.recharge_amount,0) recharge_amount FROM (SELECT channel_id,sum(recharge_amount) recharge_amount,report_date FROM comprehensive_report_data_collection t1 GROUP BY channel_id) t1  RIGHT JOIN  (SELECT datelist FROM calendar t1 WHERE 1=1 ");
-        if(StringUtils.isNotBlank(query.getReportDate())){
+        if (StringUtils.isNotBlank(query.getReportDate())) {
             sql.append(" AND datelist<=(select last_day(#{reportDate})) AND datelist>=(select DATE_ADD(#{reportDate},interval -day(#{reportDate})+1 day))) t2 ");
-        }else{
+        } else {
             sql.append(" AND datelist<=(select last_day(curdate())) AND datelist>=(select DATE_ADD(curdate(),interval -day(curdate())+1 day))) t2 ");
         }
         sql.append(" ON DATE_FORMAT(t1.report_date,'%Y-%m-%d')=t2.datelist ");

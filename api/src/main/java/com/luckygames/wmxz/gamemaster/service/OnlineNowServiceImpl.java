@@ -1,4 +1,5 @@
 package com.luckygames.wmxz.gamemaster.service;
+
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.luckygames.wmxz.gamemaster.dao.OnlineNowEntity;
@@ -58,6 +59,7 @@ public class OnlineNowServiceImpl extends BaseServiceImpl<OnlineNowEntity> imple
         }
         return BeanUtils.copyProperties(OnlineNowList.get(0), OnlineNow.class);
     }
+
     @Override
     public List<OnlineNow> findByOneDate(Date date) {
         List<OnlineNowEntity> OnlineNowEntities = this.OnlineNowMapper.select(new OnlineNowEntity() {{

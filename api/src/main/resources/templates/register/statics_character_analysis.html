@@ -1,5 +1,6 @@
 <div class="pageHeader">
-    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="register/statics_character_analysis" method="post"
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="register/statics_character_analysis"
+          method="post"
           onreset="$(this).find('select.combox').comboxReset()">
         <div th:replace="_include/searchBar"></div>
     </form>
@@ -13,7 +14,7 @@
         </ul>
     </div>
     <table class="table" width="100%" layoutH="137">
-    <thead>
+        <thead>
         <tr>
             <th width="120">总创角数</th>
             <th width="120">非重复创角数</th>

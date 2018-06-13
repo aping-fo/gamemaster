@@ -9,7 +9,6 @@ import com.luckygames.wmxz.gamemaster.model.enums.LTVDaysType;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
 import com.luckygames.wmxz.gamemaster.model.view.request.CommonSearchQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.LTVSearchQuery;
-import com.luckygames.wmxz.gamemaster.model.view.request.PayRetentionRateSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.NewUserService;
 import com.luckygames.wmxz.gamemaster.service.PayLTVService;
 import com.luckygames.wmxz.gamemaster.service.PayRetentionRateService;

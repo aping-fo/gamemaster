@@ -1,7 +1,6 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
 import com.luckygames.wmxz.gamemaster.model.view.request.GiftpackageSyncSearchQuery;
-import org.apache.commons.lang3.StringUtils;
 
 public class GiftpackageSyncSqlProvider {
     public String queryGiftpackageSyncReportFromOrderSingleDate(String singleDate) {

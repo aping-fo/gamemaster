@@ -1,4 +1,4 @@
-<div class="pageHeader" xmlns:th="http://www.w3.org/1999/xhtml">
+<div xmlns:th="http://www.w3.org/1999/xhtml" class="pageHeader">
     <form id="pagerForm" onsubmit="return navTabSearch(this);" action="recharge/failedOrder" method="post"
           onreset="$(this).find('select.combox').comboxReset()">
         <div class="searchBar">
@@ -18,9 +18,11 @@
                     </td>
                     <td>
                         元宝：
-                        <input name="goldQuantityFrom" type="number" value="" th:value="${request.goldQuantityFrom}" size="10">
+                        <input name="goldQuantityFrom" type="number" value="" th:value="${request.goldQuantityFrom}"
+                               size="10">
                         <span class="limit">-</span>
-                        <input name="goldQuantityTo" type="number" value="" th:value="${request.goldQuantityTo}" size="10">
+                        <input name="goldQuantityTo" type="number" value="" th:value="${request.goldQuantityTo}"
+                               size="10">
                     </td>
                 </tr>
             </table>
@@ -32,12 +34,13 @@
     <div class="panelBar">
         <ul class="toolBar">
             <li>
-                <a class="icon" href="recharge/failedOrder/export" target="dwzExport" targetType="navTab" title="确实要导出这些记录吗?"><span>导出EXCEL</span></a>
+                <a class="icon" href="recharge/failedOrder/export" target="dwzExport" targetType="navTab"
+                   title="确实要导出这些记录吗?"><span>导出EXCEL</span></a>
             </li>
         </ul>
     </div>
     <table class="table" width="100%" layoutH="137">
-    <thead>
+        <thead>
         <tr>
             <th width="120">订单号</th>
             <th width="100">区服</th>

@@ -1,7 +1,5 @@
 package com.luckygames.wmxz.gamemaster.model.view.request;
 
-import java.util.Date;
-
 public class GiftpackageSyncSearchQuery extends CommonSearchQuery {
     private String name;
     private Integer count;

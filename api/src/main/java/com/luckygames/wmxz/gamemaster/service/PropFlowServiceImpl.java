@@ -1,4 +1,6 @@
 package com.luckygames.wmxz.gamemaster.service;
+
+import com.github.pagehelper.Page;
 import com.luckygames.wmxz.gamemaster.dao.PropFlowEntity;
 import com.luckygames.wmxz.gamemaster.dao.mapper.PropFlowMapper;
 import com.luckygames.wmxz.gamemaster.model.entity.PropFlow;
@@ -7,9 +9,6 @@ import com.luckygames.wmxz.gamemaster.service.base.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
-
-import java.util.List;
-import com.github.pagehelper.Page;
 
 @Service("PropFlowService")
 public class PropFlowServiceImpl extends BaseServiceImpl<PropFlowEntity> implements PropFlowService {

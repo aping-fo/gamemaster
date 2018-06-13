@@ -1,10 +1,8 @@
 package com.luckygames.wmxz.gamemaster.service;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
+
 import com.luckygames.wmxz.gamemaster.dao.IntegratedOnlineEntity;
 import com.luckygames.wmxz.gamemaster.dao.mapper.IntegratedOnlineMapper;
 import com.luckygames.wmxz.gamemaster.model.entity.IntegratedOnline;
-import com.luckygames.wmxz.gamemaster.model.view.request.CommonSearchQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.IntegratedOnlineSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.base.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

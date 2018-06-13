@@ -4,7 +4,6 @@ import com.luckygames.wmxz.gamemaster.dao.IntegratedOnlineEntity;
 import com.luckygames.wmxz.gamemaster.dao.IntegratedOnlineEntityMapper;
 import com.luckygames.wmxz.gamemaster.dao.IntegratedOnlineSqlProvider;
 import com.luckygames.wmxz.gamemaster.model.entity.IntegratedOnline;
-import com.luckygames.wmxz.gamemaster.model.view.request.CommonSearchQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.IntegratedOnlineSearchQuery;
 import org.apache.ibatis.annotations.SelectProvider;
 

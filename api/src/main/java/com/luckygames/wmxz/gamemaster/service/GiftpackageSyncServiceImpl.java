@@ -1,21 +1,18 @@
 package com.luckygames.wmxz.gamemaster.service;
+
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.luckygames.wmxz.gamemaster.dao.GiftpackageSyncEntity;
-import com.luckygames.wmxz.gamemaster.dao.GiftpackageSyncExample;
 import com.luckygames.wmxz.gamemaster.dao.mapper.GiftpackageSyncMapper;
 import com.luckygames.wmxz.gamemaster.model.entity.GiftpackageSync;
-import com.luckygames.wmxz.gamemaster.model.enums.Status;
 import com.luckygames.wmxz.gamemaster.model.view.request.GiftpackageSyncSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.base.BaseServiceImpl;
-import com.luckygames.wmxz.gamemaster.utils.BeanUtils;
 import com.luckygames.wmxz.gamemaster.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.Date;
-import java.util.List;
 
 @Service("GiftpackageSyncService")
 public class GiftpackageSyncServiceImpl extends BaseServiceImpl<GiftpackageSyncEntity> implements GiftpackageSyncService {
@@ -29,7 +26,7 @@ public class GiftpackageSyncServiceImpl extends BaseServiceImpl<GiftpackageSyncE
 
     @Override
     public void addGiftpackage(GiftpackageSyncSearchQuery giftpackageSyncSearchQuery) {
-        GiftpackageSync giftpackageSync=new GiftpackageSync();
+        GiftpackageSync giftpackageSync = new GiftpackageSync();
         giftpackageSync.setCardType(giftpackageSyncSearchQuery.getName());
         giftpackageSync.setCardCount(giftpackageSyncSearchQuery.getCount());
         giftpackageSync.setMinTermValidity(DateUtils.StringToDate(giftpackageSyncSearchQuery.getMinTermValidity()));

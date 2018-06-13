@@ -7,7 +7,9 @@ import com.luckygames.wmxz.gamemaster.model.view.request.DataCollectionSearchQue
 
 public interface ReportService {
     Page<DataCollection> searchPage(DataCollectionSearchQuery query);
+
     Page<DataCollection> searchChannelDataPage(ChannelDataSearchQuery query);
+
     Page<DataCollection> searchChannelDailyPage(ChannelDataSearchQuery query);
     DataCollection findOne(Long channelId, Long serverId, String date);
     void generateDataCollectionReportToday();

@@ -1,57 +1,57 @@
 <div class="pageHeader">
     <!--<form id="pagerForm" onsubmit="return navTabSearch(this);" action="online/statics_data" method="post"-->
-          <!--onreset="$(this).find('select.combox').comboxReset()">-->
-        <div class="searchBar">
-            <table class="searchContent">
-                <tr>
-                    <td>
-                        <input name="recentTime" type="radio" value="60" size="15">最近60天
-                        <input name="recentTime" type="radio" value="90" size="15">最近90天
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <input type="hidden" name="serverIds" th:value="${#strings.listJoin(request.serverIds,',')}"/>
-        <input type="hidden" name="channelIds" th:value="${#strings.listJoin(request.channelIds,',')}"/>
-        <input type="hidden" name="orderField" th:value="${request.orderField}"/>
-        <input type="hidden" name="orderDirection" th:value="${request.orderDirection}"/>
-        <div class="searchBar">
-            <table class="searchContent">
-                <tr>
-                    <td>
-                        <div>
-                            <div class="buttonContent">
-                                <a class="button" href="server/select"
-                                   rel="serverselect" mask="true" lookupGroup=""><span>区服筛选</span></a>
-                            </div>
+    <!--onreset="$(this).find('select.combox').comboxReset()">-->
+    <div class="searchBar">
+        <table class="searchContent">
+            <tr>
+                <td>
+                    <input name="recentTime" type="radio" value="60" size="15">最近60天
+                    <input name="recentTime" type="radio" value="90" size="15">最近90天
+                </td>
+            </tr>
+        </table>
+    </div>
+    <input type="hidden" name="serverIds" th:value="${#strings.listJoin(request.serverIds,',')}"/>
+    <input type="hidden" name="channelIds" th:value="${#strings.listJoin(request.channelIds,',')}"/>
+    <input type="hidden" name="orderField" th:value="${request.orderField}"/>
+    <input type="hidden" name="orderDirection" th:value="${request.orderDirection}"/>
+    <div class="searchBar">
+        <table class="searchContent">
+            <tr>
+                <td>
+                    <div>
+                        <div class="buttonContent">
+                            <a class="button" href="server/select"
+                               rel="serverselect" mask="true" lookupGroup=""><span>区服筛选</span></a>
                         </div>
-                    </td>
-                    <td>
-                        <div>
-                            <div class="buttonContent">
-                                <a class="button" href="channel/select"
-                                   rel="channelselect" mask="true" lookupGroup=""><span>渠道筛选</span></a>
-                            </div>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <div class="buttonContent">
+                            <a class="button" href="channel/select"
+                               rel="channelselect" mask="true" lookupGroup=""><span>渠道筛选</span></a>
                         </div>
-                    </td>
-                    <td class="dateRange">
-                        日期:
-                        <input name="startDate" class="date readonly" readonly="readonly" type="text" value=""
-                               id="startDate">
-                        <span class="limit">-</span>
-                        <input name="endDate" class="date readonly" readonly="readonly" type="text" value=""
-                               id="endDate">
-                    </td>
-                    <td>
-                        <div class="buttonActive">
-                            <div class="buttonContent">
-                                <button type="submit" id="retrieval">检索</button>
-                            </div>
+                    </div>
+                </td>
+                <td class="dateRange">
+                    日期:
+                    <input name="startDate" class="date readonly" readonly="readonly" type="text" value=""
+                           id="startDate">
+                    <span class="limit">-</span>
+                    <input name="endDate" class="date readonly" readonly="readonly" type="text" value=""
+                           id="endDate">
+                </td>
+                <td>
+                    <div class="buttonActive">
+                        <div class="buttonContent">
+                            <button type="submit" id="retrieval">检索</button>
                         </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
     <!--</form>-->
 </div>
 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
@@ -65,7 +65,7 @@
     myChart.setOption({
         tooltip: {},
         legend: {
-            data:['最大角色数','平均角色数','最小角色数']
+            data: ['最大角色数', '平均角色数', '最小角色数']
         },
         xAxis: {
             data: []
@@ -73,9 +73,9 @@
         yAxis: {},
         series: [
             {
-            name: '最大角色数',
-            type: 'bar',
-            data: []
+                name: '最大角色数',
+                type: 'bar',
+                data: []
             },
             {
                 name: '平均角色数',
@@ -88,20 +88,21 @@
                 data: []
             }
         ],
-        label:{
-            normal:{
-                show:true,
-                position:'top'
+        label: {
+            normal: {
+                show: true,
+                position: 'top'
             }
         }
     });
+
     // 异步加载数据
-    function retrieval(data){
-        var maxCoutArry=new Array();
-        var avgCoutArry=new Array();
-        var minCoutArry=new Array();
-        var timeArry=new Array();
-        for(var i=0;i<data.length;i++) {
+    function retrieval(data) {
+        var maxCoutArry = new Array();
+        var avgCoutArry = new Array();
+        var minCoutArry = new Array();
+        var timeArry = new Array();
+        for (var i = 0; i < data.length; i++) {
             maxCoutArry.push(data[i].maxRoleCount);
             avgCoutArry.push(data[i].avgRoleCount);
             minCoutArry.push(data[i].minRoleCount);
@@ -129,14 +130,15 @@
             ]
         });
     }
+
     $.get('online/statics_data').done(function (data) {
         retrieval(data);
     });
     $('#retrieval').click(function () {
-        $.get('online/statics_data',{
-            recentTime:$("input[name='recentTime']:checked").val(),
-            startDate:$('#startDate').val(),
-            endDate:$('#endDate').val()
+        $.get('online/statics_data', {
+            recentTime: $("input[name='recentTime']:checked").val(),
+            startDate: $('#startDate').val(),
+            endDate: $('#endDate').val()
         }).done(function (data) {
             retrieval(data);
         });

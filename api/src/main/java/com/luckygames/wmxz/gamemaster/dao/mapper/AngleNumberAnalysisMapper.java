@@ -4,7 +4,6 @@ import com.luckygames.wmxz.gamemaster.dao.AngleNumberAnalysisEntity;
 import com.luckygames.wmxz.gamemaster.dao.AngleNumberAnalysisEntityMapper;
 import com.luckygames.wmxz.gamemaster.dao.AngleNumberAnalysisSqlProvider;
 import com.luckygames.wmxz.gamemaster.model.entity.AngleNumberAnalysis;
-import com.luckygames.wmxz.gamemaster.model.view.request.AngleNumberAnalysisSearchQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.CommonSearchQuery;
 import org.apache.ibatis.annotations.SelectProvider;
 

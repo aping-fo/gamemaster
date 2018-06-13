@@ -2,11 +2,9 @@ package com.luckygames.wmxz.gamemaster.controller;
 
 import com.github.pagehelper.Page;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
-import com.luckygames.wmxz.gamemaster.model.entity.DataCollection;
 import com.luckygames.wmxz.gamemaster.model.entity.LogonStatistics;
 import com.luckygames.wmxz.gamemaster.model.entity.StaticsSummary;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
-import com.luckygames.wmxz.gamemaster.model.view.request.ChannelDataSearchQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.CommonSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.LogonStatisticsService;
 import com.luckygames.wmxz.gamemaster.service.ReportService;

@@ -2,7 +2,10 @@ package com.luckygames.wmxz.gamemaster.controller;
 
 import com.github.pagehelper.Page;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
-import com.luckygames.wmxz.gamemaster.model.entity.*;
+import com.luckygames.wmxz.gamemaster.model.entity.Channel;
+import com.luckygames.wmxz.gamemaster.model.entity.GiftpackageAdd;
+import com.luckygames.wmxz.gamemaster.model.entity.GiftpackageSync;
+import com.luckygames.wmxz.gamemaster.model.entity.Server;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
 import com.luckygames.wmxz.gamemaster.model.view.request.ChannelSearchQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.GiftpackageAddSearchQuery;
@@ -17,7 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import sun.plugin.com.Utils;
 
 import java.util.List;
 
@@ -42,7 +44,7 @@ public class GameController extends BaseController {
     //添加礼包
     @RequestMapping(value = "/giftpackage_add", method = {RequestMethod.GET, RequestMethod.POST})
     public Response addGiftPackage(GiftpackageAddSearchQuery giftpackageAddSearchQuery) {
-        if(StringUtils.isNotBlank(giftpackageAddSearchQuery.getName())){
+        if (StringUtils.isNotBlank(giftpackageAddSearchQuery.getName())) {
             giftpackageAddService.addGiftpackage(giftpackageAddSearchQuery);
         }
         return new Response("game/giftpackage_add");
@@ -59,7 +61,7 @@ public class GameController extends BaseController {
     //同步礼包
     @RequestMapping(value = "/giftpackage_sync", method = {RequestMethod.GET, RequestMethod.POST})
     public Response syncGiftPackage(GiftpackageSyncSearchQuery giftpackageSyncSearchQuery) {
-        if(giftpackageSyncSearchQuery.getCount()!=null){
+        if (giftpackageSyncSearchQuery.getCount() != null) {
             giftpackageSyncService.addGiftpackage(giftpackageSyncSearchQuery);
         }
 
@@ -68,9 +70,9 @@ public class GameController extends BaseController {
         }
 
         List<GiftpackageAdd> giftpackageAddList = giftpackageAddService.searchType();
-        ServerSearchQuery serverSearchQuery=new ServerSearchQuery();
+        ServerSearchQuery serverSearchQuery = new ServerSearchQuery();
         List<Server> serverList = serverService.searchList(serverSearchQuery);
-        ChannelSearchQuery channelSearchQuery=new ChannelSearchQuery();
+        ChannelSearchQuery channelSearchQuery = new ChannelSearchQuery();
         List<Channel> channelList = channelService.searchList(channelSearchQuery);
         Page<GiftpackageSync> giftPackagePage = giftpackageSyncService.searchPage(giftpackageSyncSearchQuery);
 

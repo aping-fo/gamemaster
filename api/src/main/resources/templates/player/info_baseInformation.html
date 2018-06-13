@@ -4,57 +4,111 @@
         <div class="pageContent">
             <table class="table" width="40%" layoutH="137" th:each="row : ${baseInformation}">
                 <tr>
-                    <td>角色ID</td><td><input name="charId" type="text" th:value="${row.charId}"/></td>
-                    <td>账户</td><td><input name="account" type="text" th:value="${row.account}"/></td>
+                    <td>角色ID</td>
+                    <td><input name="charId" type="text" th:value="${row.charId}"/></td>
+                    <td>账户</td>
+                    <td><input name="account" type="text" th:value="${row.account}"/></td>
                 </tr>
                 <tr>
-                    <td>角色名</td><td><input name="charName" type="text" th:value="${row.charName}"/></td>
-                    <td>等级</td><td><input name="level" type="text" th:value="${row.level}"/></td></tr>
+                    <td>角色名</td>
+                    <td><input name="charName" type="text" th:value="${row.charName}"/></td>
+                    <td>等级</td>
+                    <td><input name="level" type="text" th:value="${row.level}"/></td>
+                </tr>
                 <tr>
-                    <td>杀戮值</td><td><input name="slaughter" type="text" th:value="${row.slaughter}"/></td>
-                    <td>杀人数</td><td><input name="killingNumber" type="text" th:value="${row.killingNumber}"/></td></tr>
+                    <td>杀戮值</td>
+                    <td><input name="slaughter" type="text" th:value="${row.slaughter}"/></td>
+                    <td>杀人数</td>
+                    <td><input name="killingNumber" type="text" th:value="${row.killingNumber}"/></td>
+                </tr>
                 <tr>
-                    <td>VIP等级</td><td><input name="vipLevel" type="text" th:value="${row.vipLevel}"/></td>
-                    <td>账户权限</td><td><input type="text" th:value="${row.accountAuthority}"/></td></tr>
+                    <td>VIP等级</td>
+                    <td><input name="vipLevel" type="text" th:value="${row.vipLevel}"/></td>
+                    <td>账户权限</td>
+                    <td><input type="text" th:value="${row.accountAuthority}"/></td>
+                </tr>
                 <tr>
-                    <td>创号时间</td><td><input class="date readonly" name="createTime" type="text" th:value="${#dates.format(row.createTime, 'yyyy-MM-dd HH:mm:ss')}"/></td>
-                    <td>性别</td><td><input name="sex" type="text" th:value="${row.sex}"/></td></tr>
+                    <td>创号时间</td>
+                    <td><input class="date readonly" name="createTime" type="text"
+                               th:value="${#dates.format(row.createTime, 'yyyy-MM-dd HH:mm:ss')}"/></td>
+                    <td>性别</td>
+                    <td><input name="sex" type="text" th:value="${row.sex}"/></td>
+                </tr>
                 <tr>
-                    <td>战斗力</td><td><input name="combatPower" type="text" th:value="${row.combatPower}"/></td>
-                    <td>帮派</td><td><input name="gangs" type="text" th:value="${row.gangs}"/></td></tr>
+                    <td>战斗力</td>
+                    <td><input name="combatPower" type="text" th:value="${row.combatPower}"/></td>
+                    <td>帮派</td>
+                    <td><input name="gangs" type="text" th:value="${row.gangs}"/></td>
+                </tr>
                 <tr>
-                    <td>渠道</td><td><input name="channelName" type="text" th:value="${row.channelName}"/></td>
-                    <td>包</td><td><input name="serverName" type="text" th:value="${row.serverName}"/></td></tr>
+                    <td>渠道</td>
+                    <td><input name="channelName" type="text" th:value="${row.channelName}"/></td>
+                    <td>包</td>
+                    <td><input name="serverName" type="text" th:value="${row.serverName}"/></td>
+                </tr>
                 <tr>
-                    <td>经验值</td><td><input name="exp" type="text" th:value="${row.exp}"/></td>
-                    <td>充值元宝</td><td><input name="rechargeTreasure" type="text" th:value="${row.rechargeTreasure}"/></td></tr>
+                    <td>经验值</td>
+                    <td><input name="exp" type="text" th:value="${row.exp}"/></td>
+                    <td>充值元宝</td>
+                    <td><input name="rechargeTreasure" type="text" th:value="${row.rechargeTreasure}"/></td>
+                </tr>
                 <tr>
-                    <td>充值次数</td><td><input name="rechargeNumber" type="text" th:value="${row.rechargeNumber}"/></td>
-                    <td>首充时间</td><td><input class="date readonly" name="firstChargeTime" type="text" th:value="${#dates.format(row.firstChargeTime, 'yyyy-MM-dd HH:mm:ss')}"/></td></tr>
+                    <td>充值次数</td>
+                    <td><input name="rechargeNumber" type="text" th:value="${row.rechargeNumber}"/></td>
+                    <td>首充时间</td>
+                    <td><input class="date readonly" name="firstChargeTime" type="text"
+                               th:value="${#dates.format(row.firstChargeTime, 'yyyy-MM-dd HH:mm:ss')}"/></td>
+                </tr>
                 <tr>
-                    <td>最后一次充值时间</td><td><input class="date readonly" name="lastChargeTime" type="text" th:value="${#dates.format(row.lastChargeTime, 'yyyy-MM-dd HH:mm:ss')}"/></td>
-                    <td>未充值天数</td><td><input name="nonRechargeDays" type="text" th:value="${row.nonRechargeDays}"/></td></tr>
+                    <td>最后一次充值时间</td>
+                    <td><input class="date readonly" name="lastChargeTime" type="text"
+                               th:value="${#dates.format(row.lastChargeTime, 'yyyy-MM-dd HH:mm:ss')}"/></td>
+                    <td>未充值天数</td>
+                    <td><input name="nonRechargeDays" type="text" th:value="${row.nonRechargeDays}"/></td>
+                </tr>
                 <tr>
-                    <td>剩余元宝</td><td><input name="surplusTreasure" type="text" th:value="${row.surplusTreasure}"/></td>
-                    <td>消耗元宝</td><td><input name="consumesTreasure" type="text" th:value="${row.consumesTreasure}"/></td></tr>
+                    <td>剩余元宝</td>
+                    <td><input name="surplusTreasure" type="text" th:value="${row.surplusTreasure}"/></td>
+                    <td>消耗元宝</td>
+                    <td><input name="consumesTreasure" type="text" th:value="${row.consumesTreasure}"/></td>
+                </tr>
                 <tr>
-                    <td>剩余绑定元宝</td><td><input name="surplusBindingTreasure" type="text" th:value="${row.surplusBindingTreasure}"/></td>
-                    <td>消耗绑定元宝</td><td><input name="consumesBindingTreasure" type="text" th:value="${row.consumesBindingTreasure}"/></td></tr>
+                    <td>剩余绑定元宝</td>
+                    <td><input name="surplusBindingTreasure" type="text" th:value="${row.surplusBindingTreasure}"/></td>
+                    <td>消耗绑定元宝</td>
+                    <td><input name="consumesBindingTreasure" type="text" th:value="${row.consumesBindingTreasure}"/>
+                    </td>
+                </tr>
                 <tr>
-                    <td>剩余铜钱</td><td><input name="surplusMoney" type="text" th:value="${row.surplusMoney}"/></td>
-                    <td>消耗铜钱</td><td><input name="consumesMoney" type="text" th:value="${row.consumesMoney}"/></td></tr>
+                    <td>剩余铜钱</td>
+                    <td><input name="surplusMoney" type="text" th:value="${row.surplusMoney}"/></td>
+                    <td>消耗铜钱</td>
+                    <td><input name="consumesMoney" type="text" th:value="${row.consumesMoney}"/></td>
+                </tr>
                 <tr>
-                    <td>剩余绑定铜钱</td><td><input name="surplusBindingMoney" type="text" th:value="${row.surplusBindingMoney}"/></td>
-                    <td>消耗绑定铜钱</td><td><input name="consumesBindingMoney" type="text" th:value="${row.consumesBindingMoney}"/></td></tr>
+                    <td>剩余绑定铜钱</td>
+                    <td><input name="surplusBindingMoney" type="text" th:value="${row.surplusBindingMoney}"/></td>
+                    <td>消耗绑定铜钱</td>
+                    <td><input name="consumesBindingMoney" type="text" th:value="${row.consumesBindingMoney}"/></td>
+                </tr>
                 <tr>
-                    <td>登录时间</td><td><input name="loginTime" type="text" th:value="${row.loginTime}"/></td>
-                    <td>登录ip</td><td><input name="loginIp" type="text" th:value="${row.loginIp}"/></td></tr>
+                    <td>登录时间</td>
+                    <td><input name="loginTime" type="text" th:value="${row.loginTime}"/></td>
+                    <td>登录ip</td>
+                    <td><input name="loginIp" type="text" th:value="${row.loginIp}"/></td>
+                </tr>
                 <tr>
-                    <td>网络环境</td><td><input name="networkEnvironment" type="text" th:value="${row.networkEnvironment}"/></td>
-                    <td>mac</td><td><input name="mac" type="text" th:value="${row.mac}"/></td></tr>
+                    <td>网络环境</td>
+                    <td><input name="networkEnvironment" type="text" th:value="${row.networkEnvironment}"/></td>
+                    <td>mac</td>
+                    <td><input name="mac" type="text" th:value="${row.mac}"/></td>
+                </tr>
                 <tr>
-                    <td>机型</td><td><input name="model" type="text" th:value="${row.model}"/></td>
-                    <td>系统版本</td><td><input name="systemVersion" type="text" th:value="${row.systemVersion}"/></td></tr>
+                    <td>机型</td>
+                    <td><input name="model" type="text" th:value="${row.model}"/></td>
+                    <td>系统版本</td>
+                    <td><input name="systemVersion" type="text" th:value="${row.systemVersion}"/></td>
+                </tr>
                 <tr>
                     <td colspan="4">
                         设置权限:

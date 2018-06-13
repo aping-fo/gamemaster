@@ -1,4 +1,4 @@
-<div class="pageHeader" xmlns:th="http://www.w3.org/1999/xhtml">
+<div xmlns:th="http://www.w3.org/1999/xhtml" class="pageHeader">
     <form id="pagerForm" onsubmit="return navTabSearch(this);" action="recharge/erroneousOrder" method="post"
           onreset="$(this).find('select.combox').comboxReset()">
         <div class="searchBar">
@@ -11,7 +11,8 @@
                     </td>
                     <td>
                         账号：
-                        <input name="userName" type="text" value="" th:value="${request.userName}" placeholder="账号/手机/身份证"
+                        <input name="userName" type="text" value="" th:value="${request.userName}"
+                               placeholder="账号/手机/身份证"
                                size="15">
                     </td>
                     <td>
@@ -35,12 +36,13 @@
     <div class="panelBar">
         <ul class="toolBar">
             <li>
-                <a class="icon" href="recharge/erroneousOrder/export" target="dwzExport" targetType="navTab" title="确实要导出这些记录吗?"><span>导出EXCEL</span></a>
+                <a class="icon" href="recharge/erroneousOrder/export" target="dwzExport" targetType="navTab"
+                   title="确实要导出这些记录吗?"><span>导出EXCEL</span></a>
             </li>
         </ul>
     </div>
     <table class="table" width="100%" layoutH="137">
-    <thead>
+        <thead>
         <tr>
             <th width="120">订单号</th>
             <th width="100">区服</th>

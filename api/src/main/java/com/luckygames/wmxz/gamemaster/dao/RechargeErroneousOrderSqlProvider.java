@@ -46,10 +46,10 @@ public class RechargeErroneousOrderSqlProvider {
         if (StringUtils.isNotBlank(query.getCharName())) {
             sql.append(" and ( pc.char_name like \"%\"#{charName}\"%\" ) ");
         }
-        if (query.getSuccessfulOrder()!=null) {
+        if (query.getSuccessfulOrder() != null) {
             sql.append(" and po.status !=2  ");
         }
-        if (query.getRepeat()!=null) {
+        if (query.getRepeat() != null) {
             sql.append(" GROUP BY order_code  ");
         }
         return sql.toString();

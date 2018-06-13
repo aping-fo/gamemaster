@@ -1,4 +1,5 @@
 package com.luckygames.wmxz.gamemaster.service;
+
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.luckygames.wmxz.gamemaster.dao.PayRetentionRateEntity;
@@ -7,7 +8,6 @@ import com.luckygames.wmxz.gamemaster.dao.mapper.PayRetentionRateMapper;
 import com.luckygames.wmxz.gamemaster.model.entity.PayRetentionRate;
 import com.luckygames.wmxz.gamemaster.model.enums.Status;
 import com.luckygames.wmxz.gamemaster.model.view.request.CommonSearchQuery;
-import com.luckygames.wmxz.gamemaster.model.view.request.PayRetentionRateSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.base.BaseServiceImpl;
 import com.luckygames.wmxz.gamemaster.utils.BeanUtils;
 import com.luckygames.wmxz.gamemaster.utils.DateUtils;

@@ -5,7 +5,6 @@ import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.model.entity.DataCollection;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
 import com.luckygames.wmxz.gamemaster.model.view.request.ChannelDataSearchQuery;
-import com.luckygames.wmxz.gamemaster.model.view.request.ChannelSearchQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.DataCollectionSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;

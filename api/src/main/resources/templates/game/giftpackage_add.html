@@ -1,10 +1,16 @@
-<div class="pageHeader" xmlns:th="http://www.w3.org/1999/xhtml">
+<div class="pageHeader">
     <form id="pagerForm" onsubmit="return navTabSearch(this);" action="game/giftpackage_add" method="post"
           onreset="$(this).find('select.combox').comboxReset()">
         <div class="searchBar">
             <table class="searchContent">
-                <tr><td>礼包名称</td><td><input name="name" type="text" size="15"></td></tr>
-                <tr><td>礼包描述</td><td><textarea name="des" rows="3" cols="20" style="resize:none;"></textarea></td></tr>
+                <tr>
+                    <td>礼包名称</td>
+                    <td><input name="name" type="text" size="15"></td>
+                </tr>
+                <tr>
+                    <td>礼包描述</td>
+                    <td><textarea name="des" rows="3" cols="20" style="resize:none;"></textarea></td>
+                </tr>
                 <tr>
                     <td colspan="2">
                         <table class="list nowrap itemDetail" addButton="增加道具" width="100%">
@@ -12,7 +18,9 @@
                             <tr>
                                 <th type="text" name="goods#index#Name" fieldClass="required">道具名称</th>
                                 <th type="number" name="goods#index#Count" fieldClass="required">道具数量</th>
-                                <th type="enum" name="isBinding" enumUrl="game/giftpackage_add_isBinding" size="12">是否绑定</th>
+                                <th type="enum" name="isBinding" enumUrl="game/giftpackage_add_isBinding" size="12">
+                                    是否绑定
+                                </th>
                                 <th type="del" width="60">删除</th>
                             </tr>
                             </thead>
@@ -21,7 +29,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2"><input type="submit"  value="提交" size="15"></td>
+                    <td colspan="2"><input type="submit" value="提交" size="15"></td>
                 </tr>
             </table>
         </div>
