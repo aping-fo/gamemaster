@@ -18,25 +18,25 @@ public class PlayerActionReportTask extends BaseTask {
     @Autowired
     private CharacterDailyService characterDailyService;
 
-    @Scheduled(cron = "#{@reportProperties.playerAction.todayCron}")
-    public void generatePlayerActionDailyReportToday() {
-        try {
-            playerActionDailyService.generatePlayerActionDailyReportToday();
-            characterDailyService.generateCharacterDailyReportToday();
-        } catch (Exception e) {
-            e.printStackTrace();
-            logger.error("Task failed :{}", e.getMessage());
-        }
-    }
-
-    @Scheduled(cron = "#{@reportProperties.playerAction.yesterdayCron}")
-    public void generatePlayerActionDailyReportYesterday() {
-        try {
-            playerActionDailyService.generatePlayerActionDailyReportYesterday();
-            characterDailyService.generateCharacterDailyReportYesterday();
-        } catch (Exception e) {
-            e.printStackTrace();
-            logger.error("Task failed :{}", e.getMessage());
-        }
-    }
+//    @Scheduled(cron = "#{@reportProperties.playerAction.todayCron}")
+//    public void generatePlayerActionDailyReportToday() {
+//        try {
+//            playerActionDailyService.generatePlayerActionDailyReportToday();
+//            characterDailyService.generateCharacterDailyReportToday();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            logger.error("Task failed :{}", e.getMessage());
+//        }
+//    }
+//
+//    @Scheduled(cron = "#{@reportProperties.playerAction.yesterdayCron}")
+//    public void generatePlayerActionDailyReportYesterday() {
+//        try {
+//            playerActionDailyService.generatePlayerActionDailyReportYesterday();
+//            characterDailyService.generateCharacterDailyReportYesterday();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            logger.error("Task failed :{}", e.getMessage());
+//        }
+//    }
 }

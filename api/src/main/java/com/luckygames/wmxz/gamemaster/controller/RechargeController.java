@@ -2,17 +2,10 @@ package com.luckygames.wmxz.gamemaster.controller;
 
 import com.github.pagehelper.Page;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
-import com.luckygames.wmxz.gamemaster.model.entity.PlayerOrder;
-import com.luckygames.wmxz.gamemaster.model.entity.RechargeDaily;
-import com.luckygames.wmxz.gamemaster.model.entity.RechargeMonthly;
+import com.luckygames.wmxz.gamemaster.model.entity.*;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
-import com.luckygames.wmxz.gamemaster.model.view.request.PlayerOrderSearchQuery;
-import com.luckygames.wmxz.gamemaster.model.view.request.RechargeDailySearchQuery;
-import com.luckygames.wmxz.gamemaster.model.view.request.RechargeMonthlySearchQuery;
-import com.luckygames.wmxz.gamemaster.service.PlayerOrderService;
-import com.luckygames.wmxz.gamemaster.service.RechargeDailyService;
-import com.luckygames.wmxz.gamemaster.service.RechargeMonthlyDayService;
-import com.luckygames.wmxz.gamemaster.service.RechargeMonthlyService;
+import com.luckygames.wmxz.gamemaster.model.view.request.*;
+import com.luckygames.wmxz.gamemaster.service.*;
 import com.luckygames.wmxz.gamemaster.utils.DateUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +25,11 @@ public class RechargeController extends BaseController {
     private RechargeMonthlyService rechargeMonthlyService;
     @Autowired
     private RechargeMonthlyDayService rechargeMonthlyDayService;
+    @Autowired
+    private RechargeFailedOrderService rechargeFailedOrderService;
+    @Autowired
+    private RechargeErroneousOrderService rechargeErroneousOrderService;
+
 
     @RequestMapping(value = "/daily", method = {RequestMethod.GET, RequestMethod.POST})
     public Response dailyRecharge(RechargeDailySearchQuery rechargeDailySearchRequest) {
@@ -72,5 +70,26 @@ public class RechargeController extends BaseController {
         return new Response("recharge/statics")
                 .request(rechargeMonthlySearchQuery)
                 .data("rechargeMonthlyList", rechargeMonthlyPage);
+    }
+
+    //失败订单
+    @RequestMapping(value = "/failedOrder", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response queryOrderfailedOrder(RechargeFailedOrderSearchQuery rechargeFailedOrderSearchQuery) {
+//        rechargeFailedOrderService.generateRechargeFailedOrderReportToday();
+        Page<RechargeFailedOrder> rechargeFailedOrderPage = rechargeFailedOrderService.searchPage(rechargeFailedOrderSearchQuery);
+        return new Response("recharge/failedOrder")
+                .request(rechargeFailedOrderSearchQuery)
+                .data("rechargeFailedOrderList", rechargeFailedOrderPage);
+    }
+
+    //错误订单
+    @RequestMapping(value = "/erroneousOrder", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response queryOrderErroneousOrder(RechargeErroneousOrderSearchQuery rechargeErroneousOrderSearchQuery) {
+//        rechargeErroneousOrderService.generateRechargeErroneousOrderReportToday();
+        Page<RechargeErroneousOrder> rechargeErroneousOrderPage = rechargeErroneousOrderService.searchPage(rechargeErroneousOrderSearchQuery);
+
+        return new Response("recharge/erroneousOrder")
+                .request(rechargeErroneousOrderSearchQuery)
+                .data("rechargeErroneousOrderList", rechargeErroneousOrderPage);
     }
 }

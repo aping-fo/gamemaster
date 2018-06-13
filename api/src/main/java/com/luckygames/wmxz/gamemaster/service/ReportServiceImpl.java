@@ -7,6 +7,7 @@ import com.luckygames.wmxz.gamemaster.dao.DataCollectionEntityExample;
 import com.luckygames.wmxz.gamemaster.dao.mapper.DataCollectionMapper;
 import com.luckygames.wmxz.gamemaster.model.entity.DataCollection;
 import com.luckygames.wmxz.gamemaster.model.enums.Status;
+import com.luckygames.wmxz.gamemaster.model.view.request.ChannelDataSearchQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.DataCollectionSearchQuery;
 import com.luckygames.wmxz.gamemaster.utils.BeanUtils;
 import com.luckygames.wmxz.gamemaster.utils.DateUtils;
@@ -26,6 +27,22 @@ public class ReportServiceImpl implements ReportService {
             query.setPageNum(1);
         }
         return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> dataCollectionMapper.queryRechargeDailyReport(query));
+    }
+
+    @Override
+    public Page<DataCollection> searchChannelDataPage(ChannelDataSearchQuery query) {
+        if (query.getPageNum() == null) {
+            query.setPageNum(1);
+        }
+        return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> dataCollectionMapper.queryChannelDataReport(query));
+    }
+
+    @Override
+    public Page<DataCollection> searchChannelDailyPage(ChannelDataSearchQuery query) {
+        if (query.getPageNum() == null) {
+            query.setPageNum(1);
+        }
+        return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> dataCollectionMapper.queryChannelDailyReport(query));
     }
 
     @Override

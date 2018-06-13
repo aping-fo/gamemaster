@@ -94,4 +94,12 @@ public class PlayerActionDailyServiceImpl extends BaseServiceImpl<PlayerActionDa
         }
         return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> playerActionDailyMapper.queryPlayerActionDailyCharacterReport(query));
     }
+
+    @Override
+    public Page<PlayerActionDaily> searchCharacterAnalysisPage(CommonSearchQuery query) {
+        if (query.getPageNum() == null) {
+            query.setPageNum(1);
+        }
+        return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> playerActionDailyMapper.queryPlayerActionDailyCharacterAnalysisReport(query));
+    }
 }

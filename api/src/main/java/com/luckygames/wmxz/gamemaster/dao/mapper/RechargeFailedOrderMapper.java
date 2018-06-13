@@ -1,0 +1,19 @@
+package com.luckygames.wmxz.gamemaster.dao.mapper;
+
+import com.luckygames.wmxz.gamemaster.dao.RechargeFailedOrderEntity;
+import com.luckygames.wmxz.gamemaster.dao.RechargeFailedOrderEntityMapper;
+import com.luckygames.wmxz.gamemaster.dao.RechargeFailedOrderSqlProvider;
+import com.luckygames.wmxz.gamemaster.model.entity.RechargeFailedOrder;
+import com.luckygames.wmxz.gamemaster.model.view.request.RechargeFailedOrderSearchQuery;
+import org.apache.ibatis.annotations.SelectProvider;
+
+import java.util.List;
+
+public interface RechargeFailedOrderMapper extends RechargeFailedOrderEntityMapper<RechargeFailedOrderEntity> {
+
+    @SelectProvider(type = RechargeFailedOrderSqlProvider.class, method = "queryRechargeFailedOrderReportFromOrderSingleDate")
+    List<RechargeFailedOrder> queryRechargeFailedOrderReportFromOrderSingleDate(String singleDate);
+
+    @SelectProvider(type = RechargeFailedOrderSqlProvider.class, method = "queryRechargeFailedOrderReport")
+    List<RechargeFailedOrder> queryRechargeFailedOrderReport(RechargeFailedOrderSearchQuery query);
+}

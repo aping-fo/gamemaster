@@ -3,6 +3,7 @@ package com.luckygames.wmxz.gamemaster.service;
 import com.github.pagehelper.Page;
 import com.luckygames.wmxz.gamemaster.dao.PlayerActionDailyEntity;
 import com.luckygames.wmxz.gamemaster.model.entity.PlayerActionDaily;
+import com.luckygames.wmxz.gamemaster.model.entity.PlayerActionLog;
 import com.luckygames.wmxz.gamemaster.model.view.request.CommonSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.base.BaseService;
 
@@ -20,6 +21,6 @@ public interface PlayerActionDailyService extends BaseService<PlayerActionDailyE
     PlayerActionDaily findOne(Long channelId, Long serverId, String reportDate);
 
     Page<PlayerActionDaily> searchRegisterPage(CommonSearchQuery commonSearchQuery);
-
     Page<PlayerActionDaily> searchCharacterPage(CommonSearchQuery commonSearchQuery);
+    Page<PlayerActionDaily> searchCharacterAnalysisPage(CommonSearchQuery commonSearchQuery);
 }

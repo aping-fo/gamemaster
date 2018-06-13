@@ -1,0 +1,51 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="online/now" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>
+                        角色名：
+                        <input name="charName" type="text" value="" th:value="${request.charName}" placeholder="角色"
+                               size="15">
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div th:replace="_include/searchBar"></div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li>
+                <a class="icon" href="online/now/export" target="dwzExport" targetType="navTab" title="确实要导出这些记录吗?"><span>导出EXCEL</span></a>
+            </li>
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="137">
+        <thead>
+        <tr>
+            <th width="100">角色id</th>
+            <th width="80">角色名</th>
+            <th width="100">账户</th>
+            <th width="100">最后登录时间</th>
+            <th width="100">在线时长(分钟)</th>
+            <th width="100">地图id</th>
+            <th width="100">ip</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${onlineNowList}">
+            <td th:text="${row.charId}"></td>
+            <td th:text="${row.charName}"></td>
+            <td th:text="${row.userName}"></td>
+            <td th:text="${#dates.format(row.lastLoginTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${row.maxOnlineLength}"></td>
+            <td th:text="${row.mapId}"></td>
+            <td th:text="${row.playerIp}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>
