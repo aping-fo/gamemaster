@@ -72,12 +72,13 @@ public class AllDialogController extends BaseController {
 
         try {
             forbiddenRequest.getCharIds().forEach(f -> {
-                String result = adminService.banRole(new BanQuery() {{
-                    setBan(forbiddenRequest.getForbiddenType().getCode());
-                    setHour(forbiddenRequest.getHour());
-                    setId(f);
-                    setType(forbiddenRequest.getForbiddenOperationType().getCode());
-                }});
+                String result = adminService.banRole(new BanQuery (
+                        forbiddenRequest.getForbiddenOperationType().getCode(),
+                        forbiddenRequest.getForbiddenType().getCode(),
+                        f,
+                        forbiddenRequest.getHour(),
+                        forbiddenRequest.getServerId()
+                ));
                 logger.debug("调用封禁接口返回：{}", result);
                 //TODO:检查返回值是否成功
                 if (true) {

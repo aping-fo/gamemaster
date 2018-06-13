@@ -97,7 +97,9 @@
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
         </table>
+        <table schema="wmxz" tableName="activity" domainObjectName="ActivityEntity">
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
+        </table>
     </context>
-
-
 </generatorConfiguration>

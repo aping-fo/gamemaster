@@ -8,4 +8,5 @@ import com.luckygames.wmxz.gamemaster.service.base.BaseService;
 
 public interface RegisteredDataService extends BaseService<RegisteredDataEntity> {
     Page<RegisteredData> searchPage(CommonSearchQuery query);
+    void save(RegisteredData registeredData);
 }

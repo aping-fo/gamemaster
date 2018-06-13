@@ -1,6 +1,8 @@
 package com.luckygames.wmxz.gamemaster.service;
 
+import com.luckygames.wmxz.gamemaster.model.entity.Server;
 import com.luckygames.wmxz.gamemaster.model.view.base.GMQuery;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -74,14 +76,17 @@ public interface AdminService {
      *
      * @param reqParams
      * @param restTemplate
-     * @param host
+     * @param serverId
      * @return
      */
-    default String commonRequest(String reqParams, RestTemplate restTemplate, String host, String url) {
+    default String commonRequest(String reqParams, RestTemplate restTemplate, Long serverId, String url) {
         //String strParams = encodeReqParams(reqParams);
+        String host = getHost(serverId);
         ResponseEntity<String> result = restTemplate.getForEntity(host + url + reqParams, String.class);
         System.out.println(result.getBody());
         return result.getBody();
     }
+
+    public String getHost(Long serverId);
 }
 

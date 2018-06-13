@@ -6,6 +6,23 @@ import java.lang.reflect.Field;
  * Created by lucky on 2018/3/29.
  */
 public class GMQuery {
+    private Long serverId;
+
+    public GMQuery() {
+    }
+
+    public GMQuery(Long serverId) {
+        this.serverId = serverId;
+    }
+
+    public Long getServerId() {
+        return serverId;
+    }
+
+    public void setServerId(Long serverId) {
+        this.serverId = serverId;
+    }
+
     public String encodeReqParams() {
         StringBuilder sb = new StringBuilder("?");
         Field[] fields = this.getClass().getDeclaredFields();

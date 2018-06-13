@@ -42,17 +42,17 @@
     <table class="table" width="100%" layoutH="137">
         <thead>
         <tr>
-            <th width="120">订单号</th>
-            <th width="100">区服</th>
-            <th width="100">渠道</th>
-            <th width="100">账号</th>
-            <th width="100">角色名</th>
-            <th width="80" align="right">等级</th>
-            <th width="80" align="right">元宝</th>
-            <th width="80" align="right">金额</th>
-            <th width="80" align="right">状态</th>
-            <th width="80" align="right">时间</th>
-            <!--<th width="80" align="right">操作</th>-->
+            <th>订单号</th>
+            <th>区服</th>
+            <th>渠道</th>
+            <th>账号</th>
+            <th>角色名</th>
+            <th>等级</th>
+            <th>元宝</th>
+            <th>金额</th>
+            <th>状态</th>
+            <th>时间</th>
+            <th>操作</th>
         </tr>
         </thead>
         <tbody>
@@ -68,7 +68,7 @@
             <td th:if="${row.reason==1}">服务器不正确</td>
             <td th:if="${row.reason==2}">账户或用户名不存在</td>
             <td th:text="${#dates.format(row.reportDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
-            <!--<td th:text="TODO"></td>-->
+            <td><input type="submit" value="同步"/></td>
         </tr>
         </tbody>
     </table>
