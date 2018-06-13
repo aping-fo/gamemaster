@@ -1,6 +1,5 @@
 package generator.dao;
 
-import org.apache.commons.io.IOUtils;
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
@@ -22,7 +21,7 @@ public class DaoGenerator {
         try {
             gen(input);
         } finally {
-            IOUtils.closeQuietly(input);
+            input.close();
         }
 
         System.out.println("DaoGenerator> Done.");

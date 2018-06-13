@@ -1,9 +1,14 @@
 package com.luckygames.wmxz.gamemaster.utils;
 
 import org.apache.commons.lang3.RandomUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class DateUtils {
@@ -47,6 +52,60 @@ public class DateUtils {
     }
 
     public static Date RandomDateTime(Date from, Date to) {
+        if (from.after(to)) {
+            Date t = to;
+            to = from;
+            from = t;
+        }
         return new Date(RandomUtils.nextLong(from.getTime(), to.getTime()));
+    }
+
+    public static Date Now() {
+        return Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    public static String TodayString() {
+        return LocalDate.now().format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+    }
+
+    public static String YesterdayString() {
+        return LocalDate.now().plusDays(-1).format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+    }
+
+    public static String TomorrowString() {
+        return LocalDate.now().plusDays(1).format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+    }
+
+    public static int DayFromDate(String s) {
+        if (StringUtils.isBlank(s)) {
+            return 0;
+        }
+        return LocalDate.parse(s, DateTimeFormatter.ofPattern(DATE_FORMAT)).getDayOfMonth();
+    }
+
+    public static int MonthFromDate(String s) {
+        if (StringUtils.isBlank(s)) {
+            return 0;
+        }
+        return LocalDate.parse(s, DateTimeFormatter.ofPattern(DATE_FORMAT)).getMonthValue();
+    }
+
+    public static int YearFromDate(String s) {
+        if (StringUtils.isBlank(s)) {
+            return 0;
+        }
+        return LocalDate.parse(s, DateTimeFormatter.ofPattern(DATE_FORMAT)).getYear();
+    }
+
+    public static Date addDays(Date date, int days) {
+        return org.apache.commons.lang3.time.DateUtils.addDays(date, days);
+    }
+
+    public static Date addSeconds(Date date, int seconds) {
+        return org.apache.commons.lang3.time.DateUtils.addSeconds(date, seconds);
+    }
+
+    public static Date addHours(Date date, int seconds) {
+        return org.apache.commons.lang3.time.DateUtils.addHours(date, seconds);
     }
 }

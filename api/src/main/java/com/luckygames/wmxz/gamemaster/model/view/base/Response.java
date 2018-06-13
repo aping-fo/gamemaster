@@ -1,40 +1,58 @@
 package com.luckygames.wmxz.gamemaster.model.view.base;
 
 import com.github.pagehelper.Page;
+import com.luckygames.wmxz.gamemaster.common.constants.ResultCode;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.Map;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 public class Response extends ModelAndView {
+    private Integer statusCode = 200;
+    private String message = "操作成功";
+
     public Response() {
+        copyCodeMessage();
     }
 
     public Response(String viewName) {
         super(viewName);
+        copyCodeMessage();
     }
 
-    public Response(String viewName, Map<String, ?> model) {
-        super(viewName, model);
+    public Response(ResultCode resultCode) {
+        this.statusCode = resultCode.getCode();
+        this.message = resultCode.getMessage();
+        copyCodeMessage();
     }
 
-    public Response(String viewName, HttpStatus status) {
-        super(viewName, status);
+    public Response(int code, String message) {
+        this.statusCode = code;
+        this.message = message;
+        copyCodeMessage();
     }
 
-    public Response(String viewName, Map<String, ?> model, HttpStatus status) {
-        super(viewName, model, status);
+    public Integer getStatusCode() {
+        return statusCode;
     }
 
-    public Response(String viewName, String modelName, Object modelObject) {
-        super(viewName, modelName, modelObject);
-        if (modelObject != null && modelObject instanceof Page) {
-            Page m = (Page) modelObject;
-            Pager pager = new Pager(m.getPageNum(), m.getPageSize(), m.getTotal());
-            this.addObject("Pager", pager);
-        }
+    public void setStatusCode(Integer statusCode) {
+        this.statusCode = statusCode;
     }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    private void copyCodeMessage() {
+        data("message", String.format("%s(%d)", message, statusCode));
+        data("statusCode", statusCode == 200 ? statusCode : 300);
+    }
+
+//-------------------------------------------------------------
 
     public Response view(String viewName) {
         this.setViewName(viewName);
@@ -42,8 +60,11 @@ public class Response extends ModelAndView {
     }
 
     public Response data(String name, Object value) {
+        if (name == null || "".equals(name.trim()) || value == null) {
+            return this;
+        }
         this.addObject(name, value);
-        if (value != null && value instanceof Page) {
+        if (value instanceof Page) {
             Page m = (Page) value;
             Pager pager = new Pager(m.getPageNum(), m.getPageSize(), m.getTotal());
             this.addObject("Pager", pager);
@@ -61,9 +82,27 @@ public class Response extends ModelAndView {
         return this;
     }
 
+    public Response result(ResultCode resultCode) {
+        this.statusCode = resultCode.getCode();
+        this.message = resultCode.getMessage();
+        copyCodeMessage();
+        return this;
+    }
+
+    public Response result(int code, String message) {
+        this.statusCode = code;
+        this.message = message;
+        copyCodeMessage();
+        return this;
+    }
+
     @Override
     public String toString() {
         return ReflectionToStringBuilder.toString(this);
     }
 
+    public Response json() {
+        this.setView(new MappingJackson2JsonView());
+        return this;
+    }
 }

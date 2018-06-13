@@ -1,0 +1,34 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="register/statics_equipment" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div th:replace="_include/searchBar"></div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li>
+                <a class="icon" href="recharge/daily/export" target="dwzExport" targetType="navTab" title="确实要导出这些记录吗?"><span>导出EXCEL</span></a>
+            </li>
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="137">
+        <thead>
+        <tr>
+            <th width="120">日期</th>
+            <th width="120">设备数</th>
+            <th width="120">激活数</th>
+            <th width="120">登录页面流失率</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${equipmentCountList}">
+            <td th:text="${#dates.format(row.updateTime, 'yyyy-MM-dd')}"></td>
+            <td th:text="${row.equipmentCount}"></td>
+            <td th:text="${row.activationCount}"></td>
+            <td th:text="${#strings.append(#strings.substring(row.lossRate*100,0,#strings.length(row.lossRate*100)-2),'%')}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>

@@ -1,0 +1,48 @@
+<div xmlns:th="http://www.w3.org/1999/xhtml" class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="paid/payRetentionRate" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div th:replace="_include/searchBar"></div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li>
+                <a class="icon" href="recharge/daily/export" target="dwzExport" targetType="navTab" title="确实要导出这些记录吗?"><span>导出EXCEL</span></a>
+            </li>
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="137">
+        <thead>
+        <tr>
+            <th width="100">付费日期</th>
+            <th width="100">用户数</th>
+            <th width="100">1</th>
+            <th width="100">2</th>
+            <th width="100">3</th>
+            <th width="100">4</th>
+            <th width="100">5</th>
+            <th width="100">6</th>
+            <th width="100">7</th>
+            <th width="100">14</th>
+            <th width="100">30</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${payRetentionRateList}">
+            <td th:text="${#dates.format(row.reportDate, 'yyyy-MM-dd')}"></td>
+            <td th:text="${row.userCount}"></td>
+            <td th:text="${#strings.append(#strings.substring(row.oneDay*100,0,#strings.length(row.oneDay*100)-2),'%')}"></td>
+            <td th:text="${#strings.append(#strings.substring(row.twoDay*100,0,#strings.length(row.twoDay*100)-2),'%')}"></td>
+            <td th:text="${#strings.append(#strings.substring(row.threeDay*100,0,#strings.length(row.threeDay*100)-2),'%')}"></td>
+            <td th:text="${#strings.append(#strings.substring(row.fourDay*100,0,#strings.length(row.fourDay*100)-2),'%')}"></td>
+            <td th:text="${#strings.append(#strings.substring(row.fiveDay*100,0,#strings.length(row.fiveDay*100)-2),'%')}"></td>
+            <td th:text="${#strings.append(#strings.substring(row.sixDay*100,0,#strings.length(row.sixDay*100)-2),'%')}"></td>
+            <td th:text="${#strings.append(#strings.substring(row.sevenDay*100,0,#strings.length(row.sevenDay*100)-2),'%')}"></td>
+            <td th:text="${#strings.append(#strings.substring(row.twoWeeks*100,0,#strings.length(row.twoWeeks*100)-2),'%')}"></td>
+            <td th:text="${#strings.append(#strings.substring(row.oneMonth*100,0,#strings.length(row.oneMonth*100)-2),'%')}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>

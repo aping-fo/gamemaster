@@ -54,4 +54,18 @@ public enum UserType implements EnumType {
         return this.textEn;
     }
 
+    @Override
+    public int getCode() {
+        return code;
+    }
+
+    @Override
+    public String getText() {
+        return text;
+    }
+
+    @Override
+    public String getTextEn() {
+        return textEn;
+    }
 }

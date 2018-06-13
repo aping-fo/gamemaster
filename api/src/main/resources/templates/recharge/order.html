@@ -1,0 +1,71 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="recharge/order" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>
+                        订单号：
+                        <input name="orderCode" type="text" value="" th:value="${request.orderCode}" placeholder="订单号"
+                               size="15">
+                    </td>
+                    <td>
+                        账号：
+                        <input name="player" type="text" value="" th:value="${request.player}" placeholder="账号/手机/身份证"
+                               size="15">
+                    </td>
+                    <td>
+                        角色名：
+                        <input name="character" type="text" value="" th:value="${request.character}" placeholder="角色"
+                               size="15">
+                    </td>
+                    <td>
+                        元宝：
+                        <input name="goldFrom" type="number" value="" th:value="${request.goldFrom}" size="10">
+                        <span class="limit">-</span>
+                        <input name="goldTo" type="number" value="" th:value="${request.goldTo}" size="10">
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div th:replace="_include/searchBar"></div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li>
+                <a class="icon" href="recharge/daily/export" target="dwzExport" targetType="navTab" title="确实要导出这些记录吗?"><span>导出EXCEL</span></a>
+            </li>
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="137">
+        <thead>
+        <tr>
+            <th width="120">订单号</th>
+            <th width="100">区服</th>
+            <th width="100">渠道</th>
+            <th width="100">账号</th>
+            <th width="100">角色名</th>
+            <th width="80" align="right">等级</th>
+            <th width="80" align="right">元宝</th>
+            <th width="80" align="right">金额</th>
+            <th width="80" align="right">时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${orderList}">
+            <td th:text="${row.orderCode}"></td>
+            <td th:text="${row.serverName}"></td>
+            <td th:text="${row.channelName}"></td>
+            <td th:text="${row.username}"></td>
+            <td th:text="${row.charName}"></td>
+            <td th:text="${row.charLevel}"></td>
+            <td th:text="${row.goldQuantity}"></td>
+            <td th:text="${row.amount}"></td>
+            <td th:text="${#dates.format(row.rechargedDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>

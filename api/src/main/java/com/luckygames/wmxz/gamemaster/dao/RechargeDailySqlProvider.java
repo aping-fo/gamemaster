@@ -3,10 +3,8 @@ package com.luckygames.wmxz.gamemaster.dao;
 import com.luckygames.wmxz.gamemaster.model.view.request.RechargeDailySearchQuery;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Date;
-
 public class RechargeDailySqlProvider {
-    public String queryRechargeDailyReportFromOrderSingleDate(Date singleDate) {
+    public String queryRechargeDailyReportFromOrderSingleDate(String singleDate) {
         String sql = "SELECT  " +
                 "po.channel_id,  " +
                 "po.server_id,  " +
@@ -25,7 +23,7 @@ public class RechargeDailySqlProvider {
                 "left JOIN  " +
                 "player_character pc on po.char_id=pc.char_id   " +
                 "where   " +
-                "po.paid_date between DATE(#{singleDate}) and DATE(DATE_ADD(#{singleDate},INTERVAL 1 DAY))  " +
+                "po.paid_date between DATE(#{singleDate}) and DATE_ADD(DATE(#{singleDate}),INTERVAL 1 DAY)  " +
                 "GROUP BY   " +
                 "po.channel_id,  " +
                 "po.server_id,  " +
@@ -49,12 +47,12 @@ public class RechargeDailySqlProvider {
                 "recharge_daily  " +
                 "where   " +
                 "1=1  ";
-        if (query.getChannelId() != null && !query.getChannelId().isEmpty()) {
-            String ids = StringUtils.join(query.getChannelId(), ",");
+        if (query.getChannelIds() != null && !query.getChannelIds().isEmpty()) {
+            String ids = StringUtils.join(query.getChannelIds(), ",");
             sql += "and channel_id in (" + ids + ")  ";
         }
-        if (query.getServerId() != null && !query.getServerId().isEmpty()) {
-            String ids = StringUtils.join(query.getServerId(), ",");
+        if (query.getServerIds() != null && !query.getServerIds().isEmpty()) {
+            String ids = StringUtils.join(query.getServerIds(), ",");
             sql += "and server_id in (" + ids + ")  ";
         }
         if (StringUtils.isNotBlank(query.getStartDate())) {

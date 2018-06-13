@@ -1,0 +1,63 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="player/info_flowQuery" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>
+                        <select name="type" class="combox">
+                            <option value="1">出售</option>
+                            <option value="2">购买</option>
+                            <option value="3">BOSS掉落</option>
+                            <option value="4">活动</option>
+                        </select>
+                    </td>
+                    <td>装备名称：<input type="text" name="name"/></td>
+                </tr>
+            </table>
+        </div>
+        <div th:replace="_include/searchBar"></div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li>
+                <a class="icon" href="recharge/daily/export" target="dwzExport" targetType="navTab" title="确实要导出这些记录吗?"><span>导出EXCEL</span></a>
+            </li>
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="137">
+        <thead>
+        <tr>
+            <th width="120">类型</th>
+            <th width="120">装备</th>
+            <th width="120">数量</th>
+            <th width="120">状态</th>
+            <th width="120">强化等级</th>
+            <th width="120">强化完成度</th>
+            <th width="120">幸运值</th>
+            <th width="120">镶嵌</th>
+            <th width="120">洗练</th>
+            <th width="120">极品属性</th>
+            <th width="120">时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${propFlowList}">
+            <td th:text="${row.type}"></td>
+            <td th:text="${row.name}"></td>
+            <td th:text="${row.count}"></td>
+            <td th:text="${row.status}"></td>
+            <td th:text="${row.strengtheningGrade}"></td>
+            <td th:text="${row.strengtheningDegreeCompletion}"></td>
+            <td th:text="${row.luckyValue}"></td>
+            <td th:text="${row.set}"></td>
+            <td th:text="${row.clear}"></td>
+            <td th:text="${row.ultimateAttribute}"></td>
+            <td th:text="${#dates.format(row.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>
