@@ -1,0 +1,67 @@
+<div class="pageHeader" xmlns:th="http://www.w3.org/1999/xhtml">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="game/olympics_single_activity" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>
+                        <input type="checkbox"/>全部选择
+                        <input type="button" value="删除"/>
+                    </td>
+                    <td>服务器：
+                        <select name="type">
+                            <option>1服</option>
+                            <option>2服</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">检索</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li>
+                <a class="icon" href="recharge/daily/export" target="dwzExport" targetType="navTab" title="确实要导出这些记录吗?"><span>导出EXCEL</span></a>
+            </li>
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="137">
+        <thead>
+        <tr>
+            <th>编号</th>
+            <th>活动大类</th>
+            <th>活动标题</th>
+            <th>开始时间</th>
+            <th>结束时间</th>
+            <th>活动状态</th>
+            <th>活动类型</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--<tr th:each="row,iterStat:${giftPackageList}">-->
+            <!--<td th:text="${row.cardFile}"></td>-->
+            <!--<td th:text="${row.activityId}"></td>-->
+            <!--<td th:text="${#dates.format(row.minTermValidity, 'yyyy-MM-dd HH:mm:ss')}+'&#45;&#45;'+${#dates.format(row.maxTermValidity, 'yyyy-MM-dd HH:mm:ss')}"></td>-->
+            <!--<td th:text="${row.channelId}"></td>-->
+            <!--<td th:text="${row.serverId}"></td>-->
+            <!--<td th:text="${row.isActivation}"></td>-->
+            <!--<td th:text="${row.cardType}"></td>-->
+            <!--<td th:text="${row.cardCount}"></td>-->
+            <!--<td th:text="${row.isActivation}"></td>-->
+            <!--<td th:text="${#dates.format(row.generateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>-->
+            <!--<td th:text="${row.generateType}"></td>-->
+            <!--<td><input type="button" value="删除"/></td>-->
+        <!--</tr>-->
+        </tbody>
+    </table>
+    <!--<div th:replace="_include/pager"></div>-->
+</div>
