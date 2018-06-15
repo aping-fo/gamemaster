@@ -2,16 +2,10 @@ package com.luckygames.wmxz.gamemaster.controller;
 
 import com.github.pagehelper.Page;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
-import com.luckygames.wmxz.gamemaster.model.entity.Channel;
-import com.luckygames.wmxz.gamemaster.model.entity.GiftpackageAdd;
-import com.luckygames.wmxz.gamemaster.model.entity.GiftpackageSync;
-import com.luckygames.wmxz.gamemaster.model.entity.Server;
+import com.luckygames.wmxz.gamemaster.model.entity.*;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
 import com.luckygames.wmxz.gamemaster.model.view.request.*;
-import com.luckygames.wmxz.gamemaster.service.ChannelService;
-import com.luckygames.wmxz.gamemaster.service.GiftpackageAddService;
-import com.luckygames.wmxz.gamemaster.service.GiftpackageSyncService;
-import com.luckygames.wmxz.gamemaster.service.ServerService;
+import com.luckygames.wmxz.gamemaster.service.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
