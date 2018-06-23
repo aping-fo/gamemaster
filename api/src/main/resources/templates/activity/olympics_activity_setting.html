@@ -1,0 +1,118 @@
+<div class="pageHeader" xmlns:th="http://www.w3.org/1999/xhtml">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="game/olympics_activity_setting" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>活动分类</td>
+                    <td>
+                        <select name="classification">
+                            <option value="1">活跃类</option>
+                            <option value="2">充值类</option>
+                            <option value="3">消费类</option>
+                            <option value="4">兑换类</option>
+                            <option value="5">BOSS类</option>
+                            <option value="6">副本类</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>活动类型</td>
+                    <td>
+                        <select name="type">
+                            <option value="1">登录豪礼</option>
+                            <option value="2">特惠礼包</option>
+                            <option value="3">神兵现世</option>
+                            <option value="4">环卫绩点</option>
+                            <option value="5">节日兑换</option>
+                            <option value="6">日夜除尘</option>
+                            <option value="7">双倍经验</option>
+                            <option value="8">副本双倍</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>活动名称</td>
+                    <td><input type="text" name="title"/></td>
+                </tr>
+                <tr>
+                    <td>活动时间</td>
+                    <td>
+                        <select>
+                            <option>自定义</option>
+                            <option>开服时间</option>
+                        </select>
+                        <input name="startTime" class="date readonly" readonly="readonly" type="text">
+                        <span class="limit">-</span>
+                        <input name="endTime" class="date readonly" readonly="readonly" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>登录天数<input type="button" value="添加"/></td>
+                    <td>
+                        <table>
+                            <tr>
+                                <th>天数</th>
+                                <th>奖励</th>
+                                <th>操作</th>
+                            </tr>
+                            <tr>
+                                <td><input type="text"/></td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <th>名称</th>
+                                            <th>数量</th>
+                                            <th>颜色</th>
+                                            <th>状态</th>
+                                            <th>+</th>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="text"/></td>
+                                            <td><input type="text"/></td>
+                                            <td><input type="text"/></td>
+                                            <td>
+                                                <select>
+                                                    <option>绑定</option>
+                                                    <option>不绑定</option>
+                                                    <option>使用后绑定</option>
+                                                    <option>永久绑定</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td><input type="button" value="删除"/></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>活动描述</td>
+                    <td><textarea name="des"  style="resize:none;"></textarea></td>
+                </tr>
+                <tr>
+                    <td>活动开关</td>
+                    <td>
+                        <select name="isOpen">
+                            <option value="1">开启</option>
+                            <option value="0">关闭</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>活动排序</td>
+                    <td><input type="text" name="sort"/>数字越大越靠前</td>
+                </tr>
+                <tr>
+                    <td><input type="button" value="渠道"/></td>
+                    <td>(默认或者不勾选表示所有渠道生效)</td>
+                </tr>
+                <tr>
+                    <td><input type="button" value="区服"/></td>
+                    <td><input type="submit" value="保存"/></td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
