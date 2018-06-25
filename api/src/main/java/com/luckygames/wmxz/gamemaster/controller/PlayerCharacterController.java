@@ -3,16 +3,14 @@ package com.luckygames.wmxz.gamemaster.controller;
 import com.github.pagehelper.Page;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.model.entity.BaseInformation;
+import com.luckygames.wmxz.gamemaster.model.entity.ForbiddenLog;
 import com.luckygames.wmxz.gamemaster.model.entity.PlayerCharacter;
 import com.luckygames.wmxz.gamemaster.model.entity.PropFlow;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
 import com.luckygames.wmxz.gamemaster.model.view.request.ForbiddenSearchQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.PlayerCharacterSearchQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.PropFlowSearchQuery;
-import com.luckygames.wmxz.gamemaster.service.AdminService;
-import com.luckygames.wmxz.gamemaster.service.BaseInformationService;
-import com.luckygames.wmxz.gamemaster.service.PlayerCharacterService;
-import com.luckygames.wmxz.gamemaster.service.PropFlowService;
+import com.luckygames.wmxz.gamemaster.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,6 +33,8 @@ public class PlayerCharacterController extends BaseController {
     private PropFlowService propFlowService;
     @Autowired
     private BaseInformationService baseInformationService;
+    @Autowired
+    private ForbiddenLogService forbiddenLogService;
 
     @RequestMapping(value = "/character", method = {RequestMethod.GET, RequestMethod.POST})
     public Response queryCharacter(PlayerCharacterSearchQuery playerCharacterSearchQuery) {
@@ -51,9 +51,13 @@ public class PlayerCharacterController extends BaseController {
 
     @RequestMapping(value = "/forbidden", method = {RequestMethod.GET, RequestMethod.POST})
     public Response queryForbidden(ForbiddenSearchQuery forbiddenQuery) {
+        if (forbiddenQuery.getPageNum() == null) {
+            forbiddenQuery.setPageNum(1);
+        }
+        Page<ForbiddenLog> forbiddenLogPage = forbiddenLogService.searchPage(forbiddenQuery);
         return new Response("player/forbidden")
                 .request(forbiddenQuery)
-                .data("", null);
+                .data("forbiddenLogs", forbiddenLogPage);
     }
 
     @RequestMapping(value = "/info", method = {RequestMethod.GET, RequestMethod.POST})

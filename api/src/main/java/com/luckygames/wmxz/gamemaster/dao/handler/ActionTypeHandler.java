@@ -30,7 +30,7 @@ public class ActionTypeHandler implements TypeHandler<ActionType> {
 
     @Override
     public void setParameter(PreparedStatement ps, int i, ActionType param, JdbcType jdbcType) throws SQLException {
-        ps.setInt(i, (byte) param.code());
+        ps.setInt(i, param.code());
     }
 
 }

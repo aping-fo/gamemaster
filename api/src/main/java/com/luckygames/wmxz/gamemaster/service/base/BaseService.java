@@ -10,6 +10,8 @@ public interface BaseService<T extends BaseEntity> {
 
     Long save(T obj);
 
+    void delete(T obj);
+
     Mapper<T> getMapper();
 
 }

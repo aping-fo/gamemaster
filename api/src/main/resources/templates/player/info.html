@@ -50,6 +50,9 @@
     <div class="panelBar">
         <ul class="toolBar">
             <li>
+                <a class="delete" href="javascript:batchBanDialog();"><span>批量封禁</span></a>
+            </li>
+            <li>
                 <a class="icon" href="recharge/daily/export" target="dwzExport" targetType="navTab" title="确实要导出这些记录吗?"><span>导出EXCEL</span></a>
             </li>
         </ul>
@@ -57,6 +60,7 @@
     <table class="table" layoutH="137">
         <thead>
         <tr>
+            <th width="22"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
             <th width="120">区服</th>
             <th width="120">渠道</th>
             <th width="120">账号</th>
@@ -70,6 +74,7 @@
         </thead>
         <tbody>
         <tr th:each="row,iterStat:${characters}">
+            <td><input name="ids" th:value="${row.charId}" type="checkbox"></td>
             <td th:text="${row.serverName}"></td>
             <td th:text="${row.channelName}"></td>
             <td th:text="${row.username}"></td>
@@ -79,7 +84,8 @@
             <td th:text="${row.level}"></td>
             <td th:text="${row.leftGold}"></td>
             <td>
-                <a title="封禁" class="button" th:href="@{player/dialog_ban(charId=${row.charId})}" target="dialog"
+                <a title="封禁" class="button" th:href="@{player/dialog_ban(charIds=${row.charId},opType='FORBIDDEN')}"
+                   target="dialog"
                    mask="true"><span>封禁</span></a>
                 <a title="踢下线" class="button"><span>踢下线</span></a>
                 <a title="闪断" class="button"><span>闪断</span></a>
@@ -89,3 +95,13 @@
     </table>
     <div th:replace="_include/pager"></div>
 </div>
+<script type="text/javascript">
+    function batchBanDialog() {
+        var selectIds = $.getSelectedIds("ids");
+        alert(selectIds);
+        var url = "player/dialog_ban";
+        url += "?charIds=" + selectIds;
+        url += "&opType=FORBIDDEN";
+        $.pdialog.open(url, 'batchBan', '批量封禁', {mask: true});
+    }
+</script>

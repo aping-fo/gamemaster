@@ -3,20 +3,10 @@
           onsubmit="return validateCallback(this, navTabAjaxDone);">
         <div class="pageFormContent" layoutH="56">
             <p>
-                <label>区服</label>
-                <select name="serverId" class="combox">
-                    <option th:each="s:${serverList}"
-                            th:value="${s.serverId}"
-                            th:selected="(${s.serverId} == ${server.serverId})"
-                            th:text="${s.serverName}">
-                    </option>
-                </select>
-            </p>
-            <p>
                 <label>操作类型：</label>
                 <select name="forbiddenOperationType" class="combox">
-                    <option value="FORBIDDEN">封禁</option>
-                    <option value="ALLOWED">解封</option>
+                    <option value="FORBIDDEN" th:selected="(${opType.toString() == 'FORBIDDEN'})">封禁</option>
+                    <option value="ALLOWED" th:selected="(${opType.toString() == 'ALLOWED'})">解封</option>
                 </select>
             </p>
             <p>

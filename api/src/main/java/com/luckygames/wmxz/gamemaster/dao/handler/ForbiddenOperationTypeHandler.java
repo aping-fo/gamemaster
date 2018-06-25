@@ -30,7 +30,7 @@ public class ForbiddenOperationTypeHandler implements TypeHandler<ForbiddenOpera
 
     @Override
     public void setParameter(PreparedStatement ps, int i, ForbiddenOperationType param, JdbcType jdbcType) throws SQLException {
-        ps.setInt(i, (byte) param.code());
+        ps.setInt(i, param.code());
     }
 
 }
