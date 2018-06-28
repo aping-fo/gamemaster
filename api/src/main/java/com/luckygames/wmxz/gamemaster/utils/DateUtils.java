@@ -105,7 +105,7 @@ public class DateUtils {
         return org.apache.commons.lang3.time.DateUtils.addSeconds(date, seconds);
     }
 
-    public static Date addHours(Date date, int seconds) {
-        return org.apache.commons.lang3.time.DateUtils.addHours(date, seconds);
+    public static Date addHours(Date date, int hours) {
+        return org.apache.commons.lang3.time.DateUtils.addHours(date, hours);
     }
 }

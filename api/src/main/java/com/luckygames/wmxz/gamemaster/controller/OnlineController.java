@@ -6,14 +6,13 @@ import com.github.pagehelper.Page;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.model.entity.IntegratedOnline;
 import com.luckygames.wmxz.gamemaster.model.entity.OnlineNow;
+import com.luckygames.wmxz.gamemaster.model.entity.ServerOnlineLog;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
-import com.luckygames.wmxz.gamemaster.model.view.request.CommonSearchQuery;
-import com.luckygames.wmxz.gamemaster.model.view.request.IntegratedOnlineSearchQuery;
-import com.luckygames.wmxz.gamemaster.model.view.request.IntegratedOnlineServiceSearchQuery;
-import com.luckygames.wmxz.gamemaster.model.view.request.OnlineNowSearchQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.*;
 import com.luckygames.wmxz.gamemaster.service.IntegratedOnlineService;
 import com.luckygames.wmxz.gamemaster.service.IntegratedOnlineServiceService;
 import com.luckygames.wmxz.gamemaster.service.OnlineNowService;
+import com.luckygames.wmxz.gamemaster.service.ServerOnlineLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +30,8 @@ public class OnlineController extends BaseController {
     private IntegratedOnlineService integratedOnlineService;
     @Autowired
     private IntegratedOnlineServiceService integratedOnlineServiceService;
+    @Autowired
+    private ServerOnlineLogService serverOnlineLogService;
 
     //综合在线
     @RequestMapping(value = "/statics", method = {RequestMethod.GET, RequestMethod.POST})
@@ -68,5 +69,22 @@ public class OnlineController extends BaseController {
         return new Response("online/server")
                 .request(query)
                 .data("integratedOnlineServiceList", integratedOnlineServicePage);
+    }
+
+    //实时在线
+    @RequestMapping(value = "/real", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response queryReal(ServerOnlineLogQuery query) {
+        if (query.getPageNum() == null) {
+            query.setPageNum(1);
+        }
+        if (query.getPageSize() == null) {
+            query.setPageSize(24);
+        }
+        Page<ServerOnlineLog> serverOnlineLogs = serverOnlineLogService.searchPage(query);
+
+        return new Response("online/real")
+                .request(query)
+                .data("serverOnlineLogs", serverOnlineLogs);
+
     }
 }
