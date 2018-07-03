@@ -94,4 +94,15 @@ public class MailQuery extends GMQuery {
     public void setVocation(Integer vocation) {
         this.vocation = vocation;
     }
+
+    public MailQuery(Long serverId, String title, String content, String ids, Integer min_lev, Integer max_lev, Integer vocation, String rewards) {
+        super(serverId);
+        this.title = title;
+        this.content = content;
+        this.rewards = rewards;
+        this.ids = ids;
+        this.min_lev = min_lev;
+        this.max_lev = max_lev;
+        this.vocation = vocation;
+    }
 }

@@ -3,25 +3,28 @@ package com.luckygames.wmxz.gamemaster.controller;
 import com.luckygames.wmxz.gamemaster.common.constants.ResultCode;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.model.entity.ForbiddenLog;
+import com.luckygames.wmxz.gamemaster.model.entity.MailLog;
 import com.luckygames.wmxz.gamemaster.model.entity.PlayerCharacter;
 import com.luckygames.wmxz.gamemaster.model.entity.Server;
 import com.luckygames.wmxz.gamemaster.model.enums.ForbiddenOperationType;
+import com.luckygames.wmxz.gamemaster.model.enums.MailType;
 import com.luckygames.wmxz.gamemaster.model.enums.Status;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
 import com.luckygames.wmxz.gamemaster.model.view.request.BanQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.ForbiddenRequest;
-import com.luckygames.wmxz.gamemaster.service.AdminService;
-import com.luckygames.wmxz.gamemaster.service.ForbiddenLogService;
-import com.luckygames.wmxz.gamemaster.service.PlayerCharacterService;
-import com.luckygames.wmxz.gamemaster.service.ServerService;
+import com.luckygames.wmxz.gamemaster.model.view.request.MailQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.SendMailRequest;
+import com.luckygames.wmxz.gamemaster.service.*;
 import com.luckygames.wmxz.gamemaster.utils.DateUtils;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -33,6 +36,13 @@ public class AllDialogController extends BaseController {
     private ServerService serverService;
     @Autowired
     private ForbiddenLogService forbiddenLogService;
+    @Autowired
+    private MailLogService mailLogService;
+    @Autowired
+    private MailCharacterService mailCharacterService;
+    @Autowired
+    private MailRewardService mailRewardService;
+
     @Autowired
     private AdminService adminService;
 
@@ -67,8 +77,9 @@ public class AllDialogController extends BaseController {
             if (character == null) {
                 return;
             }
+            String result = null;
             try {
-                String result = adminService.banRole(new BanQuery(
+                result = adminService.banRole(new BanQuery(
                         forbiddenRequest.getForbiddenOperationType().getCode(),
                         forbiddenRequest.getForbiddenType().getCode(),
                         f,
@@ -80,25 +91,105 @@ public class AllDialogController extends BaseController {
                 logger.error("封禁角色异常：", e);
                 //return new Response(ResultCode.CHARACTER_FORBIDDEN_FAILD.getCode(), e.getMessage()).json();
             }
-            //TODO:检查返回值是否成功
-            if (forbiddenRequest.getForbiddenOperationType().equals(ForbiddenOperationType.FORBIDDEN)) {
-                ForbiddenLog forbiddenLog = new ForbiddenLog();
-                forbiddenLog.setCharId(f);
-                forbiddenLog.setPlayerId(character.getPlayerId());
-                forbiddenLog.setExpireTime(DateUtils.addHours(DateUtils.Now(), forbiddenRequest.getHour()));
-                forbiddenLog.setForbiddenType(forbiddenRequest.getForbiddenType());
-                forbiddenLog.setOperateTime(DateUtils.Now());
-                forbiddenLog.setOperateType(forbiddenRequest.getForbiddenOperationType());
-                forbiddenLog.setReason(forbiddenRequest.getReason());
-                forbiddenLog.setServerId(forbiddenRequest.getServerId());
-                forbiddenLog.setStatus(Status.NORMAL);
-                forbiddenLogService.save(forbiddenLog);
-            } else {
-                forbiddenLogService.removeFobidden(f);
+            result = "OK";
+            if ("OK".equals(result)) {
+                if (forbiddenRequest.getForbiddenOperationType().equals(ForbiddenOperationType.FORBIDDEN)) {
+                    ForbiddenLog forbiddenLog = new ForbiddenLog();
+                    forbiddenLog.setCharId(f);
+                    forbiddenLog.setPlayerId(character.getPlayerId());
+                    forbiddenLog.setExpireTime(DateUtils.addHours(DateUtils.Now(), forbiddenRequest.getHour()));
+                    forbiddenLog.setForbiddenType(forbiddenRequest.getForbiddenType());
+                    forbiddenLog.setOperateTime(DateUtils.Now());
+                    forbiddenLog.setOperateType(forbiddenRequest.getForbiddenOperationType());
+                    forbiddenLog.setReason(forbiddenRequest.getReason());
+                    forbiddenLog.setServerId(forbiddenRequest.getServerId());
+                    forbiddenLog.setStatus(Status.NORMAL);
+                    forbiddenLogService.save(forbiddenLog);
+                } else {
+                    forbiddenLogService.removeFobidden(f);
+                }
             }
         });
 
 
         return new Response().request(forbiddenRequest).json();
+    }
+
+    @RequestMapping(value = "/game/dialog_newmail", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response dialogNewMail() {
+        List<Server> serverList = serverService.searchList();
+
+        return new Response("game/dialog_newmail")
+                .data("mailType", MailType.SERVER)
+                .data("serverList", serverList);
+
+    }
+
+    @RequestMapping(value = "/game/ajax_sendmail", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response ajaxSendMail(SendMailRequest request) {
+        if (request.getServerId() == null || request.getServerId() <= 0) {
+            return new Response(ResultCode.SERVER_ID_INVALID)
+                    .json();
+        }
+        if (request.getMailType().equals(MailType.CHAR) && CollectionUtils.isEmpty(request.getCharNames())) {
+            return new Response(ResultCode.CHARACTER_NAME_INVALID)
+                    .json();
+        }
+        if (request.getMailType().equals(MailType.LEVEL) && (request.getMinLevel() == null && request.getMaxLevel() == null)) {
+            return new Response(ResultCode.CHARACTER_LEVEL_INVALID)
+                    .json();
+        }
+
+        List<Long> charIds = new ArrayList<>();
+        List<PlayerCharacter> playerCharacters = new ArrayList<>();
+
+        request.getCharNames().forEach(charName -> {
+            PlayerCharacter character = playerCharacterService.getByCharName(request.getServerId(), charName);
+            if (character == null) {
+                return;
+            }
+            playerCharacters.add(character);
+            charIds.add(character.getCharId());
+        });
+
+        String result;
+        try {
+            result = adminService.sendMail(new MailQuery(
+                    request.getServerId(),
+                    request.getTitle(),
+                    request.getContent(),
+                    StringUtils.join(charIds, ","),
+                    request.getMinLevel(),
+                    request.getMaxLevel(),
+                    0,
+                    StringUtils.join(request.getRewardNames(), ",")
+            ));
+        } catch (Exception e) {
+            logger.error("发送邮件异常：", e);
+//            return new Response(ResultCode.SEND_MAIL_FAILED.getCode(), e.getMessage())
+//                    .json();
+        }
+        result = "OK";
+        if (!"OK".equals(result)) {
+            logger.error("发送邮件失败：{}", result);
+            return new Response(ResultCode.SEND_MAIL_FAILED.getCode(), result);
+        }
+
+        MailLog mailLog = new MailLog();
+        mailLog.setServerId(request.getServerId());
+        mailLog.setMailType(request.getMailType());
+        mailLog.setTitle(request.getTitle());
+        mailLog.setContent(request.getContent());
+        mailLog.setVocation(0);
+        mailLog.setMinLev(request.getMinLevel());
+        mailLog.setMaxLev(request.getMaxLevel());
+        mailLog.setSender(request.getSender());
+        mailLog.setStatus(Status.NORMAL);
+        mailLogService.save(mailLog);
+
+        mailCharacterService.saveMailCharacters(mailLog.getId(), playerCharacters);
+        mailRewardService.saveMailRewards(mailLog.getId(), request.getRewardNames());
+
+        return new Response().request(request).json();
     }
 }
