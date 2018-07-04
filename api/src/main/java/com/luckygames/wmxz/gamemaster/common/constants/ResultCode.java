@@ -24,7 +24,9 @@ public enum ResultCode {
     SERVER_NOT_FOUND(3000, "区服不存在"),
     SERVER_ID_INVALID(3001, "区服ID错误"),
 
-    SEND_MAIL_FAILED(4001, "发送邮件异常");
+    SEND_MAIL_FAILED(4001, "发送邮件异常"),
+    CONTENT_INVALID(4002, "广播/公告内存错误"),
+    SEND_BROADCAST_FAILED(4003, "发送广播/公告异常");
 
 
     private final int code;

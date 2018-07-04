@@ -1,0 +1,40 @@
+<div class="pageContent">
+    <form method="post" action="game/ajax_sendbroadcast" class="pageForm required-validate"
+          onsubmit="return validateCallback(this, navTabAjaxDone);">
+        <input type="hidden" name="broadcastType" value="AFFICHE">
+        <div class="pageFormContent" layoutH="56">
+            <p>
+                <label>区服筛选(多选)</label>
+                <input type="hidden" name="serverIds"/>
+                <a class="button" href="server/select"
+                   rel="serverselect" mask="true" lookupGroup=""><span>区服筛选</span></a>
+            </p>
+            <p>
+                <label>标题：</label>
+                <input type="text" class="textInput" name="title"/>
+            </p>
+            <div>
+                <label>广播内容：</label>
+                <textarea name="content" class="required textArea" cols="30" rows="4"></textarea>
+            </div>
+        </div>
+        <div class="formBar">
+            <ul>
+                <li>
+                    <div class="buttonActive">
+                        <div class="buttonContent">
+                            <button type="submit">确定</button>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="button">
+                        <div class="buttonContent">
+                            <button type="button" class="close">取消</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </form>
+</div>

@@ -2,18 +2,10 @@ package com.luckygames.wmxz.gamemaster.controller;
 
 import com.luckygames.wmxz.gamemaster.common.constants.ResultCode;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
-import com.luckygames.wmxz.gamemaster.model.entity.ForbiddenLog;
-import com.luckygames.wmxz.gamemaster.model.entity.MailLog;
-import com.luckygames.wmxz.gamemaster.model.entity.PlayerCharacter;
-import com.luckygames.wmxz.gamemaster.model.entity.Server;
-import com.luckygames.wmxz.gamemaster.model.enums.ForbiddenOperationType;
-import com.luckygames.wmxz.gamemaster.model.enums.MailType;
-import com.luckygames.wmxz.gamemaster.model.enums.Status;
+import com.luckygames.wmxz.gamemaster.model.entity.*;
+import com.luckygames.wmxz.gamemaster.model.enums.*;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
-import com.luckygames.wmxz.gamemaster.model.view.request.BanQuery;
-import com.luckygames.wmxz.gamemaster.model.view.request.ForbiddenRequest;
-import com.luckygames.wmxz.gamemaster.model.view.request.MailQuery;
-import com.luckygames.wmxz.gamemaster.model.view.request.SendMailRequest;
+import com.luckygames.wmxz.gamemaster.model.view.request.*;
 import com.luckygames.wmxz.gamemaster.service.*;
 import com.luckygames.wmxz.gamemaster.utils.DateUtils;
 import org.apache.commons.collections4.CollectionUtils;
@@ -42,6 +34,8 @@ public class AllDialogController extends BaseController {
     private MailCharacterService mailCharacterService;
     @Autowired
     private MailRewardService mailRewardService;
+    @Autowired
+    private BroadcastService broadcastService;
 
     @Autowired
     private AdminService adminService;
@@ -192,4 +186,59 @@ public class AllDialogController extends BaseController {
 
         return new Response().request(request).json();
     }
+
+    @RequestMapping(value = "/game/dialog_newbroadcast", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response dialogNewBroadcast(@RequestParam("broadcastType") BroadcastType broadcastType) {
+        List<Server> serverList = serverService.searchList();
+
+        String view = broadcastType.equals(BroadcastType.BROADCAST) ? "game/dialog_newbroadcast" : "game/dialog_newaffiche";
+        return new Response(view)
+                .data("serverList", serverList);
+    }
+
+    @RequestMapping(value = "/game/ajax_sendbroadcast", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response ajaxSendBroadcast(SendBroadcastRequest request) {
+        if (CollectionUtils.isEmpty(request.getServerIds())) {
+            return new Response(ResultCode.SERVER_ID_INVALID).json();
+        }
+
+        if (StringUtils.isBlank(request.getContent())) {
+            return new Response(ResultCode.CONTENT_INVALID).json();
+        }
+
+        request.getServerIds().forEach(id -> {
+            String result = "OK";
+            try {
+                result = adminService.sendBroadcast(new BroadcastQuery(
+                        id,
+                        request.getLoopTimes(),
+                        request.getGameSeconds(),
+                        request.getPlayTime(),
+                        request.getTitle(),
+                        request.getContent()
+                ));
+            } catch (Exception e) {
+                logger.error("发送广播异常：", e);
+                return;
+//                return new Response(ResultCode.SEND_BROADCAST_FAILED.getCode(), e.getMessage())
+//                        .json();
+            }
+
+            result = "OK";
+            if (!"OK".equals(request)) {
+                return;
+            }
+            Broadcast broadcast = new Broadcast();
+            broadcast.setServerId(id);
+            broadcast.setLoopTimes(request.getLoopTimes());
+            broadcast.setPlayTime(request.getPlayTime());
+            broadcast.setTitle(request.getTitle());
+            broadcast.setContent(request.getContent());
+            broadcast.setBroadcastStatus(BroadcastStatus.ENABLED);
+            broadcastService.save(broadcast);
+        });
+
+        return new Response().request(request).json();
+    }
+
 }

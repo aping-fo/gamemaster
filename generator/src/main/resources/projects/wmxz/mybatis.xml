@@ -114,5 +114,13 @@
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
         </table>
+        <table schema="wmxz" tableName="broadcast" domainObjectName="BroadcastEntity">
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
+            <columnOverride column="broadcast_type"
+                            javaType="com.luckygames.wmxz.gamemaster.model.enums.BroadcastType"/>
+            <columnOverride column="broadcast_status"
+                            javaType="com.luckygames.wmxz.gamemaster.model.enums.BroadcastStatus"/>
+        </table>
     </context>
 </generatorConfiguration>
