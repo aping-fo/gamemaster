@@ -1,3 +1,17 @@
+<div class="pageContent">
+    <div class="tabs" currentIndex="2">
+        <div class="tabsHeader">
+            <div class="tabsHeaderContent">
+                <ul>
+                    <li><a href="register/statics_equipment" class="j-ajax" target="navTab"><span>设备数(二期)</span></a></li>
+                    <li><a href="register/statics_register" class="j-ajax" target="navTab"><span>注册数(一期)</span></a></li>
+                    <li><a href="register/statics_character" class="j-ajax" target="navTab"><span>创角数(一期)</span></a></li>
+                    <li><a href="register/statics_character_analysis" class="j-ajax" target="navTab"><span>创角数分析(二期)</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="pageHeader">
     <form id="pagerForm" onsubmit="return navTabSearch(this);" action="register/statics_character" method="post"
           onreset="$(this).find('select.combox').comboxReset()">
@@ -5,13 +19,6 @@
     </form>
 </div>
 <div class="pageContent">
-    <div class="panelBar">
-        <ul class="toolBar">
-            <li>
-                <a class="icon" href="recharge/daily/export" target="dwzExport" targetType="navTab" title="确实要导出这些记录吗?"><span>导出EXCEL</span></a>
-            </li>
-        </ul>
-    </div>
     <table class="table" layoutH="145">
         <thead>
         <tr>

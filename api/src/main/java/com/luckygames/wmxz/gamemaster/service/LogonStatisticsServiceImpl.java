@@ -6,6 +6,7 @@ import com.luckygames.wmxz.gamemaster.dao.LogonStatisticsEntity;
 import com.luckygames.wmxz.gamemaster.dao.mapper.LogonStatisticsMapper;
 import com.luckygames.wmxz.gamemaster.model.entity.LogonStatistics;
 import com.luckygames.wmxz.gamemaster.model.view.request.CommonSearchQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.SigninSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.base.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class LogonStatisticsServiceImpl extends BaseServiceImpl<LogonStatisticsE
     }
 
     @Override
-    public Page<LogonStatistics> searchPage(CommonSearchQuery query) {
+    public Page<LogonStatistics> searchPage(SigninSearchQuery query) {
         if (query.getPageNum() == null) {
             query.setPageNum(1);
         }

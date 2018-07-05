@@ -57,7 +57,7 @@ public class OnlineNowEntitySqlProvider {
         }
         
         if (record.getPlayerIp() != null) {
-            sql.VALUES("player_ip", "#{playerIp,jdbcType=INTEGER}");
+            sql.VALUES("player_ip", "#{playerIp,jdbcType=VARCHAR}");
         }
         
         if (record.getOnline() != null) {
@@ -163,7 +163,7 @@ public class OnlineNowEntitySqlProvider {
         }
         
         if (record.getPlayerIp() != null) {
-            sql.SET("player_ip = #{record.playerIp,jdbcType=INTEGER}");
+            sql.SET("player_ip = #{record.playerIp,jdbcType=VARCHAR}");
         }
         
         if (record.getOnline() != null) {
@@ -213,7 +213,7 @@ public class OnlineNowEntitySqlProvider {
         sql.SET("last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP}");
         sql.SET("max_online_length = #{record.maxOnlineLength,jdbcType=INTEGER}");
         sql.SET("map_id = #{record.mapId,jdbcType=INTEGER}");
-        sql.SET("player_ip = #{record.playerIp,jdbcType=INTEGER}");
+        sql.SET("player_ip = #{record.playerIp,jdbcType=VARCHAR}");
         sql.SET("`online` = #{record.online,jdbcType=INTEGER}");
         sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");

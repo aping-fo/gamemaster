@@ -9,11 +9,6 @@ import com.luckygames.wmxz.gamemaster.service.base.BaseService;
 import java.util.Date;
 
 public interface RechargeFailedOrderService extends BaseService<RechargeFailedOrderEntity> {
-    Page<RechargeFailedOrder> searchPage(RechargeFailedOrderSearchQuery rechargeFailedOrderSearchRequest);
-
-    void generateRechargeFailedOrderReportToday();
-
-    RechargeFailedOrder findOne(Long channelId, Long serverId, Date date);
-
-    void generateRechargeFailedOrderReportByDay(String date);
+    Page<RechargeFailedOrder> searchPage(RechargeFailedOrderSearchQuery query);
+    void delete(int id);
 }

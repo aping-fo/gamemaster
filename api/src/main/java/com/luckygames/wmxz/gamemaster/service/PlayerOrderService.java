@@ -8,4 +8,5 @@ import com.luckygames.wmxz.gamemaster.service.base.BaseService;
 
 public interface PlayerOrderService extends BaseService<PlayerOrderEntity> {
     Page<PlayerOrder> searchPage(PlayerOrderSearchQuery playerOrderSearchQuery);
+    void update(String orderCode);
 }

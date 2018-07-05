@@ -736,62 +736,52 @@ public class GiftpackageSyncEntityExample {
             return (Criteria) this;
         }
 
-        public Criteria andGenerateTypeEqualTo(String value) {
+        public Criteria andGenerateTypeEqualTo(Integer value) {
             addCriterion("generate_type =", value, "generateType");
             return (Criteria) this;
         }
 
-        public Criteria andGenerateTypeNotEqualTo(String value) {
+        public Criteria andGenerateTypeNotEqualTo(Integer value) {
             addCriterion("generate_type <>", value, "generateType");
             return (Criteria) this;
         }
 
-        public Criteria andGenerateTypeGreaterThan(String value) {
+        public Criteria andGenerateTypeGreaterThan(Integer value) {
             addCriterion("generate_type >", value, "generateType");
             return (Criteria) this;
         }
 
-        public Criteria andGenerateTypeGreaterThanOrEqualTo(String value) {
+        public Criteria andGenerateTypeGreaterThanOrEqualTo(Integer value) {
             addCriterion("generate_type >=", value, "generateType");
             return (Criteria) this;
         }
 
-        public Criteria andGenerateTypeLessThan(String value) {
+        public Criteria andGenerateTypeLessThan(Integer value) {
             addCriterion("generate_type <", value, "generateType");
             return (Criteria) this;
         }
 
-        public Criteria andGenerateTypeLessThanOrEqualTo(String value) {
+        public Criteria andGenerateTypeLessThanOrEqualTo(Integer value) {
             addCriterion("generate_type <=", value, "generateType");
             return (Criteria) this;
         }
 
-        public Criteria andGenerateTypeLike(String value) {
-            addCriterion("generate_type like", value, "generateType");
-            return (Criteria) this;
-        }
-
-        public Criteria andGenerateTypeNotLike(String value) {
-            addCriterion("generate_type not like", value, "generateType");
-            return (Criteria) this;
-        }
-
-        public Criteria andGenerateTypeIn(List<String> values) {
+        public Criteria andGenerateTypeIn(List<Integer> values) {
             addCriterion("generate_type in", values, "generateType");
             return (Criteria) this;
         }
 
-        public Criteria andGenerateTypeNotIn(List<String> values) {
+        public Criteria andGenerateTypeNotIn(List<Integer> values) {
             addCriterion("generate_type not in", values, "generateType");
             return (Criteria) this;
         }
 
-        public Criteria andGenerateTypeBetween(String value1, String value2) {
+        public Criteria andGenerateTypeBetween(Integer value1, Integer value2) {
             addCriterion("generate_type between", value1, value2, "generateType");
             return (Criteria) this;
         }
 
-        public Criteria andGenerateTypeNotBetween(String value1, String value2) {
+        public Criteria andGenerateTypeNotBetween(Integer value1, Integer value2) {
             addCriterion("generate_type not between", value1, value2, "generateType");
             return (Criteria) this;
         }

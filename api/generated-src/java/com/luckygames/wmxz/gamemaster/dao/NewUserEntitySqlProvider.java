@@ -76,6 +76,14 @@ public class NewUserEntitySqlProvider {
             sql.VALUES("new_pay_rate", "#{newPayRate,jdbcType=DECIMAL}");
         }
         
+        if (record.getPackageName() != null) {
+            sql.VALUES("package_name", "#{packageName,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getPackageId() != null) {
+            sql.VALUES("package_id", "#{packageId,jdbcType=INTEGER}");
+        }
+        
         return sql.toString();
     }
 
@@ -97,6 +105,8 @@ public class NewUserEntitySqlProvider {
         sql.SELECT("new_user_count");
         sql.SELECT("new_pay_sum");
         sql.SELECT("new_pay_rate");
+        sql.SELECT("package_name");
+        sql.SELECT("package_id");
         sql.FROM("new_user");
         applyWhere(sql, example, false);
         
@@ -162,6 +172,14 @@ public class NewUserEntitySqlProvider {
             sql.SET("new_pay_rate = #{record.newPayRate,jdbcType=DECIMAL}");
         }
         
+        if (record.getPackageName() != null) {
+            sql.SET("package_name = #{record.packageName,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getPackageId() != null) {
+            sql.SET("package_id = #{record.packageId,jdbcType=INTEGER}");
+        }
+        
         applyWhere(sql, example, true);
         return sql.toString();
     }
@@ -182,6 +200,8 @@ public class NewUserEntitySqlProvider {
         sql.SET("new_user_count = #{record.newUserCount,jdbcType=INTEGER}");
         sql.SET("new_pay_sum = #{record.newPaySum,jdbcType=INTEGER}");
         sql.SET("new_pay_rate = #{record.newPayRate,jdbcType=DECIMAL}");
+        sql.SET("package_name = #{record.packageName,jdbcType=VARCHAR}");
+        sql.SET("package_id = #{record.packageId,jdbcType=INTEGER}");
         
         NewUserEntityExample example = (NewUserEntityExample) parameter.get("example");
         applyWhere(sql, example, true);

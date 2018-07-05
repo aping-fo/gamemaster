@@ -38,11 +38,11 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public Page<DataCollection> searchChannelDailyPage(ChannelDataSearchQuery query) {
+    public Page<DataCollection> searchChannelDailyPage(ChannelDataSearchQuery query,Integer type) {
         if (query.getPageNum() == null) {
             query.setPageNum(1);
         }
-        return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> dataCollectionMapper.queryChannelDailyReport(query));
+        return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> dataCollectionMapper.queryChannelDailyReport(query,type));
     }
 
     @Override

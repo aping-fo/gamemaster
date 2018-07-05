@@ -33,48 +33,6 @@ public class RechargeErroneousOrderServiceImpl extends BaseServiceImpl<RechargeE
         if (query.getPageNum() == null) {
             query.setPageNum(1);
         }
-        return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> rechargeErroneousOrderMapper.queryRechargeErroneousOrderReport(query));
+        return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> rechargeErroneousOrderMapper.searchPage(query));
     }
-
-    private void saveRechargeErroneousOrderReport(List<RechargeErroneousOrder> list) {
-        list.forEach(r -> {
-            RechargeErroneousOrder rechargeErroneousOrder = findOne(r.getChannelId(), r.getServerId(), r.getReportDate());
-            if (rechargeErroneousOrder == null) {
-                rechargeErroneousOrder = new RechargeErroneousOrder();
-            }
-            BeanUtils.copyProperties(r, rechargeErroneousOrder);
-            save(rechargeErroneousOrder);
-        });
-    }
-
-    @Override
-    public RechargeErroneousOrder findOne(Long channelId, Long serverId, Date date) {
-        RechargeErroneousOrderExample example = new RechargeErroneousOrderExample();
-        RechargeErroneousOrderExample.Criteria criteria = example.createCriteria();
-        criteria.andStatusEqualTo(Status.NORMAL)
-                .andChannelIdEqualTo(channelId)
-                .andServerIdEqualTo(serverId)
-                .andReportDateEqualTo(date);
-        List<RechargeErroneousOrderEntity> rechargeErroneousOrderList = rechargeErroneousOrderMapper.selectByExample(example);
-        if (rechargeErroneousOrderList == null || rechargeErroneousOrderList.isEmpty()) {
-            return null;
-        }
-        return BeanUtils.copyProperties(rechargeErroneousOrderList.get(0), RechargeErroneousOrder.class);
-    }
-
-    @Override
-    public void generateRechargeErroneousOrderReportToday() {
-        generateRechargeErroneousOrderReportByDay(DateUtils.TodayString());
-    }
-
-
-    @Override
-    public void generateRechargeErroneousOrderReportByDay(String date) {
-        List<RechargeErroneousOrder> list = rechargeErroneousOrderMapper.queryRechargeErroneousOrderReportFromOrderSingleDate(date);
-        if (list == null || list.isEmpty()) {
-            return;
-        }
-        saveRechargeErroneousOrderReport(list);
-    }
-
 }

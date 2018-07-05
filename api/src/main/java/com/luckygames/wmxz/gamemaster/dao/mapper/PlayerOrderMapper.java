@@ -17,4 +17,7 @@ public interface PlayerOrderMapper extends PlayerOrderEntityMapper<PlayerOrderEn
 
     @SelectProvider(type = PlayerOrderSqlProvider.class, method = "queryPlayerOrder")
     List<PlayerOrder> queryPlayerOrder(PlayerOrderSearchQuery query);
+
+    @SelectProvider(type = PlayerOrderSqlProvider.class, method = "update")
+    void update(String orderCode);
 }

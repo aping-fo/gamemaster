@@ -8,6 +8,33 @@ public class GiftpackageSyncSearchQuery extends CommonSearchQuery {
     private Integer type;
     private Long channelId;
     private Long serverId;
+    private Integer id;
+    private Integer generateType;
+    private String operation;
+
+    public String getOperation() {
+        return operation;
+    }
+
+    public void setOperation(String operation) {
+        this.operation = operation;
+    }
+
+    public Integer getGenerateType() {
+        return generateType;
+    }
+
+    public void setGenerateType(Integer generateType) {
+        this.generateType = generateType;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

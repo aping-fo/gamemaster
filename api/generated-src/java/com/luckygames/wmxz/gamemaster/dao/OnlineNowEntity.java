@@ -18,7 +18,7 @@ public class OnlineNowEntity extends BaseEntity {
 
     private Integer mapId;
 
-    private Integer playerIp;
+    private String playerIp;
 
     private Integer online;
 
@@ -78,12 +78,12 @@ public class OnlineNowEntity extends BaseEntity {
         this.mapId = mapId;
     }
 
-    public Integer getPlayerIp() {
+    public String getPlayerIp() {
         return playerIp;
     }
 
-    public void setPlayerIp(Integer playerIp) {
-        this.playerIp = playerIp;
+    public void setPlayerIp(String playerIp) {
+        this.playerIp = playerIp == null ? null : playerIp.trim();
     }
 
     public Integer getOnline() {

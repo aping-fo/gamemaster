@@ -556,52 +556,62 @@ public class OnlineNowEntityExample {
             return (Criteria) this;
         }
 
-        public Criteria andPlayerIpEqualTo(Integer value) {
+        public Criteria andPlayerIpEqualTo(String value) {
             addCriterion("player_ip =", value, "playerIp");
             return (Criteria) this;
         }
 
-        public Criteria andPlayerIpNotEqualTo(Integer value) {
+        public Criteria andPlayerIpNotEqualTo(String value) {
             addCriterion("player_ip <>", value, "playerIp");
             return (Criteria) this;
         }
 
-        public Criteria andPlayerIpGreaterThan(Integer value) {
+        public Criteria andPlayerIpGreaterThan(String value) {
             addCriterion("player_ip >", value, "playerIp");
             return (Criteria) this;
         }
 
-        public Criteria andPlayerIpGreaterThanOrEqualTo(Integer value) {
+        public Criteria andPlayerIpGreaterThanOrEqualTo(String value) {
             addCriterion("player_ip >=", value, "playerIp");
             return (Criteria) this;
         }
 
-        public Criteria andPlayerIpLessThan(Integer value) {
+        public Criteria andPlayerIpLessThan(String value) {
             addCriterion("player_ip <", value, "playerIp");
             return (Criteria) this;
         }
 
-        public Criteria andPlayerIpLessThanOrEqualTo(Integer value) {
+        public Criteria andPlayerIpLessThanOrEqualTo(String value) {
             addCriterion("player_ip <=", value, "playerIp");
             return (Criteria) this;
         }
 
-        public Criteria andPlayerIpIn(List<Integer> values) {
+        public Criteria andPlayerIpLike(String value) {
+            addCriterion("player_ip like", value, "playerIp");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlayerIpNotLike(String value) {
+            addCriterion("player_ip not like", value, "playerIp");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlayerIpIn(List<String> values) {
             addCriterion("player_ip in", values, "playerIp");
             return (Criteria) this;
         }
 
-        public Criteria andPlayerIpNotIn(List<Integer> values) {
+        public Criteria andPlayerIpNotIn(List<String> values) {
             addCriterion("player_ip not in", values, "playerIp");
             return (Criteria) this;
         }
 
-        public Criteria andPlayerIpBetween(Integer value1, Integer value2) {
+        public Criteria andPlayerIpBetween(String value1, String value2) {
             addCriterion("player_ip between", value1, value2, "playerIp");
             return (Criteria) this;
         }
 
-        public Criteria andPlayerIpNotBetween(Integer value1, Integer value2) {
+        public Criteria andPlayerIpNotBetween(String value1, String value2) {
             addCriterion("player_ip not between", value1, value2, "playerIp");
             return (Criteria) this;
         }

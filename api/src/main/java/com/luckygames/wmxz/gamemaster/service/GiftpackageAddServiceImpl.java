@@ -26,17 +26,7 @@ public class GiftpackageAddServiceImpl extends BaseServiceImpl<GiftpackageAddEnt
         GiftpackageAdd giftpackageAdd = new GiftpackageAdd();
         giftpackageAdd.setName(giftpackageAddSearchQuery.getName());
         giftpackageAdd.setDes(giftpackageAddSearchQuery.getDes());
-        giftpackageAdd.setIsbinding(giftpackageAddSearchQuery.getIsBinding());
-        giftpackageAdd.setGoods0Name(giftpackageAddSearchQuery.getGoods0Name());
-        giftpackageAdd.setGoods0Count(giftpackageAddSearchQuery.getGoods0Count());
-        giftpackageAdd.setGoods1Name(giftpackageAddSearchQuery.getGoods1Name());
-        giftpackageAdd.setGoods1Count(giftpackageAddSearchQuery.getGoods1Count());
-        giftpackageAdd.setGoods2Name(giftpackageAddSearchQuery.getGoods2Name());
-        giftpackageAdd.setGoods2Count(giftpackageAddSearchQuery.getGoods2Count());
-        giftpackageAdd.setGoods3Name(giftpackageAddSearchQuery.getGoods3Name());
-        giftpackageAdd.setGoods3Count(giftpackageAddSearchQuery.getGoods3Count());
-        giftpackageAdd.setGoods4Name(giftpackageAddSearchQuery.getGoods4Name());
-        giftpackageAdd.setGoods4Count(giftpackageAddSearchQuery.getGoods4Count());
+        giftpackageAdd.setGoods(giftpackageAddSearchQuery.getGoods());
         create(giftpackageAdd);
     }
 

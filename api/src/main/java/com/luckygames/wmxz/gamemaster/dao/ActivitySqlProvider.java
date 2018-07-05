@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class ActivitySqlProvider {
     public String add(Activity activity) {
-        StringBuilder sql = new StringBuilder("INSERT INTO activity(create_time,update_time,classification,title,start_time,end_time,activity_status,is_open,type,des,sort,creater,auditor,auditor_time) VALUES(now(),now()");
+        StringBuilder sql = new StringBuilder("INSERT INTO activity(create_time,update_time,classification,title,start_time,end_time,activity_status,is_open,type,des,sort,creater,auditor,auditor_time,server_id,channel_id) VALUES(now(),now()");
         sql.append(","+activity.getClassification());
         sql.append(",'"+activity.getTitle()+"'");
         sql.append(",'"+activity.getStartTime()+"'");
@@ -18,6 +18,16 @@ public class ActivitySqlProvider {
         sql.append(",'"+activity.getDes()+"'");
         sql.append(","+activity.getSort());
         sql.append(",'张三','李四',now())");
+        if (activity.getServerId()!=null) {
+            sql.append(","+activity.getServerId());
+        }else{
+            sql.append(",0");
+        }
+        if (activity.getChannelId()!=null) {
+            sql.append(","+activity.getChannelId());
+        }else{
+            sql.append(",0");
+        }
         return sql.toString();
     }
 
@@ -45,6 +55,7 @@ public class ActivitySqlProvider {
         if (StringUtils.isNotBlank(query.getEndDate())) {
             sql.append(" and update_time < #{endDate}  ");
         }
+        sql.append(" GROUP BY server_id");
         return sql.toString();
     }
 }

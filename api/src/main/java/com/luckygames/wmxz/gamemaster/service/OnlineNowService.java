@@ -11,12 +11,4 @@ import java.util.List;
 
 public interface OnlineNowService extends BaseService<OnlineNowEntity> {
     Page<OnlineNow> searchPage(OnlineNowSearchQuery OnlineNowSearchRequest);
-
-    void generateOnlineNowReportToday();
-
-    OnlineNow findOne(Long charId);
-
-    List<OnlineNow> findByOneDate(Date date);
-
-    void generateOnlineNowReportByDay(String date);
 }

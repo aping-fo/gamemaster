@@ -36,20 +36,20 @@ public class RechargeFailedOrderEntitySqlProvider {
             sql.VALUES("order_code", "#{orderCode,jdbcType=VARCHAR}");
         }
         
-        if (record.getServerName() != null) {
-            sql.VALUES("`server_name`", "#{serverName,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getServerId() != null) {
-            sql.VALUES("server_id", "#{serverId,jdbcType=BIGINT}");
+        if (record.getChannelId() != null) {
+            sql.VALUES("channel_id", "#{channelId,jdbcType=BIGINT}");
         }
         
         if (record.getChannelName() != null) {
             sql.VALUES("channel_name", "#{channelName,jdbcType=VARCHAR}");
         }
         
-        if (record.getChannelId() != null) {
-            sql.VALUES("channel_id", "#{channelId,jdbcType=BIGINT}");
+        if (record.getServerName() != null) {
+            sql.VALUES("`server_name`", "#{serverName,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getServerId() != null) {
+            sql.VALUES("server_id", "#{serverId,jdbcType=BIGINT}");
         }
         
         if (record.getUserName() != null) {
@@ -111,10 +111,10 @@ public class RechargeFailedOrderEntitySqlProvider {
             sql.SELECT("id");
         }
         sql.SELECT("order_code");
+        sql.SELECT("channel_id");
+        sql.SELECT("channel_name");
         sql.SELECT("`server_name`");
         sql.SELECT("server_id");
-        sql.SELECT("channel_name");
-        sql.SELECT("channel_id");
         sql.SELECT("user_name");
         sql.SELECT("char_name");
         sql.SELECT("char_level");
@@ -152,20 +152,20 @@ public class RechargeFailedOrderEntitySqlProvider {
             sql.SET("order_code = #{record.orderCode,jdbcType=VARCHAR}");
         }
         
-        if (record.getServerName() != null) {
-            sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getServerId() != null) {
-            sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
+        if (record.getChannelId() != null) {
+            sql.SET("channel_id = #{record.channelId,jdbcType=BIGINT}");
         }
         
         if (record.getChannelName() != null) {
             sql.SET("channel_name = #{record.channelName,jdbcType=VARCHAR}");
         }
         
-        if (record.getChannelId() != null) {
-            sql.SET("channel_id = #{record.channelId,jdbcType=BIGINT}");
+        if (record.getServerName() != null) {
+            sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getServerId() != null) {
+            sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
         }
         
         if (record.getUserName() != null) {
@@ -226,10 +226,10 @@ public class RechargeFailedOrderEntitySqlProvider {
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("order_code = #{record.orderCode,jdbcType=VARCHAR}");
+        sql.SET("channel_id = #{record.channelId,jdbcType=BIGINT}");
+        sql.SET("channel_name = #{record.channelName,jdbcType=VARCHAR}");
         sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");
         sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
-        sql.SET("channel_name = #{record.channelName,jdbcType=VARCHAR}");
-        sql.SET("channel_id = #{record.channelId,jdbcType=BIGINT}");
         sql.SET("user_name = #{record.userName,jdbcType=VARCHAR}");
         sql.SET("char_name = #{record.charName,jdbcType=VARCHAR}");
         sql.SET("char_level = #{record.charLevel,jdbcType=INTEGER}");

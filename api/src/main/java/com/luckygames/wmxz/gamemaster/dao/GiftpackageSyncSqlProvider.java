@@ -19,4 +19,9 @@ public class GiftpackageSyncSqlProvider {
         StringBuilder sql = new StringBuilder("select * from giftpackage_sync");
         return sql.toString();
     }
+
+    public String selectById(Integer id) {
+        StringBuilder sql = new StringBuilder("select * from giftpackage_sync where id = " + id);
+        return sql.toString();
+    }
 }

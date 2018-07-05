@@ -69,7 +69,7 @@ public class GiftpackageSyncEntitySqlProvider {
         }
         
         if (record.getGenerateType() != null) {
-            sql.VALUES("generate_type", "#{generateType,jdbcType=VARCHAR}");
+            sql.VALUES("generate_type", "#{generateType,jdbcType=INTEGER}");
         }
         
         if (record.getStatus() != null) {
@@ -185,7 +185,7 @@ public class GiftpackageSyncEntitySqlProvider {
         }
         
         if (record.getGenerateType() != null) {
-            sql.SET("generate_type = #{record.generateType,jdbcType=VARCHAR}");
+            sql.SET("generate_type = #{record.generateType,jdbcType=INTEGER}");
         }
         
         if (record.getStatus() != null) {
@@ -234,7 +234,7 @@ public class GiftpackageSyncEntitySqlProvider {
         sql.SET("card_count = #{record.cardCount,jdbcType=INTEGER}");
         sql.SET("is_activation = #{record.isActivation,jdbcType=INTEGER}");
         sql.SET("generate_time = #{record.generateTime,jdbcType=TIMESTAMP}");
-        sql.SET("generate_type = #{record.generateType,jdbcType=VARCHAR}");
+        sql.SET("generate_type = #{record.generateType,jdbcType=INTEGER}");
         sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
         sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");

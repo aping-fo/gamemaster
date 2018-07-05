@@ -40,48 +40,8 @@ public class GiftpackageAddEntitySqlProvider {
             sql.VALUES("des", "#{des,jdbcType=VARCHAR}");
         }
         
-        if (record.getIsbinding() != null) {
-            sql.VALUES("isBinding", "#{isbinding,jdbcType=INTEGER}");
-        }
-        
-        if (record.getGoods0Name() != null) {
-            sql.VALUES("goods0_name", "#{goods0Name,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getGoods0Count() != null) {
-            sql.VALUES("goods0_count", "#{goods0Count,jdbcType=INTEGER}");
-        }
-        
-        if (record.getGoods1Name() != null) {
-            sql.VALUES("goods1_name", "#{goods1Name,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getGoods1Count() != null) {
-            sql.VALUES("goods1_count", "#{goods1Count,jdbcType=INTEGER}");
-        }
-        
-        if (record.getGoods2Name() != null) {
-            sql.VALUES("goods2_name", "#{goods2Name,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getGoods2Count() != null) {
-            sql.VALUES("goods2_count", "#{goods2Count,jdbcType=INTEGER}");
-        }
-        
-        if (record.getGoods3Name() != null) {
-            sql.VALUES("goods3_name", "#{goods3Name,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getGoods3Count() != null) {
-            sql.VALUES("goods3_count", "#{goods3Count,jdbcType=INTEGER}");
-        }
-        
-        if (record.getGoods4Name() != null) {
-            sql.VALUES("goods4_name", "#{goods4Name,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getGoods4Count() != null) {
-            sql.VALUES("goods4_count", "#{goods4Count,jdbcType=INTEGER}");
+        if (record.getGoods() != null) {
+            sql.VALUES("goods", "#{goods,jdbcType=VARCHAR}");
         }
         
         if (record.getStatus() != null) {
@@ -124,17 +84,7 @@ public class GiftpackageAddEntitySqlProvider {
         }
         sql.SELECT("`name`");
         sql.SELECT("des");
-        sql.SELECT("isBinding");
-        sql.SELECT("goods0_name");
-        sql.SELECT("goods0_count");
-        sql.SELECT("goods1_name");
-        sql.SELECT("goods1_count");
-        sql.SELECT("goods2_name");
-        sql.SELECT("goods2_count");
-        sql.SELECT("goods3_name");
-        sql.SELECT("goods3_count");
-        sql.SELECT("goods4_name");
-        sql.SELECT("goods4_count");
+        sql.SELECT("goods");
         sql.SELECT("`status`");
         sql.SELECT("server_id");
         sql.SELECT("`server_name`");
@@ -171,48 +121,8 @@ public class GiftpackageAddEntitySqlProvider {
             sql.SET("des = #{record.des,jdbcType=VARCHAR}");
         }
         
-        if (record.getIsbinding() != null) {
-            sql.SET("isBinding = #{record.isbinding,jdbcType=INTEGER}");
-        }
-        
-        if (record.getGoods0Name() != null) {
-            sql.SET("goods0_name = #{record.goods0Name,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getGoods0Count() != null) {
-            sql.SET("goods0_count = #{record.goods0Count,jdbcType=INTEGER}");
-        }
-        
-        if (record.getGoods1Name() != null) {
-            sql.SET("goods1_name = #{record.goods1Name,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getGoods1Count() != null) {
-            sql.SET("goods1_count = #{record.goods1Count,jdbcType=INTEGER}");
-        }
-        
-        if (record.getGoods2Name() != null) {
-            sql.SET("goods2_name = #{record.goods2Name,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getGoods2Count() != null) {
-            sql.SET("goods2_count = #{record.goods2Count,jdbcType=INTEGER}");
-        }
-        
-        if (record.getGoods3Name() != null) {
-            sql.SET("goods3_name = #{record.goods3Name,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getGoods3Count() != null) {
-            sql.SET("goods3_count = #{record.goods3Count,jdbcType=INTEGER}");
-        }
-        
-        if (record.getGoods4Name() != null) {
-            sql.SET("goods4_name = #{record.goods4Name,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getGoods4Count() != null) {
-            sql.SET("goods4_count = #{record.goods4Count,jdbcType=INTEGER}");
+        if (record.getGoods() != null) {
+            sql.SET("goods = #{record.goods,jdbcType=VARCHAR}");
         }
         
         if (record.getStatus() != null) {
@@ -254,17 +164,7 @@ public class GiftpackageAddEntitySqlProvider {
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("`name` = #{record.name,jdbcType=VARCHAR}");
         sql.SET("des = #{record.des,jdbcType=VARCHAR}");
-        sql.SET("isBinding = #{record.isbinding,jdbcType=INTEGER}");
-        sql.SET("goods0_name = #{record.goods0Name,jdbcType=VARCHAR}");
-        sql.SET("goods0_count = #{record.goods0Count,jdbcType=INTEGER}");
-        sql.SET("goods1_name = #{record.goods1Name,jdbcType=VARCHAR}");
-        sql.SET("goods1_count = #{record.goods1Count,jdbcType=INTEGER}");
-        sql.SET("goods2_name = #{record.goods2Name,jdbcType=VARCHAR}");
-        sql.SET("goods2_count = #{record.goods2Count,jdbcType=INTEGER}");
-        sql.SET("goods3_name = #{record.goods3Name,jdbcType=VARCHAR}");
-        sql.SET("goods3_count = #{record.goods3Count,jdbcType=INTEGER}");
-        sql.SET("goods4_name = #{record.goods4Name,jdbcType=VARCHAR}");
-        sql.SET("goods4_count = #{record.goods4Count,jdbcType=INTEGER}");
+        sql.SET("goods = #{record.goods,jdbcType=VARCHAR}");
         sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
         sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");

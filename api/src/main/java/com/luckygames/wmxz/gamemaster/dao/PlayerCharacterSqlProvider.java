@@ -30,6 +30,7 @@ public class PlayerCharacterSqlProvider extends PlayerCharacterEntitySqlProvider
         if (StringUtils.isNotBlank(query.getEndDate())) {
             sql.append(" and cd.report_date < #{endDate} ");
         }
+
         sql.append(" GROUP BY ")
                 .append(" char_id  ")
                 .append(" ) cd ON pc.char_id = cd.char_id ");
@@ -46,7 +47,22 @@ public class PlayerCharacterSqlProvider extends PlayerCharacterEntitySqlProvider
                 sql.append(" and pc.char_id = #{keyword} ");
             }
         }
+        if (StringUtils.isNotBlank(query.getSex())) {
+            sql.append(" and pc.sex = #{sex} ");
+        }
 
+        if (StringUtils.isNotBlank(query.getJob())) {
+            sql.append(" and pc.job = #{job} ");
+        }
+
+        if (query.getChannelIds() != null && !query.getChannelIds().isEmpty()) {
+            String ids = StringUtils.join(query.getChannelIds(), ",");
+            sql.append(" and p.channel_id in (").append(ids).append(") ");
+        }
+        if (query.getServerIds() != null && !query.getServerIds().isEmpty()) {
+            String ids = StringUtils.join(query.getServerIds(), ",");
+            sql.append(" and pc.server_id in (").append(ids).append(") ");
+        }
 
         return sql.toString();
     }
@@ -98,14 +114,14 @@ public class PlayerCharacterSqlProvider extends PlayerCharacterEntitySqlProvider
             sql.append(" and pc.level >= #{levelStart} ");
         }
         if (query.getLevelEnd() != null && query.getLevelEnd() > 0) {
-            sql.append(" and pc.level < #{levelEnd} ");
+            sql.append(" and pc.level <= #{levelEnd} ");
         }
 
         if (query.getGoldStart() != null && query.getGoldStart() > 0) {
             sql.append(" and pc.left_gold >= #{goldStart} ");
         }
         if (query.getGoldEnd() != null && query.getGoldEnd() > 0) {
-            sql.append(" and pc.left_gold < #{goldEnd} ");
+            sql.append(" and pc.left_gold <= #{goldEnd} ");
         }
 
 

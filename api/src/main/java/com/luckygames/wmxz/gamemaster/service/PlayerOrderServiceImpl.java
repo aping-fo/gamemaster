@@ -25,6 +25,11 @@ public class PlayerOrderServiceImpl extends BaseServiceImpl<PlayerOrderEntity> i
     }
 
     @Override
+    public void update(String orderCode) {
+        playerOrderMapper.update(orderCode);
+    }
+
+    @Override
     public Mapper<PlayerOrderEntity> getMapper() {
         return this.playerOrderMapper;
     }

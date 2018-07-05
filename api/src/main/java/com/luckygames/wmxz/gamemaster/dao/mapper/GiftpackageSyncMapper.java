@@ -16,4 +16,7 @@ public interface GiftpackageSyncMapper extends GiftpackageSyncEntityMapper<Giftp
 
     @SelectProvider(type = GiftpackageSyncSqlProvider.class, method = "queryGiftpackageSyncReport")
     List<GiftpackageSync> queryGiftpackageSyncReport(GiftpackageSyncSearchQuery query);
+
+    @SelectProvider(type = GiftpackageSyncSqlProvider.class, method = "selectById")
+    GiftpackageSync selectById(Integer id);
 }

@@ -21,7 +21,7 @@ public class RechargeErroneousOrderEntity extends BaseEntity {
 
     private BigDecimal amount;
 
-    private String errorMessage;
+    private Integer errorMessage;
 
     private Long channelId;
 
@@ -87,12 +87,12 @@ public class RechargeErroneousOrderEntity extends BaseEntity {
         this.amount = amount;
     }
 
-    public String getErrorMessage() {
+    public Integer getErrorMessage() {
         return errorMessage;
     }
 
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage == null ? null : errorMessage.trim();
+    public void setErrorMessage(Integer errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
     public Long getChannelId() {

@@ -14,11 +14,11 @@ import tk.mybatis.mapper.common.Mapper;
 @Service("RegisteredDataService")
 public class RegisteredDataServiceImpl extends BaseServiceImpl<RegisteredDataEntity> implements RegisteredDataService {
     @Autowired
-    private RegisteredDataMapper RegisteredDataMapper;
+    private RegisteredDataMapper registeredDataMapper;
 
     @Override
     public Mapper<RegisteredDataEntity> getMapper() {
-        return RegisteredDataMapper;
+        return registeredDataMapper;
     }
 
     @Override
@@ -26,11 +26,6 @@ public class RegisteredDataServiceImpl extends BaseServiceImpl<RegisteredDataEnt
         if (query.getPageNum() == null) {
             query.setPageNum(1);
         }
-        return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> RegisteredDataMapper.searchPage(query));
-    }
-
-    @Override
-    public void save(RegisteredData registeredData) {
-        RegisteredDataMapper.save(registeredData);
+        return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> registeredDataMapper.searchPage(query));
     }
 }

@@ -6,6 +6,7 @@ import com.luckygames.wmxz.gamemaster.model.entity.LogonStatistics;
 import com.luckygames.wmxz.gamemaster.model.entity.StaticsSummary;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
 import com.luckygames.wmxz.gamemaster.model.view.request.CommonSearchQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.SigninSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.LogonStatisticsService;
 import com.luckygames.wmxz.gamemaster.service.ReportService;
 import com.luckygames.wmxz.gamemaster.service.StaticsSummaryService;
@@ -23,6 +24,7 @@ public class StaticsController extends BaseController {
     @Autowired
     private LogonStatisticsService logonStatisticsService;
 
+    //数据汇总
     @RequestMapping("summary")
     public Response Summary(CommonSearchQuery query) {
         if (query.getPageNum() == null) {
@@ -38,10 +40,10 @@ public class StaticsController extends BaseController {
 
     //登录统计
     @RequestMapping("signin")
-    public Response signinStatics(CommonSearchQuery query) {
+    public Response signinStatics(SigninSearchQuery query) {
         Page<LogonStatistics> logonStatisticsPage = logonStatisticsService.searchPage(query);
         return new Response("statics/signin")
                 .request(query)
-                .data("logonStatisticsList", logonStatisticsPage);
+                .data("list", logonStatisticsPage);
     }
 }

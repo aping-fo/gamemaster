@@ -10,4 +10,8 @@ public interface GiftpackageSyncService extends BaseService<GiftpackageSyncEntit
     void addGiftpackage(GiftpackageSyncSearchQuery giftpackageSyncSearchRequest);
 
     Page<GiftpackageSync> searchPage(GiftpackageSyncSearchQuery GiftpackageSyncSearchRequest);
+
+    void delete(int id);
+
+    GiftpackageSync searchById(Integer id);
 }

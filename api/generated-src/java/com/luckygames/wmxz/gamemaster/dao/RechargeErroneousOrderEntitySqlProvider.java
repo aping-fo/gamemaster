@@ -61,7 +61,7 @@ public class RechargeErroneousOrderEntitySqlProvider {
         }
         
         if (record.getErrorMessage() != null) {
-            sql.VALUES("error_message", "#{errorMessage,jdbcType=VARCHAR}");
+            sql.VALUES("error_message", "#{errorMessage,jdbcType=INTEGER}");
         }
         
         if (record.getStatus() != null) {
@@ -167,7 +167,7 @@ public class RechargeErroneousOrderEntitySqlProvider {
         }
         
         if (record.getErrorMessage() != null) {
-            sql.SET("error_message = #{record.errorMessage,jdbcType=VARCHAR}");
+            sql.SET("error_message = #{record.errorMessage,jdbcType=INTEGER}");
         }
         
         if (record.getStatus() != null) {
@@ -214,7 +214,7 @@ public class RechargeErroneousOrderEntitySqlProvider {
         sql.SET("char_id = #{record.charId,jdbcType=BIGINT}");
         sql.SET("char_name = #{record.charName,jdbcType=VARCHAR}");
         sql.SET("amount = #{record.amount,jdbcType=DECIMAL}");
-        sql.SET("error_message = #{record.errorMessage,jdbcType=VARCHAR}");
+        sql.SET("error_message = #{record.errorMessage,jdbcType=INTEGER}");
         sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("channel_id = #{record.channelId,jdbcType=BIGINT}");
         sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");

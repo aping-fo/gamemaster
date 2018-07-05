@@ -1,17 +1,60 @@
 <div xmlns:th="http://www.w3.org/1999/xhtml" class="pageHeader">
     <form id="pagerForm" onsubmit="return navTabSearch(this);" action="paid/newuser" method="post"
           onreset="$(this).find('select.combox').comboxReset()">
-        <div th:replace="_include/searchBar"></div>
+        <div th:fragment="searchBar">
+            <input type="hidden" name="serverIds" th:value="${#strings.listJoin(request.serverIds,',')}"/>
+            <input type="hidden" name="channelIds" th:value="${#strings.listJoin(request.channelIds,',')}"/>
+            <input type="hidden" name="orderField" th:value="${request.orderField}"/>
+            <input type="hidden" name="orderDirection" th:value="${request.orderDirection}"/>
+            <input type="hidden" name="pageNum" th:value="${Pager.pageNum}"/>
+            <input type="hidden" name="pageSize" th:value="${Pager.pageSize}"/>
+            <div class="searchBar">
+                <table class="searchContent">
+                    <tr>
+                        <td>
+                            <div>
+                                <div class="buttonContent">
+                                    <a class="button" href="server/select"
+                                       rel="serverselect" mask="true" lookupGroup=""><span>区服筛选</span></a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <div class="buttonContent">
+                                    <a class="button" href="channel/select"
+                                       rel="channelselect" mask="true" lookupGroup=""><span>渠道筛选</span></a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>包:
+                            <select name="packageId">
+                                <option value="1">测试1</option>
+                                <option value="2">测试2</option>
+                            </select>
+                        </td>
+                        <td class="dateRange">
+                            日期:
+                            <input name="startDate" class="date readonly" readonly="readonly" type="text" value=""
+                                   th:value="${request.startDate}">
+                            <span class="limit">-</span>
+                            <input name="endDate" class="date readonly" readonly="readonly" type="text" value=""
+                                   th:value="${request.endDate}">
+                        </td>
+                        <td>
+                            <div class="buttonActive">
+                                <div class="buttonContent">
+                                    <button type="submit">检索</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </form>
 </div>
 <div class="pageContent">
-    <div class="panelBar">
-        <ul class="toolBar">
-            <li>
-                <a class="icon" href="recharge/daily/export" target="dwzExport" targetType="navTab" title="确实要导出这些记录吗?"><span>导出EXCEL</span></a>
-            </li>
-        </ul>
-    </div>
     <table class="table" width="100%" layoutH="137">
         <thead>
         <tr>
@@ -23,13 +66,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="row,iterStat:${newUserList}">
+        <tr th:if="${list.size()!=0}" th:each="row,iterStat:${list}">
             <td th:text="${#dates.format(row.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
             <td th:text="${row.firstChargeCount}"></td>
             <td th:text="${row.newUserCount}"></td>
             <td th:text="${row.newPaySum}"></td>
             <td th:text="${#strings.append(#strings.substring(row.newPayRate*100,0,#strings.length(row.newPayRate*100)-2),'%')}"></td>
         </tr>
+        <tr th:if="${list.size()==0}"><td colspan="11" style="text-align: center">暂无数据</td></tr>
         </tbody>
     </table>
     <div th:replace="_include/pager"></div>

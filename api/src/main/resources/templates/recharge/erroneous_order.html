@@ -35,7 +35,9 @@
             <td th:text="${row.userName}"></td>
             <td th:text="${row.charId}"></td>
             <td th:text="${row.amount}"></td>
-            <td th:text="${row.errorMessage}"></td>
+            <td th:if="${row.errorMessage==1}" th:text="签名错误"></td>
+            <td th:if="${row.errorMessage==2}" th:text="签名失败"></td>
+            <td th:if="${row.errorMessage==3}" th:text="订单已存在"></td>
             <td th:text="${#dates.format(row.reportDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
         </tr>
         <tr th:if="${list.size()==0}"><td colspan="11" style="text-align: center">暂无数据</td></tr>

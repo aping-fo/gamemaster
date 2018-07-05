@@ -36,6 +36,10 @@ public class LogonStatisticsEntity extends BaseEntity {
 
     private Integer oldPlayerEquipment;
 
+    private String packageName;
+
+    private Integer packageId;
+
     public Long getServerId() {
         return serverId;
     }
@@ -154,5 +158,21 @@ public class LogonStatisticsEntity extends BaseEntity {
 
     public void setOldPlayerEquipment(Integer oldPlayerEquipment) {
         this.oldPlayerEquipment = oldPlayerEquipment;
+    }
+
+    public String getPackageName() {
+        return packageName;
+    }
+
+    public void setPackageName(String packageName) {
+        this.packageName = packageName == null ? null : packageName.trim();
+    }
+
+    public Integer getPackageId() {
+        return packageId;
+    }
+
+    public void setPackageId(Integer packageId) {
+        this.packageId = packageId;
     }
 }

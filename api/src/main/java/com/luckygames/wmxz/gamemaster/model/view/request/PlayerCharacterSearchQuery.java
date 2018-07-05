@@ -9,6 +9,15 @@ public class PlayerCharacterSearchQuery extends CommonSearchQuery {
     private Integer goldStart;
     private Integer goldEnd;
     private String job;
+    private Integer charId;
+
+    public Integer getCharId() {
+        return charId;
+    }
+
+    public void setCharId(Integer charId) {
+        this.charId = charId;
+    }
 
     public String getSex() {
         return sex;

@@ -10,10 +10,6 @@ import org.apache.ibatis.annotations.SelectProvider;
 import java.util.List;
 
 public interface RechargeFailedOrderMapper extends RechargeFailedOrderEntityMapper<RechargeFailedOrderEntity> {
-
-    @SelectProvider(type = RechargeFailedOrderSqlProvider.class, method = "queryRechargeFailedOrderReportFromOrderSingleDate")
-    List<RechargeFailedOrder> queryRechargeFailedOrderReportFromOrderSingleDate(String singleDate);
-
-    @SelectProvider(type = RechargeFailedOrderSqlProvider.class, method = "queryRechargeFailedOrderReport")
-    List<RechargeFailedOrder> queryRechargeFailedOrderReport(RechargeFailedOrderSearchQuery query);
+    @SelectProvider(type = RechargeFailedOrderSqlProvider.class, method = "searchPage")
+    List<RechargeFailedOrder> searchPage(RechargeFailedOrderSearchQuery query);
 }

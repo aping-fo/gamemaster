@@ -90,7 +90,7 @@ public class PayRetentionRateSqlProvider {
     }
 
     public String searchPage(CommonSearchQuery query) {
-        StringBuilder sql = new StringBuilder("SELECT report_date,IFNULL(user_count,0) user_count,IFNULL(one_day,0) one_day,IFNULL(two_day,0) two_day,IFNULL(three_day,0) three_day,IFNULL(four_day,0) four_day,IFNULL(five_day,0) five_day,IFNULL(six_day,0) six_day,IFNULL(seven_day,0) seven_day,IFNULL(two_weeks,0) two_weeks, IFNULL(one_month,0) one_month FROM pay_retention_rate where 1=1");
+        StringBuilder sql = new StringBuilder("SELECT id,report_date,IFNULL(user_count,0) user_count,IFNULL(one_day,0) one_day,IFNULL(two_day,0) two_day,IFNULL(three_day,0) three_day,IFNULL(four_day,0) four_day,IFNULL(five_day,0) five_day,IFNULL(six_day,0) six_day,IFNULL(seven_day,0) seven_day,IFNULL(two_weeks,0) two_weeks, IFNULL(one_month,0) one_month FROM pay_retention_rate where 1=1");
 
         if (query.getChannelIds() != null && !query.getChannelIds().isEmpty()) {
             String ids = StringUtils.join(query.getChannelIds(), ",");
@@ -102,11 +102,12 @@ public class PayRetentionRateSqlProvider {
         }
 
         if (StringUtils.isNotBlank(query.getStartDate())) {
-            sql.append(" and report_date >= #{startDate}  ");
+            sql.append(" and DATE_FORMAT(report_date,'%Y-%m-%d') >= #{startDate}  ");
         }
         if (StringUtils.isNotBlank(query.getEndDate())) {
-            sql.append(" and report_date < #{endDate}  ");
+            sql.append(" and DATE_FORMAT(report_date,'%Y-%m-%d') <= #{endDate}  ");
         }
+        sql.append(" order by report_date desc");
         return sql.toString();
     }
 }

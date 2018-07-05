@@ -9,4 +9,7 @@ import org.apache.ibatis.annotations.SelectProvider;
 public interface BaseInformationMapper extends BaseInformationEntityMapper<BaseInformationEntity> {
     @SelectProvider(type = BaseInformationSqlProvider.class, method = "searchById")
     BaseInformation searchById(Integer charId);
+
+    @SelectProvider(type = BaseInformationSqlProvider.class, method = "updateByCharId")
+    void updateByCharId(BaseInformation baseInformation);
 }

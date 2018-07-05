@@ -14,11 +14,11 @@ import java.util.List;
 @Service("IntegratedOnlineService")
 public class IntegratedOnlineServiceImpl extends BaseServiceImpl<IntegratedOnlineEntity> implements IntegratedOnlineService {
     @Autowired
-    private IntegratedOnlineMapper IntegratedOnlineMapper;
+    private IntegratedOnlineMapper integratedOnlineMapper;
 
     @Override
     public Mapper<IntegratedOnlineEntity> getMapper() {
-        return IntegratedOnlineMapper;
+        return integratedOnlineMapper;
     }
 
     @Override
@@ -26,6 +26,6 @@ public class IntegratedOnlineServiceImpl extends BaseServiceImpl<IntegratedOnlin
         if (query.getPageNum() == null) {
             query.setPageNum(1);
         }
-        return IntegratedOnlineMapper.searchPage(query);
+        return integratedOnlineMapper.searchPage(query);
     }
 }

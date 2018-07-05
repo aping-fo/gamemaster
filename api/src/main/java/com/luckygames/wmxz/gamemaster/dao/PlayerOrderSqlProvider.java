@@ -4,6 +4,11 @@ import com.luckygames.wmxz.gamemaster.model.view.request.PlayerOrderSearchQuery;
 import org.apache.commons.lang3.StringUtils;
 
 public class PlayerOrderSqlProvider {
+    public String update(String orderCode) {
+        StringBuilder sql = new StringBuilder("update player_order set status = 1 where order_code = '"+orderCode+"'");
+        return sql.toString();
+    }
+
     public String queryPlayerOrder(PlayerOrderSearchQuery query) {
         StringBuilder sql = new StringBuilder("select po.* ")
                 .append(" ,p.username username ")
@@ -46,7 +51,6 @@ public class PlayerOrderSqlProvider {
         if (query.getGoldTo() != null) {
             sql.append(" and po.gold_quantity <=#{goldTo} ");
         }
-
         return sql.toString();
     }
 }

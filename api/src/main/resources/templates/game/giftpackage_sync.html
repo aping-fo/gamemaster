@@ -1,3 +1,13 @@
+<div class="tabs" currentIndex="1">
+    <div class="tabsHeader">
+        <div class="tabsHeaderContent">
+            <ul>
+                <li><a href="game/giftpackage_add" class="j-ajax" target="navTab"><span>添加礼包</span></a></li>
+                <li><a href="game/giftpackage_sync" class="j-ajax" target="navTab"><span>同步礼包</span></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
 <div xmlns:th="http://www.w3.org/1999/xhtml" class="pageHeader">
     <form id="pagerForm" onsubmit="return navTabSearch(this);" action="game/giftpackage_sync" method="post"
           onreset="$(this).find('select.combox').comboxReset()">
@@ -6,34 +16,31 @@
                 <tr>
                     <td>类型：
                         <select name="name">
-                            <option th:each="row,iterStat:${typeList}" th:text="${row.name}"
-                                    th:value="${row.name}"></option>
+                            <option th:each="row,iterStat:${typeList}" th:text="${row.name}" th:value="${row.name}"></option>
                         </select>
-                    <td>数量：<input name="count" type="text" size="15"></td>
+                    <td>数量：<input name="count" type="number"></td>
                     <td>卡号有效期：
-                        <input name="minTermValidity" type="text" size="15" class="date readonly" readonly="readonly">到:
-                        <input name="maxTermValidity" type="text" size="15" class="date readonly" readonly="readonly">
+                        <input name="minTermValidity" type="text" class="date readonly" readonly="readonly">
+                        <span class="limit">-</span>
+                        <input name="maxTermValidity" type="text" class="date readonly" readonly="readonly">
                     </td>
                     <td>
-                        <select name="type">
+                        <select name="generateType">
                             <option value="1">同一类型只能使用1个卡号</option>
                             <option value="2">同一类型可以使用多个激活码</option>
                             <option value="3">特殊礼包</option>
                         </select>
                     </td>
-                </tr>
-                <tr>
-                    <td th:each="row,iterStat:${channelList}">
-                        <input name="channelId" type="checkbox" th:value="${row.channelId}"
-                               th:text="${row.channelName}">
+                    <td>
+                        <select name="channelId">
+                            <option th:each="row,iterStat:${channelList}" th:text="${row.channelName}" th:value="${row.channelId}"></option>
+                        </select>
                     </td>
-                </tr>
-                <tr>
-                    <td th:each="row,iterStat:${serverList}">
-                        <input name="serverId" type="checkbox" th:value="${row.serverId}" th:text="${row.serverName}">
+                    <td>
+                        <select name="serverId">
+                            <option th:each="row,iterStat:${serverList}" th:text="${row.serverName}" th:value="${row.serverId}"></option>
+                        </select>
                     </td>
-                </tr>
-                <tr>
                     <td><input type="submit" value="生成"></td>
                 </tr>
             </table>
@@ -41,46 +48,67 @@
     </form>
 </div>
 <div class="pageContent">
-    <div class="panelBar">
-        <ul class="toolBar">
-            <li>
-                <a class="icon" href="recharge/daily/export" target="dwzExport" targetType="navTab" title="确实要导出这些记录吗?"><span>导出EXCEL</span></a>
-            </li>
-        </ul>
-    </div>
     <table class="table" width="100%" layoutH="137">
         <thead>
-        <tr>
-            <th width="100">卡号文件</th>
-            <th width="100">礼包活动id</th>
-            <th width="100">有效期</th>
-            <th width="100">渠道</th>
-            <th width="100">区服</th>
-            <th width="100">是否独家礼包</th>
-            <th width="100">卡号类型</th>
-            <th width="100">卡号数量</th>
-            <th width="100">未激活</th>
-            <th width="100">生成时间</th>
-            <th width="100">生成类型</th>
-            <th width="100">删除</th>
+        <tr id="title">
+            <th>卡号文件</th>
+            <th>礼包活动id</th>
+            <th>生效时间</th>
+            <th>过期时间</th>
+            <th>渠道</th>
+            <th>区服</th>
+            <th>是否独家礼包</th>
+            <th>卡号类型</th>
+            <th>卡号数量</th>
+            <th>未激活</th>
+            <th>生成时间</th>
+            <th>生成类型</th>
+            <th>删除</th>
+            <th>下载</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="row,iterStat:${giftPackageList}">
+        <tr th:if="${list.size()!=0}" th:each="row,iterStat:${list}">
             <td th:text="${row.cardFile}"></td>
             <td th:text="${row.activityId}"></td>
-            <td th:text="${#dates.format(row.minTermValidity, 'yyyy-MM-dd HH:mm:ss')}+'--'+${#dates.format(row.maxTermValidity, 'yyyy-MM-dd HH:mm:ss')}"></td>
-            <td th:text="${row.channelId}"></td>
-            <td th:text="${row.serverId}"></td>
-            <td th:text="${row.isActivation}"></td>
+            <td th:text="${#dates.format(row.minTermValidity, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${#dates.format(row.maxTermValidity, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${row.channelName}"></td>
+            <td th:text="${row.serverName}"></td>
+            <td th:if="${row.isExclusiveGiftbag==0}" th:text="否"></td>
+            <td th:if="${row.isExclusiveGiftbag==1}" th:text="是"></td>
             <td th:text="${row.cardType}"></td>
             <td th:text="${row.cardCount}"></td>
-            <td th:text="${row.isActivation}"></td>
+            <td th:if="${row.isActivation==0}" th:text="否"></td>
+            <td th:if="${row.isActivation==1}" th:text="是"></td>
             <td th:text="${#dates.format(row.generateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-            <td th:text="${row.generateType}"></td>
-            <td><input type="button" value="删除"/></td>
+            <td th:if="${row.generateType==1}" th:text="同一类型只能使用1个卡号"></td>
+            <td th:if="${row.generateType==2}" th:text="同一类型可以使用多个激活码"></td>
+            <td th:if="${row.generateType==3}" th:text="特殊礼包"></td>
+            <td><a class="button" th:href="@{game/giftpackage_sync(id=${row.id})}" target="navTab"><span>删除</span></a></td>
+            <!--<td><a class="button" th:href="@{game/download1(id=${row.id})}" target="navTab"><span>下载</span></a></td>-->
+            <td>
+                <a class="button" onclick="test(this)"><span>下载</span></a>
+                <input type="hidden" th:value="${row.id}"/>
+                <input type="hidden" th:value="${row.cardFile}"/>
+            </td>
         </tr>
+        <tr th:if="${list.size()==0}"><td colspan="11" style="text-align: center">暂无数据</td></tr>
         </tbody>
     </table>
     <div th:replace="_include/pager"></div>
 </div>
+<script type="text/javascript">
+    function test(flag) {
+        var id=$(flag).next().val();
+        var filename=$(flag).next().next().val();
+
+        var title=new Array();
+        var titles=$('#title th');
+        for(var i=0; i<titles.length-2; i++){
+            title.push(titles.eq(i).text());
+        }
+
+        $(flag).attr("href","game/download?id="+id+"&filename="+filename+"&title="+title);
+    }
+</script>

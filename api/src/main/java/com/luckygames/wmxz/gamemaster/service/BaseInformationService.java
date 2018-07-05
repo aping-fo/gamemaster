@@ -6,4 +6,5 @@ import com.luckygames.wmxz.gamemaster.service.base.BaseService;
 
 public interface BaseInformationService extends BaseService<BaseInformationEntity> {
     BaseInformation searchById(Integer charId);
+    void updateByCharId(BaseInformation baseInformation);
 }

@@ -11,6 +11,12 @@ import java.util.Map;
  */
 public interface AdminService {
     /**
+     * 聊天监控
+     * @param conten
+     * @return
+     */
+    public  String chatMonitoring(GMQuery conten);
+    /**
      * 公告
      *
      * @param content

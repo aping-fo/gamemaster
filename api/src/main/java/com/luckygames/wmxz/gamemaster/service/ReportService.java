@@ -10,7 +10,7 @@ public interface ReportService {
 
     Page<DataCollection> searchChannelDataPage(ChannelDataSearchQuery query);
 
-    Page<DataCollection> searchChannelDailyPage(ChannelDataSearchQuery query);
+    Page<DataCollection> searchChannelDailyPage(ChannelDataSearchQuery query,Integer type);
     DataCollection findOne(Long channelId, Long serverId, String date);
     void generateDataCollectionReportToday();
 }

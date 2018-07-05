@@ -13,7 +13,4 @@ public interface RegisteredDataMapper extends RegisteredDataEntityMapper<Registe
 
     @SelectProvider(type = RegisteredDataSqlProvider.class, method = "searchPage")
     List<RegisteredData> searchPage(CommonSearchQuery query);
-
-    @SelectProvider(type = RegisteredDataSqlProvider.class, method = "save")
-    List<RegisteredData> save(RegisteredData registeredData);
 }

@@ -136,6 +136,22 @@ public class DataCollectionEntitySqlProvider {
             sql.VALUES("update_time", "#{updateTime,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getChannelName() != null) {
+            sql.VALUES("channel_name", "#{channelName,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getServerName() != null) {
+            sql.VALUES("`server_name`", "#{serverName,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getPackageName() != null) {
+            sql.VALUES("package_name", "#{packageName,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getPackageId() != null) {
+            sql.VALUES("package_id", "#{packageId,jdbcType=INTEGER}");
+        }
+        
         return sql.toString();
     }
 
@@ -172,6 +188,10 @@ public class DataCollectionEntitySqlProvider {
         sql.SELECT("`status`");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
+        sql.SELECT("channel_name");
+        sql.SELECT("`server_name`");
+        sql.SELECT("package_name");
+        sql.SELECT("package_id");
         sql.FROM("comprehensive_report_data_collection");
         applyWhere(sql, example, false);
         
@@ -297,6 +317,22 @@ public class DataCollectionEntitySqlProvider {
             sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getChannelName() != null) {
+            sql.SET("channel_name = #{record.channelName,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getServerName() != null) {
+            sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getPackageName() != null) {
+            sql.SET("package_name = #{record.packageName,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getPackageId() != null) {
+            sql.SET("package_id = #{record.packageId,jdbcType=INTEGER}");
+        }
+        
         applyWhere(sql, example, true);
         return sql.toString();
     }
@@ -332,6 +368,10 @@ public class DataCollectionEntitySqlProvider {
         sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
+        sql.SET("channel_name = #{record.channelName,jdbcType=VARCHAR}");
+        sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");
+        sql.SET("package_name = #{record.packageName,jdbcType=VARCHAR}");
+        sql.SET("package_id = #{record.packageId,jdbcType=INTEGER}");
         
         DataCollectionEntityExample example = (DataCollectionEntityExample) parameter.get("example");
         applyWhere(sql, example, true);

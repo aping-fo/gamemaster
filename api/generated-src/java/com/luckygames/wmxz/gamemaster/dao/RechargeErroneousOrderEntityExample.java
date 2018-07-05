@@ -647,62 +647,52 @@ public class RechargeErroneousOrderEntityExample {
             return (Criteria) this;
         }
 
-        public Criteria andErrorMessageEqualTo(String value) {
+        public Criteria andErrorMessageEqualTo(Integer value) {
             addCriterion("error_message =", value, "errorMessage");
             return (Criteria) this;
         }
 
-        public Criteria andErrorMessageNotEqualTo(String value) {
+        public Criteria andErrorMessageNotEqualTo(Integer value) {
             addCriterion("error_message <>", value, "errorMessage");
             return (Criteria) this;
         }
 
-        public Criteria andErrorMessageGreaterThan(String value) {
+        public Criteria andErrorMessageGreaterThan(Integer value) {
             addCriterion("error_message >", value, "errorMessage");
             return (Criteria) this;
         }
 
-        public Criteria andErrorMessageGreaterThanOrEqualTo(String value) {
+        public Criteria andErrorMessageGreaterThanOrEqualTo(Integer value) {
             addCriterion("error_message >=", value, "errorMessage");
             return (Criteria) this;
         }
 
-        public Criteria andErrorMessageLessThan(String value) {
+        public Criteria andErrorMessageLessThan(Integer value) {
             addCriterion("error_message <", value, "errorMessage");
             return (Criteria) this;
         }
 
-        public Criteria andErrorMessageLessThanOrEqualTo(String value) {
+        public Criteria andErrorMessageLessThanOrEqualTo(Integer value) {
             addCriterion("error_message <=", value, "errorMessage");
             return (Criteria) this;
         }
 
-        public Criteria andErrorMessageLike(String value) {
-            addCriterion("error_message like", value, "errorMessage");
-            return (Criteria) this;
-        }
-
-        public Criteria andErrorMessageNotLike(String value) {
-            addCriterion("error_message not like", value, "errorMessage");
-            return (Criteria) this;
-        }
-
-        public Criteria andErrorMessageIn(List<String> values) {
+        public Criteria andErrorMessageIn(List<Integer> values) {
             addCriterion("error_message in", values, "errorMessage");
             return (Criteria) this;
         }
 
-        public Criteria andErrorMessageNotIn(List<String> values) {
+        public Criteria andErrorMessageNotIn(List<Integer> values) {
             addCriterion("error_message not in", values, "errorMessage");
             return (Criteria) this;
         }
 
-        public Criteria andErrorMessageBetween(String value1, String value2) {
+        public Criteria andErrorMessageBetween(Integer value1, Integer value2) {
             addCriterion("error_message between", value1, value2, "errorMessage");
             return (Criteria) this;
         }
 
-        public Criteria andErrorMessageNotBetween(String value1, String value2) {
+        public Criteria andErrorMessageNotBetween(Integer value1, Integer value2) {
             addCriterion("error_message not between", value1, value2, "errorMessage");
             return (Criteria) this;
         }

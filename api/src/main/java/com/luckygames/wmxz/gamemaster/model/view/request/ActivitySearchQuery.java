@@ -1,8 +1,19 @@
 package com.luckygames.wmxz.gamemaster.model.view.request;
 
+import com.luckygames.wmxz.gamemaster.model.entity.Activity;
+
 public class ActivitySearchQuery extends CommonSearchQuery {
     private Integer activityStatus;
     private  Integer id;
+    private Activity activity;
+
+    public Activity getActivity() {
+        return activity;
+    }
+
+    public void setActivity(Activity activity) {
+        this.activity = activity;
+    }
 
     public Integer getId() {
         return id;

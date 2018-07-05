@@ -22,4 +22,9 @@ public class BaseInformationServiceImpl extends BaseServiceImpl<BaseInformationE
     public BaseInformation searchById(Integer charId) {
         return BaseInformationMapper.searchById(charId);
     }
+
+    @Override
+    public void updateByCharId(BaseInformation baseInformation) {
+        BaseInformationMapper.updateByCharId(baseInformation);
+    }
 }

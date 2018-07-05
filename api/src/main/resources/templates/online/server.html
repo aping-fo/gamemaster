@@ -43,13 +43,6 @@
     </form>
 </div>
 <div class="pageContent">
-    <div class="panelBar">
-        <ul class="toolBar">
-            <li>
-                <a class="icon" href="recharge/daily/export" target="dwzExport" targetType="navTab" title="确实要导出这些记录吗?"><span>导出EXCEL</span></a>
-            </li>
-        </ul>
-    </div>
     <table class="table" width="100%" layoutH="137">
         <thead>
         <tr>
@@ -61,13 +54,15 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="row,iterStat:${integratedOnlineServiceList}">
-            <td th:text="${row.serverId}"></td>
+        <tr th:if="${list.size()!=0}" th:each="row,iterStat:${list}">
+            <td th:text="${row.serverName}"></td>
             <td th:text="${row.totalCreationAngle}"></td>
             <td th:text="${row.maxRoleCount}"></td>
             <td th:text="${row.avgRoleCount}"></td>
             <td th:text="${row.minRoleCount}"></td>
         </tr>
+        <tr th:if="${list.size()==0}"><td colspan="11" style="text-align: center">暂无数据</td></tr>
+
         </tbody>
     </table>
     <div th:replace="_include/pager"></div>

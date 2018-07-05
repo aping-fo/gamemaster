@@ -33,48 +33,12 @@ public class RechargeFailedOrderServiceImpl extends BaseServiceImpl<RechargeFail
         if (query.getPageNum() == null) {
             query.setPageNum(1);
         }
-        return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> rechargeFailedOrderMapper.queryRechargeFailedOrderReport(query));
-    }
-
-    private void saveRechargeFailedOrderReport(List<RechargeFailedOrder> list) {
-        list.forEach(r -> {
-            RechargeFailedOrder rechargeFailedOrder = findOne(r.getChannelId(), r.getServerId(), r.getReportDate());
-            if (rechargeFailedOrder == null) {
-                rechargeFailedOrder = new RechargeFailedOrder();
-            }
-            BeanUtils.copyProperties(r, rechargeFailedOrder);
-            save(rechargeFailedOrder);
-        });
+        return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> rechargeFailedOrderMapper.searchPage(query));
     }
 
     @Override
-    public RechargeFailedOrder findOne(Long channelId, Long serverId, Date date) {
-        RechargeFailedOrderExample example = new RechargeFailedOrderExample();
-        RechargeFailedOrderExample.Criteria criteria = example.createCriteria();
-        criteria.andStatusEqualTo(Status.NORMAL)
-                .andChannelIdEqualTo(channelId)
-                .andServerIdEqualTo(serverId)
-                .andReportDateEqualTo(date);
-        List<RechargeFailedOrderEntity> rechargeFailedOrderList = rechargeFailedOrderMapper.selectByExample(example);
-        if (rechargeFailedOrderList == null || rechargeFailedOrderList.isEmpty()) {
-            return null;
-        }
-        return BeanUtils.copyProperties(rechargeFailedOrderList.get(0), RechargeFailedOrder.class);
-    }
-
-    @Override
-    public void generateRechargeFailedOrderReportToday() {
-        generateRechargeFailedOrderReportByDay(DateUtils.TodayString());
-    }
-
-
-    @Override
-    public void generateRechargeFailedOrderReportByDay(String date) {
-        List<RechargeFailedOrder> list = rechargeFailedOrderMapper.queryRechargeFailedOrderReportFromOrderSingleDate(date);
-        if (list == null || list.isEmpty()) {
-            return;
-        }
-        saveRechargeFailedOrderReport(list);
+    public void delete(int id) {
+        rechargeFailedOrderMapper.deleteByPrimaryKey(id);
     }
 
 }

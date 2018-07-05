@@ -1,3 +1,17 @@
+<div class="pageContent">
+    <div class="tabs" currentIndex="0">
+        <div class="tabsHeader">
+            <div class="tabsHeaderContent">
+                <ul id="player">
+                    <input type="hidden" th:value="${charId}"/>
+                    <li class="selected"><a href="player/info_playerList" class="j-ajax" target="navTab"><span>玩家列表(一期)</span></a></li>
+                    <li><a href="player/info_baseInformation" class="j-ajax" target="navTab"><span>基本信息(二期)</span></a></li>
+                    <li><a href="player/info_equipment_flow" class="j-ajax" target="navTab"><span>流水查询(二期)</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="pageHeader">
     <form id="pagerForm" onsubmit="return navTabSearch(this);" action="player/info_playerList" method="post"
           onreset="$(this).find('select.combox').comboxReset()">
@@ -15,8 +29,8 @@
                     <td>
                         <select name="sex" class="combox">
                             <option value="">-性别-</option>
-                            <option value="男" th:selected="(${request.sex}=='男')">男</option>
-                            <option value="女" th:selected="(${request.sex}=='女')">女</option>
+                            <option value="1" th:selected="(${request.sex}=='1')">男</option>
+                            <option value="2" th:selected="(${request.sex}=='2')">女</option>
                         </select>
                     </td>
                     <td>
@@ -34,6 +48,9 @@
                     <td>
                         <select name="job" class="combox">
                             <option value="">-职业-</option>
+                            <option value="1">战士</option>
+                            <option value="2">刺客</option>
+                            <option value="3">法师</option>
                         </select>
                     </td>
                 </tr>
@@ -43,13 +60,6 @@
     </form>
 </div>
 <div class="pageContent">
-    <div class="panelBar">
-        <ul class="toolBar">
-            <li>
-                <a class="icon" href="recharge/daily/export" target="dwzExport" targetType="navTab" title="确实要导出这些记录吗?"><span>导出EXCEL</span></a>
-            </li>
-        </ul>
-    </div>
     <table class="table" layoutH="137">
         <thead>
         <tr>
@@ -61,6 +71,7 @@
             <th width="120">性别</th>
             <th width="80" align="right">角色等级</th>
             <th width="80" align="right">剩余元宝</th>
+            <th width="80" align="right">最后登录时间</th>
             <th width="120">操作</th>
         </tr>
         </thead>
@@ -68,15 +79,35 @@
         <tr th:each="row,iterStat:${characters}">
             <td th:text="${row.serverName}"></td>
             <td th:text="${row.channelName}"></td>
-            <td th:text="${row.username}"></td>
+            <td><input type="button" th:value="${row.username}" th:onclick="'changeHref(\''+${row.charId}+'\')'"/></td>
             <td th:text="${row.charName}"></td>
-            <td th:text="${row.job}"></td>
-            <td th:text="${row.sex}"></td>
+            <td th:if="${row.job} eq'1'" th:text="战士"></td>
+            <td th:if="${row.job} eq'2'" th:text="刺客"></td>
+            <td th:if="${row.job} eq'3'" th:text="法师"></td>
+            <td th:if="${row.sex} eq'1'" th:text="男"></td>
+            <td th:if="${row.sex} eq'2'" th:text="女"></td>
             <td th:text="${row.level}"></td>
             <td th:text="${row.leftGold}"></td>
+            <td th:text="${#dates.format(row.updateTime, 'yyyy-MM-dd')}"></td>
             <td></td>
         </tr>
         </tbody>
     </table>
     <div th:replace="_include/pager"></div>
 </div>
+<script type="text/javascript">
+    function changeHref(charId) {
+        var href = $('#player a')
+        href.eq(0).attr("href","player/info_playerList?charId="+charId)
+        href.eq(1).attr("href","player/info_baseInformation?charId="+charId)
+        href.eq(2).attr("href","player/info_equipment_flow?charId="+charId)
+    }
+    function changeHref2() {
+        var href = $('#player a')
+        var charId = $('#player input').val()
+        href.eq(0).attr("href","player/info_playerList?charId="+charId)
+        href.eq(1).attr("href","player/info_baseInformation?charId="+charId)
+        href.eq(2).attr("href","player/info_equipment_flow?charId="+charId)
+    }
+    changeHref2()
+</script>

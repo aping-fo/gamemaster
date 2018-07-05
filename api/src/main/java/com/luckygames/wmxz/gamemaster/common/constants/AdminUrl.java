@@ -8,7 +8,8 @@ public enum AdminUrl {
     BAN("/ban", "封禁操作"),
     MESSAGE("/sendSysMsg", "系统消息"),
     GETINFO("/getInfo", "获取玩家信息"),
-    MAIL("/sendMail", "发送邮件");
+    MAIL("/sendMail", "发送邮件"),
+    CHAT("/chatMonitoring", "聊天监控");
 
     private final String url;
     private final String desc;

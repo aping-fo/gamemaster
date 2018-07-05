@@ -52,6 +52,14 @@ public class DataCollectionEntity extends BaseEntity {
 
     private Long serverId;
 
+    private String channelName;
+
+    private String serverName;
+
+    private String packageName;
+
+    private Integer packageId;
+
     public String getReportDate() {
         return reportDate;
     }
@@ -234,5 +242,37 @@ public class DataCollectionEntity extends BaseEntity {
 
     public void setServerId(Long serverId) {
         this.serverId = serverId;
+    }
+
+    public String getChannelName() {
+        return channelName;
+    }
+
+    public void setChannelName(String channelName) {
+        this.channelName = channelName == null ? null : channelName.trim();
+    }
+
+    public String getServerName() {
+        return serverName;
+    }
+
+    public void setServerName(String serverName) {
+        this.serverName = serverName == null ? null : serverName.trim();
+    }
+
+    public String getPackageName() {
+        return packageName;
+    }
+
+    public void setPackageName(String packageName) {
+        this.packageName = packageName == null ? null : packageName.trim();
+    }
+
+    public Integer getPackageId() {
+        return packageId;
+    }
+
+    public void setPackageId(Integer packageId) {
+        this.packageId = packageId;
     }
 }

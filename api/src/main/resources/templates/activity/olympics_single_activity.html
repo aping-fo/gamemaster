@@ -27,16 +27,10 @@
     </form>
 </div>
 <div class="pageContent">
-    <div class="panelBar">
-        <ul class="toolBar">
-            <li>
-                <a class="icon" href="recharge/daily/export" target="dwzExport" targetType="navTab" title="确实要导出这些记录吗?"><span>导出EXCEL</span></a>
-            </li>
-        </ul>
-    </div>
     <table class="table" width="100%" layoutH="137">
         <thead>
         <tr>
+            <th></th>
             <th>编号</th>
             <th>活动大类</th>
             <th>活动标题</th>
@@ -47,20 +41,29 @@
         </tr>
         </thead>
         <tbody>
-        <!--<tr th:each="row,iterStat:${giftPackageList}">-->
-            <!--<td th:text="${row.cardFile}"></td>-->
-            <!--<td th:text="${row.activityId}"></td>-->
-            <!--<td th:text="${#dates.format(row.minTermValidity, 'yyyy-MM-dd HH:mm:ss')}+'&#45;&#45;'+${#dates.format(row.maxTermValidity, 'yyyy-MM-dd HH:mm:ss')}"></td>-->
-            <!--<td th:text="${row.channelId}"></td>-->
-            <!--<td th:text="${row.serverId}"></td>-->
-            <!--<td th:text="${row.isActivation}"></td>-->
-            <!--<td th:text="${row.cardType}"></td>-->
-            <!--<td th:text="${row.cardCount}"></td>-->
-            <!--<td th:text="${row.isActivation}"></td>-->
-            <!--<td th:text="${#dates.format(row.generateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>-->
-            <!--<td th:text="${row.generateType}"></td>-->
-            <!--<td><input type="button" value="删除"/></td>-->
-        <!--</tr>-->
+        <tr th:each="row,iterStat:${activityList}">
+            <td><input type="checkbox" name="id" th:value="${row.id}" /></td>
+            <td th:text="${row.id}"></td>
+            <td th:if="${row.classification==1}">活跃类</td>
+            <td th:if="${row.classification==2}">充值类</td>
+            <td th:if="${row.classification==3}">消费类</td>
+            <td th:if="${row.classification==4}">兑换类</td>
+            <td th:if="${row.classification==5}">BOSS类</td>
+            <td th:if="${row.classification==6}">副本类</td>
+            <td th:text="${row.title}"></td>
+            <td th:text="${row.startTime}"></td>
+            <td th:text="${row.endTime}"></td>
+            <td th:if="${row.activityStatus==0}">未通过</td>
+            <td th:if="${row.activityStatus==1}">已同步</td>
+            <td th:if="${row.type==1}">登录豪礼</td>
+            <td th:if="${row.type==2}">特惠礼包</td>
+            <td th:if="${row.type==3}">神兵现世</td>
+            <td th:if="${row.type==4}">环卫绩点</td>
+            <td th:if="${row.type==5}">节日兑换</td>
+            <td th:if="${row.type==6}">日夜除尘</td>
+            <td th:if="${row.type==7}">双倍经验</td>
+            <td th:if="${row.type==8}">副本双倍</td>
+        </tr>
         </tbody>
     </table>
     <!--<div th:replace="_include/pager"></div>-->

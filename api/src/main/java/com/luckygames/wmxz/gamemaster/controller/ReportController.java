@@ -18,14 +18,13 @@ public class ReportController extends BaseController {
     @Autowired
     private ReportService reportService;
 
+    //数据汇总
     @RequestMapping(value = "/summary", method = {RequestMethod.GET, RequestMethod.POST})
     public Response summaryReport(DataCollectionSearchQuery dataCollectionSearchRequest) {
-//        reportService.generateDataCollectionReportToday();
         if (dataCollectionSearchRequest.getPageNum() == null) {
             dataCollectionSearchRequest.setPageNum(1);
         }
         Page<DataCollection> dataCollections = reportService.searchPage(dataCollectionSearchRequest);
-
         Response r = new Response("report/summary")
                 .request(dataCollectionSearchRequest)
                 .data("dataCollectionList", dataCollections);
@@ -35,23 +34,31 @@ public class ReportController extends BaseController {
     //渠道数据
     @RequestMapping(value = "/channel", method = {RequestMethod.GET, RequestMethod.POST})
     public Response channelReport(ChannelDataSearchQuery query) {
-//        reportService.generateDataCollectionReportToday();
         Page<DataCollection> channelDataList = reportService.searchChannelDataPage(query);
         Response r = new Response("report/channel")
                 .request(query)
-                .data("channelDataList", channelDataList);
+                .data("list", channelDataList);
         return r;
     }
 
 
-    //渠道每日数据
-    @RequestMapping(value = "/channel_daily", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response channelDailyReport(ChannelDataSearchQuery query) {
-//        reportService.generateDataCollectionReportToday();
-        Page<DataCollection> channelDailyList = reportService.searchChannelDailyPage(query);
-        Response r = new Response("report/channelDaily")
+    //渠道每日导入数据
+    @RequestMapping(value = "/channel_daily_import", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response channelDailyImportReport(ChannelDataSearchQuery query) {
+        Page<DataCollection> channelDailyList = reportService.searchChannelDailyPage(query,1);
+        Response r = new Response("report/channelDailyImport")
                 .request(query)
-                .data("channelDailyList", channelDailyList);
+                .data("list", channelDailyList);
+        return r;
+    }
+
+    //渠道每日收入数据
+    @RequestMapping(value = "/channel_daily_income", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response channelDailyIncomeReport(ChannelDataSearchQuery query) {
+        Page<DataCollection> channelDailyList = reportService.searchChannelDailyPage(query,2);
+        Response r = new Response("report/channelDailyIncome")
+                .request(query)
+                .data("list", channelDailyList);
         return r;
     }
 }

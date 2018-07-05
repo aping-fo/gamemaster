@@ -6,6 +6,15 @@ public class RechargeFailedOrderSearchQuery extends CommonSearchQuery {
     private String charName;
     private Integer goldQuantityFrom;
     private Integer goldQuantityTo;
+    private Integer id;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getOrderCode() {
         return orderCode;

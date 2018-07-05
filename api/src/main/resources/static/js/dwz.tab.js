@@ -111,6 +111,15 @@
                     jTabs.removeClass("selected");
                     jTab.addClass("selected");
 
+                    // if($("a",jTab)&&$("a",jTab).hasClass((op.ajaxClass))&&!jGroup.attr("loaded")){
+                    //     if($("a",jTab).attr("href")){
+                    //         jGroup.loadUrl($("a",jTab).attr("href"),{},function () {
+                    //             jGroup.find("[layoutH]").layoutH();
+                    //             jGroup.attr("loaded",true);
+                    //         })
+                    //     }
+                    // }
+
                     jGroups.hide().eq(op.currentIndex).show();
                 }
 

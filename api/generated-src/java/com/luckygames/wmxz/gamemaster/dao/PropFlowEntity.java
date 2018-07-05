@@ -1,7 +1,6 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
 import com.luckygames.wmxz.gamemaster.model.entity.base.BaseEntity;
-import java.math.BigDecimal;
 import javax.persistence.Table;
 
 @Table(name="prop_flow")
@@ -16,21 +15,15 @@ public class PropFlowEntity extends BaseEntity {
 
     private Integer type;
 
-    private String name;
+    private Integer subType;
+
+    private String propName;
 
     private Integer count;
 
-    private Integer strengtheningGrade;
+    private Integer bindingStatus;
 
-    private BigDecimal strengtheningDegreeCompletion;
-
-    private Integer luckyValue;
-
-    private String set;
-
-    private String clear;
-
-    private String ultimateAttribute;
+    private String tradingParty;
 
     public Long getServerId() {
         return serverId;
@@ -72,12 +65,20 @@ public class PropFlowEntity extends BaseEntity {
         this.type = type;
     }
 
-    public String getName() {
-        return name;
+    public Integer getSubType() {
+        return subType;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setSubType(Integer subType) {
+        this.subType = subType;
+    }
+
+    public String getPropName() {
+        return propName;
+    }
+
+    public void setPropName(String propName) {
+        this.propName = propName == null ? null : propName.trim();
     }
 
     public Integer getCount() {
@@ -88,51 +89,19 @@ public class PropFlowEntity extends BaseEntity {
         this.count = count;
     }
 
-    public Integer getStrengtheningGrade() {
-        return strengtheningGrade;
+    public Integer getBindingStatus() {
+        return bindingStatus;
     }
 
-    public void setStrengtheningGrade(Integer strengtheningGrade) {
-        this.strengtheningGrade = strengtheningGrade;
+    public void setBindingStatus(Integer bindingStatus) {
+        this.bindingStatus = bindingStatus;
     }
 
-    public BigDecimal getStrengtheningDegreeCompletion() {
-        return strengtheningDegreeCompletion;
+    public String getTradingParty() {
+        return tradingParty;
     }
 
-    public void setStrengtheningDegreeCompletion(BigDecimal strengtheningDegreeCompletion) {
-        this.strengtheningDegreeCompletion = strengtheningDegreeCompletion;
-    }
-
-    public Integer getLuckyValue() {
-        return luckyValue;
-    }
-
-    public void setLuckyValue(Integer luckyValue) {
-        this.luckyValue = luckyValue;
-    }
-
-    public String getSet() {
-        return set;
-    }
-
-    public void setSet(String set) {
-        this.set = set == null ? null : set.trim();
-    }
-
-    public String getClear() {
-        return clear;
-    }
-
-    public void setClear(String clear) {
-        this.clear = clear == null ? null : clear.trim();
-    }
-
-    public String getUltimateAttribute() {
-        return ultimateAttribute;
-    }
-
-    public void setUltimateAttribute(String ultimateAttribute) {
-        this.ultimateAttribute = ultimateAttribute == null ? null : ultimateAttribute.trim();
+    public void setTradingParty(String tradingParty) {
+        this.tradingParty = tradingParty == null ? null : tradingParty.trim();
     }
 }

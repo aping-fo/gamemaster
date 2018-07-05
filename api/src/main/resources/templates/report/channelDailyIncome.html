@@ -1,0 +1,36 @@
+<div class="tabs" currentIndex="1">
+    <div class="tabsHeader">
+        <div class="tabsHeaderContent">
+            <ul>
+                <li><a href="report/channel_daily_import" class="j-ajax" target="navTab"><span>渠道导入</span></a></li>
+                <li><a href="report/channel_daily_income" class="j-ajax" target="navTab"><span>渠道收入</span></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div>
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="report/channel_daily_income" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div th:replace="_include/searchBar"></div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%" layoutH="137">
+        <thead>
+        <tr>
+            <th width="100">日期</th>
+            <th width="100">渠道</th>
+            <th width="100">收入</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${list.size()!=0}" th:each="row,iterStat:${list}">
+            <td th:text="${row.reportDate}"></td>
+            <td th:text="${row.channelId}"></td>
+            <td th:text="${row.registerNumber}"></td>
+        </tr>
+        <tr th:if="${list.size()==0}"><td colspan="11" style="text-align: center">暂无数据</td></tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>

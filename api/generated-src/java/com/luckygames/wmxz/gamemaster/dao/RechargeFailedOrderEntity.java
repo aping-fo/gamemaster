@@ -9,13 +9,13 @@ import javax.persistence.Table;
 public class RechargeFailedOrderEntity extends BaseEntity {
     private String orderCode;
 
-    private String serverName;
-
-    private Long serverId;
+    private Long channelId;
 
     private String channelName;
 
-    private Long channelId;
+    private String serverName;
+
+    private Long serverId;
 
     private String userName;
 
@@ -43,6 +43,22 @@ public class RechargeFailedOrderEntity extends BaseEntity {
         this.orderCode = orderCode == null ? null : orderCode.trim();
     }
 
+    public Long getChannelId() {
+        return channelId;
+    }
+
+    public void setChannelId(Long channelId) {
+        this.channelId = channelId;
+    }
+
+    public String getChannelName() {
+        return channelName;
+    }
+
+    public void setChannelName(String channelName) {
+        this.channelName = channelName == null ? null : channelName.trim();
+    }
+
     public String getServerName() {
         return serverName;
     }
@@ -57,22 +73,6 @@ public class RechargeFailedOrderEntity extends BaseEntity {
 
     public void setServerId(Long serverId) {
         this.serverId = serverId;
-    }
-
-    public String getChannelName() {
-        return channelName;
-    }
-
-    public void setChannelName(String channelName) {
-        this.channelName = channelName == null ? null : channelName.trim();
-    }
-
-    public Long getChannelId() {
-        return channelId;
-    }
-
-    public void setChannelId(Long channelId) {
-        this.channelId = channelId;
     }
 
     public String getUserName() {

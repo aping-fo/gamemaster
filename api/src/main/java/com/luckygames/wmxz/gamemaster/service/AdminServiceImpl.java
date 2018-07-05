@@ -26,6 +26,15 @@ public class AdminServiceImpl implements AdminService {
     @Value("${global.gmHost}")
     private String host;
 
+    /**
+     * 聊天监控
+     * @param query
+     * @return
+     */
+    @Override
+    public String chatMonitoring(GMQuery query) {
+        return commonRequest(query.encodeReqParams(), restTemplate, query.getServerId(), AdminUrl.MESSAGE.getUrl());
+    }
 
     @Override
     public String sendNotice(String content) {
@@ -33,7 +42,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     /**
-     * 发送系统邮件
+     * 广播
      *
      * @param query 请求参数
      * @return 返回：成功:success，失败：failed,参数错误：param_error

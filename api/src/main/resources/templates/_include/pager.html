@@ -2,11 +2,9 @@
     <div class="pages">
         <span>显示</span>
         <select class="combox" name="pageSize" onchange="navTabPageBreak({pageSize:this.value})">
+            <option value="25" th:selected="${Pager.pageSize == 25}">25</option>
             <option value="50" th:selected="${Pager.pageSize == 50}">50</option>
             <option value="100" th:selected="${Pager.pageSize == 100}">100</option>
-            <option value="150" th:selected="${Pager.pageSize == 150}">150</option>
-            <option value="200" th:selected="${Pager.pageSize == 200}">200</option>
-            <option value="250" th:selected="${Pager.pageSize == 250}">250</option>
         </select>
         <span th:text="'条，共'+${Pager.totalElements}+'条'"></span>
     </div>

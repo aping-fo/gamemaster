@@ -1736,6 +1736,276 @@ public class DataCollectionEntityExample {
             addCriterion("update_time not between", value1, value2, "updateTime");
             return (Criteria) this;
         }
+
+        public Criteria andChannelNameIsNull() {
+            addCriterion("channel_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelNameIsNotNull() {
+            addCriterion("channel_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelNameEqualTo(String value) {
+            addCriterion("channel_name =", value, "channelName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelNameNotEqualTo(String value) {
+            addCriterion("channel_name <>", value, "channelName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelNameGreaterThan(String value) {
+            addCriterion("channel_name >", value, "channelName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelNameGreaterThanOrEqualTo(String value) {
+            addCriterion("channel_name >=", value, "channelName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelNameLessThan(String value) {
+            addCriterion("channel_name <", value, "channelName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelNameLessThanOrEqualTo(String value) {
+            addCriterion("channel_name <=", value, "channelName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelNameLike(String value) {
+            addCriterion("channel_name like", value, "channelName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelNameNotLike(String value) {
+            addCriterion("channel_name not like", value, "channelName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelNameIn(List<String> values) {
+            addCriterion("channel_name in", values, "channelName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelNameNotIn(List<String> values) {
+            addCriterion("channel_name not in", values, "channelName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelNameBetween(String value1, String value2) {
+            addCriterion("channel_name between", value1, value2, "channelName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelNameNotBetween(String value1, String value2) {
+            addCriterion("channel_name not between", value1, value2, "channelName");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerNameIsNull() {
+            addCriterion("`server_name` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerNameIsNotNull() {
+            addCriterion("`server_name` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerNameEqualTo(String value) {
+            addCriterion("`server_name` =", value, "serverName");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerNameNotEqualTo(String value) {
+            addCriterion("`server_name` <>", value, "serverName");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerNameGreaterThan(String value) {
+            addCriterion("`server_name` >", value, "serverName");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerNameGreaterThanOrEqualTo(String value) {
+            addCriterion("`server_name` >=", value, "serverName");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerNameLessThan(String value) {
+            addCriterion("`server_name` <", value, "serverName");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerNameLessThanOrEqualTo(String value) {
+            addCriterion("`server_name` <=", value, "serverName");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerNameLike(String value) {
+            addCriterion("`server_name` like", value, "serverName");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerNameNotLike(String value) {
+            addCriterion("`server_name` not like", value, "serverName");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerNameIn(List<String> values) {
+            addCriterion("`server_name` in", values, "serverName");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerNameNotIn(List<String> values) {
+            addCriterion("`server_name` not in", values, "serverName");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerNameBetween(String value1, String value2) {
+            addCriterion("`server_name` between", value1, value2, "serverName");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerNameNotBetween(String value1, String value2) {
+            addCriterion("`server_name` not between", value1, value2, "serverName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageNameIsNull() {
+            addCriterion("package_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageNameIsNotNull() {
+            addCriterion("package_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageNameEqualTo(String value) {
+            addCriterion("package_name =", value, "packageName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageNameNotEqualTo(String value) {
+            addCriterion("package_name <>", value, "packageName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageNameGreaterThan(String value) {
+            addCriterion("package_name >", value, "packageName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageNameGreaterThanOrEqualTo(String value) {
+            addCriterion("package_name >=", value, "packageName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageNameLessThan(String value) {
+            addCriterion("package_name <", value, "packageName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageNameLessThanOrEqualTo(String value) {
+            addCriterion("package_name <=", value, "packageName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageNameLike(String value) {
+            addCriterion("package_name like", value, "packageName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageNameNotLike(String value) {
+            addCriterion("package_name not like", value, "packageName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageNameIn(List<String> values) {
+            addCriterion("package_name in", values, "packageName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageNameNotIn(List<String> values) {
+            addCriterion("package_name not in", values, "packageName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageNameBetween(String value1, String value2) {
+            addCriterion("package_name between", value1, value2, "packageName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageNameNotBetween(String value1, String value2) {
+            addCriterion("package_name not between", value1, value2, "packageName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdIsNull() {
+            addCriterion("package_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdIsNotNull() {
+            addCriterion("package_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdEqualTo(Integer value) {
+            addCriterion("package_id =", value, "packageId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdNotEqualTo(Integer value) {
+            addCriterion("package_id <>", value, "packageId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdGreaterThan(Integer value) {
+            addCriterion("package_id >", value, "packageId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("package_id >=", value, "packageId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdLessThan(Integer value) {
+            addCriterion("package_id <", value, "packageId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdLessThanOrEqualTo(Integer value) {
+            addCriterion("package_id <=", value, "packageId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdIn(List<Integer> values) {
+            addCriterion("package_id in", values, "packageId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdNotIn(List<Integer> values) {
+            addCriterion("package_id not in", values, "packageId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdBetween(Integer value1, Integer value2) {
+            addCriterion("package_id between", value1, value2, "packageId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("package_id not between", value1, value2, "packageId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

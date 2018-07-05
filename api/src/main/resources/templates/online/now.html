@@ -4,11 +4,7 @@
         <div class="searchBar">
             <table class="searchContent">
                 <tr>
-                    <td>
-                        角色名：
-                        <input name="charName" type="text" value="" th:value="${request.charName}" placeholder="角色"
-                               size="15">
-                    </td>
+                    <td>角色名：<input name="charName" type="text"></td>
                 </tr>
             </table>
         </div>
@@ -16,28 +12,20 @@
     </form>
 </div>
 <div class="pageContent">
-    <div class="panelBar">
-        <ul class="toolBar">
-            <li>
-                <a class="icon" href="online/now/export" target="dwzExport" targetType="navTab"
-                   title="确实要导出这些记录吗?"><span>导出EXCEL</span></a>
-            </li>
-        </ul>
-    </div>
     <table class="table" width="100%" layoutH="137">
         <thead>
         <tr>
-            <th width="100">角色id</th>
-            <th width="80">角色名</th>
-            <th width="100">账户</th>
-            <th width="100">最后登录时间</th>
-            <th width="100">在线时长(分钟)</th>
-            <th width="100">地图id</th>
-            <th width="100">ip</th>
+            <th>角色id</th>
+            <th>角色名</th>
+            <th>账户</th>
+            <th>最后登录时间</th>
+            <th>在线时长(分钟)</th>
+            <th>地图id</th>
+            <th>ip</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="row,iterStat:${onlineNowList}">
+        <tr th:if="${list.size()!=0}" th:each="row,iterStat:${list}">
             <td th:text="${row.charId}"></td>
             <td th:text="${row.charName}"></td>
             <td th:text="${row.userName}"></td>
@@ -46,6 +34,7 @@
             <td th:text="${row.mapId}"></td>
             <td th:text="${row.playerIp}"></td>
         </tr>
+        <tr th:if="${list.size()==0}"><td colspan="11" style="text-align: center">暂无数据</td></tr>
         </tbody>
     </table>
     <div th:replace="_include/pager"></div>

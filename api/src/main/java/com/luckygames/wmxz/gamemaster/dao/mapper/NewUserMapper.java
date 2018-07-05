@@ -5,6 +5,7 @@ import com.luckygames.wmxz.gamemaster.dao.NewUserEntityMapper;
 import com.luckygames.wmxz.gamemaster.dao.NewUserSqlProvider;
 import com.luckygames.wmxz.gamemaster.model.entity.NewUser;
 import com.luckygames.wmxz.gamemaster.model.view.request.CommonSearchQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.NewUserSearchQuery;
 import org.apache.ibatis.annotations.SelectProvider;
 
 import java.util.List;
@@ -12,5 +13,5 @@ import java.util.List;
 public interface NewUserMapper extends NewUserEntityMapper<NewUserEntity> {
 
     @SelectProvider(type = NewUserSqlProvider.class, method = "searchPage")
-    List<NewUser> searchPage(CommonSearchQuery query);
+    List<NewUser> searchPage(NewUserSearchQuery query);
 }

@@ -1266,6 +1266,136 @@ public class LogonStatisticsEntityExample {
             addCriterion("old_player_equipment not between", value1, value2, "oldPlayerEquipment");
             return (Criteria) this;
         }
+
+        public Criteria andPackageNameIsNull() {
+            addCriterion("package_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageNameIsNotNull() {
+            addCriterion("package_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageNameEqualTo(String value) {
+            addCriterion("package_name =", value, "packageName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageNameNotEqualTo(String value) {
+            addCriterion("package_name <>", value, "packageName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageNameGreaterThan(String value) {
+            addCriterion("package_name >", value, "packageName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageNameGreaterThanOrEqualTo(String value) {
+            addCriterion("package_name >=", value, "packageName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageNameLessThan(String value) {
+            addCriterion("package_name <", value, "packageName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageNameLessThanOrEqualTo(String value) {
+            addCriterion("package_name <=", value, "packageName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageNameLike(String value) {
+            addCriterion("package_name like", value, "packageName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageNameNotLike(String value) {
+            addCriterion("package_name not like", value, "packageName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageNameIn(List<String> values) {
+            addCriterion("package_name in", values, "packageName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageNameNotIn(List<String> values) {
+            addCriterion("package_name not in", values, "packageName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageNameBetween(String value1, String value2) {
+            addCriterion("package_name between", value1, value2, "packageName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageNameNotBetween(String value1, String value2) {
+            addCriterion("package_name not between", value1, value2, "packageName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdIsNull() {
+            addCriterion("package_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdIsNotNull() {
+            addCriterion("package_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdEqualTo(Integer value) {
+            addCriterion("package_id =", value, "packageId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdNotEqualTo(Integer value) {
+            addCriterion("package_id <>", value, "packageId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdGreaterThan(Integer value) {
+            addCriterion("package_id >", value, "packageId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("package_id >=", value, "packageId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdLessThan(Integer value) {
+            addCriterion("package_id <", value, "packageId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdLessThanOrEqualTo(Integer value) {
+            addCriterion("package_id <=", value, "packageId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdIn(List<Integer> values) {
+            addCriterion("package_id in", values, "packageId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdNotIn(List<Integer> values) {
+            addCriterion("package_id not in", values, "packageId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdBetween(Integer value1, Integer value2) {
+            addCriterion("package_id between", value1, value2, "packageId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("package_id not between", value1, value2, "packageId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

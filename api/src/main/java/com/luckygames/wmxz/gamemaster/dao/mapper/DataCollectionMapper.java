@@ -22,5 +22,5 @@ public interface DataCollectionMapper extends DataCollectionEntityMapper<DataCol
     List<DataCollection> queryChannelDataReport(ChannelDataSearchQuery query);
 
     @SelectProvider(type = DataCollectionSqlProvider.class, method = "queryChannelDailyReport")
-    List<DataCollection> queryChannelDailyReport(ChannelDataSearchQuery query);
+    List<DataCollection> queryChannelDailyReport(ChannelDataSearchQuery query,Integer type);
 }

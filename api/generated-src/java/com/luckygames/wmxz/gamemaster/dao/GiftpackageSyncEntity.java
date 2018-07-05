@@ -24,7 +24,7 @@ public class GiftpackageSyncEntity extends BaseEntity {
 
     private Date generateTime;
 
-    private String generateType;
+    private Integer generateType;
 
     private Long serverId;
 
@@ -106,12 +106,12 @@ public class GiftpackageSyncEntity extends BaseEntity {
         this.generateTime = generateTime;
     }
 
-    public String getGenerateType() {
+    public Integer getGenerateType() {
         return generateType;
     }
 
-    public void setGenerateType(String generateType) {
-        this.generateType = generateType == null ? null : generateType.trim();
+    public void setGenerateType(Integer generateType) {
+        this.generateType = generateType;
     }
 
     public Long getServerId() {

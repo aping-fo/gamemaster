@@ -58,13 +58,6 @@
     </form>
 </div>
 <div class="pageContent">
-    <div class="panelBar">
-        <ul class="toolBar">
-            <li>
-                <a class="icon" href="recharge/daily/export" target="dwzExport" targetType="navTab" title="确实要导出这些记录吗?"><span>导出EXCEL</span></a>
-            </li>
-        </ul>
-    </div>
     <table class="table" width="100%" layoutH="137">
         <thead>
         <tr>
@@ -98,7 +91,7 @@
             <td th:text="${#dates.format(row.auditorTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
             <td>
                 <input type="button" value="查看"/>
-                <a class="button" th:href="@{game/olympics_activity_list(id=${row.id})}"><span>通过</span></a>
+                <a class="button" th:href="@{game/olympics_activity_list(id=${row.id})}" target="navTab"><span>通过</span></a>
                 <input type="button" value="驳回"/>
             </td>
         </tr>

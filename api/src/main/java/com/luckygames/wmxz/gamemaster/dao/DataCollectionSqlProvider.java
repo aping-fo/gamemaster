@@ -70,12 +70,12 @@ public class DataCollectionSqlProvider {
                 "comprehensive_report_data_collection  " +
                 "where   " +
                 "1=1  ";
-        if (query.getChannelId() != null && !query.getChannelId().isEmpty()) {
-            String ids = StringUtils.join(query.getChannelId(), ",");
+        if (query.getChannelIds() != null && !query.getChannelIds().isEmpty()) {
+            String ids = StringUtils.join(query.getChannelIds(), ",");
             sql += "and channel_id in (" + ids + ")  ";
         }
-        if (query.getServerId() != null && !query.getServerId().isEmpty()) {
-            String ids = StringUtils.join(query.getServerId(), ",");
+        if (query.getServerIds() != null && !query.getServerIds().isEmpty()) {
+            String ids = StringUtils.join(query.getServerIds(), ",");
             sql += "and server_id in (" + ids + ")  ";
         }
         if (StringUtils.isNotBlank(query.getStartDate())) {
@@ -91,7 +91,7 @@ public class DataCollectionSqlProvider {
     }
 
     public String queryChannelDataReport(ChannelDataSearchQuery query) {
-        StringBuilder sql = new StringBuilder("SELECT channel_id,sum( recharge_amount ) recharge_amount,sum( register_number ) register_number,sum( role_number ) role_number,sum( pay_number ) pay_number FROM comprehensive_report_data_collection  where 1=1 ");
+        StringBuilder sql = new StringBuilder("SELECT channel_id,channel_name,server_id,sum( recharge_amount ) recharge_amount,sum( register_number ) register_number,sum( role_number ) role_number,sum( pay_number ) pay_number FROM comprehensive_report_data_collection  where 1=1 ");
         if (query.getChannelIds() != null && !query.getChannelIds().isEmpty()) {
             String ids = StringUtils.join(query.getChannelIds(), ",");
             sql.append(" and channel_id in (").append(ids).append(")  ");
@@ -106,15 +106,35 @@ public class DataCollectionSqlProvider {
         if (StringUtils.isNotBlank(query.getEndDate())) {
             sql.append(" and report_date < #{endDate}  ");
         }
-        sql.append("GROUP BY channel_id");
+        sql.append("GROUP BY channel_id,server_id");
         return sql.toString();
     }
 
-    public String queryChannelDailyReport(ChannelDataSearchQuery query) {
-        StringBuilder sql = new StringBuilder("SELECT t2.datelist report_date,IFNULL(t1.channel_id,0) channel_id,IFNULL(t1.recharge_amount,0) recharge_amount FROM (SELECT channel_id,sum(recharge_amount) recharge_amount,report_date FROM comprehensive_report_data_collection t1 GROUP BY channel_id) t1  RIGHT JOIN  (SELECT datelist FROM calendar t1 WHERE 1=1 ");
-        if (StringUtils.isNotBlank(query.getReportDate())) {
-            sql.append(" AND datelist<=(select last_day(#{reportDate})) AND datelist>=(select DATE_ADD(#{reportDate},interval -day(#{reportDate})+1 day))) t2 ");
-        } else {
+    public String queryChannelDailyReport(ChannelDataSearchQuery query,Integer type) {
+        StringBuilder sql = new StringBuilder("SELECT t2.datelist report_date,IFNULL(t1.channel_id,0) channel_id,");
+        if(type==1){
+            sql.append("IFNULL(t1.recharge_amount,0) recharge_amount ");
+        }else{
+            sql.append("IFNULL(t1.register_number,0) register_number ");
+        }
+
+        sql.append("FROM (SELECT * from (SELECT channel_id,server_id,sum(recharge_amount) recharge_amount,sum( register_number ) register_number,report_date FROM comprehensive_report_data_collection where 1 = 1 ");
+        if (query.getChannelIds() != null && !query.getChannelIds().isEmpty()) {
+            String ids = StringUtils.join(query.getChannelIds(), ",");
+            sql.append(" and channel_id in (").append(ids).append(")  ");
+        }
+        if (query.getServerIds() != null && !query.getServerIds().isEmpty()) {
+            String ids = StringUtils.join(query.getServerIds(), ",");
+            sql.append(" and server_id in (").append(ids).append(")  ");
+        }
+        sql.append(" GROUP BY report_date,channel_id,server_id)t1) t1  RIGHT JOIN  (SELECT datelist FROM calendar t1 WHERE 1=1 ");
+        if (StringUtils.isNotBlank(query.getStartDate())) {
+            sql.append(" AND datelist>=#{startDate} AND datelist<=(select last_day(curdate()))) t2 ");
+        } else if(StringUtils.isNotBlank(query.getEndDate())){
+            sql.append(" AND datelist<=#{endDate} AND datelist>=(select DATE_ADD(curdate(),interval -day(curdate())+1 day))) t2 ");
+        }else if (StringUtils.isNotBlank(query.getStartDate())&&StringUtils.isNotBlank(query.getEndDate())){
+            sql.append(" AND datelist>=#{startDate} AND datelist<=#{endDate}) t2 ");
+        } else{
             sql.append(" AND datelist<=(select last_day(curdate())) AND datelist>=(select DATE_ADD(curdate(),interval -day(curdate())+1 day))) t2 ");
         }
         sql.append(" ON DATE_FORMAT(t1.report_date,'%Y-%m-%d')=t2.datelist ");

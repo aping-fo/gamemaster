@@ -10,10 +10,6 @@ import org.apache.ibatis.annotations.SelectProvider;
 import java.util.List;
 
 public interface RechargeErroneousOrderMapper extends RechargeErroneousOrderEntityMapper<RechargeErroneousOrderEntity> {
-
-    @SelectProvider(type = RechargeErroneousOrderSqlProvider.class, method = "queryRechargeErroneousOrderReportFromOrderSingleDate")
-    List<RechargeErroneousOrder> queryRechargeErroneousOrderReportFromOrderSingleDate(String singleDate);
-
-    @SelectProvider(type = RechargeErroneousOrderSqlProvider.class, method = "queryRechargeErroneousOrderReport")
-    List<RechargeErroneousOrder> queryRechargeErroneousOrderReport(RechargeErroneousOrderSearchQuery query);
+    @SelectProvider(type = RechargeErroneousOrderSqlProvider.class, method = "searchPage")
+    List<RechargeErroneousOrder> searchPage(RechargeErroneousOrderSearchQuery query);
 }

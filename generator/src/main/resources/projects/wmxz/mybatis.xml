@@ -61,10 +61,6 @@
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
         </table>
-        <table schema="wmxz" tableName="prop_flow" domainObjectName="PropFlowEntity">
-            <property name="useActualColumnNames" value="false"/>
-            <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
-        </table>
         <table schema="wmxz" tableName="online" domainObjectName="OnlineEntity">
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
@@ -98,6 +94,62 @@
             <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
         </table>
         <table schema="wmxz" tableName="activity" domainObjectName="ActivityEntity">
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
+        </table>
+        <table schema="wmxz" tableName="equipment_flow" domainObjectName="EquipmentFlowEntity">
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
+        </table>
+        <table schema="wmxz" tableName="prop_flow" domainObjectName="PropFlowEntity">
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
+        </table>
+        <table schema="wmxz" tableName="money_flow" domainObjectName="MoneyFlowEntity">
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
+        </table>
+        <table schema="wmxz" tableName="level_flow" domainObjectName="LevelFlowEntity">
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
+        </table>
+        <table schema="wmxz" tableName="login_flow" domainObjectName="LoginFlowEntity">
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
+        </table>
+        <table schema="wmxz" tableName="task_flow" domainObjectName="TaskFlowEntity">
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
+        </table>
+        <table schema="wmxz" tableName="rankings_flow" domainObjectName="RankingsFlowEntity">
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
+        </table>
+        <table schema="wmxz" tableName="email_flow" domainObjectName="EmailFlowEntity">
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
+        </table>
+        <table schema="wmxz" tableName="other_flow" domainObjectName="OtherFlowEntity">
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
+        </table>
+        <table schema="wmxz" tableName="activation_code" domainObjectName="ActivationCodeEntity">
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
+        </table>
+        <table schema="wmxz" tableName="single_service_bag" domainObjectName="SingleServiceBagEntity">
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
+        </table>
+        <table schema="wmxz" tableName="create_role_manage" domainObjectName="CreateRoleManageEntity">
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
+        </table>
+        <table schema="wmxz" tableName="chat_settings" domainObjectName="ChatSettingsEntity">
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
+        </table>
+        <table schema="wmxz" tableName="comprehensive_report_data_collection" domainObjectName="DataCollectionEntity">
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
         </table>

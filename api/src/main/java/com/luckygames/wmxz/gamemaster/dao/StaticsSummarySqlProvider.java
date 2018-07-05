@@ -18,7 +18,7 @@ public class StaticsSummarySqlProvider {
         }
         if (query.getServerIds() != null && !query.getServerIds().isEmpty()) {
             String ids = StringUtils.join(query.getServerIds(), ",");
-            sql.append(" and c.server_id in (").append(ids).append(") ");
+            sql.append(" and s.server_id in (").append(ids).append(") ");
         }
         if (StringUtils.isNotBlank(query.getStartDate())) {
             sql.append(" and ss.report_date >= #{startDate} ");

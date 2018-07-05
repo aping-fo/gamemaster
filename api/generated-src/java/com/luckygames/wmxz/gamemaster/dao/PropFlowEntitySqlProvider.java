@@ -64,36 +64,24 @@ public class PropFlowEntitySqlProvider {
             sql.VALUES("`type`", "#{type,jdbcType=INTEGER}");
         }
         
-        if (record.getName() != null) {
-            sql.VALUES("`name`", "#{name,jdbcType=VARCHAR}");
+        if (record.getSubType() != null) {
+            sql.VALUES("sub_type", "#{subType,jdbcType=INTEGER}");
+        }
+        
+        if (record.getPropName() != null) {
+            sql.VALUES("prop_name", "#{propName,jdbcType=VARCHAR}");
         }
         
         if (record.getCount() != null) {
             sql.VALUES("`count`", "#{count,jdbcType=INTEGER}");
         }
         
-        if (record.getStrengtheningGrade() != null) {
-            sql.VALUES("strengthening_grade", "#{strengtheningGrade,jdbcType=INTEGER}");
+        if (record.getBindingStatus() != null) {
+            sql.VALUES("binding_status", "#{bindingStatus,jdbcType=INTEGER}");
         }
         
-        if (record.getStrengtheningDegreeCompletion() != null) {
-            sql.VALUES("strengthening_degree_completion", "#{strengtheningDegreeCompletion,jdbcType=DECIMAL}");
-        }
-        
-        if (record.getLuckyValue() != null) {
-            sql.VALUES("lucky_value", "#{luckyValue,jdbcType=INTEGER}");
-        }
-        
-        if (record.getSet() != null) {
-            sql.VALUES("`set`", "#{set,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getClear() != null) {
-            sql.VALUES("clear", "#{clear,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getUltimateAttribute() != null) {
-            sql.VALUES("ultimate_attribute", "#{ultimateAttribute,jdbcType=VARCHAR}");
+        if (record.getTradingParty() != null) {
+            sql.VALUES("trading_party", "#{tradingParty,jdbcType=VARCHAR}");
         }
         
         return sql.toString();
@@ -114,14 +102,11 @@ public class PropFlowEntitySqlProvider {
         sql.SELECT("create_time");
         sql.SELECT("update_time");
         sql.SELECT("`type`");
-        sql.SELECT("`name`");
+        sql.SELECT("sub_type");
+        sql.SELECT("prop_name");
         sql.SELECT("`count`");
-        sql.SELECT("strengthening_grade");
-        sql.SELECT("strengthening_degree_completion");
-        sql.SELECT("lucky_value");
-        sql.SELECT("`set`");
-        sql.SELECT("clear");
-        sql.SELECT("ultimate_attribute");
+        sql.SELECT("binding_status");
+        sql.SELECT("trading_party");
         sql.FROM("prop_flow");
         applyWhere(sql, example, false);
         
@@ -175,36 +160,24 @@ public class PropFlowEntitySqlProvider {
             sql.SET("`type` = #{record.type,jdbcType=INTEGER}");
         }
         
-        if (record.getName() != null) {
-            sql.SET("`name` = #{record.name,jdbcType=VARCHAR}");
+        if (record.getSubType() != null) {
+            sql.SET("sub_type = #{record.subType,jdbcType=INTEGER}");
+        }
+        
+        if (record.getPropName() != null) {
+            sql.SET("prop_name = #{record.propName,jdbcType=VARCHAR}");
         }
         
         if (record.getCount() != null) {
             sql.SET("`count` = #{record.count,jdbcType=INTEGER}");
         }
         
-        if (record.getStrengtheningGrade() != null) {
-            sql.SET("strengthening_grade = #{record.strengtheningGrade,jdbcType=INTEGER}");
+        if (record.getBindingStatus() != null) {
+            sql.SET("binding_status = #{record.bindingStatus,jdbcType=INTEGER}");
         }
         
-        if (record.getStrengtheningDegreeCompletion() != null) {
-            sql.SET("strengthening_degree_completion = #{record.strengtheningDegreeCompletion,jdbcType=DECIMAL}");
-        }
-        
-        if (record.getLuckyValue() != null) {
-            sql.SET("lucky_value = #{record.luckyValue,jdbcType=INTEGER}");
-        }
-        
-        if (record.getSet() != null) {
-            sql.SET("`set` = #{record.set,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getClear() != null) {
-            sql.SET("clear = #{record.clear,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getUltimateAttribute() != null) {
-            sql.SET("ultimate_attribute = #{record.ultimateAttribute,jdbcType=VARCHAR}");
+        if (record.getTradingParty() != null) {
+            sql.SET("trading_party = #{record.tradingParty,jdbcType=VARCHAR}");
         }
         
         applyWhere(sql, example, true);
@@ -224,14 +197,11 @@ public class PropFlowEntitySqlProvider {
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         sql.SET("`type` = #{record.type,jdbcType=INTEGER}");
-        sql.SET("`name` = #{record.name,jdbcType=VARCHAR}");
+        sql.SET("sub_type = #{record.subType,jdbcType=INTEGER}");
+        sql.SET("prop_name = #{record.propName,jdbcType=VARCHAR}");
         sql.SET("`count` = #{record.count,jdbcType=INTEGER}");
-        sql.SET("strengthening_grade = #{record.strengtheningGrade,jdbcType=INTEGER}");
-        sql.SET("strengthening_degree_completion = #{record.strengtheningDegreeCompletion,jdbcType=DECIMAL}");
-        sql.SET("lucky_value = #{record.luckyValue,jdbcType=INTEGER}");
-        sql.SET("`set` = #{record.set,jdbcType=VARCHAR}");
-        sql.SET("clear = #{record.clear,jdbcType=VARCHAR}");
-        sql.SET("ultimate_attribute = #{record.ultimateAttribute,jdbcType=VARCHAR}");
+        sql.SET("binding_status = #{record.bindingStatus,jdbcType=INTEGER}");
+        sql.SET("trading_party = #{record.tradingParty,jdbcType=VARCHAR}");
         
         PropFlowEntityExample example = (PropFlowEntityExample) parameter.get("example");
         applyWhere(sql, example, true);

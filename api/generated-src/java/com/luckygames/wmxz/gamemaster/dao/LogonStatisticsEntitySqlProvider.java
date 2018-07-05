@@ -104,6 +104,14 @@ public class LogonStatisticsEntitySqlProvider {
             sql.VALUES("old_player_equipment", "#{oldPlayerEquipment,jdbcType=INTEGER}");
         }
         
+        if (record.getPackageName() != null) {
+            sql.VALUES("package_name", "#{packageName,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getPackageId() != null) {
+            sql.VALUES("package_id", "#{packageId,jdbcType=INTEGER}");
+        }
+        
         return sql.toString();
     }
 
@@ -132,6 +140,8 @@ public class LogonStatisticsEntitySqlProvider {
         sql.SELECT("loyal_player_count");
         sql.SELECT("total_registration");
         sql.SELECT("old_player_equipment");
+        sql.SELECT("package_name");
+        sql.SELECT("package_id");
         sql.FROM("logon_statistics");
         applyWhere(sql, example, false);
         
@@ -225,6 +235,14 @@ public class LogonStatisticsEntitySqlProvider {
             sql.SET("old_player_equipment = #{record.oldPlayerEquipment,jdbcType=INTEGER}");
         }
         
+        if (record.getPackageName() != null) {
+            sql.SET("package_name = #{record.packageName,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getPackageId() != null) {
+            sql.SET("package_id = #{record.packageId,jdbcType=INTEGER}");
+        }
+        
         applyWhere(sql, example, true);
         return sql.toString();
     }
@@ -252,6 +270,8 @@ public class LogonStatisticsEntitySqlProvider {
         sql.SET("loyal_player_count = #{record.loyalPlayerCount,jdbcType=INTEGER}");
         sql.SET("total_registration = #{record.totalRegistration,jdbcType=INTEGER}");
         sql.SET("old_player_equipment = #{record.oldPlayerEquipment,jdbcType=INTEGER}");
+        sql.SET("package_name = #{record.packageName,jdbcType=VARCHAR}");
+        sql.SET("package_id = #{record.packageId,jdbcType=INTEGER}");
         
         LogonStatisticsEntityExample example = (LogonStatisticsEntityExample) parameter.get("example");
         applyWhere(sql, example, true);

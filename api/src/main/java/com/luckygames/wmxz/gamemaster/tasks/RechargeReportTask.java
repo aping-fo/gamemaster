@@ -1,6 +1,7 @@
 package com.luckygames.wmxz.gamemaster.tasks;
 
 import com.luckygames.wmxz.gamemaster.service.RechargeDailyService;
+import com.luckygames.wmxz.gamemaster.service.RechargeFailedOrderService;
 import com.luckygames.wmxz.gamemaster.service.RechargeMonthlyService;
 import com.luckygames.wmxz.gamemaster.tasks.base.BaseTask;
 import org.springframework.beans.factory.annotation.Autowired;

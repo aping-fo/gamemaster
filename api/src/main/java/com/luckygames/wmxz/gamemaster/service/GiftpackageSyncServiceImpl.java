@@ -2,8 +2,12 @@ package com.luckygames.wmxz.gamemaster.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.luckygames.wmxz.gamemaster.dao.ChannelEntity;
 import com.luckygames.wmxz.gamemaster.dao.GiftpackageSyncEntity;
+import com.luckygames.wmxz.gamemaster.dao.ServerEntity;
+import com.luckygames.wmxz.gamemaster.dao.mapper.ChannelMapper;
 import com.luckygames.wmxz.gamemaster.dao.mapper.GiftpackageSyncMapper;
+import com.luckygames.wmxz.gamemaster.dao.mapper.ServerMapper;
 import com.luckygames.wmxz.gamemaster.model.entity.GiftpackageSync;
 import com.luckygames.wmxz.gamemaster.model.view.request.GiftpackageSyncSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.base.BaseServiceImpl;
@@ -18,6 +22,10 @@ import java.util.Date;
 public class GiftpackageSyncServiceImpl extends BaseServiceImpl<GiftpackageSyncEntity> implements GiftpackageSyncService {
     @Autowired
     private GiftpackageSyncMapper GiftpackageSyncMapper;
+    @Autowired
+    private ServerMapper serverMapper;
+    @Autowired
+    private ChannelMapper channelMapper;
 
     @Override
     public Mapper<GiftpackageSyncEntity> getMapper() {
@@ -34,6 +42,15 @@ public class GiftpackageSyncServiceImpl extends BaseServiceImpl<GiftpackageSyncE
         giftpackageSync.setGenerateTime(new Date());
         giftpackageSync.setChannelId(giftpackageSyncSearchQuery.getChannelId());
         giftpackageSync.setServerId(giftpackageSyncSearchQuery.getServerId());
+        ServerEntity serverEntity = serverMapper.selectByPrimaryKey(giftpackageSyncSearchQuery.getServerId());
+        giftpackageSync.setServerName(serverEntity.getServerName());
+        ChannelEntity channelEntity = channelMapper.selectByPrimaryKey(giftpackageSyncSearchQuery.getChannelId());
+        giftpackageSync.setChannelName(channelEntity.getChannelName());
+        giftpackageSync.setCardFile(System.currentTimeMillis()+".xls");
+        giftpackageSync.setActivityId(1);
+        giftpackageSync.setIsExclusiveGiftbag(0);
+        giftpackageSync.setIsActivation(0);
+        giftpackageSync.setGenerateType(giftpackageSyncSearchQuery.getGenerateType());
         create(giftpackageSync);
     }
 
@@ -43,6 +60,16 @@ public class GiftpackageSyncServiceImpl extends BaseServiceImpl<GiftpackageSyncE
             query.setPageNum(1);
         }
         return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> GiftpackageSyncMapper.queryGiftpackageSyncReport(query));
+    }
+
+    @Override
+    public void delete(int id) {
+        GiftpackageSyncMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public GiftpackageSync searchById(Integer id) {
+        return GiftpackageSyncMapper.selectById(id);
     }
 
 }
