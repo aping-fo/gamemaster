@@ -30,7 +30,7 @@ public class UserTypeHandler implements TypeHandler<UserType> {
 
     @Override
     public void setParameter(PreparedStatement ps, int i, UserType param, JdbcType jdbcType) throws SQLException {
-        ps.setInt(i, (byte) param.code());
+        ps.setInt(i, param.code());
     }
 
 }

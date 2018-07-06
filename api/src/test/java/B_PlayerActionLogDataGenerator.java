@@ -53,7 +53,7 @@ public class B_PlayerActionLogDataGenerator {
 //        for (long i = 0; i < 20000; i++) {
 //            PlayerActionLog playerActionLog = new PlayerActionLog();
 //            playerActionLog.setDeviceId("" + (i + 1));
-//            playerActionLog.setAction((int) i % 5 + 1);//RandomUtils.nextInt(1, 6));
+//            playerActionLog.setAction(ActionType.codeOf((int) i % 5 + 1));//RandomUtils.nextInt(1, 6));
 //            playerActionLog.setActionDate(DateUtils.RandomDateTime(DateUtils.StringToDate("2018-01-01"), DateUtils.StringToDate("2018-06-01")));
 //            playerActionLog.setChannelId(RandomUtils.nextLong(1, channelCount));
 //            Channel channel = this.channelService.getByChannelId(playerActionLog.getChannelId());
@@ -82,7 +82,7 @@ public class B_PlayerActionLogDataGenerator {
 //
 //            playerActionLog.setPlayerId(RandomUtils.nextLong(1, playerCount));
 //            playerActionLog.setCharId(playerActionLog.getPlayerId());
-//            if (playerActionLog.getAction() == 5) {
+//            if (playerActionLog.getAction().equals(ActionType.OFFLINE)) {
 //                playerActionLog.setOnlineTime(RandomUtils.nextLong(5000, 200000));
 //            }
 //            playerActionLogService.save(playerActionLog);

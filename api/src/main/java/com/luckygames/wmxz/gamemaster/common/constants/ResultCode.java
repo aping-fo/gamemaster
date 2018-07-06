@@ -18,10 +18,15 @@ public enum ResultCode {
     CHARACTER_NOT_FOUND(2000, "玩家角色不存在"),
     CHARACTER_ID_INVALID(2001, "角色ID错误"),
     CHARACTER_FORBIDDEN_FAILD(2002, "封禁角色失败"),
-
+    CHARACTER_NAME_INVALID(2003, "角色名称错误"),
+    CHARACTER_LEVEL_INVALID(2004, "角色等级错误"),
 
     SERVER_NOT_FOUND(3000, "区服不存在"),
-    SERVER_ID_INVALID(3001, "区服ID错误"),;
+    SERVER_ID_INVALID(3001, "区服ID错误"),
+
+    SEND_MAIL_FAILED(4001, "发送邮件异常"),
+    CONTENT_INVALID(4002, "广播/公告内存错误"),
+    SEND_BROADCAST_FAILED(4003, "发送广播/公告异常");
 
 
     private final int code;

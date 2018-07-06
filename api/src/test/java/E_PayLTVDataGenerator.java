@@ -2,7 +2,6 @@ import com.luckygames.wmxz.gamemaster.GamemasterApplication;
 import com.luckygames.wmxz.gamemaster.service.PayLTVDayService;
 import com.luckygames.wmxz.gamemaster.service.PayLTVService;
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -20,7 +19,7 @@ import java.util.Date;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GamemasterApplication.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-@Ignore
+//@Ignore
 public class E_PayLTVDataGenerator {
     @Autowired
     private PayLTVService payLTVService;

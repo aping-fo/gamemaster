@@ -37,4 +37,10 @@ public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseServi
 
         return obj.getId();
     }
+
+    @Override
+    public void delete(T obj) {
+        obj.setStatus(Status.DELETED);
+        update(obj);
+    }
 }

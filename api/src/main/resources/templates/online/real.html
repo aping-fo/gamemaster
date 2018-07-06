@@ -1,0 +1,47 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="online/real" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>
+                        <label><input type="radio" name="searchType" value="1" th:checked="${request.searchType==1}"/>按日期查询</label>
+                        <label><input type="radio" name="searchType" value="0" th:checked="${request.searchType==0}"/>最近24小时</label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div th:replace="_include/searchBar"></div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li>
+                <a class="icon" href="online/now/export" target="dwzExport" targetType="navTab"
+                   title="确实要导出这些记录吗?"><span>导出EXCEL</span></a>
+            </li>
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="137">
+        <thead>
+        <tr>
+            <th width="100">区服</th>
+            <th width="100">日期</th>
+            <th width="80">小时</th>
+            <th width="100">在线数</th>
+            <th width="100">最大在线数</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${serverOnlineLogs}">
+            <td th:text="${row.serverName}"></td>
+            <td th:text="${row.reportDate}"></td>
+            <td th:text="${row.reportHour}"></td>
+            <td th:text="${row.onlineCount}"></td>
+            <td th:text="${row.maxOnlineCount}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>

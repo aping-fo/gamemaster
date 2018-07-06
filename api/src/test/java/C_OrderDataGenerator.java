@@ -5,7 +5,6 @@ import com.luckygames.wmxz.gamemaster.service.*;
 import com.luckygames.wmxz.gamemaster.utils.DateUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -19,7 +18,7 @@ import java.math.BigDecimal;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GamemasterApplication.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-@Ignore
+//@Ignore
 public class C_OrderDataGenerator {
     @Autowired
     private PlayerOrderService playerOrderService;

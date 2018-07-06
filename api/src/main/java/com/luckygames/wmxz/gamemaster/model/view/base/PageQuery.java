@@ -3,8 +3,8 @@ package com.luckygames.wmxz.gamemaster.model.view.base;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 public class PageQuery {
-    private Integer pageNum;
-    private Integer pageSize = 25;
+    private Integer pageNum = 1;
+    private Integer pageSize = 50;
     private String orderField = "";
     private String orderDirection = "ASC";
 

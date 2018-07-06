@@ -4,6 +4,8 @@ import com.github.pagehelper.Page;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.dao.GiftpackageSyncEntity;
 import com.luckygames.wmxz.gamemaster.model.entity.*;
+import com.luckygames.wmxz.gamemaster.model.enums.BroadcastType;
+import com.luckygames.wmxz.gamemaster.model.enums.MailType;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
 import com.luckygames.wmxz.gamemaster.model.view.request.*;
 import com.luckygames.wmxz.gamemaster.service.*;
@@ -410,5 +412,33 @@ public class GameController extends BaseController {
         return new Response("activity/olympics_activity_audit")
                 .request(query)
                 .data("activityList", activityPage);
+    }
+
+    @Autowired
+    private MailLogService mailLogService;
+
+    @RequestMapping(value = "/mail", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response mail(MailSearchQuery query) {
+        if (query.getMailType() != null && query.getMailType().equals(MailType.UNKNOWN)) {
+            query.setMailType(null);
+        }
+        Page<MailLog> mailLogs = mailLogService.searchPage(query);
+
+        return new Response("game/mail")
+                .request(query)
+                .data("mailLogs", mailLogs);
+    }
+
+    @Autowired
+    private BroadcastService broadcastService;
+
+    @RequestMapping(value = {"/broadcast", "/affiche"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public Response broadcast(BroadcastSearchQuery query) {
+
+        Page<Broadcast> broadcastList = broadcastService.searchPage(query);
+        String view = query.getBroadcastType().equals(BroadcastType.BROADCAST) ? "game/broadcast" : "game/affiche";
+        return new Response(view)
+                .request(query)
+                .data("broadcastList", broadcastList);
     }
 }

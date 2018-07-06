@@ -55,6 +55,16 @@ public class PlayerCharacterServiceImpl extends BaseServiceImpl<PlayerCharacterE
     }
 
     @Override
+    public PlayerCharacter getByCharName(Long serverId, String charName) {
+        PlayerCharacterEntity playerCharacterEntity = playerCharacterMapper.selectOne(new PlayerCharacterEntity() {{
+            setServerId(serverId);
+            setCharName(charName);
+            setStatus(Status.NORMAL);
+        }});
+        return BeanUtils.copyProperties(playerCharacterEntity, PlayerCharacter.class);
+    }
+
+    @Override
     public Mapper<PlayerCharacterEntity> getMapper() {
         return playerCharacterMapper;
     }

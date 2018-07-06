@@ -30,7 +30,7 @@ public class StatusHandler implements TypeHandler<Status> {
 
     @Override
     public void setParameter(PreparedStatement ps, int i, Status param, JdbcType jdbcType) throws SQLException {
-        ps.setInt(i, (byte) param.code());
+        ps.setInt(i, param.code());
     }
 
 }

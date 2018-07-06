@@ -5,7 +5,6 @@ import com.luckygames.wmxz.gamemaster.service.ChannelService;
 import com.luckygames.wmxz.gamemaster.service.ServerService;
 import com.luckygames.wmxz.gamemaster.utils.DateUtils;
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -17,7 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GamemasterApplication.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-@Ignore
+//@Ignore
 public class serverChannelGenerator {
 
     private static String[] channelNames = {

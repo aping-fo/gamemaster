@@ -7,7 +7,6 @@ import com.luckygames.wmxz.gamemaster.utils.DateUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -21,7 +20,7 @@ import java.util.Date;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GamemasterApplication.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-@Ignore
+//@Ignore
 public class A_PlayerDataGenerator {
     @Autowired
     private PlayerService playerService;

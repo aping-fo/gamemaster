@@ -30,7 +30,7 @@ public class ForbiddenTypeHandler implements TypeHandler<ForbiddenType> {
 
     @Override
     public void setParameter(PreparedStatement ps, int i, ForbiddenType param, JdbcType jdbcType) throws SQLException {
-        ps.setInt(i, (byte) param.code());
+        ps.setInt(i, param.code());
     }
 
 }
