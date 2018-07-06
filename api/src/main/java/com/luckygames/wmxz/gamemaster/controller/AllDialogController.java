@@ -49,12 +49,14 @@ public class AllDialogController extends BaseController {
                 if (character == null) {
                     return new Response(ResultCode.CHARACTER_NOT_FOUND);
                 }
+                //更新玩家状态
+                playerCharacterService.updateStatus(character.getPlayerId(),1);
             }
         }
         List<Server> serverList = serverService.searchList();
         logger.debug("optype:{}", opType);
 
-        return new Response("player/dialog_ban")
+        return new Response("player/dialog_unban")
                 .data("serverList", serverList)
                 .data("charIds", charIds)
                 .data("opType", opType);
@@ -99,6 +101,8 @@ public class AllDialogController extends BaseController {
                     forbiddenLog.setServerId(forbiddenRequest.getServerId());
                     forbiddenLog.setStatus(Status.NORMAL);
                     forbiddenLogService.save(forbiddenLog);
+                    //更新玩家状态
+                    playerCharacterService.updateStatus(character.getPlayerId(),2);
                 } else {
                     forbiddenLogService.removeFobidden(f);
                 }
@@ -224,8 +228,8 @@ public class AllDialogController extends BaseController {
 //                        .json();
             }
 
-            result = "OK";
-            if (!"OK".equals(request)) {
+//            result = "OK";
+            if (!result.equals("success")) {
                 return;
             }
             Broadcast broadcast = new Broadcast();
@@ -235,10 +239,19 @@ public class AllDialogController extends BaseController {
             broadcast.setTitle(request.getTitle());
             broadcast.setContent(request.getContent());
             broadcast.setBroadcastStatus(BroadcastStatus.ENABLED);
+            broadcast.setGapSecond(request.getGameSeconds());
             broadcastService.save(broadcast);
         });
 
         return new Response().request(request).json();
     }
 
+    // TODO 踢下线
+//    @RequestMapping(value = "/game/kick_line", method = {RequestMethod.GET, RequestMethod.POST})
+
+    // TODO 闪断
+//    @RequestMapping(value = "/game/flicker", method = {RequestMethod.GET, RequestMethod.POST})
+
+    // TODO 公告
+//    @RequestMapping(value = "/game/affiche", method = {RequestMethod.GET, RequestMethod.POST})
 }

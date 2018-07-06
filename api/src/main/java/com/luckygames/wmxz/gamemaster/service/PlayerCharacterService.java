@@ -19,4 +19,6 @@ public interface PlayerCharacterService extends BaseService<PlayerCharacterEntit
     Page<PlayerCharacter> searchPage(PlayerCharacterSearchQuery query);
 
     PlayerCharacter getByCharName(Long serverId, String charName);
+
+    void updateStatus(Long playerId,Integer operateStatus);
 }

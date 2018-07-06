@@ -132,6 +132,10 @@ public class PlayerCharacterEntitySqlProvider {
             sql.VALUES("update_time", "#{updateTime,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getOperateStatus() != null) {
+            sql.VALUES("operate_status", "#{operateStatus,jdbcType=INTEGER}");
+        }
+        
         return sql.toString();
     }
 
@@ -167,6 +171,7 @@ public class PlayerCharacterEntitySqlProvider {
         sql.SELECT("`status`");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
+        sql.SELECT("operate_status");
         sql.FROM("player_character");
         applyWhere(sql, example, false);
         
@@ -288,6 +293,10 @@ public class PlayerCharacterEntitySqlProvider {
             sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getOperateStatus() != null) {
+            sql.SET("operate_status = #{record.operateStatus,jdbcType=INTEGER}");
+        }
+        
         applyWhere(sql, example, true);
         return sql.toString();
     }
@@ -322,6 +331,7 @@ public class PlayerCharacterEntitySqlProvider {
         sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
+        sql.SET("operate_status = #{record.operateStatus,jdbcType=INTEGER}");
         
         PlayerCharacterEntityExample example = (PlayerCharacterEntityExample) parameter.get("example");
         applyWhere(sql, example, true);

@@ -1,5 +1,5 @@
 <div class="pageContent">
-    <form method="post" action="game/ajax_sendbroadcast" class="pageForm required-validate"
+    <form method="post" action="game/affiche" class="pageForm required-validate"
           onsubmit="return validateCallback(this, navTabAjaxDone);">
         <input type="hidden" name="broadcastType" value="AFFICHE">
         <div class="pageFormContent" layoutH="56">
@@ -14,7 +14,7 @@
                 <input type="text" class="textInput" name="title"/>
             </p>
             <div>
-                <label>广播内容：</label>
+                <label>公告内容：</label>
                 <textarea name="content" class="required textArea" cols="30" rows="4"></textarea>
             </div>
         </div>

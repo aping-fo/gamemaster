@@ -15,4 +15,7 @@ public interface PlayerCharacterMapper extends PlayerCharacterEntityMapper<Playe
 
     @SelectProvider(type = PlayerCharacterSqlProvider.class, method = "searchPlayerCharacter")
     List<PlayerCharacter> searchPlayerCharacter(PlayerCharacterSearchQuery query);
+
+    @SelectProvider(type = PlayerCharacterSqlProvider.class, method = "updateStatus")
+    List<PlayerCharacter> updateStatus(Long playerId,Integer operateStatus);
 }

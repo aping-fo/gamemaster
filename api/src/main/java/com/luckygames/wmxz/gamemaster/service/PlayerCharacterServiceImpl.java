@@ -65,6 +65,11 @@ public class PlayerCharacterServiceImpl extends BaseServiceImpl<PlayerCharacterE
     }
 
     @Override
+    public void updateStatus(Long playerId,Integer operateStatus) {
+        playerCharacterMapper.updateStatus(playerId,operateStatus);
+    }
+
+    @Override
     public Mapper<PlayerCharacterEntity> getMapper() {
         return playerCharacterMapper;
     }

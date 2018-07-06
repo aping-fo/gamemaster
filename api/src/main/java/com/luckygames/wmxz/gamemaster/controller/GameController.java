@@ -99,24 +99,6 @@ public class GameController extends BaseController {
         return new Response("game/chatmonitor");
     }
 
-    //公告管理
-    @RequestMapping(value = "/affiche", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response affiche() {
-        return new Response("game/affiche");
-    }
-
-    //广播管理
-    @RequestMapping(value = "/broadcast", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response broadcast() {
-        return new Response("game/broadcast");
-    }
-
-    //邮件系统
-    @RequestMapping(value = "/mail", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response mail() {
-        return new Response("game/mail");
-    }
-
     //添加礼包
     @RequestMapping(value = "/giftpackage_add", method = {RequestMethod.GET, RequestMethod.POST})
     public Response addGiftPackage(GiftpackageAddSearchQuery giftpackageAddSearchQuery) {
@@ -432,12 +414,19 @@ public class GameController extends BaseController {
     @Autowired
     private BroadcastService broadcastService;
 
-    @RequestMapping(value = {"/broadcast", "/affiche"}, method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = {"/broadcast"}, method = {RequestMethod.GET, RequestMethod.POST})
     public Response broadcast(BroadcastSearchQuery query) {
 
         Page<Broadcast> broadcastList = broadcastService.searchPage(query);
-        String view = query.getBroadcastType().equals(BroadcastType.BROADCAST) ? "game/broadcast" : "game/affiche";
-        return new Response(view)
+        return new Response("game/broadcast")
+                .request(query)
+                .data("broadcastList", broadcastList);
+    }
+
+    @RequestMapping(value = {"/affiche"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public Response affiche(BroadcastSearchQuery query) {
+        Page<Broadcast> broadcastList = broadcastService.searchPage(query);
+        return new Response("game/affiche")
                 .request(query)
                 .data("broadcastList", broadcastList);
     }

@@ -128,4 +128,10 @@ public class PlayerCharacterSqlProvider extends PlayerCharacterEntitySqlProvider
         return sql.toString();
 
     }
+
+
+    public String updateStatus(Long playerId, Integer operateStatus) {
+        StringBuilder sql = new StringBuilder("update player_character set operate_status= " + operateStatus + " where player_id = " + playerId);
+        return sql.toString();
+    }
 }

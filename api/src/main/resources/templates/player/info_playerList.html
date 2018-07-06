@@ -60,9 +60,15 @@
     </form>
 </div>
 <div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><a class="delete" href="javascript:batchBanDialog();"><span>批量封禁</span></a></li>
+        </ul>
+    </div>
     <table class="table" layoutH="137">
         <thead>
         <tr>
+            <th width="22"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
             <th width="120">区服</th>
             <th width="120">渠道</th>
             <th width="120">账号</th>
@@ -72,11 +78,12 @@
             <th width="80" align="right">角色等级</th>
             <th width="80" align="right">剩余元宝</th>
             <th width="80" align="right">最后登录时间</th>
-            <th width="120">操作</th>
+            <th width="220">操作</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="row,iterStat:${characters}">
+            <td><input name="ids" th:value="${row.charId}" type="checkbox"></td>
             <td th:text="${row.serverName}"></td>
             <td th:text="${row.channelName}"></td>
             <td><input type="button" th:value="${row.username}" th:onclick="'changeHref(\''+${row.charId}+'\')'"/></td>
@@ -89,7 +96,11 @@
             <td th:text="${row.level}"></td>
             <td th:text="${row.leftGold}"></td>
             <td th:text="${#dates.format(row.updateTime, 'yyyy-MM-dd')}"></td>
-            <td></td>
+            <td>
+                <a th:if="${row.operateStatus==1}" title="封禁" class="button" th:href="@{player/dialog_ban(charIds=${row.charId},opType='FORBIDDEN')}" target="dialog" mask="true"><span>封禁</span></a>
+                <a title="踢下线" class="button" th:href="@{player/kick_line(charIds=${row.charId})}" target="dialog" mask="true"><span>踢下线</span></a>
+                <a title="闪断" class="button" th:href="@{player/flicker(charIds=${row.charId})}" target="dialog" mask="true"><span>闪断</span></a>
+            </td>
         </tr>
         </tbody>
     </table>
@@ -110,4 +121,12 @@
         href.eq(2).attr("href","player/info_equipment_flow?charId="+charId)
     }
     changeHref2()
+    function batchBanDialog() {
+        var selectIds = $.getSelectedIds("ids");
+        alert(selectIds);
+        var url = "player/dialog_ban";
+        url += "?charIds=" + selectIds;
+        url += "&opType=FORBIDDEN";
+        $.pdialog.open(url, 'batchBan', '批量封禁', {mask: true});
+    }
 </script>

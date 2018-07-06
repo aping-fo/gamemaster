@@ -9,7 +9,7 @@ public class BroadcastQuery extends GMQuery {
     private int gapSecond;
     private Date playTime;
     private String title;
-    private String content;
+    private String msg;
 
     public BroadcastQuery(Long serverId, int loopTimes, int gapSecond, Date playTime, String title, String content) {
         super(serverId);
@@ -17,7 +17,7 @@ public class BroadcastQuery extends GMQuery {
         this.gapSecond = gapSecond;
         this.playTime = playTime;
         this.title = title;
-        this.content = content;
+        this.msg = content;
     }
 
     public int getLoopTimes() {
@@ -53,11 +53,11 @@ public class BroadcastQuery extends GMQuery {
     }
 
     public String getContent() {
-        return content;
+        return msg;
     }
 
     public void setContent(String content) {
-        this.content = content;
+        this.msg = content;
     }
 
 }

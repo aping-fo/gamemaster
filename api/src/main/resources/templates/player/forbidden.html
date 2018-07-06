@@ -30,13 +30,6 @@
     </form>
 </div>
 <div class="pageContent">
-    <div class="panelBar">
-        <ul class="toolBar">
-            <li>
-                <a class="icon" href="recharge/daily/export" target="dwzExport" targetType="navTab" title="确实要导出这些记录吗?"><span>导出EXCEL</span></a>
-            </li>
-        </ul>
-    </div>
     <table class="table" layoutH="137">
         <thead>
         <tr>
@@ -47,7 +40,7 @@
             <th width="120">IP</th>
             <th width="120">过期时间</th>
             <th width="120">封禁时间</th>
-            <th width="280">操作</th>
+            <th width="120">操作</th>
         </tr>
         </thead>
         <tbody>
@@ -60,9 +53,7 @@
             <td th:text="${#dates.format(row.expireTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
             <td th:text="${#dates.format(row.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
             <td>
-                <a title="解封" class="button" th:href="@{player/dialog_ban(charId=${row.charId},opType='ALLOWED')}"
-                   target="dialog"
-                   mask="true"><span>解封</span></a>
+                <a title="解封" class="button" th:href="@{player/dialog_ban(charIds=${row.charId},opType='ALLOWED')}" target="dialog" mask="true"><span>解封</span></a>
             </td>
         </tr>
         </tbody>

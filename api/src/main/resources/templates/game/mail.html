@@ -10,7 +10,7 @@
                             <option value="UNKNOWN" th:selected="${request.mailType=='UNKNOWN'}">全部</option>
                             <option value="SERVER" th:selected="${request.mailType=='SERVER'}">全服群发</option>
                             <option value="LEVEL" th:selected="${request.mailType=='LEVEL'}">等级范围</option>
-                            <option value="CHAR" th:selected="${request.mailType=='CHAR'}">指定角色</option>
+                            <option value="CHAR" th:selected="${request.mailType=='CHAR'}">角色群发</option>
                         </select>
                     </td>
                 </tr>
@@ -22,10 +22,6 @@
 <div class="pageContent">
     <div class="panelBar">
         <ul class="toolBar">
-            <li>
-                <a class="icon" href="online/now/export" target="dwzExport" targetType="navTab"
-                   title="确实要导出这些记录吗?"><span>导出EXCEL</span></a>
-            </li>
             <li>
                 <a title="发送邮件" class="edit" href="game/dialog_newmail"
                    target="dialog" width="480" height="500"
