@@ -1,0 +1,63 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="game/chat_settings" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>渠道</td>
+                    <td>
+                        <select name="channelId">
+                            <option th:each="row,iterStat:${channelList}" th:text="${row.channelName}" th:value="${row.channelId}"></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>区服</td>
+                    <td>
+                        <select name="serverId">
+                            <option th:each="row,iterStat:${serverList}" th:text="${row.serverName}" th:value="${row.serverId}"></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>聊天频道</td>
+                    <td>
+                        <select name="chatChannel">
+                            <option value="1">私聊</option>
+                            <option value="2">世界</option>
+                            <option value="3">帮派</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr><td>等级限制</td><td><input type="number" name="chatLevel" value="110"/></td></tr>
+                <tr><td>VIP限制</td><td><input type="number" name="chatVip" value="0"/>(默认不限制)</td></tr>
+                <tr><td colspan="2"><input type="submit" value="提交"/></td></tr>
+            </table>
+        </div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%" layoutH="137">
+        <thead>
+        <tr>
+            <th>渠道</th>
+            <th>区服</th>
+            <th>聊天频道</th>
+            <th>等级限制</th>
+            <th>VIP限制</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${chatSettingsList}">
+            <td th:text="${row.channelName}"><input type="hidden" value="${row.id}"/></td>
+            <td th:text="${row.serverName}"></td>
+            <td th:if="${row.chatChannel==1}" th:text="私聊"></td>
+            <td th:if="${row.chatChannel==2}" th:text="世界"></td>
+            <td th:if="${row.chatChannel==3}" th:text="帮派"></td>
+            <td th:text="${row.chatLevel}"></td>
+            <td th:if="${row.chatVip==0}">无限制</td>
+            <td th:if="${row.chatVip!=0}" th:text="${row.chatVip}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

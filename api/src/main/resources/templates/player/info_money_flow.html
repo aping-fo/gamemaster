@@ -1,0 +1,55 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="player/info_flowQuery" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>
+                        <select name="type" class="combox">
+                            <option value="1">出售</option>
+                            <option value="2">购买</option>
+                            <option value="3">BOSS掉落</option>
+                            <option value="4">活动</option>
+                        </select>
+                    </td>
+                    <td>金钱类型：
+                        <select name="type" class="combox">
+                            <option value="1">-</option>
+                            <option value="2">元宝</option>
+                            <option value="3">铜钱</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div th:replace="_include/searchBar"></div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%" layoutH="137">
+        <thead>
+        <tr>
+            <th width="120">类型</th>
+            <th width="120">金钱类型</th>
+            <th width="120">变动的金钱</th>
+            <th width="120">变动的绑金</th>
+            <th width="120">剩余的金钱</th>
+            <th width="120">剩余的绑金</th>
+            <th width="120">时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${propFlowList}">
+            <td th:text="${row.type}"></td>
+            <td th:if="${row.moneyType==1}" th:text="金币"></td>
+            <td th:if="${row.moneyType==2}" th:text="元宝"></td>
+            <td th:text="${row.changeMoney}"></td>
+            <td th:text="${row.changeBindGold}"></td>
+            <td th:text="${row.leftGold}"></td>
+            <td th:text="${row.leftBindGold}"></td>
+            <td th:text="${#dates.format(row.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>

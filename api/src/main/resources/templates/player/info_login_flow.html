@@ -1,0 +1,31 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="player/info_flowQuery" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div th:replace="_include/searchBar"></div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%" layoutH="137">
+        <thead>
+        <tr>
+            <th width="120">等级</th>
+            <th width="120">包</th>
+            <th width="120">ip</th>
+            <th width="120">登入时间</th>
+            <th width="120">登出时间</th>
+            <th width="120">在线时长</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${propFlowList}">
+            <td th:text="${row.level}"></td>
+            <td th:text="${row.channelId}"></td>
+            <td th:text="${row.ip}"></td>
+            <td th:text="${#dates.format(row.loginTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${#dates.format(row.logoutTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${row.onlineTimeLength}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>

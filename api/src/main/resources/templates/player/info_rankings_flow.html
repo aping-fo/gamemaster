@@ -1,0 +1,40 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="player/info_flowQuery" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>类型:
+                        <select name="type" class="combox">
+                            <option value="1">出售</option>
+                            <option value="2">购买</option>
+                            <option value="3">BOSS掉落</option>
+                            <option value="4">活动</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div th:replace="_include/searchBar"></div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%" layoutH="137">
+        <thead>
+        <tr>
+            <th width="120">类型</th>
+            <th width="120">数值</th>
+            <th width="120">时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${propFlowList}">
+            <td th:if="${row.type==1}" th:text="战力"></td>
+            <td th:if="${row.type==2}" th:text="等级"></td>
+            <td th:text="${row.numericalValue}"></td>
+            <td th:text="${#dates.format(row.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>

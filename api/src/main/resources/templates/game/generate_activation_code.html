@@ -1,0 +1,37 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="game/generate_activation_code" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>礼包</td>
+                    <td>
+                        <select name="giftBag">
+                            <option th:each="row1,iterStat:${typeList}" th:text="${row1.name}" th:value="${row1.name}"></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>激活码数量</td>
+                    <td><input name="number" type="text" size="15"></td>
+                </tr>
+                <tr>
+                    <td>使用次数</td>
+                    <td><input name="frequency" type="text" size="15"></td>
+                </tr>
+                <tr>
+                    <td>生效时间</td>
+                    <td><input name="invalidTime" type="text" size="15" class="date readonly" readonly="readonly">留空不判断开始失效时间</td>
+                </tr>
+                <tr>
+                    <td>失效时间</td>
+                    <td><input name="overdueTime" type="text" size="15" class="date readonly" readonly="readonly">留空表示不会失效</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" size="15" value="提交"></td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
