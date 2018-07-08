@@ -1,0 +1,61 @@
+<div class="pageContent">
+    <div class="tabs" currentIndex="0" eventType="click">
+        <div class="tabsHeader">
+            <div class="tabsHeaderContent">
+                <ul>
+                    <li>
+                        <span>实时</span>
+                    </li>
+                    <li>
+                        <a href="game/chatmonitor_history" class="j-ajax"><span>历史</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="tabsContent">
+            <div>
+                <div class="pageHeader">
+                    <form id="chatMonitorForm" onsubmit="return navTabSearch(this);" action="game/chatmonitor"
+                          method="post"
+                          onreset="$(this).find('select.combox').comboxReset()">
+                        <div class="searchBar">
+                            <table class="searchContent">
+                                <tr>
+                                    <td>
+                                        <label>频道</label>
+                                        <select name="chatChannel" class="combox">
+                                            <option value="ALL" th:selected="${request.chatChannel=='ALL'}">全部</option>
+                                            <option value="WORLD" th:selected="${request.chatChannel=='WORLD'}">世界
+                                            </option>
+                                            <option value="FRIEND" th:selected="${request.chatChannel=='FRIEND'}">好友
+                                            </option>
+                                            <option value="FACTION" th:selected="${request.chatChannel=='FACTION'}">公会
+                                            </option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+                <div class="pageContent" id="chatMonitorFrame">
+                </div>
+
+            </div>
+            <div>历史</div>
+        </div>
+        <div class="tabsFooter">
+            <div class="tabsFooterContent"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        function autoRefresh() {
+            $("#chatMonitorFrame").loadUrl("game/chatmonitor_frame");
+        }
+
+        t = setInterval(autoRefresh, 2000);
+    });
+</script>

@@ -9,9 +9,9 @@ function initEnv() {
     var ajaxbg = $("#background,#progressBar");
     ajaxbg.hide();
     $(document).ajaxStart(function () {
-        ajaxbg.show();
+        //ajaxbg.show();
     }).ajaxStop(function () {
-        ajaxbg.hide();
+        //ajaxbg.hide();
     });
 
     if ($.fn.jBar) $("#leftside").jBar({minW: 150, maxW: 700});

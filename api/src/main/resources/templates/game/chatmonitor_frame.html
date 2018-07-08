@@ -1,0 +1,24 @@
+<table class="table" layoutH="110">
+    <thead>
+    <tr>
+        <th width="80">区服</th>
+        <th width="80">频道</th>
+        <th width="80">角色ID</th>
+        <th width="120">角色名</th>
+        <th width="130">时间</th>
+        <th width="300">聊天内容</th>
+        <th width="100">操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="row,iterStat:${chatLogList}">
+        <td th:text="${row.serverName}"></td>
+        <td th:text="${row.chatChannel}"></td>
+        <td th:text="${row.charId}"></td>
+        <td th:text="${row.charName}"></td>
+        <td th:text="${#dates.format(row.chatTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td th:text="${row.content}"></td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>

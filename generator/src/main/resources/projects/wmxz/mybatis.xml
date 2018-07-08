@@ -122,5 +122,9 @@
             <columnOverride column="broadcast_status"
                             javaType="com.luckygames.wmxz.gamemaster.model.enums.BroadcastStatus"/>
         </table>
+        <table schema="wmxz" tableName="chat_log" domainObjectName="ChatLogEntity">
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
+        </table>
     </context>
 </generatorConfiguration>
