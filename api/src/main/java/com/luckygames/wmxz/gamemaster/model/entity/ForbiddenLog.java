@@ -5,6 +5,15 @@ import com.luckygames.wmxz.gamemaster.dao.ForbiddenLogEntity;
 public class ForbiddenLog extends ForbiddenLogEntity {
     private String username;
     private String charName;
+    private Integer hour;
+
+    public Integer getHour() {
+        return hour;
+    }
+
+    public void setHour(Integer hour) {
+        this.hour = hour;
+    }
 
     public String getUsername() {
         return username;

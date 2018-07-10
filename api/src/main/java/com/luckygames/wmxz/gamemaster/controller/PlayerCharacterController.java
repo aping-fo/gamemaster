@@ -61,13 +61,14 @@ public class PlayerCharacterController extends BaseController {
     }
 
     @RequestMapping(value = "/forbidden", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response queryForbidden(ForbiddenSearchQuery forbiddenQuery) {
-        if (forbiddenQuery.getPageNum() == null) {
-            forbiddenQuery.setPageNum(1);
+    public Response queryForbidden(ForbiddenSearchQuery query) {
+        if (query.getPageNum() == null) {
+            query.setPageNum(1);
         }
-        Page<ForbiddenLog> forbiddenLogPage = forbiddenLogService.searchPage(forbiddenQuery);
+
+        Page<ForbiddenLog> forbiddenLogPage = forbiddenLogService.searchPage(query);
         return new Response("player/forbidden")
-                .request(forbiddenQuery)
+                .request(query)
                 .data("forbiddenLogs", forbiddenLogPage);
     }
 

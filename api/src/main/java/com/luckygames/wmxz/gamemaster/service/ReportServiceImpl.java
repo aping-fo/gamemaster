@@ -14,7 +14,9 @@ import com.luckygames.wmxz.gamemaster.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("reportService")
 public class ReportServiceImpl implements ReportService {
@@ -52,6 +54,11 @@ public class ReportServiceImpl implements ReportService {
             return;
         }
         saveDataCollectionReport(list);
+    }
+
+    @Override
+    public List<LinkedHashMap> queryChannelDailyReport2(String startDate,String endDate,Integer type) {
+        return dataCollectionMapper.queryChannelDailyReport2(startDate,endDate,type);
     }
 
     private void saveDataCollectionReport(List<DataCollection> list) {

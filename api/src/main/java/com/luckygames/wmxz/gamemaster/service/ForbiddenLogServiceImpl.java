@@ -30,6 +30,11 @@ public class ForbiddenLogServiceImpl extends BaseServiceImpl<ForbiddenLogEntity>
     }
 
     @Override
+    public ForbiddenLog searchByCharId(Long charId) {
+        return forbiddenLogMapper.searchByCharId(charId);
+    }
+
+    @Override
     public void removeFobidden(Long charId) {
         forbiddenLogMapper.removeFobidden(charId);
     }

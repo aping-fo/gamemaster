@@ -9,5 +9,7 @@ import com.luckygames.wmxz.gamemaster.service.base.BaseService;
 public interface ForbiddenLogService extends BaseService<ForbiddenLogEntity> {
     Page<ForbiddenLog> searchPage(ForbiddenSearchQuery forbiddenQuery);
 
+    ForbiddenLog searchByCharId(Long charId);
+
     void removeFobidden(Long charId);
 }

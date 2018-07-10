@@ -47,7 +47,7 @@
                 <li>
                     <div class="buttonActive">
                         <div class="buttonContent">
-                            <button type="submit">确定</button>
+                            <button type="submit" id="confirm">确定</button>
                         </div>
                     </div>
                 </li>
@@ -62,3 +62,8 @@
         </div>
     </form>
 </div>
+<script type="text/javascript">
+    $('#confirm').click(function () {
+        $.pdialog.closeCurrent();
+    })
+</script>

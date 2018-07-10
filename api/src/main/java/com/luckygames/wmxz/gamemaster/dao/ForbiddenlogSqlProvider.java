@@ -28,7 +28,7 @@ public class ForbiddenlogSqlProvider {
             sql.append(" and forbidden_type = #{forbiddenType} ");
         }
         if (StringUtils.isNotBlank(query.getUsername())) {
-            sql.append(" and ( p.username like \"%\"#{userName}\"%\" or p.mobile like \"%\"#{userName}\"%\" or p.id_card like \"%\"#{userName}\"%\") ");
+            sql.append(" and ( p.username like \"%\"#{username}\"%\" or p.mobile like \"%\"#{username}\"%\" or p.id_card like \"%\"#{username}\"%\") ");
         }
         if (StringUtils.isNotBlank(query.getCharName())) {
             sql.append(" and ( pc.char_name like \"%\"#{charName}\"%\" ) ");

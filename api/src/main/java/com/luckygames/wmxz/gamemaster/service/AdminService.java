@@ -84,7 +84,6 @@ public interface AdminService {
      * @return
      */
     default String commonRequest(String reqParams, RestTemplate restTemplate, Long serverId, String url) {
-        //String strParams = encodeReqParams(reqParams);
         String host = getHost(serverId);
         ResponseEntity<String> result = restTemplate.getForEntity(host + url + reqParams, String.class);
         System.out.println(result.getBody());
@@ -92,5 +91,10 @@ public interface AdminService {
     }
 
     public String getHost(Long serverId);
+
+    /**
+     * 踢人
+     */
+    public String kickLine(GMQuery query);
 }
 

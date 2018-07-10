@@ -11,35 +11,28 @@
             <p>
                 <label>封禁类型：</label>
                 <select name="forbiddenType" class="combox">
-                    <option value="LOGIN">禁止登录</option>
-                    <option value="CHAT">禁止聊天</option>
+                    <option value="CHAT" th:if="${forbiddenLog.forbiddenType.toString() == 'LOGIN'}" th:text="禁止登录"></option>
+                    <option value="CHAT" th:if="${forbiddenLog.forbiddenType.toString() == 'CHAT'}" th:text="禁止聊天"></option>
                 </select>
             </p>
             <p>
                 <label>封禁时间：</label>
                 <select name="hour" class="combox">
-                    <option value="1">1小时</option>
-                    <option value="3">3小时</option>
-                    <option value="12">12小时</option>
-                    <option value="24">24小时</option>
-                    <option value="72">3天</option>
-                    <option value="720">30天</option>
+                    <option value="1" th:if="${forbiddenLog.hour==1}" th:text="1小时"></option>
+                    <option value="3" th:if="${forbiddenLog.hour==3}" th:text="3小时"></option>
+                    <option value="12" th:if="${forbiddenLog.hour==12}" th:text="12小时"></option>
+                    <option value="24" th:if="${forbiddenLog.hour==24}" th:text="24小时"></option>
+                    <option value="72" th:if="${forbiddenLog.hour==72}" th:text="3天"></option>
+                    <option value="720" th:if="${forbiddenLog.hour==720}" th:text="30天"></option>
                 </select>
             </p>
             <p>
                 <label>封禁理由：</label>
-                <select name="reason" class="combox">
-                    <option value="发布卖元宝信息">发布卖元宝信息</option>
-                    <option value="游戏刷屏">游戏刷屏</option>
-                    <option value="拉人">拉人</option>
-                    <option value="游戏捣乱">游戏捣乱</option>
-                    <option value="其他">其他</option>
-                </select>
+                <input name="reason" type="text" readonly="readonly" th:value="${forbiddenLog.reason}"/>
             </p>
             <p>
                 <label>角色ID：<br/>(以英文逗号分隔)</label>
-                <textarea name="charIds" class="required textInput" cols="30" rows="3"
-                          th:text="${#strings.listJoin(charIds,',')}"></textarea>
+                <textarea style="resize:none;" readonly="readonly" name="charIds" class="required textInput" cols="30" rows="1" th:text="${#strings.listJoin(charIds,',')}"></textarea>
             </p>
         </div>
         <div class="formBar">
@@ -47,7 +40,7 @@
                 <li>
                     <div class="buttonActive">
                         <div class="buttonContent">
-                            <button type="submit">确定</button>
+                            <button type="submit" id="confirm">确定</button>
                         </div>
                     </div>
                 </li>
@@ -62,3 +55,8 @@
         </div>
     </form>
 </div>
+<script type="text/javascript">
+    $('#confirm').click(function () {
+        $.pdialog.closeCurrent();
+    })
+</script>

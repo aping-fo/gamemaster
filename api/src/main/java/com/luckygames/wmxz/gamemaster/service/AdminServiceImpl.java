@@ -71,6 +71,16 @@ public class AdminServiceImpl implements AdminService {
     }
 
     /**
+     * 踢人
+     * @param query
+     * @return
+     */
+    @Override
+    public String kickLine(GMQuery query) {
+        return commonRequest(query.encodeReqParams(), restTemplate, query.getServerId(), AdminUrl.KICK.getUrl());
+    }
+
+    /**
      * 角色封禁操作
      *
      * @param query hour：封禁时长
