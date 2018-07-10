@@ -1,5 +1,6 @@
 package com.luckygames.wmxz.gamemaster.controller;
 
+import com.github.pagehelper.Page;
 import com.luckygames.wmxz.gamemaster.common.constants.ResultCode;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.model.entity.*;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 @Controller
@@ -49,17 +52,35 @@ public class AllDialogController extends BaseController {
                 if (character == null) {
                     return new Response(ResultCode.CHARACTER_NOT_FOUND);
                 }
-                //更新玩家状态
-                playerCharacterService.updateStatus(character.getPlayerId(),1);
             }
         }
         List<Server> serverList = serverService.searchList();
         logger.debug("optype:{}", opType);
+        Response response=new Response();
+        String view="player/dialog_ban";
+        if(opType==ForbiddenOperationType.ALLOWED){
+            view="player/dialog_unban";
+            ForbiddenLog forbiddenLog = forbiddenLogService.searchByCharId(charIds.get(0));
 
-        return new Response("player/dialog_unban")
+            //计算封禁时间
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Calendar cal=Calendar.getInstance();//获取当前日期
+            cal.setTime(forbiddenLog.getCreateTime());
+            long time1 = cal.getTimeInMillis();
+            cal.setTime(forbiddenLog.getExpireTime());
+            long time2 = cal.getTimeInMillis();
+            long between_days=(time2-time1)/(1000*3600);
+            int hour = Integer.parseInt(String.valueOf(between_days));
+            forbiddenLog.setHour(hour);
+
+            response.data("forbiddenLog",forbiddenLog);
+        }
+
+        response.view(view)
                 .data("serverList", serverList)
                 .data("charIds", charIds)
                 .data("opType", opType);
+        return response;
     }
 
     @RequestMapping(value = "/player/ajax_ban", method = RequestMethod.POST)
@@ -80,15 +101,14 @@ public class AllDialogController extends BaseController {
                         forbiddenRequest.getForbiddenType().getCode(),
                         f,
                         forbiddenRequest.getHour(),
-                        forbiddenRequest.getServerId()
+                        character.getServerId()
                 ));
                 logger.debug("调用封禁接口返回：{}", result);
             } catch (Exception e) {
                 logger.error("封禁角色异常：", e);
-                //return new Response(ResultCode.CHARACTER_FORBIDDEN_FAILD.getCode(), e.getMessage()).json();
             }
             result = "OK";
-            if ("OK".equals(result)) {
+            if (result!=null&&"OK".equals(result)) {
                 if (forbiddenRequest.getForbiddenOperationType().equals(ForbiddenOperationType.FORBIDDEN)) {
                     ForbiddenLog forbiddenLog = new ForbiddenLog();
                     forbiddenLog.setCharId(f);
@@ -101,15 +121,15 @@ public class AllDialogController extends BaseController {
                     forbiddenLog.setServerId(forbiddenRequest.getServerId());
                     forbiddenLog.setStatus(Status.NORMAL);
                     forbiddenLogService.save(forbiddenLog);
+
                     //更新玩家状态
                     playerCharacterService.updateStatus(character.getPlayerId(),2);
-                } else {
+                } else if(forbiddenRequest.getForbiddenOperationType().equals(ForbiddenOperationType.ALLOWED)){
+                    playerCharacterService.updateStatus(character.getPlayerId(),1);
                     forbiddenLogService.removeFobidden(f);
                 }
             }
         });
-
-
         return new Response().request(forbiddenRequest).json();
     }
 
@@ -247,7 +267,20 @@ public class AllDialogController extends BaseController {
     }
 
     // TODO 踢下线
-//    @RequestMapping(value = "/game/kick_line", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/player/kick_line", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response kickLine(KickLineRequest request) {
+        String result;
+        try {
+            result = adminService.kickLine(new KickLineQuery(
+                    request.getCharId(),
+                    request.getServerId()
+            ));
+            logger.debug("调用踢人接口返回：{}", result);
+        } catch (Exception e) {
+            logger.error("踢人角色异常：", e);
+        }
+        return new Response().request(request).json();
+    }
 
     // TODO 闪断
 //    @RequestMapping(value = "/game/flicker", method = {RequestMethod.GET, RequestMethod.POST})
