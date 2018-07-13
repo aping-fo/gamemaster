@@ -1,6 +1,16 @@
 package com.luckygames.wmxz.gamemaster.model.view.request;
 
 public class ServerSearchQuery extends KeywordSearchQuery {
+    private Integer serverId;
+
+    public Integer getServerId() {
+        return serverId;
+    }
+
+    public void setServerId(Integer serverId) {
+        this.serverId = serverId;
+    }
+
     public ServerSearchQuery(KeywordSearchQuery request) {
 
         this.setKeyword(request.getKeyword());

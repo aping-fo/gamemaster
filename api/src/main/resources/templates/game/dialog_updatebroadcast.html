@@ -1,0 +1,62 @@
+<div class="pageContent">
+    <form id="pagerForm" action="game/update_broadcast" method="post" onsubmit="return validateCallback(this, navTabAjaxDone);">
+
+        <input type="hidden" name="broadcastType" value="BROADCAST">
+        <input type="hidden" name="id" th:value="${broadcast.id}"/>
+        <div class="pageFormContent" layoutH="56">
+            <p>
+                <label>区服筛选</label>
+                <select name="serverId">
+                    <option th:if="${broadcast.serverId==row.serverId}" selected="selected" th:each="row,iterStat:${serverList}" th:text="${row.serverName}" th:value="${row.serverId}"></option>
+                    <option th:if="${broadcast.serverId!=row.serverId}" th:each="row,iterStat:${serverList}" th:text="${row.serverName}" th:value="${row.serverId}"></option>
+                </select>
+            </p>
+            <p>
+                <label>渠道筛选</label>
+                <select name="channelId">
+                    <option th:if="${broadcast.channelId==row.channelId}" selected="selected" th:each="row,iterStat:${channelList}" th:text="${row.channelName}" th:value="${row.channelId}"></option>
+                    <option th:if="${broadcast.channelId!=row.channelId}" th:each="row,iterStat:${channelList}" th:text="${row.channelName}" th:value="${row.channelId}"></option>
+                </select>
+            </p>
+            <p>
+                <label>开始播放时间：</label>
+                <input type="text" class="date" name="playTime" dateFmt="yyyy-MM-dd HH:mm:ss" th:value="${#dates.format(broadcast.playTime, 'yyyy-MM-dd HH:mm:ss')}"/>
+            </p>
+            <p>
+                <label>循环次数</label>
+                <input type="number" name="loopTimes" class="textInput" th:value="${broadcast.loopTimes}"/>
+            </p>
+            <p>
+                <label>间隔时间(秒)</label>
+                <input type="number" name="gameSeconds" class="textInput" th:value="${broadcast.gapSecond}"/>
+            </p>
+            <div>
+                <label>广播内容：</label>
+                <textarea name="content" class="required textArea" cols="30" rows="4"  th:text="${broadcast.content}" style="resize: none"></textarea>
+            </div>
+        </div>
+        <div class="formBar">
+            <ul>
+                <li>
+                    <div class="buttonActive">
+                        <div class="buttonContent">
+                            <button type="submit" id="confirm">确定</button>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="button">
+                        <div class="buttonContent">
+                            <button type="button" class="close">取消</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $('#confirm').click(function () {
+        $.pdialog.closeCurrent();
+    })
+</script>

@@ -27,9 +27,9 @@ public class ChatLogController extends BaseController {
         if (chatLog.getCharId() == null || chatLog.getCharId() <= 0) {
             return new Response(ResultCode.CHARACTER_ID_INVALID).json();
         }
-        if (StringUtils.isBlank(chatLog.getChatChannel())) {
-            return new Response(ResultCode.CHAT_CHANNEL_INVALID).json();
-        }
+//        if (StringUtils.isBlank(chatLog.getChatChannel())) {
+//            return new Response(ResultCode.CHAT_CHANNEL_INVALID).json();
+//        }
 
         ChatLog newChatLog = chatLogService.saveChatLog(chatLog);
         if (newChatLog == null) {

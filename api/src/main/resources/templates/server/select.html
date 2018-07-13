@@ -3,7 +3,8 @@
         <div>
             <div layoutH="138">
                 <div class="col-md-2" th:each="server:${serverList}">
-                    <input type="checkbox" name="serverId" th:value="'{serverIds:'+${server.serverId}+'}'"/>
+                    <input th:if="${serverId==server.serverId}" checked="checked" type="checkbox" name="serverId" th:value="'{serverIds:'+${server.serverId}+'}'"/>
+                    <input th:if="${serverId!=server.serverId}" type="checkbox" name="serverId" th:value="'{serverIds:'+${server.serverId}+'}'"/>
                     <span th:text="${server.serverName}"/>
                 </div>
             </div>

@@ -8,4 +8,8 @@ import com.luckygames.wmxz.gamemaster.service.base.BaseService;
 
 public interface BroadcastService extends BaseService<BroadcastEntity> {
     Page<Broadcast> searchPage(BroadcastSearchQuery query);
+
+    void deleteById(Long id);
+
+    Broadcast searchById(Long id);
 }

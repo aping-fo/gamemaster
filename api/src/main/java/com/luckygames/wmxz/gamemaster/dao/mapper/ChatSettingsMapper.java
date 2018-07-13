@@ -16,7 +16,7 @@ public interface ChatSettingsMapper extends ChatSettingsEntityMapper<ChatSetting
     ChatSettings search(ChatSettings chatSettings);
 
     @SelectProvider(type = ChatSettingsSqlProvider.class, method = "update")
-    void update(ChatSettings ChatSettings);
+    void update(ChatSettings chatSettings);
 
     @SelectProvider(type = ChatSettingsSqlProvider.class, method = "add")
     void add(ChatSettings ChatSettings);

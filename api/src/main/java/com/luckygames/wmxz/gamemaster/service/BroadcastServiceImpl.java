@@ -27,4 +27,14 @@ public class BroadcastServiceImpl extends BaseServiceImpl<BroadcastEntity> imple
         return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> broadcastMapper.searchPage(query));
 
     }
+
+    @Override
+    public void deleteById(Long id) {
+        broadcastMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public Broadcast searchById(Long id) {
+        return broadcastMapper.searchById(id);
+    }
 }

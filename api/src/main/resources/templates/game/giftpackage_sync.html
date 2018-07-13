@@ -86,7 +86,6 @@
             <td th:if="${row.generateType==2}" th:text="同一类型可以使用多个激活码"></td>
             <td th:if="${row.generateType==3}" th:text="特殊礼包"></td>
             <td><a class="button" th:href="@{game/giftpackage_sync(id=${row.id})}" target="navTab"><span>删除</span></a></td>
-            <!--<td><a class="button" th:href="@{game/download1(id=${row.id})}" target="navTab"><span>下载</span></a></td>-->
             <td>
                 <a class="button" onclick="test(this)"><span>下载</span></a>
                 <input type="hidden" th:value="${row.id}"/>

@@ -23,7 +23,7 @@
     <div class="panelBar">
         <ul class="toolBar">
             <li>
-                <a title="发送广播消息" class="edit" href="game/dialog_newbroadcast?broadcastType=BROADCAST"
+                <a title="发送广播消息" class="edit" href="game/dialog_newbroadcast"
                    target="dialog" width="480" height="500" rel="dialog_newbroadcast"
                    mask="true"><span>发送广播消息</span></a>
             </li>
@@ -32,7 +32,7 @@
     <table class="table" layoutH="137">
         <thead>
         <tr>
-            <!--<th width="80">区服</th>-->
+            <th width="80">区服</th>
             <th width="300">内容</th>
             <th width="120">播放时间</th>
             <th width="80">循环次数</th>
@@ -42,12 +42,15 @@
         </thead>
         <tbody>
         <tr th:each="row,iterStat:${broadcastList}">
-            <!--<td th:text="${row.serverName}"></td>-->
+            <td th:text="${row.serverName}"></td>
             <td th:text="${row.content}"></td>
             <td th:text="${#dates.format(row.playTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
             <td th:text="${row.loopTimes}"></td>
             <td th:text="${row.gapSecond}"></td>
-            <td></td>
+            <td>
+                <a title="删除" class="button" th:href="@{game/broadcast(id=${row.id})}" target="navTab"><span>删除</span></a>
+                <a title="修改" class="button" th:href="@{game/dialog_newbroadcast(id=${row.id})}"  target="dialog" width="480" height="500" rel="dialog_updatebroadcast" mask="true"><span>修改</span></a>
+            </td>
         </tr>
         </tbody>
     </table>

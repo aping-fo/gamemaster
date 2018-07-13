@@ -1,11 +1,14 @@
 package com.luckygames.wmxz.gamemaster.controller;
 
 import com.github.pagehelper.Page;
+import com.luckygames.wmxz.gamemaster.common.constants.ResultCode;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.dao.GiftpackageSyncEntity;
 import com.luckygames.wmxz.gamemaster.model.entity.*;
+import com.luckygames.wmxz.gamemaster.model.enums.BroadcastStatus;
 import com.luckygames.wmxz.gamemaster.model.enums.BroadcastType;
 import com.luckygames.wmxz.gamemaster.model.enums.MailType;
+import com.luckygames.wmxz.gamemaster.model.enums.Status;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
 import com.luckygames.wmxz.gamemaster.model.view.request.*;
 import com.luckygames.wmxz.gamemaster.service.*;
@@ -50,6 +53,8 @@ public class GameController extends BaseController {
     private CreateRoleManageService createRoleManageService;
     @Autowired
     private ChatSettingsService chatSettingsService;
+    @Autowired
+    private AdminService adminService;
 
     //聊天设置
     @RequestMapping(value = "/chat_settings", method = {RequestMethod.GET, RequestMethod.POST})
@@ -59,6 +64,7 @@ public class GameController extends BaseController {
             //检查是否已存在
             ChatSettings chatSettings1 = chatSettingsService.search(chatSettings);
             if(chatSettings1!=null){
+                chatSettings.setId(chatSettings1.getId());
                 chatSettingsService.update(chatSettings);
             }else{
                 Server service = serverService.getByServerId(chatSettings.getServerId());
@@ -91,12 +97,6 @@ public class GameController extends BaseController {
         Page<CreateRoleManage> createRoleManagePage = createRoleManageService.searchPage(query);
         return new Response("game/create_role_manage")
                 .data("createRoleManageList",createRoleManagePage);
-    }
-
-    //聊天监控
-    @RequestMapping(value = "/chatmonitor", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response chatmonitor() {
-        return new Response("game/chatmonitor");
     }
 
     //添加礼包
@@ -414,14 +414,55 @@ public class GameController extends BaseController {
     @Autowired
     private BroadcastService broadcastService;
 
+    //广播管理
     @RequestMapping(value = {"/broadcast"}, method = {RequestMethod.GET, RequestMethod.POST})
     public Response broadcast(BroadcastSearchQuery query) {
+        //删除
+        if(query.getId()!=null){
+            broadcastService.deleteById(query.getId());
+        }
 
         Page<Broadcast> broadcastList = broadcastService.searchPage(query);
         return new Response("game/broadcast")
                 .request(query)
                 .data("broadcastList", broadcastList);
     }
+
+    //更新广播管理
+    @RequestMapping(value = {"/update_broadcast"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public Response updateBroadcast(SendBroadcastRequest request) {
+        String result="ok";
+        try {
+            result = adminService.sendBroadcast(new BroadcastQuery(
+                    request.getServerId(),
+                    request.getLoopTimes(),
+                    request.getGameSeconds(),
+                    request.getPlayTime(),
+                    request.getTitle(),
+                    request.getContent()
+            ));
+        } catch (Exception e) {
+            logger.error("发送广播异常：", e);
+            return new Response(ResultCode.SEND_BROADCAST_FAILED.getCode(), result);
+        }
+
+        if (!result.equals("success")) {
+            return new Response(ResultCode.SEND_BROADCAST_FAILED.getCode(), result);
+        }
+        Broadcast broadcast = new Broadcast();
+        broadcast.setId(request.getId());
+        broadcast.setServerId(request.getServerId());
+        broadcast.setChannelId(request.getChannelId());
+        broadcast.setLoopTimes(request.getLoopTimes());
+        broadcast.setPlayTime(request.getPlayTime());
+        broadcast.setTitle(request.getTitle());
+        broadcast.setContent(request.getContent());
+        broadcast.setBroadcastStatus(BroadcastStatus.ENABLED);
+        broadcast.setGapSecond(request.getGameSeconds());
+        broadcastService.update(broadcast);
+        return new Response().request(request).json();
+    }
+
 
     @RequestMapping(value = {"/affiche"}, method = {RequestMethod.GET, RequestMethod.POST})
     public Response affiche(BroadcastSearchQuery query) {

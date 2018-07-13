@@ -1,6 +1,16 @@
 package com.luckygames.wmxz.gamemaster.model.view.request;
 
 public class ChannelSearchQuery extends KeywordSearchQuery {
+    private Long channelId;
+
+    public Long getChannelId() {
+        return channelId;
+    }
+
+    public void setChannelId(Long channelId) {
+        this.channelId = channelId;
+    }
+
     public ChannelSearchQuery(KeywordSearchQuery request) {
         this.setKeyword(request.getKeyword());
         this.setPageNum(request.getPageNum());

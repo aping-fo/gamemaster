@@ -12,12 +12,10 @@
         </div>
     </div>
 </div>
-<div th:if="${baseInformation!=null}">
+<div th:if="${charId!=null}">
     <div class="pageHeader">
-        <form id="pagerForm" onsubmit="return navTabSearch(this);" action="player/info_baseInformation" method="post"
-              onreset="$(this).find('select.combox').comboxReset()">
-            <div class="pageContent">
-                <table class="table" width="40%" layoutH="137" th:each="row : ${baseInformation}">
+        <div class="pageContent">
+            <table class="table" width="40%" layoutH="137" th:each="row : ${baseInformation}">
                 <tr>
                     <td>角色ID</td>
                     <td><input name="charId" type="text" th:value="${row.charId}" readonly/></td>
@@ -130,21 +128,24 @@
                     <td><input name="systemVersion" type="text" th:value="${row.systemVersion}" readonly/></td>
                 </tr>
                 <tr>
-                    <td colspan="4">
-                        设置权限:
-                        <input type="radio" th:checked="${row.accountAuthority==1}" value="1" name="accountAuthority"/>普通玩家
-                        <input type="radio" th:checked="${row.accountAuthority==2}" value="2" name="accountAuthority"/>GM
-                        <input type="radio" th:checked="${row.accountAuthority==3}" value="3" name="accountAuthority"/>新手指导员
-                        <input type="radio" th:checked="${row.accountAuthority==4}" value="4" name="accountAuthority"/>内部玩家
-                        <input type="submit" value="修改"/>
+                    <td>设置权限:</td>
+                    <td colspan="3">
+                        <form id="pagerForm" onsubmit="return navTabSearch(this);" action="player/info_baseInformation" method="post">
+                            <input type="hidden" th:value="${charId}" name="charId"/>
+                            <input type="hidden" th:value="${row.id}" name="id"/>
+                            <input type="radio" th:checked="${row.accountAuthority==1}" value="1" name="accountAuthority"/>普通玩家
+                            <input type="radio" th:checked="${row.accountAuthority==2}" value="2" name="accountAuthority"/>GM
+                            <input type="radio" th:checked="${row.accountAuthority==3}" value="3" name="accountAuthority"/>新手指导员
+                            <input type="radio" th:checked="${row.accountAuthority==4}" value="4" name="accountAuthority"/>内部玩家
+                            <input type="submit" value="修改"/>
+                        </form>
                     </td>
                 </tr>
             </table>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
-<div th:if="${baseInformation==null}">
+<div th:if="${charId==null}">
     请点击角色名来选定角色
 </div>
 <script type="text/javascript">

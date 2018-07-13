@@ -3,7 +3,8 @@
         <div>
             <div layoutH="138">
                 <div class="col-md-2" th:each="channel:${channelList}">
-                    <input type="checkbox" name="channelId" th:value="'{channelIds:'+${channel.channelId}+'}'"/>
+                    <input th:if="${channelId==channel.channelId}" checked="checked" type="checkbox" name="channelId" th:value="'{channelIds:'+${channel.channelId}+'}'"/>
+                    <input th:if="${channelId!=channel.channelId}" type="checkbox" name="channelId" th:value="'{channelIds:'+${channel.channelId}+'}'"/>
                     <span th:text="${channel.channelName}"/>
                 </div>
             </div>

@@ -1,6 +1,5 @@
 package com.luckygames.wmxz.gamemaster.controller;
 
-import com.github.pagehelper.Page;
 import com.luckygames.wmxz.gamemaster.common.constants.ResultCode;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.model.entity.*;
@@ -21,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Controller
 @RequestMapping("/")
@@ -39,9 +39,10 @@ public class AllDialogController extends BaseController {
     private MailRewardService mailRewardService;
     @Autowired
     private BroadcastService broadcastService;
-
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private ChannelService channelService;
 
     @RequestMapping(value = "/player/dialog_ban", method = {RequestMethod.GET, RequestMethod.POST})
     public Response dialogBan(@RequestParam("charIds") List<Long> charIds,
@@ -212,25 +213,33 @@ public class AllDialogController extends BaseController {
     }
 
     @RequestMapping(value = "/game/dialog_newbroadcast", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response dialogNewBroadcast(@RequestParam("broadcastType") BroadcastType broadcastType) {
+    public Response dialogNewBroadcast(BroadcastSearchQuery query) {
         List<Server> serverList = serverService.searchList();
+        Response response=new Response();
+        String view="game/dialog_newbroadcast";
 
-        String view = broadcastType.equals(BroadcastType.BROADCAST) ? "game/dialog_newbroadcast" : "game/dialog_newaffiche";
-        return new Response(view)
+        //更新
+        if(query.getId()!=null){
+            Broadcast broadcast = broadcastService.searchById(query.getId());
+            view="game/dialog_updatebroadcast";
+            response.data("broadcast",broadcast);
+            List<Channel> channelList = channelService.searchList();
+            response.data("channelList",channelList);
+        }
+
+        response.view(view)
                 .data("serverList", serverList);
+
+        return response;
     }
 
     @RequestMapping(value = "/game/ajax_sendbroadcast", method = {RequestMethod.GET, RequestMethod.POST})
     public Response ajaxSendBroadcast(SendBroadcastRequest request) {
-        if (CollectionUtils.isEmpty(request.getServerIds())) {
-            return new Response(ResultCode.SERVER_ID_INVALID).json();
-        }
-
         if (StringUtils.isBlank(request.getContent())) {
             return new Response(ResultCode.CONTENT_INVALID).json();
         }
 
-        request.getServerIds().forEach(id -> {
+        request.getChannelIds().forEach(id -> {
             String result = "OK";
             try {
                 result = adminService.sendBroadcast(new BroadcastQuery(
@@ -244,16 +253,14 @@ public class AllDialogController extends BaseController {
             } catch (Exception e) {
                 logger.error("发送广播异常：", e);
                 return;
-//                return new Response(ResultCode.SEND_BROADCAST_FAILED.getCode(), e.getMessage())
-//                        .json();
             }
 
-//            result = "OK";
             if (!result.equals("success")) {
                 return;
             }
             Broadcast broadcast = new Broadcast();
-            broadcast.setServerId(id);
+            broadcast.setServerId(request.getServerId());
+            broadcast.setChannelId(id);
             broadcast.setLoopTimes(request.getLoopTimes());
             broadcast.setPlayTime(request.getPlayTime());
             broadcast.setTitle(request.getTitle());

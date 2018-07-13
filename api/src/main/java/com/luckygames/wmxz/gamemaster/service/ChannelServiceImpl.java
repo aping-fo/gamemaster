@@ -31,8 +31,10 @@ public class ChannelServiceImpl extends BaseServiceImpl<ChannelEntity> implement
         ChannelExample.Criteria criteria = example.createCriteria();
         criteria.andStatusEqualTo(Status.NORMAL);
 
-        if (StringUtils.isNotBlank(request.getKeyword())) {
-            criteria.andChannelNameLike(request.getKeyword());
+        if (request != null) {
+            if (StringUtils.isNotBlank(request.getKeyword())) {
+                criteria.andChannelNameLike(request.getKeyword());
+            }
         }
 
         return BeanUtils.copyListProperties(channelMapper.selectByExample(example), Channel.class);
@@ -81,6 +83,11 @@ public class ChannelServiceImpl extends BaseServiceImpl<ChannelEntity> implement
             save(channel);
         }
         return channel;
+    }
+
+    @Override
+    public List<Channel> searchList() {
+        return searchList(null);
     }
 
     @Override

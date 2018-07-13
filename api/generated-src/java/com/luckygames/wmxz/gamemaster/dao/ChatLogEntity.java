@@ -10,7 +10,7 @@ public class ChatLogEntity extends BaseEntity {
 
     private Long charId;
 
-    private String chatChannel;
+    private Integer chatChannel;
 
     private Long toCharId;
 
@@ -34,12 +34,12 @@ public class ChatLogEntity extends BaseEntity {
         this.charId = charId;
     }
 
-    public String getChatChannel() {
+    public Integer getChatChannel() {
         return chatChannel;
     }
 
-    public void setChatChannel(String chatChannel) {
-        this.chatChannel = chatChannel == null ? null : chatChannel.trim();
+    public void setChatChannel(Integer chatChannel) {
+        this.chatChannel = chatChannel;
     }
 
     public Long getToCharId() {

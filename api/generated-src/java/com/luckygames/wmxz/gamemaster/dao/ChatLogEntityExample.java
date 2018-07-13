@@ -296,62 +296,52 @@ public class ChatLogEntityExample {
             return (Criteria) this;
         }
 
-        public Criteria andChatChannelEqualTo(String value) {
+        public Criteria andChatChannelEqualTo(Integer value) {
             addCriterion("chat_channel =", value, "chatChannel");
             return (Criteria) this;
         }
 
-        public Criteria andChatChannelNotEqualTo(String value) {
+        public Criteria andChatChannelNotEqualTo(Integer value) {
             addCriterion("chat_channel <>", value, "chatChannel");
             return (Criteria) this;
         }
 
-        public Criteria andChatChannelGreaterThan(String value) {
+        public Criteria andChatChannelGreaterThan(Integer value) {
             addCriterion("chat_channel >", value, "chatChannel");
             return (Criteria) this;
         }
 
-        public Criteria andChatChannelGreaterThanOrEqualTo(String value) {
+        public Criteria andChatChannelGreaterThanOrEqualTo(Integer value) {
             addCriterion("chat_channel >=", value, "chatChannel");
             return (Criteria) this;
         }
 
-        public Criteria andChatChannelLessThan(String value) {
+        public Criteria andChatChannelLessThan(Integer value) {
             addCriterion("chat_channel <", value, "chatChannel");
             return (Criteria) this;
         }
 
-        public Criteria andChatChannelLessThanOrEqualTo(String value) {
+        public Criteria andChatChannelLessThanOrEqualTo(Integer value) {
             addCriterion("chat_channel <=", value, "chatChannel");
             return (Criteria) this;
         }
 
-        public Criteria andChatChannelLike(String value) {
-            addCriterion("chat_channel like", value, "chatChannel");
-            return (Criteria) this;
-        }
-
-        public Criteria andChatChannelNotLike(String value) {
-            addCriterion("chat_channel not like", value, "chatChannel");
-            return (Criteria) this;
-        }
-
-        public Criteria andChatChannelIn(List<String> values) {
+        public Criteria andChatChannelIn(List<Integer> values) {
             addCriterion("chat_channel in", values, "chatChannel");
             return (Criteria) this;
         }
 
-        public Criteria andChatChannelNotIn(List<String> values) {
+        public Criteria andChatChannelNotIn(List<Integer> values) {
             addCriterion("chat_channel not in", values, "chatChannel");
             return (Criteria) this;
         }
 
-        public Criteria andChatChannelBetween(String value1, String value2) {
+        public Criteria andChatChannelBetween(Integer value1, Integer value2) {
             addCriterion("chat_channel between", value1, value2, "chatChannel");
             return (Criteria) this;
         }
 
-        public Criteria andChatChannelNotBetween(String value1, String value2) {
+        public Criteria andChatChannelNotBetween(Integer value1, Integer value2) {
             addCriterion("chat_channel not between", value1, value2, "chatChannel");
             return (Criteria) this;
         }

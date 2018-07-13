@@ -1,55 +1,134 @@
-<div class="pageHeader">
-    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="player/info_flowQuery" method="post"
-          onreset="$(this).find('select.combox').comboxReset()">
-        <div class="searchBar">
-            <table class="searchContent">
-                <tr>
-                    <td>
-                        <select name="type" class="combox">
-                            <option value="1">出售</option>
-                            <option value="2">购买</option>
-                            <option value="3">BOSS掉落</option>
-                            <option value="4">活动</option>
-                        </select>
-                    </td>
-                    <td>金钱类型：
-                        <select name="type" class="combox">
-                            <option value="1">-</option>
-                            <option value="2">元宝</option>
-                            <option value="3">铜钱</option>
-                        </select>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div th:replace="_include/searchBar"></div>
-    </form>
-</div>
 <div class="pageContent">
-    <table class="table" width="100%" layoutH="137">
-        <thead>
-        <tr>
-            <th width="120">类型</th>
-            <th width="120">金钱类型</th>
-            <th width="120">变动的金钱</th>
-            <th width="120">变动的绑金</th>
-            <th width="120">剩余的金钱</th>
-            <th width="120">剩余的绑金</th>
-            <th width="120">时间</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="row,iterStat:${propFlowList}">
-            <td th:text="${row.type}"></td>
-            <td th:if="${row.moneyType==1}" th:text="金币"></td>
-            <td th:if="${row.moneyType==2}" th:text="元宝"></td>
-            <td th:text="${row.changeMoney}"></td>
-            <td th:text="${row.changeBindGold}"></td>
-            <td th:text="${row.leftGold}"></td>
-            <td th:text="${row.leftBindGold}"></td>
-            <td th:text="${#dates.format(row.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-        </tr>
-        </tbody>
-    </table>
-    <div th:replace="_include/pager"></div>
+    <div class="tabs" currentIndex="2">
+        <div class="tabsHeader">
+            <div class="tabsHeaderContent">
+                <ul id="player">
+                    <input type="hidden" th:value="${charId}"/>
+                    <li><a href="player/info_playerList" class="j-ajax" target="navTab"><span>玩家列表(一期)</span></a></li>
+                    <li><a href="player/info_baseInformation" class="j-ajax" target="navTab"><span>基本信息(二期)</span></a></li>
+                    <li><a href="player/info_equipment_flow" class="j-ajax" target="navTab"><span>流水查询(二期)</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
+<div th:if="${charId!=null}">
+    <div class="pageContent">
+        <div class="tabs" currentIndex="2">
+            <div class="tabsHeader">
+                <div class="tabsHeaderContent">
+                    <ul id="player2">
+                        <input type="hidden" th:value="${charId}"/>
+                        <li><a href="player/info_equipment_flow" class="j-ajax" target="navTab"><span>装备流水</span></a></li>
+                        <li><a href="player/info_prop_flow" class="j-ajax" target="navTab"><span>道具流水</span></a></li>
+                        <li><a href="player/info_money_flow" class="j-ajax" target="navTab"><span>金钱流水</span></a></li>
+                        <li><a href="player/info_level_flow" class="j-ajax" target="navTab"><span>等级流水</span></a></li>
+                        <li><a href="player/info_login_flow" class="j-ajax" target="navTab"><span>登录流水</span></a></li>
+                        <li><a href="player/info_task_flow" class="j-ajax" target="navTab"><span>任务流水</span></a></li>
+                        <li><a href="player/info_rankings_flow" class="j-ajax" target="navTab"><span>排行流水</span></a></li>
+                        <li><a href="player/info_email_flow" class="j-ajax" target="navTab"><span>邮件流水</span></a></li>
+                        <li><a href="player/info_other_flow" class="j-ajax" target="navTab"><span>其他流水</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pageHeader">
+        <form id="pagerForm" onsubmit="return navTabSearch(this);" action="player/info_money_flow" method="post"
+              onreset="$(this).find('select.combox').comboxReset()">
+            <input type="hidden" th:value="${charId}" name="charId"/>
+            <div class="searchBar">
+                <table class="searchContent">
+                    <tr>
+                        <td><span>类型:</span></td>
+                        <td>
+                            <select name="type" class="combox">
+                                <option value="">全部</option>
+                                <option value="1">出售</option>
+                                <option value="2">购买</option>
+                                <option value="3">BOSS掉落</option>
+                                <option value="4">活动</option>
+                            </select>
+                        </td>
+                        <td><span>金钱类型:</span></td>
+                        <td>
+                            <select name="type" class="combox">
+                                <option value="">全部</option>
+                                <option value="1">元宝</option>
+                                <option value="2">铜钱</option>
+                            </select>
+                        </td>
+                        <td class="dateRange">
+                            日期:
+                            <input name="startDate" class="date readonly" readonly="readonly" type="text" value=""
+                                   th:value="${request.startDate}">
+                            <span class="limit">-</span>
+                            <input name="endDate" class="date readonly" readonly="readonly" type="text" value=""
+                                   th:value="${request.endDate}">
+                        </td>
+                        <td>
+                            <div class="buttonActive">
+                                <div class="buttonContent">
+                                    <button type="submit">检索</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+    <div class="pageContent">
+        <table class="table" width="100%" layoutH="137">
+            <thead>
+            <tr>
+                <th width="120">类型</th>
+                <th width="120">金钱类型</th>
+                <th width="120">变动的金钱</th>
+                <th width="120">变动的绑金</th>
+                <th width="120">剩余的金钱</th>
+                <th width="120">剩余的绑金</th>
+                <th width="120">时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${list.size()!=0}" th:each="row,iterStat:${list}">
+                <td th:text="${row.type}"></td>
+                <td th:if="${row.moneyType==1}" th:text="金币"></td>
+                <td th:if="${row.moneyType==2}" th:text="元宝"></td>
+                <td th:text="${row.changeMoney}"></td>
+                <td th:text="${row.changeBindGold}"></td>
+                <td th:text="${row.leftGold}"></td>
+                <td th:text="${row.leftBindGold}"></td>
+                <td th:text="${#dates.format(row.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            </tr>
+            <tr th:if="${list.size()==0}"><td colspan="8" style="text-align: center">暂无数据</td></tr>
+            </tbody>
+        </table>
+        <div th:replace="_include/pager"></div>
+    </div>
+</div>
+<div th:if="${charId==null}">
+    请点击角色名来选定角色
+</div>
+<script type="text/javascript">
+    function changeHref() {
+        var href = $('#player a')
+        var charId = $('#player input').val()
+        href.eq(0).attr("href","player/info_playerList?charId="+charId)
+        href.eq(1).attr("href","player/info_baseInformation?charId="+charId)
+        href.eq(2).attr("href","player/info_equipment_flow?charId="+charId)
+
+        var href2 = $('#player2 a')
+        href2.eq(0).attr("href","player/info_equipment_flow?charId="+charId)
+        href2.eq(1).attr("href","player/info_prop_flow?charId="+charId)
+        href2.eq(2).attr("href","player/info_money_flow?charId="+charId)
+        href2.eq(3).attr("href","player/info_level_flow?charId="+charId)
+        href2.eq(4).attr("href","player/info_login_flow?charId="+charId)
+        href2.eq(5).attr("href","player/info_task_flow?charId="+charId)
+        href2.eq(6).attr("href","player/info_rankings_flow?charId="+charId)
+        href2.eq(7).attr("href","player/info_email_flow?charId="+charId)
+        href2.eq(8).attr("href","player/info_other_flow?charId="+charId)
+    }
+    changeHref()
+</script>

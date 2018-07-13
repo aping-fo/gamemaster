@@ -7,6 +7,7 @@ import com.luckygames.wmxz.gamemaster.model.entity.PlayerActionDaily;
 import com.luckygames.wmxz.gamemaster.model.entity.RegisteredData;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
 import com.luckygames.wmxz.gamemaster.model.view.request.CommonSearchQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.EquipmentSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.AngleNumberAnalysisService;
 import com.luckygames.wmxz.gamemaster.service.PlayerActionDailyService;
 import com.luckygames.wmxz.gamemaster.service.PlayerActionLogService;
@@ -31,7 +32,7 @@ public class RegisterController extends BaseController {
 
     //在线与注册
     @RequestMapping(value = "/statics", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response registerStatics(CommonSearchQuery query) {
+    public Response registerStatics(EquipmentSearchQuery query) {
         Page<RegisteredData> registeredDataPage = registeredDataService.searchPage(query);
         return new Response("register/statics")
                 .request(query)
@@ -68,7 +69,7 @@ public class RegisterController extends BaseController {
 
     //设备数
     @RequestMapping(value = "/statics_equipment", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response staticsEquipment(CommonSearchQuery query) {
+    public Response staticsEquipment(EquipmentSearchQuery query) {
         Page<RegisteredData> registeredDataPage = registeredDataService.searchPage(query);
         return new Response("register/statics_equipment")
                 .request(query)

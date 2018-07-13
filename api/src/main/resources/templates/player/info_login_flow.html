@@ -1,31 +1,113 @@
-<div class="pageHeader">
-    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="player/info_flowQuery" method="post"
-          onreset="$(this).find('select.combox').comboxReset()">
-        <div th:replace="_include/searchBar"></div>
-    </form>
-</div>
 <div class="pageContent">
-    <table class="table" width="100%" layoutH="137">
-        <thead>
-        <tr>
-            <th width="120">等级</th>
-            <th width="120">包</th>
-            <th width="120">ip</th>
-            <th width="120">登入时间</th>
-            <th width="120">登出时间</th>
-            <th width="120">在线时长</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="row,iterStat:${propFlowList}">
-            <td th:text="${row.level}"></td>
-            <td th:text="${row.channelId}"></td>
-            <td th:text="${row.ip}"></td>
-            <td th:text="${#dates.format(row.loginTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-            <td th:text="${#dates.format(row.logoutTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-            <td th:text="${row.onlineTimeLength}"></td>
-        </tr>
-        </tbody>
-    </table>
-    <div th:replace="_include/pager"></div>
+    <div class="tabs" currentIndex="2">
+        <div class="tabsHeader">
+            <div class="tabsHeaderContent">
+                <ul id="player">
+                    <input type="hidden" th:value="${charId}"/>
+                    <li><a href="player/info_playerList" class="j-ajax" target="navTab"><span>玩家列表(一期)</span></a></li>
+                    <li><a href="player/info_baseInformation" class="j-ajax" target="navTab"><span>基本信息(二期)</span></a></li>
+                    <li><a href="player/info_equipment_flow" class="j-ajax" target="navTab"><span>流水查询(二期)</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
+<div th:if="${charId!=null}">
+    <div class="pageContent">
+        <div class="tabs" currentIndex="4">
+            <div class="tabsHeader">
+                <div class="tabsHeaderContent">
+                    <ul id="player2">
+                        <input type="hidden" th:value="${charId}"/>
+                        <li><a href="player/info_equipment_flow" class="j-ajax" target="navTab"><span>装备流水</span></a></li>
+                        <li><a href="player/info_prop_flow" class="j-ajax" target="navTab"><span>道具流水</span></a></li>
+                        <li><a href="player/info_money_flow" class="j-ajax" target="navTab"><span>金钱流水</span></a></li>
+                        <li><a href="player/info_level_flow" class="j-ajax" target="navTab"><span>等级流水</span></a></li>
+                        <li><a href="player/info_login_flow" class="j-ajax" target="navTab"><span>登录流水</span></a></li>
+                        <li><a href="player/info_task_flow" class="j-ajax" target="navTab"><span>任务流水</span></a></li>
+                        <li><a href="player/info_rankings_flow" class="j-ajax" target="navTab"><span>排行流水</span></a></li>
+                        <li><a href="player/info_email_flow" class="j-ajax" target="navTab"><span>邮件流水</span></a></li>
+                        <li><a href="player/info_other_flow" class="j-ajax" target="navTab"><span>其他流水</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pageHeader">
+        <form id="pagerForm" onsubmit="return navTabSearch(this);" action="player/info_login_flow" method="post"
+              onreset="$(this).find('select.combox').comboxReset()">
+            <input type="hidden" th:value="${charId}" name="charId"/>
+            <div class="searchBar">
+                <table class="searchContent">
+                <tr>
+                    <td class="dateRange">
+                        日期:
+                        <input name="startDate" class="date readonly" readonly="readonly" type="text" value=""
+                               th:value="${request.startDate}">
+                        <span class="limit">-</span>
+                        <input name="endDate" class="date readonly" readonly="readonly" type="text" value=""
+                               th:value="${request.endDate}">
+                    </td>
+                    <td>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">检索</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            </div>
+        </form>
+    </div>
+    <div class="pageContent">
+        <table class="table" width="100%" layoutH="137">
+            <thead>
+            <tr>
+                <th width="120">等级</th>
+                <th width="120">包</th>
+                <th width="120">ip</th>
+                <th width="120">登入时间</th>
+                <th width="120">登出时间</th>
+                <th width="120">在线时长</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${list.size()!=0}" th:each="row,iterStat:${list}">
+                <td th:text="${row.level}"></td>
+                <td th:text="${row.channelId}"></td>
+                <td th:text="${row.ip}"></td>
+                <td th:text="${#dates.format(row.loginTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                <td th:text="${#dates.format(row.logoutTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                <td th:text="${row.onlineTimeLength}"></td>
+            </tr>
+            <tr th:if="${list.size()==0}"><td colspan="6" style="text-align: center">暂无数据</td></tr>
+            </tbody>
+        </table>
+        <div th:replace="_include/pager"></div>
+    </div>
+</div>
+<div th:if="${charId==null}">
+    请点击角色名来选定角色
+</div>
+<script type="text/javascript">
+    function changeHref() {
+        var href = $('#player a')
+        var charId = $('#player input').val()
+        href.eq(0).attr("href","player/info_playerList?charId="+charId)
+        href.eq(1).attr("href","player/info_baseInformation?charId="+charId)
+        href.eq(2).attr("href","player/info_equipment_flow?charId="+charId)
+
+        var href2 = $('#player2 a')
+        href2.eq(0).attr("href","player/info_equipment_flow?charId="+charId)
+        href2.eq(1).attr("href","player/info_prop_flow?charId="+charId)
+        href2.eq(2).attr("href","player/info_money_flow?charId="+charId)
+        href2.eq(3).attr("href","player/info_level_flow?charId="+charId)
+        href2.eq(4).attr("href","player/info_login_flow?charId="+charId)
+        href2.eq(5).attr("href","player/info_task_flow?charId="+charId)
+        href2.eq(6).attr("href","player/info_rankings_flow?charId="+charId)
+        href2.eq(7).attr("href","player/info_email_flow?charId="+charId)
+        href2.eq(8).attr("href","player/info_other_flow?charId="+charId)
+    }
+    changeHref()
+</script>

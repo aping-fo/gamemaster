@@ -9,6 +9,7 @@ import java.util.List;
 public class SendBroadcastRequest {
     private BroadcastType broadcastType;
     private List<Long> serverIds;
+    private List<Long> channelIds;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date playTime;
@@ -17,6 +18,42 @@ public class SendBroadcastRequest {
     private String content;
 
     private String title;
+
+    private Long id;
+    private Long serverId;
+    private Long channelId;
+
+    public Long getChannelId() {
+        return channelId;
+    }
+
+    public void setChannelId(Long channelId) {
+        this.channelId = channelId;
+    }
+
+    public List<Long> getChannelIds() {
+        return channelIds;
+    }
+
+    public void setChannelIds(List<Long> channelIds) {
+        this.channelIds = channelIds;
+    }
+
+    public Long getServerId() {
+        return serverId;
+    }
+
+    public void setServerId(Long serverId) {
+        this.serverId = serverId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public BroadcastType getBroadcastType() {
         return broadcastType;

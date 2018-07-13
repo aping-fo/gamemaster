@@ -73,24 +73,30 @@ public class PlayerCharacterController extends BaseController {
     }
 
     @RequestMapping(value = "/info_playerList", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response queryPlayer(PlayerCharacterSearchQuery playerCharacterSearchQuery) {
-        if (playerCharacterSearchQuery.getPageNum() == null) {
-            playerCharacterSearchQuery.setPageNum(1);
+    public Response queryPlayer(PlayerCharacterSearchQuery query) {
+        if (query.getPageNum() == null) {
+            query.setPageNum(1);
         }
-        Page<PlayerCharacter> characters = playerCharacterService.searchPage(playerCharacterSearchQuery);
+        Page<PlayerCharacter> characters = playerCharacterService.searchPage(query);
 
         Response r = new Response("player/info_playerList")
-                .request(playerCharacterSearchQuery)
-                .data("characters", characters);
+                .request(query)
+                .data("characters", characters)
+                .data("charId", query.getCharId());
         return r;
     }
 
     //基本信息
     @RequestMapping(value = "/info_baseInformation", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response baseInformationPlayer(Integer charId) {
-        BaseInformation baseInformation = baseInformationService.searchById(1);
+    public Response baseInformationPlayer(BaseInformation baseInformation) {
+        if(baseInformation.getCharId()!=null){
+            baseInformationService.update(baseInformation);
+            // TODO 同步账户权限
+        }
+        BaseInformation baseInformation2 = baseInformationService.searchById(baseInformation.getCharId());
         return new Response("player/info_baseInformation")
-                .data("baseInformation", baseInformation);
+                .data("baseInformation", baseInformation2)
+                .data("charId", baseInformation.getCharId());
     }
 
     //装备流水
@@ -107,80 +113,80 @@ public class PlayerCharacterController extends BaseController {
     @RequestMapping(value = "/info_prop_flow", method = {RequestMethod.GET, RequestMethod.POST})
     public Response flowPropQueryPlayer(PropFlowSearchQuery query) {
         Page<PropFlow> propFlowPage = propFlowService.searchPage(query);
-        Response r = new Response("player/info_prop_flow")
+        return new Response("player/info_prop_flow")
                 .request(query)
-                .data("propFlowList", propFlowPage);
-        return r;
+                .data("list", propFlowPage)
+                .data("charId", query.getCharId());
     }
 
     //金钱流水
     @RequestMapping(value = "/info_money_flow", method = {RequestMethod.GET, RequestMethod.POST})
     public Response flowMoneyQueryPlayer(MoneyFlowSearchQuery query) {
         Page<MoneyFlow> propFlowPage = moneyFlowService.searchPage(query);
-        Response r = new Response("player/info_money_flow")
+        return new Response("player/info_money_flow")
                 .request(query)
-                .data("propFlowList", propFlowPage);
-        return r;
+                .data("list", propFlowPage)
+                .data("charId", query.getCharId());
     }
 
     //等级流水
     @RequestMapping(value = "/info_level_flow", method = {RequestMethod.GET, RequestMethod.POST})
     public Response flowLevelQueryPlayer(LevelFlowSearchQuery query) {
         Page<LevelFlow> propFlowPage = levelFlowService.searchPage(query);
-        Response r = new Response("player/info_level_flow")
+        return new Response("player/info_level_flow")
                 .request(query)
-                .data("propFlowList", propFlowPage);
-        return r;
+                .data("list", propFlowPage)
+                .data("charId", query.getCharId());
     }
 
     //登录流水
     @RequestMapping(value = "/info_login_flow", method = {RequestMethod.GET, RequestMethod.POST})
     public Response flowLoginQueryPlayer(LoginFlowSearchQuery query) {
         Page<LoginFlow> propFlowPage = loginFlowService.searchPage(query);
-        Response r = new Response("player/info_login_flow")
+        return new Response("player/info_login_flow")
                 .request(query)
-                .data("propFlowList", propFlowPage);
-        return r;
+                .data("list", propFlowPage)
+                .data("charId", query.getCharId());
     }
 
     //任务流水
     @RequestMapping(value = "/info_task_flow", method = {RequestMethod.GET, RequestMethod.POST})
     public Response flowTaskQueryPlayer(TaskFlowSearchQuery query) {
         Page<TaskFlow> propFlowPage = taskFlowService.searchPage(query);
-        Response r = new Response("player/info_task_flow")
+        return new Response("player/info_task_flow")
                 .request(query)
-                .data("propFlowList", propFlowPage);
-        return r;
+                .data("list", propFlowPage)
+                .data("charId", query.getCharId());
     }
 
     //排行流水
     @RequestMapping(value = "/info_rankings_flow", method = {RequestMethod.GET, RequestMethod.POST})
     public Response flowRankingsQueryPlayer(RankingsFlowSearchQuery query) {
         Page<RankingsFlow> propFlowPage = rankingsFlowService.searchPage(query);
-        Response r = new Response("player/info_rankings_flow")
+        return new Response("player/info_rankings_flow")
                 .request(query)
-                .data("propFlowList", propFlowPage);
-        return r;
+                .data("list", propFlowPage)
+                .data("charId", query.getCharId());
     }
 
     //邮件流水
     @RequestMapping(value = "/info_email_flow", method = {RequestMethod.GET, RequestMethod.POST})
     public Response flowEmailQueryPlayer(EmailFlowSearchQuery query) {
         Page<EmailFlow> propFlowPage = emailFlowService.searchPage(query);
-        Response r = new Response("player/info_email_flow")
+        return new Response("player/info_email_flow")
                 .request(query)
-                .data("propFlowList", propFlowPage);
-        return r;
+                .data("list", propFlowPage)
+                .data("charId", query.getCharId());
     }
 
     //其他流水
     @RequestMapping(value = "/info_other_flow", method = {RequestMethod.GET, RequestMethod.POST})
     public Response flowOtherQueryPlayer(OtherFlowSearchQuery query) {
         Page<OtherFlow> propFlowPage = otherFlowService.searchPage(query);
-        Response r = new Response("player/info_other_flow")
+        return new Response("player/info_other_flow")
                 .request(query)
-                .data("propFlowList", propFlowPage);
-        return r;
+                .data("list", propFlowPage)
+                .data("charId", query.getCharId());
     }
 
     @RequestMapping(value = "/gm", method = {RequestMethod.GET})

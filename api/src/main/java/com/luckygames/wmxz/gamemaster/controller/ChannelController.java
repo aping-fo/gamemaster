@@ -24,6 +24,10 @@ public class ChannelController extends BaseController {
         Response r = new Response("channel/select")
                 .request(request);
 
+        if(request.getChannelId()!=null){
+            r.data("channelId",request.getChannelId());
+        }
+
         if (request.getPageNum() == null) {
             List<Channel> channelList = channelService.searchList(request);
             r.data("channelList", channelList);

@@ -104,6 +104,14 @@ public class PayRetentionRateEntitySqlProvider {
             sql.VALUES("channel_name", "#{channelName,jdbcType=VARCHAR}");
         }
         
+        if (record.getPackageId() != null) {
+            sql.VALUES("package_id", "#{packageId,jdbcType=INTEGER}");
+        }
+        
+        if (record.getPackageName() != null) {
+            sql.VALUES("package_name", "#{packageName,jdbcType=VARCHAR}");
+        }
+        
         return sql.toString();
     }
 
@@ -132,6 +140,8 @@ public class PayRetentionRateEntitySqlProvider {
         sql.SELECT("`server_name`");
         sql.SELECT("channel_id");
         sql.SELECT("channel_name");
+        sql.SELECT("package_id");
+        sql.SELECT("package_name");
         sql.FROM("pay_retention_rate");
         applyWhere(sql, example, false);
         
@@ -225,6 +235,14 @@ public class PayRetentionRateEntitySqlProvider {
             sql.SET("channel_name = #{record.channelName,jdbcType=VARCHAR}");
         }
         
+        if (record.getPackageId() != null) {
+            sql.SET("package_id = #{record.packageId,jdbcType=INTEGER}");
+        }
+        
+        if (record.getPackageName() != null) {
+            sql.SET("package_name = #{record.packageName,jdbcType=VARCHAR}");
+        }
+        
         applyWhere(sql, example, true);
         return sql.toString();
     }
@@ -252,6 +270,8 @@ public class PayRetentionRateEntitySqlProvider {
         sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");
         sql.SET("channel_id = #{record.channelId,jdbcType=BIGINT}");
         sql.SET("channel_name = #{record.channelName,jdbcType=VARCHAR}");
+        sql.SET("package_id = #{record.packageId,jdbcType=INTEGER}");
+        sql.SET("package_name = #{record.packageName,jdbcType=VARCHAR}");
         
         PayRetentionRateEntityExample example = (PayRetentionRateEntityExample) parameter.get("example");
         applyWhere(sql, example, true);

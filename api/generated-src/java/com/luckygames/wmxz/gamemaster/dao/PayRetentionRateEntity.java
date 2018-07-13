@@ -37,6 +37,10 @@ public class PayRetentionRateEntity extends BaseEntity {
 
     private String channelName;
 
+    private Integer packageId;
+
+    private String packageName;
+
     public Date getReportDate() {
         return reportDate;
     }
@@ -155,5 +159,21 @@ public class PayRetentionRateEntity extends BaseEntity {
 
     public void setChannelName(String channelName) {
         this.channelName = channelName == null ? null : channelName.trim();
+    }
+
+    public Integer getPackageId() {
+        return packageId;
+    }
+
+    public void setPackageId(Integer packageId) {
+        this.packageId = packageId;
+    }
+
+    public String getPackageName() {
+        return packageName;
+    }
+
+    public void setPackageName(String packageName) {
+        this.packageName = packageName == null ? null : packageName.trim();
     }
 }

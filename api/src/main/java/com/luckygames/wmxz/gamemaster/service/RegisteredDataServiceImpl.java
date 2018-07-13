@@ -6,6 +6,7 @@ import com.luckygames.wmxz.gamemaster.dao.RegisteredDataEntity;
 import com.luckygames.wmxz.gamemaster.dao.mapper.RegisteredDataMapper;
 import com.luckygames.wmxz.gamemaster.model.entity.RegisteredData;
 import com.luckygames.wmxz.gamemaster.model.view.request.CommonSearchQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.EquipmentSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.base.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class RegisteredDataServiceImpl extends BaseServiceImpl<RegisteredDataEnt
     }
 
     @Override
-    public Page<RegisteredData> searchPage(CommonSearchQuery query) {
+    public Page<RegisteredData> searchPage(EquipmentSearchQuery query) {
         if (query.getPageNum() == null) {
             query.setPageNum(1);
         }

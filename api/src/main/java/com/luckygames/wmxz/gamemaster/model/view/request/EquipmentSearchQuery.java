@@ -1,6 +1,6 @@
 package com.luckygames.wmxz.gamemaster.model.view.request;
 
-public class PayRetentionRateSearchQuery extends CommonSearchQuery {
+public class EquipmentSearchQuery extends CommonSearchQuery {
     private Integer packageId;
 
     public Integer getPackageId() {
@@ -10,4 +10,5 @@ public class PayRetentionRateSearchQuery extends CommonSearchQuery {
     public void setPackageId(Integer packageId) {
         this.packageId = packageId;
     }
+
 }

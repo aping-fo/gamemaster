@@ -30,10 +30,10 @@ public class ChatSettingsServiceImpl extends BaseServiceImpl<ChatSettingsEntity>
         return chatSettingsMapper.search(chatSettings);
     }
 
-    @Override
-    public void update(ChatSettings ChatSettings) {
-        chatSettingsMapper.update(ChatSettings);
-    }
+//    @Override
+//    public void update(ChatSettings chatSettings) {
+//        chatSettingsMapper.update(chatSettings);
+//    }
 
     @Override
     public void add(ChatSettings ChatSettings) {

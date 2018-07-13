@@ -41,7 +41,7 @@ public class ChatLogEntitySqlProvider {
         }
         
         if (record.getChatChannel() != null) {
-            sql.VALUES("chat_channel", "#{chatChannel,jdbcType=VARCHAR}");
+            sql.VALUES("chat_channel", "#{chatChannel,jdbcType=INTEGER}");
         }
         
         if (record.getToCharId() != null) {
@@ -117,7 +117,7 @@ public class ChatLogEntitySqlProvider {
         }
         
         if (record.getChatChannel() != null) {
-            sql.SET("chat_channel = #{record.chatChannel,jdbcType=VARCHAR}");
+            sql.SET("chat_channel = #{record.chatChannel,jdbcType=INTEGER}");
         }
         
         if (record.getToCharId() != null) {
@@ -155,7 +155,7 @@ public class ChatLogEntitySqlProvider {
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
         sql.SET("char_id = #{record.charId,jdbcType=BIGINT}");
-        sql.SET("chat_channel = #{record.chatChannel,jdbcType=VARCHAR}");
+        sql.SET("chat_channel = #{record.chatChannel,jdbcType=INTEGER}");
         sql.SET("to_char_id = #{record.toCharId,jdbcType=BIGINT}");
         sql.SET("content = #{record.content,jdbcType=VARCHAR}");
         sql.SET("chat_time = #{record.chatTime,jdbcType=TIMESTAMP}");

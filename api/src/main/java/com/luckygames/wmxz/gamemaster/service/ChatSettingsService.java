@@ -8,7 +8,10 @@ import com.luckygames.wmxz.gamemaster.service.base.BaseService;
 
 public interface ChatSettingsService extends BaseService<ChatSettingsEntity> {
     Page<ChatSettings> searchPage(ChatSettingsSearchQuery query);
+
     ChatSettings search(ChatSettings chatSettings);
-    void update(ChatSettings ChatSettings);
+
+//    void update(ChatSettings chatSettings);
+
     void add(ChatSettings ChatSettings);
 }

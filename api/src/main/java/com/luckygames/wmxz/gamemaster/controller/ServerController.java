@@ -24,6 +24,10 @@ public class ServerController extends BaseController {
         Response r = new Response("server/select")
                 .request(request);
 
+        if(request.getServerId()!=null){
+            r.data("serverId",request.getServerId());
+        }
+
         if (request.getPageNum() == null) {
             List<Server> serverList = serverService.searchList(request);
             r.data("serverList", serverList);

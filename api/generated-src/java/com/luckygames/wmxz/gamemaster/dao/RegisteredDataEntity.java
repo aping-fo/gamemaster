@@ -20,6 +20,10 @@ public class RegisteredDataEntity extends BaseEntity {
 
     private BigDecimal lossRate;
 
+    private Integer packageId;
+
+    private String packageName;
+
     public Long getServerId() {
         return serverId;
     }
@@ -74,5 +78,21 @@ public class RegisteredDataEntity extends BaseEntity {
 
     public void setLossRate(BigDecimal lossRate) {
         this.lossRate = lossRate;
+    }
+
+    public Integer getPackageId() {
+        return packageId;
+    }
+
+    public void setPackageId(Integer packageId) {
+        this.packageId = packageId;
+    }
+
+    public String getPackageName() {
+        return packageName;
+    }
+
+    public void setPackageName(String packageName) {
+        this.packageName = packageName == null ? null : packageName.trim();
     }
 }

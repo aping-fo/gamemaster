@@ -10,9 +10,12 @@ import com.luckygames.wmxz.gamemaster.model.view.request.ChatLogSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.base.BaseServiceImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
+
+import java.util.List;
 
 @Service("chatLogService")
 public class ChatLogServiceImpl extends BaseServiceImpl<ChatLogEntity> implements ChatLogService {
@@ -78,7 +81,11 @@ public class ChatLogServiceImpl extends BaseServiceImpl<ChatLogEntity> implement
         long end = start + query.getPageSize();
         String channel = StringUtils.isBlank(query.getChatChannel()) ? "CHAT_LOG_ALL" : "CHAT_LOG_" + query.getChatChannel();
         Page<ChatLog> chatLogList = new Page<>();
-        chatLogList.addAll(redisTemplate.opsForList().range(channel, start, end));
+
+        ListOperations listOperations = redisTemplate.opsForList();
+        List range = listOperations.range(channel, start, end);
+        chatLogList.addAll(range);
+
         return chatLogList;
     }
 }

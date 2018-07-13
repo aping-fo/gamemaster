@@ -10,6 +10,7 @@ import com.luckygames.wmxz.gamemaster.model.view.base.Response;
 import com.luckygames.wmxz.gamemaster.model.view.request.CommonSearchQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.LTVSearchQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.NewUserSearchQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.PayRetentionRateSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.NewUserService;
 import com.luckygames.wmxz.gamemaster.service.PayLTVService;
 import com.luckygames.wmxz.gamemaster.service.PayRetentionRateService;
@@ -43,7 +44,7 @@ public class PaidController extends BaseController {
 
     //付费留存率
     @RequestMapping(value = "/payRetentionRate", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response payRetentionRate(CommonSearchQuery query) {
+    public Response payRetentionRate(PayRetentionRateSearchQuery query) {
         Page<PayRetentionRate> payRetentionRatePage = payRetentionRateService.searchPage(query);
         return new Response("paid/stay")
                 .request(query)

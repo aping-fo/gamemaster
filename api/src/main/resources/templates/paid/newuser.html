@@ -29,8 +29,8 @@
                         </td>
                         <td>包:
                             <select name="packageId">
-                                <option value="1">测试1</option>
-                                <option value="2">测试2</option>
+                                <option value="1" th:selected="${request.packageId==1}">测试1</option>
+                                <option value="2" th:selected="${request.packageId==2}">测试2</option>
                             </select>
                         </td>
                         <td class="dateRange">

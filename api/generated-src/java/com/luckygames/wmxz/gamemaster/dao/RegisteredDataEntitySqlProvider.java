@@ -72,6 +72,14 @@ public class RegisteredDataEntitySqlProvider {
             sql.VALUES("loss_rate", "#{lossRate,jdbcType=DECIMAL}");
         }
         
+        if (record.getPackageId() != null) {
+            sql.VALUES("package_id", "#{packageId,jdbcType=INTEGER}");
+        }
+        
+        if (record.getPackageName() != null) {
+            sql.VALUES("package_name", "#{packageName,jdbcType=VARCHAR}");
+        }
+        
         return sql.toString();
     }
 
@@ -92,6 +100,8 @@ public class RegisteredDataEntitySqlProvider {
         sql.SELECT("equipment_count");
         sql.SELECT("activation_count");
         sql.SELECT("loss_rate");
+        sql.SELECT("package_id");
+        sql.SELECT("package_name");
         sql.FROM("registered_data");
         applyWhere(sql, example, false);
         
@@ -153,6 +163,14 @@ public class RegisteredDataEntitySqlProvider {
             sql.SET("loss_rate = #{record.lossRate,jdbcType=DECIMAL}");
         }
         
+        if (record.getPackageId() != null) {
+            sql.SET("package_id = #{record.packageId,jdbcType=INTEGER}");
+        }
+        
+        if (record.getPackageName() != null) {
+            sql.SET("package_name = #{record.packageName,jdbcType=VARCHAR}");
+        }
+        
         applyWhere(sql, example, true);
         return sql.toString();
     }
@@ -172,6 +190,8 @@ public class RegisteredDataEntitySqlProvider {
         sql.SET("equipment_count = #{record.equipmentCount,jdbcType=INTEGER}");
         sql.SET("activation_count = #{record.activationCount,jdbcType=INTEGER}");
         sql.SET("loss_rate = #{record.lossRate,jdbcType=DECIMAL}");
+        sql.SET("package_id = #{record.packageId,jdbcType=INTEGER}");
+        sql.SET("package_name = #{record.packageName,jdbcType=VARCHAR}");
         
         RegisteredDataEntityExample example = (RegisteredDataEntityExample) parameter.get("example");
         applyWhere(sql, example, true);

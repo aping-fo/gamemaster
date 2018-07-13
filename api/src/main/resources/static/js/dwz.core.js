@@ -198,6 +198,11 @@ var DWZ = {
         ajaxUrl: function (op) {
             var $this = $(this);
 
+            //解决发多次请求的Bug
+            if(op.type===undefined){
+                return;
+            }
+
             $this.trigger(DWZ.eventType.pageClear);
 
             $.ajax({

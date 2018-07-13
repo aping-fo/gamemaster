@@ -4,12 +4,13 @@ import com.github.pagehelper.Page;
 import com.luckygames.wmxz.gamemaster.dao.PayRetentionRateEntity;
 import com.luckygames.wmxz.gamemaster.model.entity.PayRetentionRate;
 import com.luckygames.wmxz.gamemaster.model.view.request.CommonSearchQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.PayRetentionRateSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.base.BaseService;
 
 import java.util.Date;
 
 public interface PayRetentionRateService extends BaseService<PayRetentionRateEntity> {
-    Page<PayRetentionRate> searchPage(CommonSearchQuery PayRetentionRateSearchRequest);
+    Page<PayRetentionRate> searchPage(PayRetentionRateSearchQuery PayRetentionRateSearchRequest);
 
     void generatePayRetentionRateReportToday();
 
