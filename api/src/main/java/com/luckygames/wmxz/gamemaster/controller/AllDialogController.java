@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -278,10 +279,14 @@ public class AllDialogController extends BaseController {
     public Response kickLine(KickLineRequest request) {
         String result;
         try {
-            result = adminService.kickLine(new KickLineQuery(
-                    request.getCharId(),
-                    request.getServerId()
-            ));
+            BackendCommand command = new BackendCommand();
+            command.setServerId(request.getServerId());
+            command.setPlayerIdList(Arrays.asList(request.getCharId()));
+            result = adminService.kickLine(command);
+//            result = adminService.kickLine(new KickLineQuery(
+//                    request.getCharId(),
+//                    request.getServerId()
+//            ));
             logger.debug("调用踢人接口返回：{}", result);
         } catch (Exception e) {
             logger.error("踢人角色异常：", e);
