@@ -90,7 +90,7 @@
         <div class="headerNav">
             <!--<a class="logo" href="">标志</a>-->
             <ul class="nav">
-                <li><a href="login.html">退出</a></li>
+                <li><a href="/logout">退出</a></li>
             </ul>
             <ul class="themeList" id="themeList">
                 <li theme="default">
@@ -138,7 +138,8 @@
                                 <li><a href="recharge/level" target="navTab" rel="recharge_level">充值等级</a></li>
                                 <li><a href="recharge/compare" target="navTab" rel="recharge_compare">充值对比</a></li>
                                 <li><a href="recharge/order" target="navTab" rel="recharge_order">充值记录(一期)</a></li>
-                                <li><a href="recharge/statics" target="navTab" rel="recharge_statics">区服充值汇总(一期)</a></li>
+                                <li><a href="recharge/statics" target="navTab" rel="recharge_statics">区服充值汇总(一期)</a>
+                                </li>
                                 <li><a href="recharge/failedOrder" target="navTab" rel="recharge_failedOrder">失败订单</a>
                                 </li>
                                 <li><a href="recharge/erroneousOrder" target="navTab"
@@ -201,8 +202,10 @@
                         <li><a>游戏管理</a>
                             <ul>
                                 <li><a href="game/mail" target="navTab" rel="game_mail">邮件系统(一期)</a></li>
-                                <li><a href="game/resourcerequire" target="navTab" rel="game_resource_require">资源申请</a></li>
-                                <li><a href="game/resourceapproval" target="navTab" rel="game_resource_approval">资源审核</a>
+                                <li><a href="game/resourcerequire" target="navTab" rel="game_resource_require">资源申请</a>
+                                </li>
+                                <li><a href="game/resourceapproval" target="navTab"
+                                       rel="game_resource_approval">资源审核</a>
                                 </li>
                                 <li><a href="game/giftpackage" target="navTab" rel="game_giftpackage">礼包管理</a></li>
                                 <li><a href="game/broadcast?broadcastType=BROADCAST" target="navTab"
@@ -217,7 +220,8 @@
                         </li>
                         <li><a>系统设置</a>
                             <ul>
-                                <li><a href="system/replaceorder" target="navTab" rel="system_replace_order">补单功能</a></li>
+                                <li><a href="system/replaceorder" target="navTab" rel="system_replace_order">补单功能</a>
+                                </li>
                                 <li><a href="system/changepassword" target="navTab" rel="system_changepassword">修改密码</a>
                                 </li>
                             </ul>
@@ -250,7 +254,62 @@
             </ul>
             <div class="navTab-panel tabsPageContent layoutBox">
                 <div class="page unitBox">
-                    <div class="pageFormContent" layoutH="80" style="margin-right:230px">
+                    <div class="pageHeader">
+                        <form id="pagerForm" action="/" method="post"
+                              onreset="$(this).find('select.combox').comboxReset()">
+                            <input type="hidden" name="serverIds"
+                                   th:value="${#strings.listJoin(request.serverIds,',')}"/>
+                            <div class="searchBar">
+                                <table class="searchContent">
+                                    <tr>
+                                        <td>
+                                            <div class="buttonContent">
+                                                <a class="button" href="server/select"
+                                                   rel="serverselect" mask="true"
+                                                   lookupGroup=""><span>区服筛选</span></a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="buttonActive">
+                                                <div class="buttonContent">
+                                                    <button type="submit">检索</button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="pageContent">
+                        <table class="table" layoutH="137">
+                            <thead>
+                            <tr>
+                                <th width="80">区服</th>
+                                <th width="120" align="right">开服日期</th>
+                                <th width="80" align="right">开服天数</th>
+                                <th width="100" align="right">总注册角色数</th>
+                                <th width="120" align="right">当天在线角色数</th>
+                                <th width="120" align="right">当前活跃用户数</th>
+                                <th width="100" align="right">总充值金额</th>
+                                <th width="100" align="right">总充值人数</th>
+                                <th width="80" align="right">ARPU</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="row,iterStat:${serverList}">
+                                <td th:text="${row.serverName}"></td>
+                                <td align="right" th:text="${#dates.format(row.openDate, 'yyyy-MM-dd')}"></td>
+                                <td align="right" th:text="${row.openDays}"></td>
+                                <td align="right" th:text="${row.charCount}"></td>
+                                <td align="right" th:text="${row.onlineCount}"></td>
+                                <td align="right" th:text="${row.activeCount}"></td>
+                                <td align="right" th:text="${row.rechargeAmount}"></td>
+                                <td align="right" th:text="${row.rechargeCount}"></td>
+                                <td align="right" th:text="${row.arpu}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

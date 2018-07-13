@@ -19,4 +19,8 @@ public interface OnlineNowService extends BaseService<OnlineNowEntity> {
     List<OnlineNow> findByOneDate(Date date);
 
     void generateOnlineNowReportByDay(String date);
+
+    long countOnlineNow(Long serverId);
+
+    long countOnlineNow(Long serverId, Integer onlineSeconds);
 }

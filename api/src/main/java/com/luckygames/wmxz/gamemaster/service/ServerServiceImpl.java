@@ -11,6 +11,7 @@ import com.luckygames.wmxz.gamemaster.model.view.request.ServerSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.base.BaseServiceImpl;
 import com.luckygames.wmxz.gamemaster.utils.BeanUtils;
 import com.luckygames.wmxz.gamemaster.utils.DateUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,9 @@ public class ServerServiceImpl extends BaseServiceImpl<ServerEntity> implements 
             if (StringUtils.isNotBlank(request.getKeyword())) {
                 criteria.andServerNameLike(request.getKeyword());
             }
+            if (CollectionUtils.isNotEmpty(request.getServerIds())) {
+                criteria.andServerIdIn(request.getServerIds());
+            }
         }
 
         return BeanUtils.copyListProperties(serverMapper.selectByExample(example), Server.class);
@@ -53,6 +57,9 @@ public class ServerServiceImpl extends BaseServiceImpl<ServerEntity> implements 
 
         if (StringUtils.isNotBlank(request.getKeyword())) {
             criteria.andServerNameLike(request.getKeyword());
+        }
+        if (CollectionUtils.isNotEmpty(request.getServerIds())) {
+            criteria.andServerIdIn(request.getServerIds());
         }
 
         return PageHelper.startPage(request.getPageNum(), request.getPageSize()).doSelectPage(() -> serverMapper.selectByExample(example));
