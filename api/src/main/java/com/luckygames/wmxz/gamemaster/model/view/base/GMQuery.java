@@ -6,7 +6,7 @@ import java.lang.reflect.Field;
  * Created by lucky on 2018/3/29.
  */
 public class GMQuery {
-    private Long serverId;
+    protected Long serverId;
 
     public GMQuery() {
     }
