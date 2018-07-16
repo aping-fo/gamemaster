@@ -23,8 +23,6 @@ public class PlayerCharacterController extends BaseController {
     @Autowired
     private PlayerCharacterService playerCharacterService;
     @Autowired
-    private AdminService adminService;
-    @Autowired
     private PropFlowService propFlowService;
     @Autowired
     private EquipmentFlowService equipmentFlowService;

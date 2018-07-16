@@ -10,7 +10,8 @@ public enum AdminUrl {
     GETINFO("/getInfo", "获取玩家信息"),
     MAIL("/send_mail", "发送邮件"),
     CHAT("/chatMonitoring", "聊天监控"),
-    KICK("KICK_PLAYER", "踢人");
+    KICK("KICK_PLAYER", "踢人"),
+    BROADCAST("KICK_PLAYER", "发送广播");
 
     private final String url;
     private final String desc;

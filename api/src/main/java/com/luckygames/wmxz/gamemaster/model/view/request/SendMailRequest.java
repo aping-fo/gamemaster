@@ -14,6 +14,24 @@ public class SendMailRequest {
     private String title;
     private String content;
     private List<String> rewardNames;
+    private String attachments;
+    private String extraParam;
+
+    public String getExtraParam() {
+        return extraParam;
+    }
+
+    public void setExtraParam(String extraParam) {
+        this.extraParam = extraParam;
+    }
+
+    public String getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(String attachments) {
+        this.attachments = attachments;
+    }
 
     public MailType getMailType() {
         return mailType;

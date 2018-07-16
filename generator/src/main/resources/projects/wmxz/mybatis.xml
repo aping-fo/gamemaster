@@ -79,10 +79,10 @@
         <!--<property name="useActualColumnNames" value="false"/>-->
         <!--<columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>-->
         <!--</table>-->
-        <table schema="wmxz" tableName="pay_retention_rate" domainObjectName="PayRetentionRateEntity">
-        <property name="useActualColumnNames" value="false"/>
-        <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
-        </table>
+        <!--<table schema="wmxz" tableName="pay_retention_rate" domainObjectName="PayRetentionRateEntity">-->
+        <!--<property name="useActualColumnNames" value="false"/>-->
+        <!--<columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>-->
+        <!--</table>-->
         <!--<table schema="wmxz" tableName="giftpackage_sync" domainObjectName="GiftpackageSyncEntity">-->
         <!--<property name="useActualColumnNames" value="false"/>-->
         <!--<columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>-->
@@ -99,10 +99,10 @@
         <!--<property name="useActualColumnNames" value="false"/>-->
         <!--<columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>-->
         <!--</table>-->
-        <table schema="wmxz" tableName="registered_data" domainObjectName="RegisteredDataEntity">
-        <property name="useActualColumnNames" value="false"/>
-        <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
-        </table>
+        <!--<table schema="wmxz" tableName="registered_data" domainObjectName="RegisteredDataEntity">-->
+        <!--<property name="useActualColumnNames" value="false"/>-->
+        <!--<columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>-->
+        <!--</table>-->
         <!--<table schema="wmxz" tableName="integrated_online" domainObjectName="IntegratedOnlineEntity">-->
         <!--<property name="useActualColumnNames" value="false"/>-->
         <!--<columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>-->
@@ -208,7 +208,11 @@
         <!--<columnOverride column="broadcast_status"-->
         <!--javaType="com.luckygames.wmxz.gamemaster.model.enums.BroadcastStatus"/>-->
         <!--</table>-->
-        <table schema="wmxz" tableName="chat_log" domainObjectName="ChatLogEntity">
+        <!--<table schema="wmxz" tableName="chat_log" domainObjectName="ChatLogEntity">-->
+            <!--<property name="useActualColumnNames" value="false"/>-->
+            <!--<columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>-->
+        <!--</table>-->
+        <table schema="wmxz" tableName="broadcast_new" domainObjectName="BroadcastNewEntity">
             <property name="useActualColumnNames" value="false"/>
             <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
         </table>

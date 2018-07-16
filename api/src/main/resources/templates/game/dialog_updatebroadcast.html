@@ -1,34 +1,24 @@
 <div class="pageContent">
     <form id="pagerForm" action="game/update_broadcast" method="post" onsubmit="return validateCallback(this, navTabAjaxDone);">
-
-        <input type="hidden" name="broadcastType" value="BROADCAST">
         <input type="hidden" name="id" th:value="${broadcast.id}"/>
         <div class="pageFormContent" layoutH="56">
             <p>
                 <label>区服筛选</label>
                 <select name="serverId">
-                    <option th:if="${broadcast.serverId==row.serverId}" selected="selected" th:each="row,iterStat:${serverList}" th:text="${row.serverName}" th:value="${row.serverId}"></option>
-                    <option th:if="${broadcast.serverId!=row.serverId}" th:each="row,iterStat:${serverList}" th:text="${row.serverName}" th:value="${row.serverId}"></option>
+                    <option th:each="row,iterStat:${serverList}" th:selected="${broadcast.serverId==row.serverId}"  th:text="${row.serverName}" th:value="${row.serverId}"></option>
                 </select>
             </p>
             <p>
                 <label>渠道筛选</label>
                 <select name="channelId">
-                    <option th:if="${broadcast.channelId==row.channelId}" selected="selected" th:each="row,iterStat:${channelList}" th:text="${row.channelName}" th:value="${row.channelId}"></option>
-                    <option th:if="${broadcast.channelId!=row.channelId}" th:each="row,iterStat:${channelList}" th:text="${row.channelName}" th:value="${row.channelId}"></option>
+                    <option th:each="row,iterStat:${channelList}" th:selected="${broadcast.channelId==row.channelId}" th:text="${row.channelName}" th:value="${row.channelId}"></option>
                 </select>
             </p>
             <p>
-                <label>开始播放时间：</label>
-                <input type="text" class="date" name="playTime" dateFmt="yyyy-MM-dd HH:mm:ss" th:value="${#dates.format(broadcast.playTime, 'yyyy-MM-dd HH:mm:ss')}"/>
-            </p>
-            <p>
-                <label>循环次数</label>
-                <input type="number" name="loopTimes" class="textInput" th:value="${broadcast.loopTimes}"/>
-            </p>
-            <p>
-                <label>间隔时间(秒)</label>
-                <input type="number" name="gameSeconds" class="textInput" th:value="${broadcast.gapSecond}"/>
+                <label>广播类型(多选)</label>
+                <input th:checked="${broadcast.notifyType==1}" type="checkbox" name="notifyType" value="1"/>通用提示
+                <input th:checked="${broadcast.notifyType==2}" type="checkbox" name="notifyType" value="2"/>江湖传闻
+                <input th:checked="${broadcast.notifyType==3}" type="checkbox" name="notifyType" value="3"/>系统公告
             </p>
             <div>
                 <label>广播内容：</label>
