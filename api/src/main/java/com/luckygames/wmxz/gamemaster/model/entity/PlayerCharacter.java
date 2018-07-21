@@ -3,6 +3,7 @@ package com.luckygames.wmxz.gamemaster.model.entity;
 import com.luckygames.wmxz.gamemaster.dao.PlayerCharacterEntity;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 
 public class PlayerCharacter extends PlayerCharacterEntity {
     private Long channelId;
@@ -12,10 +13,26 @@ public class PlayerCharacter extends PlayerCharacterEntity {
     private String idCard;
     private Integer loginTimes;
     private Integer loginDays;
-
     private Integer onlineTime;
-
     private BigDecimal rechargeAmount;
+    private Long lossNumbers;//流失人数
+    private Double lossRate;//流失率
+
+    public Double getLossRate() {
+        return lossRate;
+    }
+
+    public void setLossRate(Double lossRate) {
+        this.lossRate = lossRate;
+    }
+
+    public Long getLossNumbers() {
+        return lossNumbers;
+    }
+
+    public void setLossNumbers(Long lossNumbers) {
+        this.lossNumbers = lossNumbers;
+    }
 
     public Integer getLoginDays() {
         return loginDays;

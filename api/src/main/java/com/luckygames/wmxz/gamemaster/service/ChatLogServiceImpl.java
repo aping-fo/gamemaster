@@ -79,7 +79,7 @@ public class ChatLogServiceImpl extends BaseServiceImpl<ChatLogEntity> implement
 
         long start = (query.getPageNum() - 1) * query.getPageSize();
         long end = start + query.getPageSize();
-        String channel = StringUtils.isBlank(query.getChatChannel()) ? "CHAT_LOG_ALL" : "CHAT_LOG_" + query.getChatChannel();
+        String channel = query.getChatChannel()==null ? "CHAT_LOG_ALL" : "CHAT_LOG_" + query.getChatChannel();
         Page<ChatLog> chatLogList = new Page<>();
 
         ListOperations listOperations = redisTemplate.opsForList();

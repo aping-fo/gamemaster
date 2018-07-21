@@ -27,6 +27,11 @@ public class PlayerOrderServiceImpl extends BaseServiceImpl<PlayerOrderEntity> i
     }
 
     @Override
+    public void update(String orderCode) {
+        playerOrderMapper.update(orderCode);
+    }
+
+    @Override
     public BigDecimal sumRechargeAmount(Long serverId) {
         return playerOrderMapper.sumRechargeAmount(serverId);
     }

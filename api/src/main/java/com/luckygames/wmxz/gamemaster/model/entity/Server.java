@@ -3,6 +3,8 @@ package com.luckygames.wmxz.gamemaster.model.entity;
 import com.luckygames.wmxz.gamemaster.dao.ServerEntity;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 
 public class Server extends ServerEntity {
     private Integer openDays;
@@ -12,6 +14,15 @@ public class Server extends ServerEntity {
     private BigDecimal rechargeAmount;
     private Integer rechargeCount;
     private BigDecimal arpu;
+    private Map<String,List<ChannelBag>> channelListMap;
+
+    public Map<String, List<ChannelBag>> getChannelListMap() {
+        return channelListMap;
+    }
+
+    public void setChannelListMap(Map<String, List<ChannelBag>> channelListMap) {
+        this.channelListMap = channelListMap;
+    }
 
     public Integer getOpenDays() {
         return openDays;

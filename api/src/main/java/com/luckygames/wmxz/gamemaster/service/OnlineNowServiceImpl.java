@@ -34,7 +34,7 @@ public class OnlineNowServiceImpl extends BaseServiceImpl<OnlineNowEntity> imple
         if (query.getPageNum() == null) {
             query.setPageNum(1);
         }
-        return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> onlineNowMapper.queryOnlineNowReport(query));
+        return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> onlineNowMapper.searchPage(query));
     }
 
     private void saveOnlineNowReport(List<OnlineNow> list) {

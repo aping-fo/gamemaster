@@ -136,6 +136,10 @@ public class PlayerCharacterEntitySqlProvider {
             sql.VALUES("operate_status", "#{operateStatus,jdbcType=INTEGER}");
         }
         
+        if (record.getPackageId() != null) {
+            sql.VALUES("package_id", "#{packageId,jdbcType=INTEGER}");
+        }
+        
         return sql.toString();
     }
 
@@ -172,6 +176,7 @@ public class PlayerCharacterEntitySqlProvider {
         sql.SELECT("create_time");
         sql.SELECT("update_time");
         sql.SELECT("operate_status");
+        sql.SELECT("package_id");
         sql.FROM("player_character");
         applyWhere(sql, example, false);
         
@@ -297,6 +302,10 @@ public class PlayerCharacterEntitySqlProvider {
             sql.SET("operate_status = #{record.operateStatus,jdbcType=INTEGER}");
         }
         
+        if (record.getPackageId() != null) {
+            sql.SET("package_id = #{record.packageId,jdbcType=INTEGER}");
+        }
+        
         applyWhere(sql, example, true);
         return sql.toString();
     }
@@ -332,6 +341,7 @@ public class PlayerCharacterEntitySqlProvider {
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         sql.SET("operate_status = #{record.operateStatus,jdbcType=INTEGER}");
+        sql.SET("package_id = #{record.packageId,jdbcType=INTEGER}");
         
         PlayerCharacterEntityExample example = (PlayerCharacterEntityExample) parameter.get("example");
         applyWhere(sql, example, true);

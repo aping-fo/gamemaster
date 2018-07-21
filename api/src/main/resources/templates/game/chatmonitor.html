@@ -4,7 +4,7 @@
             <div class="tabsHeaderContent">
                 <ul>
                     <li><span>实时</span></li>
-                    <!--<li><a href="game/chatmonitor_history" class="j-ajax"><span>历史</span></a></li>-->
+                    <li><a href="game/chatmonitor_history" class="j-ajax"><span>历史</span></a></li>
                 </ul>
             </div>
         </div>
@@ -20,13 +20,10 @@
                                     <td>
                                         <label>频道</label>
                                         <select name="chatChannel" class="combox">
-                                            <option value="ALL" th:selected="${request.chatChannel=='ALL'}">全部</option>
-                                            <option value="WORLD" th:selected="${request.chatChannel=='WORLD'}">世界
-                                            </option>
-                                            <option value="FRIEND" th:selected="${request.chatChannel=='FRIEND'}">好友
-                                            </option>
-                                            <option value="FACTION" th:selected="${request.chatChannel=='FACTION'}">公会
-                                            </option>
+                                            <option value="">全部</option>
+                                            <option value="1" th:selected="${request.chatChannel==1}">世界</option>
+                                            <option value="2" th:selected="${request.chatChannel==2}">好友</option>
+                                            <option value="3" th:selected="${request.chatChannel==3}">公会</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -36,9 +33,8 @@
                 </div>
                 <div class="pageContent" id="chatMonitorFrame">
                 </div>
-
             </div>
-            <div>历史</div>
+            <!--<div>历史</div>-->
         </div>
         <div class="tabsFooter">
             <div class="tabsFooterContent"></div>
@@ -49,7 +45,12 @@
 <script type="text/javascript">
     $(document).ready(function () {
         function autoRefresh() {
-            $("#chatMonitorFrame").loadUrl("game/chatmonitor_frame");
+            var value=$("select").val()
+            if(value.length!=0){
+                $("#chatMonitorFrame").loadUrl("game/chatmonitor_frame?chatChannel="+value);
+            }else{
+                $("#chatMonitorFrame").loadUrl("game/chatmonitor_frame");
+            }
         }
 
         t = setInterval(autoRefresh, 2000);

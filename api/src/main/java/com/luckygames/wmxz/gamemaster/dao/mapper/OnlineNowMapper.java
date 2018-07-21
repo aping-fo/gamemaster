@@ -10,6 +10,9 @@ import org.apache.ibatis.annotations.SelectProvider;
 import java.util.List;
 
 public interface OnlineNowMapper extends OnlineNowEntityMapper<OnlineNowEntity> {
+    @SelectProvider(type = OnlineNowSqlProvider.class, method = "queryOnlineNowReportFromOrderSingleDate")
+    List<OnlineNow> queryOnlineNowReportFromOrderSingleDate(String singleDate);
+
     @SelectProvider(type = OnlineNowSqlProvider.class, method = "searchPage")
     List<OnlineNow> searchPage(OnlineNowSearchQuery query);
 }

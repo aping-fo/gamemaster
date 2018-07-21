@@ -40,6 +40,10 @@ public class PlayerActionLogEntitySqlProvider {
             sql.VALUES("`action`", "#{action,jdbcType=INTEGER}");
         }
         
+        if (record.getActionValue() != null) {
+            sql.VALUES("action_value", "#{actionValue,jdbcType=INTEGER}");
+        }
+        
         if (record.getActionDate() != null) {
             sql.VALUES("action_date", "#{actionDate,jdbcType=TIMESTAMP}");
         }
@@ -60,10 +64,6 @@ public class PlayerActionLogEntitySqlProvider {
             sql.VALUES("char_id", "#{charId,jdbcType=BIGINT}");
         }
         
-        if (record.getOnlineTime() != null) {
-            sql.VALUES("online_time", "#{onlineTime,jdbcType=BIGINT}");
-        }
-        
         if (record.getStatus() != null) {
             sql.VALUES("`status`", "#{status,jdbcType=INTEGER}");
         }
@@ -74,6 +74,14 @@ public class PlayerActionLogEntitySqlProvider {
         
         if (record.getUpdateTime() != null) {
             sql.VALUES("update_time", "#{updateTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getOnlineTime() != null) {
+            sql.VALUES("online_time", "#{onlineTime,jdbcType=BIGINT}");
+        }
+        
+        if (record.getLevel() != null) {
+            sql.VALUES("`level`", "#{level,jdbcType=INTEGER}");
         }
         
         return sql.toString();
@@ -88,15 +96,17 @@ public class PlayerActionLogEntitySqlProvider {
         }
         sql.SELECT("device_id");
         sql.SELECT("`action`");
+        sql.SELECT("action_value");
         sql.SELECT("action_date");
         sql.SELECT("channel_id");
         sql.SELECT("server_id");
         sql.SELECT("player_id");
         sql.SELECT("char_id");
-        sql.SELECT("online_time");
         sql.SELECT("`status`");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
+        sql.SELECT("online_time");
+        sql.SELECT("`level`");
         sql.FROM("player_action_log");
         applyWhere(sql, example, false);
         
@@ -126,6 +136,10 @@ public class PlayerActionLogEntitySqlProvider {
             sql.SET("`action` = #{record.action,jdbcType=INTEGER}");
         }
         
+        if (record.getActionValue() != null) {
+            sql.SET("action_value = #{record.actionValue,jdbcType=INTEGER}");
+        }
+        
         if (record.getActionDate() != null) {
             sql.SET("action_date = #{record.actionDate,jdbcType=TIMESTAMP}");
         }
@@ -146,10 +160,6 @@ public class PlayerActionLogEntitySqlProvider {
             sql.SET("char_id = #{record.charId,jdbcType=BIGINT}");
         }
         
-        if (record.getOnlineTime() != null) {
-            sql.SET("online_time = #{record.onlineTime,jdbcType=BIGINT}");
-        }
-        
         if (record.getStatus() != null) {
             sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         }
@@ -160,6 +170,14 @@ public class PlayerActionLogEntitySqlProvider {
         
         if (record.getUpdateTime() != null) {
             sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getOnlineTime() != null) {
+            sql.SET("online_time = #{record.onlineTime,jdbcType=BIGINT}");
+        }
+        
+        if (record.getLevel() != null) {
+            sql.SET("`level` = #{record.level,jdbcType=INTEGER}");
         }
         
         applyWhere(sql, example, true);
@@ -173,15 +191,17 @@ public class PlayerActionLogEntitySqlProvider {
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("device_id = #{record.deviceId,jdbcType=VARCHAR}");
         sql.SET("`action` = #{record.action,jdbcType=INTEGER}");
+        sql.SET("action_value = #{record.actionValue,jdbcType=INTEGER}");
         sql.SET("action_date = #{record.actionDate,jdbcType=TIMESTAMP}");
         sql.SET("channel_id = #{record.channelId,jdbcType=BIGINT}");
         sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
         sql.SET("player_id = #{record.playerId,jdbcType=BIGINT}");
         sql.SET("char_id = #{record.charId,jdbcType=BIGINT}");
-        sql.SET("online_time = #{record.onlineTime,jdbcType=BIGINT}");
         sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
+        sql.SET("online_time = #{record.onlineTime,jdbcType=BIGINT}");
+        sql.SET("`level` = #{record.level,jdbcType=INTEGER}");
         
         PlayerActionLogEntityExample example = (PlayerActionLogEntityExample) parameter.get("example");
         applyWhere(sql, example, true);

@@ -1775,6 +1775,66 @@ public class PlayerCharacterEntityExample {
             addCriterion("operate_status not between", value1, value2, "operateStatus");
             return (Criteria) this;
         }
+
+        public Criteria andPackageIdIsNull() {
+            addCriterion("package_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdIsNotNull() {
+            addCriterion("package_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdEqualTo(Integer value) {
+            addCriterion("package_id =", value, "packageId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdNotEqualTo(Integer value) {
+            addCriterion("package_id <>", value, "packageId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdGreaterThan(Integer value) {
+            addCriterion("package_id >", value, "packageId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("package_id >=", value, "packageId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdLessThan(Integer value) {
+            addCriterion("package_id <", value, "packageId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdLessThanOrEqualTo(Integer value) {
+            addCriterion("package_id <=", value, "packageId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdIn(List<Integer> values) {
+            addCriterion("package_id in", values, "packageId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdNotIn(List<Integer> values) {
+            addCriterion("package_id not in", values, "packageId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdBetween(Integer value1, Integer value2) {
+            addCriterion("package_id between", value1, value2, "packageId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPackageIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("package_id not between", value1, value2, "packageId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

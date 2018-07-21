@@ -11,6 +11,8 @@ import java.math.BigDecimal;
 public interface PlayerOrderService extends BaseService<PlayerOrderEntity> {
     Page<PlayerOrder> searchPage(PlayerOrderSearchQuery playerOrderSearchQuery);
 
+    void update(String orderCode);
+
     BigDecimal sumRechargeAmount(Long serverId);
 
     Integer countRechargeCount(Long serverId);

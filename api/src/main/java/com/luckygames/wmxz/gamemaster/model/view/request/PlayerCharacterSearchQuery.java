@@ -1,5 +1,7 @@
 package com.luckygames.wmxz.gamemaster.model.view.request;
 
+import java.util.Date;
+
 public class PlayerCharacterSearchQuery extends CommonSearchQuery {
     private Integer searchKey;
     private String keyword;
@@ -10,6 +12,33 @@ public class PlayerCharacterSearchQuery extends CommonSearchQuery {
     private Integer goldEnd;
     private String job;
     private Integer charId;
+    private String loginTime;
+    private Integer loginDay;//登录天数
+    private Long platform;//平台
+
+    public Long getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(Long platform) {
+        this.platform = platform;
+    }
+
+    public Integer getLoginDay() {
+        return loginDay;
+    }
+
+    public void setLoginDay(Integer loginDay) {
+        this.loginDay = loginDay;
+    }
+
+    public String getLoginTime() {
+        return loginTime;
+    }
+
+    public void setLoginTime(String loginTime) {
+        this.loginTime = loginTime;
+    }
 
     public Integer getCharId() {
         return charId;

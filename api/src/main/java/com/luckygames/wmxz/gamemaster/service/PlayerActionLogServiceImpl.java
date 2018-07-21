@@ -9,6 +9,7 @@ import com.luckygames.wmxz.gamemaster.model.entity.PlayerActionLog;
 import com.luckygames.wmxz.gamemaster.model.enums.ActionType;
 import com.luckygames.wmxz.gamemaster.model.enums.Status;
 import com.luckygames.wmxz.gamemaster.model.view.request.CommonSearchQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.PlayerActionLogSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.base.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,5 +50,21 @@ public class PlayerActionLogServiceImpl extends BaseServiceImpl<PlayerActionLogE
             query.setPageNum(1);
         }
         return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> playerActionLogMapper.queryEquipmentCountReport(query));
+    }
+
+    @Override
+    public Page<PlayerActionLog> searchLeaveLoss(PlayerActionLogSearchQuery query) {
+        return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> playerActionLogMapper.searchLeaveLoss(query));
+
+    }
+
+    @Override
+    public Page<PlayerActionLog> searchLeaveDistribution(PlayerActionLogSearchQuery query) {
+        return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> playerActionLogMapper.searchLeaveDistribution(query));
+    }
+
+    @Override
+    public Page<PlayerActionLog> searchLeProduceExpend(PlayerActionLogSearchQuery query) {
+        return playerActionLogMapper.searchLeProduceExpend(query);
     }
 }

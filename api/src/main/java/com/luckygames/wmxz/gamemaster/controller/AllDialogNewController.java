@@ -4,7 +4,6 @@ import com.luckygames.wmxz.gamemaster.common.constants.AdminUrl;
 import com.luckygames.wmxz.gamemaster.common.constants.ResultCode;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.model.entity.*;
-import com.luckygames.wmxz.gamemaster.model.enums.BroadcastStatus;
 import com.luckygames.wmxz.gamemaster.model.enums.ForbiddenOperationType;
 import com.luckygames.wmxz.gamemaster.model.enums.MailType;
 import com.luckygames.wmxz.gamemaster.model.enums.Status;
@@ -47,7 +46,7 @@ public class AllDialogNewController extends BaseController {
     private AdminNewService adminNewService;
     @Autowired
     private ChannelService channelService;
-/*
+
     //封禁页面
     @RequestMapping(value = "/player/dialog_ban", method = {RequestMethod.GET, RequestMethod.POST})
     public Response dialogBan(@RequestParam("charIds") List<Long> charIds,
@@ -91,53 +90,50 @@ public class AllDialogNewController extends BaseController {
 
     //封禁接口
     @RequestMapping(value = "/player/ajax_ban", method = RequestMethod.POST)
-    public Response ajaxBan(ForbiddenRequest forbiddenRequest) {
-        if (CollectionUtils.isEmpty(forbiddenRequest.getCharIds())) {
+    public Response ajaxBan(ForbiddenRequest request) {
+        if (CollectionUtils.isEmpty(request.getCharIds())) {
             return new Response(ResultCode.CHARACTER_ID_INVALID);
         }
 
-        forbiddenRequest.getCharIds().forEach(f -> {
-            PlayerCharacter character = playerCharacterService.getByCharId(f);
+        request.getCharIds().forEach(charId -> {
+            PlayerCharacter character = playerCharacterService.getByCharId(charId);
             if (character == null) {
                 return;
             }
             String result = null;
             try {
-                result = adminService.banRole(new BanQuery(
-                        forbiddenRequest.getForbiddenOperationType().getCode(),
-                        forbiddenRequest.getForbiddenType().getCode(),
-                        f,
-                        forbiddenRequest.getHour(),
-                        character.getServerId()
-                ));
+                BackendCommand command = new BackendCommand();
+                command.setServerId(request.getServerId());
+                command.setPlayerIdList(Arrays.asList(charId));
+                result = adminNewService.commonAction(command,AdminUrl.BAN.getUrl());
                 logger.debug("调用封禁接口返回：{}", result);
             } catch (Exception e) {
                 logger.error("封禁角色异常：", e);
             }
             result = "OK";
             if (result != null && "OK".equals(result)) {
-                if (forbiddenRequest.getForbiddenOperationType().equals(ForbiddenOperationType.FORBIDDEN)) {
+                if (request.getForbiddenOperationType().equals(ForbiddenOperationType.FORBIDDEN)) {
                     ForbiddenLog forbiddenLog = new ForbiddenLog();
-                    forbiddenLog.setCharId(f);
+                    forbiddenLog.setCharId(charId);
                     forbiddenLog.setPlayerId(character.getPlayerId());
-                    forbiddenLog.setExpireTime(DateUtils.addHours(DateUtils.Now(), forbiddenRequest.getHour()));
-                    forbiddenLog.setForbiddenType(forbiddenRequest.getForbiddenType());
+                    forbiddenLog.setExpireTime(DateUtils.addHours(DateUtils.Now(), request.getHour()));
+                    forbiddenLog.setForbiddenType(request.getForbiddenType());
                     forbiddenLog.setOperateTime(DateUtils.Now());
-                    forbiddenLog.setOperateType(forbiddenRequest.getForbiddenOperationType());
-                    forbiddenLog.setReason(forbiddenRequest.getReason());
-                    forbiddenLog.setServerId(forbiddenRequest.getServerId());
+                    forbiddenLog.setOperateType(request.getForbiddenOperationType());
+                    forbiddenLog.setReason(request.getReason());
+                    forbiddenLog.setServerId(request.getServerId());
                     forbiddenLog.setStatus(Status.NORMAL);
                     forbiddenLogService.save(forbiddenLog);
 
                     //更新玩家状态
                     playerCharacterService.updateStatus(character.getPlayerId(), 2);
-                } else if (forbiddenRequest.getForbiddenOperationType().equals(ForbiddenOperationType.ALLOWED)) {
+                } else if (request.getForbiddenOperationType().equals(ForbiddenOperationType.ALLOWED)) {
                     playerCharacterService.updateStatus(character.getPlayerId(), 1);
-                    forbiddenLogService.removeFobidden(f);
+                    forbiddenLogService.removeFobidden(charId);
                 }
             }
         });
-        return new Response().request(forbiddenRequest).json();
+        return new Response().request(request).json();
     }
 
     //邮件页面
@@ -185,7 +181,7 @@ public class AllDialogNewController extends BaseController {
             command.setTitle(request.getTitle());
             command.setAttachments(request.getAttachments());
             command.setExtraParam(request.getExtraParam());
-            result = adminService.kickLine(command);
+            result = adminNewService.commonAction(command,AdminUrl.MAIL.getUrl());
         } catch (Exception e) {
             logger.error("发送邮件异常：", e);
         }
@@ -212,7 +208,7 @@ public class AllDialogNewController extends BaseController {
 
         return new Response().request(request).json();
     }
-*/
+
     //广播页面
     @RequestMapping(value = "/game/dialog_newbroadcast", method = {RequestMethod.GET, RequestMethod.POST})
     public Response dialogNewBroadcast(BroadcastNewSearchQuery query) {

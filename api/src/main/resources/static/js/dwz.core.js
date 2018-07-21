@@ -199,7 +199,7 @@ var DWZ = {
             var $this = $(this);
 
             //解决发多次请求的Bug
-            if(op.type===undefined){
+            if(op.type===undefined&&op.url.indexOf("game/chatmonitor_frame")==-1){
                 return;
             }
 

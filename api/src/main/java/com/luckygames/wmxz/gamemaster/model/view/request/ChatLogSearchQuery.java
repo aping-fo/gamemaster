@@ -3,13 +3,13 @@ package com.luckygames.wmxz.gamemaster.model.view.request;
 public class ChatLogSearchQuery extends CommonSearchQuery {
     private String charName;
     private String keyword;
-    private String chatChannel;
+    private Integer chatChannel;
 
-    public String getChatChannel() {
+    public Integer getChatChannel() {
         return chatChannel;
     }
 
-    public void setChatChannel(String chatChannel) {
+    public void setChatChannel(Integer chatChannel) {
         this.chatChannel = chatChannel;
     }
 

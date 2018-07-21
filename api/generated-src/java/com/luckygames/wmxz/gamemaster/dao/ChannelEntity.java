@@ -14,6 +14,8 @@ public class ChannelEntity extends BaseEntity {
 
     private String channelType;
 
+    private Integer serverId;
+
     public Long getChannelId() {
         return channelId;
     }
@@ -44,5 +46,13 @@ public class ChannelEntity extends BaseEntity {
 
     public void setChannelType(String channelType) {
         this.channelType = channelType == null ? null : channelType.trim();
+    }
+
+    public Integer getServerId() {
+        return serverId;
+    }
+
+    public void setServerId(Integer serverId) {
+        this.serverId = serverId;
     }
 }

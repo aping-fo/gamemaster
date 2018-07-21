@@ -4,32 +4,24 @@ import com.github.pagehelper.Page;
 import com.luckygames.wmxz.gamemaster.common.constants.AdminUrl;
 import com.luckygames.wmxz.gamemaster.common.constants.ResultCode;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
-import com.luckygames.wmxz.gamemaster.dao.GiftpackageSyncEntity;
 import com.luckygames.wmxz.gamemaster.model.entity.*;
-import com.luckygames.wmxz.gamemaster.model.enums.BroadcastStatus;
-import com.luckygames.wmxz.gamemaster.model.enums.BroadcastType;
 import com.luckygames.wmxz.gamemaster.model.enums.MailType;
-import com.luckygames.wmxz.gamemaster.model.enums.Status;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
 import com.luckygames.wmxz.gamemaster.model.view.request.*;
 import com.luckygames.wmxz.gamemaster.service.*;
 import com.luckygames.wmxz.gamemaster.utils.ExcelExportUtil;
+import com.luckygames.wmxz.gamemaster.utils.ExportUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -173,35 +165,8 @@ public class GameController extends BaseController {
         HttpHeaders headers = new HttpHeaders();
         String fileName2;
         byte[] body= new byte[0];
-        try {
-            if(isMSBrowser(request)){
-                fileName2 = URLEncoder.encode(filename, "UTF-8");
-            }else{//如果是谷歌、火狐则解析为ISO-8859-1
-                fileName2 = new String(filename.getBytes("UTF-8"), "iso-8859-1");
-            }
-            headers.setContentDispositionFormData("attachment", fileName2);
-            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-            body = FileUtils.readFileToByteArray(file);
-            // 删除临时文件
-            file.delete();
-        }catch (UnsupportedEncodingException e){
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        body = ExportUtil.exportExcel(filename, request, file, headers, body);
         return new ResponseEntity<>(body, headers, HttpStatus.OK);
-    }
-
-    //判断是否是IE浏览器
-    public boolean isMSBrowser(HttpServletRequest request) {
-        String[] IEBrowserSignals = {"MSIE", "Trident", "Edge"};
-        String userAgent = request.getHeader("User-Agent");
-        for (String signal : IEBrowserSignals) {
-            if (userAgent.contains(signal)){
-                return true;
-            }
-        }
-        return false;
     }
 
     //生成激活码

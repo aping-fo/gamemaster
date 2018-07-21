@@ -91,6 +91,11 @@ public class ChannelServiceImpl extends BaseServiceImpl<ChannelEntity> implement
     }
 
     @Override
+    public List<Channel> searchListByServerId(Long serverId) {
+        return channelMapper.searchListByServerId(serverId);
+    }
+
+    @Override
     public Mapper<ChannelEntity> getMapper() {
         return this.channelMapper;
     }

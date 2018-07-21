@@ -87,7 +87,7 @@
             <td th:if="${row.generateType==3}" th:text="特殊礼包"></td>
             <td><a class="button" th:href="@{game/giftpackage_sync(id=${row.id})}" target="navTab"><span>删除</span></a></td>
             <td>
-                <a class="button" onclick="test(this)"><span>下载</span></a>
+                <a class="button" onclick="downloadFile(this)"><span>下载</span></a>
                 <input type="hidden" th:value="${row.id}"/>
                 <input type="hidden" th:value="${row.cardFile}"/>
             </td>
@@ -98,7 +98,7 @@
     <div th:replace="_include/pager"></div>
 </div>
 <script type="text/javascript">
-    function test(flag) {
+    function downloadFile(flag) {
         var id=$(flag).next().val();
         var filename=$(flag).next().next().val();
 

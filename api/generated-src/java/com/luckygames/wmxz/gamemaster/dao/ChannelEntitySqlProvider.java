@@ -60,6 +60,10 @@ public class ChannelEntitySqlProvider {
             sql.VALUES("update_time", "#{updateTime,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getServerId() != null) {
+            sql.VALUES("server_id", "#{serverId,jdbcType=INTEGER}");
+        }
+        
         return sql.toString();
     }
 
@@ -77,6 +81,7 @@ public class ChannelEntitySqlProvider {
         sql.SELECT("`status`");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
+        sql.SELECT("server_id");
         sql.FROM("channel");
         applyWhere(sql, example, false);
         
@@ -126,6 +131,10 @@ public class ChannelEntitySqlProvider {
             sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getServerId() != null) {
+            sql.SET("server_id = #{record.serverId,jdbcType=INTEGER}");
+        }
+        
         applyWhere(sql, example, true);
         return sql.toString();
     }
@@ -142,6 +151,7 @@ public class ChannelEntitySqlProvider {
         sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
+        sql.SET("server_id = #{record.serverId,jdbcType=INTEGER}");
         
         ChannelEntityExample example = (ChannelEntityExample) parameter.get("example");
         applyWhere(sql, example, true);

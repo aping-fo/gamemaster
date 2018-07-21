@@ -13,7 +13,9 @@
     <tbody>
     <tr th:each="row,iterStat:${chatLogList}">
         <td th:text="${row.serverName}"></td>
-        <td th:text="${row.chatChannel}"></td>
+        <td th:if="${row.chatChannel==1}" th:text="世界"></td>
+        <td th:if="${row.chatChannel==2}" th:text="好友"></td>
+        <td th:if="${row.chatChannel==3}" th:text="公会或帮派"></td>
         <td th:text="${row.charId}"></td>
         <td th:text="${row.charName}"></td>
         <td th:text="${#dates.format(row.chatTime, 'yyyy-MM-dd HH:mm:ss')}"></td>

@@ -20,6 +20,9 @@ public interface PlayerOrderMapper extends PlayerOrderEntityMapper<PlayerOrderEn
     @SelectProvider(type = PlayerOrderSqlProvider.class, method = "queryPlayerOrder")
     List<PlayerOrder> queryPlayerOrder(PlayerOrderSearchQuery query);
 
+    @SelectProvider(type = PlayerOrderSqlProvider.class, method = "update")
+    void update(String orderCode);
+
     @Select("select sum(amount) rechargeAmount from player_order where server_id = #{serverId}")
     BigDecimal sumRechargeAmount(Long serverId);
 

@@ -20,5 +20,7 @@ public interface PlayerCharacterService extends BaseService<PlayerCharacterEntit
 
     PlayerCharacter getByCharName(Long serverId, String charName);
 
+    void updateStatus(Long playerId,Integer operateStatus);
+
     long countCharaters(Long serverId);
 }
