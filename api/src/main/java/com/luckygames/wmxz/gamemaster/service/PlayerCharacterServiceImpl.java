@@ -38,12 +38,19 @@ public class PlayerCharacterServiceImpl extends BaseServiceImpl<PlayerCharacterE
         }});
         return BeanUtils.copyProperties(playerCharacterEntity, PlayerCharacter.class);
     }
+    @Override
+    public long countCharaters(Long serverId) {
+        return this.playerCharacterMapper.selectCount(new PlayerCharacterEntity() {{
+            setStatus(Status.NORMAL);
+            if (serverId != null) {
+                setServerId(serverId);
+            }
+        }});
+    }
 
     @Override
     public long countCharaters() {
-        return this.playerCharacterMapper.selectCount(new PlayerCharacterEntity() {{
-            setStatus(Status.NORMAL);
-        }});
+        return countCharaters(null);
     }
 
     @Override
@@ -63,6 +70,7 @@ public class PlayerCharacterServiceImpl extends BaseServiceImpl<PlayerCharacterE
         }});
         return BeanUtils.copyProperties(playerCharacterEntity, PlayerCharacter.class);
     }
+
 
     @Override
     public void updateStatus(Long playerId,Integer operateStatus) {

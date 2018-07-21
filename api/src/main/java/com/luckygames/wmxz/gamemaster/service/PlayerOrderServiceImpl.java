@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
+import java.math.BigDecimal;
+
 @Service("playerOrderService")
 public class PlayerOrderServiceImpl extends BaseServiceImpl<PlayerOrderEntity> implements PlayerOrderService {
     @Autowired
@@ -25,8 +27,13 @@ public class PlayerOrderServiceImpl extends BaseServiceImpl<PlayerOrderEntity> i
     }
 
     @Override
-    public void update(String orderCode) {
-        playerOrderMapper.update(orderCode);
+    public BigDecimal sumRechargeAmount(Long serverId) {
+        return playerOrderMapper.sumRechargeAmount(serverId);
+    }
+
+    @Override
+    public Integer countRechargeCount(Long serverId) {
+        return playerOrderMapper.countRechargeCount(serverId);
     }
 
     @Override
