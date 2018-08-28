@@ -1,0 +1,90 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="report/ranking" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div th:fragment="searchBar">
+            <input id="serverIds" type="hidden" name="serverIds" th:value="${#strings.listJoin(request.serverIds,',')}"/>
+            <input id="channelIds" type="hidden" name="channelIds" th:value="${#strings.listJoin(request.channelIds,',')}"/>
+            <input type="hidden" name="orderField" th:value="${request.orderField}"/>
+            <input type="hidden" name="orderDirection" th:value="${request.orderDirection}"/>
+            <input id="pageNum" type="hidden" name="pageNum" th:value="${Pager.pageNum}"/>
+            <input type="hidden" name="pageSize" th:value="${Pager.pageSize}"/>
+            <div class="searchBar">
+                <table class="searchContent">
+                    <tr>
+                        <td>服务器:
+                            <select name="serverId">
+                                <option value="">全部</option>
+                                <option th:each="row,iterStat:${serverList}" th:text="${row.serverName}" th:value="${row.serverId}" th:selected="${row.serverId==request.serverId}"></option>
+                            </select>
+                        </td>
+                        <td class="date">
+                            日期:
+                            <input name="date" class="date readonly" readonly="readonly" type="text" value="" th:value="${request.date}">
+                        </td>
+                        <td>小时:
+                            <select name="hour">
+                                <option th:each="row,iterStat:${hour}" th:text="${row}" th:value="${row}" th:selected="${row} eq${request.hour}"></option>
+                            </select>
+                        </td>
+                        <td>排行类型
+                            <select name="type">
+                                <option th:selected="${request.type==1}" value="1">玩家战力</option>
+                                <option th:selected="${request.type==2}" value="2">无尽试炼</option>
+                                <option th:selected="${request.type==3}" value="3">玩家等级</option>
+                                <option th:selected="${request.type==4}" value="4">仙盟排行</option>
+                                <option th:selected="${request.type==5}" value="5">宠物</option>
+                                <option th:selected="${request.type==6}" value="6">坐骑</option>
+                                <option th:selected="${request.type==7}" value="7">羽翼等级排行</option>
+                                <option th:selected="${request.type==8}" value="8">送花排行</option>
+                                <option th:selected="${request.type==9}" value="9">收花排行</option>
+                                <option th:selected="${request.type==10}" value="10">恶人榜排行</option>
+                                <option th:selected="${request.type==11}" value="11">英雄榜排行</option>
+                                <option th:selected="${request.type==12}" value="12">竞技场排行</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="buttonActive">
+                                <div class="buttonContent">
+                                    <button type="submit">检索</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%" layoutH="137">
+        <thead>
+        <tr>
+            <th width="100">玩家名字</th>
+            <th width="100">排行名次</th>
+            <th width="100" th:if="${request.type==1}">战力值</th>
+            <th width="100" th:if="${request.type==2}">过关章节</th>
+            <th width="100" th:if="${request.type==2}">过关时间</th>
+            <th width="100" th:if="${request.type==3}">等级</th>
+            <th width="100" th:if="${request.type==4}">仙盟等级</th>
+            <th width="100" th:if="${request.type==4}">仙盟战力</th>
+            <th width="100" th:if="${request.type==5}">宠物战力</th>
+            <th width="100" th:if="${request.type==6}">坐骑品阶</th>
+            <th width="100" th:if="${request.type==7}">羽翼等级</th>
+            <th width="100" th:if="${request.type==8}">送出鲜花</th>
+            <th width="100" th:if="${request.type==9}">收到鲜花</th>
+            <th width="100" th:if="${request.type==10}">击杀普通人数</th>
+            <th width="100" th:if="${request.type==11}">击杀恶人数</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${list.size()!=0}" th:each="row,iterStat:${list}">
+            <td th:text="${row.playerName}"></td>
+            <td th:text="${row.sortValue}"></td>
+            <td th:if="${row.type!=12}" th:text="${row.contrastValue}"></td>
+            <td th:if="${row.type==2 or row.type==4}" th:text="${row.extraValue}"></td>
+        </tr>
+        <tr th:if="${list.size()==0}"><td colspan="4" style="text-align: center">暂无数据</td></tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>
