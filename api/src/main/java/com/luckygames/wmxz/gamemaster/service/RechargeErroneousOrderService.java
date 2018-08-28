@@ -6,8 +6,6 @@ import com.luckygames.wmxz.gamemaster.model.entity.RechargeErroneousOrder;
 import com.luckygames.wmxz.gamemaster.model.view.request.RechargeErroneousOrderSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.base.BaseService;
 
-import java.util.Date;
-
 public interface RechargeErroneousOrderService extends BaseService<RechargeErroneousOrderEntity> {
     Page<RechargeErroneousOrder> searchPage(RechargeErroneousOrderSearchQuery query);
 }

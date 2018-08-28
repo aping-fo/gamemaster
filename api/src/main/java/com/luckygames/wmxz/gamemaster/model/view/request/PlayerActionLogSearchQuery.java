@@ -4,8 +4,8 @@ public class PlayerActionLogSearchQuery extends CommonSearchQuery {
     private String date;
     private Long level;
     private Long platform;
-    private Integer day=3;
-    private Integer type=22;//消耗类型,默认为仙晶
+    private Integer day;
+    private Integer type;
     private Integer packageId;
 
     public Integer getPackageId() {

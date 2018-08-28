@@ -22,12 +22,10 @@
                 <table class="searchContent">
                     <tr>
                         <td class="dateRange">
-                            日期:
-                            <input name="startDate" class="date readonly" readonly="readonly" type="text" value=""
-                                   th:value="${request.startDate}">
+                            日期：
+                            <input name="startDate" class="date readonly" readonly="readonly" type="text" value="" th:value="${request.startDate}">
                             <span class="limit">-</span>
-                            <input name="endDate" class="date readonly" readonly="readonly" type="text" value=""
-                                   th:value="${request.endDate}">
+                            <input name="endDate" class="date readonly" readonly="readonly" type="text" value="" th:value="${request.endDate}">
                         </td>
                         <td>
                             <div class="buttonActive">
@@ -45,18 +43,18 @@
 <div class="pageContent">
     <table class="table" width="100%" layoutH="137">
         <thead>
-        <tr>
-            <th th:each="row:${listMapTitle}">
-                <span th:if="${row.key} eq'channel_id'" th:text="渠道"/>
-                <span th:if="${row.key} eq'summary'" th:text="汇总"/>
-                <span th:if="${row.key} ne'channel_id' and ${row.key} ne'summary'" th:text="${#strings.substring(row.key,5,10)}"/>
-            </th>
-        </tr>
+            <tr>
+                <th th:each="row:${listMapTitle}">
+                    <span th:if="${row.key} eq'channel_id'" th:text="渠道"/>
+                    <span th:if="${row.key} eq'summary'" th:text="汇总"/>
+                    <span th:if="${row.key} ne'channel_id' and ${row.key} ne'summary'" th:text="${#strings.substring(row.key,5,10)}"/>
+                </th>
+            </tr>
         </thead>
         <tbody>
-        <tr th:each="row,iterStat:${listMap}">
-            <td th:each="row1:${row}"><span th:text="${row1.value}"></span></td>
-        </tr>
+            <tr th:each="row,iterStat:${listMap}">
+                <td th:each="row1:${row}"><span th:text="${row1.value}"></span></td>
+            </tr>
         </tbody>
     </table>
     <div th:replace="_include/pager"></div>

@@ -31,9 +31,6 @@ public class OnlineNowServiceImpl extends BaseServiceImpl<OnlineNowEntity> imple
 
     @Override
     public Page<OnlineNow> searchPage(OnlineNowSearchQuery query) {
-        if (query.getPageNum() == null) {
-            query.setPageNum(1);
-        }
         return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> onlineNowMapper.searchPage(query));
     }
 

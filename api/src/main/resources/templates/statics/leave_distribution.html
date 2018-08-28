@@ -1,7 +1,7 @@
 <div class="pageHeader">
     <form id="pagerForm" onsubmit="return navTabSearch(this);" action="statics/leave_distribution" method="post"
           onreset="$(this).find('select.combox').comboxReset()">
-        <div th:fragment="searchBar">
+        <div th:fragment="searchBar" id="leaveDistribution">
             <input id="serverIds" type="hidden" name="serverIds" th:value="${#strings.listJoin(request.serverIds,',')}"/>
             <input id="channelIds" type="hidden" name="channelIds" th:value="${#strings.listJoin(request.channelIds,',')}"/>
             <input type="hidden" name="orderField" th:value="${request.orderField}"/>
@@ -59,7 +59,7 @@
 <div class="pageContent">
     <table class="table" width="100%" layoutH="137">
         <thead>
-        <tr id="title">
+        <tr id="leaveDistributionTitle">
             <input type="hidden" th:each="row,iterStat:${list}" th:value="${row.date}"/>
             <th width="100">日期</th>
             <th width="100">等级</th>
@@ -76,13 +76,16 @@
             <td th:text="${row.date}"></td>
             <td th:text="${row.level}"></td>
             <td th:text="${row.userNumber}"></td>
-            <td th:if="${row.userRate>0}" th:text="${#strings.append(#strings.substring(row.userRate*100,0,4),'%')}"></td>
+            <td th:if="${row.userRate>=1}">100.00%</td>
+            <td th:if="${row.userRate>0 and row.userRate<1}" th:text="${#strings.append(#strings.substring(row.userRate*100,0,4),'%')}"></td>
             <td th:if="${row.userRate<=0}">0.00%</td>
             <td th:text="${row.activeNumber}"></td>
-            <td th:if="${row.activeRate>0}" th:text="${#strings.append(#strings.substring(row.activeRate*100,0,4),'%')}"></td>
+            <td th:if="${row.activeRate>=1}">100.00%</td>
+            <td th:if="${row.activeRate>0 and row.activeRate<1}" th:text="${#strings.append(#strings.substring(row.activeRate*100,0,4),'%')}"></td>
             <td th:if="${row.activeRate<=0}">0.00%</td>
             <td th:text="${row.payNumber}"></td>
-            <td th:if="${row.payRate>0}" th:text="${#strings.append(#strings.substring(row.payRate*100,0,4),'%')}"></td>
+            <td th:if="${row.payRate>=1}">100.00%</td>
+            <td th:if="${row.payRate>0 and row.payRate<1}" th:text="${#strings.append(#strings.substring(row.payRate*100,0,4),'%')}"></td>
             <td th:if="${row.payRate<=0}">0.00%</td>
         </tr>
         <tr th:if="${list.size()==0}"><td colspan="8" style="text-align: center">暂无数据</td></tr>
@@ -92,20 +95,20 @@
 </div>
 <script type="text/javascript">
     function exportExcel(flag) {
-        var filename='等级分布'+$('#title input').val()+'.xls';
+        var filename='等级分布'+$('#leaveDistributionTitle input').val()+'.xls';
 
         var title=new Array();
-        var titles=$('#title th');
+        var titles=$('#leaveDistributionTitle th');
         for(var i=0; i<titles.length; i++){
             title.push(titles.eq(i).text());
         }
 
-        var channelIds=$('#channelIds').val()
-        var serverIds=$('#serverIds').val()
-        var platform=$('select[name="platform"]').val()
-        var date=$('input[name="date"]').val()
-        var level=$('input[name="level"]').val()
-        var pageNum=$('#pageNum').val()
+        var channelIds=$('#leaveDistribution #channelIds').val()
+        var serverIds=$('#leaveDistribution #serverIds').val()
+        var platform=$('#leaveDistribution select[name="platform"]').val()
+        var date=$('#leaveDistribution input[name="date"]').val()
+        var level=$('#leaveDistribution input[name="level"]').val()
+        var pageNum=$('#leaveDistribution #pageNum').val()
 
         $(flag).attr("href","statics/download?&filename="+filename+"&title="+title+"&channelIds="+channelIds+"&serverIds="+serverIds+"&platform="+platform+"&date="+date+"&level="+level+"&pageNum="+pageNum);
     }

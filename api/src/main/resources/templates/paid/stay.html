@@ -20,26 +20,23 @@
                             </div>
                         </td>
                         <td>
-                            <div>
-                                <div class="buttonContent">
-                                    <a class="button" href="channel/select"
-                                       rel="channelselect" mask="true" lookupGroup=""><span>渠道筛选</span></a>
-                                </div>
-                            </div>
+                            渠道：
+                            <select name="channelId">
+                                <option value="">全部</option>
+                                <option th:each="row,iterStat:${channelList}" th:selected="${row.channelId==request.channelId}" th:text="${row.channelName}" th:value="${row.channelId}"></option>
+                            </select>
                         </td>
                         <td>包:
                             <select name="packageId">
-                                <option value="1" th:selected="${request.packageId==1}">测试1</option>
-                                <option value="2" th:selected="${request.packageId==2}">测试2</option>
+                                <option value="">全部</option>
+                                <option th:each="row,iterStat:${channelBagList}" th:value="${row.id}" th:text="${row.name}" th:selected="${row.id==request.packageId}"></option>
                             </select>
                         </td>
                         <td class="dateRange">
                             日期:
-                            <input name="startDate" class="date readonly" readonly="readonly" type="text" value=""
-                                   th:value="${request.startDate}">
+                            <input name="startDate" class="date readonly" readonly="readonly" type="text" value="" th:value="${request.startDate}">
                             <span class="limit">-</span>
-                            <input name="endDate" class="date readonly" readonly="readonly" type="text" value=""
-                                   th:value="${request.endDate}">
+                            <input name="endDate" class="date readonly" readonly="readonly" type="text" value="" th:value="${request.endDate}">
                         </td>
                         <td>
                             <div class="buttonActive">
@@ -58,17 +55,17 @@
     <table class="table" width="100%" layoutH="137">
         <thead>
         <tr>
-            <th width="100">付费日期</th>
-            <th width="100">用户数</th>
-            <th width="100">1</th>
-            <th width="100">2</th>
-            <th width="100">3</th>
-            <th width="100">4</th>
-            <th width="100">5</th>
-            <th width="100">6</th>
-            <th width="100">7</th>
-            <th width="100">14</th>
-            <th width="100">30</th>
+            <th>付费日期</th>
+            <th>用户数</th>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+            <th>6</th>
+            <th>7</th>
+            <th>14</th>
+            <th>30</th>
         </tr>
         </thead>
         <tbody>

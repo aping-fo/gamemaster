@@ -2,8 +2,11 @@
     <div class="tabsHeader">
         <div class="tabsHeaderContent">
             <ul>
-                <li><a href="game/giftpackage_add" class="j-ajax" target="navTab"><span>添加礼包</span></a></li>
-                <li><a href="game/giftpackage_sync" class="j-ajax" target="navTab"><span>同步礼包</span></a></li>
+                <li><a href="game/giftpackage_add" class="j-ajax" target="navTab"><span>添加礼包(二期)</span></a></li>
+                <li><a href="game/giftpackage_sync" class="j-ajax" target="navTab"><span>同步礼包(二期)</span></a></li>
+                <li><a href="game/generate_activation_code" class="j-ajax" target="navTab"><span>生成激活码(三期)</span></a></li>
+                <li><a href="game/synchronous_activation_code" class="j-ajax" target="navTab"><span>同步激活码(三期)</span></a></li>
+                <li><a href="game/single_service_bag" class="j-ajax" target="navTab"><span>单服礼包(三期)</span></a></li>
             </ul>
         </div>
     </div>
@@ -50,7 +53,7 @@
 <div class="pageContent">
     <table class="table" width="100%" layoutH="137">
         <thead>
-        <tr id="title">
+        <tr id="giftpackageTitle">
             <th>卡号文件</th>
             <th>礼包活动id</th>
             <th>生效时间</th>
@@ -103,7 +106,7 @@
         var filename=$(flag).next().next().val();
 
         var title=new Array();
-        var titles=$('#title th');
+        var titles=$('#giftpackageTitle th');
         for(var i=0; i<titles.length-2; i++){
             title.push(titles.eq(i).text());
         }

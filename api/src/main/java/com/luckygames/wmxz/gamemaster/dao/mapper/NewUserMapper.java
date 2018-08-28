@@ -4,7 +4,6 @@ import com.luckygames.wmxz.gamemaster.dao.NewUserEntity;
 import com.luckygames.wmxz.gamemaster.dao.NewUserEntityMapper;
 import com.luckygames.wmxz.gamemaster.dao.NewUserSqlProvider;
 import com.luckygames.wmxz.gamemaster.model.entity.NewUser;
-import com.luckygames.wmxz.gamemaster.model.view.request.CommonSearchQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.NewUserSearchQuery;
 import org.apache.ibatis.annotations.SelectProvider;
 

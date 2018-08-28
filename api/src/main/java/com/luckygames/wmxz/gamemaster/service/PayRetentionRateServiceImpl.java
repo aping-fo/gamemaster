@@ -31,9 +31,6 @@ public class PayRetentionRateServiceImpl extends BaseServiceImpl<PayRetentionRat
 
     @Override
     public Page<PayRetentionRate> searchPage(PayRetentionRateSearchQuery query) {
-        if (query.getPageNum() == null) {
-            query.setPageNum(1);
-        }
         return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> PayRetentionRateMapper.searchPage(query));
     }
 

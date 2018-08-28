@@ -1,8 +1,10 @@
 package com.luckygames.wmxz.gamemaster.service;
 
+import com.github.pagehelper.PageHelper;
 import com.luckygames.wmxz.gamemaster.dao.ChannelBagEntity;
 import com.luckygames.wmxz.gamemaster.dao.mapper.ChannelBagMapper;
 import com.luckygames.wmxz.gamemaster.model.entity.ChannelBag;
+import com.luckygames.wmxz.gamemaster.model.view.request.PackageSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.base.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,5 +26,10 @@ public class ChannelBagServiceImpl extends BaseServiceImpl<ChannelBagEntity> imp
     @Override
     public List<ChannelBag> searchPageByChannelId(Long channelId) {
         return  channelBagMapper.searchPageByChannelId(channelId);
+    }
+
+    @Override
+    public List<ChannelBag> searchPage(PackageSearchQuery query) {
+        return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> channelBagMapper.searchPage(query));
     }
 }

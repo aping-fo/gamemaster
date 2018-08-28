@@ -8,11 +8,11 @@
     <table class="table" width="100%" layoutH="137">
         <thead>
         <tr>
-            <th width="100">渠道</th>
-            <th width="100">总收入</th>
-            <th width="100">总注册</th>
-            <th width="100">总充值账户(排重)</th>
-            <th width="100">总充值角色(排重)</th>
+            <th>渠道</th>
+            <th>总收入</th>
+            <th>总注册</th>
+            <th>总充值账户(排重)</th>
+            <th>总充值角色(排重)</th>
         </tr>
         </thead>
         <tbody>
@@ -23,7 +23,7 @@
             <td th:text="${row.roleNumber}"></td>
             <td th:text="${row.payNumber}"></td>
         </tr>
-        <tr th:if="${list.size()==0}"><td colspan="11" style="text-align: center">暂无数据</td></tr>
+        <tr th:if="${list.size()==0}"><td colspan="5" style="text-align: center">暂无数据</td></tr>
         </tbody>
     </table>
     <div th:replace="_include/pager"></div>

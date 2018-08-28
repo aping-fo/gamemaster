@@ -24,10 +24,6 @@ public class LogonStatisticsServiceImpl extends BaseServiceImpl<LogonStatisticsE
 
     @Override
     public Page<LogonStatistics> searchPage(SigninSearchQuery query) {
-        if (query.getPageNum() == null) {
-            query.setPageNum(1);
-        }
         return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> LogonStatisticsMapper.searchPage(query));
-
     }
 }

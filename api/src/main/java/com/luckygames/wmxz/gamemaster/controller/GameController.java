@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -50,18 +51,20 @@ public class GameController extends BaseController {
     private AdminNewService adminNewService;
     @Autowired
     private BroadcastNewService broadcastNewService;
+    @Autowired
+    private NoticeService noticeService;
 
     //聊天设置
     @RequestMapping(value = "/chat_settings", method = {RequestMethod.GET, RequestMethod.POST})
     public Response chatSettings(ChatSettings chatSettings) {
-        ChatSettingsSearchQuery query=new ChatSettingsSearchQuery();
-        if(chatSettings.getServerId()!=null){
+        ChatSettingsSearchQuery query = new ChatSettingsSearchQuery();
+        if (chatSettings.getServerId() != null) {
             //检查是否已存在
             ChatSettings chatSettings1 = chatSettingsService.search(chatSettings);
-            if(chatSettings1!=null){
+            if (chatSettings1 != null) {
                 chatSettings.setId(chatSettings1.getId());
                 chatSettingsService.update(chatSettings);
-            }else{
+            } else {
                 Server service = serverService.getByServerId(chatSettings.getServerId());
                 chatSettings.setServerName(service.getServerName());
                 Channel channel = channelService.getByChannelId(chatSettings.getChannelId());
@@ -77,7 +80,7 @@ public class GameController extends BaseController {
         List<Channel> channelList = channelService.searchList(channelSearchQuery);
 
         return new Response("game/chat_settings")
-                .data("chatSettingsList",chatSettingsPage)
+                .data("chatSettingsList", chatSettingsPage)
                 .data("serverList", serverList)
                 .data("channelList", channelList);
     }
@@ -85,13 +88,13 @@ public class GameController extends BaseController {
     //创建角色管理
     @RequestMapping(value = "/create_role_manage", method = {RequestMethod.GET, RequestMethod.POST})
     public Response createRoleManage(CreateRoleManage createRoleManage) {
-        CreateRoleManageSearchQuery query=new CreateRoleManageSearchQuery();
-        if(createRoleManage.getId()!=null){
+        CreateRoleManageSearchQuery query = new CreateRoleManageSearchQuery();
+        if (createRoleManage.getId() != null) {
             createRoleManageService.update(createRoleManage);
         }
         Page<CreateRoleManage> createRoleManagePage = createRoleManageService.searchPage(query);
         return new Response("game/create_role_manage")
-                .data("createRoleManageList",createRoleManagePage);
+                .data("createRoleManageList", createRoleManagePage);
     }
 
     //添加礼包
@@ -134,37 +137,37 @@ public class GameController extends BaseController {
 
     //礼包下载
     @RequestMapping("/download")
-    public ResponseEntity<byte[]> download(int id,String filename,String[] title,HttpServletRequest request){
+    public ResponseEntity<byte[]> download(int id, String filename, String[] title, HttpServletRequest request) {
         GiftpackageSync giftpackageSync = giftpackageSyncService.searchById(id);
 
-        if(giftpackageSync.getIsExclusiveGiftbag()==0){
+        if (giftpackageSync.getIsExclusiveGiftbag() == 0) {
             giftpackageSync.setIsExclusiveGiftbag2("否");
-        }else{
+        } else {
             giftpackageSync.setIsExclusiveGiftbag2("是");
         }
 
-        if(giftpackageSync.getIsActivation()==0){
+        if (giftpackageSync.getIsActivation() == 0) {
             giftpackageSync.setIsActivation2("否");
-        }else{
+        } else {
             giftpackageSync.setIsActivation2("是");
         }
 
-        if(giftpackageSync.getGenerateType()==1){
+        if (giftpackageSync.getGenerateType() == 1) {
             giftpackageSync.setGenerateType2("同一类型只能使用1个卡号");
-        }else if(giftpackageSync.getGenerateType()==2){
+        } else if (giftpackageSync.getGenerateType() == 2) {
             giftpackageSync.setIsActivation2("同一类型可以使用多个激活码");
-        }else if(giftpackageSync.getGenerateType()==3){
+        } else if (giftpackageSync.getGenerateType() == 3) {
             giftpackageSync.setIsActivation2("特殊礼包");
         }
 
-        List<GiftpackageSync> list=new ArrayList<>();
+        List<GiftpackageSync> list = new ArrayList<>();
         list.add(giftpackageSync);
-        ExcelExportUtil eu=new ExcelExportUtil();
+        ExcelExportUtil eu = new ExcelExportUtil();
         File file = new File(filename);
-        eu.export(file, list, title,GiftpackageSync.class);
+        eu.export(file, list, title, GiftpackageSync.class);
         HttpHeaders headers = new HttpHeaders();
         String fileName2;
-        byte[] body= new byte[0];
+        byte[] body = new byte[0];
         body = ExportUtil.exportExcel(filename, request, file, headers, body);
         return new ResponseEntity<>(body, headers, HttpStatus.OK);
     }
@@ -172,12 +175,21 @@ public class GameController extends BaseController {
     //生成激活码
     @RequestMapping(value = "/generate_activation_code", method = {RequestMethod.GET, RequestMethod.POST})
     public Response generateActivationCode(ActivationCode activationCode) {
-        if (activationCode.getNumber()!=null) {
-            activationCodeService.add(activationCode);
+        Response response = new Response("game/generate_activation_code");
+        if (activationCode.getNumber() != null) {
+            if (activationCode.getId() != null) {
+                activationCodeService.update(activationCode);
+            } else {
+                activationCodeService.add(activationCode);
+            }
+        } else if (activationCode.getId() != null) {
+            ActivationCode activationCode1 = activationCodeService.searchById(activationCode.getId());
+            response.data("activationCode", activationCode1);
         }
+
         List<GiftpackageAdd> giftpackageAddList = giftpackageAddService.searchType();
-        return new Response("game/generate_activation_code")
-                .data("typeList", giftpackageAddList);
+        response.data("typeList", giftpackageAddList);
+        return response;
     }
 
     //同步激活码
@@ -186,7 +198,7 @@ public class GameController extends BaseController {
         Page<ActivationCode> activationCodePage = activationCodeService.searchPage(query);
         return new Response("game/synchronous_activation_code")
                 .request(query)
-                .data("activationCodeList",activationCodePage);
+                .data("activationCodeList", activationCodePage);
     }
 
     //单服礼包
@@ -195,7 +207,7 @@ public class GameController extends BaseController {
         Page<SingleServiceBag> singleServiceBagPage = singleServiceBagService.searchPage(query);
         return new Response("game/single_service_bag")
                 .request(query)
-                .data("singleServiceBagList",singleServiceBagPage);
+                .data("singleServiceBagList", singleServiceBagPage);
     }
 
     //活动
@@ -380,12 +392,11 @@ public class GameController extends BaseController {
     }
 
 
-
     //广播管理
     @RequestMapping(value = {"/broadcast"}, method = {RequestMethod.GET, RequestMethod.POST})
     public Response broadcast(BroadcastNewSearchQuery query) {
         //删除
-        if(query.getId()!=null){
+        if (query.getId() != null) {
             broadcastNewService.deleteById(query.getId());
         }
 
@@ -398,10 +409,10 @@ public class GameController extends BaseController {
     //更新广播管理
     @RequestMapping(value = {"/update_broadcast"}, method = {RequestMethod.GET, RequestMethod.POST})
     public Response updateBroadcast(SendBroadcastNewRequest request) {
-        if (StringUtils.isBlank(request.getServerId().toString())||StringUtils.isBlank(request.getChannelId().toString())||StringUtils.isBlank(request.getNotifyType())||StringUtils.isBlank(request.getContent())) {
+        if (StringUtils.isBlank(request.getServerId().toString()) || StringUtils.isBlank(request.getChannelId().toString()) || StringUtils.isBlank(request.getNotifyType()) || StringUtils.isBlank(request.getContent())) {
             return new Response(ResultCode.EXISTENCE_UNFILLED_FIELDS).json();
         }
-        String result="ok";
+        String result = "ok";
         try {
             BackendCommand command = new BackendCommand();
             command.setServerId(request.getServerId());
@@ -428,12 +439,49 @@ public class GameController extends BaseController {
         return new Response().request(request).json();
     }
 
+    //首屏公告
+    @RequestMapping(value = {"/notice"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public Response notice(NoticeSearchQuery query) {
+        Response response = new Response("game/notice");
+        Notice notice1 = new Notice();
+        if (query.getType() != null) {
+            Notice notice = new Notice();
+            if (query.getType().equals("add") || query.getType().equals("update")) {
+                if (StringUtils.isBlank(query.getTitle()) || StringUtils.isBlank(query.getContent())) {
+                    return new Response(ResultCode.EXISTENCE_UNFILLED_FIELDS).json();
+                } else {
+                    if (query.getType().equals("update")) {
+                        notice.setId(query.getId());
+                    }
+                    notice.setTitle(query.getTitle());
+                    notice.setContent(query.getContent());
+                    notice.setChannelId(query.getChannelId());
+                    notice.setEnable(true);
+                    notice.setCreateTime(new Date());
+                    notice.setUpdateTime(new Date());
+                    noticeService.save(notice);
+                }
+            } else if (query.getType().equals("delete")) {
+                noticeService.deleteById(query.getId());
+            } else if (query.getType().equals("modify")) {
+                notice1 = noticeService.searchById(query.getId());
+            } else if (query.getType().equals("open") || query.getType().equals("close")) {
+                notice.setId(query.getId());
+                if (query.getType().equals("open")) {
+                    notice.setEnable(true);
+                } else if (query.getType().equals("close")) {
+                    notice.setEnable(false);
+                }
+                noticeService.update(notice);
+            }
+        }
 
-//    @RequestMapping(value = {"/affiche"}, method = {RequestMethod.GET, RequestMethod.POST})
-//    public Response affiche(BroadcastSearchQuery query) {
-//        Page<Broadcast> broadcastList = broadcastService.searchPage(query);
-//        return new Response("game/affiche")
-//                .request(query)
-//                .data("broadcastList", broadcastList);
-//    }
+        Page<Notice> noticePage = noticeService.searchPage(query);
+        List<Channel> channelList = channelService.searchList();
+        response.request(query)
+                .data("list", noticePage)
+                .data("channelList", channelList)
+                .data("notice", notice1);
+        return response;
+    }
 }

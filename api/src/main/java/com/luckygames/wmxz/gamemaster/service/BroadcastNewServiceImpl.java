@@ -13,7 +13,6 @@ import tk.mybatis.mapper.common.Mapper;
 
 @Service("broadcastNewService")
 public class BroadcastNewServiceImpl extends BaseServiceImpl<BroadcastNewEntity> implements BroadcastNewService {
-
     @Autowired
     private BroadcastNewMapper broadcastNewMapper;
 

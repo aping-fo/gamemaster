@@ -5,19 +5,16 @@ import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.model.entity.*;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
 import com.luckygames.wmxz.gamemaster.model.view.request.CommonSearchQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.PackageSearchQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.PlayerActionLogSearchQuery;
-import com.luckygames.wmxz.gamemaster.model.view.request.PlayerCharacterSearchQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.SigninSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.*;
 import com.luckygames.wmxz.gamemaster.utils.ExcelExportUtil;
 import com.luckygames.wmxz.gamemaster.utils.ExportUtil;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,9 +39,11 @@ public class StaticsController extends BaseController {
     @Autowired
     private LogonStatisticsService logonStatisticsService;
     @Autowired
-    private PlayerCharacterService playerCharacterService;
-    @Autowired
     private PlayerActionLogService playerActionLogService;
+    @Autowired
+    private ChannelBagService channelBagService;
+    @Autowired
+    private ChannelService channelService;
 
     //数据汇总
     @RequestMapping("summary")
@@ -64,9 +63,18 @@ public class StaticsController extends BaseController {
     @RequestMapping("signin")
     public Response signinStatics(SigninSearchQuery query) {
         Page<LogonStatistics> logonStatisticsPage = logonStatisticsService.searchPage(query);
+        List<ChannelBag> channelBagList;
+        if (query.getChannelId() != null) {
+            channelBagList = channelBagService.searchPageByChannelId(query.getChannelId());
+        } else {
+            channelBagList = channelBagService.searchPage(new PackageSearchQuery());
+        }
+        List<Channel> channelList = channelService.searchList();
         return new Response("statics/signin")
                 .request(query)
-                .data("list", logonStatisticsPage);
+                .data("list", logonStatisticsPage)
+                .data("channelBagList", channelBagList)
+                .data("channelList", channelList);
     }
 
     //等级流失

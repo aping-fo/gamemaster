@@ -61,10 +61,10 @@
         <!--<columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>-->
         <!--<columnOverride column="action" javaType="com.luckygames.wmxz·.gamemaster.model.enums.ActionType"/>-->
         <!--</table>-->
-        <table schema="wmxz" tableName="player_character" domainObjectName="PlayerCharacterEntity">
-            <property name="useActualColumnNames" value="false"/>
-            <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
-        </table>
+        <!--<table schema="wmxz" tableName="player_character" domainObjectName="PlayerCharacterEntity">-->
+            <!--<property name="useActualColumnNames" value="false"/>-->
+            <!--<columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>-->
+        <!--</table>-->
         <!--<table schema="wmxz" tableName="user" domainObjectName="UserEntity">-->
         <!--<property name="useActualColumnNames" value="false"/>-->
         <!--<columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>-->
@@ -220,5 +220,13 @@
             <!--<property name="useActualColumnNames" value="false"/>-->
             <!--<columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>-->
         <!--</table>-->
+        <!--<table schema="wmxz" tableName="ranking" domainObjectName="RankingEntity">-->
+            <!--<property name="useActualColumnNames" value="false"/>-->
+            <!--<columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>-->
+        <!--</table>-->
+        <table schema="wmxz" tableName="notice" domainObjectName="NoticeEntity">
+            <property name="useActualColumnNames" value="false"/>
+            <columnOverride column="status" javaType="com.luckygames.wmxz.gamemaster.model.enums.Status"/>
+        </table>
     </context>
 </generatorConfiguration>

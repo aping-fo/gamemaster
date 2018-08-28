@@ -1,23 +1,16 @@
 <div class="pageHeader">
-    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="online/statics_data" method="post"
-    onreset="$(this).find('select.combox').comboxReset()">
-    <div class="searchBar">
-        <table class="searchContent">
-            <tr>
-                <td>
-                    <input name="recentTime" type="radio" value="60">最近60天
-                    <input name="recentTime" type="radio" value="90">最近90天
-                </td>
-            </tr>
-        </table>
-    </div>
-    <input type="hidden" name="serverIds" th:value="${#strings.listJoin(request.serverIds,',')}"/>
-    <input type="hidden" name="channelIds" th:value="${#strings.listJoin(request.channelIds,',')}"/>
-    <input type="hidden" name="orderField" th:value="${request.orderField}"/>
-    <input type="hidden" name="orderDirection" th:value="${request.orderDirection}"/>
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="online/statics_data" method="post" onreset="$(this).find('select.combox').comboxReset()">
+        <input type="hidden" name="serverIds" th:value="${#strings.listJoin(request.serverIds,',')}"/>
+        <input type="hidden" name="channelIds" th:value="${#strings.listJoin(request.channelIds,',')}"/>
+        <input type="hidden" name="orderField" th:value="${request.orderField}"/>
+        <input type="hidden" name="orderDirection" th:value="${request.orderDirection}"/>
         <div class="searchBar">
             <table class="searchContent">
                 <tr>
+                    <td>
+                        <input name="recentTime" type="radio" value="60">最近60天
+                        <input name="recentTime" type="radio" value="90">最近90天
+                    </td>
                     <td>
                         <div>
                             <div class="buttonContent">
@@ -34,11 +27,9 @@
                     </td>
                     <td class="dateRange">
                         日期:
-                        <input name="startDate" class="date readonly" readonly="readonly" type="text" value=""
-                               id="startDate">
+                        <input name="startDate" class="date readonly" readonly="readonly" type="text" value="" id="startDate">
                         <span class="limit">-</span>
-                        <input name="endDate" class="date readonly" readonly="readonly" type="text" value=""
-                               id="endDate">
+                        <input name="endDate" class="date readonly" readonly="readonly" type="text" value="" id="endDate">
                     </td>
                     <td>
                         <div class="buttonActive">

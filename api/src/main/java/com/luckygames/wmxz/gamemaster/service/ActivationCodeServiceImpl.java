@@ -26,6 +26,11 @@ public class ActivationCodeServiceImpl extends BaseServiceImpl<ActivationCodeEnt
     }
 
     @Override
+    public ActivationCode searchById(Long id) {
+        return ActivationCodeMapper.selectById(id);
+    }
+
+    @Override
     public Page<ActivationCode> add(ActivationCode activationCode) {
         return ActivationCodeMapper.add(activationCode);
     }

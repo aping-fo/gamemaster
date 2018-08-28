@@ -34,12 +34,10 @@
                         </td>
                         <td class="dateRange">
                             登录时间:
-                            <input th:if="${request.date} eq'now()'" name="date" class="date readonly" readonly="readonly" type="text">
-                            <input th:if="${request.date} ne'now()'" name="date" class="date readonly" readonly="readonly" type="text" value="" th:value="${request.date}">
+                            <input name="date" class="date readonly" readonly="readonly" type="text" value="" th:value="${request.date}">
                         </td>
                         <td>第几天登录:
-                            <input th:if="${request.day!=3}" name="day" type="number" value="" th:value="${request.day}">
-                            <input th:if="${request.day==3}" name="day" type="number" >
+                            <input name="day" type="number" value="" th:value="${request.day}">
                         </td>
                         <td>
                             <div class="buttonActive">
@@ -67,7 +65,8 @@
         <tr th:if="${list.size()!=0}" th:each="row,iterStat:${list}">
             <td th:text="${row.level}"></td>
             <td th:text="${row.lossNumber}"></td>
-            <td th:if="${row.lossRate>0}" th:text="${#strings.append(#strings.substring(row.lossRate*100,0,4),'%')}"></td>
+            <td th:if="${row.lossRate>=1}">100.00%</td>
+            <td th:if="${row.lossRate>0 and row.lossRate<1}" th:text="${#strings.append(#strings.substring(row.lossRate*100,0,4),'%')}"></td>
             <td th:if="${row.lossRate<=0}">0.00%</td>
         </tr>
         <tr th:if="${list.size()==0}"><td colspan="3" style="text-align: center">暂无数据</td></tr>

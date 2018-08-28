@@ -1,9 +1,15 @@
-<div xmlns:th="http://www.w3.org/1999/xhtml" class="pageHeader">
-    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="game/giftpackage_sync" method="post"
-          onreset="$(this).find('select.combox').comboxReset()">
-        <div class="searchBar">
+<div class="tabs" currentIndex="3">
+    <div class="tabsHeader">
+        <div class="tabsHeaderContent">
+            <ul>
+                <li><a href="game/giftpackage_add" class="j-ajax" target="navTab"><span>添加礼包(二期)</span></a></li>
+                <li><a href="game/giftpackage_sync" class="j-ajax" target="navTab"><span>同步礼包(二期)</span></a></li>
+                <li><a href="game/generate_activation_code" class="j-ajax" target="navTab"><span>生成激活码(三期)</span></a></li>
+                <li><a href="game/synchronous_activation_code" class="j-ajax" target="navTab"><span>同步激活码(三期)</span></a></li>
+                <li><a href="game/single_service_bag" class="j-ajax" target="navTab"><span>单服礼包(三期)</span></a></li>
+            </ul>
         </div>
-    </form>
+    </div>
 </div>
 <div class="pageContent">
     <table class="table" width="100%" layoutH="137">
@@ -27,13 +33,16 @@
             <td th:text="${row.giftBag}"></td>
             <td th:text="${row.number}"></td>
             <td th:text="${row.frequency}"></td>
-            <td th:text="${row.invalidTime}"></td>
-            <td th:text="${row.overdueTime}"></td>
+            <td th:if="${row.invalidTime} ne''" th:text="${row.invalidTime}"></td>
+            <td th:if="${row.invalidTime} eq''" th:text="无"></td>
+            <td th:if="${row.overdueTime} ne''" th:text="${row.overdueTime}"></td>
+            <td th:if="${row.overdueTime} eq''" th:text="无"></td>
             <td th:text="${#dates.format(row.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
             <td th:text="${#dates.format(row.synchronizationTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
             <td th:text="${row.synchronizationLog}"></td>
+            <td><a class="button" th:href="@{game/generate_activation_code(id=${row.id})}" target="navTab"><span>编辑</span></a></td>
         </tr>
         </tbody>
     </table>
-    <!--<div th:replace="_include/pager"></div>-->
+    <div th:replace="_include/pager"></div>
 </div>

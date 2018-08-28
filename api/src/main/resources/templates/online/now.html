@@ -1,14 +1,49 @@
 <div class="pageHeader">
-    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="online/now" method="post"
-          onreset="$(this).find('select.combox').comboxReset()">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="online/now" method="post" onreset="$(this).find('select.combox').comboxReset()">
+        <input type="hidden" name="serverIds" th:value="${#strings.listJoin(request.serverIds,',')}"/>
+        <input type="hidden" name="channelIds" th:value="${#strings.listJoin(request.channelIds,',')}"/>
+        <input type="hidden" name="orderField" th:value="${request.orderField}"/>
+        <input type="hidden" name="orderDirection" th:value="${request.orderDirection}"/>
+        <input type="hidden" name="pageNum" th:value="${Pager.pageNum}"/>
+        <input type="hidden" name="pageSize" th:value="${Pager.pageSize}"/>
         <div class="searchBar">
             <table class="searchContent">
                 <tr>
-                    <td>角色名：<input name="charName" type="text"></td>
+                    <td>角色名：<input name="charName" type="text" th:value="${request.charName}"></td>
+                    <td>
+                        <div>
+                            <div class="buttonContent">
+                                <a class="button" href="server/select"
+                                   rel="serverselect" mask="true" lookupGroup=""><span>区服筛选</span></a>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <div class="buttonContent">
+                                <a class="button" href="channel/select"
+                                   rel="channelselect" mask="true" lookupGroup=""><span>渠道筛选</span></a>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="dateRange">
+                        日期:
+                        <input name="startDate" class="date readonly" readonly="readonly" type="text" value=""
+                               th:value="${request.startDate}">
+                        <span class="limit">-</span>
+                        <input name="endDate" class="date readonly" readonly="readonly" type="text" value=""
+                               th:value="${request.endDate}">
+                    </td>
+                    <td>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">检索</button>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             </table>
         </div>
-        <div th:replace="_include/searchBar"></div>
     </form>
 </div>
 <div class="pageContent">
@@ -34,7 +69,7 @@
             <td th:text="${row.mapId}"></td>
             <td th:text="${row.playerIp}"></td>
         </tr>
-        <tr th:if="${list.size()==0}"><td colspan="11" style="text-align: center">暂无数据</td></tr>
+        <tr th:if="${list.size()==0}"><td colspan="7" style="text-align: center">暂无数据</td></tr>
         </tbody>
     </table>
     <div th:replace="_include/pager"></div>

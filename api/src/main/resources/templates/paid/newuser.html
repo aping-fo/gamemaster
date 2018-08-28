@@ -14,23 +14,21 @@
                         <td>
                             <div>
                                 <div class="buttonContent">
-                                    <a class="button" href="server/select"
-                                       rel="serverselect" mask="true" lookupGroup=""><span>区服筛选</span></a>
+                                    <a class="button" href="server/select" rel="serverselect" mask="true" lookupGroup=""><span>区服筛选</span></a>
                                 </div>
                             </div>
                         </td>
                         <td>
-                            <div>
-                                <div class="buttonContent">
-                                    <a class="button" href="channel/select"
-                                       rel="channelselect" mask="true" lookupGroup=""><span>渠道筛选</span></a>
-                                </div>
-                            </div>
+                            渠道：
+                            <select name="channelId">
+                                <option value="">全部</option>
+                                <option th:each="row,iterStat:${channelList}" th:selected="${row.channelId==request.channelId}" th:text="${row.channelName}" th:value="${row.channelId}"></option>
+                            </select>
                         </td>
                         <td>包:
                             <select name="packageId">
-                                <option value="1" th:selected="${request.packageId==1}">测试1</option>
-                                <option value="2" th:selected="${request.packageId==2}">测试2</option>
+                                <option value="">全部</option>
+                                <option th:each="row,iterStat:${channelBagList}" th:value="${row.id}" th:text="${row.name}" th:selected="${row.id==request.packageId}"></option>
                             </select>
                         </td>
                         <td class="dateRange">

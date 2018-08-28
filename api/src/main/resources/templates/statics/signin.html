@@ -1,6 +1,5 @@
 <div class="pageHeader">
-    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="statics/signin" method="post"
-          onreset="$(this).find('select.combox').comboxReset()">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="statics/signin" method="post" onreset="$(this).find('select.combox').comboxReset()">
         <div th:fragment="searchBar">
             <input type="hidden" name="serverIds" th:value="${#strings.listJoin(request.serverIds,',')}"/>
             <input type="hidden" name="channelIds" th:value="${#strings.listJoin(request.channelIds,',')}"/>
@@ -20,26 +19,23 @@
                             </div>
                         </td>
                         <td>
-                            <div>
-                                <div class="buttonContent">
-                                    <a class="button" href="channel/select"
-                                       rel="channelselect" mask="true" lookupGroup=""><span>渠道筛选</span></a>
-                                </div>
-                            </div>
+                            渠道：
+                            <select name="channelId">
+                                <option value="">全部</option>
+                                <option th:each="row,iterStat:${channelList}" th:selected="${row.channelId==request.channelId}" th:text="${row.channelName}" th:value="${row.channelId}"></option>
+                            </select>
                         </td>
                         <td>包:
                             <select name="packageId">
-                                <option value="1">测试1</option>
-                                <option value="2">测试2</option>
+                                <option value="">全部</option>
+                                <option th:each="row,iterStat:${channelBagList}" th:value="${row.id}" th:text="${row.name}" th:selected="${row.id==request.packageId}"></option>
                             </select>
                         </td>
                         <td class="dateRange">
                             日期:
-                            <input name="startDate" class="date readonly" readonly="readonly" type="text" value=""
-                                   th:value="${request.startDate}">
+                            <input name="startDate" class="date readonly" readonly="readonly" type="text" value="" th:value="${request.startDate}">
                             <span class="limit">-</span>
-                            <input name="endDate" class="date readonly" readonly="readonly" type="text" value=""
-                                   th:value="${request.endDate}">
+                            <input name="endDate" class="date readonly" readonly="readonly" type="text" value="" th:value="${request.endDate}">
                         </td>
                         <td>
                             <div class="buttonActive">

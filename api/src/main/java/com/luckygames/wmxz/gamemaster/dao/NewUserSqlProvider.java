@@ -1,6 +1,5 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
-import com.luckygames.wmxz.gamemaster.model.view.request.CommonSearchQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.NewUserSearchQuery;
 import org.apache.commons.lang3.StringUtils;
 
@@ -20,18 +19,17 @@ public class NewUserSqlProvider {
             sql.append(" and DATE_FORMAT(datelist,'%Y-%m-%d')<=now()  ");
         }
         sql.append(") t2 ON DATE_FORMAT(t1.report_date,'%Y-%m-%d')=t2.datelist ");
-        if (query.getChannelIds() != null && !query.getChannelIds().isEmpty()) {
-            String ids = StringUtils.join(query.getChannelIds(), ",");
-            sql.append(" and channel_id in (").append(ids).append(")  ");
+        if (query.getChannelId() != null ) {
+            sql.append(" and channel_id = #{channelId}");
         }
         if (query.getServerIds() != null && !query.getServerIds().isEmpty()) {
             String ids = StringUtils.join(query.getServerIds(), ",");
             sql.append(" and server_id in (").append(ids).append(")  ");
         }
         if (query.getPackageId()!=null) {
-            sql.append(" and package_id = #{packageId}  ");
+            sql.append(" and package_id = #{packageId}");
         }
-        sql.append("ORDER BY update_time DESC");
+        sql.append(" ORDER BY update_time DESC");
         return sql.toString();
     }
 }

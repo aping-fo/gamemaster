@@ -3,11 +3,16 @@ package com.luckygames.wmxz.gamemaster.controller;
 import com.github.pagehelper.Page;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.model.entity.DataCollection;
+import com.luckygames.wmxz.gamemaster.model.entity.Ranking;
+import com.luckygames.wmxz.gamemaster.model.entity.Server;
 import com.luckygames.wmxz.gamemaster.model.view.base.Pager;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
 import com.luckygames.wmxz.gamemaster.model.view.request.ChannelDataSearchQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.DataCollectionSearchQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.RankingSearchQuery;
+import com.luckygames.wmxz.gamemaster.service.RankingService;
 import com.luckygames.wmxz.gamemaster.service.ReportService;
+import com.luckygames.wmxz.gamemaster.service.ServerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,16 +20,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/report")
 public class ReportController extends BaseController {
     @Autowired
     private ReportService reportService;
+    @Autowired
+    private RankingService rankingService;
+    @Autowired
+    private ServerService serverService;
 
     //数据汇总
     @RequestMapping(value = "/summary", method = {RequestMethod.GET, RequestMethod.POST})
@@ -43,10 +49,9 @@ public class ReportController extends BaseController {
     @RequestMapping(value = "/channel", method = {RequestMethod.GET, RequestMethod.POST})
     public Response channelReport(ChannelDataSearchQuery query) {
         Page<DataCollection> channelDataList = reportService.searchChannelDataPage(query);
-        Response r = new Response("report/channel")
+        return new Response("report/channel")
                 .request(query)
                 .data("list", channelDataList);
-        return r;
     }
 
 
@@ -139,5 +144,38 @@ public class ReportController extends BaseController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    //排行榜
+    @RequestMapping(value = "/ranking", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response ranking(RankingSearchQuery query) {
+        Response response = new Response("report/ranking");
+
+        //小时
+        List<String> hourList=new ArrayList<>();
+        for(int i=23;i>=0;i--){
+            if(i<10){
+                hourList.add("0"+i+":00");
+            }else{
+                hourList.add(i+":00");
+            }
+        }
+        response.data("hour", hourList);
+        Page<Ranking> rankings = rankingService.searchPage(query);
+        //设置最近的小时数
+        if(query.getHour()==null){
+            int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+            if(hour<10){
+                query.setHour("0"+hour+":00");
+            }else{
+                query.setHour(hour+":00");
+            }
+        }
+
+        List<Server> serverList = serverService.searchList();
+        response.request(query)
+                .data("list", rankings)
+                .data("serverList", serverList);
+        return response;
     }
 }

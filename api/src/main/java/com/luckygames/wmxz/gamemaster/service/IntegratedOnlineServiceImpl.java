@@ -23,9 +23,6 @@ public class IntegratedOnlineServiceImpl extends BaseServiceImpl<IntegratedOnlin
 
     @Override
     public List<IntegratedOnline> searchPage(IntegratedOnlineSearchQuery query) {
-        if (query.getPageNum() == null) {
-            query.setPageNum(1);
-        }
         return integratedOnlineMapper.searchPage(query);
     }
 }
