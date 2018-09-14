@@ -1,0 +1,48 @@
+<div class="pageContent">
+    <div class="pageFormContent" layoutH="57">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>修改服务器状态为</td>
+                    <td>
+                        <select name="state">
+                            <option value="1">开放</option>
+                            <option value="0">关闭</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>勾选服务器</td>
+                    <td>
+                        <div class="col-md-2" th:each="server:${serverList}">
+                            <input th:if="${serverId==server.serverId}" checked="checked" type="checkbox" name="serverId" th:value="'{serverIds:'+${server.serverId}+'}'"/>
+                            <input th:if="${serverId!=server.serverId}" type="checkbox" name="serverId" th:value="'{serverIds:'+${server.serverId}+'}'"/>
+                            <span th:text="${server.serverName}"/>
+                        </div>
+
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+    <div class="formBar">
+        <ul>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li>
+                <div class="button">
+                    <div class="buttonContent">
+                        <button class="close">取消</button>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="button">
+                    <div class="buttonContent">
+                        <button class="close">保存</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,331 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>乐起游戏管理后台</title>
+
+    <link href="themes/default/style.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="themes/css/core.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="themes/css/print.css" rel="stylesheet" type="text/css" media="print"/>
+    <link href="uploadify/css/uploadify.css" rel="stylesheet" type="text/css" media="screen"/>
+    <!--[if IE]>
+    <link href="themes/css/ieHack.css" rel="stylesheet" type="text/css" media="screen"/>
+    <![endif]-->
+
+    <!--[if lt IE 9]>
+    <script src="js/speedup.js" type="text/javascript"></script>
+    <script src="js/jquery-1.11.3.min.js" type="text/javascript"></script><![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script src="js/jquery-2.1.4.min.js" type="text/javascript"></script><!--<![endif]-->
+    <script src="js/jquery.cookie.js" type="text/javascript"></script>
+    <script src="js/jquery.validate.js" type="text/javascript"></script>
+    <!--<script src="js/jquery.bgiframe.js" type="text/javascript"></script>-->
+    <script src="xheditor/xheditor-1.2.2.min.js" type="text/javascript"></script>
+    <script src="xheditor/xheditor_lang/zh-cn.js" type="text/javascript"></script>
+    <script src="uploadify/scripts/jquery.uploadify.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="chart/echarts.min.js"></script>
+
+    <script src="js/dwz.core.js" type="text/javascript"></script>
+    <script src="js/dwz.util.date.js" type="text/javascript"></script>
+    <script src="js/dwz.validate.method.js" type="text/javascript"></script>
+    <script src="js/dwz.barDrag.js" type="text/javascript"></script>
+    <script src="js/dwz.drag.js" type="text/javascript"></script>
+    <script src="js/dwz.tree.js" type="text/javascript"></script>
+    <script src="js/dwz.accordion.js" type="text/javascript"></script>
+    <script src="js/dwz.ui.js" type="text/javascript"></script>
+    <script src="js/dwz.theme.js" type="text/javascript"></script>
+    <script src="js/dwz.switchEnv.js" type="text/javascript"></script>
+    <script src="js/dwz.alertMsg.js" type="text/javascript"></script>
+    <script src="js/dwz.contextmenu.js" type="text/javascript"></script>
+    <script src="js/dwz.navTab.js" type="text/javascript"></script>
+    <script src="js/dwz.tab.js" type="text/javascript"></script>
+    <script src="js/dwz.resize.js" type="text/javascript"></script>
+    <script src="js/dwz.dialog.js" type="text/javascript"></script>
+    <script src="js/dwz.dialogDrag.js" type="text/javascript"></script>
+    <script src="js/dwz.sortDrag.js" type="text/javascript"></script>
+    <script src="js/dwz.cssTable.js" type="text/javascript"></script>
+    <script src="js/dwz.stable.js" type="text/javascript"></script>
+    <script src="js/dwz.taskBar.js" type="text/javascript"></script>
+    <script src="js/dwz.ajax.js" type="text/javascript"></script>
+    <script src="js/dwz.pagination.js" type="text/javascript"></script>
+    <script src="js/dwz.database.js" type="text/javascript"></script>
+    <script src="js/dwz.datepicker.js" type="text/javascript"></script>
+    <script src="js/dwz.effects.js" type="text/javascript"></script>
+    <script src="js/dwz.panel.js" type="text/javascript"></script>
+    <script src="js/dwz.checkbox.js" type="text/javascript"></script>
+    <script src="js/dwz.history.js" type="text/javascript"></script>
+    <script src="js/dwz.combox.js" type="text/javascript"></script>
+    <script src="js/dwz.file.js" type="text/javascript"></script>
+    <script src="js/dwz.print.js" type="text/javascript"></script>
+    <script src="js/dwz.regional.zh.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            DWZ.init("dwz.frag.xml", {
+                loginUrl: "login_dialog.html", loginTitle: "登录",	// 弹出登录对话框
+                statusCode: {ok: 200, error: 300, timeout: 301}, //【可选】
+                pageInfo: {
+                    pageNum: "pageNum",
+                    pageSize: "pageSize",
+                    orderField: "orderField",
+                    orderDirection: "orderDirection"
+                }, //【可选】
+                keys: {statusCode: "statusCode", message: "message"}, //【可选】
+                ui: {hideMode: 'display'}, //【可选】hideMode:navTab组件切换的隐藏方式，支持的值有’display’，’offsets’负数偏移位置的值，默认值为’display’
+                debug: false,	// 调试模式 【true|false】
+                callback: function () {
+                    initEnv();
+                    $("#themeList").theme({themeBase: "themes"}); // themeBase 相对于index页面的主题base路径
+                }
+            });
+        });
+
+    </script>
+
+</head>
+
+<body>
+<div id="layout">
+    <div id="header">
+        <div class="headerNav">
+            <!--<a class="logo" href="">标志</a>-->
+            <ul class="nav">
+                <li><a href="/logout">退出</a></li>
+            </ul>
+            <ul class="themeList" id="themeList">
+                <li theme="default">
+                    <div class="selected">蓝色</div>
+                </li>
+                <li theme="green">
+                    <div>绿色</div>
+                </li>
+                <li theme="purple">
+                    <div>紫色</div>
+                </li>
+                <li theme="silver">
+                    <div>银色</div>
+                </li>
+                <li theme="azure">
+                    <div>天蓝</div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- navMenu -->
+
+    </div>
+
+    <div id="leftside">
+        <div id="sidebar_s">
+            <div class="collapse">
+                <div class="toggleCollapse">
+                    <div></div>
+                </div>
+            </div>
+        </div>
+        <div id="sidebar">
+            <div class="toggleCollapse"><h2>主菜单</h2>
+                <div>收缩</div>
+            </div>
+
+            <div class="accordion" fillSpace="sidebar">
+                <div class="accordionContent">
+                    <ul class="tree treeFolder">
+                        <li><a>充值统计</a>
+                            <ul>
+                                <li><a href="recharge/daily" target="navTab" rel="daily_recharge">每日充值(一期)</a></li>
+                                <!--<li><a href="recharge/rank" target="navTab" rel="recharge_rank">充值排行</a></li>-->
+                                <!--<li><a href="recharge/level" target="navTab" rel="recharge_level">充值等级</a></li>-->
+                                <!--<li><a href="recharge/compare" target="navTab" rel="recharge_compare">充值对比</a></li>-->
+                                <li><a href="recharge/order" target="navTab" rel="recharge_order">充值记录(一期)</a></li>
+                                <li><a href="recharge/statics" target="navTab" rel="recharge_statics">区服充值汇总(一期)</a></li>
+                                <li><a href="recharge/failed_order" target="navTab" rel="recharge_failedOrder">失败订单(二期)</a>
+                                <li><a href="recharge/erroneous_order" target="navTab" rel="recharge_failedOrder">错误订单(二期)</a>
+                            </ul>
+                        </li>
+
+                        <li><a>在线与注册</a>
+                            <ul>
+                                <li><a href="online/real" target="navTab" rel="online_real">实时在线(一期)</a></li>
+                                <li><a href="online/statics" target="navTab" rel="online_statics">综合在线(二期)</a></li>
+                                <li><a href="online/now" target="navTab" rel="online_now">当前在线(二期)</a></li>
+                                <li><a href="register/statics_equipment" target="navTab">注册数据(一期)</a></li>
+                                <li><a href="online/server" target="navTab" rel="online_server">区服综合在线(二期)</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a>付费数据</a>
+                            <ul>
+                                <li><a href="paid/ltv" target="navTab" rel="paid_ltv">LTV统计(一期)</a></li>
+                                <li><a href="paid/payRetentionRate" target="navTab" rel="paid_stay">付费留存率(二期)</a></li>
+                                <!--<li><a href="paid/laterrate" target="navTab" rel="paid_later_rate">后续付费率</a></li>-->
+                                <!--<li><a href="paid/laterability" target="navTab" rel="paid_later_ability">后续付费力</a></li>-->
+                                <!--<li><a href="paid/newlater" target="navTab" rel="paid_new_later">新增后续付费数据</a></li>-->
+                                <!--<li><a href="paid/arpu" target="navTab" rel="paid_arpu">ARPU</a></li>-->
+                                <li><a href="paid/newuser" target="navTab" rel="paid_newuser">新增用户数据(二期)</a></li>
+                            </ul>
+                        </li>
+                        <li><a>数据统计</a>
+                            <ul>
+                                <!--<li><a href="statics/rollserver" target="navTab" rel="statics_rollserver">滚服率</a></li>-->
+                                <li><a href="statics/leave" target="navTab" rel="statics_leave">等级流失(三期)</a></li>
+                                <li><a href="statics/leave_distribution" target="navTab" rel="statics_leave_distribution">等级分布(三期)</a></li>
+                                <li><a href="statics/produce_expend" target="navTab" rel="statics_produce_expend">产出消耗(三期)</a></li>
+                                <li><a href="statics/signin" target="navTab" rel="statics_signin">登录统计(二期)</a></li>
+                                <!--<li><a href="statics/characher" target="navTab" rel="statics_character">角色统计</a></li>-->
+                                <!--<li><a href="statics/vip" target="navTab" rel="statics_vip">VIP统计</a></li>-->
+                                <!--<li><a href="statics/fund" target="navTab" rel="statics_fund">财富统计</a></li>-->
+                                <!--<li><a href="statics/client" target="navTab" rel="statics_client">客户端统计</a></li>-->
+                                <li><a href="statics/summary" target="navTab" rel="statics_summary">数据汇总(一期)</a></li>
+                            </ul>
+                        </li>
+                        <li><a>综合报表</a>
+                            <ul>
+                                <li><a href="report/summary" target="navTab" rel="report_summary">数据汇总(一期)</a></li>
+                                <li><a href="report/channel" target="navTab" rel="report_channel">渠道数据(二期)</a></li>
+                                <li><a href="report/ranking" target="navTab" rel="report_channel">排行榜(三期)</a></li>
+                                <li><a href="report/channel_daily_import" target="navTab">渠道每日数据(二期)</a></li>
+                            </ul>
+                        </li>
+                        <li><a>玩家管理</a>
+                            <ul>
+                                <li><a href="player/character" target="navTab" rel="player_character">角色查询(一期)</a></li>
+                                <li><a href="player/info_playerList" target="navTab">玩家信息(一期)</a></li>
+                                <!--<li><a href="player/faction" target="navTab" rel="player_faction">帮派信息</a></li>-->
+                                <!--<li><a href="player/ranking" target="navTab" rel="player_ranking">排行榜</a></li>-->
+                                <li><a href="player/forbidden" target="navTab" rel="player_forbidden">封禁管理(一期)</a></li>
+                            </ul>
+                        </li>
+                        <li><a>游戏管理</a>
+                            <ul>
+                                <li><a href="game/mail" target="navTab" rel="game_mail">邮件系统(一期)</a></li>
+                                <!--<li><a href="game/resourcerequire" target="navTab" rel="game_resource_require">资源申请</a></li>-->
+                                <!--<li><a href="game/resourceapproval" target="navTab" rel="game_resource_approval">资源审核</a></li>-->
+                                <li><a href="game/giftpackage_add" target="navTab">礼包管理(二期)</a></li>
+                                <li><a href="game/broadcast" target="navTab" rel="game_broadcast">广播管理(一期)</a></li>
+                                <li><a href="game/notice" target="navTab" rel="game_affiche">首屏公告(三期)</a></li>
+                                <!--<li><a href="game/complaint" target="navTab" rel="game_complaint">投诉建议</a></li>-->
+                                <!--<li><a href="game/shop" target="navTab" rel="game_shop">商城设置</a></li>-->
+                                <!--<li><a href="game/event" target="navTab" rel="game_event">活动设置(三期)</a></li>-->
+                                <li><a href="game/chatmonitor" target="navTab" rel="game_chatmonitor">聊天监控(一期)</a></li>
+                                <!--<li><a href="game/create_role_manage" target="navTab" rel="game_chatmonitor">创角管理(三期)</a></li>-->
+                                <!--<li><a href="game/chat_settings" target="navTab" rel="game_chatmonitor">聊天设置(三期)</a></li>-->
+                            </ul>
+                        </li>
+                        <li><a>系统设置</a>
+                            <ul>
+                                <!--<li><a href="system/replaceorder" target="navTab" rel="system_replace_order">补单功能</a></li>-->
+                                <!--<li><a href="system/changepassword" target="navTab" rel="system_changepassword">修改密码</a>-->
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="container">
+        <div id="navTab" class="tabsPage">
+            <div class="tabsPageHeader">
+                <div class="tabsPageHeaderContent"><!-- 显示左右控制时添加 class="tabsPageHeaderMargin" -->
+                    <ul class="navTab-tab">
+                        <li tabid="main" class="main">
+                            <a href="javascript:;">
+                            <span>
+                                <span class="home_icon">概况</span>
+                            </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tabsLeft">left</div><!-- 禁用只需要添加一个样式 class="tabsLeft tabsLeftDisabled" -->
+                <div class="tabsRight">right</div><!-- 禁用只需要添加一个样式 class="tabsRight tabsRightDisabled" -->
+                <div class="tabsMore">more</div>
+            </div>
+            <ul class="tabsMoreList">
+                <li><a href="javascript:;">概况</a></li>
+            </ul>
+            <div class="navTab-panel tabsPageContent layoutBox">
+                <div class="page unitBox">
+                    <div class="pageHeader">
+                        <form id="pagerForm" action="/" method="post"
+                              onreset="$(this).find('select.combox').comboxReset()">
+                            <input type="hidden" name="serverIds"
+                                   th:value="${#strings.listJoin(request.serverIds,',')}"/>
+                            <div class="searchBar">
+                                <table class="searchContent">
+                                    <tr>
+                                        <td>
+                                            服务器:
+                                            <select name="serverId">
+                                                <option th:each="row,iterStat:${serverList}" th:selected="${row.serverId==request.serverId}" th:text="${row.serverName}" th:value="${row.serverId}"></option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            渠道:
+                                            <select name="channelId">
+                                                <option value="">全部</option>
+                                                <option th:each="row,iterStat:${channelList}" th:selected="${row.channelId==request.channelId}" th:text="${row.channelName}" th:value="${row.channelId}"></option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <div class="buttonActive">
+                                                <div class="buttonContent">
+                                                    <button type="submit">检索</button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="pageContent">
+                        <table class="table" layoutH="137">
+                            <tbody>
+                            <tr>
+                                <td width="100px">服务器</td>
+                                <td width="100px" th:text="${server.serverName}"></td>
+                                <td width="100px">开服日期</td>
+                                <td width="100px" th:text="${#dates.format(server.openDate, 'yyyy-MM-dd')}"></td>
+                                <td width="100px">开服天数</td>
+                                <td width="100px" th:text="${server.openDays}"></td>
+                            </tr>
+                            <tr>
+                                <td width="100px">总注册角色数</td>
+                                <td width="100px" th:text="${server.charCount}"></td>
+                                <td width="100px">当天在线角色数</td>
+                                <td width="100px" th:text="${server.onlineCount}"></td>
+                                <td width="100px">当前活跃用户数</td>
+                                <td width="100px" th:text="${server.activeCount}"></td>
+                            </tr>
+                            <tr>
+                                <td width="100px">总充值金额</td>
+                                <td width="100px" th:text="${server.rechargeAmount}"></td>
+                                <td width="100px">总充值人数</td>
+                                <td width="100px" th:text="${server.rechargeCount}"></td>
+                                <td width="100px">ARPU</td>
+                                <td width="100px" th:text="${server.arpu}"></td>
+                            </tr>
+                            <tr><td>渠道</td><td colspan="5">包</td></tr>
+                            <tr th:if="${server.channelListMap.size()>0}" th:each="channelMap,channelMaps:${server.channelListMap}">
+                                <td th:text="${channelMap.key}"></td>
+                                <td th:if="${channelMap.value.size()>0}" colspan="5">
+                                    <span  style="margin: 5px" th:each="row,iterStat:${channelMap.value}" th:text="${row.name}"></span>
+                                </td>
+                                <td th:if="${channelMap.value.size()==0}" colspan="5" style="text-align: center">暂无数据</td>
+                            </tr>
+                            <tr th:if="${server.channelListMap.size()==0}"><td colspan="6" style="text-align: center">暂无数据</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="footer">Copyright &copy; 2018 <a href="http://www.luckygz.com" target="dialog">乐起游戏</a></div>
+
+</body>
+</html>

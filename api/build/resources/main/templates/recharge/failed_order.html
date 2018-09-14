@@ -1,0 +1,91 @@
+<div xmlns:th="http://www.w3.org/1999/xhtml" class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="recharge/failed_order" method="post" onreset="$(this).find('select.combox').comboxReset()">
+        <input type="hidden" name="serverIds" th:value="${#strings.listJoin(request.serverIds,',')}"/>
+        <input type="hidden" name="channelIds" th:value="${#strings.listJoin(request.channelIds,',')}"/>
+        <input type="hidden" name="orderField" th:value="${request.orderField}"/>
+        <input type="hidden" name="orderDirection" th:value="${request.orderDirection}"/>
+        <input type="hidden" name="pageNum" th:value="${Pager.pageNum}"/>
+        <input type="hidden" name="pageSize" th:value="${Pager.pageSize}"/>
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>订单号：<input name="orderCode" type="text" th:value="${request.orderCode}"/></td>
+                    <td>账号：<input name="userName" type="text" placeholder="账号/手机/身份证" th:value="${request.userName}"/></td>
+                    <td>角色名：<input name="charName" type="text"  th:value="${request.charName}"/></td>
+                    <td>
+                        元宝：
+                        <input name="goldQuantityFrom" type="number" th:value="${request.goldQuantityFrom}">
+                        <span class="limit">-</span>
+                        <input name="goldQuantityTo" type="number" th:value="${request.goldQuantityTo}">
+                    </td>
+                    <td>
+                        <div>
+                            <div class="buttonContent">
+                                <a class="button" href="server/select" rel="serverselect" mask="true" lookupGroup=""><span>区服筛选</span></a>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <div class="buttonContent">
+                                <a class="button" href="channel/select" rel="channelselect" mask="true" lookupGroup=""><span>渠道筛选</span></a>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="dateRange">
+                        日期:
+                        <input name="startDate" class="date readonly" readonly="readonly" type="text" value="" th:value="${request.startDate}">
+                        <span class="limit">-</span>
+                        <input name="endDate" class="date readonly" readonly="readonly" type="text" value="" th:value="${request.endDate}">
+                    </td>
+                    <td>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">检索</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%" layoutH="137">
+        <thead>
+        <tr>
+            <th>订单号</th>
+            <th>渠道</th>
+            <th>区服</th>
+            <th>账号</th>
+            <th>角色名</th>
+            <th>等级</th>
+            <th>元宝</th>
+            <th>金额</th>
+            <th>状态</th>
+            <th>时间</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${list.size()!=0}" th:each="row,iterStat:${list}">
+            <td th:text="${row.orderCode}"></td>
+            <td th:text="${row.channelName}"></td>
+            <td th:text="${row.serverName}"></td>
+            <td th:text="${row.userName}"></td>
+            <td th:text="${row.charName}"></td>
+            <td th:text="${row.charLevel}"></td>
+            <td th:text="${row.goldQuantity}"></td>
+            <td th:text="${row.amount}"></td>
+            <td th:if="${row.reason==1}">服务器不正确</td>
+            <td th:if="${row.reason==2}">账户或用户名不存在</td>
+            <td th:if="${row.reason==3}">需重新同步(即可补单)</td>
+            <td th:text="${#dates.format(row.reportDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:if="${row.reason==3}"><a class="button" th:href="@{game/giftpackage_sync(id=${row.id},orderCode=${row.orderCode})}" target="navTab"><span>同步</span></a></td>
+            <td th:if="${row.reason!=3}"></td>
+        </tr>
+        <tr th:if="${list.size()==0}"><td colspan="11" style="text-align: center">暂无数据</td></tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>

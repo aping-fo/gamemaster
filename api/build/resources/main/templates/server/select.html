@@ -1,0 +1,36 @@
+<div class="pageContent">
+    <div class="pageFormContent" layoutH="57">
+        <div>
+            <div layoutH="138">
+                <div class="col-md-2" th:each="server:${serverList}">
+                    <input th:if="${serverId==server.serverId}" checked="checked" type="checkbox" name="serverId" th:value="'{serverIds:'+${server.serverId}+'}'"/>
+                    <input th:if="${serverId!=server.serverId}" type="checkbox" name="serverId" th:value="'{serverIds:'+${server.serverId}+'}'"/>
+                    <span th:text="${server.serverName}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="formBar">
+        <ul>
+            <li>
+                <input type="checkbox" class="checkboxCtrl" group="serverId"/>全选
+                <button type="button" class="checkboxCtrl" group="serverId" selectType="invert">反选</button>
+            </li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li>
+                <div class="button">
+                    <div class="buttonContent">
+                        <button type="button" multLookup="serverId" warn="请选择区服">选好了</button>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="button">
+                    <div class="buttonContent">
+                        <button class="close">取消</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

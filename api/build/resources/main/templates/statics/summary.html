@@ -1,0 +1,52 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="/statics/summary" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div th:replace="_include/searchBar"></div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" layoutH="112">
+        <thead>
+        <tr>
+            <th width="80">日期</th>
+            <th width="100">区服</th>
+            <th width="100">渠道</th>
+            <th width="80">新增注册数</th>
+            <th width="80">新增角色数</th>
+            <!--<th width="80">注册转化率</th>-->
+            <th width="80">登录角色数</th>
+            <th width="80">最高在线数</th>
+            <th width="80">活跃角色数</th>
+            <th width="80">收入</th>
+            <th width="80">付费人数</th>
+            <th width="80">ARPU</th>
+            <th width="80">新增付费人数</th>
+            <th width="80">新增付费率</th>
+            <th width="80">次日留存率</th>
+            <th width="80">三日留存率</th>
+            <th width="80">七日留存率</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${staticsSummaryList}">
+            <td th:text="${row.reportDate}"></td>
+            <td th:text="${row.channelName}"></td>
+            <td th:text="${row.serverName}"></td>
+            <td th:text="${row.playerCount}"></td>
+            <td th:text="${row.charCount}"></td>
+            <td th:text="${row.loginCount}"></td>
+            <td th:text="${row.onlineCount}"></td>
+            <td th:text="${row.activeCharCount}"></td>
+            <td th:text="${row.rechargeSum}"></td>
+            <td th:text="${row.rechargeCount}"></td>
+            <td th:text="${row.arpu}"></td>
+            <td th:text="${row.newRechargeCount}"></td>
+            <td th:text="${row.newRechargeRate}"></td>
+            <td th:text="${row.stay2d}"></td>
+            <td th:text="${row.stay3d}"></td>
+            <td th:text="${row.stay7d}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>

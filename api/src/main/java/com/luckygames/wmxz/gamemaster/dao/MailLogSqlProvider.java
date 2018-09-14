@@ -27,7 +27,7 @@ public class MailLogSqlProvider {
         if (query.getMailType() != null) {
             sql.append(" and ml.mail_type =#{mailType} ");
         }
-
+        sql.append(" order by ml.create_time desc");
         return sql.toString();
     }
 }

@@ -1,0 +1,55 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="game/mail" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>
+                        <label>邮件类型</label>
+                        <select name="mailType" class="combox">
+                            <option value="UNKNOWN" th:selected="${request.mailType=='UNKNOWN'}">全部</option>
+                            <option value="SERVER" th:selected="${request.mailType=='SERVER'}">全服群发</option>
+                            <option value="LEVEL" th:selected="${request.mailType=='LEVEL'}">等级范围</option>
+                            <option value="CHAR" th:selected="${request.mailType=='CHAR'}">角色群发</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div th:replace="_include/searchBar"></div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li>
+                <a title="发送邮件" class="edit" href="game/dialog_newmail"
+                   target="dialog" width="480" height="500"
+                   mask="true"><span>发送邮件</span></a>
+            </li>
+        </ul>
+    </div>
+    <table class="table" layoutH="137">
+        <thead>
+        <tr>
+            <th width="80">区服</th>
+            <th width="100">邮件类型</th>
+            <th width="120">标题</th>
+            <th width="300">内容</th>
+            <th width="120">发送时间</th>
+            <th width="100">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${mailLogs}">
+            <td th:text="${row.serverName}"></td>
+            <td th:text="${row.mailType.text}"></td>
+            <td th:text="${row.title}"></td>
+            <td th:text="${row.content}"></td>
+            <td th:text="${#dates.format(row.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>

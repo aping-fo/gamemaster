@@ -68,6 +68,10 @@ public class ServerEntitySqlProvider {
             sql.VALUES("update_time", "#{updateTime,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getServerState() != null) {
+            sql.VALUES("server_state", "#{serverState,jdbcType=INTEGER}");
+        }
+        
         return sql.toString();
     }
 
@@ -87,6 +91,7 @@ public class ServerEntitySqlProvider {
         sql.SELECT("`status`");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
+        sql.SELECT("server_state");
         sql.FROM("server");
         applyWhere(sql, example, false);
         
@@ -144,6 +149,10 @@ public class ServerEntitySqlProvider {
             sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getServerState() != null) {
+            sql.SET("server_state = #{record.serverState,jdbcType=INTEGER}");
+        }
+        
         applyWhere(sql, example, true);
         return sql.toString();
     }
@@ -162,6 +171,7 @@ public class ServerEntitySqlProvider {
         sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
+        sql.SET("server_state = #{record.serverState,jdbcType=INTEGER}");
         
         ServerEntityExample example = (ServerEntityExample) parameter.get("example");
         applyWhere(sql, example, true);

@@ -1,0 +1,62 @@
+<div class="pageContent">
+    <form method="post" action="player/ajax_ban" class="pageForm required-validate"
+          onsubmit="return validateCallback(this, navTabAjaxDone);">
+        <div class="pageFormContent" layoutH="56">
+            <p>
+                <label>操作类型：</label>
+                <select name="forbiddenOperationType" class="combox">
+                    <option value="ALLOWED" th:selected="(${opType.toString() == 'ALLOWED'})">解封</option>
+                </select>
+            </p>
+            <p>
+                <label>封禁类型：</label>
+                <select name="forbiddenType" class="combox">
+                    <option value="CHAT" th:if="${forbiddenLog.forbiddenType.toString() == 'LOGIN'}" th:text="禁止登录"></option>
+                    <option value="CHAT" th:if="${forbiddenLog.forbiddenType.toString() == 'CHAT'}" th:text="禁止聊天"></option>
+                </select>
+            </p>
+            <p>
+                <label>封禁时间：</label>
+                <select name="hour" class="combox">
+                    <option value="1" th:if="${forbiddenLog.hour==1}" th:text="1小时"></option>
+                    <option value="3" th:if="${forbiddenLog.hour==3}" th:text="3小时"></option>
+                    <option value="12" th:if="${forbiddenLog.hour==12}" th:text="12小时"></option>
+                    <option value="24" th:if="${forbiddenLog.hour==24}" th:text="24小时"></option>
+                    <option value="72" th:if="${forbiddenLog.hour==72}" th:text="3天"></option>
+                    <option value="720" th:if="${forbiddenLog.hour==720}" th:text="30天"></option>
+                </select>
+            </p>
+            <p>
+                <label>封禁理由：</label>
+                <input name="reason" type="text" readonly="readonly" th:value="${forbiddenLog.reason}"/>
+            </p>
+            <p>
+                <label>角色ID：<br/>(以英文逗号分隔)</label>
+                <textarea style="resize:none;" readonly="readonly" name="charIds" class="required textInput" cols="30" rows="1" th:text="${#strings.listJoin(charIds,',')}"></textarea>
+            </p>
+        </div>
+        <div class="formBar">
+            <ul>
+                <li>
+                    <div class="buttonActive">
+                        <div class="buttonContent">
+                            <button type="submit" id="confirm">确定</button>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="button">
+                        <div class="buttonContent">
+                            <button type="button" class="close">取消</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $('#confirm').click(function () {
+        $.pdialog.closeCurrent();
+    })
+</script>

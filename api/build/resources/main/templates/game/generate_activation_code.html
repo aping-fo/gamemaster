@@ -1,0 +1,53 @@
+<div class="tabs" currentIndex="2">
+    <div class="tabsHeader">
+        <div class="tabsHeaderContent">
+            <ul>
+                <li><a href="game/giftpackage_add" class="j-ajax" target="navTab"><span>添加礼包(二期)</span></a></li>
+                <li><a href="game/giftpackage_sync" class="j-ajax" target="navTab"><span>同步礼包(二期)</span></a></li>
+                <li><a href="game/generate_activation_code" class="j-ajax" target="navTab"><span>生成激活码(三期)</span></a></li>
+                <li><a href="game/synchronous_activation_code" class="j-ajax" target="navTab"><span>同步激活码(三期)</span></a></li>
+                <li><a href="game/single_service_bag" class="j-ajax" target="navTab"><span>单服礼包(三期)</span></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="game/generate_activation_code" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <input type="hidden" th:value="${activationCode.id}" name="id"/>
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>礼包</td>
+                    <td>
+                        <select name="giftBag">
+                            <option th:each="row1,iterStat:${typeList}" th:text="${row1.name}" th:value="${row1.name}"></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>激活码数量</td>
+                    <td>
+                        <input name="number" type="number" size="15" th:value="${activationCode.number}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>使用次数</td>
+                    <td><input name="frequency" type="number" size="15" th:value="${activationCode.frequency}"></td>
+                </tr>
+                <tr>
+                    <td>生效时间</td>
+                    <td><input name="invalidTime" type="text" size="15" class="date readonly" readonly="readonly" th:value="${activationCode.invalidTime}">留空不判断开始生效时间</td>
+                </tr>
+                <tr>
+                    <td>失效时间</td>
+                    <td><input name="overdueTime" type="text" size="15" class="date readonly" readonly="readonly" th:value="${activationCode.overdueTime}">留空表示不会失效</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" size="15" value="提交"></td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>

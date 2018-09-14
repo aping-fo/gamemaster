@@ -1,0 +1,29 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="recharge/statics" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div th:replace="_include/searchBar"></div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" layoutH="112">
+        <thead>
+        <tr>
+            <th width="100">区服</th>
+            <th width="80">开服日期</th>
+            <th width="100">渠道</th>
+            <!--<th width="60" align="right">充值（总）</th>-->
+            <th width="60" align="right" th:each="i:${#numbers.sequence(1,31)}" th:text="${i}"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${rechargeMonthlyList}">
+            <td th:text="${row.serverName}"></td>
+            <td th:text="${#dates.format(row.openDate, 'yyyy-MM-dd')}"></td>
+            <td th:text="${row.channelName}"></td>
+            <!--<td align="right" th:text="${row.rechargeAmount}"></td>-->
+            <td align="right" th:each="d:${row.amountMonthly}" th:text="${d}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>

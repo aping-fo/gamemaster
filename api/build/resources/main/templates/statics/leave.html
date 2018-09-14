@@ -1,0 +1,76 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="statics/leave" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div th:fragment="searchBar">
+            <input type="hidden" name="serverIds" th:value="${#strings.listJoin(request.serverIds,',')}"/>
+            <input type="hidden" name="channelIds" th:value="${#strings.listJoin(request.channelIds,',')}"/>
+            <input type="hidden" name="orderField" th:value="${request.orderField}"/>
+            <input type="hidden" name="orderDirection" th:value="${request.orderDirection}"/>
+            <input type="hidden" name="pageNum" th:value="${Pager.pageNum}"/>
+            <input type="hidden" name="pageSize" th:value="${Pager.pageSize}"/>
+            <div class="searchBar">
+                <table class="searchContent">
+                    <tr>
+                        <td>
+                            <div>
+                                <div class="buttonContent">
+                                    <a class="button" href="server/select" rel="serverselect" mask="true" lookupGroup=""><span>区服筛选</span></a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <div class="buttonContent">
+                                    <a class="button" href="channel/select" rel="channelselect" mask="true" lookupGroup=""><span>渠道筛选</span></a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>平台:
+                            <select name="platform">
+                                <option value="">全部</option>
+                                <option value="1" th:selected="${request.platform==1}">安卓</option>
+                                <option value="2" th:selected="${request.platform==2}">IOS</option>
+                            </select>
+                        </td>
+                        <td class="dateRange">
+                            登录时间:
+                            <input name="date" class="date readonly" readonly="readonly" type="text" value="" th:value="${request.date}">
+                        </td>
+                        <td>第几天登录:
+                            <input name="day" type="number" value="" th:value="${request.day}">
+                        </td>
+                        <td>
+                            <div class="buttonActive">
+                                <div class="buttonContent">
+                                    <button type="submit">检索</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%" layoutH="137">
+        <thead>
+        <tr>
+            <th width="100">等级</th>
+            <th width="100">流失人数</th>
+            <th width="100">流失比例</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${list.size()!=0}" th:each="row,iterStat:${list}">
+            <td th:text="${row.level}"></td>
+            <td th:text="${row.lossNumber}"></td>
+            <td th:if="${row.lossRate>=1}">100.00%</td>
+            <td th:if="${row.lossRate>0 and row.lossRate<1}" th:text="${#strings.append(#strings.substring(row.lossRate*100,0,4),'%')}"></td>
+            <td th:if="${row.lossRate<=0}">0.00%</td>
+        </tr>
+        <tr th:if="${list.size()==0}"><td colspan="3" style="text-align: center">暂无数据</td></tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>

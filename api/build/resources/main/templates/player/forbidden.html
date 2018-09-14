@@ -1,0 +1,63 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="player/forbidden" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div class="searchBar">
+            <table class="searchContent" width="100%">
+                <tr>
+                    <td>
+                        <label>封禁类型</label>
+                        <select name="forbiddenType" class="combox">
+                            <option value="">全部</option>
+                            <option value="LOGIN">禁止登录</option>
+                            <option value="CHAT">禁止聊天</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input class="textInput" type="text" name="username" th:value="${request.username}"
+                               alt="账号"/>
+                    </td>
+                    <td>
+                        <input class="textInput" type="text" name="charName" th:value="${request.charName}"
+                               alt="角色名"/>
+                    </td>
+                    <td>
+                        <input class="textInput" type="text" name="ipAddress" th:value="${request.ipAddress}"
+                               alt="IP"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div th:replace="_include/searchBar"></div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" layoutH="137">
+        <thead>
+        <tr>
+            <th width="120">ID</th>
+            <th width="120">封禁类型</th>
+            <th width="120">账号</th>
+            <th width="120">角色名</th>
+            <th width="120">IP</th>
+            <th width="120">过期时间</th>
+            <th width="120">封禁时间</th>
+            <th width="120">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${forbiddenLogs}">
+            <td th:text="${row.id}"></td>
+            <td th:text="${row.forbiddenType.text}"></td>
+            <td th:text="${row.username}"></td>
+            <td th:text="${row.charName}"></td>
+            <td th:text="${row.ipAddress}"></td>
+            <td th:text="${#dates.format(row.expireTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${#dates.format(row.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td>
+                <a title="解封" class="button" th:href="@{player/dialog_ban(charIds=${row.charId},opType='ALLOWED')}" target="dialog" mask="true"><span>解封</span></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>

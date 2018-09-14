@@ -1,0 +1,30 @@
+<div class="pageContent">
+    <table class="table" width="100%" layoutH="137">
+        <thead>
+        <tr>
+            <th>渠道</th>
+            <th>区服</th>
+            <th>是否开启创角</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${createRoleManageList}">
+            <td th:text="${row.channelName}"><input type="hidden" value="${row.id}"/></td>
+            <td th:text="${row.serverName}"></td>
+            <td th:if="${row.createRole==0}" th:text="关闭"></td>
+            <td th:if="${row.createRole==1}" th:text="开启"></td>
+            <td th:if="${row.createRole==0}">
+                <a title="开启" class="button" th:href="@{game/create_role_manage(id=${row.id},createRole=1)}" target="navTab">
+                    <span>开启</span>
+                </a>
+            </td>
+            <td th:if="${row.createRole==1}">
+                <a title="关闭" class="button" th:href="@{game/create_role_manage(id=${row.id},createRole=0)}" target="navTab">
+                    <span>关闭</span>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,5 +1,6 @@
 package com.luckygames.wmxz.gamemaster.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.luckygames.wmxz.gamemaster.common.constants.AdminUrl;
 import com.luckygames.wmxz.gamemaster.common.constants.ResultCode;
@@ -19,12 +20,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("/game")
@@ -461,6 +462,7 @@ public class GameController extends BaseController {
                     notice.setUpdateTime(new Date());
                     noticeService.save(notice);
                 }
+
             } else if (query.getType().equals("delete")) {
                 noticeService.deleteById(query.getId());
             } else if (query.getType().equals("modify")) {
@@ -483,5 +485,17 @@ public class GameController extends BaseController {
                 .data("channelList", channelList)
                 .data("notice", notice1);
         return response;
+    }
+
+    //广播管理
+    @RequestMapping(value = {"/ingcle/ban"}, method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public String ingcleBan(IngcleBanRequest query) {
+
+        Map<String,Object> map =new HashMap<>();
+        map.put("code",1);
+        map.put("msg","ok");
+
+        return JSON.toJSONString(map);
     }
 }

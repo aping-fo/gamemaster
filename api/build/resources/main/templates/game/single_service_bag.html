@@ -1,0 +1,36 @@
+<div class="tabs" currentIndex="4">
+    <div class="tabsHeader">
+        <div class="tabsHeaderContent">
+            <ul>
+                <li><a href="game/giftpackage_add" class="j-ajax" target="navTab"><span>添加礼包(二期)</span></a></li>
+                <li><a href="game/giftpackage_sync" class="j-ajax" target="navTab"><span>同步礼包(二期)</span></a></li>
+                <li><a href="game/generate_activation_code" class="j-ajax" target="navTab"><span>生成激活码(三期)</span></a></li>
+                <li><a href="game/synchronous_activation_code" class="j-ajax" target="navTab"><span>同步激活码(三期)</span></a></li>
+                <li><a href="game/single_service_bag" class="j-ajax" target="navTab"><span>单服礼包(三期)</span></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%" layoutH="137">
+        <thead>
+        <tr>
+            <th width="100">后台激活码数量</th>
+            <th width="100">单服激活码数量</th>
+            <th width="100">差异批次</th>
+            <th width="100">单服状态</th>
+            <th width="100">单服名称</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${singleServiceBagList}">
+            <td th:text="${row.numberBackgroundActivationCodes}"></td>
+            <td th:text="${row.numberSingleServiceActivationCodes}"></td>
+            <td th:text="${row.differentialBatch}"></td>
+            <td th:text="${row.singleServiceStatus}"></td>
+            <td th:text="${row.singleServiceName}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <!--<div th:replace="_include/pager"></div>-->
+</div>

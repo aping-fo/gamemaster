@@ -1,0 +1,74 @@
+<div class="pageContent">
+    <div class="pageFormContent" layoutH="57">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>区服ID</td>
+                    <td><input name="id" type="text"></td>
+                    <td>区服名称</td>
+                    <td><input name="name" type="text"></td>
+                </tr>
+                <tr>
+                    <td>服务器状态</td>
+                    <td>
+                        <select name="state">
+                        <option value="1">开放</option>
+                        <option value="0">关闭</option>
+                        </select>
+                    </td>
+                    <td>显示编号</td>
+                    <td><input name="name" type="text"></td>
+                </tr>
+                <tr>
+                    <td>标签显示</td>
+                    <td>
+                        <div class="col-xs-1" th:each="state:${stateList}">
+                            <input checked="checked" type="radio" name="sign" th:value="'{sign:'+${state.sign}+'}'"/>
+                            <span th:text="${state.name}"/>
+                        </div>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>服务器IP</td>
+                    <td><input name="ip" type="text"></td>
+                    <td>服务器端口</td>
+                    <td><input name="port" type="text"></td>
+                </tr>
+                <tr>
+                    <td>付款通知地址</td>
+                    <td><input name="payresp" type="text"></td>
+                </tr>
+                <tr>
+                    <td>开服时间</td>
+                    <td><input name="openDate" type="text"></td>
+                    <td>关服时间</td>
+                    <td><input name="closeDate" type="text"></td>
+                </tr>
+                <tr>
+                    <td>备注</td>
+                    <td><textarea name="des" rows="3" style="resize:none;width: 152px"></textarea></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="formBar">
+        <ul>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li>
+                <div class="button">
+                    <div class="buttonContent">
+                        <button class="close">取消</button>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="button">
+                    <div class="buttonContent">
+                        <button class="close">保存</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

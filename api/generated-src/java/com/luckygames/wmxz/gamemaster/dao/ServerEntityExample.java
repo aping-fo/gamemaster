@@ -735,6 +735,66 @@ public class ServerEntityExample {
             addCriterion("update_time not between", value1, value2, "updateTime");
             return (Criteria) this;
         }
+
+        public Criteria andServerStateIsNull() {
+            addCriterion("server_state is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerStateIsNotNull() {
+            addCriterion("server_state is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerStateEqualTo(Integer value) {
+            addCriterion("server_state =", value, "serverState");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerStateNotEqualTo(Integer value) {
+            addCriterion("server_state <>", value, "serverState");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerStateGreaterThan(Integer value) {
+            addCriterion("server_state >", value, "serverState");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerStateGreaterThanOrEqualTo(Integer value) {
+            addCriterion("server_state >=", value, "serverState");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerStateLessThan(Integer value) {
+            addCriterion("server_state <", value, "serverState");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerStateLessThanOrEqualTo(Integer value) {
+            addCriterion("server_state <=", value, "serverState");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerStateIn(List<Integer> values) {
+            addCriterion("server_state in", values, "serverState");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerStateNotIn(List<Integer> values) {
+            addCriterion("server_state not in", values, "serverState");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerStateBetween(Integer value1, Integer value2) {
+            addCriterion("server_state between", value1, value2, "serverState");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerStateNotBetween(Integer value1, Integer value2) {
+            addCriterion("server_state not between", value1, value2, "serverState");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

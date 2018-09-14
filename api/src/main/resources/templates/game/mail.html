@@ -29,15 +29,15 @@
             </li>
         </ul>
     </div>
-    <table class="table" layoutH="137">
+    <table class="table" layoutH="137" width="100%">
         <thead>
         <tr>
-            <th width="80">区服</th>
-            <th width="100">邮件类型</th>
-            <th width="120">标题</th>
-            <th width="300">内容</th>
-            <th width="120">发送时间</th>
-            <th width="100">操作</th>
+            <th width="5%" align="center">区服</th>
+            <th width="5%" align="center">邮件类型</th>
+            <th width="5%">标题</th>
+            <th width="75%">内容</th>
+            <th width="10%" align="center">发送时间</th>
+            <!--<th width="100">操作</th>-->
         </tr>
         </thead>
         <tbody>
@@ -47,7 +47,7 @@
             <td th:text="${row.title}"></td>
             <td th:text="${row.content}"></td>
             <td th:text="${#dates.format(row.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-            <td></td>
+            <!--<td></td>-->
         </tr>
         </tbody>
     </table>

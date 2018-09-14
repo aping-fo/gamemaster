@@ -1,0 +1,55 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="player/character" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>
+                        <select name="searchKey" class="combox">
+                            <option value="1" th:selected="(${request.searchKey} == 1)">角色名</option>
+                            <option value="2" th:selected="(${request.searchKey} == 2)">账号</option>
+                            <option value="3" th:selected="(${request.searchKey} == 3)">角色ID</option>
+                        </select>
+                        <input name="keyword" th:value="${request.keyword}"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div th:replace="_include/searchBar"></div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%" layoutH="137">
+        <thead>
+        <tr>
+            <th width="80">服务器名</th>
+            <th width="80">角色名</th>
+            <th width="80" align="right">角色等级</th>
+            <th width="80" align="right">VIP等级</th>
+            <th width="80" align="right">角色战力</th>
+            <th width="80" align="right">当前经验</th>
+            <th width="80" align="right">剩余元宝</th>
+            <th width="80" align="right">登录天数</th>
+            <th width="80" align="right">在线时长</th>
+            <th width="80" align="right">登录次数</th>
+            <th width="80" align="right">充值金额</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${characters}">
+            <td th:text="${row.serverName}"></td>
+            <td th:text="${row.charName}"></td>
+            <td th:text="${row.level}"></td>
+            <td th:text="${row.vipLevel}"></td>
+            <td th:text="${row.power}"></td>
+            <td th:text="${row.exp}"></td>
+            <td th:text="${row.leftGold}"></td>
+            <td th:text="${row.loginDays}"></td>
+            <td th:text="${row.onlineTime}"></td>
+            <td th:text="${row.loginTimes}"></td>
+            <td th:text="${row.rechargeAmount}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>

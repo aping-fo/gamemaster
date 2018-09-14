@@ -1,0 +1,114 @@
+<div class="pageHeader" xmlns:th="http://www.w3.org/1999/xhtml">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="game/olympics_activity_list" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>
+                        <input type="checkbox" class="checkboxCtrl" group="id"/>全部选择
+                        <input type="button" value="删除"/>
+                    </td>
+                    <td>分类：
+                        <select name="type">
+                            <option value="1">活跃类</option>
+                            <option value="2">充值类</option>
+                            <option value="3">消费类</option>
+                            <option value="4">兑换类</option>
+                            <option value="5">BOSS类</option>
+                            <option value="6">副本类</option>
+                        </select>
+                    </td>
+                    <td>标题：<input name="title" type="text" size="15"></td>
+                    <td>类型：
+                        <select name="type">
+                            <option value="1">登录豪礼</option>
+                            <option value="2">特惠礼包</option>
+                            <option value="3">神兵现世</option>
+                            <option value="4">环卫绩点</option>
+                            <option value="5">节日兑换</option>
+                            <option value="6">日夜除尘</option>
+                            <option value="7">双倍经验</option>
+                            <option value="8">副本双倍</option>
+                        </select>
+                    </td>
+                    <td>方式：
+                        <select name="type">
+                            <option value="1">自动</option>
+                            <option value="0">手动</option>
+                        </select>
+                    </td>
+                    <td class="dateRange">
+                        日期:
+                        <input name="startDate" class="date readonly" readonly="readonly" type="text">
+                        <span class="limit">-</span>
+                        <input name="endDate" class="date readonly" readonly="readonly" type="text">
+                    </td>
+                    <td>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">检索</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%" layoutH="137">
+        <thead>
+        <tr>
+            <th></th>
+            <th>ID</th>
+            <th>活动大类</th>
+            <th>活动标题</th>
+            <th>开始时间</th>
+            <th>结束时间</th>
+            <th>活动状态</th>
+            <th>活动类型</th>
+            <th>创建人</th>
+            <th>创建时间</th>
+            <th>审核人</th>
+            <th>审核时间</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${activityList}">
+            <td><input type="checkbox" name="id" th:value="${row.id}" /></td>
+            <td th:text="${row.id}"></td>
+            <td th:if="${row.classification==1}">活跃类</td>
+            <td th:if="${row.classification==2}">充值类</td>
+            <td th:if="${row.classification==3}">消费类</td>
+            <td th:if="${row.classification==4}">兑换类</td>
+            <td th:if="${row.classification==5}">BOSS类</td>
+            <td th:if="${row.classification==6}">副本类</td>
+            <td th:text="${row.title}"></td>
+            <td th:text="${row.startTime}"></td>
+            <td th:text="${row.endTime}"></td>
+            <td th:if="${row.activityStatus==0}">未通过</td>
+            <td th:if="${row.activityStatus==1}">已同步</td>
+            <td th:if="${row.type==1}">登录豪礼</td>
+            <td th:if="${row.type==2}">特惠礼包</td>
+            <td th:if="${row.type==3}">神兵现世</td>
+            <td th:if="${row.type==4}">环卫绩点</td>
+            <td th:if="${row.type==5}">节日兑换</td>
+            <td th:if="${row.type==6}">日夜除尘</td>
+            <td th:if="${row.type==7}">双倍经验</td>
+            <td th:if="${row.type==8}">副本双倍</td>
+            <td th:text="${row.creater}"></td>
+            <td th:text="${#dates.format(row.createTime, 'yyyy-MM-dd')}"></td>
+            <td th:text="${row.auditor}"></td>
+            <td th:text="${#dates.format(row.auditorTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td>
+                <input type="button" value="编辑"/>
+                <input type="button" value="查看"/>
+                <input type="button" value="同步"/>
+                <input type="button" value="删除"/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <!--<div th:replace="_include/pager"></div>-->
+</div>

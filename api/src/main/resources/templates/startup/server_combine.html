@@ -1,0 +1,60 @@
+<html>
+<body>
+<div class="pageContent">
+    <div class="pageFormContent" layoutH="57">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>原始服务器:</td>
+                    <td>
+                        <select>
+                            <div class="col-xs-1" th:each="server:${serverList}">
+                                <option value ="${server.serverId}">
+                                    <span th:text="${server.serverName}"/>
+                                </option>
+                            </div>
+                        </select>
+                    </td>
+
+
+                </tr>
+                <tr>
+                    <td>目标服务器:</td>
+                    <td>
+                        <select>
+                            <div class="col-xs-1" th:each="server:${serverList}">
+                                <option value ="${server.serverId}">
+                                    <span th:text="${server.serverName}"/>
+                                </option>
+                            </div>
+                        </select>
+                    </td>
+
+
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="formBar">
+        <ul>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li>
+                <div class="button">
+                    <div class="buttonContent">
+                        <button class="close">取消</button>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="button">
+                    <div class="buttonContent">
+                        <button class="close">保存</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

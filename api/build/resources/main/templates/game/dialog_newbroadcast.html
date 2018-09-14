@@ -1,0 +1,52 @@
+<div class="pageContent">
+    <form method="post" action="game/ajax_sendbroadcast" class="pageForm required-validate"
+          onsubmit="return validateCallback(this, navTabAjaxDone);">
+        <input type="hidden" name="broadcastType" value="BROADCAST">
+        <div class="pageFormContent" layoutH="56">
+            <p>
+                <label>区服筛选</label>
+                <select name="serverId">
+                    <option th:each="row,iterStat:${serverList}" th:text="${row.serverName}" th:value="${row.serverId}"></option>
+                </select>
+            </p>
+            <p>
+                <label>渠道筛选(多选)</label>
+                <input type="hidden" name="channelIds"/>
+                <a class="button" href="channel/select" rel="channelselect" mask="true" lookupGroup=""><span>渠道筛选</span></a>
+            </p>
+            <p>
+                <label>广播类型(多选)</label>
+                <input type="checkbox" name="notifyType" value="1"/>通用提示
+                <input type="checkbox" name="notifyType" value="2"/>江湖传闻
+                <input type="checkbox" name="notifyType" value="3"/>系统公告
+            </p>
+            <div>
+                <label>广播内容：</label>
+                <textarea name="content" class="required textArea" cols="30" rows="4" style="resize: none"></textarea>
+            </div>
+        </div>
+        <div class="formBar">
+            <ul>
+                <li>
+                    <div class="buttonActive">
+                        <div class="buttonContent">
+                            <button type="submit" id="confirm">确定</button>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="button">
+                        <div class="buttonContent">
+                            <button type="button" class="close">取消</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $('#confirm').click(function () {
+        $.pdialog.closeCurrent();
+    })
+</script>

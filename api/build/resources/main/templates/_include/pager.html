@@ -1,0 +1,17 @@
+<div class="panelBar" th:fragment="pager">
+    <div class="pages">
+        <span>显示</span>
+        <select class="combox" name="pageSize" onchange="navTabPageBreak({pageSize:this.value})">
+            <option value="25" th:selected="${Pager.pageSize == 25}">25</option>
+            <option value="50" th:selected="${Pager.pageSize == 50}">50</option>
+            <option value="100" th:selected="${Pager.pageSize == 100}">100</option>
+        </select>
+        <span th:text="'条，共'+${Pager.totalElements}+'条'"></span>
+    </div>
+
+    <div class="pagination" targetType="navTab"
+         th:attr="totalElements=${Pager.totalElements},pageSize=${Pager.pageSize},pageNum=${Pager.pageNum}"
+         pageNumShown="10">
+    </div>
+
+</div>

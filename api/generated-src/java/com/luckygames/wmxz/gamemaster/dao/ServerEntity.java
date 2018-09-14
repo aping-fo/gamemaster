@@ -18,6 +18,8 @@ public class ServerEntity extends BaseEntity {
 
     private Integer port;
 
+    private Integer serverState;
+
     public Long getServerId() {
         return serverId;
     }
@@ -64,5 +66,13 @@ public class ServerEntity extends BaseEntity {
 
     public void setPort(Integer port) {
         this.port = port;
+    }
+
+    public Integer getServerState() {
+        return serverState;
+    }
+
+    public void setServerState(Integer serverState) {
+        this.serverState = serverState;
     }
 }

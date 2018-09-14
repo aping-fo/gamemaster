@@ -1,0 +1,129 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="report/summary" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <input type="hidden" name="serverIds" th:value="${#strings.listJoin(request.serverIds,',')}"/>
+        <input type="hidden" name="channelIds" th:value="${#strings.listJoin(request.channelIds,',')}"/>
+        <input type="hidden" name="orderField" th:value="${request.orderField}"/>
+        <input type="hidden" name="orderDirection" th:value="${request.orderDirection}"/>
+        <input type="hidden" name="pageNum" th:value="${Pager.pageNum}"/>
+        <input type="hidden" name="pageSize" th:value="${Pager.pageSize}"/>
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>
+                        <div>
+                            <div class="buttonContent">
+                                <a class="button" href="server/select"
+                                   rel="serverselect" mask="true" lookupGroup=""><span>区服筛选</span></a>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <div class="buttonContent">
+                                <a class="button" href="channel/select"
+                                   rel="channelselect" mask="true" lookupGroup=""><span>渠道筛选</span></a>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="dateRange">
+                        日期:
+                        <input name="startDate" class="date readonly" readonly="readonly" type="text" value=""
+                               th:value="${request.startDate}">
+                        <span class="limit">-</span>
+                        <input name="endDate" class="date readonly" readonly="readonly" type="text" value=""
+                               th:value="${request.endDate}">
+                    </td>
+                    <td>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">检索</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%" layoutH="112">
+        <!--时间:年-月-日-->
+        <!--注册数:当天的注册数-->
+        <!--创角数:当天的创角数-->
+        <!--登录数:天登录的总角色数-->
+        <!--活跃数:当前服务器当天的活跃用户数-->
+        <!--（活跃用户：定义当天在线30分钟以上）-->
+        <!--老玩家:当天之前创建角色且今天有登录的角色数-->
+        <!--付费人数:当天总付费人数-->
+        <!--充值金额:当天总充值金额-->
+        <!--登录付费率:付费人数/登录人数-->
+        <!--付费ARPU:充值金额/付费人数-->
+        <!--新付费数:新增首次充值的玩家数量-->
+        <!--新充值金额:新增首次充值的金额总数-->
+        <!--新付费率:新增充值人数/创角数-->
+        <!--新付费ARPU:新增充值金额/新增充值人数-->
+        <!--老付费人数:非当天创角的充值角色数-->
+        <!--老充值金额:非当天创角的角色充值总数-->
+        <!--老付费率:老付费人数/老玩家-->
+        <!--老ARPU:老充值金额/老玩家充值人数-->
+        <!--次留:（当天新增的用户中，在注册的第2天还登录的用户数）/第一天新增总用户数-->
+        <!--三留:（第一天新增用户中，在注册的第3天还有登录的用户数）/第一天新增总用户数-->
+        <!--七留:（第一天新增的用户中，在注册的第7天还有登录的用户数）/第一天新增总用户数-->
+        <thead>
+        <tr>
+            <th width="160">日期</th>
+            <th width="80" align="right">渠道</th>
+            <th width="80" align="right">区服</th>
+            <th width="80" align="right">注册数</th>
+            <th width="80" align="right">创角数</th>
+            <th width="80" align="right">登录数</th>
+            <th width="80" align="right">活跃数</th>
+            <th width="80" align="right">老玩家</th>
+            <th width="80" align="right">付费人数</th>
+            <th width="80" align="right">充值金额</th>
+            <th width="80" align="right">登录付费率</th>
+            <th width="80" align="right">付费ARPU</th>
+            <th width="80" align="right">新付费数</th>
+            <th width="80" align="right">新充值金额</th>
+            <th width="80" align="right">新付费率</th>
+            <th width="80" align="right">新付费ARPU</th>
+            <th width="80" align="right">老付费人数</th>
+            <th width="80" align="right">老充值金额</th>
+            <th width="80" align="right">老付费率</th>
+            <th width="80" align="right">老ARPU</th>
+            <th width="80" align="right">次留</th>
+            <th width="80" align="right">三留</th>
+            <th width="80" align="right">七留</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${dataCollectionList}">
+            <td th:text="${row.reportDate}"></td>
+            <td th:text="${row.channelId}"></td>
+            <td th:text="${row.serverId}"></td>
+            <td th:text="${row.registerNumber}"></td>
+            <td th:text="${row.roleNumber}"></td>
+            <td th:text="${row.loginNumber}"></td>
+            <td th:text="${row.activeNumber}"></td>
+            <td th:text="${row.oldPlayerNumber}"></td>
+            <td th:text="${row.payNumber}"></td>
+            <td th:text="${row.rechargeAmount}"></td>
+            <td th:text="${#strings.append(#strings.substring(row.payRate*100,0,#strings.length(row.payRate*100)-2),'%')}"></td>
+            <td th:text="${row.payArpu}"></td>
+            <td th:text="${row.newPayNumber}"></td>
+            <td th:text="${row.newRechargeAmount}"></td>
+            <td th:text="${#strings.append(#strings.substring(row.newPayRate*100,0,#strings.length(row.newPayRate*100)-2),'%')}"></td>
+            <td th:text="${row.newPayArpu}"></td>
+            <td th:text="${row.oldPayNumber}"></td>
+            <td th:text="${row.oldRechargeAmount}"></td>
+            <td th:text="${#strings.append(#strings.substring(row.oldPayRate*100,0,#strings.length(row.oldPayRate*100)-2),'%')}"></td>
+            <td th:text="${row.oldPayArpu}"></td>
+            <td th:text="${#strings.append(#strings.substring(row.nextDayAvg*100,0,#strings.length(row.nextDayAvg*100)-2),'%')}"></td>
+            <td th:text="${#strings.append(#strings.substring(row.threeDayAvg*100,0,#strings.length(row.threeDayAvg*100)-2),'%')}"></td>
+            <td th:text="${#strings.append(#strings.substring(row.sevenDayAvg*100,0,#strings.length(row.sevenDayAvg*100)-2),'%')}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>

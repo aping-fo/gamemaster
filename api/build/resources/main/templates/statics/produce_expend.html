@@ -1,0 +1,97 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="statics/produce_expend" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div th:fragment="searchBar">
+            <input id="serverIds" type="hidden" name="serverIds" th:value="${#strings.listJoin(request.serverIds,',')}"/>
+            <input id="channelIds" type="hidden" name="channelIds" th:value="${#strings.listJoin(request.channelIds,',')}"/>
+            <input type="hidden" name="orderField" th:value="${request.orderField}"/>
+            <input type="hidden" name="orderDirection" th:value="${request.orderDirection}"/>
+            <input id="pageNum" type="hidden" name="pageNum" th:value="${Pager.pageNum}"/>
+            <input type="hidden" name="pageSize" th:value="${Pager.pageSize}"/>
+            <div class="searchBar">
+                <table class="searchContent">
+                    <tr>
+                        <td>
+                            <div>
+                                <div class="buttonContent">
+                                    <a class="button" href="server/select" rel="serverselect" mask="true" lookupGroup=""><span>区服筛选</span></a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <div class="buttonContent">
+                                    <a class="button" href="channel/select" rel="channelselect" mask="true" lookupGroup=""><span>渠道筛选</span></a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>包:
+                            <select name="packageId">
+                                <option value="">全部</option>
+                                <option value="1" th:selected="${request.packageId==1}">测试1</option>
+                                <option value="2" th:selected="${request.packageId==2}">测试2</option>
+                            </select>
+                        </td>
+                        <td>消耗类型:
+                            <select name="type">
+                                <option value="22" th:selected="${request.type==22}">仙晶</option>
+                                <option value="24" th:selected="${request.type==24}">绑定仙晶</option>
+                                <option value="8" th:selected="${request.type==8}">金币</option>
+                            </select>
+                        </td>
+                        <td class="dateRange">
+                            日期:
+                            <input name="startDate" class="date readonly" readonly="readonly" type="text" value="" th:value="${request.startDate}">
+                            <span class="limit">-</span>
+                            <input name="endDate" class="date readonly" readonly="readonly" type="text" value="" th:value="${request.endDate}">
+                        </td>
+                        <td>
+                            <div class="buttonActive">
+                                <div class="buttonContent">
+                                    <button type="submit">检索</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%" layoutH="137">
+        <thead>
+        <tr>
+            <input type="hidden" th:each="row,iterStat:${list}" th:value="${row.date}"/>
+            <th width="100">日期</th>
+            <th width="100">类型</th>
+            <th width="100">产生数量</th>
+            <th width="100">参与产生人数</th>
+            <th width="100">人均产生</th>
+            <th width="100">消耗数量</th>
+            <th width="100">参与消耗人数</th>
+            <th width="100">人均消耗</th>
+            <th width="100">滞留率</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${list.size()!=0}" th:each="row,iterStat:${list}">
+            <td th:text="${row.date}"></td>
+            <td th:if="${row.action==22}" th:text="仙晶"></td>
+            <td th:if="${row.action==24}" th:text="绑定仙晶"></td>
+            <td th:if="${row.action==8}" th:text="金币"></td>
+            <td th:text="${row.produceValue}"></td>
+            <td th:text="${row.produceNumber}"></td>
+            <td th:text="${#numbers.formatDecimal(row.avgProduce,1,2)}"></td>
+            <td th:text="${row.consumeValue}"></td>
+            <td th:text="${row.consumeNumber}"></td>
+            <td th:text="${#numbers.formatDecimal(row.avgConsume,1,2)}"></td>
+            <td th:if="${row.retentionRate>=1}">100.00%</td>
+            <td th:if="${row.retentionRate>0 and row.retentionRate<1}" th:text="${#strings.append(#strings.substring(row.retentionRate*100,0,4),'%')}"></td>
+            <td th:if="${row.retentionRate<=0}">0.00%</td>
+        </tr>
+        <tr th:if="${list.size()==0}"><td colspan="13" style="text-align: center">暂无数据</td></tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>

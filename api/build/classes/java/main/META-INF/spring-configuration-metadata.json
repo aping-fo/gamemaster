@@ -1,0 +1,105 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.luckygames.wmxz.gamemaster.common.configuration.GlobalProperties",
+      "name": "global",
+      "type": "com.luckygames.wmxz.gamemaster.common.configuration.GlobalProperties"
+    },
+    {
+      "sourceType": "com.luckygames.wmxz.gamemaster.common.configuration.ReportProperties",
+      "name": "report",
+      "type": "com.luckygames.wmxz.gamemaster.common.configuration.ReportProperties"
+    },
+    {
+      "sourceType": "com.luckygames.wmxz.gamemaster.common.configuration.ReportProperties",
+      "name": "report.pay-ltv",
+      "sourceMethod": "getPayLtv()",
+      "type": "com.luckygames.wmxz.gamemaster.common.configuration.ReportProperties$CronSetting"
+    },
+    {
+      "sourceType": "com.luckygames.wmxz.gamemaster.common.configuration.ReportProperties",
+      "name": "report.player-action",
+      "sourceMethod": "getPlayerAction()",
+      "type": "com.luckygames.wmxz.gamemaster.common.configuration.ReportProperties$CronSetting"
+    },
+    {
+      "sourceType": "com.luckygames.wmxz.gamemaster.common.configuration.ReportProperties",
+      "name": "report.recharge-daily",
+      "sourceMethod": "getRechargeDaily()",
+      "type": "com.luckygames.wmxz.gamemaster.common.configuration.ReportProperties$CronSetting"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.luckygames.wmxz.gamemaster.common.configuration.GlobalProperties",
+      "name": "global.host",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.luckygames.wmxz.gamemaster.common.configuration.GlobalProperties",
+      "name": "global.image-clean-cron",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.luckygames.wmxz.gamemaster.common.configuration.ReportProperties$CronSetting",
+      "name": "report.pay-ltv.last-month-cron",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.luckygames.wmxz.gamemaster.common.configuration.ReportProperties$CronSetting",
+      "name": "report.pay-ltv.last-week-cron",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.luckygames.wmxz.gamemaster.common.configuration.ReportProperties$CronSetting",
+      "name": "report.pay-ltv.today-cron",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.luckygames.wmxz.gamemaster.common.configuration.ReportProperties$CronSetting",
+      "name": "report.pay-ltv.yesterday-cron",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.luckygames.wmxz.gamemaster.common.configuration.ReportProperties$CronSetting",
+      "name": "report.player-action.last-month-cron",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.luckygames.wmxz.gamemaster.common.configuration.ReportProperties$CronSetting",
+      "name": "report.player-action.last-week-cron",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.luckygames.wmxz.gamemaster.common.configuration.ReportProperties$CronSetting",
+      "name": "report.player-action.today-cron",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.luckygames.wmxz.gamemaster.common.configuration.ReportProperties$CronSetting",
+      "name": "report.player-action.yesterday-cron",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.luckygames.wmxz.gamemaster.common.configuration.ReportProperties$CronSetting",
+      "name": "report.recharge-daily.last-month-cron",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.luckygames.wmxz.gamemaster.common.configuration.ReportProperties$CronSetting",
+      "name": "report.recharge-daily.last-week-cron",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.luckygames.wmxz.gamemaster.common.configuration.ReportProperties$CronSetting",
+      "name": "report.recharge-daily.today-cron",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.luckygames.wmxz.gamemaster.common.configuration.ReportProperties$CronSetting",
+      "name": "report.recharge-daily.yesterday-cron",
+      "type": "java.lang.String"
+    }
+  ]
+}

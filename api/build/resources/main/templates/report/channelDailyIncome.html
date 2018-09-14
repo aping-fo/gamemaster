@@ -1,0 +1,61 @@
+<div class="tabs" currentIndex="1">
+    <div class="tabsHeader">
+        <div class="tabsHeaderContent">
+            <ul>
+                <li><a href="report/channel_daily_import" class="j-ajax" target="navTab"><span>渠道导入</span></a></li>
+                <li><a href="report/channel_daily_income" class="j-ajax" target="navTab"><span>渠道收入</span></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div>
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="report/channel_daily_income" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div th:fragment="searchBar">
+            <input type="hidden" name="serverIds" th:value="${#strings.listJoin(request.serverIds,',')}"/>
+            <input type="hidden" name="channelIds" th:value="${#strings.listJoin(request.channelIds,',')}"/>
+            <input type="hidden" name="orderField" th:value="${request.orderField}"/>
+            <input type="hidden" name="orderDirection" th:value="${request.orderDirection}"/>
+            <input type="hidden" name="pageNum" th:value="${Pager.pageNum}"/>
+            <input type="hidden" name="pageSize" th:value="${Pager.pageSize}"/>
+            <div class="searchBar">
+                <table class="searchContent">
+                    <tr>
+                        <td class="dateRange">
+                            日期：
+                            <input name="startDate" class="date readonly" readonly="readonly" type="text" value="" th:value="${request.startDate}">
+                            <span class="limit">-</span>
+                            <input name="endDate" class="date readonly" readonly="readonly" type="text" value="" th:value="${request.endDate}">
+                        </td>
+                        <td>
+                            <div class="buttonActive">
+                                <div class="buttonContent">
+                                    <button type="submit">检索</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%" layoutH="137">
+        <thead>
+        <tr>
+            <th th:each="row:${listMapTitle}">
+                <span th:if="${row.key} eq'channel_id'" th:text="渠道"/>
+                <span th:if="${row.key} eq'summary'" th:text="汇总"/>
+                <span th:if="${row.key} ne'channel_id' and ${row.key} ne'summary'" th:text="${#strings.substring(row.key,5,10)}"/>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${listMap}">
+            <td th:each="row1:${row}"><span th:text="${row1.value}"></span></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>

@@ -1,4 +1,4 @@
-<div class="pageContent">
+<div class="pageContent" xmlns:th="http://www.w3.org/1999/xhtml">
     <form method="post" action="game/ajax_sendmail" class="pageForm required-validate"
           onsubmit="return validateCallback(this, navTabAjaxDone);">
         <div class="pageFormContent" layoutH="56">
@@ -16,21 +16,21 @@
                     <option value=""> --</option>
                     <option th:each="server:${serverList}"
                             th:value="${server.serverId}"
-                            th:utext="${server.serverName}"/>
+                            th:utext="${server.serverName}"></option>
                 </select>
             </p>
             <div>
                 <label>角色名：<br/>(一行一个)</label>
                 <textarea name="charNames" class="textArea" cols="30" rows="4" style="resize: none"></textarea>
             </div>
-            <p>
-                <label>最小等级</label>
-                <input type="number" name="minLevel"/>
-            </p>
-            <p>
-                <label>最大等级</label>
-                <input type="number" name="maxLevel"/>
-            </p>
+            <!--<p>-->
+                <!--<label>最小等级</label>-->
+                <!--<input type="number" name="minLevel"/>-->
+            <!--</p>-->
+            <!--<p>-->
+                <!--<label>最大等级</label>-->
+                <!--<input type="number" name="maxLevel"/>-->
+            <!--</p>-->
             <p>
                 <label>发件人：</label>
                 <input type="text" title="发件人" value="系统邮件" name="sender" class="required textInput"/>

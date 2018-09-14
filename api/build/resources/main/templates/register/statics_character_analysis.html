@@ -1,0 +1,45 @@
+<div class="pageContent">
+    <div class="tabs" currentIndex="3">
+        <div class="tabsHeader">
+            <div class="tabsHeaderContent">
+                <ul>
+                    <li><a href="register/statics_equipment" class="j-ajax" target="navTab"><span>设备数(二期)</span></a></li>
+                    <li><a href="register/statics_register" class="j-ajax" target="navTab"><span>注册数(一期)</span></a></li>
+                    <li><a href="register/statics_character" class="j-ajax" target="navTab"><span>创角数(一期)</span></a></li>
+                    <li><a href="register/statics_character_analysis" class="j-ajax" target="navTab"><span>创角数分析(二期)</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="register/statics_character_analysis"
+          method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div th:replace="_include/searchBar"></div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%" layoutH="137">
+        <thead>
+        <tr>
+            <th width="120">总创角数</th>
+            <th width="120">非重复创角数</th>
+            <th width="120">所占比率</th>
+            <th width="120">重复创角数</th>
+            <th width="120">所占比率</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${list.size()!=0}" th:each="row,iterStat:${list}">
+            <td th:text="${row.totalCreationAngle}"></td>
+            <td th:text="${row.nonRepeat}"></td>
+            <td th:text="${#strings.append(#strings.substring(row.nonRepeatRate*100,0,#strings.length(row.nonRepeatRate*100)-2),'%')}"></td>
+            <td th:text="${row.repeat}"></td>
+            <td th:text="${#strings.append(#strings.substring(row.repeatRate*100,0,#strings.length(row.repeatRate*100)-2),'%')}"></td>
+        </tr>
+        <tr th:if="${list.size()==0}"><td colspan="11" style="text-align: center">暂无数据</td></tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>
