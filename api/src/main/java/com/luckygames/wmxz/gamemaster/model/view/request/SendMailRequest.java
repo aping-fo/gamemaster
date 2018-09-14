@@ -13,7 +13,7 @@ public class SendMailRequest {
     private String sender;
     private String title;
     private String content;
-    private List<String> rewardNames;
+    private String rewardNames;
     private String attachments;
     private String extraParam;
 
@@ -97,11 +97,11 @@ public class SendMailRequest {
         this.content = content;
     }
 
-    public List<String> getRewardNames() {
+    public String getRewardNames() {
         return rewardNames;
     }
 
-    public void setRewardNames(List<String> rewardNames) {
+    public void setRewardNames(String rewardNames) {
         this.rewardNames = rewardNames;
     }
 }

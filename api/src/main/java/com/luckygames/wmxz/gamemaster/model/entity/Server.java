@@ -15,6 +15,15 @@ public class Server extends ServerEntity {
     private Integer rechargeCount;
     private BigDecimal arpu;
     private Map<String,List<ChannelBag>> channelListMap;
+    private Long[] ids;
+
+    public Long[] getIds() {
+        return ids;
+    }
+
+    public void setIds(Long[] ids) {
+        this.ids = ids;
+    }
 
     public Map<String, List<ChannelBag>> getChannelListMap() {
         return channelListMap;

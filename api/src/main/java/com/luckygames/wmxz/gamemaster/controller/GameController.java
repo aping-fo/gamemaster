@@ -54,6 +54,8 @@ public class GameController extends BaseController {
     private BroadcastNewService broadcastNewService;
     @Autowired
     private NoticeService noticeService;
+    @Autowired
+    private MailLogService mailLogService;
 
     //聊天设置
     @RequestMapping(value = "/chat_settings", method = {RequestMethod.GET, RequestMethod.POST})
@@ -217,169 +219,12 @@ public class GameController extends BaseController {
         return new Response("activity/activity");
     }
 
-    //奥林匹克活动列表
-    @RequestMapping(value = "/olympics_activity_list", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response activityList(ActivitySearchQuery query) {
-        if (query.getId() != null) {
-            activityService.update(query);
-        }
-        Page<Activity> activityPage = activityService.searchPage(query);
-        return new Response("activity/olympics_activity_list")
-                .request(query)
-                .data("activityList", activityPage);
-    }
 
-    //奥林匹克活动设置
-    @RequestMapping(value = "/olympics_activity_setting", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response activitySetting(Activity activity) {
-        return new Response("activity/olympics_activity_setting");
-    }
-
-    //登录豪礼
-    @RequestMapping(value = "/olympics_activity_logon_courtesy", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response activityLogonCourtesy(Activity activity) {
-        if (StringUtils.isNotBlank(activity.getTitle())) {
-            activityService.add(activity);
-        }
-        ServerSearchQuery serverSearchQuery = new ServerSearchQuery();
-        List<Server> serverList = serverService.searchList(serverSearchQuery);
-        ChannelSearchQuery channelSearchQuery = new ChannelSearchQuery();
-        List<Channel> channelList = channelService.searchList(channelSearchQuery);
-        return new Response("activity/olympics_activity_logon_courtesy")
-                .data("serverList", serverList)
-                .data("channelList", channelList);
-    }
-
-    //特惠礼包
-    @RequestMapping(value = "/olympics_activity_special_gift_bag", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response activitySpecialGiftBag(Activity activity) {
-        if (StringUtils.isNotBlank(activity.getTitle())) {
-            activityService.add(activity);
-        }
-        ServerSearchQuery serverSearchQuery = new ServerSearchQuery();
-        List<Server> serverList = serverService.searchList(serverSearchQuery);
-        ChannelSearchQuery channelSearchQuery = new ChannelSearchQuery();
-        List<Channel> channelList = channelService.searchList(channelSearchQuery);
-        return new Response("activity/olympics_activity_special_gift_bag")
-                .data("serverList", serverList)
-                .data("channelList", channelList);
-    }
-
-    //神兵现世
-    @RequestMapping(value = "/olympics_activity_presence_divine_soldiers", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response activityPresenceDivineSoldiers(Activity activity) {
-        if (StringUtils.isNotBlank(activity.getTitle())) {
-            activityService.add(activity);
-        }
-        ServerSearchQuery serverSearchQuery = new ServerSearchQuery();
-        List<Server> serverList = serverService.searchList(serverSearchQuery);
-        ChannelSearchQuery channelSearchQuery = new ChannelSearchQuery();
-        List<Channel> channelList = channelService.searchList(channelSearchQuery);
-        return new Response("activity/olympics_activity_presence_divine_soldiers")
-                .data("serverList", serverList)
-                .data("channelList", channelList);
-    }
-
-    //环卫绩点
-    @RequestMapping(value = "/olympics_activity_sanitation_point", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response activitySanitationPoint(Activity activity) {
-        if (StringUtils.isNotBlank(activity.getTitle())) {
-            activityService.add(activity);
-        }
-        ServerSearchQuery serverSearchQuery = new ServerSearchQuery();
-        List<Server> serverList = serverService.searchList(serverSearchQuery);
-        ChannelSearchQuery channelSearchQuery = new ChannelSearchQuery();
-        List<Channel> channelList = channelService.searchList(channelSearchQuery);
-        return new Response("activity/olympics_activity_sanitation_point")
-                .data("serverList", serverList)
-                .data("channelList", channelList);
-    }
-
-    //节日兑换
-    @RequestMapping(value = "/olympics_activity_festive_exchange", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response activityFestiveExchange(Activity activity) {
-        if (StringUtils.isNotBlank(activity.getTitle())) {
-            activityService.add(activity);
-        }
-        ServerSearchQuery serverSearchQuery = new ServerSearchQuery();
-        List<Server> serverList = serverService.searchList(serverSearchQuery);
-        ChannelSearchQuery channelSearchQuery = new ChannelSearchQuery();
-        List<Channel> channelList = channelService.searchList(channelSearchQuery);
-        return new Response("activity/olympics_activity_festive_exchange")
-                .data("serverList", serverList)
-                .data("channelList", channelList);
-    }
-
-    //日夜除尘
-    @RequestMapping(value = "/olympics_activity_day_night_dedusting", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response activityDayNightDedusting(Activity activity) {
-        if (StringUtils.isNotBlank(activity.getTitle())) {
-            activityService.add(activity);
-        }
-        ServerSearchQuery serverSearchQuery = new ServerSearchQuery();
-        List<Server> serverList = serverService.searchList(serverSearchQuery);
-        ChannelSearchQuery channelSearchQuery = new ChannelSearchQuery();
-        List<Channel> channelList = channelService.searchList(channelSearchQuery);
-        return new Response("activity/olympics_activity_day_night_dedusting")
-                .data("serverList", serverList)
-                .data("channelList", channelList);
-    }
-
-    //双倍经验
-    @RequestMapping(value = "/olympics_activity_double_experience", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response activityDoubleExperience(Activity activity) {
-        if (StringUtils.isNotBlank(activity.getTitle())) {
-            activityService.add(activity);
-        }
-        ServerSearchQuery serverSearchQuery = new ServerSearchQuery();
-        List<Server> serverList = serverService.searchList(serverSearchQuery);
-        ChannelSearchQuery channelSearchQuery = new ChannelSearchQuery();
-        List<Channel> channelList = channelService.searchList(channelSearchQuery);
-        return new Response("activity/olympics_activity_double_experience")
-                .data("serverList", serverList)
-                .data("channelList", channelList);
-    }
-
-    //副本双倍
-    @RequestMapping(value = "/olympics_activity_double_duplex", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response activityDoubleDuplex(Activity activity) {
-        if (StringUtils.isNotBlank(activity.getTitle())) {
-            activityService.add(activity);
-        }
-        ServerSearchQuery serverSearchQuery = new ServerSearchQuery();
-        List<Server> serverList = serverService.searchList(serverSearchQuery);
-        ChannelSearchQuery channelSearchQuery = new ChannelSearchQuery();
-        List<Channel> channelList = channelService.searchList(channelSearchQuery);
-        return new Response("activity/olympics_activity_double_duplex")
-                .data("serverList", serverList)
-                .data("channelList", channelList);
-    }
-
-    //奥林匹克单服活动
-    @RequestMapping(value = "/olympics_single_activity", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response activitySingleActivity(ActivitySearchQuery query) {
-        if (query.getId() != null) {
-            activityService.update(query);
-        }
-        Page<Activity> activityPage = activityService.searchPage(query);
-        return new Response("activity/olympics_single_activity")
-                .request(query)
-                .data("activityList", activityPage);
-    }
-
-    //奥林匹克活动审核
-    @RequestMapping(value = "/olympics_activity_audit", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response activityAudit(ActivitySearchQuery query) {
-        query.setActivityStatus(0);
-        Page<Activity> activityPage = activityService.searchPage(query);
-        return new Response("activity/olympics_activity_audit")
-                .request(query)
-                .data("activityList", activityPage);
-    }
-
-    @Autowired
-    private MailLogService mailLogService;
-
+    /**
+     * 邮件列表
+     * @param query
+     * @return
+     */
     @RequestMapping(value = "/mail", method = {RequestMethod.GET, RequestMethod.POST})
     public Response mail(MailSearchQuery query) {
         if (query.getMailType() != null && query.getMailType().equals(MailType.UNKNOWN)) {

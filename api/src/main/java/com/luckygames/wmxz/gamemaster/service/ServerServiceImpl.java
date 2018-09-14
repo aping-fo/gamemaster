@@ -32,6 +32,16 @@ public class ServerServiceImpl extends BaseServiceImpl<ServerEntity> implements 
     }
 
     @Override
+    public void updateServerState(Long id,int serverState) {
+        serverMapper.updateServerState(id,serverState);
+    }
+
+    @Override
+    public void updateWhitelist(Long id, int enable, String whiteList) {
+        serverMapper.updateWhitelist(id, enable,whiteList);
+    }
+
+    @Override
     public List<Server> searchList(ServerSearchQuery request) {
         ServerExample example = new ServerExample();
         ServerExample.Criteria criteria = example.createCriteria();
@@ -62,7 +72,8 @@ public class ServerServiceImpl extends BaseServiceImpl<ServerEntity> implements 
             criteria.andServerIdIn(request.getServerIds());
         }
 
-        return PageHelper.startPage(request.getPageNum(), request.getPageSize()).doSelectPage(() -> serverMapper.selectByExample(example));
+//        return PageHelper.startPage(request.getPageNum(), request.getPageSize()).doSelectPage(() -> serverMapper.selectByExample(example));
+        return PageHelper.startPage(request.getPageNum(), request.getPageSize()).doSelectPage(() -> serverMapper.searchPage(request));
     }
 
     @Override
@@ -90,10 +101,10 @@ public class ServerServiceImpl extends BaseServiceImpl<ServerEntity> implements 
         if (server == null) {
             return null;
         }
-        if (server.getOpenDate() == null || server.getOpenDate().after(date)) {
-            server.setOpenDate(DateUtils.addDays(date, -1));
-            save(server);
-        }
+//        if (server.getOpenTime() == null || server.getOpenTime().after(date)) {
+//            server.setOpenTime(DateUtils.addDays(date, -1));
+//            save(server);
+//        }
         return server;
     }
 

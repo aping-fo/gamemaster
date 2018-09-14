@@ -7,7 +7,6 @@ import com.luckygames.wmxz.gamemaster.model.enums.*;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
 import com.luckygames.wmxz.gamemaster.model.view.request.*;
 import com.luckygames.wmxz.gamemaster.service.*;
-import com.luckygames.wmxz.gamemaster.utils.DateUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,34 +15,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.*;
 
 @Controller
 @RequestMapping("/")
 public class AllDialogController extends BaseController {
+    public static List<Object> goodsList = new ArrayList<>();//物品列表
+
+    private final PlayerCharacterService playerCharacterService;
+    private final ServerService serverService;
+    private final ForbiddenLogService forbiddenLogService;
+    private final MailLogService mailLogService;
+    private final MailCharacterService mailCharacterService;
+    private final MailRewardService mailRewardService;
+    private final BroadcastService broadcastService;
+    private final AdminService adminService;
+    private final ChannelService channelService;
+
     @Autowired
-    private PlayerCharacterService playerCharacterService;
-    @Autowired
-    private ServerService serverService;
-    @Autowired
-    private ForbiddenLogService forbiddenLogService;
-    @Autowired
-    private MailLogService mailLogService;
-    @Autowired
-    private MailCharacterService mailCharacterService;
-    @Autowired
-    private MailRewardService mailRewardService;
-    @Autowired
-    private BroadcastService broadcastService;
-    @Autowired
-    private AdminService adminService;
-    @Autowired
-    private ChannelService channelService;
+    public AllDialogController(PlayerCharacterService playerCharacterService, ServerService serverService, ForbiddenLogService forbiddenLogService, MailLogService mailLogService, MailCharacterService mailCharacterService, MailRewardService mailRewardService, BroadcastService broadcastService, AdminService adminService, ChannelService channelService) {
+        this.playerCharacterService = playerCharacterService;
+        this.serverService = serverService;
+        this.forbiddenLogService = forbiddenLogService;
+        this.mailLogService = mailLogService;
+        this.mailCharacterService = mailCharacterService;
+        this.mailRewardService = mailRewardService;
+        this.broadcastService = broadcastService;
+        this.adminService = adminService;
+        this.channelService = channelService;
+    }
 
     //封禁页面
     @RequestMapping(value = "/player/dialog_ban", method = {RequestMethod.GET, RequestMethod.POST})
@@ -66,7 +66,7 @@ public class AllDialogController extends BaseController {
             ForbiddenLog forbiddenLog = forbiddenLogService.searchByCharId(charIds.get(0));
 
             //计算封禁时间
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Calendar cal = Calendar.getInstance();//获取当前日期
             cal.setTime(forbiddenLog.getCreateTime());
             long time1 = cal.getTimeInMillis();
@@ -137,13 +137,14 @@ public class AllDialogController extends BaseController {
 //        return new Response().request(forbiddenRequest).json();
 //    }
 
-    //邮件页面
+    //创建邮件
     @RequestMapping(value = "/game/dialog_newmail", method = {RequestMethod.GET, RequestMethod.POST})
     public Response dialogNewMail() {
         List<Server> serverList = serverService.searchList();
         return new Response("game/dialog_newmail")
                 .data("mailType", MailType.SERVER)
-                .data("serverList", serverList);
+                .data("serverList", serverList)
+                .data("goodsList", goodsList);
     }
 
     //邮件接口
@@ -174,7 +175,11 @@ public class AllDialogController extends BaseController {
             charIds.add(character.getCharId());
         });
 
+        //处理换行符
+        String rewardNames = request.getRewardNames();
+        String rewards = rewardNames.replaceAll("\r\n", "");
         String result;
+
         try {
             result = adminService.sendMail(new MailQuery(
                     request.getServerId(),
@@ -184,7 +189,7 @@ public class AllDialogController extends BaseController {
                     request.getMinLevel(),
                     request.getMaxLevel(),
                     0,
-                    StringUtils.join(request.getRewardNames(), ",")
+                    rewards
             ));
         } catch (Exception e) {
             logger.error("发送邮件异常：", e);
@@ -210,7 +215,12 @@ public class AllDialogController extends BaseController {
         mailLogService.save(mailLog);
 
         mailCharacterService.saveMailCharacters(mailLog.getId(), playerCharacters);
-        mailRewardService.saveMailRewards(mailLog.getId(), request.getRewardNames());
+
+        List<String> rewardNamesList = new ArrayList<>();
+        String[] rewardName = rewards.split(";");
+        rewardNamesList.addAll(Arrays.asList(rewardName));
+
+        mailRewardService.saveMailRewards(mailLog.getId(), rewardNamesList);
 
         return new Response().request(request).json();
     }

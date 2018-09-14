@@ -73,7 +73,7 @@ public class CommonController extends BaseController {
             server = serverList.get(0);
         }
         if (CollectionUtils.isNotEmpty(serverList)) {
-            server.setOpenDays((int) DateUtils.gapDays(server.getOpenDate(), DateUtils.Now()));
+//            server.setOpenDays((int) DateUtils.gapDays(server.getOpenTime(), DateUtils.Now()));
             server.setCharCount((int) playerCharacterService.countCharaters(server.getServerId()));
             server.setOnlineCount((int) onlineNowService.countOnlineNow(server.getServerId()));
             server.setActiveCount((int) onlineNowService.countOnlineNow(server.getServerId(), 30 * 60));

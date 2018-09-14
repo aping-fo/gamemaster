@@ -21,4 +21,8 @@ public interface ServerService extends BaseService<ServerEntity> {
     Server fixOpenDate(Long serverId, Date date);
 
     List<Server> searchList();
+
+    void updateServerState(Long id, int serverState);
+
+    void updateWhitelist(Long id, int enable,String whiteList);
 }

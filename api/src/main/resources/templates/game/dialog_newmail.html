@@ -1,70 +1,99 @@
 <div class="pageContent" xmlns:th="http://www.w3.org/1999/xhtml">
     <form method="post" action="game/ajax_sendmail" class="pageForm required-validate"
-          onsubmit="return validateCallback(this, navTabAjaxDone);">
-        <div class="pageFormContent" layoutH="56">
-            <p>
-                <label>邮件类型：</label>
-                <select name="mailType" class="combox">
-                    <option value="SERVER" th:selected="(${mailType.toString() == 'SERVER'})">全服群发</option>
-                    <option value="LEVEL" th:selected="(${mailType.toString() == 'LEVEL'})">等级范围群发</option>
-                    <option value="CHAR" th:selected="(${mailType.toString() == 'CHAR'})">角色群发</option>
-                </select>
-            </p>
-            <p>
-                <label>选择区服：</label>
-                <select name="serverId" class="required combox">
-                    <option value=""> --</option>
-                    <option th:each="server:${serverList}"
-                            th:value="${server.serverId}"
-                            th:utext="${server.serverName}"></option>
-                </select>
-            </p>
-            <div>
-                <label>角色名：<br/>(一行一个)</label>
-                <textarea name="charNames" class="textArea" cols="30" rows="4" style="resize: none"></textarea>
-            </div>
-            <!--<p>-->
-                <!--<label>最小等级</label>-->
-                <!--<input type="number" name="minLevel"/>-->
-            <!--</p>-->
-            <!--<p>-->
-                <!--<label>最大等级</label>-->
-                <!--<input type="number" name="maxLevel"/>-->
-            <!--</p>-->
-            <p>
-                <label>发件人：</label>
-                <input type="text" title="发件人" value="系统邮件" name="sender" class="required textInput"/>
-            </p>
-            <p>
-                <label>邮件标题：</label>
-                <input type="text" title="标题" value="" name="title" class="required textInput"/>
-            </p>
-            <div>
-                <label>邮件内容：</label>
-                <textarea name="content" class="required textArea" cols="30" rows="4" style="resize: none"></textarea>
-            </div>
-            <div>
-                <label style="margin-top: 10px">奖励：<br/>(一行一个)</label>
-                <textarea name="rewardNames" class="textArea" cols="30" rows="4" style="resize: none;margin-top: 10px"></textarea>
-            </div>
-        </div>
-        <div class="formBar">
-            <ul>
-                <li>
-                    <div class="buttonActive">
-                        <div class="buttonContent">
-                            <button type="submit">确定</button>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="button">
-                        <div class="buttonContent">
-                            <button type="button" class="close">取消</button>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
+          onsubmit="return closeNavTab(this);">
+        <table width="98%" style="border-collapse:separate; border-spacing:5px;">
+            <thead>
+            <tr>
+                <th width="20%"></th>
+                <th width="80%"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>邮件类型：</td>
+                <td>
+                    <select name="mailType">
+                        <option value="SERVER" th:selected="(${mailType.toString() == 'SERVER'})">全服群发</option>
+                        <option value="LEVEL" th:selected="(${mailType.toString() == 'LEVEL'})">等级范围群发</option>
+                        <option value="CHAR" th:selected="(${mailType.toString() == 'CHAR'})">角色群发</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>选择区服：</td>
+                <td>
+                    <select name="serverId" class="required">
+                        <option th:each="server:${serverList}" th:value="${server.serverId}"
+                                th:utext="${server.serverName}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>角色ID：<br/>玩家id1,<br/>玩家id2,</td>
+                <td>
+                    <textarea name="charNames" class="textArea" cols="30" rows="4" style="resize: none"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>最小等级：</td>
+                <td><input type="number" name="minLevel"/></td>
+            </tr>
+            <tr>
+                <td>最大等级：</td>
+                <td><input type="number" name="maxLevel"/></td>
+            </tr>
+            <tr>
+                <td>发件人：</td>
+                <td><input type="text" title="发件人" value="系统邮件" name="sender" class="required textInput"/></td>
+            </tr>
+            <tr>
+                <td>邮件标题：</td>
+                <td><input type="text" title="标题" value="" name="title" class="required textInput"/></td>
+            </tr>
+            <tr>
+                <td>邮件内容：</td>
+                <td>
+                    <textarea name="content" class="required textArea" cols="30" rows="4"
+                              style="resize: none"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>物品：</td>
+                <td>
+                    <select id="goods">
+                        <option th:each="goods:${goodsList}" th:text="${goods.name}" th:value="${goods.id}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>数量：</td>
+                <td><input type="number" id="count"/><input type="button" value="添加" id="addButton"/></td>
+            </tr>
+            <tr>
+                <td>奖励：</td>
+                <td>
+                    <textarea name="rewardNames" class="textArea readonly" cols="30" rows="4"
+                              style="resize: none;margin-top: 10px" id="reward" readonly="readonly"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button type="submit">发送</button>
+                    <button class="close">取消</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </form>
 </div>
+<script type="text/javascript">
+    $(function () {
+        $('#goods').searchableSelect();
+    });
+    $('#addButton').click(function () {
+        var goods = $('#goods').val();
+        var count = $('#count').val();
+        $('#reward').val($('#reward').val() + goods + ":" + count + ";\n");
+    });
+</script>

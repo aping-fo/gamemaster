@@ -76,7 +76,7 @@ public class RechargeMonthlyServiceImpl extends BaseServiceImpl<RechargeMonthlyE
                 Server server = serverService.getByServerId(r.getServerId());
                 if (server != null) {
                     rechargeMonthly.setServerName(server.getServerName());
-                    rechargeMonthly.setOpenDate(server.getOpenDate());
+//                    rechargeMonthly.setOpenDate(server.getOpenTime());
                 }
                 rechargeMonthly.setRechargeYear(year);
                 rechargeMonthly.setRechargeMonth(month);

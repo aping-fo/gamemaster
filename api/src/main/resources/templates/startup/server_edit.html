@@ -1,79 +1,92 @@
 <div class="pageContent">
-    <div class="pageFormContent" layoutH="57">
-        <div class="searchBar">
-            <table class="searchContent">
-                <tr>
-                    <td>区服ID</td>
-                    <td><textarea name="id" class="required textArea" cols="15" rows="1"  th:text="${server.serverId}" style="resize: none"  disabled = true></textarea></td>
-                    <td>区服名称</td>
-                    <td><textarea name="name" class="required textArea" cols="15" rows="1"  th:text="${server.serverName}" style="resize: none"></textarea></td>
-                </tr>
-                <tr>
-                    <td>服务器状态</td>
-                    <td>
-                        <select name="serverState">
-                            <option value="1">一般</option>
-                            <option value="2">火爆</option>
-                            <option value="3">爆满</option>
-                            <option value="4">新服</option>
-                            <option value="5">推荐</option>
-                            <option value="6">审核</option>
-                            <option value="7">代理服</option>
-                        </select>
-                    </td>
-                    <td>显示编号</td>
-                    <td><input name="name" type="text"></td>
-                </tr>
-                <tr>
-                    <td>标签显示</td>
-                    <td>
-                        <div class="col-xs-4" th:each="state:${stateList}">
-                            <input checked="checked" type="radio" name="sign" th:value="'{sign:'+${state.sign}+'}'"/>
-                            <span th:text="${state.name}"/>
-                        </div>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td>服务器IP</td>
-                    <td><textarea name="ip" class="required textArea" cols="15" rows="1"  th:text="${server.ip}" style="resize: none"></textarea></td>
-                    <td>服务器端口</td>
-                    <td><textarea name="port" class="required textArea" cols="15" rows="1"  th:text="${server.port}" style="resize: none"></textarea></td>
-                </tr>
-                <tr>
-                    <td>付款通知地址</td>
-                    <td><input name="payresp" type="text"></td>
-                </tr>
-                <tr>
-                    <td>开服时间</td>
-                    <td><textarea name="openDate" class="required textArea" cols="15" rows="1"  th:text="${server.openDate}" style="resize: none"></textarea></td>
-                    <td>关服时间</td>
-                    <td><input name="closeDate" type="text"></td>
-                </tr>
-                <tr>
-                    <td>备注</td>
-                    <td><textarea name="des" rows="3" style="resize:none;width: 152px"></textarea></td>
-                </tr>
-            </table>
+    <form id="pagerForm" onsubmit="return closeNavTab(this);" action="startup/server_edit" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <input type="hidden" name="id" th:value="${server.id}"/>
+        <div class="pageFormContent" layoutH="57">
+            <div class="searchBar">
+                <table class="searchContent">
+                    <tr>
+                        <td>区服ID</td>
+                        <td><input type="text" name="serverId" th:value="${server.serverId}" class="required"/></td>
+                        <td>区服名称</td>
+                        <td><input type="text" name="serverName" th:value="${server.serverName}" class="required"/></td>
+                    </tr>
+                    <tr>
+                        <td>服务器状态</td>
+                        <td>
+                            <select name="serverState">
+                                <option th:selected="${server.serverState==1}" value="1">开放</option>
+                                <option th:selected="${server.serverState==2}" value="2">维护</option>
+                                <option th:selected="${server.serverState==3}" value="3">隐藏</option>
+                                <option th:selected="${server.serverState==4}" value="4">关闭</option>
+                            </select>
+                        </td>
+                        <td>显示编号</td>
+                        <td><input name="showNumber" type="text" th:value="${server.showNumber}" class="required"></td>
+                    </tr>
+                    <tr>
+                        <td>标签显示</td>
+                        <td>
+                            <div class="col-xs-1">
+                                <input th:checked="${server.label==1}" type="radio" name="label" value="1"/>一般
+                                <input th:checked="${server.label==2}" type="radio" name="label" value="2"/>火爆
+                                <input th:checked="${server.label==3}" type="radio" name="label" value="3"/>爆满
+                                <input th:checked="${server.label==4}" type="radio" name="label" value="4"/>新服
+                                <input th:checked="${server.label==5}" type="radio" name="label" value="5"/>推荐
+                                <input th:checked="${server.label==6}" type="radio" name="label" value="6"/>审核服
+                                <input th:checked="${server.label==7}" type="radio" name="label" value="7"/>代理服
+                            </div>
+                        </td>
+                        <td>后台端口</td>
+                        <td><input name="gmPort" type="text" class="required" th:value="${server.gmPort}"></td>
+                    </tr>
+                    <tr>
+                        <td>服务器IP</td>
+                        <td><input type="text" name="ip" th:value="${server.ip}" class="required"/></td>
+                        <td>服务器端口</td>
+                        <td><input type="text" name="port" th:value="${server.port}" class="required"/></td>
+                    </tr>
+                    <tr>
+                        <td>付款通知地址</td>
+                        <td><input type="text" name="payAddress" th:value="${server.payAddress}" class="required"></td>
+                    </tr>
+                    <tr>
+                        <td>开服时间</td>
+                        <td><input dateFmt="yyyy-MM-dd HH:mm:ss" name="openTime" class="date readonly required"
+                                   readonly="readonly" type="text" th:value="${server.openTime}"/></td>
+                        <td>关服时间</td>
+                        <td><input dateFmt="yyyy-MM-dd HH:mm:ss" name="closeTime" class="date readonly"
+                                   readonly="readonly" type="text" th:value="${server.closeTime}"/></td>
+                    </tr>
+                    <tr>
+                        <td>备注</td>
+                        <td><textarea name="remarks" rows="3" style="resize:none;width: 152px"
+                                      th:text="${server.remarks}"></textarea></td>
+                        <td>维护提示</td>
+                        <td><textarea name="maintenanceTips" rows="3" style="resize:none;width: 152px"
+                                      th:text="${server.maintenanceTips}"></textarea></td>
+                    </tr>
+                </table>
+            </div>
         </div>
-    </div>
-    <div class="formBar">
-        <ul>
-            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-            <li>
-                <div class="button">
-                    <div class="buttonContent">
-                        <button class="close">取消</button>
+        <div class="formBar">
+            <ul>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                <li>
+                    <div class="button">
+                        <div class="buttonContent">
+                            <button class="close">取消</button>
+                        </div>
                     </div>
-                </div>
-            </li>
-            <li>
-                <div class="button">
-                    <div class="buttonContent">
-                        <button class="close">保存</button>
+                </li>
+                <li>
+                    <div class="button">
+                        <div class="buttonContent">
+                            <button type="submit">保存</button>
+                        </div>
                     </div>
-                </div>
-            </li>
-        </ul>
-    </div>
+                </li>
+            </ul>
+        </div>
+    </form>
 </div>
