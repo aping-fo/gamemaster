@@ -140,4 +140,17 @@ public class StaticsController extends BaseController {
                 .request(query)
                 .data("list", playerActionLogs);
     }
+
+    //单服数据
+    @RequestMapping("server")
+    public Response serverdata(CommonSearchQuery query) {
+        if (query.getPageNum() == null) {
+            query.setPageNum(1);
+        }
+        Page<StaticsSummary> staticsSummaryPage = staticsSummaryService.queryStaticsSummary(query);
+
+        return new Response("statics/server_statics")
+                .request(query)
+                .data("staticsSummaryList", staticsSummaryPage);
+    }
 }

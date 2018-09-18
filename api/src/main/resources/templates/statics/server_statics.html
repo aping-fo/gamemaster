@@ -1,0 +1,44 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="player/character" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div th:replace="_include/searchBar"></div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%" layoutH="137">
+        <thead>
+        <tr>
+            <th width="80">服务器名</th>
+            <th width="80">日期</th>
+            <th width="80" align="right">充值金额</th>
+            <th width="80" align="right">充值元宝</th>
+            <th width="80" align="right">充值次数</th>
+            <th width="80" align="right">付费人数</th>
+            <th width="80" align="right">付费率</th>
+            <th width="80" align="right">活跃玩家</th>
+            <th width="80" align="right">新增玩家</th>
+            <th width="80" align="right">ARPU</th>
+            <th width="80" align="right">ARPPU</th>
+            <th width="80" align="right">最高在线</th>
+            <th width="80" align="right">平均在线</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--<tr th:each="row,iterStat:${charges}">-->
+            <!--&lt;!&ndash;<td th:text="${row.serverName}"></td>&ndash;&gt;-->
+            <!--&lt;!&ndash;<td th:text="${row.userName}"></td>&ndash;&gt;-->
+            <!--&lt;!&ndash;<td th:text="${row.playerId}"></td>&ndash;&gt;-->
+            <!--&lt;!&ndash;<td th:text="${row.date}"></td>&ndash;&gt;-->
+            <!--&lt;!&ndash;<td th:text="${row.operater}"></td>&ndash;&gt;-->
+            <!--&lt;!&ndash;<td th:text="${row.chargeAmount}"></td>&ndash;&gt;-->
+            <!--&lt;!&ndash;<td th:text="${row.chargeType}"></td>&ndash;&gt;-->
+            <!--&lt;!&ndash;<td th:text="${row.state}"></td>&ndash;&gt;-->
+            <!--&lt;!&ndash;<td>&ndash;&gt;-->
+                <!--&lt;!&ndash;<a title="删除" class="button" th:href="@{simulationRecharge/pending(id=${row.id})}" target="navTab"><span>删除</span></a>&ndash;&gt;-->
+                <!--&lt;!&ndash;<a title="删除" class="button" th:href="@{simulationRecharge/pending(id=${row.id})}" target="navTab"><span>粘贴</span></a>&ndash;&gt;-->
+            <!--&lt;!&ndash;</td>&ndash;&gt;-->
+        <!--</tr>-->
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>

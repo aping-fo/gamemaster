@@ -37,8 +37,8 @@
                     <td colspan="3"><textarea id="content" name="content" cols="43" rows="20" style="resize:none;"
                                               th:text="${notice.content}" class="required"></textarea></td>
                     <td>预览：</td>
-                    <td colspan="2"><textarea id="previewView" name="content"
-                                              style="resize:none;width: 980px;height: 360px;font-size: 24px;line-height:120%" readonly="readonly"></textarea>
+                    <td>
+                        <div id="previewView" name="content"></div>
                     </td>
                 </tr>
             </table>
@@ -110,6 +110,11 @@
 </div>
 <script type="text/javascript">
     $('#preview').click(function () {
-        $("#previewView").val($("#content").val())
+        <!--$("#previewView").val($("#content").val())-->
+         var runTextArea = document.getElementById('content').value;
+         runTextArea=runTextArea.replace("<color","<font color");
+          runTextArea=runTextArea.replace("</color>","</font>");
+          var result = document.getElementById('previewView');
+           result.innerHTML = runTextArea;
     });
 </script>
