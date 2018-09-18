@@ -1,0 +1,97 @@
+<div class="pageHeader">
+    <div class="searchBar">
+        <form id="create" onsubmit="return navTabSearch(this);" action="characterTransfer/transferList" method="post"
+              onreset="$(this).find('select.combox').comboxReset()">
+            <table class="searchContent">
+                <tr>
+                    <td>服务器:</td>
+                    <td>
+                        <select name="serverId">
+                            <div class="col-xs-1" th:each="server:${serverList}">
+                                <option th:value ="${server.serverId}">
+                                    <span th:text="${server.serverName}"/>
+                                </option>
+                            </div>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>角色id</td>
+                    <td><input name="playerId" type="text"></td>
+                </tr>
+                <tr>
+                    <td>源账号</td>
+                    <td><input name="currentId" type="text"></td>
+                    <td>目标账号</td>
+                    <td><input name="toId" type="text"></td>
+                </tr>
+                <tr>
+                    <td><button id="submit" type="submit">提交</button></td>
+                </tr>
+            </table>
+        </form>
+
+    </div>
+</div>
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="characterTransfer/transferList" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div th:replace="_include/searchBar"></div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" layoutH="270" width="100%" >
+        <thead>
+        <tr>
+            <th width="120">角色id</th>
+            <th width="120">源账号id</th>
+            <th width="120">目标账号id</th>
+            <th width="120">操作者</th>
+            <th width="120">操作时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${characters}">
+            <td th:text="${row.playerId}"></td>
+            <td th:text="${row.currentId}"></td>
+            <td th:text="${row.toId}"></td>
+            <td th:text="${row.operator}"></td>
+            <td th:text="${row.updateTime}"></td>
+        </tr>
+        </tbody>
+
+    </table>
+
+</div>
+
+
+<script type="text/javascript">
+    function changeHref(charId) {
+        var href = $('#player a')
+        href.eq(0).attr("href","player/info_playerList?charId="+charId)
+        href.eq(1).attr("href","player/info_baseInformation?charId="+charId)
+        href.eq(2).attr("href","player/info_equipment_flow?charId="+charId)
+    }
+    function changeHref2() {
+        var href = $('#player a')
+        var charId = $('#player input').val()
+        href.eq(0).attr("href","player/info_playerList?charId="+charId)
+        href.eq(1).attr("href","player/info_baseInformation?charId="+charId)
+        href.eq(2).attr("href","player/info_equipment_flow?charId="+charId)
+    }
+    changeHref2()
+    function batchBanDialog() {
+        var selectIds = $.getSelectedIds("ids");
+        alert(selectIds);
+        var url = "player/dialog_ban";
+        url += "?charIds=" + selectIds;
+        url += "&opType=FORBIDDEN";
+        $.pdialog.open(url, 'batchBan', '批量封禁', {mask: true});
+    }
+     $('#submit222').click(function () {
+        var name=$('input[name=userName]').val();
+        var id=$('input[name=playerId]').val();
+        var amount=$('input[name=amount]').val();
+        $.post("simulationRecharge/createNew","userName="+name+"&playerId="+id+"&amount="+amount+"&serverId="+"1"+"&serverName="+"1"+"&type="+"1");
+    })
+</script>

@@ -40,40 +40,12 @@ public class ActivationCodeEntitySqlProvider {
             sql.VALUES("server_id", "#{serverId,jdbcType=BIGINT}");
         }
         
-        if (record.getServerName() != null) {
-            sql.VALUES("`server_name`", "#{serverName,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getChannelId() != null) {
-            sql.VALUES("channel_id", "#{channelId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getChannelName() != null) {
-            sql.VALUES("channel_name", "#{channelName,jdbcType=VARCHAR}");
-        }
-        
         if (record.getCreateTime() != null) {
             sql.VALUES("create_time", "#{createTime,jdbcType=TIMESTAMP}");
         }
         
         if (record.getUpdateTime() != null) {
             sql.VALUES("update_time", "#{updateTime,jdbcType=TIMESTAMP}");
-        }
-        
-        if (record.getBatch() != null) {
-            sql.VALUES("batch", "#{batch,jdbcType=INTEGER}");
-        }
-        
-        if (record.getGiftBag() != null) {
-            sql.VALUES("gift_bag", "#{giftBag,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getNumber() != null) {
-            sql.VALUES("`number`", "#{number,jdbcType=INTEGER}");
-        }
-        
-        if (record.getFrequency() != null) {
-            sql.VALUES("frequency", "#{frequency,jdbcType=INTEGER}");
         }
         
         if (record.getInvalidTime() != null) {
@@ -84,12 +56,40 @@ public class ActivationCodeEntitySqlProvider {
             sql.VALUES("overdue_time", "#{overdueTime,jdbcType=VARCHAR}");
         }
         
-        if (record.getSynchronizationTime() != null) {
-            sql.VALUES("synchronization_time", "#{synchronizationTime,jdbcType=TIMESTAMP}");
+        if (record.getRemarks() != null) {
+            sql.VALUES("remarks", "#{remarks,jdbcType=INTEGER}");
         }
         
-        if (record.getSynchronizationLog() != null) {
-            sql.VALUES("synchronization_log", "#{synchronizationLog,jdbcType=VARCHAR}");
+        if (record.getUniversal() != null) {
+            sql.VALUES("universal", "#{universal,jdbcType=INTEGER}");
+        }
+        
+        if (record.getUseTime() != null) {
+            sql.VALUES("use_time", "#{useTime,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getUsePlayerId() != null) {
+            sql.VALUES("use_player_id", "#{usePlayerId,jdbcType=INTEGER}");
+        }
+        
+        if (record.getUsePlayerName() != null) {
+            sql.VALUES("use_player_name", "#{usePlayerName,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getUsePlayerAccount() != null) {
+            sql.VALUES("use_player_account", "#{usePlayerAccount,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getUseServerId() != null) {
+            sql.VALUES("use_server_id", "#{useServerId,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getName() != null) {
+            sql.VALUES("`name`", "#{name,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getRewards() != null) {
+            sql.VALUES("rewards", "#{rewards,jdbcType=VARCHAR}");
         }
         
         return sql.toString();
@@ -104,19 +104,19 @@ public class ActivationCodeEntitySqlProvider {
         }
         sql.SELECT("`status`");
         sql.SELECT("server_id");
-        sql.SELECT("`server_name`");
-        sql.SELECT("channel_id");
-        sql.SELECT("channel_name");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
-        sql.SELECT("batch");
-        sql.SELECT("gift_bag");
-        sql.SELECT("`number`");
-        sql.SELECT("frequency");
         sql.SELECT("invalid_time");
         sql.SELECT("overdue_time");
-        sql.SELECT("synchronization_time");
-        sql.SELECT("synchronization_log");
+        sql.SELECT("remarks");
+        sql.SELECT("universal");
+        sql.SELECT("use_time");
+        sql.SELECT("use_player_id");
+        sql.SELECT("use_player_name");
+        sql.SELECT("use_player_account");
+        sql.SELECT("use_server_id");
+        sql.SELECT("`name`");
+        sql.SELECT("rewards");
         sql.FROM("activation_code");
         applyWhere(sql, example, false);
         
@@ -146,40 +146,12 @@ public class ActivationCodeEntitySqlProvider {
             sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
         }
         
-        if (record.getServerName() != null) {
-            sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getChannelId() != null) {
-            sql.SET("channel_id = #{record.channelId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getChannelName() != null) {
-            sql.SET("channel_name = #{record.channelName,jdbcType=VARCHAR}");
-        }
-        
         if (record.getCreateTime() != null) {
             sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         }
         
         if (record.getUpdateTime() != null) {
             sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
-        }
-        
-        if (record.getBatch() != null) {
-            sql.SET("batch = #{record.batch,jdbcType=INTEGER}");
-        }
-        
-        if (record.getGiftBag() != null) {
-            sql.SET("gift_bag = #{record.giftBag,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getNumber() != null) {
-            sql.SET("`number` = #{record.number,jdbcType=INTEGER}");
-        }
-        
-        if (record.getFrequency() != null) {
-            sql.SET("frequency = #{record.frequency,jdbcType=INTEGER}");
         }
         
         if (record.getInvalidTime() != null) {
@@ -190,12 +162,40 @@ public class ActivationCodeEntitySqlProvider {
             sql.SET("overdue_time = #{record.overdueTime,jdbcType=VARCHAR}");
         }
         
-        if (record.getSynchronizationTime() != null) {
-            sql.SET("synchronization_time = #{record.synchronizationTime,jdbcType=TIMESTAMP}");
+        if (record.getRemarks() != null) {
+            sql.SET("remarks = #{record.remarks,jdbcType=INTEGER}");
         }
         
-        if (record.getSynchronizationLog() != null) {
-            sql.SET("synchronization_log = #{record.synchronizationLog,jdbcType=VARCHAR}");
+        if (record.getUniversal() != null) {
+            sql.SET("universal = #{record.universal,jdbcType=INTEGER}");
+        }
+        
+        if (record.getUseTime() != null) {
+            sql.SET("use_time = #{record.useTime,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getUsePlayerId() != null) {
+            sql.SET("use_player_id = #{record.usePlayerId,jdbcType=INTEGER}");
+        }
+        
+        if (record.getUsePlayerName() != null) {
+            sql.SET("use_player_name = #{record.usePlayerName,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getUsePlayerAccount() != null) {
+            sql.SET("use_player_account = #{record.usePlayerAccount,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getUseServerId() != null) {
+            sql.SET("use_server_id = #{record.useServerId,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getName() != null) {
+            sql.SET("`name` = #{record.name,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getRewards() != null) {
+            sql.SET("rewards = #{record.rewards,jdbcType=VARCHAR}");
         }
         
         applyWhere(sql, example, true);
@@ -209,19 +209,19 @@ public class ActivationCodeEntitySqlProvider {
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
-        sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");
-        sql.SET("channel_id = #{record.channelId,jdbcType=BIGINT}");
-        sql.SET("channel_name = #{record.channelName,jdbcType=VARCHAR}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
-        sql.SET("batch = #{record.batch,jdbcType=INTEGER}");
-        sql.SET("gift_bag = #{record.giftBag,jdbcType=VARCHAR}");
-        sql.SET("`number` = #{record.number,jdbcType=INTEGER}");
-        sql.SET("frequency = #{record.frequency,jdbcType=INTEGER}");
         sql.SET("invalid_time = #{record.invalidTime,jdbcType=VARCHAR}");
         sql.SET("overdue_time = #{record.overdueTime,jdbcType=VARCHAR}");
-        sql.SET("synchronization_time = #{record.synchronizationTime,jdbcType=TIMESTAMP}");
-        sql.SET("synchronization_log = #{record.synchronizationLog,jdbcType=VARCHAR}");
+        sql.SET("remarks = #{record.remarks,jdbcType=INTEGER}");
+        sql.SET("universal = #{record.universal,jdbcType=INTEGER}");
+        sql.SET("use_time = #{record.useTime,jdbcType=VARCHAR}");
+        sql.SET("use_player_id = #{record.usePlayerId,jdbcType=INTEGER}");
+        sql.SET("use_player_name = #{record.usePlayerName,jdbcType=VARCHAR}");
+        sql.SET("use_player_account = #{record.usePlayerAccount,jdbcType=VARCHAR}");
+        sql.SET("use_server_id = #{record.useServerId,jdbcType=VARCHAR}");
+        sql.SET("`name` = #{record.name,jdbcType=VARCHAR}");
+        sql.SET("rewards = #{record.rewards,jdbcType=VARCHAR}");
         
         ActivationCodeEntityExample example = (ActivationCodeEntityExample) parameter.get("example");
         applyWhere(sql, example, true);

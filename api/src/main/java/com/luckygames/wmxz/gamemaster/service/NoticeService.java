@@ -12,4 +12,6 @@ public interface NoticeService extends BaseService<NoticeEntity> {
     void  deleteById(Long id);
 
     Notice searchById(Long id);
+
+    Notice searchLast();
 }

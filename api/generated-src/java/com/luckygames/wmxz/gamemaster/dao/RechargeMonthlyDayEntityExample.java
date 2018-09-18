@@ -446,7 +446,6 @@ public class RechargeMonthlyDayEntityExample {
             addCriterion("create_time <=", value, "createTime");
             return (Criteria) this;
         }
-
         public Criteria andCreateTimeIn(List<Date> values) {
             addCriterion("create_time in", values, "createTime");
             return (Criteria) this;

@@ -1,7 +1,6 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
 import com.luckygames.wmxz.gamemaster.model.entity.base.BaseEntity;
-import java.util.Date;
 import javax.persistence.Table;
 
 @Table(name="server")
@@ -10,15 +9,31 @@ public class ServerEntity extends BaseEntity {
 
     private String serverName;
 
-    private Date openDate;
+    private Integer serverState;
 
-    private String serverType;
+    private Integer showNumber;
+
+    private Integer label;
 
     private String ip;
 
     private Integer port;
 
-    private Integer serverState;
+    private String payAddress;
+
+    private String openTime;
+
+    private String closeTime;
+
+    private String remarks;
+
+    private Integer whiteListEnable;
+
+    private String maintenanceTips;
+
+    private Integer gmPort;
+
+    private String whiteList;
 
     public Long getServerId() {
         return serverId;
@@ -36,20 +51,28 @@ public class ServerEntity extends BaseEntity {
         this.serverName = serverName == null ? null : serverName.trim();
     }
 
-    public Date getOpenDate() {
-        return openDate;
+    public Integer getServerState() {
+        return serverState;
     }
 
-    public void setOpenDate(Date openDate) {
-        this.openDate = openDate;
+    public void setServerState(Integer serverState) {
+        this.serverState = serverState;
     }
 
-    public String getServerType() {
-        return serverType;
+    public Integer getShowNumber() {
+        return showNumber;
     }
 
-    public void setServerType(String serverType) {
-        this.serverType = serverType == null ? null : serverType.trim();
+    public void setShowNumber(Integer showNumber) {
+        this.showNumber = showNumber;
+    }
+
+    public Integer getLabel() {
+        return label;
+    }
+
+    public void setLabel(Integer label) {
+        this.label = label;
     }
 
     public String getIp() {
@@ -68,11 +91,67 @@ public class ServerEntity extends BaseEntity {
         this.port = port;
     }
 
-    public Integer getServerState() {
-        return serverState;
+    public String getPayAddress() {
+        return payAddress;
     }
 
-    public void setServerState(Integer serverState) {
-        this.serverState = serverState;
+    public void setPayAddress(String payAddress) {
+        this.payAddress = payAddress == null ? null : payAddress.trim();
+    }
+
+    public String getOpenTime() {
+        return openTime;
+    }
+
+    public void setOpenTime(String openTime) {
+        this.openTime = openTime == null ? null : openTime.trim();
+    }
+
+    public String getCloseTime() {
+        return closeTime;
+    }
+
+    public void setCloseTime(String closeTime) {
+        this.closeTime = closeTime == null ? null : closeTime.trim();
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks == null ? null : remarks.trim();
+    }
+
+    public Integer getWhiteListEnable() {
+        return whiteListEnable;
+    }
+
+    public void setWhiteListEnable(Integer whiteListEnable) {
+        this.whiteListEnable = whiteListEnable;
+    }
+
+    public String getMaintenanceTips() {
+        return maintenanceTips;
+    }
+
+    public void setMaintenanceTips(String maintenanceTips) {
+        this.maintenanceTips = maintenanceTips == null ? null : maintenanceTips.trim();
+    }
+
+    public Integer getGmPort() {
+        return gmPort;
+    }
+
+    public void setGmPort(Integer gmPort) {
+        this.gmPort = gmPort;
+    }
+
+    public String getWhiteList() {
+        return whiteList;
+    }
+
+    public void setWhiteList(String whiteList) {
+        this.whiteList = whiteList == null ? null : whiteList.trim();
     }
 }

@@ -65,55 +65,55 @@ public class CommonController extends BaseController {
 //                }
 //            });
 //        }
-        List<Server> serverList = serverService.searchList();
-        Server server;
-        if(query.getServerId()!=null){
-            server=serverService.getByServerId(query.getServerId());
-        }else{
-            server = serverList.get(0);
-        }
-        if (CollectionUtils.isNotEmpty(serverList)) {
+//        List<Server> serverList = serverService.searchList();
+//        Server server;
+//        if(query.getServerId()!=null){
+//            server=serverService.getByServerId(query.getServerId());
+//        }else{
+//            server = serverList.get(0);
+//        }
+//        if (CollectionUtils.isNotEmpty(serverList)) {
 //            server.setOpenDays((int) DateUtils.gapDays(server.getOpenTime(), DateUtils.Now()));
-            server.setCharCount((int) playerCharacterService.countCharaters(server.getServerId()));
-            server.setOnlineCount((int) onlineNowService.countOnlineNow(server.getServerId()));
-            server.setActiveCount((int) onlineNowService.countOnlineNow(server.getServerId(), 30 * 60));
-            BigDecimal rechargeAmount = playerOrderService.sumRechargeAmount(server.getServerId());
-            if (rechargeAmount != null) {
-                server.setRechargeAmount(rechargeAmount);
-            }
-            Integer rechargeCount = playerOrderService.countRechargeCount(server.getServerId());
-            if (rechargeCount != null) {
-                server.setRechargeCount(rechargeCount);
-            }
-            if (rechargeAmount != null && rechargeCount != null && rechargeCount >= 0) {
-                server.setArpu(rechargeAmount.divide(BigDecimal.valueOf(rechargeCount), 2, BigDecimal.ROUND_HALF_UP));
-            }
+//            server.setCharCount((int) playerCharacterService.countCharaters(server.getServerId()));
+//            server.setOnlineCount((int) onlineNowService.countOnlineNow(server.getServerId()));
+//            server.setActiveCount((int) onlineNowService.countOnlineNow(server.getServerId(), 30 * 60));
+//            BigDecimal rechargeAmount = playerOrderService.sumRechargeAmount(server.getServerId());
+//            if (rechargeAmount != null) {
+//                server.setRechargeAmount(rechargeAmount);
+//            }
+//            Integer rechargeCount = playerOrderService.countRechargeCount(server.getServerId());
+//            if (rechargeCount != null) {
+//                server.setRechargeCount(rechargeCount);
+//            }
+//            if (rechargeAmount != null && rechargeCount != null && rechargeCount >= 0) {
+//                server.setArpu(rechargeAmount.divide(BigDecimal.valueOf(rechargeCount), 2, BigDecimal.ROUND_HALF_UP));
+//            }
 
-            Map<String, List<ChannelBag>> channelListMap=new HashMap<>();
-            List<Channel> channelList = channelService.searchListByServerId(server.getServerId());
-            if(query.getChannelId()!=null){
-                Channel channel = channelService.getByChannelId(query.getChannelId());
-                for(Channel channelTemp:channelList){
-                    if(channel.getId()==channelTemp.getId()){
-                        List<ChannelBag> ChannelBagList = channelBagService.searchPageByChannelId(channel.getChannelId());
-                        channelListMap.put(channel.getChannelName(),ChannelBagList);
-                        break;
-                    }
-                }
-            }else{
-                for(Channel channel:channelList){
-                    List<ChannelBag> ChannelBagList = channelBagService.searchPageByChannelId(channel.getChannelId());
-                    channelListMap.put(channel.getChannelName(),ChannelBagList);
-                }
-            }
-            server.setChannelListMap(channelListMap);
-        }
+//            Map<String, List<ChannelBag>> channelListMap=new HashMap<>();
+//            List<Channel> channelList = channelService.searchListByServerId(server.getServerId());
+//            if(query.getChannelId()!=null){
+//                Channel channel = channelService.getByChannelId(query.getChannelId());
+//                for(Channel channelTemp:channelList){
+//                    if(channel.getId()==channelTemp.getId()){
+//                        List<ChannelBag> ChannelBagList = channelBagService.searchPageByChannelId(channel.getChannelId());
+//                        channelListMap.put(channel.getChannelName(),ChannelBagList);
+//                        break;
+//                    }
+//                }
+//            }else{
+//                for(Channel channel:channelList){
+//                    List<ChannelBag> ChannelBagList = channelBagService.searchPageByChannelId(channel.getChannelId());
+//                    channelListMap.put(channel.getChannelName(),ChannelBagList);
+//                }
+//            }
+//            server.setChannelListMap(channelListMap);
+//        }
 
-        List<Channel> channelList = channelService.searchList();
+//        List<Channel> channelList = channelService.searchList();
         return new Response("index")
-                .request(query)
-                .data("server", server)
-                .data("serverList", serverList)
-                .data("channelList", channelList);
+                .request(query);
+//                .data("server", server)
+//                .data("serverList", serverList)
+//                .data("channelList", channelList);
     }
 }

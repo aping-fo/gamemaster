@@ -12,9 +12,12 @@ import org.apache.ibatis.annotations.SelectProvider;
 import java.util.List;
 
 public interface NoticeMapper extends BroadcastEntityMapper<NoticeEntity> {
-    @SelectProvider(type = NoticeSqlProvider.class, method = "queryNotice")
+    @SelectProvider(type = NoticeSqlProvider.class, method = "searchPage")
     List<Notice> searchPage(NoticeSearchQuery query);
 
     @Select("select * from notice where id = #{id}")
     Notice selectById(@Param("id") Long id);
+
+    @Select("SELECT * from notice where enable=1 order by update_time desc LIMIT 1")
+    Notice searchLast();
 }

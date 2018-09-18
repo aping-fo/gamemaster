@@ -32,30 +32,6 @@ public class ServerEntitySqlProvider {
             sql.VALUES("id", "#{id,jdbcType=BIGINT}");
         }
         
-        if (record.getServerId() != null) {
-            sql.VALUES("server_id", "#{serverId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getServerName() != null) {
-            sql.VALUES("`server_name`", "#{serverName,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getOpenDate() != null) {
-            sql.VALUES("open_date", "#{openDate,jdbcType=TIMESTAMP}");
-        }
-        
-        if (record.getServerType() != null) {
-            sql.VALUES("server_type", "#{serverType,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getIp() != null) {
-            sql.VALUES("ip", "#{ip,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getPort() != null) {
-            sql.VALUES("port", "#{port,jdbcType=INTEGER}");
-        }
-        
         if (record.getStatus() != null) {
             sql.VALUES("`status`", "#{status,jdbcType=INTEGER}");
         }
@@ -68,8 +44,99 @@ public class ServerEntitySqlProvider {
             sql.VALUES("update_time", "#{updateTime,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getServerId() != null) {
+            sql.VALUES("server_id", "#{serverId,jdbcType=BIGINT}");
+        }
+        
+        if (record.getServerName() != null) {
+            sql.VALUES("`server_name`", "#{serverName,jdbcType=VARCHAR}");
+        }
+        
         if (record.getServerState() != null) {
             sql.VALUES("server_state", "#{serverState,jdbcType=INTEGER}");
+        }
+        
+        if (record.getShowNumber() != null) {
+            sql.VALUES("show_number", "#{showNumber,jdbcType=INTEGER}");
+        }
+        
+        if (record.getLabel() != null) {
+            sql.VALUES("`label`", "#{label,jdbcType=INTEGER}");
+        }
+        
+        if (record.getIp() != null) {
+            sql.VALUES("ip", "#{ip,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getPort() != null) {
+            sql.VALUES("port", "#{port,jdbcType=INTEGER}");
+        }
+        
+        if (record.getPayAddress() != null) {
+            sql.VALUES("pay_address", "#{payAddress,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getOpenTime() != null) {
+            sql.VALUES("open_time", "#{openTime,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getCloseTime() != null) {
+            sql.VALUES("close_time", "#{closeTime,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getRemarks() != null) {
+            sql.VALUES("remarks", "#{remarks,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getWhiteListEnable() != null) {
+            sql.VALUES("white_list_enable", "#{whiteListEnable,jdbcType=INTEGER}");
+        }
+        
+        if (record.getMaintenanceTips() != null) {
+            sql.VALUES("maintenance_tips", "#{maintenanceTips,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getGmPort() != null) {
+            sql.VALUES("gm_port", "#{gmPort,jdbcType=INTEGER}");
+        }
+        
+        if (record.getWhiteList() != null) {
+            sql.VALUES("white_list", "#{whiteList,jdbcType=LONGVARCHAR}");
+        }
+        
+        return sql.toString();
+    }
+
+    public String selectByExampleWithBLOBs(ServerEntityExample example) {
+        SQL sql = new SQL();
+        if (example != null && example.isDistinct()) {
+            sql.SELECT_DISTINCT("id");
+        } else {
+            sql.SELECT("id");
+        }
+        sql.SELECT("`status`");
+        sql.SELECT("create_time");
+        sql.SELECT("update_time");
+        sql.SELECT("server_id");
+        sql.SELECT("`server_name`");
+        sql.SELECT("server_state");
+        sql.SELECT("show_number");
+        sql.SELECT("`label`");
+        sql.SELECT("ip");
+        sql.SELECT("port");
+        sql.SELECT("pay_address");
+        sql.SELECT("open_time");
+        sql.SELECT("close_time");
+        sql.SELECT("remarks");
+        sql.SELECT("white_list_enable");
+        sql.SELECT("maintenance_tips");
+        sql.SELECT("gm_port");
+        sql.SELECT("white_list");
+        sql.FROM("server");
+        applyWhere(sql, example, false);
+        
+        if (example != null && example.getOrderByClause() != null) {
+            sql.ORDER_BY(example.getOrderByClause());
         }
         
         return sql.toString();
@@ -82,16 +149,23 @@ public class ServerEntitySqlProvider {
         } else {
             sql.SELECT("id");
         }
-        sql.SELECT("server_id");
-        sql.SELECT("`server_name`");
-        sql.SELECT("open_date");
-        sql.SELECT("server_type");
-        sql.SELECT("ip");
-        sql.SELECT("port");
         sql.SELECT("`status`");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
+        sql.SELECT("server_id");
+        sql.SELECT("`server_name`");
         sql.SELECT("server_state");
+        sql.SELECT("show_number");
+        sql.SELECT("`label`");
+        sql.SELECT("ip");
+        sql.SELECT("port");
+        sql.SELECT("pay_address");
+        sql.SELECT("open_time");
+        sql.SELECT("close_time");
+        sql.SELECT("remarks");
+        sql.SELECT("white_list_enable");
+        sql.SELECT("maintenance_tips");
+        sql.SELECT("gm_port");
         sql.FROM("server");
         applyWhere(sql, example, false);
         
@@ -113,30 +187,6 @@ public class ServerEntitySqlProvider {
             sql.SET("id = #{record.id,jdbcType=BIGINT}");
         }
         
-        if (record.getServerId() != null) {
-            sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getServerName() != null) {
-            sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getOpenDate() != null) {
-            sql.SET("open_date = #{record.openDate,jdbcType=TIMESTAMP}");
-        }
-        
-        if (record.getServerType() != null) {
-            sql.SET("server_type = #{record.serverType,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getIp() != null) {
-            sql.SET("ip = #{record.ip,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getPort() != null) {
-            sql.SET("port = #{record.port,jdbcType=INTEGER}");
-        }
-        
         if (record.getStatus() != null) {
             sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         }
@@ -149,10 +199,95 @@ public class ServerEntitySqlProvider {
             sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getServerId() != null) {
+            sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
+        }
+        
+        if (record.getServerName() != null) {
+            sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");
+        }
+        
         if (record.getServerState() != null) {
             sql.SET("server_state = #{record.serverState,jdbcType=INTEGER}");
         }
         
+        if (record.getShowNumber() != null) {
+            sql.SET("show_number = #{record.showNumber,jdbcType=INTEGER}");
+        }
+        
+        if (record.getLabel() != null) {
+            sql.SET("`label` = #{record.label,jdbcType=INTEGER}");
+        }
+        
+        if (record.getIp() != null) {
+            sql.SET("ip = #{record.ip,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getPort() != null) {
+            sql.SET("port = #{record.port,jdbcType=INTEGER}");
+        }
+        
+        if (record.getPayAddress() != null) {
+            sql.SET("pay_address = #{record.payAddress,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getOpenTime() != null) {
+            sql.SET("open_time = #{record.openTime,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getCloseTime() != null) {
+            sql.SET("close_time = #{record.closeTime,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getRemarks() != null) {
+            sql.SET("remarks = #{record.remarks,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getWhiteListEnable() != null) {
+            sql.SET("white_list_enable = #{record.whiteListEnable,jdbcType=INTEGER}");
+        }
+        
+        if (record.getMaintenanceTips() != null) {
+            sql.SET("maintenance_tips = #{record.maintenanceTips,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getGmPort() != null) {
+            sql.SET("gm_port = #{record.gmPort,jdbcType=INTEGER}");
+        }
+        
+        if (record.getWhiteList() != null) {
+            sql.SET("white_list = #{record.whiteList,jdbcType=LONGVARCHAR}");
+        }
+        
+        applyWhere(sql, example, true);
+        return sql.toString();
+    }
+
+    public String updateByExampleWithBLOBs(Map<String, Object> parameter) {
+        SQL sql = new SQL();
+        sql.UPDATE("server");
+        
+        sql.SET("id = #{record.id,jdbcType=BIGINT}");
+        sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
+        sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
+        sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
+        sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
+        sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");
+        sql.SET("server_state = #{record.serverState,jdbcType=INTEGER}");
+        sql.SET("show_number = #{record.showNumber,jdbcType=INTEGER}");
+        sql.SET("`label` = #{record.label,jdbcType=INTEGER}");
+        sql.SET("ip = #{record.ip,jdbcType=VARCHAR}");
+        sql.SET("port = #{record.port,jdbcType=INTEGER}");
+        sql.SET("pay_address = #{record.payAddress,jdbcType=VARCHAR}");
+        sql.SET("open_time = #{record.openTime,jdbcType=VARCHAR}");
+        sql.SET("close_time = #{record.closeTime,jdbcType=VARCHAR}");
+        sql.SET("remarks = #{record.remarks,jdbcType=VARCHAR}");
+        sql.SET("white_list_enable = #{record.whiteListEnable,jdbcType=INTEGER}");
+        sql.SET("maintenance_tips = #{record.maintenanceTips,jdbcType=VARCHAR}");
+        sql.SET("gm_port = #{record.gmPort,jdbcType=INTEGER}");
+        sql.SET("white_list = #{record.whiteList,jdbcType=LONGVARCHAR}");
+        
+        ServerEntityExample example = (ServerEntityExample) parameter.get("example");
         applyWhere(sql, example, true);
         return sql.toString();
     }
@@ -162,16 +297,23 @@ public class ServerEntitySqlProvider {
         sql.UPDATE("server");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
-        sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
-        sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");
-        sql.SET("open_date = #{record.openDate,jdbcType=TIMESTAMP}");
-        sql.SET("server_type = #{record.serverType,jdbcType=VARCHAR}");
-        sql.SET("ip = #{record.ip,jdbcType=VARCHAR}");
-        sql.SET("port = #{record.port,jdbcType=INTEGER}");
         sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
+        sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
+        sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");
         sql.SET("server_state = #{record.serverState,jdbcType=INTEGER}");
+        sql.SET("show_number = #{record.showNumber,jdbcType=INTEGER}");
+        sql.SET("`label` = #{record.label,jdbcType=INTEGER}");
+        sql.SET("ip = #{record.ip,jdbcType=VARCHAR}");
+        sql.SET("port = #{record.port,jdbcType=INTEGER}");
+        sql.SET("pay_address = #{record.payAddress,jdbcType=VARCHAR}");
+        sql.SET("open_time = #{record.openTime,jdbcType=VARCHAR}");
+        sql.SET("close_time = #{record.closeTime,jdbcType=VARCHAR}");
+        sql.SET("remarks = #{record.remarks,jdbcType=VARCHAR}");
+        sql.SET("white_list_enable = #{record.whiteListEnable,jdbcType=INTEGER}");
+        sql.SET("maintenance_tips = #{record.maintenanceTips,jdbcType=VARCHAR}");
+        sql.SET("gm_port = #{record.gmPort,jdbcType=INTEGER}");
         
         ServerEntityExample example = (ServerEntityExample) parameter.get("example");
         applyWhere(sql, example, true);

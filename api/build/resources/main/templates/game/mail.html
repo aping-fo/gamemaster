@@ -1,9 +1,17 @@
 <div class="pageHeader">
-    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="game/mail" method="post"
+    <form id="pagerForm" onsubmit="return closeNavTab(this);" action="game/mail" method="post"
           onreset="$(this).find('select.combox').comboxReset()">
         <div class="searchBar">
             <table class="searchContent">
                 <tr>
+                    <td>
+                        <div>
+                            <div class="buttonContent">
+                                <a class="button" href="server/select"
+                                   rel="serverselect" mask="true" lookupGroup=""><span>区服筛选</span></a>
+                            </div>
+                        </div>
+                    </td>
                     <td>
                         <label>邮件类型</label>
                         <select name="mailType" class="combox">
@@ -13,31 +21,45 @@
                             <option value="CHAR" th:selected="${request.mailType=='CHAR'}">角色群发</option>
                         </select>
                     </td>
+                    <td class="dateRange">
+                        日期:
+                        <input name="startDate" class="date readonly" readonly="readonly" type="text" value=""
+                               th:value="${request.startDate}">
+                        <span class="limit">-</span>
+                        <input name="endDate" class="date readonly" readonly="readonly" type="text" value=""
+                               th:value="${request.endDate}">
+                    </td>
+                    <td>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">检索</button>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             </table>
         </div>
-        <div th:replace="_include/searchBar"></div>
     </form>
 </div>
 <div class="pageContent">
-    <div class="panelBar">
+    <div class="panelBar" style="height:30px">
         <ul class="toolBar">
             <li>
                 <a title="发送邮件" class="edit" href="game/dialog_newmail"
-                   target="dialog" width="480" height="500"
-                   mask="true"><span>发送邮件</span></a>
+                   target="dialog" width="480" height="550"
+                   mask="true"><span style="font-size: 20px">发送邮件</span></a>
             </li>
         </ul>
     </div>
-    <table class="table" layoutH="137">
+    <table class="table" layoutH="137" width="100%">
         <thead>
         <tr>
-            <th width="80">区服</th>
-            <th width="100">邮件类型</th>
-            <th width="120">标题</th>
-            <th width="300">内容</th>
-            <th width="120">发送时间</th>
-            <th width="100">操作</th>
+            <th width="5%" align="center">服务器</th>
+            <th width="5%" align="center">类型</th>
+            <th width="5%">标题</th>
+            <th width="75%">内容</th>
+            <th width="10%" align="center">发送时间</th>
+            <!--<th width="100">操作</th>-->
         </tr>
         </thead>
         <tbody>
@@ -47,7 +69,7 @@
             <td th:text="${row.title}"></td>
             <td th:text="${row.content}"></td>
             <td th:text="${#dates.format(row.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-            <td></td>
+            <!--<td></td>-->
         </tr>
         </tbody>
     </table>

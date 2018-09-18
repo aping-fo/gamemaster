@@ -1,0 +1,126 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="simulationRecharge/create" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>
+                        <select name="searchKey" class="combox">
+                            <option value="1" th:selected="(${request.searchKey} == 1)">角色名</option>
+                            <option value="2" th:selected="(${request.searchKey} == 2)">账号</option>
+                            <option value="3" th:selected="(${request.searchKey} == 3)">角色ID</option>
+                        </select>
+                        <input name="keyword" th:value="${request.keyword}"/>
+                    </td>
+                    <td>
+                        <select name="sex" class="combox">
+                            <option value="">-性别-</option>
+                            <option value="1" th:selected="(${request.sex}=='1')">男</option>
+                            <option value="2" th:selected="(${request.sex}=='2')">女</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div th:replace="_include/searchBar"></div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" layoutH="1000" width="100%" >
+        <thead>
+        <tr>
+            <th width="120">账号</th>
+            <th width="120">角色名</th>
+            <th width="120">职业</th>
+            <th width="120">性别</th>
+            <th width="80" align="right">角色等级</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${characters}">
+            <td th:text="${row.username}"></td>
+            <td th:text="${row.charName}"></td>
+            <td th:if="${row.job} eq'1'" th:text="战士"></td>
+            <td th:if="${row.job} eq'2'" th:text="刺客"></td>
+            <td th:if="${row.job} eq'3'" th:text="法师"></td>
+            <td th:if="${row.sex} eq'1'" th:text="男"></td>
+            <td th:if="${row.sex} eq'2'" th:text="女"></td>
+            <td th:text="${row.level}"></td>
+        </tr>
+        </tbody>
+
+    </table>
+
+</div>
+<div class="pageHeader">
+    <form id="creatForm" onsubmit="return navTabSearch(this);" action="simulationRecharge/createNew" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div class="pageFormContent"  layoutH="57"  width="100%" >
+            <table class="searchContent">
+                <tr>
+                    <td>角色名称:</td>
+                    <td><input name="userName" type="text"></td>
+                </tr>
+
+                <tr>
+                    <td>角色ID:</td>
+                    <td><input name="playerId" type="text"></td>
+                </tr>
+
+                <tr>
+                    <td>充值元宝:</td>
+                    <td><input name="amount" type="text"></td>
+                </tr>
+
+                <tr>
+                    <td>类型选择:</td>
+                    <td>
+                        <select name="type">
+                            <option value="0">模拟</option>
+                            <option value="1">月卡</option>
+                            <option value="2">发送元宝</option>
+                            <option value="3">每日购买道具(运营活动)</option>
+                            <option value="4">每日购买礼包(内置)</option>
+                            <option value="5">限时购买(运营活动)</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button id="submit2" type="submit">创建</button></td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    function changeHref(charId) {
+        var href = $('#player a')
+        href.eq(0).attr("href","player/info_playerList?charId="+charId)
+        href.eq(1).attr("href","player/info_baseInformation?charId="+charId)
+        href.eq(2).attr("href","player/info_equipment_flow?charId="+charId)
+    }
+    function changeHref2() {
+        var href = $('#player a')
+        var charId = $('#player input').val()
+        href.eq(0).attr("href","player/info_playerList?charId="+charId)
+        href.eq(1).attr("href","player/info_baseInformation?charId="+charId)
+        href.eq(2).attr("href","player/info_equipment_flow?charId="+charId)
+    }
+    changeHref2()
+    function batchBanDialog() {
+        var selectIds = $.getSelectedIds("ids");
+        alert(selectIds);
+        var url = "player/dialog_ban";
+        url += "?charIds=" + selectIds;
+        url += "&opType=FORBIDDEN";
+        $.pdialog.open(url, 'batchBan', '批量封禁', {mask: true});
+    }
+     $('#submit').click(function () {
+        var name=$('input[name=userName]').val();
+        var id=$('input[name=playerId]').val();
+        var amount=$('input[name=amount]').val();
+        $.post("simulationRecharge/createNew","userName="+name+"&playerId="+id+"&amount="+amount+"&serverId="+"1"+"&serverName="+"1"+"&type="+"1");
+    })
+</script>

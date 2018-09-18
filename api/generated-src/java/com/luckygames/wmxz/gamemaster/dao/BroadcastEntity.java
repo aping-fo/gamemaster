@@ -1,8 +1,6 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
 import com.luckygames.wmxz.gamemaster.model.entity.base.BaseEntity;
-import com.luckygames.wmxz.gamemaster.model.enums.BroadcastStatus;
-import com.luckygames.wmxz.gamemaster.model.enums.BroadcastType;
 import java.util.Date;
 import javax.persistence.Table;
 
@@ -12,7 +10,7 @@ public class BroadcastEntity extends BaseEntity {
 
     private Long serverId;
 
-    private BroadcastType broadcastType;
+    private Integer broadcastType;
 
     private Integer loopTimes;
 
@@ -24,7 +22,9 @@ public class BroadcastEntity extends BaseEntity {
 
     private String content;
 
-    private BroadcastStatus broadcastStatus;
+    private Integer broadcastStatus;
+
+    private String reason;
 
     public Long getChannelId() {
         return channelId;
@@ -42,11 +42,11 @@ public class BroadcastEntity extends BaseEntity {
         this.serverId = serverId;
     }
 
-    public BroadcastType getBroadcastType() {
+    public Integer getBroadcastType() {
         return broadcastType;
     }
 
-    public void setBroadcastType(BroadcastType broadcastType) {
+    public void setBroadcastType(Integer broadcastType) {
         this.broadcastType = broadcastType;
     }
 
@@ -90,11 +90,19 @@ public class BroadcastEntity extends BaseEntity {
         this.content = content == null ? null : content.trim();
     }
 
-    public BroadcastStatus getBroadcastStatus() {
+    public Integer getBroadcastStatus() {
         return broadcastStatus;
     }
 
-    public void setBroadcastStatus(BroadcastStatus broadcastStatus) {
+    public void setBroadcastStatus(Integer broadcastStatus) {
         this.broadcastStatus = broadcastStatus;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason == null ? null : reason.trim();
     }
 }

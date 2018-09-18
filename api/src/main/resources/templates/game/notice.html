@@ -1,32 +1,69 @@
 <div xmlns:th="http://www.w3.org/1999/xhtml" class="pageHeader">
-    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="game/notice" method="post" onreset="$(this).find('select.combox').comboxReset()">
+    <form id="pagerForm" onsubmit="return ajaxNavTab(this);" action="game/notice" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
         <div class="searchBar">
             <table class="searchContent">
                 <tr>
-                    <td>渠道：</td>
+                    <td>公告状态：</td>
                     <td>
-                        <select name="channelId">
-                            <option th:each="row,iterStat:${channelList}" th:selected="${row.channelId==notice.channelId}" th:text="${row.channelName}" th:value="${row.channelId}"></option>
+                        <select name="enable">
+                            <option value="1" th:selected="${notice.enable==1}">显示</option>
+                            <option value="0" th:selected="${notice.enable==0}">隐藏</option>
                         </select>
+                    </td>
+                    <td>标题：</td>
+                    <td><input name="title" type="text" th:value="${notice.title}" class="required"/></td>
+                    <td>有效时间：</td>
+                    <td>
+                        <input dateFmt="yyyy-MM-dd HH:mm:ss" name="startTime" class="date readonly" readonly="readonly"
+                               type="text" th:value="${notice.startTime}">
+                        <span class="limit">-</span>
+                        <input dateFmt="yyyy-MM-dd HH:mm:ss" name="endTime" class="date readonly" readonly="readonly"
+                               type="text" th:value="${notice.endTime}">
+                    </td>
+                    <td><input type="button" value="预览" id="preview"></td>
+                    <td th:if="${notice.id==null}">
+                        <input type="submit" value="提交">
+                        <input name="type" type="hidden" value="add">
+                    </td>
+                    <td th:if="${notice.id!=null}">
+                        <input type="submit" value="更新">
+                        <input name="type" type="hidden" value="update">
+                        <input name="id" type="hidden" th:value="${notice.id}">
                     </td>
                 </tr>
                 <tr>
-                    <td>标题：</td>
-                    <td><input name="title" type="text" th:value="${notice.title}"/></td>
-                </tr>
-                <tr>
                     <td>内容：</td>
-                    <td><textarea name="content" cols="30" rows="10" style="resize:none;" th:text="${notice.content}"></textarea></td>
+                    <td colspan="3"><textarea id="content" name="content" cols="43" rows="20" style="resize:none;"
+                                              th:text="${notice.content}" class="required"></textarea></td>
+                    <td>预览：</td>
+                    <td colspan="2"><textarea id="previewView" name="content"
+                                              style="resize:none;width: 980px;height: 360px;font-size: 24px;line-height:120%" readonly="readonly"></textarea>
+                    </td>
                 </tr>
-                <td th:if="${notice.id==null}">
-                    <input type="submit" value="提交">
-                    <input name="type" type="hidden" value="add">
-                </td>
-                <td th:if="${notice.id!=null}">
-                    <input type="submit" value="更新">
-                    <input name="type" type="hidden" value="update">
-                    <input name="id" type="hidden" th:value="${notice.id}">
-                </td>
+            </table>
+        </div>
+    </form>
+</div>
+<div class="pageHeader">
+    <form onsubmit="return ajaxNavTab(this);" action="game/notice" method="post" onreset="$(this).find('select.combox').comboxReset()">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td class="dateRange">
+                        日期:
+                        <input name="startDate" class="date readonly" readonly="readonly" type="text" th:value="${request.startDate}">
+                        <span class="limit">-</span>
+                        <input name="endDate" class="date readonly" readonly="readonly" type="text" th:value="${request.endDate}">
+                    </td>
+                    <td>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">检索</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
             </table>
         </div>
     </form>
@@ -36,8 +73,10 @@
         <thead>
         <tr>
             <th>ID</th>
-            <th>渠道</th>
             <th>标题</th>
+            <th>内容</th>
+            <th>开始时间</th>
+            <th>结束时间</th>
             <th>状态</th>
             <th>操作</th>
         </tr>
@@ -45,19 +84,32 @@
         <tbody>
         <tr th:if="${list.size()!=0}" th:each="row,iterStat:${list}">
             <td th:text="${row.id}"></td>
-            <td th:text="${row.channelName}"></td>
             <td th:text="${row.title}"></td>
-            <td th:if="${!row.enable}" th:text="不启用"></td>
-            <td th:if="${row.enable}" th:text="启用"></td>
+            <td th:text="${row.content}"></td>
+            <td th:text="${row.startTime}"></td>
+            <td th:text="${row.endTime}"></td>
+            <td th:if="${row.enable==0}" th:text="隐藏"></td>
+            <td th:if="${row.enable==1}" th:text="显示"></td>
             <td>
-                <a th:if="${!row.enable}" class="button" th:href="@{game/notice(id=${row.id},type='open')}" target="navTab"><span>启用</span></a>
-                <a th:if="${row.enable}" class="button" th:href="@{game/notice(id=${row.id},type='close')}" target="navTab"><span>关闭</span></a>
-                <a class="button" th:href="@{game/notice(id=${row.id},type='modify')}" target="navTab"><span>编辑</span></a>
-                <a class="button" th:href="@{game/notice(id=${row.id},type='delete')}" target="navTab"><span>删除</span></a>
+                <a th:if="${row.enable==0}" class="button" th:href="@{game/notice(id=${row.id},type='open')}"
+                   target="navTab"><span>显示</span></a>
+                <a th:if="${row.enable==1}" class="button" th:href="@{game/notice(id=${row.id},type='close')}"
+                   target="navTab"><span>隐藏</span></a>
+                <a class="button" th:href="@{game/notice(id=${row.id},type='modify')}"
+                   target="navTab"><span>编辑</span></a>
+                <a class="button" th:href="@{game/notice(id=${row.id},type='delete')}"
+                   target="navTab"><span>删除</span></a>
             </td>
         </tr>
-        <tr th:if="${list.size()==0}"><td colspan="6" style="text-align: center">暂无数据</td></tr>
+        <tr th:if="${list.size()==0}">
+            <td colspan="6" style="text-align: center">暂无数据</td>
+        </tr>
         </tbody>
     </table>
     <div th:replace="_include/pager"></div>
 </div>
+<script type="text/javascript">
+    $('#preview').click(function () {
+        $("#previewView").val($("#content").val())
+    });
+</script>

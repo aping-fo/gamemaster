@@ -1,0 +1,43 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="player/character" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div th:replace="_include/searchBar"></div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%" layoutH="137">
+        <thead>
+        <tr>
+            <th width="80">服务器名</th>
+            <th width="80">角色名</th>
+            <th width="80" align="right">角色ID</th>
+            <th width="80" align="right">时间</th>
+            <th width="80" align="right">操作创建人</th>
+            <th width="80" align="right">充值元宝</th>
+            <th width="80" align="right">充值模式</th>
+            <th width="80" align="right">状态</th>
+            <th width="80" align="right"><a title="修改" class="button"  target="dialog" width="480" height="500" rel="dialog_updatebroadcast" mask="true"><span>一键发送</span></a></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${charges}">
+            <td th:text="${row.serverName}"></td>
+            <td th:text="${row.userName}"></td>
+            <td th:text="${row.playerId}"></td>
+            <td th:text="${row.date}"></td>
+            <td th:text="${row.operater}"></td>
+            <td th:text="${row.chargeAmount}"></td>
+            <td th:text="${row.chargeType}"></td>
+            <td th:if="${row.state} eq'0'" th:text="未处理"></td>
+            <td th:if="${row.state} eq'1'" th:text="已准予"></td>
+            <td th:if="${row.state} eq'2'" th:text="已拒绝"></td>
+            <td>
+                <a title="准予发送" class="button" th:href="@{simulationRecharge/pending(id=${row.id},state=1)}" target="navTab"><span>准予发送</span></a>
+                <a title="不予发送" class="button" th:href="@{game/broadcast(id=${row.serverName})}" target="navTab"><span>不予发送</span></a>
+                <a title="删除" class="button" th:href="@{simulationRecharge/pending(id=${row.id})}" target="navTab"><span>删除</span></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>

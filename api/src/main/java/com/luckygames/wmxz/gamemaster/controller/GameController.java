@@ -1,6 +1,5 @@
 package com.luckygames.wmxz.gamemaster.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.luckygames.wmxz.gamemaster.common.constants.AdminUrl;
 import com.luckygames.wmxz.gamemaster.common.constants.ResultCode;
@@ -13,6 +12,7 @@ import com.luckygames.wmxz.gamemaster.service.*;
 import com.luckygames.wmxz.gamemaster.utils.ExcelExportUtil;
 import com.luckygames.wmxz.gamemaster.utils.ExportUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.formula.functions.Now;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,12 +20,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/game")
@@ -39,8 +39,6 @@ public class GameController extends BaseController {
     @Autowired
     private ChannelService channelService;
     @Autowired
-    private ActivityService activityService;
-    @Autowired
     private ActivationCodeService activationCodeService;
     @Autowired
     private SingleServiceBagService singleServiceBagService;
@@ -49,9 +47,9 @@ public class GameController extends BaseController {
     @Autowired
     private ChatSettingsService chatSettingsService;
     @Autowired
-    private AdminNewService adminNewService;
+    private AdminService adminService;
     @Autowired
-    private BroadcastNewService broadcastNewService;
+    private BroadcastService broadcastService;
     @Autowired
     private NoticeService noticeService;
     @Autowired
@@ -179,7 +177,7 @@ public class GameController extends BaseController {
     @RequestMapping(value = "/generate_activation_code", method = {RequestMethod.GET, RequestMethod.POST})
     public Response generateActivationCode(ActivationCode activationCode) {
         Response response = new Response("game/generate_activation_code");
-        if (activationCode.getNumber() != null) {
+        if (activationCode.getId() != null) {
             if (activationCode.getId() != null) {
                 activationCodeService.update(activationCode);
             } else {
@@ -219,12 +217,7 @@ public class GameController extends BaseController {
         return new Response("activity/activity");
     }
 
-
-    /**
-     * 邮件列表
-     * @param query
-     * @return
-     */
+    //邮件列表
     @RequestMapping(value = "/mail", method = {RequestMethod.GET, RequestMethod.POST})
     public Response mail(MailSearchQuery query) {
         if (query.getMailType() != null && query.getMailType().equals(MailType.UNKNOWN)) {
@@ -240,107 +233,68 @@ public class GameController extends BaseController {
 
     //广播管理
     @RequestMapping(value = {"/broadcast"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public Response broadcast(BroadcastNewSearchQuery query) {
+    public Response broadcast(Broadcast broadcast) {
+        BroadcastSearchQuery query = new BroadcastSearchQuery();
+
         //删除
-        if (query.getId() != null) {
-            broadcastNewService.deleteById(query.getId());
+        if (broadcast.getId() != null) {
+            broadcastService.deleteById(broadcast.getId());
         }
 
-        Page<BroadcastNew> broadcastList = broadcastNewService.searchPage(query);
+        //增加
+        if (broadcast.getContent() != null) {
+            broadcastService.save(broadcast);
+            BroadcastQuery broadcastQuery = new BroadcastQuery(broadcast.getServerId(), broadcast.getLoopTimes(), broadcast.getGapSecond(), new Date(), broadcast.getTitle(), broadcast.getContent());
+
+            adminService.sendBroadcast(broadcastQuery);
+        }
+
+        Page<Broadcast> broadcastList = broadcastService.searchPage(query);
+        List<Server> serverList = serverService.searchList();
         return new Response("game/broadcast")
                 .request(query)
-                .data("list", broadcastList);
-    }
-
-    //更新广播管理
-    @RequestMapping(value = {"/update_broadcast"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public Response updateBroadcast(SendBroadcastNewRequest request) {
-        if (StringUtils.isBlank(request.getServerId().toString()) || StringUtils.isBlank(request.getChannelId().toString()) || StringUtils.isBlank(request.getNotifyType()) || StringUtils.isBlank(request.getContent())) {
-            return new Response(ResultCode.EXISTENCE_UNFILLED_FIELDS).json();
-        }
-        String result = "ok";
-        try {
-            BackendCommand command = new BackendCommand();
-            command.setServerId(request.getServerId());
-            command.setContent(request.getContent());
-            command.setNotifyType(request.getNotifyType());
-            command.setPlatform(channelService.getByChannelId(request.getChannelId()).getChannelName());
-            result = adminNewService.commonAction(command, AdminUrl.BROADCAST.getUrl());
-        } catch (Exception e) {
-            logger.error("发送广播异常：", e);
-            return new Response(ResultCode.SEND_BROADCAST_FAILED.getCode(), result);
-        }
-
-        if (!result.equals("success")) {
-            return new Response(ResultCode.SEND_BROADCAST_FAILED.getCode(), result);
-        }
-
-        BroadcastNew broadcast = new BroadcastNew();
-        broadcast.setId(request.getId());
-        broadcast.setServerId(request.getServerId());
-        broadcast.setChannelId(request.getChannelId());
-        broadcast.setContent(request.getContent());
-        broadcast.setNotifyType(Integer.parseInt(request.getNotifyType()));
-        broadcastNewService.update(broadcast);
-        return new Response().request(request).json();
+                .data("list", broadcastList)
+                .data("serverList", serverList);
     }
 
     //首屏公告
     @RequestMapping(value = {"/notice"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public Response notice(NoticeSearchQuery query) {
+    public Response notice(Notice notice) {
         Response response = new Response("game/notice");
         Notice notice1 = new Notice();
-        if (query.getType() != null) {
-            Notice notice = new Notice();
-            if (query.getType().equals("add") || query.getType().equals("update")) {
-                if (StringUtils.isBlank(query.getTitle()) || StringUtils.isBlank(query.getContent())) {
+        if (notice.getType() != null) {
+            if (notice.getType().equals("add") || notice.getType().equals("update")) {
+                if (StringUtils.isBlank(notice.getTitle()) || StringUtils.isBlank(notice.getContent())) {
                     return new Response(ResultCode.EXISTENCE_UNFILLED_FIELDS).json();
                 } else {
-                    if (query.getType().equals("update")) {
-                        notice.setId(query.getId());
+                    if (notice.getType().equals("update")) {
+                        notice.setId(notice.getId());
                     }
-                    notice.setTitle(query.getTitle());
-                    notice.setContent(query.getContent());
-                    notice.setChannelId(query.getChannelId());
-                    notice.setEnable(true);
-                    notice.setCreateTime(new Date());
-                    notice.setUpdateTime(new Date());
                     noticeService.save(notice);
                 }
-
-            } else if (query.getType().equals("delete")) {
-                noticeService.deleteById(query.getId());
-            } else if (query.getType().equals("modify")) {
-                notice1 = noticeService.searchById(query.getId());
-            } else if (query.getType().equals("open") || query.getType().equals("close")) {
-                notice.setId(query.getId());
-                if (query.getType().equals("open")) {
-                    notice.setEnable(true);
-                } else if (query.getType().equals("close")) {
-                    notice.setEnable(false);
+            } else if (notice.getType().equals("delete")) {
+                noticeService.deleteById(notice.getId());
+            } else if (notice.getType().equals("modify")) {
+                notice1 = noticeService.searchById(notice.getId());
+            } else if (notice.getType().equals("open") || notice.getType().equals("close")) {
+                notice.setId(notice.getId());
+                if (notice.getType().equals("open")) {
+                    notice.setEnable(1);
+                } else if (notice.getType().equals("close")) {
+                    notice.setEnable(0);
                 }
                 noticeService.update(notice);
             }
         }
 
+        NoticeSearchQuery query = new NoticeSearchQuery();
+        query.setStartDate(notice.getStartDate());
+        query.setEndDate(notice.getEndDate());
         Page<Notice> noticePage = noticeService.searchPage(query);
-        List<Channel> channelList = channelService.searchList();
-        response.request(query)
-                .data("list", noticePage)
-                .data("channelList", channelList)
-                .data("notice", notice1);
+
+        response.data("list", noticePage)
+                .data("notice", notice1)
+                .request(query);
         return response;
-    }
-
-    //广播管理
-    @RequestMapping(value = {"/ingcle/ban"}, method = {RequestMethod.GET, RequestMethod.POST})
-    @ResponseBody
-    public String ingcleBan(IngcleBanRequest query) {
-
-        Map<String,Object> map =new HashMap<>();
-        map.put("code",1);
-        map.put("msg","ok");
-
-        return JSON.toJSONString(map);
     }
 }

@@ -17,7 +17,7 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 group = 'com.luckygames.wmxz'
-version = '0.0.1-SNAPSHOT'
+version = 'gm_server'
 sourceCompatibility = 1.8
 
 repositories {
@@ -62,4 +62,9 @@ dependencies {
     compile group: 'org.apache.commons', name: 'commons-io', version: '1.3.2'
 }
 
-
+//jar包必须将非java文件额外设置，才能打进去
+processResources {
+    from('src/main/resources') {
+        include '**/*.xml'
+    }
+}

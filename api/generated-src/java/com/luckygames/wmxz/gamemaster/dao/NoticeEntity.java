@@ -13,7 +13,11 @@ public class NoticeEntity extends BaseEntity {
 
     private String content;
 
-    private Boolean enable;
+    private Integer enable;
+
+    private String startTime;
+
+    private String endTime;
 
     public Long getServerId() {
         return serverId;
@@ -47,11 +51,27 @@ public class NoticeEntity extends BaseEntity {
         this.content = content == null ? null : content.trim();
     }
 
-    public Boolean getEnable() {
+    public Integer getEnable() {
         return enable;
     }
 
-    public void setEnable(Boolean enable) {
+    public void setEnable(Integer enable) {
         this.enable = enable;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime == null ? null : startTime.trim();
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime == null ? null : endTime.trim();
     }
 }

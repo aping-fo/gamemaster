@@ -1,13 +1,11 @@
 package com.luckygames.wmxz.gamemaster.model.view.request;
 
-import com.luckygames.wmxz.gamemaster.model.enums.MailType;
-
 import java.util.List;
 
 public class SendMailRequest {
-    private MailType mailType;
+    private Integer mailType;
     private Long serverId;
-    private List<String> charNames;
+    private String charIds;
     private Integer minLevel;
     private Integer maxLevel;
     private String sender;
@@ -33,11 +31,11 @@ public class SendMailRequest {
         this.attachments = attachments;
     }
 
-    public MailType getMailType() {
+    public Integer getMailType() {
         return mailType;
     }
 
-    public void setMailType(MailType mailType) {
+    public void setMailType(Integer mailType) {
         this.mailType = mailType;
     }
 
@@ -49,12 +47,12 @@ public class SendMailRequest {
         this.serverId = serverId;
     }
 
-    public List<String> getCharNames() {
-        return charNames;
+    public String getCharIds() {
+        return charIds;
     }
 
-    public void setCharNames(List<String> charNames) {
-        this.charNames = charNames;
+    public void setCharIds(String charIds) {
+        this.charIds = charIds;
     }
 
     public Integer getMinLevel() {

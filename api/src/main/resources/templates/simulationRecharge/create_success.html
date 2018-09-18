@@ -1,0 +1,9 @@
+<div class="pageHeader">
+    <form id="creatForm" name="sform" onsubmit="return navTabSearch(this);" action="" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div class="pageFormContent"  layoutH="57"  width="100%" >
+            <button  th:href="@{simulationRecharge/pending}" class="button" >返回</button>
+            <a title="模拟充值列表" class="button" th:href="@{simulationRecharge/pending}" target="navTab" mask="true"><span>查看列表</span></a>
+        </div>
+    </form>
+</div>

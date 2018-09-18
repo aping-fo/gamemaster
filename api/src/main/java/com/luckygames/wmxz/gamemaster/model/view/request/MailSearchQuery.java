@@ -3,13 +3,22 @@ package com.luckygames.wmxz.gamemaster.model.view.request;
 import com.luckygames.wmxz.gamemaster.model.enums.MailType;
 
 public class MailSearchQuery extends CommonSearchQuery {
-    private MailType mailType;
+    private Integer mailType;
+    private Integer serverId;
 
-    public MailType getMailType() {
+    public Integer getServerId() {
+        return serverId;
+    }
+
+    public void setServerId(Integer serverId) {
+        this.serverId = serverId;
+    }
+
+    public Integer getMailType() {
         return mailType;
     }
 
-    public void setMailType(MailType mailType) {
+    public void setMailType(Integer mailType) {
         this.mailType = mailType;
     }
 }

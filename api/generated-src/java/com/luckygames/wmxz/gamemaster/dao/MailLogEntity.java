@@ -1,14 +1,13 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
 import com.luckygames.wmxz.gamemaster.model.entity.base.BaseEntity;
-import com.luckygames.wmxz.gamemaster.model.enums.MailType;
 import javax.persistence.Table;
 
 @Table(name="mail_log")
 public class MailLogEntity extends BaseEntity {
     private Long serverId;
 
-    private MailType mailType;
+    private Integer mailType;
 
     private String title;
 
@@ -22,6 +21,10 @@ public class MailLogEntity extends BaseEntity {
 
     private String sender;
 
+    private String rewards;
+
+    private String playerids;
+
     public Long getServerId() {
         return serverId;
     }
@@ -30,11 +33,11 @@ public class MailLogEntity extends BaseEntity {
         this.serverId = serverId;
     }
 
-    public MailType getMailType() {
+    public Integer getMailType() {
         return mailType;
     }
 
-    public void setMailType(MailType mailType) {
+    public void setMailType(Integer mailType) {
         this.mailType = mailType;
     }
 
@@ -84,5 +87,21 @@ public class MailLogEntity extends BaseEntity {
 
     public void setSender(String sender) {
         this.sender = sender == null ? null : sender.trim();
+    }
+
+    public String getRewards() {
+        return rewards;
+    }
+
+    public void setRewards(String rewards) {
+        this.rewards = rewards == null ? null : rewards.trim();
+    }
+
+    public String getPlayerids() {
+        return playerids;
+    }
+
+    public void setPlayerids(String playerids) {
+        this.playerids = playerids == null ? null : playerids.trim();
     }
 }

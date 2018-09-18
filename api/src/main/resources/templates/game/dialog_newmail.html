@@ -1,6 +1,5 @@
 <div class="pageContent" xmlns:th="http://www.w3.org/1999/xhtml">
-    <form method="post" action="game/ajax_sendmail" class="pageForm required-validate"
-          onsubmit="return closeNavTab(this);">
+    <form method="post" onsubmit="return closeNavTab(this);" action="operatingTools/sendmail" class="pageForm required-validate">
         <table width="98%" style="border-collapse:separate; border-spacing:5px;">
             <thead>
             <tr>
@@ -12,10 +11,10 @@
             <tr>
                 <td>邮件类型：</td>
                 <td>
-                    <select name="mailType">
-                        <option value="SERVER" th:selected="(${mailType.toString() == 'SERVER'})">全服群发</option>
-                        <option value="LEVEL" th:selected="(${mailType.toString() == 'LEVEL'})">等级范围群发</option>
-                        <option value="CHAR" th:selected="(${mailType.toString() == 'CHAR'})">角色群发</option>
+                    <select name="mailType" id="mailType" onchange="mailTypeOnchange(this)">
+                        <option value="1">全服群发</option>
+                        <option value="2">等级范围群发</option>
+                        <option value="3">角色群发</option>
                     </select>
                 </td>
             </tr>
@@ -23,22 +22,21 @@
                 <td>选择区服：</td>
                 <td>
                     <select name="serverId" class="required">
-                        <option th:each="server:${serverList}" th:value="${server.serverId}"
-                                th:utext="${server.serverName}"></option>
+                        <option th:each="server:${serverList}" th:value="${server.serverId}" th:utext="${server.serverName}"></option>
                     </select>
                 </td>
             </tr>
-            <tr>
+            <tr id="playerids" hidden="hidden">
                 <td>角色ID：<br/>玩家id1,<br/>玩家id2,</td>
                 <td>
-                    <textarea name="charNames" class="textArea" cols="30" rows="4" style="resize: none"></textarea>
+                    <textarea name="playerids" class="textArea" cols="30" rows="4" style="resize: none"></textarea>
                 </td>
             </tr>
-            <tr>
+            <tr id="minLevel" hidden="hidden">
                 <td>最小等级：</td>
                 <td><input type="number" name="minLevel"/></td>
             </tr>
-            <tr>
+            <tr id="maxLevel" hidden="hidden">
                 <td>最大等级：</td>
                 <td><input type="number" name="maxLevel"/></td>
             </tr>
@@ -72,7 +70,7 @@
             <tr>
                 <td>奖励：</td>
                 <td>
-                    <textarea name="rewardNames" class="textArea readonly" cols="30" rows="4"
+                    <textarea name="rewards" class="textArea readonly" cols="30" rows="4"
                               style="resize: none;margin-top: 10px" id="reward" readonly="readonly"></textarea>
                 </td>
             </tr>
@@ -91,9 +89,42 @@
     $(function () {
         $('#goods').searchableSelect();
     });
+
     $('#addButton').click(function () {
         var goods = $('#goods').val();
         var count = $('#count').val();
         $('#reward').val($('#reward').val() + goods + ":" + count + ";\n");
     });
+
+    function mailTypeOnchange(mailType) {
+        var mailType = $(mailType).val();
+        if (mailType == 1) {
+            $('#minLevel').hide();
+            $('#minLevel input').removeClass("required");
+
+            $('#maxLevel').hide();
+            $('#maxLevel input').removeClass("required");
+
+            $('#playerids').hide();
+            $('#playerids textarea').removeClass("required");
+        } else if (mailType == 2) {
+            $('#minLevel').show();
+            $('#minLevel input').addClass("required");
+
+            $('#maxLevel').show();
+            $('#maxLevel input').addClass("required");
+
+            $('#playerids').hide();
+            $('#playerids textarea').removeClass("required");
+        } else if (mailType == 3) {
+            $('#playerids').show();
+            $('#playerids textarea').addClass("required");
+
+            $('#minLevel').hide();
+            $('#minLevel input').removeClass("required");
+
+            $('#maxLevel').hide();
+            $('#maxLevel input').removeClass("required");
+        }
+    }
 </script>

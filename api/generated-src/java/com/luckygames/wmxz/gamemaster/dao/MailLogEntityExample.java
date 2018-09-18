@@ -1,6 +1,5 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
-import com.luckygames.wmxz.gamemaster.model.enums.MailType;
 import com.luckygames.wmxz.gamemaster.model.enums.Status;
 import java.util.ArrayList;
 import java.util.Date;
@@ -167,6 +166,76 @@ public class MailLogEntityExample {
             return (Criteria) this;
         }
 
+        public Criteria andStatusIsNull() {
+            addCriterion("`status` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNotNull() {
+            addCriterion("`status` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusEqualTo(Status value) {
+            addCriterion("`status` =", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotEqualTo(Status value) {
+            addCriterion("`status` <>", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThan(Status value) {
+            addCriterion("`status` >", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThanOrEqualTo(Status value) {
+            addCriterion("`status` >=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThan(Status value) {
+            addCriterion("`status` <", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThanOrEqualTo(Status value) {
+            addCriterion("`status` <=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLike(Status value) {
+            addCriterion("`status` like", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotLike(Status value) {
+            addCriterion("`status` not like", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIn(List<Status> values) {
+            addCriterion("`status` in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotIn(List<Status> values) {
+            addCriterion("`status` not in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusBetween(Status value1, Status value2) {
+            addCriterion("`status` between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotBetween(Status value1, Status value2) {
+            addCriterion("`status` not between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
         public Criteria andServerIdIsNull() {
             addCriterion("server_id is null");
             return (Criteria) this;
@@ -237,52 +306,52 @@ public class MailLogEntityExample {
             return (Criteria) this;
         }
 
-        public Criteria andMailTypeEqualTo(MailType value) {
+        public Criteria andMailTypeEqualTo(Integer value) {
             addCriterion("mail_type =", value, "mailType");
             return (Criteria) this;
         }
 
-        public Criteria andMailTypeNotEqualTo(MailType value) {
+        public Criteria andMailTypeNotEqualTo(Integer value) {
             addCriterion("mail_type <>", value, "mailType");
             return (Criteria) this;
         }
 
-        public Criteria andMailTypeGreaterThan(MailType value) {
+        public Criteria andMailTypeGreaterThan(Integer value) {
             addCriterion("mail_type >", value, "mailType");
             return (Criteria) this;
         }
 
-        public Criteria andMailTypeGreaterThanOrEqualTo(MailType value) {
+        public Criteria andMailTypeGreaterThanOrEqualTo(Integer value) {
             addCriterion("mail_type >=", value, "mailType");
             return (Criteria) this;
         }
 
-        public Criteria andMailTypeLessThan(MailType value) {
+        public Criteria andMailTypeLessThan(Integer value) {
             addCriterion("mail_type <", value, "mailType");
             return (Criteria) this;
         }
 
-        public Criteria andMailTypeLessThanOrEqualTo(MailType value) {
+        public Criteria andMailTypeLessThanOrEqualTo(Integer value) {
             addCriterion("mail_type <=", value, "mailType");
             return (Criteria) this;
         }
 
-        public Criteria andMailTypeIn(List<MailType> values) {
+        public Criteria andMailTypeIn(List<Integer> values) {
             addCriterion("mail_type in", values, "mailType");
             return (Criteria) this;
         }
 
-        public Criteria andMailTypeNotIn(List<MailType> values) {
+        public Criteria andMailTypeNotIn(List<Integer> values) {
             addCriterion("mail_type not in", values, "mailType");
             return (Criteria) this;
         }
 
-        public Criteria andMailTypeBetween(MailType value1, MailType value2) {
+        public Criteria andMailTypeBetween(Integer value1, Integer value2) {
             addCriterion("mail_type between", value1, value2, "mailType");
             return (Criteria) this;
         }
 
-        public Criteria andMailTypeNotBetween(MailType value1, MailType value2) {
+        public Criteria andMailTypeNotBetween(Integer value1, Integer value2) {
             addCriterion("mail_type not between", value1, value2, "mailType");
             return (Criteria) this;
         }
@@ -677,66 +746,6 @@ public class MailLogEntityExample {
             return (Criteria) this;
         }
 
-        public Criteria andStatusIsNull() {
-            addCriterion("`status` is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusIsNotNull() {
-            addCriterion("`status` is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusEqualTo(Status value) {
-            addCriterion("`status` =", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusNotEqualTo(Status value) {
-            addCriterion("`status` <>", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusGreaterThan(Status value) {
-            addCriterion("`status` >", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusGreaterThanOrEqualTo(Status value) {
-            addCriterion("`status` >=", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusLessThan(Status value) {
-            addCriterion("`status` <", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusLessThanOrEqualTo(Status value) {
-            addCriterion("`status` <=", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusIn(List<Status> values) {
-            addCriterion("`status` in", values, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusNotIn(List<Status> values) {
-            addCriterion("`status` not in", values, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusBetween(Status value1, Status value2) {
-            addCriterion("`status` between", value1, value2, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusNotBetween(Status value1, Status value2) {
-            addCriterion("`status` not between", value1, value2, "status");
-            return (Criteria) this;
-        }
-
         public Criteria andCreateTimeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;
@@ -854,6 +863,146 @@ public class MailLogEntityExample {
 
         public Criteria andUpdateTimeNotBetween(Date value1, Date value2) {
             addCriterion("update_time not between", value1, value2, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardsIsNull() {
+            addCriterion("rewards is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardsIsNotNull() {
+            addCriterion("rewards is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardsEqualTo(String value) {
+            addCriterion("rewards =", value, "rewards");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardsNotEqualTo(String value) {
+            addCriterion("rewards <>", value, "rewards");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardsGreaterThan(String value) {
+            addCriterion("rewards >", value, "rewards");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardsGreaterThanOrEqualTo(String value) {
+            addCriterion("rewards >=", value, "rewards");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardsLessThan(String value) {
+            addCriterion("rewards <", value, "rewards");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardsLessThanOrEqualTo(String value) {
+            addCriterion("rewards <=", value, "rewards");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardsLike(String value) {
+            addCriterion("rewards like", value, "rewards");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardsNotLike(String value) {
+            addCriterion("rewards not like", value, "rewards");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardsIn(List<String> values) {
+            addCriterion("rewards in", values, "rewards");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardsNotIn(List<String> values) {
+            addCriterion("rewards not in", values, "rewards");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardsBetween(String value1, String value2) {
+            addCriterion("rewards between", value1, value2, "rewards");
+            return (Criteria) this;
+        }
+
+        public Criteria andRewardsNotBetween(String value1, String value2) {
+            addCriterion("rewards not between", value1, value2, "rewards");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlayeridsIsNull() {
+            addCriterion("playerids is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlayeridsIsNotNull() {
+            addCriterion("playerids is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlayeridsEqualTo(String value) {
+            addCriterion("playerids =", value, "playerids");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlayeridsNotEqualTo(String value) {
+            addCriterion("playerids <>", value, "playerids");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlayeridsGreaterThan(String value) {
+            addCriterion("playerids >", value, "playerids");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlayeridsGreaterThanOrEqualTo(String value) {
+            addCriterion("playerids >=", value, "playerids");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlayeridsLessThan(String value) {
+            addCriterion("playerids <", value, "playerids");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlayeridsLessThanOrEqualTo(String value) {
+            addCriterion("playerids <=", value, "playerids");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlayeridsLike(String value) {
+            addCriterion("playerids like", value, "playerids");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlayeridsNotLike(String value) {
+            addCriterion("playerids not like", value, "playerids");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlayeridsIn(List<String> values) {
+            addCriterion("playerids in", values, "playerids");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlayeridsNotIn(List<String> values) {
+            addCriterion("playerids not in", values, "playerids");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlayeridsBetween(String value1, String value2) {
+            addCriterion("playerids between", value1, value2, "playerids");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlayeridsNotBetween(String value1, String value2) {
+            addCriterion("playerids not between", value1, value2, "playerids");
             return (Criteria) this;
         }
     }

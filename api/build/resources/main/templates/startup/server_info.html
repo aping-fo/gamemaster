@@ -1,0 +1,94 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="startup/server_info" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>
+                        区服ID：
+                        <input name="serverId" type="text" value="" th:value="${request.serverId}" placeholder="输入区服ID"
+                               size="15">
+                    </td>
+                    <td>
+                        区服名称：
+                        <input name="serverName" type="text" value="" th:value="${request.serverName}" placeholder="输入区服名"
+                               size="15">
+                    </td>
+                    <td>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">查询</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <td>
+                <a class="button" href="startup/server_createnew"
+                   rel="servercreate" mask="true" lookupGroup=""><span>新增服务器</span></a>
+            </td>
+            <td>
+                <a class="button" href="startup/server_changestate"
+                   rel="serverchangestate" mask="true" lookupGroup=""><span>修改服务器状态</span></a>
+            </td>
+            <td>
+                <a class="button" href="startup/server_combine"
+                   rel="servercombine" mask="true" lookupGroup=""><span>合服工具</span></a>
+            </td>
+            <td>
+                <a class="button" href="startup/server_whitelist"
+                   rel="serverwhitelist" mask="true" lookupGroup=""><span>白名单</span></a>
+            </td>
+        </div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%" layoutH="137">
+        <thead>
+        <tr>
+            <th width="80">区服ID</th>
+            <th width="80">区服名称</th>
+            <th width="80" align="center">状态</th>
+            <th width="80" align="right">服务器标识</th>
+            <th width="120" align="right">登录服务器IP</th>
+            <th width="80" align="right">游戏端口</th>
+            <th width="80" align="right">后台端口</th>
+            <th width="80" align="right">付款通知地址</th>
+            <th width="80" align="right">开服时间</th>
+            <th width="80" align="right">备注</th>
+            <th width="80" align="right">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${serverList}">
+            <td th:text="${row.serverId}"></td>
+            <td th:text="${row.serverName}"></td>
+            <td th:if="${row.serverState==1}">开放</td>
+            <td th:if="${row.serverState==2}">维护</td>
+            <td th:if="${row.serverState==3}">隐藏</td>
+            <td th:if="${row.serverState==4}">关闭</td>
+            <td th:if="${row.serverState==1 and row.label==1}">一般</td>
+            <td th:if="${row.serverState==1 and row.label==2}">火爆</td>
+            <td th:if="${row.serverState==1 and row.label==3}">爆满</td>
+            <td th:if="${row.serverState==1 and row.label==4}">新服</td>
+            <td th:if="${row.serverState==1 and row.label==5}">推荐</td>
+            <td th:if="${row.serverState==1 and row.label==6}">审核服</td>
+            <td th:if="${row.serverState==1 and row.label==7}">代理服</td>
+            <td th:if="${row.serverState==2}">维护</td>
+            <td th:if="${row.serverState==3}">隐藏</td>
+            <td th:if="${row.serverState==4}">关闭</td>
+            <td th:text="${row.ip}"></td>
+            <td th:text="${row.port}"></td>
+            <td th:text="${row.gmPort}"></td>
+            <td th:text="${row.payAddress}"></td>
+            <td th:text="${row.openTime}"></td>
+            <td th:text="${row.remarks}"></td>
+            <td><a title="修改" class="button" th:href="@{startup/server_edit(id=${row.serverId})}"  target="dialog" width="820" height="400" rel="dialog_updatebroadcast" mask="true"><span>修改</span></a></td>
+        </tr>
+        <tr th:if="${serverList.size()==0}"><td colspan="10" style="text-align: center">暂无数据</td></tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>

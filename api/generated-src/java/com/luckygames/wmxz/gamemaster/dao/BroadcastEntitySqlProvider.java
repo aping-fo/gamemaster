@@ -80,6 +80,10 @@ public class BroadcastEntitySqlProvider {
             sql.VALUES("update_time", "#{updateTime,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getReason() != null) {
+            sql.VALUES("reason", "#{reason,jdbcType=VARCHAR}");
+        }
+        
         return sql.toString();
     }
 
@@ -102,6 +106,7 @@ public class BroadcastEntitySqlProvider {
         sql.SELECT("`status`");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
+        sql.SELECT("reason");
         sql.FROM("broadcast");
         applyWhere(sql, example, false);
         
@@ -171,6 +176,10 @@ public class BroadcastEntitySqlProvider {
             sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getReason() != null) {
+            sql.SET("reason = #{record.reason,jdbcType=VARCHAR}");
+        }
+        
         applyWhere(sql, example, true);
         return sql.toString();
     }
@@ -192,6 +201,7 @@ public class BroadcastEntitySqlProvider {
         sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
+        sql.SET("reason = #{record.reason,jdbcType=VARCHAR}");
         
         BroadcastEntityExample example = (BroadcastEntityExample) parameter.get("example");
         applyWhere(sql, example, true);

@@ -5,9 +5,15 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class NoticeSqlProvider {
-    public String queryNotice(NoticeSearchQuery query) {
-        StringBuilder sql = new StringBuilder("select n.*,c.channel_name from notice n left join channel c on n.channel_id=c.channel_id");
+    public String searchPage(NoticeSearchQuery query) {
+        StringBuilder sql = new StringBuilder("select * from notice where 1=1");
+        if (StringUtils.isNotBlank(query.getStartDate())) {
+            sql.append(" and update_time >= #{startDate}  ");
+        }
+        if (StringUtils.isNotBlank(query.getEndDate())) {
+            sql.append(" and update_time < #{endDate}  ");
+        }
+        sql.append(" order by update_time desc");
         return sql.toString();
     }
-
 }

@@ -481,3 +481,22 @@ $.fn.iframeLoad = function (url, callback) {
         });
     });
 };
+
+/**
+ * 提交并关闭弹出窗口
+ * @param form
+ * @param navTabId
+ * @returns {boolean}
+ */
+function closeNavTab(form, navTabId) {
+    var $form = $(form);
+
+    if (!$form.valid()) {
+        return false;
+    }
+
+    if (form[DWZ.pageInfo.pageNum]) form[DWZ.pageInfo.pageNum].value = 1;
+    navTab.reload($form.attr('action'), {data: $form.serializeArray(), navTabId: navTabId});
+    $.pdialog.closeCurrent();
+    return false;
+}

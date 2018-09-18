@@ -61,7 +61,15 @@ public class NoticeEntitySqlProvider {
         }
         
         if (record.getEnable() != null) {
-            sql.VALUES("`enable`", "#{enable,jdbcType=BIT}");
+            sql.VALUES("`enable`", "#{enable,jdbcType=INTEGER}");
+        }
+        
+        if (record.getStartTime() != null) {
+            sql.VALUES("start_time", "#{startTime,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getEndTime() != null) {
+            sql.VALUES("end_time", "#{endTime,jdbcType=VARCHAR}");
         }
         
         return sql.toString();
@@ -82,6 +90,8 @@ public class NoticeEntitySqlProvider {
         sql.SELECT("title");
         sql.SELECT("content");
         sql.SELECT("`enable`");
+        sql.SELECT("start_time");
+        sql.SELECT("end_time");
         sql.FROM("notice");
         applyWhere(sql, example, false);
         
@@ -132,7 +142,15 @@ public class NoticeEntitySqlProvider {
         }
         
         if (record.getEnable() != null) {
-            sql.SET("`enable` = #{record.enable,jdbcType=BIT}");
+            sql.SET("`enable` = #{record.enable,jdbcType=INTEGER}");
+        }
+        
+        if (record.getStartTime() != null) {
+            sql.SET("start_time = #{record.startTime,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getEndTime() != null) {
+            sql.SET("end_time = #{record.endTime,jdbcType=VARCHAR}");
         }
         
         applyWhere(sql, example, true);
@@ -151,7 +169,9 @@ public class NoticeEntitySqlProvider {
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         sql.SET("title = #{record.title,jdbcType=VARCHAR}");
         sql.SET("content = #{record.content,jdbcType=VARCHAR}");
-        sql.SET("`enable` = #{record.enable,jdbcType=BIT}");
+        sql.SET("`enable` = #{record.enable,jdbcType=INTEGER}");
+        sql.SET("start_time = #{record.startTime,jdbcType=VARCHAR}");
+        sql.SET("end_time = #{record.endTime,jdbcType=VARCHAR}");
         
         NoticeEntityExample example = (NoticeEntityExample) parameter.get("example");
         applyWhere(sql, example, true);

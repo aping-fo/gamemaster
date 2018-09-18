@@ -2,6 +2,7 @@ package com.luckygames.wmxz.gamemaster.controller;
 
 import com.luckygames.wmxz.gamemaster.common.constants.ResultCode;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
+import com.luckygames.wmxz.gamemaster.data.GoodsConfig;
 import com.luckygames.wmxz.gamemaster.model.entity.*;
 import com.luckygames.wmxz.gamemaster.model.enums.*;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
@@ -20,7 +21,7 @@ import java.util.*;
 @Controller
 @RequestMapping("/")
 public class AllDialogController extends BaseController {
-    public static List<Object> goodsList = new ArrayList<>();//物品列表
+    public static List<GoodsConfig> goodsList = new ArrayList<>();//物品列表
 
     private final PlayerCharacterService playerCharacterService;
     private final ServerService serverService;
@@ -46,45 +47,45 @@ public class AllDialogController extends BaseController {
     }
 
     //封禁页面
-    @RequestMapping(value = "/player/dialog_ban", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response dialogBan(@RequestParam("charIds") List<Long> charIds,
-                              @RequestParam("opType") ForbiddenOperationType opType) {
-        if (CollectionUtils.isNotEmpty(charIds)) {
-            for (Long charId : charIds) {
-                PlayerCharacter character = playerCharacterService.getByCharId(charId);
-                if (character == null) {
-                    return new Response(ResultCode.CHARACTER_NOT_FOUND);
-                }
-            }
-        }
-        List<Server> serverList = serverService.searchList();
-        logger.debug("optype:{}", opType);
-        Response response = new Response();
-        String view = "player/dialog_ban";
-        if (opType == ForbiddenOperationType.ALLOWED) {
-            view = "player/dialog_unban";
-            ForbiddenLog forbiddenLog = forbiddenLogService.searchByCharId(charIds.get(0));
-
-            //计算封禁时间
-//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Calendar cal = Calendar.getInstance();//获取当前日期
-            cal.setTime(forbiddenLog.getCreateTime());
-            long time1 = cal.getTimeInMillis();
-            cal.setTime(forbiddenLog.getExpireTime());
-            long time2 = cal.getTimeInMillis();
-            long between_days = (time2 - time1) / (1000 * 3600);
-            int hour = Integer.parseInt(String.valueOf(between_days));
-            forbiddenLog.setHour(hour);
-
-            response.data("forbiddenLog", forbiddenLog);
-        }
-
-        response.view(view)
-                .data("serverList", serverList)
-                .data("charIds", charIds)
-                .data("opType", opType);
-        return response;
-    }
+//    @RequestMapping(value = "/player/dialog_ban", method = {RequestMethod.GET, RequestMethod.POST})
+//    public Response dialogBan(@RequestParam("charIds") List<Long> charIds,
+//                              @RequestParam("opType") ForbiddenOperationType opType) {
+//        if (CollectionUtils.isNotEmpty(charIds)) {
+//            for (Long charId : charIds) {
+//                PlayerCharacter character = playerCharacterService.getByCharId(charId);
+//                if (character == null) {
+//                    return new Response(ResultCode.CHARACTER_NOT_FOUND);
+//                }
+//            }
+//        }
+//        List<Server> serverList = serverService.searchList();
+//        logger.debug("optype:{}", opType);
+//        Response response = new Response();
+//        String view = "player/dialog_ban";
+//        if (opType == ForbiddenOperationType.ALLOWED) {
+//            view = "player/dialog_unban";
+//            ForbiddenLog forbiddenLog = forbiddenLogService.searchByCharId(charIds.get(0));
+//
+//            //计算封禁时间
+////            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//            Calendar cal = Calendar.getInstance();//获取当前日期
+//            cal.setTime(forbiddenLog.getCreateTime());
+//            long time1 = cal.getTimeInMillis();
+//            cal.setTime(forbiddenLog.getExpireTime());
+//            long time2 = cal.getTimeInMillis();
+//            long between_days = (time2 - time1) / (1000 * 3600);
+//            int hour = Integer.parseInt(String.valueOf(between_days));
+//            forbiddenLog.setHour(hour);
+//
+//            response.data("forbiddenLog", forbiddenLog);
+//        }
+//
+//        response.view(view)
+//                .data("serverList", serverList)
+//                .data("charIds", charIds)
+//                .data("opType", opType);
+//        return response;
+//    }
 
     //封禁接口
 //    @RequestMapping(value = "/player/ajax_ban", method = RequestMethod.POST)
@@ -148,142 +149,113 @@ public class AllDialogController extends BaseController {
     }
 
     //邮件接口
-    @RequestMapping(value = "/game/ajax_sendmail", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response ajaxSendMail(SendMailRequest request) {
-        if (request.getServerId() == null || request.getServerId() <= 0) {
-            return new Response(ResultCode.SERVER_ID_INVALID)
-                    .json();
-        }
-        if (request.getMailType().equals(MailType.CHAR) && CollectionUtils.isEmpty(request.getCharNames())) {
-            return new Response(ResultCode.CHARACTER_NAME_INVALID)
-                    .json();
-        }
-        if (request.getMailType().equals(MailType.LEVEL) && (request.getMinLevel() == null && request.getMaxLevel() == null)) {
-            return new Response(ResultCode.CHARACTER_LEVEL_INVALID)
-                    .json();
-        }
-
-        List<Long> charIds = new ArrayList<>();
-        List<PlayerCharacter> playerCharacters = new ArrayList<>();
-
-        request.getCharNames().forEach(charName -> {
-            PlayerCharacter character = playerCharacterService.getByCharName(request.getServerId(), charName);
-            if (character == null) {
-                return;
-            }
-            playerCharacters.add(character);
-            charIds.add(character.getCharId());
-        });
-
-        //处理换行符
-        String rewardNames = request.getRewardNames();
-        String rewards = rewardNames.replaceAll("\r\n", "");
-        String result;
-
-        try {
-            result = adminService.sendMail(new MailQuery(
-                    request.getServerId(),
-                    request.getTitle(),
-                    request.getContent(),
-                    StringUtils.join(charIds, ","),
-                    request.getMinLevel(),
-                    request.getMaxLevel(),
-                    0,
-                    rewards
-            ));
-        } catch (Exception e) {
-            logger.error("发送邮件异常：", e);
-//            return new Response(ResultCode.SEND_MAIL_FAILED.getCode(), e.getMessage())
+//    @RequestMapping(value = "/game/ajax_sendmail", method = {RequestMethod.GET, RequestMethod.POST})
+//    public Response ajaxSendMail(SendMailRequest request) {
+//        if (request.getServerId() == null || request.getServerId() <= 0) {
+//            return new Response(ResultCode.SERVER_ID_INVALID)
 //                    .json();
-        }
-        result = "OK";
-        if (!"OK".equals(result)) {
-            logger.error("发送邮件失败：{}", result);
-            return new Response(ResultCode.SEND_MAIL_FAILED.getCode(), result);
-        }
-
-        MailLog mailLog = new MailLog();
-        mailLog.setServerId(request.getServerId());
-        mailLog.setMailType(request.getMailType());
-        mailLog.setTitle(request.getTitle());
-        mailLog.setContent(request.getContent());
-        mailLog.setVocation(0);
-        mailLog.setMinLev(request.getMinLevel());
-        mailLog.setMaxLev(request.getMaxLevel());
-        mailLog.setSender(request.getSender());
-        mailLog.setStatus(Status.NORMAL);
-        mailLogService.save(mailLog);
-
-        mailCharacterService.saveMailCharacters(mailLog.getId(), playerCharacters);
-
-        List<String> rewardNamesList = new ArrayList<>();
-        String[] rewardName = rewards.split(";");
-        rewardNamesList.addAll(Arrays.asList(rewardName));
-
-        mailRewardService.saveMailRewards(mailLog.getId(), rewardNamesList);
-
-        return new Response().request(request).json();
-    }
-
-    //广播页面
-    @RequestMapping(value = "/game/dialog_newbroadcast", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response dialogNewBroadcast(BroadcastSearchQuery query) {
-        List<Server> serverList = serverService.searchList();
-        Response response = new Response();
-        String view = "game/dialog_newbroadcast";
-
-        //更新
-        if (query.getId() != null) {
-            Broadcast broadcast = broadcastService.searchById(query.getId());
-            view = "game/dialog_updatebroadcast";
-            response.data("broadcast", broadcast);
-            List<Channel> channelList = channelService.searchList();
-            response.data("channelList", channelList);
-        }
-
-        response.view(view)
-                .data("serverList", serverList);
-
-        return response;
-    }
-
-    //广播接口
-//    @RequestMapping(value = "/game/ajax_sendbroadcast", method = {RequestMethod.GET, RequestMethod.POST})
-//    public Response ajaxSendBroadcast(SendBroadcastRequest request) {
-//        if (StringUtils.isBlank(request.getContent())) {
-//            return new Response(ResultCode.CONTENT_INVALID).json();
+//        }
+//        if (request.getMailType().equals(MailType.CHAR) && CollectionUtils.isEmpty(request.getCharNames())) {
+//            return new Response(ResultCode.CHARACTER_NAME_INVALID)
+//                    .json();
+//        }
+//        if (request.getMailType().equals(MailType.LEVEL) && (request.getMinLevel() == null && request.getMaxLevel() == null)) {
+//            return new Response(ResultCode.CHARACTER_LEVEL_INVALID)
+//                    .json();
 //        }
 //
-//        request.getChannelIds().forEach(id -> {
-//            String result = "OK";
-//            try {
-//                result = adminService.sendBroadcast(new BroadcastQuery(
-//                        id,
-//                        request.getLoopTimes(),
-//                        request.getGameSeconds(),
-//                        request.getPlayTime(),
-//                        request.getTitle(),
-//                        request.getContent()
-//                ));
-//            } catch (Exception e) {
-//                logger.error("发送广播异常：", e);
-//                return;
-//            }
+//        List<Long> charIds = new ArrayList<>();
+//        List<PlayerCharacter> playerCharacters = new ArrayList<>();
 //
-//            if (!result.equals("success")) {
+//        request.getCharNames().forEach(charName -> {
+//            PlayerCharacter character = playerCharacterService.getByCharName(request.getServerId(), charName);
+//            if (character == null) {
 //                return;
 //            }
-//            Broadcast broadcast = new Broadcast();
-//            broadcast.setServerId(request.getServerId());
-//            broadcast.setChannelId(id);
-//            broadcast.setLoopTimes(request.getLoopTimes());
-//            broadcast.setPlayTime(request.getPlayTime());
-//            broadcast.setTitle(request.getTitle());
-//            broadcast.setContent(request.getContent());
-//            broadcast.setBroadcastStatus(BroadcastStatus.ENABLED);
-//            broadcast.setGapSecond(request.getGameSeconds());
-//            broadcastService.save(broadcast);
+//            playerCharacters.add(character);
+//            charIds.add(character.getCharId());
 //        });
+//
+//        //处理换行符
+//        String rewardNames = request.getRewardNames();
+//        String rewards = rewardNames.replaceAll("\r\n", "");
+//        String result;
+//
+//        try {
+//            result = adminService.sendMail(new MailQuery(
+//                    request.getServerId(),
+//                    request.getTitle(),
+//                    request.getContent(),
+//                    StringUtils.join(charIds, ","),
+//                    request.getMinLevel(),
+//                    request.getMaxLevel(),
+//                    0,
+//                    rewards
+//            ));
+//        } catch (Exception e) {
+//            logger.error("发送邮件异常：", e);
+////            return new Response(ResultCode.SEND_MAIL_FAILED.getCode(), e.getMessage())
+////                    .json();
+//        }
+//        result = "OK";
+//        if (!"OK".equals(result)) {
+//            logger.error("发送邮件失败：{}", result);
+//            return new Response(ResultCode.SEND_MAIL_FAILED.getCode(), result);
+//        }
+//
+//        MailLog mailLog = new MailLog();
+//        mailLog.setServerId(request.getServerId());
+//        mailLog.setMailType(request.getMailType());
+//        mailLog.setTitle(request.getTitle());
+//        mailLog.setContent(request.getContent());
+//        mailLog.setVocation(0);
+//        mailLog.setMinLev(request.getMinLevel());
+//        mailLog.setMaxLev(request.getMaxLevel());
+//        mailLog.setSender(request.getSender());
+//        mailLog.setStatus(Status.NORMAL);
+//        mailLogService.save(mailLog);
+//
+//        mailCharacterService.saveMailCharacters(mailLog.getId(), playerCharacters);
+//
+//        List<String> rewardNamesList = new ArrayList<>();
+//        String[] rewardName = rewards.split(";");
+//        rewardNamesList.addAll(Arrays.asList(rewardName));
+//
+//        mailRewardService.saveMailRewards(mailLog.getId(), rewardNamesList);
+//
+//        return new Response().request(request).json();
+//    }
+
+    //发送广播
+//    @RequestMapping(value = "/game/ajax_sendbroadcast", method = {RequestMethod.GET, RequestMethod.POST})
+//    public static Response ajaxSendBroadcast(Broadcast broadcast) {
+//        String result;
+//        try {
+//            result = adminService.sendBroadcast(new BroadcastQuery(
+//                    id,
+//                    request.getLoopTimes(),
+//                    request.getGameSeconds(),
+//                    request.getPlayTime(),
+//                    request.getTitle(),
+//                    request.getContent()
+//            ));
+//        } catch (Exception e) {
+//            logger.error("发送广播异常：", e);
+//            return;
+//        }
+//
+//        if (!result.equals("success")) {
+//            return;
+//        }
+//        Broadcast broadcast = new Broadcast();
+//        broadcast.setServerId(request.getServerId());
+//        broadcast.setChannelId(id);
+//        broadcast.setLoopTimes(request.getLoopTimes());
+//        broadcast.setPlayTime(request.getPlayTime());
+//        broadcast.setTitle(request.getTitle());
+//        broadcast.setContent(request.getContent());
+//        broadcast.setGapSecond(request.getGameSeconds());
+//        broadcastService.save(broadcast);
 //
 //        return new Response().request(request).json();
 //    }

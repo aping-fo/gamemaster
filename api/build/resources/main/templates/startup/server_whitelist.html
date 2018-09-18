@@ -1,0 +1,70 @@
+<div class="pageContent">
+    <form id="pagerForm" onsubmit="return closeNavTab(this);" action="startup/server_whitelist" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div class="pageFormContent" layoutH="57">
+            <div class="searchBar">
+                <table class="searchContent" width="100%" style="table-layout: fixed">
+                    <thead>
+                    <tr>
+                        <th width="15%"></th>
+                        <th width="85%"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>状态:</td>
+                        <td>
+                            <select name="whiteListEnable">
+                                <option value="1">已启用</option>
+                                <option value="0">已关闭</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>白名单(逗号分割)</td>
+                        <td><textarea name="whiteList" rows="3" style="resize:none;width: 152px"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" id="allSelect"/>服务器列表:</td>
+                        <td>
+                            <input class="required" th:each="row:${serverList}" type="checkbox" name="ids"
+                                   th:text="${row.serverName}" th:value="${row.id}"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="formBar">
+            <ul>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                <li>
+                    <div class="button">
+                        <div class="buttonContent">
+                            <button class="close">取消</button>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="button">
+                        <div class="buttonContent">
+                            <button type="submit">保存</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $('#allSelect').click(function () {
+        var ids = $('input[name=ids]');
+        for(var i=0;i<ids.length;i++){
+            if($(this).prop("checked")){
+                ids.eq(i).prop("checked",true);
+            }else{
+                ids.eq(i).prop("checked",false);
+            }
+        }
+    });
+</script>

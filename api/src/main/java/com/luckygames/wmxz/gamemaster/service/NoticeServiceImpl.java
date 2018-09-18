@@ -36,4 +36,9 @@ public class NoticeServiceImpl extends BaseServiceImpl<NoticeEntity> implements 
     public Notice searchById(Long id) {
         return noticeMapper.selectById(id);
     }
+
+    @Override
+    public Notice searchLast() {
+        return noticeMapper.searchLast();
+    }
 }

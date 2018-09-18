@@ -1,0 +1,89 @@
+<div class="pageContent">
+    <form id="pagerForm" onsubmit="return closeNavTab(this);" action="startup/server_createnew" method="post"
+          onreset="$(this).find('select.combox').comboxReset()">
+        <div class="pageFormContent" layoutH="57">
+            <div class="searchBar">
+                <table class="searchContent">
+                    <tr>
+                        <td>区服ID</td>
+                        <td><input name="serverId" type="text" class="required"></td>
+                        <td>区服名称</td>
+                        <td><input name="serverName" type="text" class="required"></td>
+                    </tr>
+                    <tr>
+                        <td>服务器状态</td>
+                        <td>
+                            <select name="serverState">
+                                <option value="1">开放</option>
+                                <option value="2">维护</option>
+                                <option value="3">隐藏</option>
+                                <option value="4">关闭</option>
+                            </select>
+                        </td>
+                        <td>显示编号</td>
+                        <td><input name="showNumber" type="text" class="required"></td>
+                    </tr>
+                    <tr>
+                        <td>标签显示</td>
+                        <td>
+                            <div class="col-xs-1">
+                                <input type="radio" name="label" value="1"/>一般
+                                <input type="radio" name="label" value="2"/>火爆
+                                <input type="radio" name="label" value="3"/>爆满
+                                <input type="radio" name="label" value="4"/>新服
+                                <input type="radio" name="label" value="5" checked="checked"/>推荐
+                                <input type="radio" name="label" value="6"/>审核服
+                                <input type="radio" name="label" value="7"/>代理服
+                            </div>
+                        </td>
+                        <td>后台端口</td>
+                        <td><input name="gmPort" type="text" class="required"></td>
+                    </tr>
+                    <tr>
+                        <td>服务器IP</td>
+                        <td><input name="ip" type="text" class="required"></td>
+                        <td>服务器端口</td>
+                        <td><input name="port" type="text" class="required"></td>
+                    </tr>
+                    <tr>
+                        <td>付款通知地址</td>
+                        <td><input name="payAddress" type="text" class="required"></td>
+                    </tr>
+                    <tr>
+                        <td>开服时间</td>
+                        <td><input dateFmt="yyyy-MM-dd HH:mm:ss" name="openTime" class="date readonly required"
+                                   readonly="readonly" type="text"></td>
+                        <td>关服时间</td>
+                        <td><input dateFmt="yyyy-MM-dd HH:mm:ss" name="closeTime" class="date readonly"
+                                   readonly="readonly" type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>备注</td>
+                        <td><textarea name="remarks" rows="3" style="resize:none;width: 152px"></textarea></td>
+                        <td>维护提示</td>
+                        <td><textarea name="maintenanceTips" rows="3" style="resize:none;width: 152px"></textarea></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="formBar">
+            <ul>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                <li>
+                    <div class="button">
+                        <div class="buttonContent">
+                            <button class="close">取消</button>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="button">
+                        <div class="buttonContent">
+                            <button type="submit">保存</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </form>
+</div>

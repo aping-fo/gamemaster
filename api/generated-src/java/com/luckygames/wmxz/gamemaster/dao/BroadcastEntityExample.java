@@ -1,7 +1,5 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
-import com.luckygames.wmxz.gamemaster.model.enums.BroadcastStatus;
-import com.luckygames.wmxz.gamemaster.model.enums.BroadcastType;
 import com.luckygames.wmxz.gamemaster.model.enums.Status;
 import java.util.ArrayList;
 import java.util.Date;
@@ -298,52 +296,52 @@ public class BroadcastEntityExample {
             return (Criteria) this;
         }
 
-        public Criteria andBroadcastTypeEqualTo(BroadcastType value) {
+        public Criteria andBroadcastTypeEqualTo(Integer value) {
             addCriterion("broadcast_type =", value, "broadcastType");
             return (Criteria) this;
         }
 
-        public Criteria andBroadcastTypeNotEqualTo(BroadcastType value) {
+        public Criteria andBroadcastTypeNotEqualTo(Integer value) {
             addCriterion("broadcast_type <>", value, "broadcastType");
             return (Criteria) this;
         }
 
-        public Criteria andBroadcastTypeGreaterThan(BroadcastType value) {
+        public Criteria andBroadcastTypeGreaterThan(Integer value) {
             addCriterion("broadcast_type >", value, "broadcastType");
             return (Criteria) this;
         }
 
-        public Criteria andBroadcastTypeGreaterThanOrEqualTo(BroadcastType value) {
+        public Criteria andBroadcastTypeGreaterThanOrEqualTo(Integer value) {
             addCriterion("broadcast_type >=", value, "broadcastType");
             return (Criteria) this;
         }
 
-        public Criteria andBroadcastTypeLessThan(BroadcastType value) {
+        public Criteria andBroadcastTypeLessThan(Integer value) {
             addCriterion("broadcast_type <", value, "broadcastType");
             return (Criteria) this;
         }
 
-        public Criteria andBroadcastTypeLessThanOrEqualTo(BroadcastType value) {
+        public Criteria andBroadcastTypeLessThanOrEqualTo(Integer value) {
             addCriterion("broadcast_type <=", value, "broadcastType");
             return (Criteria) this;
         }
 
-        public Criteria andBroadcastTypeIn(List<BroadcastType> values) {
+        public Criteria andBroadcastTypeIn(List<Integer> values) {
             addCriterion("broadcast_type in", values, "broadcastType");
             return (Criteria) this;
         }
 
-        public Criteria andBroadcastTypeNotIn(List<BroadcastType> values) {
+        public Criteria andBroadcastTypeNotIn(List<Integer> values) {
             addCriterion("broadcast_type not in", values, "broadcastType");
             return (Criteria) this;
         }
 
-        public Criteria andBroadcastTypeBetween(BroadcastType value1, BroadcastType value2) {
+        public Criteria andBroadcastTypeBetween(Integer value1, Integer value2) {
             addCriterion("broadcast_type between", value1, value2, "broadcastType");
             return (Criteria) this;
         }
 
-        public Criteria andBroadcastTypeNotBetween(BroadcastType value1, BroadcastType value2) {
+        public Criteria andBroadcastTypeNotBetween(Integer value1, Integer value2) {
             addCriterion("broadcast_type not between", value1, value2, "broadcastType");
             return (Criteria) this;
         }
@@ -678,52 +676,52 @@ public class BroadcastEntityExample {
             return (Criteria) this;
         }
 
-        public Criteria andBroadcastStatusEqualTo(BroadcastStatus value) {
+        public Criteria andBroadcastStatusEqualTo(Integer value) {
             addCriterion("broadcast_status =", value, "broadcastStatus");
             return (Criteria) this;
         }
 
-        public Criteria andBroadcastStatusNotEqualTo(BroadcastStatus value) {
+        public Criteria andBroadcastStatusNotEqualTo(Integer value) {
             addCriterion("broadcast_status <>", value, "broadcastStatus");
             return (Criteria) this;
         }
 
-        public Criteria andBroadcastStatusGreaterThan(BroadcastStatus value) {
+        public Criteria andBroadcastStatusGreaterThan(Integer value) {
             addCriterion("broadcast_status >", value, "broadcastStatus");
             return (Criteria) this;
         }
 
-        public Criteria andBroadcastStatusGreaterThanOrEqualTo(BroadcastStatus value) {
+        public Criteria andBroadcastStatusGreaterThanOrEqualTo(Integer value) {
             addCriterion("broadcast_status >=", value, "broadcastStatus");
             return (Criteria) this;
         }
 
-        public Criteria andBroadcastStatusLessThan(BroadcastStatus value) {
+        public Criteria andBroadcastStatusLessThan(Integer value) {
             addCriterion("broadcast_status <", value, "broadcastStatus");
             return (Criteria) this;
         }
 
-        public Criteria andBroadcastStatusLessThanOrEqualTo(BroadcastStatus value) {
+        public Criteria andBroadcastStatusLessThanOrEqualTo(Integer value) {
             addCriterion("broadcast_status <=", value, "broadcastStatus");
             return (Criteria) this;
         }
 
-        public Criteria andBroadcastStatusIn(List<BroadcastStatus> values) {
+        public Criteria andBroadcastStatusIn(List<Integer> values) {
             addCriterion("broadcast_status in", values, "broadcastStatus");
             return (Criteria) this;
         }
 
-        public Criteria andBroadcastStatusNotIn(List<BroadcastStatus> values) {
+        public Criteria andBroadcastStatusNotIn(List<Integer> values) {
             addCriterion("broadcast_status not in", values, "broadcastStatus");
             return (Criteria) this;
         }
 
-        public Criteria andBroadcastStatusBetween(BroadcastStatus value1, BroadcastStatus value2) {
+        public Criteria andBroadcastStatusBetween(Integer value1, Integer value2) {
             addCriterion("broadcast_status between", value1, value2, "broadcastStatus");
             return (Criteria) this;
         }
 
-        public Criteria andBroadcastStatusNotBetween(BroadcastStatus value1, BroadcastStatus value2) {
+        public Criteria andBroadcastStatusNotBetween(Integer value1, Integer value2) {
             addCriterion("broadcast_status not between", value1, value2, "broadcastStatus");
             return (Criteria) this;
         }
@@ -905,6 +903,76 @@ public class BroadcastEntityExample {
 
         public Criteria andUpdateTimeNotBetween(Date value1, Date value2) {
             addCriterion("update_time not between", value1, value2, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonIsNull() {
+            addCriterion("reason is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonIsNotNull() {
+            addCriterion("reason is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonEqualTo(String value) {
+            addCriterion("reason =", value, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonNotEqualTo(String value) {
+            addCriterion("reason <>", value, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonGreaterThan(String value) {
+            addCriterion("reason >", value, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonGreaterThanOrEqualTo(String value) {
+            addCriterion("reason >=", value, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonLessThan(String value) {
+            addCriterion("reason <", value, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonLessThanOrEqualTo(String value) {
+            addCriterion("reason <=", value, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonLike(String value) {
+            addCriterion("reason like", value, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonNotLike(String value) {
+            addCriterion("reason not like", value, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonIn(List<String> values) {
+            addCriterion("reason in", values, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonNotIn(List<String> values) {
+            addCriterion("reason not in", values, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonBetween(String value1, String value2) {
+            addCriterion("reason between", value1, value2, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonNotBetween(String value1, String value2) {
+            addCriterion("reason not between", value1, value2, "reason");
             return (Criteria) this;
         }
     }

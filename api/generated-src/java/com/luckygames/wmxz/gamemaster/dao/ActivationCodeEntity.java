@@ -1,34 +1,33 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
 import com.luckygames.wmxz.gamemaster.model.entity.base.BaseEntity;
-import java.util.Date;
 import javax.persistence.Table;
 
 @Table(name="activation_code")
 public class ActivationCodeEntity extends BaseEntity {
     private Long serverId;
 
-    private String serverName;
-
-    private Long channelId;
-
-    private String channelName;
-
-    private Integer batch;
-
-    private String giftBag;
-
-    private Integer number;
-
-    private Integer frequency;
-
     private String invalidTime;
 
     private String overdueTime;
 
-    private Date synchronizationTime;
+    private Integer remarks;
 
-    private String synchronizationLog;
+    private Integer universal;
+
+    private String useTime;
+
+    private Integer usePlayerId;
+
+    private String usePlayerName;
+
+    private String usePlayerAccount;
+
+    private String useServerId;
+
+    private String name;
+
+    private String rewards;
 
     public Long getServerId() {
         return serverId;
@@ -36,62 +35,6 @@ public class ActivationCodeEntity extends BaseEntity {
 
     public void setServerId(Long serverId) {
         this.serverId = serverId;
-    }
-
-    public String getServerName() {
-        return serverName;
-    }
-
-    public void setServerName(String serverName) {
-        this.serverName = serverName == null ? null : serverName.trim();
-    }
-
-    public Long getChannelId() {
-        return channelId;
-    }
-
-    public void setChannelId(Long channelId) {
-        this.channelId = channelId;
-    }
-
-    public String getChannelName() {
-        return channelName;
-    }
-
-    public void setChannelName(String channelName) {
-        this.channelName = channelName == null ? null : channelName.trim();
-    }
-
-    public Integer getBatch() {
-        return batch;
-    }
-
-    public void setBatch(Integer batch) {
-        this.batch = batch;
-    }
-
-    public String getGiftBag() {
-        return giftBag;
-    }
-
-    public void setGiftBag(String giftBag) {
-        this.giftBag = giftBag == null ? null : giftBag.trim();
-    }
-
-    public Integer getNumber() {
-        return number;
-    }
-
-    public void setNumber(Integer number) {
-        this.number = number;
-    }
-
-    public Integer getFrequency() {
-        return frequency;
-    }
-
-    public void setFrequency(Integer frequency) {
-        this.frequency = frequency;
     }
 
     public String getInvalidTime() {
@@ -110,19 +53,75 @@ public class ActivationCodeEntity extends BaseEntity {
         this.overdueTime = overdueTime == null ? null : overdueTime.trim();
     }
 
-    public Date getSynchronizationTime() {
-        return synchronizationTime;
+    public Integer getRemarks() {
+        return remarks;
     }
 
-    public void setSynchronizationTime(Date synchronizationTime) {
-        this.synchronizationTime = synchronizationTime;
+    public void setRemarks(Integer remarks) {
+        this.remarks = remarks;
     }
 
-    public String getSynchronizationLog() {
-        return synchronizationLog;
+    public Integer getUniversal() {
+        return universal;
     }
 
-    public void setSynchronizationLog(String synchronizationLog) {
-        this.synchronizationLog = synchronizationLog == null ? null : synchronizationLog.trim();
+    public void setUniversal(Integer universal) {
+        this.universal = universal;
+    }
+
+    public String getUseTime() {
+        return useTime;
+    }
+
+    public void setUseTime(String useTime) {
+        this.useTime = useTime == null ? null : useTime.trim();
+    }
+
+    public Integer getUsePlayerId() {
+        return usePlayerId;
+    }
+
+    public void setUsePlayerId(Integer usePlayerId) {
+        this.usePlayerId = usePlayerId;
+    }
+
+    public String getUsePlayerName() {
+        return usePlayerName;
+    }
+
+    public void setUsePlayerName(String usePlayerName) {
+        this.usePlayerName = usePlayerName == null ? null : usePlayerName.trim();
+    }
+
+    public String getUsePlayerAccount() {
+        return usePlayerAccount;
+    }
+
+    public void setUsePlayerAccount(String usePlayerAccount) {
+        this.usePlayerAccount = usePlayerAccount == null ? null : usePlayerAccount.trim();
+    }
+
+    public String getUseServerId() {
+        return useServerId;
+    }
+
+    public void setUseServerId(String useServerId) {
+        this.useServerId = useServerId == null ? null : useServerId.trim();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
+    public String getRewards() {
+        return rewards;
+    }
+
+    public void setRewards(String rewards) {
+        this.rewards = rewards == null ? null : rewards.trim();
     }
 }

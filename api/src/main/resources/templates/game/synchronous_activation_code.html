@@ -1,47 +1,70 @@
-<div class="tabs" currentIndex="3">
-    <div class="tabsHeader">
-        <div class="tabsHeaderContent">
-            <ul>
-                <li><a href="game/giftpackage_add" class="j-ajax" target="navTab"><span>添加礼包(二期)</span></a></li>
-                <li><a href="game/giftpackage_sync" class="j-ajax" target="navTab"><span>同步礼包(二期)</span></a></li>
-                <li><a href="game/generate_activation_code" class="j-ajax" target="navTab"><span>生成激活码(三期)</span></a></li>
-                <li><a href="game/synchronous_activation_code" class="j-ajax" target="navTab"><span>同步激活码(三期)</span></a></li>
-                <li><a href="game/single_service_bag" class="j-ajax" target="navTab"><span>单服礼包(三期)</span></a></li>
-            </ul>
+<div class="pageHeader">
+    <form onsubmit="return ajaxNavTab(this);" action="operatingTools/activationCode" method="post">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>
+                        <label>激活码名称：</label>
+                        <input name="name" type="text" th:value="${request.name}">
+                    </td>
+                    <td>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">检索</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
-    </div>
+    </form>
 </div>
 <div class="pageContent">
+    <div class="panelBar" style="height:30px">
+        <ul class="toolBar">
+            <li>
+                <a title="生成激活码" class="edit" href="operatingTools/addActivationCode"
+                   target="dialog" width="480" height="550"
+                   mask="true"><span style="font-size: 20px">生成激活码</span></a>
+            </li>
+        </ul>
+    </div>
     <table class="table" width="100%" layoutH="137">
         <thead>
         <tr>
-            <th width="100">批次</th>
-            <th width="100">礼包</th>
-            <th width="100">激活码数量</th>
-            <th width="100">使用次数</th>
+            <th width="100">激活码</th>
+            <th width="100">备注</th>
+            <th width="100">物品</th>
+            <th width="100">万能码</th>
             <th width="100">生效时间</th>
-            <th width="100">过期时间</th>
+            <th width="100">失效时间</th>
+            <th width="100">有效区服</th>
             <th width="100">创建时间</th>
-            <th width="100">同步时间</th>
-            <th width="100">同步日志</th>
-            <th width="100">操作</th>
+            <th width="100">使用时间</th>
+            <th width="100">使用角色ID</th>
+            <th width="100">使用角色名称</th>
+            <th width="100">使用角色账户</th>
+            <th width="100">使用服务器</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="row,iterStat:${activationCodeList}">
-            <td th:text="${row.batch}"></td>
-            <td th:text="${row.giftBag}"></td>
-            <td th:text="${row.number}"></td>
-            <td th:text="${row.frequency}"></td>
-            <td th:if="${row.invalidTime} ne''" th:text="${row.invalidTime}"></td>
-            <td th:if="${row.invalidTime} eq''" th:text="无"></td>
-            <td th:if="${row.overdueTime} ne''" th:text="${row.overdueTime}"></td>
-            <td th:if="${row.overdueTime} eq''" th:text="无"></td>
-            <td th:text="${#dates.format(row.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-            <td th:text="${#dates.format(row.synchronizationTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-            <td th:text="${row.synchronizationLog}"></td>
-            <td><a class="button" th:href="@{game/generate_activation_code(id=${row.id})}" target="navTab"><span>编辑</span></a></td>
+        <tr th:each="row,iterStat:${list}">
+            <td th:text="${row.name}"></td>
+            <td th:text="${row.remarks}"></td>
+            <td th:text="${row.rewards}"></td>
+            <td th:if="${row.universal==1}" th:text="是"></td>
+            <td th:if="${row.universal==0}" th:text="否"></td>
+            <td th:text="${row.invalidTime}"></td>
+            <td th:text="${row.overdueTime}"></td>
+            <td th:text="${row.serverName}"></td>
+            <td th:text="${#dates.format(row.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${row.useTime}"></td>
+            <td th:text="${row.usePlayerId}"></td>
+            <td th:text="${row.usePlayerName}"></td>
+            <td th:text="${row.usePlayerAccount}"></td>
+            <td th:text="${row.useServerName}"></td>
         </tr>
+        <tr th:if="${list.size()==0}"><td colspan="6" style="text-align: center">暂无数据</td></tr>
         </tbody>
     </table>
     <div th:replace="_include/pager"></div>
