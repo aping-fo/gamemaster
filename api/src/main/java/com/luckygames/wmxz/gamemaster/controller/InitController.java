@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.data.GoodsConfig;
 import com.luckygames.wmxz.gamemaster.model.view.request.ServerSearchQuery;
+import com.luckygames.wmxz.gamemaster.service.NoticeService;
 import com.luckygames.wmxz.gamemaster.service.ServerService;
 import com.luckygames.wmxz.gamemaster.utils.GameDataUtils;
 import com.luckygames.wmxz.gamemaster.utils.XmlUtil2;
@@ -30,6 +31,8 @@ import java.util.stream.Collectors;
 public class InitController extends BaseController implements ApplicationRunner {
     @Autowired
     private ServerService serverService;
+    @Autowired
+    private NoticeService noticeService;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -41,6 +44,9 @@ public class InitController extends BaseController implements ApplicationRunner 
         //初始化服务器列表
         ServerSearchQuery query = new ServerSearchQuery();
         AdminController.serverList = serverService.searchPage(query);
+
+        //初始化公告
+        AdminController.notice = noticeService.searchLast();
 
         System.out.println("加载完毕...");
     }

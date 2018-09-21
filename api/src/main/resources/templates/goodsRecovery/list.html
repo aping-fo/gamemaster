@@ -1,0 +1,75 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return ajaxNavTab(this);" action="operatingTools/recoveryGoods" method="post">
+        <div class="searchBar" style="height: 200px">
+            <table class="searchContent">
+                <tr>
+                    <td>物品</td>
+                    <td>
+                        <select id="goods" name="goodId">
+                            <option>全部</option>
+                            <option th:each="goods:${goodsList}" th:text="${goods.name}" th:value="${goods.id}" th:selected="${request.goodId==goods.id}"></option>
+                        </select>
+                    </td>
+                    <td class="dateRange">
+                        日期:
+                        <input name="startDate" class="date readonly" readonly="readonly" type="text" th:value="${request.startDate}">
+                        <span class="limit">-</span>
+                        <input name="endDate" class="date readonly" readonly="readonly" type="text" th:value="${request.endDate}">
+                    </td>
+                    <td>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">检索</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar" style="height:30px">
+        <ul class="toolBar">
+            <li>
+                <a title="物品回收" class="edit" href="operatingTools/addRecoveryGoods" target="dialog" mask="true" height="400">
+                    <span style="font-size: 20px">物品回收</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <table class="table" layoutH="270" width="100%">
+        <thead>
+        <tr>
+            <th width="120">区服</th>
+            <th width="120">角色id</th>
+            <th width="120">角色名称</th>
+            <th width="120">回收物品</th>
+            <th width="120">操作时间</th>
+            <th width="120">操作原因</th>
+            <th width="120">状态</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${list}">
+            <td th:text="${row.serverName}"></td>
+            <td th:text="${row.playerId}"></td>
+            <td th:text="${row.playerName}"></td>
+            <td th:text="${row.goods}"></td>
+            <td th:text="${#dates.format(row.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${row.reason}"></td>
+            <td th:if="${row.state==1}" th:text="已回收"></td>
+            <td th:if="${row.state==2}" th:text="玩家id不存在"></td>
+            <td th:if="${row.state==3}" th:text="回收物品不存在"></td>
+        </tr>
+        <tr th:if="${list.size()==0}">
+            <td colspan="6" style="text-align: center">暂无数据</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#goods').searchableSelect();
+    });
+</script>

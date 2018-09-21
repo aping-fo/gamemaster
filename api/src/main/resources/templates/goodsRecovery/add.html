@@ -1,0 +1,61 @@
+<div class="pageHeader">
+    <div class="searchBar">
+        <form id="create" onsubmit="return closeNavTab(this);" action="operatingTools/addRecoveryGoods" method="post">
+            <table class="searchContent">
+                <tr>
+                    <td>服务器</td>
+                    <td>
+                        <select name="serverId" class="required">
+                            <option th:each="server:${serverList}" th:value="${server.serverId}" th:utext="${server.serverName}"></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>角色ID</td>
+                    <td><input name="playerId" type="number"></td>
+                </tr>
+                <tr>
+                    <td>物品</td>
+                    <td>
+                        <select id="recovery_goods">
+                            <option th:each="goods:${goodsList}" th:text="${goods.name}" th:value="${goods.id}"></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>数量</td>
+                    <td><input type="number" id="recovery_count" min="1"/><input type="button" value="添加" id="addButton"/></td>
+                </tr>
+                <tr>
+                    <td>回收物品</td>
+                    <td>
+                        <textarea name="goods" class="textArea readonly required" cols="30" rows="4" style="resize: none;margin-top: 10px" id="reward" readonly="readonly"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>发送原因</td>
+                    <td><textarea name="reason" class="required textArea" cols="15" rows="1" style="resize: none"></textarea></td>
+                </tr>
+                <tr>
+                    <td>
+                        <button id="submit" type="submit">提交</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#recovery_goods').searchableSelect();
+    });
+    $('#addButton').click(function () {
+        var goods = $('#recovery_goods').val();
+        var count = $('#recovery_count').val();
+        if (count > 0) {
+            $('#reward').val($('#reward').val() + goods + ":" + count + ";\n");
+        } else {
+            alert("请选择物品数量");
+        }
+    });
+</script>

@@ -1,6 +1,9 @@
 package com.luckygames.wmxz.gamemaster.service;
 
 import com.luckygames.wmxz.gamemaster.model.view.base.GMQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.ActivationCodeQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.ActivitySearchQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.RecoveryGoodsQuery;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -96,5 +99,11 @@ public interface AdminService {
      * 踢人
      */
     public String kickLine(GMQuery query);
+
+    //更新激活码
+    public String sendActivationCode(ActivationCodeQuery query);
+
+    //物品回收
+    public String recoveryGoods(RecoveryGoodsQuery query);
 }
 

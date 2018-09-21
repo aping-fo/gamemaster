@@ -23,9 +23,9 @@
     <div class="panelBar" style="height:30px">
         <ul class="toolBar">
             <li>
-                <a title="生成激活码" class="edit" href="operatingTools/addActivationCode"
-                   target="dialog" width="480" height="550"
-                   mask="true"><span style="font-size: 20px">生成激活码</span></a>
+                <a title="生成激活码" class="edit" href="operatingTools/addActivationCode" target="dialog" mask="true" height="400">
+                    <span style="font-size: 20px">生成激活码</span>
+                </a>
             </li>
         </ul>
     </div>
@@ -56,15 +56,18 @@
             <td th:if="${row.universal==0}" th:text="否"></td>
             <td th:text="${row.invalidTime}"></td>
             <td th:text="${row.overdueTime}"></td>
-            <td th:text="${row.serverName}"></td>
+            <td th:if="${row.serverId!=0}" th:text="${row.serverName}"></td>
+            <td th:if="${row.serverId==0}" th:text="全部"></td>
             <td th:text="${#dates.format(row.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-            <td th:text="${row.useTime}"></td>
+            <td th:text="${#dates.format(row.useTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
             <td th:text="${row.usePlayerId}"></td>
             <td th:text="${row.usePlayerName}"></td>
             <td th:text="${row.usePlayerAccount}"></td>
             <td th:text="${row.useServerName}"></td>
         </tr>
-        <tr th:if="${list.size()==0}"><td colspan="6" style="text-align: center">暂无数据</td></tr>
+        <tr th:if="${list.size()==0}">
+            <td colspan="6" style="text-align: center">暂无数据</td>
+        </tr>
         </tbody>
     </table>
     <div th:replace="_include/pager"></div>

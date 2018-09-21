@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
+import java.util.List;
+
 @Service("ActivationCodeService")
 public class ActivationCodeServiceImpl extends BaseServiceImpl<ActivationCodeEntity> implements ActivationCodeService {
     @Autowired
@@ -33,5 +35,10 @@ public class ActivationCodeServiceImpl extends BaseServiceImpl<ActivationCodeEnt
     @Override
     public Page<ActivationCode> add(ActivationCode activationCode) {
         return ActivationCodeMapper.add(activationCode);
+    }
+
+    @Override
+    public List<ActivationCode> searchByServerId(Long serverId) {
+        return ActivationCodeMapper.searchByServerId(serverId);
     }
 }

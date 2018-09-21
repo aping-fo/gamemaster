@@ -12,6 +12,4 @@ import java.util.List;
 
 public interface GoodsRecoveryService extends BaseService<GoodsRecoveryEntity> {
     Page<GoodsRecovery> searchPage(GoodsRecoverySearchQuery query);
-    void addGoodsRecovery(GoodsRecoverySearchQuery query);
-    HashMap<Long,String> goodsMap();
 }

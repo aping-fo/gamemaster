@@ -10,6 +10,8 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 
+import java.util.List;
+
 public interface ActivationCodeMapper extends ActivationCodeEntityMapper<ActivationCodeEntity> {
     @SelectProvider(type = ActivationCodeSqlProvider.class, method = "searchPage")
     Page<ActivationCode> searchPage(ActivationCodeSearchQuery query);
@@ -19,4 +21,7 @@ public interface ActivationCodeMapper extends ActivationCodeEntityMapper<Activat
 
     @Select("select * from activation_code where id = #{id}")
     ActivationCode selectById(@Param("id") Long id);
+
+    @Select("select * from activation_code where (server_id = #{serverId} or server_id=0) and now()<=overdue_time and (use_player_id is null or universal=1)")
+    List<ActivationCode> searchByServerId(@Param("serverId") Long serverId);
 }

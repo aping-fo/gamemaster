@@ -6,30 +6,10 @@ import com.luckygames.wmxz.gamemaster.dao.GoodsRecoveryEntityExample.Criterion;
 import com.luckygames.wmxz.gamemaster.dao.GoodsRecoveryEntityExample;
 import java.util.List;
 import java.util.Map;
-
-import com.luckygames.wmxz.gamemaster.model.view.request.GoodsRecoverySearchQuery;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.jdbc.SQL;
 
 public class GoodsRecoveryEntitySqlProvider {
-    public String searchPage(GoodsRecoverySearchQuery query) {
-        StringBuilder sql = new StringBuilder("SELECT * FROM goods_recovery where 1=1 ");
-        if (query.getChannelIds() != null && !query.getChannelIds().isEmpty()) {
-            String ids = StringUtils.join(query.getChannelIds(), ",");
-            sql.append(" and channel_id in (").append(ids).append(")  ");
-        }
-        if (query.getServerIds() != null && !query.getServerIds().isEmpty()) {
-            String ids = StringUtils.join(query.getServerIds(), ",");
-            sql.append(" and server_id in (").append(ids).append(")  ");
-        }
-        if (StringUtils.isNotBlank(query.getStartDate())) {
-            sql.append(" and update_time >= #{startDate}  ");
-        }
-        if (StringUtils.isNotBlank(query.getEndDate())) {
-            sql.append(" and update_time < #{endDate}  ");
-        }
-        return sql.toString();
-    }
+
     public String countByExample(GoodsRecoveryEntityExample example) {
         SQL sql = new SQL();
         sql.SELECT("count(*)").FROM("goods_recovery");
@@ -56,56 +36,36 @@ public class GoodsRecoveryEntitySqlProvider {
             sql.VALUES("`status`", "#{status,jdbcType=INTEGER}");
         }
         
-        if (record.getServerId() != null) {
-            sql.VALUES("server_id", "#{serverId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getServerName() != null) {
-            sql.VALUES("`server_name`", "#{serverName,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getChannelId() != null) {
-            sql.VALUES("channel_id", "#{channelId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getChannelName() != null) {
-            sql.VALUES("channel_name", "#{channelName,jdbcType=VARCHAR}");
-        }
-        
         if (record.getCreateTime() != null) {
-            sql.VALUES("create_time", "#{createTime,jdbcType=DATE}");
+            sql.VALUES("create_time", "#{createTime,jdbcType=TIMESTAMP}");
         }
         
         if (record.getUpdateTime() != null) {
-            sql.VALUES("update_time", "#{updateTime,jdbcType=DATE}");
+            sql.VALUES("update_time", "#{updateTime,jdbcType=TIMESTAMP}");
         }
         
         if (record.getPlayerId() != null) {
             sql.VALUES("player_id", "#{playerId,jdbcType=BIGINT}");
         }
         
-        if (record.getPlayerName() != null) {
-            sql.VALUES("player_name", "#{playerName,jdbcType=VARCHAR}");
+        if (record.getGoods() != null) {
+            sql.VALUES("goods", "#{goods,jdbcType=VARCHAR}");
         }
         
-        if (record.getGoodsId() != null) {
-            sql.VALUES("goods_id", "#{goodsId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getGoodsName() != null) {
-            sql.VALUES("goods_name", "#{goodsName,jdbcType=VARCHAR}");
+        if (record.getReason() != null) {
+            sql.VALUES("reason", "#{reason,jdbcType=VARCHAR}");
         }
         
         if (record.getState() != null) {
             sql.VALUES("`state`", "#{state,jdbcType=INTEGER}");
         }
         
-        if (record.getOperator() != null) {
-            sql.VALUES("`operator`", "#{operator,jdbcType=VARCHAR}");
+        if (record.getServerId() != null) {
+            sql.VALUES("server_id", "#{serverId,jdbcType=BIGINT}");
         }
         
-        if (record.getReason() != null) {
-            sql.VALUES("reason", "#{reason,jdbcType=VARCHAR}");
+        if (record.getPlayerName() != null) {
+            sql.VALUES("player_name", "#{playerName,jdbcType=VARCHAR}");
         }
         
         return sql.toString();
@@ -119,19 +79,14 @@ public class GoodsRecoveryEntitySqlProvider {
             sql.SELECT("id");
         }
         sql.SELECT("`status`");
-        sql.SELECT("server_id");
-        sql.SELECT("`server_name`");
-        sql.SELECT("channel_id");
-        sql.SELECT("channel_name");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
         sql.SELECT("player_id");
-        sql.SELECT("player_name");
-        sql.SELECT("goods_id");
-        sql.SELECT("goods_name");
-        sql.SELECT("`state`");
-        sql.SELECT("`operator`");
+        sql.SELECT("goods");
         sql.SELECT("reason");
+        sql.SELECT("`state`");
+        sql.SELECT("server_id");
+        sql.SELECT("player_name");
         sql.FROM("goods_recovery");
         applyWhere(sql, example, false);
         
@@ -157,56 +112,36 @@ public class GoodsRecoveryEntitySqlProvider {
             sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         }
         
-        if (record.getServerId() != null) {
-            sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getServerName() != null) {
-            sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getChannelId() != null) {
-            sql.SET("channel_id = #{record.channelId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getChannelName() != null) {
-            sql.SET("channel_name = #{record.channelName,jdbcType=VARCHAR}");
-        }
-        
         if (record.getCreateTime() != null) {
-            sql.SET("create_time = #{record.createTime,jdbcType=DATE}");
+            sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         }
         
         if (record.getUpdateTime() != null) {
-            sql.SET("update_time = #{record.updateTime,jdbcType=DATE}");
+            sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         }
         
         if (record.getPlayerId() != null) {
             sql.SET("player_id = #{record.playerId,jdbcType=BIGINT}");
         }
         
-        if (record.getPlayerName() != null) {
-            sql.SET("player_name = #{record.playerName,jdbcType=VARCHAR}");
+        if (record.getGoods() != null) {
+            sql.SET("goods = #{record.goods,jdbcType=VARCHAR}");
         }
         
-        if (record.getGoodsId() != null) {
-            sql.SET("goods_id = #{record.goodsId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getGoodsName() != null) {
-            sql.SET("goods_name = #{record.goodsName,jdbcType=VARCHAR}");
+        if (record.getReason() != null) {
+            sql.SET("reason = #{record.reason,jdbcType=VARCHAR}");
         }
         
         if (record.getState() != null) {
             sql.SET("`state` = #{record.state,jdbcType=INTEGER}");
         }
         
-        if (record.getOperator() != null) {
-            sql.SET("`operator` = #{record.operator,jdbcType=VARCHAR}");
+        if (record.getServerId() != null) {
+            sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
         }
         
-        if (record.getReason() != null) {
-            sql.SET("reason = #{record.reason,jdbcType=VARCHAR}");
+        if (record.getPlayerName() != null) {
+            sql.SET("player_name = #{record.playerName,jdbcType=VARCHAR}");
         }
         
         applyWhere(sql, example, true);
@@ -219,19 +154,14 @@ public class GoodsRecoveryEntitySqlProvider {
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
-        sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
-        sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");
-        sql.SET("channel_id = #{record.channelId,jdbcType=BIGINT}");
-        sql.SET("channel_name = #{record.channelName,jdbcType=VARCHAR}");
-        sql.SET("create_time = #{record.createTime,jdbcType=DATE}");
-        sql.SET("update_time = #{record.updateTime,jdbcType=DATE}");
+        sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
+        sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         sql.SET("player_id = #{record.playerId,jdbcType=BIGINT}");
-        sql.SET("player_name = #{record.playerName,jdbcType=VARCHAR}");
-        sql.SET("goods_id = #{record.goodsId,jdbcType=BIGINT}");
-        sql.SET("goods_name = #{record.goodsName,jdbcType=VARCHAR}");
-        sql.SET("`state` = #{record.state,jdbcType=INTEGER}");
-        sql.SET("`operator` = #{record.operator,jdbcType=VARCHAR}");
+        sql.SET("goods = #{record.goods,jdbcType=VARCHAR}");
         sql.SET("reason = #{record.reason,jdbcType=VARCHAR}");
+        sql.SET("`state` = #{record.state,jdbcType=INTEGER}");
+        sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
+        sql.SET("player_name = #{record.playerName,jdbcType=VARCHAR}");
         
         GoodsRecoveryEntityExample example = (GoodsRecoveryEntityExample) parameter.get("example");
         applyWhere(sql, example, true);

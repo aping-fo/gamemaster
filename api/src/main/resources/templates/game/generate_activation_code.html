@@ -1,28 +1,59 @@
-<div class="pageHeader">
-    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="operatingTools/addActivationCode" method="post">
+<div class="pageHeader" xmlns:th="http://www.w3.org/1999/xhtml">
+    <form id="pagerForm" onsubmit="return closeNavTab(this);" action="operatingTools/addActivationCode" method="post">
         <input type="hidden" th:value="${activationCode.id}" name="id"/>
         <div class="searchBar">
             <table class="searchContent">
                 <tr>
                     <td>激活码数量</td>
                     <td>
-                        <input name="number" type="number">
+                        <input name="number" type="number" class="required" min="1" max="999">
+                    </td>
+                </tr>
+                <tr>
+                    <td>物品</td>
+                    <td>
+                        <select id="code_goods">
+                            <option th:each="goods:${goodsList}" th:text="${goods.name}" th:value="${goods.id}"></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>数量</td>
+                    <td><input type="number" id="code_count" min="1"/><input type="button" value="添加" id="addButton"/></td>
+                </tr>
+                <tr>
+                    <td>奖励</td>
+                    <td>
+                    <textarea name="rewards" class="textArea readonly required" cols="30" rows="4" style="resize: none;margin-top: 10px" id="reward" readonly="readonly"></textarea>
                     </td>
                 </tr>
                 <tr>
                     <td>万能码</td>
                     <td>
-                        <input name="universal" type="radio" value="0"/>否
+                        <input name="universal" type="radio" value="0" checked="checked"/>否
                         <input name="universal" type="radio" value="1"/>是
                     </td>
                 </tr>
                 <tr>
                     <td>有效开始时间</td>
-                    <td><input name="invalidTime" type="text" class="date readonly" readonly="readonly">留空不判断开始生效时间</td>
+                    <td><input name="invalidTime" type="text" class="date readonly required" readonly="readonly"></td>
                 </tr>
                 <tr>
                     <td>有效结束时间</td>
-                    <td><input name="overdueTime" type="text" class="date readonly" readonly="readonly">留空表示不会失效</td>
+                    <td><input name="overdueTime" type="text" class="date readonly required" readonly="readonly"></td>
+                </tr>
+                <tr>
+                    <td>区服</td>
+                    <td>
+                        <select name="serverId" class="required">
+                            <option value="0">全部</option>
+                            <option th:each="server:${serverList}" th:value="${server.serverId}" th:utext="${server.serverName}"></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>备注</td>
+                    <td><input name="remarks" type="text"></td>
                 </tr>
                 <tr>
                     <td></td>
@@ -32,3 +63,17 @@
         </div>
     </form>
 </div>
+<script type="text/javascript">
+    $(function () {
+        $('#code_goods').searchableSelect();
+    });
+    $('#addButton').click(function () {
+        var goods = $('#code_goods').val();
+        var count = $('#code_count').val();
+        if(count>0){
+            $('#reward').val($('#reward').val() + goods + ":" + count + ";\n");
+        }else{
+            alert("请选择物品数量");
+        }
+    });
+</script>

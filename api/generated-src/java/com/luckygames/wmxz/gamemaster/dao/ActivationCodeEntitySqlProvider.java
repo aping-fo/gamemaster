@@ -65,7 +65,7 @@ public class ActivationCodeEntitySqlProvider {
         }
         
         if (record.getUseTime() != null) {
-            sql.VALUES("use_time", "#{useTime,jdbcType=VARCHAR}");
+            sql.VALUES("use_time", "#{useTime,jdbcType=TIMESTAMP}");
         }
         
         if (record.getUsePlayerId() != null) {
@@ -171,7 +171,7 @@ public class ActivationCodeEntitySqlProvider {
         }
         
         if (record.getUseTime() != null) {
-            sql.SET("use_time = #{record.useTime,jdbcType=VARCHAR}");
+            sql.SET("use_time = #{record.useTime,jdbcType=TIMESTAMP}");
         }
         
         if (record.getUsePlayerId() != null) {
@@ -215,7 +215,7 @@ public class ActivationCodeEntitySqlProvider {
         sql.SET("overdue_time = #{record.overdueTime,jdbcType=VARCHAR}");
         sql.SET("remarks = #{record.remarks,jdbcType=INTEGER}");
         sql.SET("universal = #{record.universal,jdbcType=INTEGER}");
-        sql.SET("use_time = #{record.useTime,jdbcType=VARCHAR}");
+        sql.SET("use_time = #{record.useTime,jdbcType=TIMESTAMP}");
         sql.SET("use_player_id = #{record.usePlayerId,jdbcType=INTEGER}");
         sql.SET("use_player_name = #{record.usePlayerName,jdbcType=VARCHAR}");
         sql.SET("use_player_account = #{record.usePlayerAccount,jdbcType=VARCHAR}");

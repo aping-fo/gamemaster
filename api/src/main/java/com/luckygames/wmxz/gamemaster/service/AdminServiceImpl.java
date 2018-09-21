@@ -3,7 +3,9 @@ package com.luckygames.wmxz.gamemaster.service;
 import com.luckygames.wmxz.gamemaster.common.constants.AdminUrl;
 import com.luckygames.wmxz.gamemaster.model.entity.Server;
 import com.luckygames.wmxz.gamemaster.model.view.base.GMQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.ActivationCodeQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.BackendCommand;
+import com.luckygames.wmxz.gamemaster.model.view.request.RecoveryGoodsQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -93,6 +95,15 @@ public class AdminServiceImpl implements AdminService {
         BackendCommand command = (BackendCommand)query;
         command.setAction(AdminUrl.KICK.getUrl());
         return reqBackendCommond(command);
+    }
+
+    public String sendActivationCode(ActivationCodeQuery query) {
+        return commonRequest(query.encodeReqParams(), restTemplate, query.getServerId(), AdminUrl.ACTIVATION_CODE.getUrl());
+    }
+
+    @Override
+    public String recoveryGoods(RecoveryGoodsQuery query) {
+        return commonRequest(query.encodeReqParams(), restTemplate, query.getServerId(), AdminUrl.RECOVERY_GOODS.getUrl());
     }
 
     public String reqBackendCommond(BackendCommand command){

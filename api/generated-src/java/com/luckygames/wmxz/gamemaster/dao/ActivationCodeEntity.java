@@ -1,6 +1,7 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
 import com.luckygames.wmxz.gamemaster.model.entity.base.BaseEntity;
+import java.util.Date;
 import javax.persistence.Table;
 
 @Table(name="activation_code")
@@ -15,7 +16,7 @@ public class ActivationCodeEntity extends BaseEntity {
 
     private Integer universal;
 
-    private String useTime;
+    private Date useTime;
 
     private Integer usePlayerId;
 
@@ -69,12 +70,12 @@ public class ActivationCodeEntity extends BaseEntity {
         this.universal = universal;
     }
 
-    public String getUseTime() {
+    public Date getUseTime() {
         return useTime;
     }
 
-    public void setUseTime(String useTime) {
-        this.useTime = useTime == null ? null : useTime.trim();
+    public void setUseTime(Date useTime) {
+        this.useTime = useTime;
     }
 
     public Integer getUsePlayerId() {

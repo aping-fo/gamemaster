@@ -11,6 +11,8 @@ public enum AdminUrl {
     MAIL("/send_mail", "发送邮件"),
     CHAT("/chatMonitoring", "聊天监控"),
     KICK("KICK_PLAYER", "踢人"),
+    ACTIVATION_CODE("/update_ActivationCode", "更新激活码"),
+    RECOVERY_GOODS("/goods_recovery", "物品回收"),
     BROADCAST("KICK_PLAYER", "发送广播");
 
     private final String url;

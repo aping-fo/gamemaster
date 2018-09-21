@@ -230,7 +230,6 @@ public class GameController extends BaseController {
                 .data("mailLogs", mailLogs);
     }
 
-
     //广播管理
     @RequestMapping(value = {"/broadcast"}, method = {RequestMethod.GET, RequestMethod.POST})
     public Response broadcast(Broadcast broadcast) {
@@ -285,6 +284,8 @@ public class GameController extends BaseController {
                 }
                 noticeService.update(notice);
             }
+
+            AdminController.notice = noticeService.searchLast();
         }
 
         NoticeSearchQuery query = new NoticeSearchQuery();

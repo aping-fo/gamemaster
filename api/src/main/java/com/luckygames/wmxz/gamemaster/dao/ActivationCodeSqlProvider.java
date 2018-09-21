@@ -12,9 +12,9 @@ public class ActivationCodeSqlProvider {
     }
 
     public String searchPage(ActivationCodeSearchQuery query) {
-        StringBuilder sql = new StringBuilder("SELECT * FROM activation_code where 1=1 ");
+        StringBuilder sql = new StringBuilder("SELECT ac.*,s.server_name,se.server_name useServerName FROM activation_code ac left join server s on ac.server_id=s.server_id left join server se on ac.use_server_id=se.server_id where 1=1 ");
         if (StringUtils.isNotBlank(query.getName())) {
-            sql.append(" and name like \"%\"#{name}\"%\" ");
+            sql.append(" and ac.name like \"%\"#{name}\"%\" ");
         }
         return sql.toString();
     }

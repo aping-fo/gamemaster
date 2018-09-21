@@ -676,62 +676,52 @@ public class ActivationCodeEntityExample {
             return (Criteria) this;
         }
 
-        public Criteria andUseTimeEqualTo(String value) {
+        public Criteria andUseTimeEqualTo(Date value) {
             addCriterion("use_time =", value, "useTime");
             return (Criteria) this;
         }
 
-        public Criteria andUseTimeNotEqualTo(String value) {
+        public Criteria andUseTimeNotEqualTo(Date value) {
             addCriterion("use_time <>", value, "useTime");
             return (Criteria) this;
         }
 
-        public Criteria andUseTimeGreaterThan(String value) {
+        public Criteria andUseTimeGreaterThan(Date value) {
             addCriterion("use_time >", value, "useTime");
             return (Criteria) this;
         }
 
-        public Criteria andUseTimeGreaterThanOrEqualTo(String value) {
+        public Criteria andUseTimeGreaterThanOrEqualTo(Date value) {
             addCriterion("use_time >=", value, "useTime");
             return (Criteria) this;
         }
 
-        public Criteria andUseTimeLessThan(String value) {
+        public Criteria andUseTimeLessThan(Date value) {
             addCriterion("use_time <", value, "useTime");
             return (Criteria) this;
         }
 
-        public Criteria andUseTimeLessThanOrEqualTo(String value) {
+        public Criteria andUseTimeLessThanOrEqualTo(Date value) {
             addCriterion("use_time <=", value, "useTime");
             return (Criteria) this;
         }
 
-        public Criteria andUseTimeLike(String value) {
-            addCriterion("use_time like", value, "useTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andUseTimeNotLike(String value) {
-            addCriterion("use_time not like", value, "useTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andUseTimeIn(List<String> values) {
+        public Criteria andUseTimeIn(List<Date> values) {
             addCriterion("use_time in", values, "useTime");
             return (Criteria) this;
         }
 
-        public Criteria andUseTimeNotIn(List<String> values) {
+        public Criteria andUseTimeNotIn(List<Date> values) {
             addCriterion("use_time not in", values, "useTime");
             return (Criteria) this;
         }
 
-        public Criteria andUseTimeBetween(String value1, String value2) {
+        public Criteria andUseTimeBetween(Date value1, Date value2) {
             addCriterion("use_time between", value1, value2, "useTime");
             return (Criteria) this;
         }
 
-        public Criteria andUseTimeNotBetween(String value1, String value2) {
+        public Criteria andUseTimeNotBetween(Date value1, Date value2) {
             addCriterion("use_time not between", value1, value2, "useTime");
             return (Criteria) this;
         }
