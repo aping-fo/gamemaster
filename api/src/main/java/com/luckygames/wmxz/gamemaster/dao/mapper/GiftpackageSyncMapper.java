@@ -11,11 +11,8 @@ import java.util.List;
 
 public interface GiftpackageSyncMapper extends GiftpackageSyncEntityMapper<GiftpackageSyncEntity> {
 
-    @SelectProvider(type = GiftpackageSyncSqlProvider.class, method = "queryGiftpackageSyncReportFromOrderSingleDate")
-    List<GiftpackageSync> queryGiftpackageSyncReportFromOrderSingleDate(String singleDate);
-
-    @SelectProvider(type = GiftpackageSyncSqlProvider.class, method = "queryGiftpackageSyncReport")
-    List<GiftpackageSync> queryGiftpackageSyncReport(GiftpackageSyncSearchQuery query);
+    @SelectProvider(type = GiftpackageSyncSqlProvider.class, method = "searchPage")
+    List<GiftpackageSync> searchPage(GiftpackageSyncSearchQuery query);
 
     @SelectProvider(type = GiftpackageSyncSqlProvider.class, method = "selectById")
     GiftpackageSync selectById(Integer id);

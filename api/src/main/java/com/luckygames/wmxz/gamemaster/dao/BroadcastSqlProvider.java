@@ -35,7 +35,7 @@ public class BroadcastSqlProvider {
         if (StringUtils.isNotBlank(query.getEndDate())) {
             sql.append(" and b.play_time < #{endDate}  ");
         }
-
+        sql.append(" order by b.update_time desc");
         return sql.toString();
     }
 

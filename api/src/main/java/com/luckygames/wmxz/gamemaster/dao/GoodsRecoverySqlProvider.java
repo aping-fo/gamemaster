@@ -15,6 +15,7 @@ public class GoodsRecoverySqlProvider {
         if (query.getGoodId() != null) {
             sql.append(" and gr.goods like '%" + query.getGoodId() + "%' ");
         }
+        sql.append(" order by gr.update_time desc");
         return sql.toString();
     }
 }

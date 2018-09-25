@@ -16,4 +16,6 @@ public interface ActivationCodeService extends BaseService<ActivationCodeEntity>
     Page<ActivationCode> add(ActivationCode activationCode);
 
     List<ActivationCode> searchByServerId(Long serverId);
+
+    ActivationCode searchLast();
 }

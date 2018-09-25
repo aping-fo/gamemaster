@@ -16,6 +16,10 @@ public class ActivationCodeSqlProvider {
         if (StringUtils.isNotBlank(query.getName())) {
             sql.append(" and ac.name like \"%\"#{name}\"%\" ");
         }
+        if (StringUtils.isNotBlank(query.getRemarks())) {
+            sql.append(" and ac.remarks like \"%\"#{remarks}\"%\" ");
+        }
+        sql.append(" order by ac.create_time desc");
         return sql.toString();
     }
 }

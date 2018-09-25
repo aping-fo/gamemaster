@@ -1,0 +1,65 @@
+<div class="tabs" currentIndex="0">
+    <div class="tabsHeader">
+        <div class="tabsHeaderContent">
+            <ul>
+                <li><a href="operatingTools/activationCode" class="j-ajax" target="navTab"><span>激活码</span></a></li>
+                <li><a href="operatingTools/activationCodeDetails" class="j-ajax" target="navTab"><span>激活码详情</span></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="pageContent">
+    <div class="panelBar" style="height:30px">
+        <ul class="toolBar">
+            <li>
+                <a title="生成激活码" class="edit" href="operatingTools/addActivationCode" target="dialog" mask="true" height="400">
+                    <span style="font-size: 20px">生成激活码</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="137">
+        <thead>
+        <tr>
+            <th width="100">活动代码</th>
+            <th width="100">类型</th>
+            <th width="100">区服</th>
+            <th width="100">生效时间</th>
+            <th width="100">失效时间</th>
+            <th width="100">码数量</th>
+            <th width="100">创建时间</th>
+            <th width="100">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${list}">
+            <td th:text="${row.id}"></td>
+            <td th:text="${row.cardType}"></td>
+            <td th:if="${row.serverId!=0}" th:text="${row.serverName}"></td>
+            <td th:if="${row.serverId==0}" th:text="全部"></td>
+            <td th:text="${row.cardCount}"></td>
+            <td th:text="${row.minTermValidity}"></td>
+            <td th:text="${row.maxTermValidity}"></td>
+            <td th:text="${#dates.format(row.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td>
+                <a class="button" th:href="@{operatingTools/activationCodeDetails(remarks=${row.cardType})}" target="navTab">
+                    <span>查看详情</span>
+                </a>
+                <span class="limit"> | </span>
+                <a class="button" onclick="downloadFile(this)"><span>导出激活码</span></a>
+                <input type="hidden" id="remarks" th:value="${row.cardType}"/>
+            </td>
+        </tr>
+        <tr th:if="${list.size()==0}">
+            <td colspan="6" style="text-align: center">暂无数据</td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>
+<script type="text/javascript">
+    function downloadFile(flag) {
+        var filename=$(flag).next().val();
+        $(flag).attr("href","operatingTools/activationCodeExport?remarks="+filename);
+    }
+</script>

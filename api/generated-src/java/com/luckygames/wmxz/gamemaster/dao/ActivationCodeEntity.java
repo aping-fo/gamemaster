@@ -12,7 +12,7 @@ public class ActivationCodeEntity extends BaseEntity {
 
     private String overdueTime;
 
-    private Integer remarks;
+    private String remarks;
 
     private Integer universal;
 
@@ -54,12 +54,12 @@ public class ActivationCodeEntity extends BaseEntity {
         this.overdueTime = overdueTime == null ? null : overdueTime.trim();
     }
 
-    public Integer getRemarks() {
+    public String getRemarks() {
         return remarks;
     }
 
-    public void setRemarks(Integer remarks) {
-        this.remarks = remarks;
+    public void setRemarks(String remarks) {
+        this.remarks = remarks == null ? null : remarks.trim();
     }
 
     public Integer getUniversal() {

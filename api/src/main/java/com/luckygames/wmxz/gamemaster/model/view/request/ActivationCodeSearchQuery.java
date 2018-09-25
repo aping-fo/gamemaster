@@ -4,6 +4,15 @@ public class ActivationCodeSearchQuery extends CommonSearchQuery {
     private String type;
     private String name;
     private Long id;
+    private String remarks;
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
 
     public Long getId() {
         return id;

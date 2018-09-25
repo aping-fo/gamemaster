@@ -34,24 +34,24 @@ public class GiftpackageSyncServiceImpl extends BaseServiceImpl<GiftpackageSyncE
 
     @Override
     public void addGiftpackage(GiftpackageSyncSearchQuery giftpackageSyncSearchQuery) {
-        GiftpackageSync giftpackageSync = new GiftpackageSync();
-        giftpackageSync.setCardType(giftpackageSyncSearchQuery.getName());
-        giftpackageSync.setCardCount(giftpackageSyncSearchQuery.getCount());
-        giftpackageSync.setMinTermValidity(DateUtils.StringToDate(giftpackageSyncSearchQuery.getMinTermValidity()));
-        giftpackageSync.setMaxTermValidity(DateUtils.StringToDate(giftpackageSyncSearchQuery.getMaxTermValidity()));
-        giftpackageSync.setGenerateTime(new Date());
-        giftpackageSync.setChannelId(giftpackageSyncSearchQuery.getChannelId());
-        giftpackageSync.setServerId(giftpackageSyncSearchQuery.getServerId());
-        ServerEntity serverEntity = serverMapper.selectByPrimaryKey(giftpackageSyncSearchQuery.getServerId());
-        giftpackageSync.setServerName(serverEntity.getServerName());
-        ChannelEntity channelEntity = channelMapper.selectByPrimaryKey(giftpackageSyncSearchQuery.getChannelId());
-        giftpackageSync.setChannelName(channelEntity.getChannelName());
-        giftpackageSync.setCardFile(System.currentTimeMillis()+".xls");
-        giftpackageSync.setActivityId(1);
-        giftpackageSync.setIsExclusiveGiftbag(0);
-        giftpackageSync.setIsActivation(0);
-        giftpackageSync.setGenerateType(giftpackageSyncSearchQuery.getGenerateType());
-        create(giftpackageSync);
+//        GiftpackageSync giftpackageSync = new GiftpackageSync();
+//        giftpackageSync.setCardType(giftpackageSyncSearchQuery.getName());
+//        giftpackageSync.setCardCount(giftpackageSyncSearchQuery.getCount());
+//        giftpackageSync.setMinTermValidity(DateUtils.StringToDate(giftpackageSyncSearchQuery.getMinTermValidity()));
+//        giftpackageSync.setMaxTermValidity(DateUtils.StringToDate(giftpackageSyncSearchQuery.getMaxTermValidity()));
+//        giftpackageSync.setGenerateTime(new Date());
+//        giftpackageSync.setChannelId(giftpackageSyncSearchQuery.getChannelId());
+//        giftpackageSync.setServerId(giftpackageSyncSearchQuery.getServerId());
+//        ServerEntity serverEntity = serverMapper.selectByPrimaryKey(giftpackageSyncSearchQuery.getServerId());
+//        giftpackageSync.setServerName(serverEntity.getServerName());
+//        ChannelEntity channelEntity = channelMapper.selectByPrimaryKey(giftpackageSyncSearchQuery.getChannelId());
+//        giftpackageSync.setChannelName(channelEntity.getChannelName());
+//        giftpackageSync.setCardFile(System.currentTimeMillis()+".xls");
+//        giftpackageSync.setActivityId(1);
+//        giftpackageSync.setIsExclusiveGiftbag(0);
+//        giftpackageSync.setIsActivation(0);
+//        giftpackageSync.setGenerateType(giftpackageSyncSearchQuery.getGenerateType());
+//        create(giftpackageSync);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class GiftpackageSyncServiceImpl extends BaseServiceImpl<GiftpackageSyncE
         if (query.getPageNum() == null) {
             query.setPageNum(1);
         }
-        return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> GiftpackageSyncMapper.queryGiftpackageSyncReport(query));
+        return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> GiftpackageSyncMapper.searchPage(query));
     }
 
     @Override

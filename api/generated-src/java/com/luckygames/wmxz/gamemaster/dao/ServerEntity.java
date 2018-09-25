@@ -33,6 +33,10 @@ public class ServerEntity extends BaseEntity {
 
     private Integer gmPort;
 
+    private String serverGroup;
+
+    private String channel;
+
     private String whiteList;
 
     public Long getServerId() {
@@ -145,6 +149,22 @@ public class ServerEntity extends BaseEntity {
 
     public void setGmPort(Integer gmPort) {
         this.gmPort = gmPort;
+    }
+
+    public String getServerGroup() {
+        return serverGroup;
+    }
+
+    public void setServerGroup(String serverGroup) {
+        this.serverGroup = serverGroup == null ? null : serverGroup.trim();
+    }
+
+    public String getChannel() {
+        return channel;
+    }
+
+    public void setChannel(String channel) {
+        this.channel = channel == null ? null : channel.trim();
     }
 
     public String getWhiteList() {

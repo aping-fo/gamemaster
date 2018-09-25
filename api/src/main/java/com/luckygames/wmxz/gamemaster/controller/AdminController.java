@@ -7,6 +7,9 @@ import com.luckygames.wmxz.gamemaster.model.view.request.ActivationCodeQuery;
 import com.luckygames.wmxz.gamemaster.service.ActivationCodeService;
 import com.luckygames.wmxz.gamemaster.service.AdminService;
 import com.luckygames.wmxz.gamemaster.service.NoticeService;
+import com.luckygames.wmxz.gamemaster.service.ServerService;
+import com.luckygames.wmxz.gamemaster.utils.StringUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +40,28 @@ public class AdminController {
     @RequestMapping(value = "/serverList", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
     public List<Server> getServerList(String group, String channel) {
-        return serverList;
+        List<Server> list = new ArrayList<>();
+        if (StringUtils.isNotBlank(group)) {
+            serverList.forEach(s -> {
+                if (s.getServerGroup().equals(group)) {
+                    list.add(s);
+                }
+            });
+        } else {
+            return serverList;
+        }
+
+        if (StringUtils.isNotBlank(channel)) {
+            serverList.forEach(s -> {
+                if (s.getChannel().equals(channel)) {
+                    list.add(s);
+                }
+            });
+        } else {
+            return serverList;
+        }
+
+        return list;
     }
 
     //获取登录公告

@@ -64,26 +64,20 @@ public class ServerServiceImpl extends BaseServiceImpl<ServerEntity> implements 
         ServerExample example = new ServerExample();
         ServerExample.Criteria criteria = example.createCriteria();
         criteria.andStatusEqualTo(Status.NORMAL);
-
         if (StringUtils.isNotBlank(request.getKeyword())) {
             criteria.andServerNameLike(request.getKeyword());
         }
         if (CollectionUtils.isNotEmpty(request.getServerIds())) {
             criteria.andServerIdIn(request.getServerIds());
         }
-
-//        return PageHelper.startPage(request.getPageNum(), request.getPageSize()).doSelectPage(() -> serverMapper.selectByExample(example));
         return PageHelper.startPage(request.getPageNum(), request.getPageSize()).doSelectPage(() -> serverMapper.searchPage(request));
     }
 
     @Override
     public Server getByServerId(Long serverId) {
-        ServerEntity serverEntity = serverMapper.selectOne(new ServerEntity() {{
-            setServerId(serverId);
-            setStatus(Status.NORMAL);
-        }});
-        return BeanUtils.copyProperties(serverEntity, Server.class);
+        return serverMapper.getByServerId(serverId);
     }
+
 
     @Override
     public long countServers() {

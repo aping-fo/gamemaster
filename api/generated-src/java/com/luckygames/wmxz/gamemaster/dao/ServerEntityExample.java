@@ -1255,6 +1255,146 @@ public class ServerEntityExample {
             addCriterion("gm_port not between", value1, value2, "gmPort");
             return (Criteria) this;
         }
+
+        public Criteria andServerGroupIsNull() {
+            addCriterion("server_group is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerGroupIsNotNull() {
+            addCriterion("server_group is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerGroupEqualTo(String value) {
+            addCriterion("server_group =", value, "serverGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerGroupNotEqualTo(String value) {
+            addCriterion("server_group <>", value, "serverGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerGroupGreaterThan(String value) {
+            addCriterion("server_group >", value, "serverGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerGroupGreaterThanOrEqualTo(String value) {
+            addCriterion("server_group >=", value, "serverGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerGroupLessThan(String value) {
+            addCriterion("server_group <", value, "serverGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerGroupLessThanOrEqualTo(String value) {
+            addCriterion("server_group <=", value, "serverGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerGroupLike(String value) {
+            addCriterion("server_group like", value, "serverGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerGroupNotLike(String value) {
+            addCriterion("server_group not like", value, "serverGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerGroupIn(List<String> values) {
+            addCriterion("server_group in", values, "serverGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerGroupNotIn(List<String> values) {
+            addCriterion("server_group not in", values, "serverGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerGroupBetween(String value1, String value2) {
+            addCriterion("server_group between", value1, value2, "serverGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andServerGroupNotBetween(String value1, String value2) {
+            addCriterion("server_group not between", value1, value2, "serverGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelIsNull() {
+            addCriterion("channel is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelIsNotNull() {
+            addCriterion("channel is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelEqualTo(String value) {
+            addCriterion("channel =", value, "channel");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelNotEqualTo(String value) {
+            addCriterion("channel <>", value, "channel");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelGreaterThan(String value) {
+            addCriterion("channel >", value, "channel");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelGreaterThanOrEqualTo(String value) {
+            addCriterion("channel >=", value, "channel");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelLessThan(String value) {
+            addCriterion("channel <", value, "channel");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelLessThanOrEqualTo(String value) {
+            addCriterion("channel <=", value, "channel");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelLike(String value) {
+            addCriterion("channel like", value, "channel");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelNotLike(String value) {
+            addCriterion("channel not like", value, "channel");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelIn(List<String> values) {
+            addCriterion("channel in", values, "channel");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelNotIn(List<String> values) {
+            addCriterion("channel not in", values, "channel");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelBetween(String value1, String value2) {
+            addCriterion("channel between", value1, value2, "channel");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelNotBetween(String value1, String value2) {
+            addCriterion("channel not between", value1, value2, "channel");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

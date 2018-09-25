@@ -57,7 +57,7 @@ public class ActivationCodeEntitySqlProvider {
         }
         
         if (record.getRemarks() != null) {
-            sql.VALUES("remarks", "#{remarks,jdbcType=INTEGER}");
+            sql.VALUES("remarks", "#{remarks,jdbcType=VARCHAR}");
         }
         
         if (record.getUniversal() != null) {
@@ -163,7 +163,7 @@ public class ActivationCodeEntitySqlProvider {
         }
         
         if (record.getRemarks() != null) {
-            sql.SET("remarks = #{record.remarks,jdbcType=INTEGER}");
+            sql.SET("remarks = #{record.remarks,jdbcType=VARCHAR}");
         }
         
         if (record.getUniversal() != null) {
@@ -213,7 +213,7 @@ public class ActivationCodeEntitySqlProvider {
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         sql.SET("invalid_time = #{record.invalidTime,jdbcType=VARCHAR}");
         sql.SET("overdue_time = #{record.overdueTime,jdbcType=VARCHAR}");
-        sql.SET("remarks = #{record.remarks,jdbcType=INTEGER}");
+        sql.SET("remarks = #{record.remarks,jdbcType=VARCHAR}");
         sql.SET("universal = #{record.universal,jdbcType=INTEGER}");
         sql.SET("use_time = #{record.useTime,jdbcType=TIMESTAMP}");
         sql.SET("use_player_id = #{record.usePlayerId,jdbcType=INTEGER}");

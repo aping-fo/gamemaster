@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.data.GoodsConfig;
 import com.luckygames.wmxz.gamemaster.model.view.request.ServerSearchQuery;
+import com.luckygames.wmxz.gamemaster.service.ActivationCodeService;
+import com.luckygames.wmxz.gamemaster.service.GiftpackageSyncService;
 import com.luckygames.wmxz.gamemaster.service.NoticeService;
 import com.luckygames.wmxz.gamemaster.service.ServerService;
 import com.luckygames.wmxz.gamemaster.utils.GameDataUtils;
@@ -33,6 +35,8 @@ public class InitController extends BaseController implements ApplicationRunner 
     private ServerService serverService;
     @Autowired
     private NoticeService noticeService;
+    @Autowired
+    private ActivationCodeService activationCodeService;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -47,6 +51,9 @@ public class InitController extends BaseController implements ApplicationRunner 
 
         //初始化公告
         AdminController.notice = noticeService.searchLast();
+
+        //初始化礼包序号
+        OperatingToolsController.Activation_Code_batch = Integer.valueOf(activationCodeService.searchLast().getName().substring(5, 8));
 
         System.out.println("加载完毕...");
     }

@@ -24,4 +24,7 @@ public interface ActivationCodeMapper extends ActivationCodeEntityMapper<Activat
 
     @Select("select * from activation_code where (server_id = #{serverId} or server_id=0) and now()<=overdue_time and (use_player_id is null or universal=1)")
     List<ActivationCode> searchByServerId(@Param("serverId") Long serverId);
+
+    @Select("SELECT * from activation_code order by create_time desc LIMIT 1")
+    ActivationCode searchLast();
 }

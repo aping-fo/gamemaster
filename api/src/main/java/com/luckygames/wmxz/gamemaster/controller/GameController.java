@@ -121,18 +121,18 @@ public class GameController extends BaseController {
             giftpackageSyncService.delete(query.getId());
         }
 
-        List<GiftpackageAdd> giftpackageAddList = giftpackageAddService.searchType();
-        ServerSearchQuery serverSearchQuery = new ServerSearchQuery();
-        List<Server> serverList = serverService.searchList(serverSearchQuery);
-        ChannelSearchQuery channelSearchQuery = new ChannelSearchQuery();
-        List<Channel> channelList = channelService.searchList(channelSearchQuery);
+//        List<GiftpackageAdd> giftpackageAddList = giftpackageAddService.searchType();
+//        ServerSearchQuery serverSearchQuery = new ServerSearchQuery();
+//        List<Server> serverList = serverService.searchList(serverSearchQuery);
+//        ChannelSearchQuery channelSearchQuery = new ChannelSearchQuery();
+//        List<Channel> channelList = channelService.searchList(channelSearchQuery);
         Page<GiftpackageSync> giftPackagePage = giftpackageSyncService.searchPage(query);
 
         return new Response("game/giftpackage_sync")
                 .request(query)
-                .data("typeList", giftpackageAddList)
-                .data("serverList", serverList)
-                .data("channelList", channelList)
+//                .data("typeList", giftpackageAddList)
+//                .data("serverList", serverList)
+//                .data("channelList", channelList)
                 .data("list", giftPackagePage);
     }
 
@@ -141,25 +141,25 @@ public class GameController extends BaseController {
     public ResponseEntity<byte[]> download(int id, String filename, String[] title, HttpServletRequest request) {
         GiftpackageSync giftpackageSync = giftpackageSyncService.searchById(id);
 
-        if (giftpackageSync.getIsExclusiveGiftbag() == 0) {
-            giftpackageSync.setIsExclusiveGiftbag2("否");
-        } else {
-            giftpackageSync.setIsExclusiveGiftbag2("是");
-        }
-
-        if (giftpackageSync.getIsActivation() == 0) {
-            giftpackageSync.setIsActivation2("否");
-        } else {
-            giftpackageSync.setIsActivation2("是");
-        }
-
-        if (giftpackageSync.getGenerateType() == 1) {
-            giftpackageSync.setGenerateType2("同一类型只能使用1个卡号");
-        } else if (giftpackageSync.getGenerateType() == 2) {
-            giftpackageSync.setIsActivation2("同一类型可以使用多个激活码");
-        } else if (giftpackageSync.getGenerateType() == 3) {
-            giftpackageSync.setIsActivation2("特殊礼包");
-        }
+//        if (giftpackageSync.getIsExclusiveGiftbag() == 0) {
+//            giftpackageSync.setIsExclusiveGiftbag2("否");
+//        } else {
+//            giftpackageSync.setIsExclusiveGiftbag2("是");
+//        }
+//
+//        if (giftpackageSync.getIsActivation() == 0) {
+//            giftpackageSync.setIsActivation2("否");
+//        } else {
+//            giftpackageSync.setIsActivation2("是");
+//        }
+//
+//        if (giftpackageSync.getGenerateType() == 1) {
+//            giftpackageSync.setGenerateType2("同一类型只能使用1个卡号");
+//        } else if (giftpackageSync.getGenerateType() == 2) {
+//            giftpackageSync.setIsActivation2("同一类型可以使用多个激活码");
+//        } else if (giftpackageSync.getGenerateType() == 3) {
+//            giftpackageSync.setIsActivation2("特殊礼包");
+//        }
 
         List<GiftpackageSync> list = new ArrayList<>();
         list.add(giftpackageSync);

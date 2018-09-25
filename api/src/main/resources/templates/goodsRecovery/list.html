@@ -1,6 +1,6 @@
 <div class="pageHeader">
     <form id="pagerForm" onsubmit="return ajaxNavTab(this);" action="operatingTools/recoveryGoods" method="post">
-        <div class="searchBar" style="height: 200px">
+        <div class="searchBar" style="height: 177px">
             <table class="searchContent">
                 <tr>
                     <td>物品</td>
@@ -67,6 +67,7 @@
         </tr>
         </tbody>
     </table>
+    <div th:replace="_include/pager"></div>
 </div>
 <script type="text/javascript">
     $(function () {

@@ -32,24 +32,24 @@ public class GiftpackageSyncEntitySqlProvider {
             sql.VALUES("id", "#{id,jdbcType=BIGINT}");
         }
         
-        if (record.getCardFile() != null) {
-            sql.VALUES("card_file", "#{cardFile,jdbcType=VARCHAR}");
+        if (record.getStatus() != null) {
+            sql.VALUES("`status`", "#{status,jdbcType=INTEGER}");
         }
         
-        if (record.getActivityId() != null) {
-            sql.VALUES("activity_id", "#{activityId,jdbcType=INTEGER}");
+        if (record.getUpdateTime() != null) {
+            sql.VALUES("update_time", "#{updateTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getCreateTime() != null) {
+            sql.VALUES("create_time", "#{createTime,jdbcType=TIMESTAMP}");
         }
         
         if (record.getMinTermValidity() != null) {
-            sql.VALUES("min_term_validity", "#{minTermValidity,jdbcType=TIMESTAMP}");
+            sql.VALUES("min_term_validity", "#{minTermValidity,jdbcType=VARCHAR}");
         }
         
         if (record.getMaxTermValidity() != null) {
-            sql.VALUES("max_term_validity", "#{maxTermValidity,jdbcType=TIMESTAMP}");
-        }
-        
-        if (record.getIsExclusiveGiftbag() != null) {
-            sql.VALUES("is_exclusive_giftbag", "#{isExclusiveGiftbag,jdbcType=INTEGER}");
+            sql.VALUES("max_term_validity", "#{maxTermValidity,jdbcType=VARCHAR}");
         }
         
         if (record.getCardType() != null) {
@@ -60,44 +60,12 @@ public class GiftpackageSyncEntitySqlProvider {
             sql.VALUES("card_count", "#{cardCount,jdbcType=INTEGER}");
         }
         
-        if (record.getIsActivation() != null) {
-            sql.VALUES("is_activation", "#{isActivation,jdbcType=INTEGER}");
-        }
-        
         if (record.getGenerateTime() != null) {
             sql.VALUES("generate_time", "#{generateTime,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getGenerateType() != null) {
-            sql.VALUES("generate_type", "#{generateType,jdbcType=INTEGER}");
-        }
-        
-        if (record.getStatus() != null) {
-            sql.VALUES("`status`", "#{status,jdbcType=INTEGER}");
-        }
-        
         if (record.getServerId() != null) {
             sql.VALUES("server_id", "#{serverId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getServerName() != null) {
-            sql.VALUES("`server_name`", "#{serverName,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getChannelId() != null) {
-            sql.VALUES("channel_id", "#{channelId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getChannelName() != null) {
-            sql.VALUES("channel_name", "#{channelName,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getCreateTime() != null) {
-            sql.VALUES("create_time", "#{createTime,jdbcType=TIMESTAMP}");
-        }
-        
-        if (record.getUpdateTime() != null) {
-            sql.VALUES("update_time", "#{updateTime,jdbcType=TIMESTAMP}");
         }
         
         return sql.toString();
@@ -110,23 +78,15 @@ public class GiftpackageSyncEntitySqlProvider {
         } else {
             sql.SELECT("id");
         }
-        sql.SELECT("card_file");
-        sql.SELECT("activity_id");
+        sql.SELECT("`status`");
+        sql.SELECT("update_time");
+        sql.SELECT("create_time");
         sql.SELECT("min_term_validity");
         sql.SELECT("max_term_validity");
-        sql.SELECT("is_exclusive_giftbag");
         sql.SELECT("card_type");
         sql.SELECT("card_count");
-        sql.SELECT("is_activation");
         sql.SELECT("generate_time");
-        sql.SELECT("generate_type");
-        sql.SELECT("`status`");
         sql.SELECT("server_id");
-        sql.SELECT("`server_name`");
-        sql.SELECT("channel_id");
-        sql.SELECT("channel_name");
-        sql.SELECT("create_time");
-        sql.SELECT("update_time");
         sql.FROM("giftpackage_sync");
         applyWhere(sql, example, false);
         
@@ -148,24 +108,24 @@ public class GiftpackageSyncEntitySqlProvider {
             sql.SET("id = #{record.id,jdbcType=BIGINT}");
         }
         
-        if (record.getCardFile() != null) {
-            sql.SET("card_file = #{record.cardFile,jdbcType=VARCHAR}");
+        if (record.getStatus() != null) {
+            sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         }
         
-        if (record.getActivityId() != null) {
-            sql.SET("activity_id = #{record.activityId,jdbcType=INTEGER}");
+        if (record.getUpdateTime() != null) {
+            sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getCreateTime() != null) {
+            sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         }
         
         if (record.getMinTermValidity() != null) {
-            sql.SET("min_term_validity = #{record.minTermValidity,jdbcType=TIMESTAMP}");
+            sql.SET("min_term_validity = #{record.minTermValidity,jdbcType=VARCHAR}");
         }
         
         if (record.getMaxTermValidity() != null) {
-            sql.SET("max_term_validity = #{record.maxTermValidity,jdbcType=TIMESTAMP}");
-        }
-        
-        if (record.getIsExclusiveGiftbag() != null) {
-            sql.SET("is_exclusive_giftbag = #{record.isExclusiveGiftbag,jdbcType=INTEGER}");
+            sql.SET("max_term_validity = #{record.maxTermValidity,jdbcType=VARCHAR}");
         }
         
         if (record.getCardType() != null) {
@@ -176,44 +136,12 @@ public class GiftpackageSyncEntitySqlProvider {
             sql.SET("card_count = #{record.cardCount,jdbcType=INTEGER}");
         }
         
-        if (record.getIsActivation() != null) {
-            sql.SET("is_activation = #{record.isActivation,jdbcType=INTEGER}");
-        }
-        
         if (record.getGenerateTime() != null) {
             sql.SET("generate_time = #{record.generateTime,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getGenerateType() != null) {
-            sql.SET("generate_type = #{record.generateType,jdbcType=INTEGER}");
-        }
-        
-        if (record.getStatus() != null) {
-            sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
-        }
-        
         if (record.getServerId() != null) {
             sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getServerName() != null) {
-            sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getChannelId() != null) {
-            sql.SET("channel_id = #{record.channelId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getChannelName() != null) {
-            sql.SET("channel_name = #{record.channelName,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getCreateTime() != null) {
-            sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
-        }
-        
-        if (record.getUpdateTime() != null) {
-            sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         }
         
         applyWhere(sql, example, true);
@@ -225,23 +153,15 @@ public class GiftpackageSyncEntitySqlProvider {
         sql.UPDATE("giftpackage_sync");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
-        sql.SET("card_file = #{record.cardFile,jdbcType=VARCHAR}");
-        sql.SET("activity_id = #{record.activityId,jdbcType=INTEGER}");
-        sql.SET("min_term_validity = #{record.minTermValidity,jdbcType=TIMESTAMP}");
-        sql.SET("max_term_validity = #{record.maxTermValidity,jdbcType=TIMESTAMP}");
-        sql.SET("is_exclusive_giftbag = #{record.isExclusiveGiftbag,jdbcType=INTEGER}");
+        sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
+        sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
+        sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
+        sql.SET("min_term_validity = #{record.minTermValidity,jdbcType=VARCHAR}");
+        sql.SET("max_term_validity = #{record.maxTermValidity,jdbcType=VARCHAR}");
         sql.SET("card_type = #{record.cardType,jdbcType=VARCHAR}");
         sql.SET("card_count = #{record.cardCount,jdbcType=INTEGER}");
-        sql.SET("is_activation = #{record.isActivation,jdbcType=INTEGER}");
         sql.SET("generate_time = #{record.generateTime,jdbcType=TIMESTAMP}");
-        sql.SET("generate_type = #{record.generateType,jdbcType=INTEGER}");
-        sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
-        sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");
-        sql.SET("channel_id = #{record.channelId,jdbcType=BIGINT}");
-        sql.SET("channel_name = #{record.channelName,jdbcType=VARCHAR}");
-        sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
-        sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         
         GiftpackageSyncEntityExample example = (GiftpackageSyncEntityExample) parameter.get("example");
         applyWhere(sql, example, true);

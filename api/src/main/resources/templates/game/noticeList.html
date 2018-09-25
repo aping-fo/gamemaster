@@ -1,0 +1,66 @@
+<div class="pageHeader">
+    <form onsubmit="return ajaxNavTab(this);" action="operatingTools/noticeList" method="post">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td class="dateRange">
+                        日期:
+                        <input name="startDate" class="date readonly" readonly="readonly" type="text" th:value="${request.startDate}">
+                        <span class="limit">-</span>
+                        <input name="endDate" class="date readonly" readonly="readonly" type="text" th:value="${request.endDate}">
+                    </td>
+                    <td>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">检索</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar" style="height:30px">
+        <ul class="toolBar">
+            <li>
+                <a title="增加公告" class="edit" href="operatingTools/noticeAdd" target="dialog" mask="true" height="500" width="900">
+                    <span style="font-size: 20px">增加公告</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="137">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>标题</th>
+            <th>内容</th>
+            <th>开始时间</th>
+            <th>结束时间</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${list.size()!=0}" th:each="row,iterStat:${list}">
+            <td th:text="${row.id}"></td>
+            <td th:text="${row.title}"></td>
+            <td th:text="${row.content}"></td>
+            <td th:text="${row.startTime}"></td>
+            <td th:text="${row.endTime}"></td>
+            <td th:if="${row.enable==0}" th:text="隐藏"></td>
+            <td th:if="${row.enable==1}" th:text="显示"></td>
+            <td>
+                <a class="button" th:href="@{operatingTools/noticeUpdate(id=${row.id},type='update')}" target="dialog" mask="true" height="500" width="900"><span>修改</span></a>
+                <a class="button" th:href="@{operatingTools/noticeDelete(id=${row.id})}" target="navTab"><span>删除</span></a>
+            </td>
+        </tr>
+        <tr th:if="${list.size()==0}">
+            <td colspan="6" style="text-align: center">暂无数据</td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>

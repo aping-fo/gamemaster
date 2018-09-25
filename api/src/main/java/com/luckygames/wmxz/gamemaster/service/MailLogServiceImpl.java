@@ -24,6 +24,5 @@ public class MailLogServiceImpl extends BaseServiceImpl<MailLogEntity> implement
     @Override
     public Page<MailLog> searchPage(MailSearchQuery query) {
         return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> mailLogMapper.searchPage(query));
-
     }
 }

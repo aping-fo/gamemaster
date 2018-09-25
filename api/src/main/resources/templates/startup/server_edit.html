@@ -1,6 +1,5 @@
 <div class="pageContent">
-    <form id="pagerForm" onsubmit="return closeNavTab(this);" action="startup/server_edit" method="post"
-          onreset="$(this).find('select.combox').comboxReset()">
+    <form id="pagerForm" onsubmit="return closeNavTab(this);" action="startup/server_edit" method="post">
         <input type="hidden" name="id" th:value="${server.id}"/>
         <div class="pageFormContent" layoutH="57">
             <div class="searchBar">
@@ -10,6 +9,12 @@
                         <td><input type="text" name="serverId" th:value="${server.serverId}" class="required"/></td>
                         <td>区服名称</td>
                         <td><input type="text" name="serverName" th:value="${server.serverName}" class="required"/></td>
+                    </tr>
+                    <tr>
+                        <td>服务器组</td>
+                        <td><input name="serverGroup" type="text" class="required" th:value="${server.serverGroup}"></td>
+                        <td>渠道</td>
+                        <td><input name="channel" type="text" class="required" th:value="${server.channel}"></td>
                     </tr>
                     <tr>
                         <td>服务器状态</td>

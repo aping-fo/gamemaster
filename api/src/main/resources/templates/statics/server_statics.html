@@ -1,7 +1,25 @@
 <div class="pageHeader">
-    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="player/character" method="post"
-          onreset="$(this).find('select.combox').comboxReset()">
-        <div th:replace="_include/searchBar"></div>
+    <form id="pagerForm" onsubmit="return ajaxNavTab(this);" action="operatingTools/recoveryGoods" method="post">
+        <div class="searchBar" style="height: 200px">
+            <table class="searchContent">
+                <tr>
+                    <td>服务器</td>
+                    <td>
+                        <select name="serverId" class="required">
+                            <option>全部</option>
+                            <option th:each="server:${serverList}" th:value="${server.serverId}" th:utext="${server.serverName}"></option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">检索</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </form>
 </div>
 <div class="pageContent">

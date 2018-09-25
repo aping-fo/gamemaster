@@ -2,6 +2,7 @@ package com.luckygames.wmxz.gamemaster.service;
 
 import com.github.pagehelper.Page;
 
+import com.github.pagehelper.PageHelper;
 import com.luckygames.wmxz.gamemaster.dao.GoodsRecoveryEntity;
 import com.luckygames.wmxz.gamemaster.dao.mapper.GoodsRecoveryMapper;
 
@@ -31,7 +32,6 @@ public class GoodsRecoveryServiceImpl extends BaseServiceImpl<GoodsRecoveryEntit
 
     @Override
     public Page<GoodsRecovery> searchPage(GoodsRecoverySearchQuery query) {
-        return goodsRecoveryMapper.searchPage(query);
+        return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> goodsRecoveryMapper.searchPage(query));
     }
-
 }

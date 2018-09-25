@@ -1,0 +1,79 @@
+<div class="tabs" currentIndex="1">
+    <div class="tabsHeader">
+        <div class="tabsHeaderContent">
+            <ul>
+                <li><a href="operatingTools/activationCode" class="j-ajax" target="navTab"><span>激活码</span></a></li>
+                <li><a href="operatingTools/activationCodeDetails" class="j-ajax" target="navTab"><span>激活码详情</span></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="pageHeader">
+    <form onsubmit="return ajaxNavTab(this);" action="operatingTools/activationCode" method="post">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>
+                        <label>激活码名称</label>
+                        <input name="name" type="text" th:value="${request.name}">
+                    </td>
+                    <td>
+                        <label>备注</label>
+                        <input name="remarks" type="text" th:value="${request.remarks}">
+                    </td>
+                    <td>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">检索</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%" layoutH="137">
+        <thead>
+        <tr>
+            <th width="100">激活码</th>
+            <th width="100">备注</th>
+            <th width="100">物品</th>
+            <th width="100">万能码</th>
+            <th width="100">生效时间</th>
+            <th width="100">失效时间</th>
+            <th width="100">有效区服</th>
+            <th width="100">创建时间</th>
+            <th width="100">使用时间</th>
+            <th width="100">使用角色ID</th>
+            <th width="100">使用角色名称</th>
+            <th width="100">使用角色账户</th>
+            <th width="100">使用服务器</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${list}">
+            <td th:text="${row.name}"></td>
+            <td th:text="${row.remarks}"></td>
+            <td th:text="${row.rewards}"></td>
+            <td th:if="${row.universal==1}" th:text="是"></td>
+            <td th:if="${row.universal==0}" th:text="否"></td>
+            <td th:text="${row.invalidTime}"></td>
+            <td th:text="${row.overdueTime}"></td>
+            <td th:if="${row.serverId!=0}" th:text="${row.serverName}"></td>
+            <td th:if="${row.serverId==0}" th:text="全部"></td>
+            <td th:text="${#dates.format(row.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${#dates.format(row.useTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${row.usePlayerId}"></td>
+            <td th:text="${row.usePlayerName}"></td>
+            <td th:text="${row.usePlayerAccount}"></td>
+            <td th:text="${row.useServerName}"></td>
+        </tr>
+        <tr th:if="${list.size()==0}">
+            <td colspan="6" style="text-align: center">暂无数据</td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>

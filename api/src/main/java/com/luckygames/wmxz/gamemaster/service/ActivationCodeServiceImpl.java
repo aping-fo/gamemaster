@@ -1,6 +1,7 @@
 package com.luckygames.wmxz.gamemaster.service;
 
 import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.luckygames.wmxz.gamemaster.dao.ActivationCodeEntity;
 import com.luckygames.wmxz.gamemaster.dao.mapper.ActivationCodeMapper;
 import com.luckygames.wmxz.gamemaster.model.entity.ActivationCode;
@@ -24,7 +25,7 @@ public class ActivationCodeServiceImpl extends BaseServiceImpl<ActivationCodeEnt
 
     @Override
     public Page<ActivationCode> searchPage(ActivationCodeSearchQuery query) {
-        return ActivationCodeMapper.searchPage(query);
+        return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> ActivationCodeMapper.searchPage(query));
     }
 
     @Override
@@ -40,5 +41,10 @@ public class ActivationCodeServiceImpl extends BaseServiceImpl<ActivationCodeEnt
     @Override
     public List<ActivationCode> searchByServerId(Long serverId) {
         return ActivationCodeMapper.searchByServerId(serverId);
+    }
+
+    @Override
+    public ActivationCode searchLast() {
+        return ActivationCodeMapper.searchLast();
     }
 }

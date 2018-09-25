@@ -71,7 +71,7 @@ public class StartupController extends BaseController {
     @RequestMapping(value = "/server_edit", method = {RequestMethod.GET, RequestMethod.POST})
     public Response edit(Server server) {
         Response response = new Response();
-        if (server.getServerId() != null) {
+        if (server.getId() != null) {
             serverService.update(server);
             ServerSearchQuery query = new ServerSearchQuery();
             List<Server> list = serverService.searchPage(query);
@@ -79,7 +79,7 @@ public class StartupController extends BaseController {
             AdminController.serverList = list;
             response.view("startup/server_info");
         } else {
-            Server server1 = serverService.getByServerId(server.getId());
+            Server server1 = serverService.getByServerId(server.getServerId());
             response.data("server", server1);
             response.view("startup/server_edit");
         }

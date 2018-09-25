@@ -100,6 +100,14 @@ public class ServerEntitySqlProvider {
             sql.VALUES("gm_port", "#{gmPort,jdbcType=INTEGER}");
         }
         
+        if (record.getServerGroup() != null) {
+            sql.VALUES("server_group", "#{serverGroup,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getChannel() != null) {
+            sql.VALUES("channel", "#{channel,jdbcType=VARCHAR}");
+        }
+        
         if (record.getWhiteList() != null) {
             sql.VALUES("white_list", "#{whiteList,jdbcType=LONGVARCHAR}");
         }
@@ -131,6 +139,8 @@ public class ServerEntitySqlProvider {
         sql.SELECT("white_list_enable");
         sql.SELECT("maintenance_tips");
         sql.SELECT("gm_port");
+        sql.SELECT("server_group");
+        sql.SELECT("channel");
         sql.SELECT("white_list");
         sql.FROM("server");
         applyWhere(sql, example, false);
@@ -166,6 +176,8 @@ public class ServerEntitySqlProvider {
         sql.SELECT("white_list_enable");
         sql.SELECT("maintenance_tips");
         sql.SELECT("gm_port");
+        sql.SELECT("server_group");
+        sql.SELECT("channel");
         sql.FROM("server");
         applyWhere(sql, example, false);
         
@@ -255,6 +267,14 @@ public class ServerEntitySqlProvider {
             sql.SET("gm_port = #{record.gmPort,jdbcType=INTEGER}");
         }
         
+        if (record.getServerGroup() != null) {
+            sql.SET("server_group = #{record.serverGroup,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getChannel() != null) {
+            sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
+        }
+        
         if (record.getWhiteList() != null) {
             sql.SET("white_list = #{record.whiteList,jdbcType=LONGVARCHAR}");
         }
@@ -285,6 +305,8 @@ public class ServerEntitySqlProvider {
         sql.SET("white_list_enable = #{record.whiteListEnable,jdbcType=INTEGER}");
         sql.SET("maintenance_tips = #{record.maintenanceTips,jdbcType=VARCHAR}");
         sql.SET("gm_port = #{record.gmPort,jdbcType=INTEGER}");
+        sql.SET("server_group = #{record.serverGroup,jdbcType=VARCHAR}");
+        sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         sql.SET("white_list = #{record.whiteList,jdbcType=LONGVARCHAR}");
         
         ServerEntityExample example = (ServerEntityExample) parameter.get("example");
@@ -314,6 +336,8 @@ public class ServerEntitySqlProvider {
         sql.SET("white_list_enable = #{record.whiteListEnable,jdbcType=INTEGER}");
         sql.SET("maintenance_tips = #{record.maintenanceTips,jdbcType=VARCHAR}");
         sql.SET("gm_port = #{record.gmPort,jdbcType=INTEGER}");
+        sql.SET("server_group = #{record.serverGroup,jdbcType=VARCHAR}");
+        sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         
         ServerEntityExample example = (ServerEntityExample) parameter.get("example");
         applyWhere(sql, example, true);

@@ -26,20 +26,16 @@
         </div>
         <div>
             <td>
-                <a class="button" href="startup/server_createnew"
-                   rel="servercreate" mask="true" lookupGroup=""><span>新增服务器</span></a>
+                <a class="button" href="startup/server_createnew" rel="servercreate" mask="true" lookupGroup=""><span>新增服务器</span></a>
             </td>
             <td>
-                <a class="button" href="startup/server_changestate"
-                   rel="serverchangestate" mask="true" lookupGroup=""><span>修改服务器状态</span></a>
+                <a class="button" href="startup/server_changestate" rel="serverchangestate" mask="true" lookupGroup=""><span>修改服务器状态</span></a>
             </td>
             <td>
-                <a class="button" href="startup/server_combine"
-                   rel="servercombine" mask="true" lookupGroup=""><span>合服工具</span></a>
+                <a class="button" href="startup/server_combine" rel="servercombine" mask="true" lookupGroup=""><span>合服工具</span></a>
             </td>
             <td>
-                <a class="button" href="startup/server_whitelist"
-                   rel="serverwhitelist" mask="true" lookupGroup=""><span>白名单</span></a>
+                <a class="button" href="startup/server_whitelist" rel="serverwhitelist" mask="true" lookupGroup=""><span>白名单</span></a>
             </td>
         </div>
     </form>
@@ -50,6 +46,8 @@
         <tr>
             <th width="80">区服ID</th>
             <th width="80">区服名称</th>
+            <th width="80">服务器组</th>
+            <th width="80">渠道</th>
             <th width="80" align="center">状态</th>
             <th width="80" align="right">服务器标识</th>
             <th width="120" align="right">登录服务器IP</th>
@@ -65,6 +63,8 @@
         <tr th:each="row,iterStat:${serverList}">
             <td th:text="${row.serverId}"></td>
             <td th:text="${row.serverName}"></td>
+            <td th:text="${row.serverGroup}"></td>
+            <td th:text="${row.channel}"></td>
             <td th:if="${row.serverState==1}">开放</td>
             <td th:if="${row.serverState==2}">维护</td>
             <td th:if="${row.serverState==3}">隐藏</td>
@@ -85,9 +85,11 @@
             <td th:text="${row.payAddress}"></td>
             <td th:text="${row.openTime}"></td>
             <td th:text="${row.remarks}"></td>
-            <td><a title="修改" class="button" th:href="@{startup/server_edit(id=${row.serverId})}"  target="dialog" width="820" height="400" rel="dialog_updatebroadcast" mask="true"><span>修改</span></a></td>
+            <td><a title="修改" class="button" th:href="@{startup/server_edit(serverId=${row.serverId})}" target="dialog" width="820" height="400" rel="dialog_updatebroadcast" mask="true"><span>修改</span></a></td>
         </tr>
-        <tr th:if="${serverList.size()==0}"><td colspan="10" style="text-align: center">暂无数据</td></tr>
+        <tr th:if="${serverList.size()==0}">
+            <td colspan="10" style="text-align: center">暂无数据</td>
+        </tr>
         </tbody>
     </table>
     <div th:replace="_include/pager"></div>

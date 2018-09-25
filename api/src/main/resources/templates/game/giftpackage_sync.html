@@ -1,55 +1,55 @@
-<div class="tabs" currentIndex="1">
-    <div class="tabsHeader">
-        <div class="tabsHeaderContent">
-            <ul>
-                <li><a href="game/giftpackage_add" class="j-ajax" target="navTab"><span>添加礼包(二期)</span></a></li>
-                <li><a href="game/giftpackage_sync" class="j-ajax" target="navTab"><span>同步礼包(二期)</span></a></li>
-                <li><a href="game/generate_activation_code" class="j-ajax" target="navTab"><span>生成激活码(三期)</span></a></li>
-                <li><a href="game/synchronous_activation_code" class="j-ajax" target="navTab"><span>同步激活码(三期)</span></a></li>
-                <li><a href="game/single_service_bag" class="j-ajax" target="navTab"><span>单服礼包(三期)</span></a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-<div xmlns:th="http://www.w3.org/1999/xhtml" class="pageHeader">
-    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="game/giftpackage_sync" method="post"
-          onreset="$(this).find('select.combox').comboxReset()">
-        <div class="searchBar">
-            <table class="searchContent">
-                <tr>
-                    <td>类型：
-                        <select name="name">
-                            <option th:each="row,iterStat:${typeList}" th:text="${row.name}" th:value="${row.name}"></option>
-                        </select>
-                    <td>数量：<input name="count" type="number"></td>
-                    <td>卡号有效期：
-                        <input name="minTermValidity" type="text" class="date readonly" readonly="readonly">
-                        <span class="limit">-</span>
-                        <input name="maxTermValidity" type="text" class="date readonly" readonly="readonly">
-                    </td>
-                    <td>
-                        <select name="generateType">
-                            <option value="1">同一类型只能使用1个卡号</option>
-                            <option value="2">同一类型可以使用多个激活码</option>
-                            <option value="3">特殊礼包</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select name="channelId">
-                            <option th:each="row,iterStat:${channelList}" th:text="${row.channelName}" th:value="${row.channelId}"></option>
-                        </select>
-                    </td>
-                    <td>
-                        <select name="serverId">
-                            <option th:each="row,iterStat:${serverList}" th:text="${row.serverName}" th:value="${row.serverId}"></option>
-                        </select>
-                    </td>
-                    <td><input type="submit" value="生成"></td>
-                </tr>
-            </table>
-        </div>
-    </form>
-</div>
+<!--<div class="tabs" currentIndex="1">-->
+    <!--<div class="tabsHeader">-->
+        <!--<div class="tabsHeaderContent">-->
+            <!--<ul>-->
+                <!--<li><a href="game/giftpackage_add" class="j-ajax" target="navTab"><span>添加礼包(二期)</span></a></li>-->
+                <!--<li><a href="game/giftpackage_sync" class="j-ajax" target="navTab"><span>同步礼包(二期)</span></a></li>-->
+                <!--<li><a href="game/generate_activation_code" class="j-ajax" target="navTab"><span>生成激活码(三期)</span></a></li>-->
+                <!--<li><a href="game/synchronous_activation_code" class="j-ajax" target="navTab"><span>同步激活码(三期)</span></a></li>-->
+                <!--<li><a href="game/single_service_bag" class="j-ajax" target="navTab"><span>单服礼包(三期)</span></a></li>-->
+            <!--</ul>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<!--&lt;!&ndash;<div xmlns:th="http://www.w3.org/1999/xhtml" class="pageHeader">&ndash;&gt;-->
+    <!--&lt;!&ndash;<form id="pagerForm" onsubmit="return navTabSearch(this);" action="game/giftpackage_sync" method="post"&ndash;&gt;-->
+          <!--&lt;!&ndash;onreset="$(this).find('select.combox').comboxReset()">&ndash;&gt;-->
+        <!--&lt;!&ndash;<div class="searchBar">&ndash;&gt;-->
+            <!--&lt;!&ndash;<table class="searchContent">&ndash;&gt;-->
+                <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<td>类型：&ndash;&gt;-->
+                        <!--&lt;!&ndash;<select name="name">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<option th:each="row,iterStat:${typeList}" th:text="${row.name}" th:value="${row.name}"></option>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</select>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<td>数量：<input name="count" type="number"></td>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<td>卡号有效期：&ndash;&gt;-->
+                        <!--&lt;!&ndash;<input name="minTermValidity" type="text" class="date readonly" readonly="readonly">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<span class="limit">-</span>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<input name="maxTermValidity" type="text" class="date readonly" readonly="readonly">&ndash;&gt;-->
+                    <!--&lt;!&ndash;</td>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<select name="generateType">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<option value="1">同一类型只能使用1个卡号</option>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<option value="2">同一类型可以使用多个激活码</option>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<option value="3">特殊礼包</option>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</select>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</td>&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;<td>&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;<select name="channelId">&ndash;&gt;&ndash;&gt;-->
+                            <!--&lt;!&ndash;&lt;!&ndash;<option th:each="row,iterStat:${channelList}" th:text="${row.channelName}" th:value="${row.channelId}"></option>&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;</select>&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;</td>&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;<td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<select name="serverId">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<option th:each="row,iterStat:${serverList}" th:text="${row.serverName}" th:value="${row.serverId}"></option>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</select>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</td>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<td><input type="submit" value="生成"></td>&ndash;&gt;-->
+                <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+            <!--&lt;!&ndash;</table>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--&lt;!&ndash;</form>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
 <div class="pageContent">
     <table class="table" width="100%" layoutH="137">
         <thead>
@@ -72,23 +72,23 @@
         </thead>
         <tbody>
         <tr th:if="${list.size()!=0}" th:each="row,iterStat:${list}">
-            <td th:text="${row.cardFile}"></td>
-            <td th:text="${row.activityId}"></td>
-            <td th:text="${#dates.format(row.minTermValidity, 'yyyy-MM-dd HH:mm:ss')}"></td>
-            <td th:text="${#dates.format(row.maxTermValidity, 'yyyy-MM-dd HH:mm:ss')}"></td>
-            <td th:text="${row.channelName}"></td>
-            <td th:text="${row.serverName}"></td>
-            <td th:if="${row.isExclusiveGiftbag==0}" th:text="否"></td>
-            <td th:if="${row.isExclusiveGiftbag==1}" th:text="是"></td>
+            <!--<td th:text="${row.cardFile}"></td>-->
+            <!--<td th:text="${row.activityId}"></td>-->
+            <!--<td th:text="${#dates.format(row.minTermValidity, 'yyyy-MM-dd HH:mm:ss')}"></td>-->
+            <!--<td th:text="${#dates.format(row.maxTermValidity, 'yyyy-MM-dd HH:mm:ss')}"></td>-->
+            <!--<td th:text="${row.channelName}"></td>-->
+            <!--<td th:text="${row.serverName}"></td>-->
+            <!--<td th:if="${row.isExclusiveGiftbag==0}" th:text="否"></td>-->
+            <!--<td th:if="${row.isExclusiveGiftbag==1}" th:text="是"></td>-->
             <td th:text="${row.cardType}"></td>
-            <td th:text="${row.cardCount}"></td>
-            <td th:if="${row.isActivation==0}" th:text="否"></td>
-            <td th:if="${row.isActivation==1}" th:text="是"></td>
-            <td th:text="${#dates.format(row.generateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-            <td th:if="${row.generateType==1}" th:text="同一类型只能使用1个卡号"></td>
-            <td th:if="${row.generateType==2}" th:text="同一类型可以使用多个激活码"></td>
-            <td th:if="${row.generateType==3}" th:text="特殊礼包"></td>
-            <td><a class="button" th:href="@{game/giftpackage_sync(id=${row.id})}" target="navTab"><span>删除</span></a></td>
+            <!--<td th:text="${row.cardCount}"></td>-->
+            <!--<td th:if="${row.isActivation==0}" th:text="否"></td>-->
+            <!--<td th:if="${row.isActivation==1}" th:text="是"></td>-->
+            <!--<td th:text="${#dates.format(row.generateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>-->
+            <!--<td th:if="${row.generateType==1}" th:text="同一类型只能使用1个卡号"></td>-->
+            <!--<td th:if="${row.generateType==2}" th:text="同一类型可以使用多个激活码"></td>-->
+            <!--<td th:if="${row.generateType==3}" th:text="特殊礼包"></td>-->
+            <!--<td><a class="button" th:href="@{game/giftpackage_sync(id=${row.id})}" target="navTab"><span>删除</span></a></td>-->
             <td>
                 <a class="button" onclick="downloadFile(this)"><span>下载</span></a>
                 <input type="hidden" th:value="${row.id}"/>
@@ -98,7 +98,7 @@
         <tr th:if="${list.size()==0}"><td colspan="11" style="text-align: center">暂无数据</td></tr>
         </tbody>
     </table>
-    <div th:replace="_include/pager"></div>
+    <!--<div th:replace="_include/pager"></div>-->
 </div>
 <script type="text/javascript">
     function downloadFile(flag) {

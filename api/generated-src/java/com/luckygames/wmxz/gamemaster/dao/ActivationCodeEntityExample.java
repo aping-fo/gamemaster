@@ -556,52 +556,62 @@ public class ActivationCodeEntityExample {
             return (Criteria) this;
         }
 
-        public Criteria andRemarksEqualTo(Integer value) {
+        public Criteria andRemarksEqualTo(String value) {
             addCriterion("remarks =", value, "remarks");
             return (Criteria) this;
         }
 
-        public Criteria andRemarksNotEqualTo(Integer value) {
+        public Criteria andRemarksNotEqualTo(String value) {
             addCriterion("remarks <>", value, "remarks");
             return (Criteria) this;
         }
 
-        public Criteria andRemarksGreaterThan(Integer value) {
+        public Criteria andRemarksGreaterThan(String value) {
             addCriterion("remarks >", value, "remarks");
             return (Criteria) this;
         }
 
-        public Criteria andRemarksGreaterThanOrEqualTo(Integer value) {
+        public Criteria andRemarksGreaterThanOrEqualTo(String value) {
             addCriterion("remarks >=", value, "remarks");
             return (Criteria) this;
         }
 
-        public Criteria andRemarksLessThan(Integer value) {
+        public Criteria andRemarksLessThan(String value) {
             addCriterion("remarks <", value, "remarks");
             return (Criteria) this;
         }
 
-        public Criteria andRemarksLessThanOrEqualTo(Integer value) {
+        public Criteria andRemarksLessThanOrEqualTo(String value) {
             addCriterion("remarks <=", value, "remarks");
             return (Criteria) this;
         }
 
-        public Criteria andRemarksIn(List<Integer> values) {
+        public Criteria andRemarksLike(String value) {
+            addCriterion("remarks like", value, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksNotLike(String value) {
+            addCriterion("remarks not like", value, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksIn(List<String> values) {
             addCriterion("remarks in", values, "remarks");
             return (Criteria) this;
         }
 
-        public Criteria andRemarksNotIn(List<Integer> values) {
+        public Criteria andRemarksNotIn(List<String> values) {
             addCriterion("remarks not in", values, "remarks");
             return (Criteria) this;
         }
 
-        public Criteria andRemarksBetween(Integer value1, Integer value2) {
+        public Criteria andRemarksBetween(String value1, String value2) {
             addCriterion("remarks between", value1, value2, "remarks");
             return (Criteria) this;
         }
 
-        public Criteria andRemarksNotBetween(Integer value1, Integer value2) {
+        public Criteria andRemarksNotBetween(String value1, String value2) {
             addCriterion("remarks not between", value1, value2, "remarks");
             return (Criteria) this;
         }

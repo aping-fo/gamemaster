@@ -13,7 +13,7 @@ public class ServerSqlProvider extends ServerEntitySqlProvider {
         if (StringUtils.isNotBlank(query.getServerName())) {
             sql.append(" and server_name like \"%\"#{serverName}\"%\" ");
         }
-        sql.append(" order by create_time desc");
+        sql.append(" order by update_time desc");
         return sql.toString();
     }
 }
