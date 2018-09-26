@@ -47,4 +47,9 @@ public class ActivationCodeServiceImpl extends BaseServiceImpl<ActivationCodeEnt
     public ActivationCode searchLast() {
         return ActivationCodeMapper.searchLast();
     }
+
+    @Override
+    public Page<ActivationCode> search(String remarks) {
+        return ActivationCodeMapper.search(remarks);
+    }
 }

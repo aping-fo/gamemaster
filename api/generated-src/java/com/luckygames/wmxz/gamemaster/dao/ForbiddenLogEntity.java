@@ -26,6 +26,8 @@ public class ForbiddenLogEntity extends BaseEntity {
 
     private Date operateTime;
 
+    private String playerName;
+
     public Long getServerId() {
         return serverId;
     }
@@ -96,5 +98,13 @@ public class ForbiddenLogEntity extends BaseEntity {
 
     public void setOperateTime(Date operateTime) {
         this.operateTime = operateTime;
+    }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName == null ? null : playerName.trim();
     }
 }

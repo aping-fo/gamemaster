@@ -80,6 +80,10 @@ public class ForbiddenLogEntitySqlProvider {
             sql.VALUES("update_time", "#{updateTime,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getPlayerName() != null) {
+            sql.VALUES("player_name", "#{playerName,jdbcType=VARCHAR}");
+        }
+        
         return sql.toString();
     }
 
@@ -102,6 +106,7 @@ public class ForbiddenLogEntitySqlProvider {
         sql.SELECT("`status`");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
+        sql.SELECT("player_name");
         sql.FROM("forbidden_log");
         applyWhere(sql, example, false);
         
@@ -171,6 +176,10 @@ public class ForbiddenLogEntitySqlProvider {
             sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getPlayerName() != null) {
+            sql.SET("player_name = #{record.playerName,jdbcType=VARCHAR}");
+        }
+        
         applyWhere(sql, example, true);
         return sql.toString();
     }
@@ -192,6 +201,7 @@ public class ForbiddenLogEntitySqlProvider {
         sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
+        sql.SET("player_name = #{record.playerName,jdbcType=VARCHAR}");
         
         ForbiddenLogEntityExample example = (ForbiddenLogEntityExample) parameter.get("example");
         applyWhere(sql, example, true);

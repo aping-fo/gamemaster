@@ -4,13 +4,11 @@ import com.github.pagehelper.Page;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.data.GoodsConfig;
 import com.luckygames.wmxz.gamemaster.model.entity.*;
+import com.luckygames.wmxz.gamemaster.model.enums.ForbiddenOperationType;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
 import com.luckygames.wmxz.gamemaster.model.view.request.*;
 import com.luckygames.wmxz.gamemaster.service.*;
-import com.luckygames.wmxz.gamemaster.utils.ExcelExportUtil;
-import com.luckygames.wmxz.gamemaster.utils.ExportUtil;
-import com.luckygames.wmxz.gamemaster.utils.RandomString;
-import com.luckygames.wmxz.gamemaster.utils.StringUtil;
+import com.luckygames.wmxz.gamemaster.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -22,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -54,6 +53,8 @@ public class OperatingToolsController extends BaseController {
     private GiftpackageSyncService giftpackageSyncService;
     @Autowired
     private NoticeService noticeService;
+    @Autowired
+    private ForbiddenLogService forbiddenLogService;
 
     //邮件查询
     @RequestMapping(value = "/mailManage", method = {RequestMethod.GET, RequestMethod.POST})
@@ -175,7 +176,7 @@ public class OperatingToolsController extends BaseController {
     @RequestMapping(value = "/activationCodeExport", method = {RequestMethod.GET, RequestMethod.POST})
     public ResponseEntity<byte[]> activationCodeExport(ActivationCodeSearchQuery query, HttpServletRequest request) {
         String name = query.getRemarks() + ".xls";
-        Page<ActivationCode> activationCodePage = activationCodeService.searchPage(query);
+        Page<ActivationCode> activationCodePage = activationCodeService.search(query.getRemarks());
 
         //导出数据处理
         activationCodePage.forEach(ac -> {
@@ -347,5 +348,106 @@ public class OperatingToolsController extends BaseController {
                 .request(query)
                 .data("characters", characters)
                 .data("serverList", serverList);
+    }
+
+    //封禁列表
+    @RequestMapping(value = "/forbiddenList", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response forbiddenList(ForbiddenSearchQuery query) {
+        Page<ForbiddenLog> forbiddenLogList = forbiddenLogService.searchPage(query);
+        forbiddenLogList.forEach(f -> {
+            if (f.getOperateType().equals(ForbiddenOperationType.FORBIDDEN) && f.getExpireTime().getTime() < new Date().getTime()) {
+                f.setOperateType(ForbiddenOperationType.ALLOWED);
+                forbiddenLogService.update(f);
+            }
+        });
+
+        return new Response("player/forbiddenList")
+                .request(query)
+                .data("list", forbiddenLogList);
+    }
+
+    //封禁增加
+    @RequestMapping(value = "/forbiddenAdd", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response forbiddenAdd(ForbiddenLog forbiddenLog) {
+        Response response = new Response("player/forbiddenAdd");
+//        if (forbiddenLog.getPlayerId() != null) {
+        //设置玩家名称
+//        String playerString = adminService.getPlayerById(new PlayerQuery(forbiddenLog.getServerId(), forbiddenLog.getPlayerId()));
+//        Map<String, Object> playerMap = JsonUtils.string2Map(playerString);
+//        try {
+//            forbiddenLog.setPlayerName(new String(playerMap.get("name").toString().getBytes("ISO-8859-1"), "utf-8"));
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        }
+        if (forbiddenLog.getPlayerName() != null) {
+            String playerString = adminService.getPlayerName(new PlayerNameQuery(forbiddenLog.getServerId(), forbiddenLog.getPlayerName()));
+            Map<String, Object> playerMap = JsonUtils.string2Map(playerString);
+            try {
+                forbiddenLog.setPlayerName(new String(playerMap.get("name").toString().getBytes("ISO-8859-1"), "utf-8"));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            forbiddenLog.setPlayerId(Long.valueOf(playerMap.get("playerId").toString()));
+
+            //设置过期时间
+            Date date = new Date();
+            date.setTime(date.getTime() + forbiddenLog.getHour() * 1000 * 60 * 60);
+            forbiddenLog.setExpireTime(date);
+
+            forbiddenLogService.save(forbiddenLog);
+
+            response.view("player/forbiddenList");
+            ForbiddenSearchQuery query = new ForbiddenSearchQuery();
+            Page<ForbiddenLog> forbiddenLogList = forbiddenLogService.searchPage(query);
+            response.request(query).data("list", forbiddenLogList);
+
+            new Thread(() -> adminService.banRole(new BanQuery(
+                    forbiddenLog.getForbiddenType().getCode(),
+                    forbiddenLog.getOperateType().getCode(),
+                    forbiddenLog.getPlayerId(),
+                    forbiddenLog.getHour(),
+                    forbiddenLog.getServerId()))).start();
+        } else {
+            List<Server> serverList = serverService.searchList();
+            response.data("serverList", serverList);
+        }
+        return response;
+    }
+
+    //封禁解除
+    @RequestMapping(value = "/forbiddenAllowed", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response forbiddenAllowed(ForbiddenLog forbiddenLog) {
+        Response response = new Response("player/forbiddenList");
+        forbiddenLogService.update(forbiddenLog);
+        ForbiddenSearchQuery query = new ForbiddenSearchQuery();
+        Page<ForbiddenLog> forbiddenLogList = forbiddenLogService.searchPage(query);
+        response.request(query).data("list", forbiddenLogList);
+
+        new Thread(() -> adminService.banRole(new BanQuery(
+                forbiddenLog.getForbiddenType().getCode(),
+                forbiddenLog.getOperateType().getCode(),
+                forbiddenLog.getPlayerId(),
+                forbiddenLog.getHour(),
+                forbiddenLog.getServerId())
+        )).start();
+
+        return response;
+    }
+
+    //踢人
+    @RequestMapping(value = "/kickLine", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response kickLine(ForbiddenLog forbiddenLog) {
+        Response response = new Response("player/forbiddenList");
+
+        ForbiddenSearchQuery query = new ForbiddenSearchQuery();
+        Page<ForbiddenLog> forbiddenLogList = forbiddenLogService.searchPage(query);
+        response.request(query).data("list", forbiddenLogList);
+
+        new Thread(() -> adminService.kickLine(new KickLineQuery(
+                forbiddenLog.getPlayerId(),
+                forbiddenLog.getServerId())
+        )).start();
+
+        return response;
     }
 }

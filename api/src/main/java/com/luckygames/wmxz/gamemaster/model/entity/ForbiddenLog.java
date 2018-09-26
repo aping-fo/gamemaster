@@ -3,31 +3,31 @@ package com.luckygames.wmxz.gamemaster.model.entity;
 import com.luckygames.wmxz.gamemaster.dao.ForbiddenLogEntity;
 
 public class ForbiddenLog extends ForbiddenLogEntity {
-    private String username;
-    private String charName;
-    private Integer hour;
+    private String playerName;
+    private String serverName;
+    private int hour;
 
-    public Integer getHour() {
+    public int getHour() {
         return hour;
     }
 
-    public void setHour(Integer hour) {
+    public void setHour(int hour) {
         this.hour = hour;
     }
 
-    public String getUsername() {
-        return username;
+    public String getPlayerName() {
+        return playerName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
 
-    public String getCharName() {
-        return charName;
+    public String getServerName() {
+        return serverName;
     }
 
-    public void setCharName(String charName) {
-        this.charName = charName;
+    public void setServerName(String serverName) {
+        this.serverName = serverName;
     }
 }

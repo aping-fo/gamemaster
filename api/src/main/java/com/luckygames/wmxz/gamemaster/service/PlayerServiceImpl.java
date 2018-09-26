@@ -18,7 +18,7 @@ public class PlayerServiceImpl extends BaseServiceImpl<PlayerEntity> implements 
     @Override
     public Player getByPlayerId(long playerId) {
         PlayerEntity playerEntity = playerMapper.selectOne(new PlayerEntity() {{
-            setPlayerId(playerId);
+//            setPlayerId(playerId);
             setStatus(Status.NORMAL);
         }});
         return BeanUtils.copyProperties(playerEntity, Player.class);

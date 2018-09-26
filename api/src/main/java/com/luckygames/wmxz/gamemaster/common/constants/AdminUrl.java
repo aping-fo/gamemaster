@@ -10,9 +10,11 @@ public enum AdminUrl {
     GETINFO("/getInfo", "获取玩家信息"),
     MAIL("/send_mail", "发送邮件"),
     CHAT("/chatMonitoring", "聊天监控"),
-    KICK("KICK_PLAYER", "踢人"),
+    KICK("kickPlayer", "踢人"),
     ACTIVATION_CODE("/update_ActivationCode", "更新激活码"),
     RECOVERY_GOODS("/goods_recovery", "物品回收"),
+    GET_INFO_BY_PLAYER_ID("/getInfoByPlayerId", "通过玩家Id获取玩家信息"),
+    GET_INFO_BY_PLAYER_NAME("/getInfo", "通过玩家名称获取玩家信息"),
     BROADCAST("KICK_PLAYER", "发送广播");
 
     private final String url;

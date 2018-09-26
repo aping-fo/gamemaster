@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 @Table(name="player")
 public class PlayerEntity extends BaseEntity {
-    private Long playerId;
+    private Integer playerid;
 
     private String accname;
 
@@ -100,12 +100,12 @@ public class PlayerEntity extends BaseEntity {
 
     private Integer consumediamon;
 
-    public Long getPlayerId() {
-        return playerId;
+    public Integer getPlayerid() {
+        return playerid;
     }
 
-    public void setPlayerId(Long playerid) {
-        this.playerId = playerid;
+    public void setPlayerid(Integer playerid) {
+        this.playerid = playerid;
     }
 
     public String getAccname() {

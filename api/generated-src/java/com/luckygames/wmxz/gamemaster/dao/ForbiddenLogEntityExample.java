@@ -907,6 +907,76 @@ public class ForbiddenLogEntityExample {
             addCriterion("update_time not between", value1, value2, "updateTime");
             return (Criteria) this;
         }
+
+        public Criteria andPlayerNameIsNull() {
+            addCriterion("player_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlayerNameIsNotNull() {
+            addCriterion("player_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlayerNameEqualTo(String value) {
+            addCriterion("player_name =", value, "playerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlayerNameNotEqualTo(String value) {
+            addCriterion("player_name <>", value, "playerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlayerNameGreaterThan(String value) {
+            addCriterion("player_name >", value, "playerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlayerNameGreaterThanOrEqualTo(String value) {
+            addCriterion("player_name >=", value, "playerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlayerNameLessThan(String value) {
+            addCriterion("player_name <", value, "playerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlayerNameLessThanOrEqualTo(String value) {
+            addCriterion("player_name <=", value, "playerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlayerNameLike(String value) {
+            addCriterion("player_name like", value, "playerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlayerNameNotLike(String value) {
+            addCriterion("player_name not like", value, "playerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlayerNameIn(List<String> values) {
+            addCriterion("player_name in", values, "playerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlayerNameNotIn(List<String> values) {
+            addCriterion("player_name not in", values, "playerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlayerNameBetween(String value1, String value2) {
+            addCriterion("player_name between", value1, value2, "playerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlayerNameNotBetween(String value1, String value2) {
+            addCriterion("player_name not between", value1, value2, "playerName");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

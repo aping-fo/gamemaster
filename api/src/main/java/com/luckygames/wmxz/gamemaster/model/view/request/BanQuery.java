@@ -11,7 +11,7 @@ public class BanQuery extends GMQuery {
         super(0L);
     }
 
-    public BanQuery(Integer ban, Integer type, Long id, Integer hour, Long serverId) {
+    public BanQuery(Integer type, Integer ban, Long id, Integer hour, Long serverId) {
         super(serverId);
         this.ban = ban;
         this.type = type;
@@ -20,12 +20,12 @@ public class BanQuery extends GMQuery {
     }
 
     /**
-     * 封禁类型，1：禁止登录，2：禁止聊天
+     * 封禁操作类型，0：解封，1：封禁
      */
     private Integer ban;
 
     /**
-     * 封禁操作类型，0：解封，1：封禁
+     * 封禁类型，1：禁止登录，2：禁止聊天
      */
     private Integer type;
 

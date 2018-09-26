@@ -105,5 +105,11 @@ public interface AdminService {
 
     //物品回收
     public String recoveryGoods(RecoveryGoodsQuery query);
+
+    //获取玩家信息
+    public String getPlayerById(GMQuery query);
+
+    //获取玩家信息
+    public String getPlayerName(GMQuery query);
 }
 

@@ -1,0 +1,47 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return closeNavTab(this);" action="operatingTools/forbiddenAdd" method="post">
+        <input type="hidden" name="forbiddenType" value="LOGIN"/>
+        <input type="hidden" name="operateType" value="FORBIDDEN"/>
+        <div class="searchBar">
+            <table class="searchContent" width="100%">
+                <tr>
+                    <td>
+                        <label>服务器</label>
+                        <select name="serverId" class="required">
+                            <option th:each="server:${serverList}" th:value="${server.serverId}" th:utext="${server.serverName}"></option>
+                        </select>
+                    </td>
+                </tr>
+                <!--<tr>-->
+                    <!--<td>-->
+                        <!--<label>角色ID</label>-->
+                        <!--<input class="textInput required" type="number" name="playerId"/>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <tr>
+                    <td>
+                        <label>角色名称</label>
+                        <input class="textInput required" type="text" name="playerName"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>封禁理由</label>
+                        <input class="textInput required" type="text" name="reason"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>封禁时间(小时)</label>
+                        <input class="textInput required" type="number" name="hour"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button id="submit" type="submit">提交</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>

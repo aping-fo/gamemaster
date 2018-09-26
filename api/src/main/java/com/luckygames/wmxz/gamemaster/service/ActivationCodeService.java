@@ -18,4 +18,6 @@ public interface ActivationCodeService extends BaseService<ActivationCodeEntity>
     List<ActivationCode> searchByServerId(Long serverId);
 
     ActivationCode searchLast();
+
+    Page<ActivationCode> search(String remarks);
 }

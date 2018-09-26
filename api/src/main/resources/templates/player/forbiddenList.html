@@ -1,0 +1,72 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return ajaxNavTab(this);" action="operatingTools/forbiddenList" method="post">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>玩家名称</td>
+                    <td>
+                        <input type="text" name="playerName" th:value="${request.playerName}"/>
+                    </td>
+                    <td class="dateRange">
+                        日期:
+                        <input name="startDate" class="date readonly" readonly="readonly" type="text" th:value="${request.startDate}">
+                        <span class="limit">-</span>
+                        <input name="endDate" class="date readonly" readonly="readonly" type="text" th:value="${request.endDate}">
+                    </td>
+                    <td>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">检索</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar" style="height:30px">
+        <ul class="toolBar">
+            <li>
+                <a title="封禁" class="edit" href="operatingTools/forbiddenAdd" target="dialog" mask="true" height="400">
+                    <span style="font-size: 20px">封禁</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <table class="table" layoutH="137" width="100%">
+        <thead>
+        <tr>
+            <th width="120">角色ID</th>
+            <th width="120">角色名</th>
+            <th width="120">服务器</th>
+            <th width="120">过期时间</th>
+            <th width="120">封禁时间</th>
+            <th width="120">状态</th>
+            <th width="120">原因</th>
+            <th width="120">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row,iterStat:${list}">
+            <td th:text="${row.playerId}"></td>
+            <td th:text="${row.playerName}"></td>
+            <td th:text="${row.serverName}"></td>
+            <td th:text="${#dates.format(row.expireTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${#dates.format(row.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:if="${row.operateType.toString()=='FORBIDDEN'}" th:text="封禁中"></td>
+            <td th:if="${row.operateType.toString()!='FORBIDDEN'}" th:text="已解封"></td>
+            <td th:text="${row.reason}"></td>
+            <td>
+                <a title="踢下线" class="button" th:href="@{operatingTools/kickLine(playerId=${row.playerId},serverId=${row.serverId})}" target="navTab" mask="true"><span>踢下线</span></a>
+                <a th:if="${row.operateType.toString()=='FORBIDDEN'}" title="解封" class="button" th:href="@{operatingTools/forbiddenAllowed(id=${row.id},playerId=${row.playerId},serverId=${row.serverId},operateType='ALLOWED',forbiddenType='LOGIN')}" target="navTab" mask="true"><span>解封</span></a>
+            </td>
+        </tr>
+        <tr th:if="${list.size()==0}">
+            <td colspan="6" style="text-align: center">暂无数据</td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="_include/pager"></div>
+</div>

@@ -92,9 +92,7 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public String kickLine(GMQuery query) {
-        BackendCommand command = (BackendCommand)query;
-        command.setAction(AdminUrl.KICK.getUrl());
-        return reqBackendCommond(command);
+        return commonRequest(query.encodeReqParams(), restTemplate, query.getServerId(), AdminUrl.KICK.getUrl());
     }
 
     public String sendActivationCode(ActivationCodeQuery query) {
@@ -104,6 +102,16 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public String recoveryGoods(RecoveryGoodsQuery query) {
         return commonRequest(query.encodeReqParams(), restTemplate, query.getServerId(), AdminUrl.RECOVERY_GOODS.getUrl());
+    }
+
+    @Override
+    public String getPlayerById(GMQuery query) {
+        return commonRequest(query.encodeReqParams(), restTemplate, query.getServerId(), AdminUrl.GET_INFO_BY_PLAYER_ID.getUrl());
+    }
+
+    @Override
+    public String getPlayerName(GMQuery query) {
+        return commonRequest(query.encodeReqParams(), restTemplate, query.getServerId(), AdminUrl.GET_INFO_BY_PLAYER_NAME.getUrl());
     }
 
     public String reqBackendCommond(BackendCommand command){

@@ -23,8 +23,6 @@ public class EmailFlowSqlProvider {
         if (StringUtils.isNotBlank(query.getName())) {
             sql.append(" and name like \"%\"#{name}\"%\" ");
         }
-        if (StringUtils.isNotBlank(query.getType())) {
-        }
         return sql.toString();
     }
 }

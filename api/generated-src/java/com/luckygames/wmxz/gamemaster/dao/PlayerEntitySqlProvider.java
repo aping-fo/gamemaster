@@ -28,7 +28,7 @@ public class PlayerEntitySqlProvider {
         SQL sql = new SQL();
         sql.INSERT_INTO("player");
         
-        if (record.getPlayerId() != null) {
+        if (record.getPlayerid() != null) {
             sql.VALUES("playerId", "#{playerid,jdbcType=INTEGER}");
         }
         
@@ -289,7 +289,7 @@ public class PlayerEntitySqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("player");
         
-        if (record.getPlayerId() != null) {
+        if (record.getPlayerid() != null) {
             sql.SET("playerId = #{record.playerid,jdbcType=INTEGER}");
         }
         

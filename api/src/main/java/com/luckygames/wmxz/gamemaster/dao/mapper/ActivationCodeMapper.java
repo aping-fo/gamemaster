@@ -27,4 +27,7 @@ public interface ActivationCodeMapper extends ActivationCodeEntityMapper<Activat
 
     @Select("SELECT * from activation_code order by create_time desc LIMIT 1")
     ActivationCode searchLast();
+
+    @Select("SELECT * from activation_code where remarks=#{remarks}")
+    Page<ActivationCode> search(@Param("remarks") String remarks);
 }
