@@ -29,8 +29,8 @@
     <div class="panelBar" style="height:30px">
         <ul class="toolBar">
             <li>
-                <a title="封禁" class="edit" href="operatingTools/forbiddenAdd" target="dialog" mask="true" height="400">
-                    <span style="font-size: 20px">封禁</span>
+                <a title="封禁管理" class="edit" href="operatingTools/forbiddenAdd" target="dialog" mask="true" height="400">
+                    <span style="font-size: 20px">封禁管理</span>
                 </a>
             </li>
         </ul>
@@ -55,12 +55,13 @@
             <td th:text="${row.serverName}"></td>
             <td th:text="${#dates.format(row.expireTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
             <td th:text="${#dates.format(row.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-            <td th:if="${row.operateType.toString()=='FORBIDDEN'}" th:text="封禁中"></td>
+            <td th:if="${row.operateType.toString()=='FORBIDDEN' and row.forbiddenType.toString()=='LOGIN'}" th:text="禁止登录"></td>
+            <td th:if="${row.operateType.toString()=='FORBIDDEN' and row.forbiddenType.toString()=='CHAT'}"  th:text="禁止聊天"></td>
             <td th:if="${row.operateType.toString()!='FORBIDDEN'}" th:text="已解封"></td>
             <td th:text="${row.reason}"></td>
             <td>
                 <a title="踢下线" class="button" th:href="@{operatingTools/kickLine(playerId=${row.playerId},serverId=${row.serverId})}" target="navTab" mask="true"><span>踢下线</span></a>
-                <a th:if="${row.operateType.toString()=='FORBIDDEN'}" title="解封" class="button" th:href="@{operatingTools/forbiddenAllowed(id=${row.id},playerId=${row.playerId},serverId=${row.serverId},operateType='ALLOWED',forbiddenType='LOGIN')}" target="navTab" mask="true"><span>解封</span></a>
+                <a th:if="${row.operateType.toString()=='FORBIDDEN'}" title="解封" class="button" th:href="@{operatingTools/forbiddenAllowed(id=${row.id},playerId=${row.playerId},serverId=${row.serverId},operateType='ALLOWED',forbiddenType=${row.forbiddenType})}" target="navTab" mask="true"><span>解封</span></a>
             </td>
         </tr>
         <tr th:if="${list.size()==0}">

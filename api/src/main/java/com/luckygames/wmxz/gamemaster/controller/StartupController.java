@@ -90,6 +90,7 @@ public class StartupController extends BaseController {
     @RequestMapping(value = "/server_whitelist", method = {RequestMethod.GET, RequestMethod.POST})
     public Response whitelist(Server server) {
         Response response = new Response();
+        ServerSearchQuery query = new ServerSearchQuery();
         if (server.getIds() != null) {
             Long[] ids = server.getIds();
             int enable = server.getWhiteListEnable();
@@ -97,12 +98,12 @@ public class StartupController extends BaseController {
             for (Long id : ids) {
                 serverService.updateWhitelist(id, enable, whiteList);
             }
+            AdminController.serverList = serverService.searchPage(query);
             response.view("startup/server_info");
         } else {
             response.view("startup/server_whitelist");
         }
 
-        ServerSearchQuery query = new ServerSearchQuery();
         List<Server> list = serverService.searchPage(query);
         response.request(query).data("serverList", list);
         return response;

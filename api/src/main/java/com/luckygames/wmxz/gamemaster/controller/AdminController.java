@@ -2,12 +2,10 @@ package com.luckygames.wmxz.gamemaster.controller;
 
 import com.luckygames.wmxz.gamemaster.model.entity.ActivationCode;
 import com.luckygames.wmxz.gamemaster.model.entity.Notice;
+import com.luckygames.wmxz.gamemaster.model.entity.Online;
 import com.luckygames.wmxz.gamemaster.model.entity.Server;
 import com.luckygames.wmxz.gamemaster.model.view.request.ActivationCodeQuery;
-import com.luckygames.wmxz.gamemaster.service.ActivationCodeService;
-import com.luckygames.wmxz.gamemaster.service.AdminService;
-import com.luckygames.wmxz.gamemaster.service.NoticeService;
-import com.luckygames.wmxz.gamemaster.service.ServerService;
+import com.luckygames.wmxz.gamemaster.service.*;
 import com.luckygames.wmxz.gamemaster.utils.StringUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +33,8 @@ public class AdminController {
     private ActivationCodeService activationCodeService;
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private OnlineService onlineService;
 
     //获取服务器列表
     @RequestMapping(value = "/serverList", method = {RequestMethod.GET, RequestMethod.POST})
@@ -85,5 +85,15 @@ public class AdminController {
         activationCode.setUseTime(new Date());
         activationCodeService.update(activationCode);
         new Thread(() -> adminService.sendActivationCode(new ActivationCodeQuery(activationCode.getServerId(), "update"))).start();
+    }
+
+    //当前在线人数
+    @RequestMapping(value = "/onlinePlayer", method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public void onlinePlayer(Online online) {
+        if (online.getMaxRoleCount() == null) {
+            online.setMaxRoleCount("0");
+        }
+        onlineService.save(online);
     }
 }

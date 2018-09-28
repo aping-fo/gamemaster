@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.Page;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.model.entity.IntegratedOnline;
+import com.luckygames.wmxz.gamemaster.model.entity.Online;
 import com.luckygames.wmxz.gamemaster.model.entity.OnlineNow;
 import com.luckygames.wmxz.gamemaster.model.entity.ServerOnlineLog;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
@@ -29,6 +30,8 @@ public class OnlineController extends BaseController {
     private IntegratedOnlineServiceService integratedOnlineServiceService;
     @Autowired
     private ServerOnlineLogService serverOnlineLogService;
+    @Autowired
+    private OnlineService onlineService;
 
     //综合在线
     @RequestMapping(value = "/statics", method = {RequestMethod.GET, RequestMethod.POST})
@@ -48,11 +51,11 @@ public class OnlineController extends BaseController {
 
     //当前在线
     @RequestMapping(value = "/now", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response onlineNow(OnlineNowSearchQuery query) {
-        Page<OnlineNow> onlineNowPage = onlineNowService.searchPage(query);
+    public Response onlineNow(OnlineSearchQuery query) {
+        Page<Online> onlines = onlineService.searchPage(query);
         return new Response("online/now")
                 .request(query)
-                .data("list", onlineNowPage);
+                .data("list", onlines);
     }
 
     //区服综合在线
