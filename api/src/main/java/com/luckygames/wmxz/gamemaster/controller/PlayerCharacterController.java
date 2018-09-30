@@ -1,17 +1,24 @@
 package com.luckygames.wmxz.gamemaster.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.Page;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.model.entity.*;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
 import com.luckygames.wmxz.gamemaster.model.view.request.*;
 import com.luckygames.wmxz.gamemaster.service.*;
+import com.luckygames.wmxz.gamemaster.utils.JsonUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -44,6 +51,21 @@ public class PlayerCharacterController extends BaseController {
     private BaseInformationService baseInformationService;
     @Autowired
     private ForbiddenLogService forbiddenLogService;
+    @Autowired
+    private PlayerService playerService;
+    @Autowired
+    private ServerService serverService;
+
+    //角色查询
+    @RequestMapping(value = "/playerQuery", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response query(Player player) {
+        Response response = new Response("player/playerQuery");
+        playerService.queryPlayer(player);
+        List<Server> serverList = serverService.searchList();
+        return response.request(player).data("player", player).data("serverList", serverList);
+    }
+
+
 
     @RequestMapping(value = "/character", method = {RequestMethod.GET, RequestMethod.POST})
     public Response queryCharacter(PlayerCharacterSearchQuery playerCharacterSearchQuery) {
@@ -87,7 +109,7 @@ public class PlayerCharacterController extends BaseController {
     //基本信息
     @RequestMapping(value = "/info_baseInformation", method = {RequestMethod.GET, RequestMethod.POST})
     public Response baseInformationPlayer(BaseInformation baseInformation) {
-        if(baseInformation.getCharId()!=null){
+        if (baseInformation.getCharId() != null) {
             baseInformationService.update(baseInformation);
             // TODO 同步账户权限
         }

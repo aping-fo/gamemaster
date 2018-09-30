@@ -15,7 +15,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><input type="checkbox" id="allSelect"/>勾选服务器</td>
+                        <td><input type="checkbox" id="allSelect"/>全选服务器</td>
                         <td>
                             <input class="required" th:each="row:${serverList}" type="checkbox" name="ids" th:text="${row.serverName}" th:value="${row.id}"/>
                         </td>

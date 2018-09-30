@@ -105,13 +105,13 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public String getPlayerById(GMQuery query) {
-        return commonRequest(query.encodeReqParams(), restTemplate, query.getServerId(), AdminUrl.GET_INFO_BY_PLAYER_ID.getUrl());
+    public String getPlayerName(GMQuery query) {
+        return commonRequest(query.encodeReqParams(), restTemplate, query.getServerId(), AdminUrl.GET_INFO_BY_PLAYER_NAME.getUrl());
     }
 
     @Override
-    public String getPlayerName(GMQuery query) {
-        return commonRequest(query.encodeReqParams(), restTemplate, query.getServerId(), AdminUrl.GET_INFO_BY_PLAYER_NAME.getUrl());
+    public String pay(GMQuery query) {
+        return commonRequest(query.encodeReqParams(), restTemplate, query.getServerId(), AdminUrl.PAY.getUrl());
     }
 
     public String reqBackendCommond(BackendCommand command){

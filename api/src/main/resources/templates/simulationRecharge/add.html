@@ -1,0 +1,96 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return dialogSearch(this);" action="simulationRecharge/selectPlayer" method="post">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>服务器</td>
+                    <td>
+                        <select name="serverId" class="required">
+                            <option th:each="server:${serverList}" th:value="${server.serverId}" th:utext="${server.serverName}"></option>
+                        </select>
+                    </td>
+                    <td>
+                        <label>角色名/角色ID</label>
+                        <input type="text" name="searchValue" th:value="${request.searchValue}" class="required"/>
+                    </td>
+                    <td>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit" id="retrieval">检索</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%">
+        <thead>
+        <tr>
+            <th width="120">角色名</th>
+            <th width="120">角色ID</th>
+            <th width="120">职业</th>
+            <th width="120">性别</th>
+            <th width="80" align="right">角色等级</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${player.name}"></td>
+            <td th:text="${player.playerId}"></td>
+            <td th:text="${player.lev}"></td>
+            <td th:if="${player.sex} eq'1'" th:text="男"></td>
+            <td th:if="${player.sex} eq'2'" th:text="女"></td>
+            <td th:if="${player.vocation} eq'1'" th:text="战士"></td>
+            <td th:if="${player.vocation} eq'2'" th:text="刺客"></td>
+            <td th:if="${player.vocation} eq'3'" th:text="法师"></td>
+        </tr>
+        <tr th:if="${player.name==null}">
+            <td colspan="4">暂无数据</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="pageHeader">
+    <form id="creatForm" onsubmit="return closeNavTab(this);" action="simulationRecharge/add" method="post" style="height: 100%">
+        <table width="98%">
+            <tr>
+                <td>服务器</td>
+                <td>
+                    <select name="serverId" class="required">
+                        <option th:each="server:${serverList}" th:value="${server.serverId}" th:utext="${server.serverName}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>角色名称</td>
+                <td><input name="name" type="text" class="required"></td>
+            </tr>
+            <tr>
+                <td>角色ID</td>
+                <td><input name="playerId" type="number" class="required"></td>
+            </tr>
+            <tr>
+                <td>充值类型</td>
+                <td>
+                    <select id="chargeType" name="type">
+                        <option th:each="charge:${chargeList}" th:text="${charge.name}" th:value="${charge.id}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button type="submit">创建</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#chargeType').searchableSelect();
+    });
+</script>

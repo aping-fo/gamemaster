@@ -13,8 +13,8 @@ public enum AdminUrl {
     KICK("kickPlayer", "踢人"),
     ACTIVATION_CODE("/update_ActivationCode", "更新激活码"),
     RECOVERY_GOODS("/goods_recovery", "物品回收"),
-    GET_INFO_BY_PLAYER_ID("/getInfoByPlayerId", "通过玩家Id获取玩家信息"),
     GET_INFO_BY_PLAYER_NAME("/getInfo", "通过玩家名称获取玩家信息"),
+    PAY("/pay", "充值"),
     BROADCAST("KICK_PLAYER", "发送广播");
 
     private final String url;

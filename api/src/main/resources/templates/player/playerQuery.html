@@ -1,0 +1,63 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return navTabSearch(this);" action="player/playerQuery" method="post">
+        <div class="searchBar">
+            <table class="searchContent">
+                <td>服务器</td>
+                <td>
+                    <select name="serverId" class="required">
+                        <option th:each="server:${serverList}" th:value="${server.serverId}" th:utext="${server.serverName}"></option>
+                    </select>
+                </td>
+                <td>
+                    <label>角色名/角色ID</label>
+                    <input type="text" name="searchValue" th:value="${request.searchValue}" class="required"/>
+                </td>
+                <td>
+                    <div class="buttonActive">
+                        <div class="buttonContent">
+                            <button type="submit" id="retrieval">检索</button>
+                        </div>
+                    </div>
+                </td>
+            </table>
+        </div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%" layoutH="137">
+        <thead>
+        <tr>
+            <th width="80">角色ID</th>
+            <th width="80">角色名称</th>
+            <th width="80" align="right">等级</th>
+            <th width="80" align="right">职业</th>
+            <th width="80" align="right">金钱</th>
+            <th width="80" align="right">钻石</th>
+            <th width="80" align="right">区服</th>
+            <th width="80" align="right">充值钻石</th>
+            <th width="80" align="right">创建时间</th>
+            <th width="80" align="right">是否在线</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${player.name!=null}">
+            <td th:text="${player.playerId}"></td>
+            <td th:text="${player.name}"></td>
+            <td th:text="${player.lev}"></td>
+            <td th:if="${player.vocation} eq'1'" th:text="战士"></td>
+            <td th:if="${player.vocation} eq'2'" th:text="刺客"></td>
+            <td th:if="${player.vocation} eq'3'" th:text="法师"></td>
+            <td th:text="${player.coin}"></td>
+            <td th:text="${player.diamond}"></td>
+            <td th:text="${player.serverName}"></td>
+            <td th:text="${player.chargediamond}"></td>
+            <td th:text="${player.regtime}"></td>
+            <td th:if="${player.online==true}" th:text="在线"></td>
+            <td th:if="${player.online==false}" th:text="离线"></td>
+        </tr>
+        <tr th:if="${player.name==null}">
+            <td colspan="4" align="center">暂无数据</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

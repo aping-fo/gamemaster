@@ -1,38 +1,67 @@
 package com.luckygames.wmxz.gamemaster.service;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.luckygames.wmxz.gamemaster.dao.PlayerEntity;
 import com.luckygames.wmxz.gamemaster.dao.mapper.PlayerMapper;
+import com.luckygames.wmxz.gamemaster.dao.mapper.ServerMapper;
 import com.luckygames.wmxz.gamemaster.model.entity.Player;
-import com.luckygames.wmxz.gamemaster.model.enums.Status;
+import com.luckygames.wmxz.gamemaster.model.entity.Server;
+import com.luckygames.wmxz.gamemaster.model.view.request.PlayerNameQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.PlayerSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.base.BaseServiceImpl;
-import com.luckygames.wmxz.gamemaster.utils.BeanUtils;
+import com.luckygames.wmxz.gamemaster.utils.JsonUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
-@Service("playerService")
+import java.io.UnsupportedEncodingException;
+import java.sql.Date;
+import java.util.Map;
+
+@Service("PlayerService")
 public class PlayerServiceImpl extends BaseServiceImpl<PlayerEntity> implements PlayerService {
     @Autowired
-    private PlayerMapper playerMapper;
-
-    @Override
-    public Player getByPlayerId(long playerId) {
-        PlayerEntity playerEntity = playerMapper.selectOne(new PlayerEntity() {{
-//            setPlayerId(playerId);
-            setStatus(Status.NORMAL);
-        }});
-        return BeanUtils.copyProperties(playerEntity, Player.class);
-    }
-
-    @Override
-    public long countPlayers() {
-        return this.playerMapper.selectCount(new PlayerEntity() {{
-            setStatus(Status.NORMAL);
-        }});
-    }
+    private PlayerMapper PlayerMapper;
+    @Autowired
+    private AdminService adminService;
+    @Autowired
+    private ServerMapper serverMapper;
 
     @Override
     public Mapper<PlayerEntity> getMapper() {
-        return playerMapper;
+        return PlayerMapper;
+    }
+
+    @Override
+    public Page<Player> searchPage(PlayerSearchQuery query) {
+        return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> PlayerMapper.searchPage(query));
+    }
+
+    @Override
+    public void queryPlayer(Player player) {
+        if (StringUtils.isNotBlank(player.getSearchValue())) {
+            String playerString = adminService.getPlayerName(new PlayerNameQuery(player.getServerId(), player.getSearchValue()));
+            Map<String, Object> playerMap = JsonUtils.string2Map(playerString);
+            try {
+                if (playerMap != null) {
+                    player.setName(new String(playerMap.get("name").toString().getBytes("ISO-8859-1"), "utf-8"));
+                    player.setPlayerId(Long.valueOf(playerMap.get("playerId").toString()));
+                    player.setLev(Short.valueOf(playerMap.get("lev").toString()));
+                    player.setSex(Byte.valueOf(playerMap.get("sex").toString()));
+                    player.setVocation(Byte.valueOf(playerMap.get("vocation").toString()));
+                    player.setCoin(Integer.valueOf(playerMap.get("coin").toString()));
+                    player.setDiamond(Integer.valueOf(playerMap.get("diamond").toString()));
+                    Server server = serverMapper.getByServerId(player.getServerId());
+                    player.setServerName(server.getServerName());
+                    player.setChargediamond(Integer.valueOf(playerMap.get("chargeDiamond").toString()));
+                    player.setRegtime(new Date(Long.parseLong(playerMap.get("regTime").toString())));
+                    player.setOnline(Boolean.parseBoolean(playerMap.get("online").toString()));
+                }
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

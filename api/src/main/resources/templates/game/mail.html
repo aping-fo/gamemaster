@@ -1,5 +1,9 @@
 <div class="pageHeader">
     <form id="pagerForm" onsubmit="return ajaxNavTab(this);" action="operatingTools/mailManage" method="post">
+        <input type="hidden" name="orderField" th:value="${request.orderField}"/>
+        <input type="hidden" name="orderDirection" th:value="${request.orderDirection}"/>
+        <input type="hidden" name="pageNum" th:value="${Pager.pageNum}"/>
+        <input type="hidden" name="pageSize" th:value="${Pager.pageSize}"/>
         <div class="searchBar">
             <table class="searchContent">
                 <tr>
@@ -11,9 +15,8 @@
                     <td>
                         <label>邮件类型</label>
                         <select name="mailType" class="combox">
-                            <option value="1" th:selected="${request.mailType==1}">全服群发</option>
-                            <option value="2" th:selected="${request.mailType==2}">等级范围</option>
                             <option value="3" th:selected="${request.mailType==3}">角色群发</option>
+                            <option value="2" th:selected="${request.mailType==2}">等级群发</option>
                         </select>
                     </td>
                     <td class="dateRange">
@@ -38,9 +41,8 @@
     <div class="panelBar" style="height:30px">
         <ul class="toolBar">
             <li>
-                <a title="发送邮件" class="edit" href="game/dialog_newmail"
-                   target="dialog" width="480" height="550"
-                   mask="true"><span style="font-size: 20px">发送邮件</span></a>
+                <a title="角色群发" class="edit" href="operatingTools/mailAddRole" target="dialog" width="480" height="550" mask="true"><span style="font-size: 20px">角色群发</span></a>
+                <a title="等级群发" class="edit" href="operatingTools/mailAddLevel" target="dialog" width="480" height="550" mask="true"><span style="font-size: 20px">等级群发</span></a>
             </li>
         </ul>
     </div>
@@ -50,7 +52,8 @@
             <th width="5%" align="center">服务器</th>
             <th width="5%" align="center">类型</th>
             <th width="5%">标题</th>
-            <th width="75%">内容</th>
+            <th width="55%">内容</th>
+            <th width="20%">附件</th>
             <th width="10%" align="center">发送时间</th>
         </tr>
         </thead>
@@ -62,9 +65,12 @@
             <td th:if="${row.mailType==3}" th:text="角色群发"></td>
             <td th:text="${row.title}"></td>
             <td th:text="${row.content}"></td>
+            <td th:text="${row.rewards}"></td>
             <td th:text="${#dates.format(row.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
         </tr>
-        <tr th:if="${list.size()==0}"><td colspan="6" style="text-align: center">暂无数据</td></tr>
+        <tr th:if="${list.size()==0}">
+            <td colspan="6" style="text-align: center">暂无数据</td>
+        </tr>
         </tbody>
     </table>
     <div th:replace="_include/pager"></div>

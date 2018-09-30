@@ -1,5 +1,9 @@
 <div class="pageHeader">
     <form id="pagerForm" onsubmit="return ajaxNavTab(this);" action="operatingTools/recoveryGoods" method="post">
+        <input type="hidden" name="orderField" th:value="${request.orderField}"/>
+        <input type="hidden" name="orderDirection" th:value="${request.orderDirection}"/>
+        <input type="hidden" name="pageNum" th:value="${Pager.pageNum}"/>
+        <input type="hidden" name="pageSize" th:value="${Pager.pageSize}"/>
         <div class="searchBar" style="height: 177px">
             <table class="searchContent">
                 <tr>

@@ -4,10 +4,7 @@ import com.github.pagehelper.Page;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.model.entity.*;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
-import com.luckygames.wmxz.gamemaster.model.view.request.CommonSearchQuery;
-import com.luckygames.wmxz.gamemaster.model.view.request.PackageSearchQuery;
-import com.luckygames.wmxz.gamemaster.model.view.request.PlayerActionLogSearchQuery;
-import com.luckygames.wmxz.gamemaster.model.view.request.SigninSearchQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.*;
 import com.luckygames.wmxz.gamemaster.service.*;
 import com.luckygames.wmxz.gamemaster.utils.ExcelExportUtil;
 import com.luckygames.wmxz.gamemaster.utils.ExportUtil;
@@ -37,13 +34,22 @@ public class StaticsController extends BaseController {
     @Autowired
     private StaticsSummaryService staticsSummaryService;
     @Autowired
-    private LogonStatisticsService logonStatisticsService;
-    @Autowired
     private PlayerActionLogService playerActionLogService;
     @Autowired
-    private ChannelBagService channelBagService;
+    private AccountLogService accountLogService;
     @Autowired
-    private ChannelService channelService;
+    private ServerService serverService;
+
+    //登录统计
+    @RequestMapping("signin")
+    public Response signinStatics(AccountLogSearchQuery query) {
+        Page<AccountLog> accountLogs = accountLogService.searchPage(query);
+        List<Server> serverList = serverService.searchList();
+        return new Response("statics/signin")
+                .request(query)
+                .data("list", accountLogs)
+                .data("serverList", serverList);
+    }
 
     //数据汇总
     @RequestMapping("summary")
@@ -57,24 +63,6 @@ public class StaticsController extends BaseController {
         return new Response("statics/summary")
                 .request(query)
                 .data("staticsSummaryList", staticsSummaryPage);
-    }
-
-    //登录统计
-    @RequestMapping("signin")
-    public Response signinStatics(SigninSearchQuery query) {
-        Page<LogonStatistics> logonStatisticsPage = logonStatisticsService.searchPage(query);
-        List<ChannelBag> channelBagList;
-        if (query.getChannelId() != null) {
-            channelBagList = channelBagService.searchPageByChannelId(query.getChannelId());
-        } else {
-            channelBagList = channelBagService.searchPage(new PackageSearchQuery());
-        }
-        List<Channel> channelList = channelService.searchList();
-        return new Response("statics/signin")
-                .request(query)
-                .data("list", logonStatisticsPage)
-                .data("channelBagList", channelBagList)
-                .data("channelList", channelList);
     }
 
     //等级流失
@@ -97,21 +85,21 @@ public class StaticsController extends BaseController {
 
     //等级分布导出
     @RequestMapping("/download")
-    public ResponseEntity<byte[]> download(String filename,String[] title,String serverIds,String channelIds,Long platform,String date,Long level,Integer pageNum,HttpServletRequest request){
+    public ResponseEntity<byte[]> download(String filename, String[] title, String serverIds, String channelIds, Long platform, String date, Long level, Integer pageNum, HttpServletRequest request) {
         //条件处理
-        PlayerActionLogSearchQuery query=new PlayerActionLogSearchQuery();
-        if(serverIds!=null){
-            List<Long> serverIdList=new ArrayList<>();
+        PlayerActionLogSearchQuery query = new PlayerActionLogSearchQuery();
+        if (serverIds != null) {
+            List<Long> serverIdList = new ArrayList<>();
             String[] serverIdArray = StringUtils.split(serverIds, ",");
-            for(int i=0;i<serverIdArray.length;i++){
+            for (int i = 0; i < serverIdArray.length; i++) {
                 serverIdList.add(Long.valueOf(serverIdArray[i]));
             }
             query.setServerIds(serverIdList);
         }
-        if(channelIds!=null){
-            List<Long> channelIdList=new ArrayList<>();
+        if (channelIds != null) {
+            List<Long> channelIdList = new ArrayList<>();
             String[] channelIdArray = StringUtils.split(channelIds, ",");
-            for(int i=0;i<channelIdArray.length;i++){
+            for (int i = 0; i < channelIdArray.length; i++) {
                 channelIdList.add(Long.valueOf(channelIdArray[i]));
             }
             query.setChannelIds(channelIdList);
@@ -123,11 +111,11 @@ public class StaticsController extends BaseController {
         Page<PlayerActionLog> playerActionLogs = playerActionLogService.searchLeaveDistribution(query);
 
         //下载
-        ExcelExportUtil eu=new ExcelExportUtil();
+        ExcelExportUtil eu = new ExcelExportUtil();
         File file = new File(filename);
-        eu.export(file, playerActionLogs, title,PlayerActionLog.class);
+        eu.export(file, playerActionLogs, title, PlayerActionLog.class);
         HttpHeaders headers = new HttpHeaders();
-        byte[] body= new byte[0];
+        byte[] body = new byte[0];
         body = ExportUtil.exportExcel(filename, request, file, headers, body);
         return new ResponseEntity<>(body, headers, HttpStatus.OK);
     }

@@ -1,5 +1,6 @@
 package com.luckygames.wmxz.gamemaster.controller;
 
+import com.luckygames.wmxz.gamemaster.dao.AccountLogEntity;
 import com.luckygames.wmxz.gamemaster.model.entity.ActivationCode;
 import com.luckygames.wmxz.gamemaster.model.entity.Notice;
 import com.luckygames.wmxz.gamemaster.model.entity.Online;
@@ -35,6 +36,8 @@ public class AdminController {
     private AdminService adminService;
     @Autowired
     private OnlineService onlineService;
+    @Autowired
+    private AccountLogService accountLogService;
 
     //获取服务器列表
     @RequestMapping(value = "/serverList", method = {RequestMethod.GET, RequestMethod.POST})
@@ -95,5 +98,12 @@ public class AdminController {
             online.setMaxRoleCount("0");
         }
         onlineService.save(online);
+    }
+
+    //账户登录日志
+    @RequestMapping(value = "/accountLog", method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public void accountLog(AccountLogEntity accountLogEntity) {
+        accountLogService.save(accountLogEntity);
     }
 }

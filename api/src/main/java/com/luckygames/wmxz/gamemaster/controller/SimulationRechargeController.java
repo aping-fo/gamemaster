@@ -2,105 +2,80 @@ package com.luckygames.wmxz.gamemaster.controller;
 
 import com.github.pagehelper.Page;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
-import com.luckygames.wmxz.gamemaster.model.entity.PlayerCharacter;
+import com.luckygames.wmxz.gamemaster.data.ChargeConfig;
+import com.luckygames.wmxz.gamemaster.data.GoodsConfig;
+import com.luckygames.wmxz.gamemaster.model.entity.Player;
 import com.luckygames.wmxz.gamemaster.model.entity.RechargeSimulation;
+import com.luckygames.wmxz.gamemaster.model.entity.Server;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
-import com.luckygames.wmxz.gamemaster.model.view.request.PlayerCharacterSearchQuery;
-import com.luckygames.wmxz.gamemaster.model.view.request.RechargeSimulationSearchQuery;
-import com.luckygames.wmxz.gamemaster.service.PlayerCharacterService;
-import com.luckygames.wmxz.gamemaster.service.RechargeSimulationService;
-import com.luckygames.wmxz.gamemaster.service.ServerService;
+import com.luckygames.wmxz.gamemaster.model.view.request.*;
+import com.luckygames.wmxz.gamemaster.service.*;
+import com.luckygames.wmxz.gamemaster.utils.JsonUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/simulationRecharge")
 public class SimulationRechargeController extends BaseController {
-    @Autowired
-    private ServerService serverService;
+    public static final String RETURN_SUCCESS = "success";// 成功
+    public static List<ChargeConfig> chargeList = new ArrayList<>();//物品列表
+
     @Autowired
     private PlayerCharacterService playerCharacterService;
     @Autowired
     private RechargeSimulationService rechargeSimulationService;
-    //玩家列表
-    @RequestMapping(value = "/create", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response queryPlayer(PlayerCharacterSearchQuery query) {
-        if (query.getPageNum() == null) {
-            query.setPageNum(1);
-        }
-        Page<PlayerCharacter> characters;
-        if(query.getKeyword() == null || query.getKeyword().length() == 0)
-        {
-            characters=new Page<PlayerCharacter>();
-        }
-        else
-        {
-            characters= playerCharacterService.searchPage(query);
-        }
+    @Autowired
+    private AdminService adminService;
+    @Autowired
+    private ServerService serverService;
+    @Autowired
+    private PlayerService playerService;
 
-        Response r = new Response("simulationRecharge/create")
-                .request(query)
-                .data("characters", characters)
-                .data("charId", query.getCharId());
-        return r;
-    }
-    //未处理列表
-    @RequestMapping(value = "/pending", method = {RequestMethod.GET, RequestMethod.POST})
-        public Response pending(RechargeSimulationSearchQuery rechargeSimulationSearchQuery) {
-
-        if (rechargeSimulationSearchQuery.getId() != null) {
-            if (rechargeSimulationSearchQuery.getState() != null) {
-                RechargeSimulation sim=new RechargeSimulation();
-                sim.setId(rechargeSimulationSearchQuery.getId());
-                sim.setState(rechargeSimulationSearchQuery.getState());
-                rechargeSimulationService.update(sim);
-            }
-            else //删除
-            {
-                rechargeSimulationService.delRechargeSimulation(rechargeSimulationSearchQuery.getId());
-            }
-
-        }
-        //
-
-            if (rechargeSimulationSearchQuery.getPageNum() == null) {
-                rechargeSimulationSearchQuery.setPageNum(1);
-            }
-            Page<RechargeSimulation> charges = rechargeSimulationService.searchPage(rechargeSimulationSearchQuery);
-
-            Response r = new Response("simulationRecharge/pending")
-                    .request(rechargeSimulationSearchQuery)
-                    .data("charges", charges);
-            return r;
-    }
-    //新增条目
-    @RequestMapping(value = "/createNew", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response create(RechargeSimulationSearchQuery rechargeSimulationSearchQuery) {
-        rechargeSimulationService.addRechargeSimulation(rechargeSimulationSearchQuery);
-        Response r = new Response("simulationRecharge/create_success")
-                .request(rechargeSimulationSearchQuery);
-        return r;
-
-    }
-    //已处理条目
-    @RequestMapping(value = "/processed", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response processed(RechargeSimulationSearchQuery rechargeSimulationSearchQuery) {
-            if (rechargeSimulationSearchQuery.getPageNum() == null) {
-                rechargeSimulationSearchQuery.setPageNum(1);
-            }
-            Page<RechargeSimulation> charges = rechargeSimulationService.searchPage(rechargeSimulationSearchQuery);
-
-            Response r = new Response("simulationRecharge/processed")
-                    .request(rechargeSimulationSearchQuery)
-                    .data("charges", charges);
-            return r;
+    //模拟充值列表
+    @RequestMapping(value = "/list", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response queryPlayer(PlayerSearchQuery query) {
+        Response response = new Response("simulationRecharge/list");
+        Page<Player> players = playerService.searchPage(query);
+        response.request(query)
+                .data("list", players);
+        return response;
     }
 
+    //模拟充值搜索玩家
+    @RequestMapping(value = "/selectPlayer", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response selectPlayer(Player player) {
+        Response response = new Response("simulationRecharge/add");
+        playerService.queryPlayer(player);
+        List<Server> serverList = serverService.searchList();
+        return response.request(player).data("player", player).data("serverList", serverList).data("chargeList", chargeList);
+    }
+
+    //模拟充值增加
+    @RequestMapping(value = "/add", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response add(Player player) {
+        Response response = new Response("simulationRecharge/list");
+        for (ChargeConfig cc : chargeList) {
+            if (cc.id == player.getType()) {
+                player.setAmount((long) (cc.total + cc.add));
+                break;
+            }
+        }
+        String code = adminService.pay(new PayQuery(player.getServerId(), player.getPlayerId(), player.getAmount(), player.getType()));
+        if (code.equals(RETURN_SUCCESS)) {
+            playerService.save(player);
+        }
+        PlayerSearchQuery query = new PlayerSearchQuery();
+        Page<Player> players = playerService.searchPage(query);
+        return response.request(query).data("list", players);
+    }
 }
 
 

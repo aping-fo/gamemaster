@@ -1,8 +1,6 @@
 package com.luckygames.wmxz.gamemaster.utils;
 
-import com.luckygames.wmxz.gamemaster.controller.AllDialogController;
 import com.luckygames.wmxz.gamemaster.data.GoodsConfig;
-import org.apache.poi.ss.formula.functions.T;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -101,7 +99,7 @@ public class XmlUtil2 {
         }
         Object finalObject = object;
         map.forEach((k, v) -> {
-            Field[] fields = GoodsConfig.class.getFields();
+            Field[] fields = clazz.getFields();
             for (Field field : fields) {
                 //根据字段名找到响应方法
                 if (field.getName().equals(k)) {

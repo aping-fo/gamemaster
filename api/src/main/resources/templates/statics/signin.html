@@ -1,8 +1,6 @@
 <div class="pageHeader">
     <form id="pagerForm" onsubmit="return navTabSearch(this);" action="statics/signin" method="post" onreset="$(this).find('select.combox').comboxReset()">
         <div th:fragment="searchBar">
-            <input type="hidden" name="serverIds" th:value="${#strings.listJoin(request.serverIds,',')}"/>
-            <input type="hidden" name="channelIds" th:value="${#strings.listJoin(request.channelIds,',')}"/>
             <input type="hidden" name="orderField" th:value="${request.orderField}"/>
             <input type="hidden" name="orderDirection" th:value="${request.orderDirection}"/>
             <input type="hidden" name="pageNum" th:value="${Pager.pageNum}"/>
@@ -10,25 +8,10 @@
             <div class="searchBar">
                 <table class="searchContent">
                     <tr>
+                        <td>服务器</td>
                         <td>
-                            <div>
-                                <div class="buttonContent">
-                                    <a class="button" href="server/select"
-                                       rel="serverselect" mask="true" lookupGroup=""><span>区服筛选</span></a>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            渠道：
-                            <select name="channelId">
-                                <option value="">全部</option>
-                                <option th:each="row,iterStat:${channelList}" th:selected="${row.channelId==request.channelId}" th:text="${row.channelName}" th:value="${row.channelId}"></option>
-                            </select>
-                        </td>
-                        <td>包:
-                            <select name="packageId">
-                                <option value="">全部</option>
-                                <option th:each="row,iterStat:${channelBagList}" th:value="${row.id}" th:text="${row.name}" th:selected="${row.id==request.packageId}"></option>
+                            <select name="serverId" class="required">
+                                <option th:each="server:${serverList}" th:value="${server.serverId}" th:utext="${server.serverName}" th:selected="${server.serverId==request.serverId}"></option>
                             </select>
                         </td>
                         <td class="dateRange">
@@ -54,36 +37,20 @@
     <table class="table" width="100%" layoutH="137">
         <thead>
         <tr>
-            <th width="100">日期</th>
-            <th width="100">登录人数</th>
-            <th width="100">登录次数</th>
-            <th width="100">平均登录次数</th>
-            <th width="100">老玩家数</th>
-            <th width="100">老玩家在线时长</th>
-            <th width="100">老玩家平均在线时长</th>
-            <th width="100">老玩家留存</th>
-            <th width="100">活跃玩家数</th>
-            <th width="100">忠实玩家数</th>
-            <th width="100">总注册量</th>
-            <th width="100">老玩家留存</th>
+            <th width="100">区服</th>
+            <th width="100">账户</th>
+            <th width="100">时间</th>
         </tr>
         </thead>
         <tbody>
         <tr th:if="${list.size()!=0}" th:each="row,iterStat:${list}">
-            <td th:text="${#dates.format(row.updateTime, 'yyyy-MM-dd')}"></td>
-            <td th:text="${row.logonCount}"></td>
-            <td th:text="${row.logonNumber}"></td>
-            <td th:text="${row.avgLogonNumber}"></td>
-            <td th:text="${row.oldPlayerCount}"></td>
-            <td th:text="${row.oldPlayerOnlineTime}"></td>
-            <td th:text="${row.oldPlayerAvgOnlineTime}"></td>
-            <td th:text="${#strings.append(#strings.substring(row.oldPlayerArpu*100,0,#strings.length(row.oldPlayerArpu*100)-2),'%')}"></td>
-            <td th:text="${row.activePlayerCount}"></td>
-            <td th:text="${row.loyalPlayerCount}"></td>
-            <td th:text="${row.totalRegistration}"></td>
-            <td th:text="${row.oldPlayerEquipment}"></td>
+            <td th:text="${row.serverName}"></td>
+            <td th:text="${row.accountName}"></td>
+            <td th:text="${#dates.format(row.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
         </tr>
-        <tr th:if="${list.size()==0}"><td colspan="11" style="text-align: center">暂无数据</td></tr>
+        <tr th:if="${list.size()==0}">
+            <td colspan="11" style="text-align: center">暂无数据</td>
+        </tr>
         </tbody>
     </table>
     <div th:replace="_include/pager"></div>

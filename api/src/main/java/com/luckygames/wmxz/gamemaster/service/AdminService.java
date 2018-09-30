@@ -107,9 +107,9 @@ public interface AdminService {
     public String recoveryGoods(RecoveryGoodsQuery query);
 
     //获取玩家信息
-    public String getPlayerById(GMQuery query);
-
-    //获取玩家信息
     public String getPlayerName(GMQuery query);
+
+    //模拟充值
+    public String pay(GMQuery query);
 }
 

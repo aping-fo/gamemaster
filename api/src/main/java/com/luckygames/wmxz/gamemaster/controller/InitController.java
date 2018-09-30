@@ -1,11 +1,13 @@
 package com.luckygames.wmxz.gamemaster.controller;
 
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
+import com.luckygames.wmxz.gamemaster.data.ChargeConfig;
 import com.luckygames.wmxz.gamemaster.data.GoodsConfig;
 import com.luckygames.wmxz.gamemaster.model.entity.ActivationCode;
 import com.luckygames.wmxz.gamemaster.model.view.request.PlayerQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.ServerSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.*;
+import com.luckygames.wmxz.gamemaster.utils.JsonUtils;
 import com.luckygames.wmxz.gamemaster.utils.XmlUtil2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -52,22 +54,35 @@ public class InitController extends BaseController implements ApplicationRunner 
         }
         OperatingToolsController.Activation_Code_batch = value;
 
+        //初始化充值表
+        initChargeConfig();
+
         System.out.println("加载完毕...");
+    }
+
+    //初始化充值表
+    private void initChargeConfig() {
+        XmlUtil2.xml2map("ChargeConfig.xml", ChargeConfig.class)
+                .forEach(o -> SimulationRechargeController.chargeList.add((ChargeConfig) o));
+
+        SimulationRechargeController.chargeList = SimulationRechargeController.chargeList.stream()
+                .sorted(Comparator.comparing((Object o) -> {
+                    ChargeConfig goodsConfig = (ChargeConfig) o;
+                    return goodsConfig.id;
+                }))
+                .collect(Collectors.toList());
     }
 
     //初始化物品表
     private void initGoodsConfig() {
-        List<Object> objects = XmlUtil2.xml2map("GoodsConfig.xml", GoodsConfig.class);
-        List<GoodsConfig> goodsList = new ArrayList<>();
-        objects.forEach(o -> {
-            GoodsConfig goodsConfig = (GoodsConfig) o;
-            goodsList.add(goodsConfig);
-        });
-        AllDialogController.goodsList = goodsList;
+        XmlUtil2.xml2map("GoodsConfig.xml", GoodsConfig.class)
+                .forEach(o -> OperatingToolsController.goodsList.add((GoodsConfig) o));
 
-        AllDialogController.goodsList = AllDialogController.goodsList.stream().sorted(Comparator.comparing((Object o) -> {
-            GoodsConfig goodsConfig = (GoodsConfig) o;
-            return goodsConfig.id;
-        })).collect(Collectors.toList());
+        OperatingToolsController.goodsList = OperatingToolsController.goodsList.stream()
+                .sorted(Comparator.comparing((Object o) -> {
+                    GoodsConfig goodsConfig = (GoodsConfig) o;
+                    return goodsConfig.id;
+                }))
+                .collect(Collectors.toList());
     }
 }
