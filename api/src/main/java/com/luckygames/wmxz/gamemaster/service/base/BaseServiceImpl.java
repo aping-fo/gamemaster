@@ -1,7 +1,6 @@
 package com.luckygames.wmxz.gamemaster.service.base;
 
 import com.luckygames.wmxz.gamemaster.model.entity.base.BaseEntity;
-import com.luckygames.wmxz.gamemaster.model.enums.Status;
 import com.luckygames.wmxz.gamemaster.utils.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +10,7 @@ public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseServi
 
     @Override
     public Long create(T entity) {
-        entity.setStatus(Status.NORMAL);
+//        entity.setStatus(Status.NORMAL);
         entity.setCreateTime(DateUtils.Now());
         entity.setUpdateTime(DateUtils.Now());
 
@@ -40,7 +39,7 @@ public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseServi
 
     @Override
     public void delete(T obj) {
-        obj.setStatus(Status.DELETED);
+//        obj.setStatus(Status.DELETED);
         update(obj);
     }
 }

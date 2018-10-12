@@ -6,11 +6,9 @@ import com.luckygames.wmxz.gamemaster.dao.ServerEntity;
 import com.luckygames.wmxz.gamemaster.dao.ServerExample;
 import com.luckygames.wmxz.gamemaster.dao.mapper.ServerMapper;
 import com.luckygames.wmxz.gamemaster.model.entity.Server;
-import com.luckygames.wmxz.gamemaster.model.enums.Status;
 import com.luckygames.wmxz.gamemaster.model.view.request.ServerSearchQuery;
-import com.luckygames.wmxz.gamemaster.service.base.BaseServiceImpl;
+import com.luckygames.wmxz.gamemaster.service.base.BaseNewServiceImpl;
 import com.luckygames.wmxz.gamemaster.utils.BeanUtils;
-import com.luckygames.wmxz.gamemaster.utils.DateUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,31 +19,37 @@ import java.util.Date;
 import java.util.List;
 
 @Service("serverService")
-public class ServerServiceImpl extends BaseServiceImpl<ServerEntity> implements ServerService {
+public class ServerServiceImpl extends BaseNewServiceImpl<ServerEntity> implements ServerService {
 
     @Autowired
     private ServerMapper serverMapper;
 
     @Override
     public List<Server> searchList() {
+        ServerSearchQuery query = new ServerSearchQuery();
+        query.setOpen(1);
+        return searchList(query);
+    }
+
+    @Override
+    public List<Server> searchAllList() {
         return searchList(null);
     }
 
     @Override
-    public void updateServerState(Long id,int serverState) {
-        serverMapper.updateServerState(id,serverState);
+    public void updateServerState(Long id, int serverState) {
+        serverMapper.updateServerState(id, serverState);
     }
 
     @Override
     public void updateWhitelist(Long id, int enable, String whiteList) {
-        serverMapper.updateWhitelist(id, enable,whiteList);
+        serverMapper.updateWhitelist(id, enable, whiteList);
     }
 
     @Override
     public List<Server> searchList(ServerSearchQuery request) {
         ServerExample example = new ServerExample();
         ServerExample.Criteria criteria = example.createCriteria();
-        criteria.andStatusEqualTo(Status.NORMAL);
 
         if (request != null) {
             if (StringUtils.isNotBlank(request.getKeyword())) {
@@ -53,6 +57,9 @@ public class ServerServiceImpl extends BaseServiceImpl<ServerEntity> implements 
             }
             if (CollectionUtils.isNotEmpty(request.getServerIds())) {
                 criteria.andServerIdIn(request.getServerIds());
+            }
+            if (request.getOpen() != null) {
+                criteria.andOpenEqualTo(request.getOpen());
             }
         }
 
@@ -63,7 +70,6 @@ public class ServerServiceImpl extends BaseServiceImpl<ServerEntity> implements 
     public Page<Server> searchPage(ServerSearchQuery request) {
         ServerExample example = new ServerExample();
         ServerExample.Criteria criteria = example.createCriteria();
-        criteria.andStatusEqualTo(Status.NORMAL);
         if (StringUtils.isNotBlank(request.getKeyword())) {
             criteria.andServerNameLike(request.getKeyword());
         }
@@ -82,7 +88,6 @@ public class ServerServiceImpl extends BaseServiceImpl<ServerEntity> implements 
     @Override
     public long countServers() {
         return this.serverMapper.selectCount(new ServerEntity() {{
-            setStatus(Status.NORMAL);
         }});
     }
 

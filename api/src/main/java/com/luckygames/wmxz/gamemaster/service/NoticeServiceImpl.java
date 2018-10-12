@@ -6,13 +6,13 @@ import com.luckygames.wmxz.gamemaster.dao.NoticeEntity;
 import com.luckygames.wmxz.gamemaster.dao.mapper.NoticeMapper;
 import com.luckygames.wmxz.gamemaster.model.entity.Notice;
 import com.luckygames.wmxz.gamemaster.model.view.request.NoticeSearchQuery;
-import com.luckygames.wmxz.gamemaster.service.base.BaseServiceImpl;
+import com.luckygames.wmxz.gamemaster.service.base.BaseNewServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
 @Service("NoticeService")
-public class NoticeServiceImpl extends BaseServiceImpl<NoticeEntity> implements NoticeService {
+public class NoticeServiceImpl extends BaseNewServiceImpl<NoticeEntity> implements NoticeService {
 
     @Autowired
     private NoticeMapper noticeMapper;

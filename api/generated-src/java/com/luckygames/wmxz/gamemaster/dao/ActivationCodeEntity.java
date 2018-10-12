@@ -1,11 +1,11 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
-import com.luckygames.wmxz.gamemaster.model.entity.base.BaseEntity;
+import com.luckygames.wmxz.gamemaster.model.entity.base.BaseNewEntity;
 import java.util.Date;
 import javax.persistence.Table;
 
 @Table(name="activation_code")
-public class ActivationCodeEntity extends BaseEntity {
+public class ActivationCodeEntity extends BaseNewEntity {
     private Long serverId;
 
     private String invalidTime;

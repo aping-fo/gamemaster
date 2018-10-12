@@ -6,13 +6,13 @@ import com.luckygames.wmxz.gamemaster.dao.ForbiddenLogEntity;
 import com.luckygames.wmxz.gamemaster.dao.mapper.ForbiddenLogMapper;
 import com.luckygames.wmxz.gamemaster.model.entity.ForbiddenLog;
 import com.luckygames.wmxz.gamemaster.model.view.request.ForbiddenSearchQuery;
-import com.luckygames.wmxz.gamemaster.service.base.BaseServiceImpl;
+import com.luckygames.wmxz.gamemaster.service.base.BaseNewServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
 @Service("forbiddenLogService")
-public class ForbiddenLogServiceImpl extends BaseServiceImpl<ForbiddenLogEntity> implements ForbiddenLogService {
+public class ForbiddenLogServiceImpl extends BaseNewServiceImpl<ForbiddenLogEntity> implements ForbiddenLogService {
     @Autowired
     private ForbiddenLogMapper forbiddenLogMapper;
 

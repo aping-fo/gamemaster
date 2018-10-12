@@ -1,6 +1,5 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
-import com.luckygames.wmxz.gamemaster.model.enums.Status;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -163,66 +162,6 @@ public class ServerEntityExample {
 
         public Criteria andIdNotBetween(Long value1, Long value2) {
             addCriterion("id not between", value1, value2, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusIsNull() {
-            addCriterion("`status` is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusIsNotNull() {
-            addCriterion("`status` is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusEqualTo(Status value) {
-            addCriterion("`status` =", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusNotEqualTo(Status value) {
-            addCriterion("`status` <>", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusGreaterThan(Status value) {
-            addCriterion("`status` >", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusGreaterThanOrEqualTo(Status value) {
-            addCriterion("`status` >=", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusLessThan(Status value) {
-            addCriterion("`status` <", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusLessThanOrEqualTo(Status value) {
-            addCriterion("`status` <=", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusIn(List<Status> values) {
-            addCriterion("`status` in", values, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusNotIn(List<Status> values) {
-            addCriterion("`status` not in", values, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusBetween(Status value1, Status value2) {
-            addCriterion("`status` between", value1, value2, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusNotBetween(Status value1, Status value2) {
-            addCriterion("`status` not between", value1, value2, "status");
             return (Criteria) this;
         }
 
@@ -1393,6 +1332,66 @@ public class ServerEntityExample {
 
         public Criteria andChannelNotBetween(String value1, String value2) {
             addCriterion("channel not between", value1, value2, "channel");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenIsNull() {
+            addCriterion("`open` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenIsNotNull() {
+            addCriterion("`open` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenEqualTo(Integer value) {
+            addCriterion("`open` =", value, "open");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenNotEqualTo(Integer value) {
+            addCriterion("`open` <>", value, "open");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenGreaterThan(Integer value) {
+            addCriterion("`open` >", value, "open");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenGreaterThanOrEqualTo(Integer value) {
+            addCriterion("`open` >=", value, "open");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenLessThan(Integer value) {
+            addCriterion("`open` <", value, "open");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenLessThanOrEqualTo(Integer value) {
+            addCriterion("`open` <=", value, "open");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenIn(List<Integer> values) {
+            addCriterion("`open` in", values, "open");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenNotIn(List<Integer> values) {
+            addCriterion("`open` not in", values, "open");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenBetween(Integer value1, Integer value2) {
+            addCriterion("`open` between", value1, value2, "open");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenNotBetween(Integer value1, Integer value2) {
+            addCriterion("`open` not between", value1, value2, "open");
             return (Criteria) this;
         }
     }

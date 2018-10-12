@@ -1,10 +1,10 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
-import com.luckygames.wmxz.gamemaster.model.entity.base.BaseEntity;
+import com.luckygames.wmxz.gamemaster.model.entity.base.BaseNewEntity;
 import javax.persistence.Table;
 
 @Table(name="server")
-public class ServerEntity extends BaseEntity {
+public class ServerEntity extends BaseNewEntity {
     private Long serverId;
 
     private String serverName;
@@ -36,6 +36,8 @@ public class ServerEntity extends BaseEntity {
     private String serverGroup;
 
     private String channel;
+
+    private Integer open;
 
     private String whiteList;
 
@@ -165,6 +167,14 @@ public class ServerEntity extends BaseEntity {
 
     public void setChannel(String channel) {
         this.channel = channel == null ? null : channel.trim();
+    }
+
+    public Integer getOpen() {
+        return open;
+    }
+
+    public void setOpen(Integer open) {
+        this.open = open;
     }
 
     public String getWhiteList() {

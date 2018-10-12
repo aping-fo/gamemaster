@@ -32,10 +32,6 @@ public class GoodsRecoveryEntitySqlProvider {
             sql.VALUES("id", "#{id,jdbcType=BIGINT}");
         }
         
-        if (record.getStatus() != null) {
-            sql.VALUES("`status`", "#{status,jdbcType=INTEGER}");
-        }
-        
         if (record.getCreateTime() != null) {
             sql.VALUES("create_time", "#{createTime,jdbcType=TIMESTAMP}");
         }
@@ -78,7 +74,6 @@ public class GoodsRecoveryEntitySqlProvider {
         } else {
             sql.SELECT("id");
         }
-        sql.SELECT("`status`");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
         sql.SELECT("player_id");
@@ -106,10 +101,6 @@ public class GoodsRecoveryEntitySqlProvider {
         
         if (record.getId() != null) {
             sql.SET("id = #{record.id,jdbcType=BIGINT}");
-        }
-        
-        if (record.getStatus() != null) {
-            sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         }
         
         if (record.getCreateTime() != null) {
@@ -153,7 +144,6 @@ public class GoodsRecoveryEntitySqlProvider {
         sql.UPDATE("goods_recovery");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
-        sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         sql.SET("player_id = #{record.playerId,jdbcType=BIGINT}");

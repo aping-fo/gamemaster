@@ -384,7 +384,7 @@ var navTab = {
 
         var iOpenIndex = this._indexTabId(tabid);
 
-        if (iOpenIndex >= 0) {
+        if (iOpenIndex >= 0||(tabid=='_blank'&&iOpenIndex==-1)) { //特殊处理
             var $tab = this._getTabs().eq(iOpenIndex);
             var span$ = $tab.attr("tabid") == this._op.mainTabId ? "> span > span" : "> span";
             $tab.find(">a").attr("title", op.title).find(span$).html(op.title);

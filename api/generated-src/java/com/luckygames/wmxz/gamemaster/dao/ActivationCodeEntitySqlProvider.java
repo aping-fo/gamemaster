@@ -32,10 +32,6 @@ public class ActivationCodeEntitySqlProvider {
             sql.VALUES("id", "#{id,jdbcType=BIGINT}");
         }
         
-        if (record.getStatus() != null) {
-            sql.VALUES("`status`", "#{status,jdbcType=INTEGER}");
-        }
-        
         if (record.getServerId() != null) {
             sql.VALUES("server_id", "#{serverId,jdbcType=BIGINT}");
         }
@@ -102,7 +98,6 @@ public class ActivationCodeEntitySqlProvider {
         } else {
             sql.SELECT("id");
         }
-        sql.SELECT("`status`");
         sql.SELECT("server_id");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
@@ -136,10 +131,6 @@ public class ActivationCodeEntitySqlProvider {
         
         if (record.getId() != null) {
             sql.SET("id = #{record.id,jdbcType=BIGINT}");
-        }
-        
-        if (record.getStatus() != null) {
-            sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         }
         
         if (record.getServerId() != null) {
@@ -207,7 +198,6 @@ public class ActivationCodeEntitySqlProvider {
         sql.UPDATE("activation_code");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
-        sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");

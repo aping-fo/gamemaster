@@ -6,13 +6,13 @@ import com.luckygames.wmxz.gamemaster.dao.MailLogEntity;
 import com.luckygames.wmxz.gamemaster.dao.mapper.MailLogMapper;
 import com.luckygames.wmxz.gamemaster.model.entity.MailLog;
 import com.luckygames.wmxz.gamemaster.model.view.request.MailSearchQuery;
-import com.luckygames.wmxz.gamemaster.service.base.BaseServiceImpl;
+import com.luckygames.wmxz.gamemaster.service.base.BaseNewServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
 @Service("mailLogService")
-public class MailLogServiceImpl extends BaseServiceImpl<MailLogEntity> implements MailLogService {
+public class MailLogServiceImpl extends BaseNewServiceImpl<MailLogEntity> implements MailLogService {
     @Autowired
     private MailLogMapper mailLogMapper;
 

@@ -59,13 +59,13 @@
             <td th:text="${row.serverName}"></td>
             <td th:text="${#dates.format(row.expireTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
             <td th:text="${#dates.format(row.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-            <td th:if="${row.operateType.toString()=='FORBIDDEN' and row.forbiddenType.toString()=='LOGIN'}" th:text="禁止登录"></td>
-            <td th:if="${row.operateType.toString()=='FORBIDDEN' and row.forbiddenType.toString()=='CHAT'}"  th:text="禁止聊天"></td>
-            <td th:if="${row.operateType.toString()!='FORBIDDEN'}" th:text="已解封"></td>
+            <td th:if="${row.operateType==1 and row.forbiddenType==1}" th:text="禁止登录"></td>
+            <td th:if="${row.operateType==1 and row.forbiddenType==2}"  th:text="禁止聊天"></td>
+            <td th:if="${row.operateType!=1}" th:text="已解封"></td>
             <td th:text="${row.reason}"></td>
             <td>
                 <a title="踢下线" class="button" th:href="@{operatingTools/kickLine(playerId=${row.playerId},serverId=${row.serverId})}" target="navTab" mask="true"><span>踢下线</span></a>
-                <a th:if="${row.operateType.toString()=='FORBIDDEN'}" title="解封" class="button" th:href="@{operatingTools/forbiddenAllowed(id=${row.id},playerId=${row.playerId},serverId=${row.serverId},operateType='ALLOWED',forbiddenType=${row.forbiddenType})}" target="navTab" mask="true"><span>解封</span></a>
+                <a th:if="${row.operateType==1}" title="解封" class="button" th:href="@{operatingTools/forbiddenAllowed(id=${row.id},playerId=${row.playerId},serverId=${row.serverId},operateType='2',forbiddenType=${row.forbiddenType})}" target="navTab" mask="true"><span>解封</span></a>
             </td>
         </tr>
         <tr th:if="${list.size()==0}">

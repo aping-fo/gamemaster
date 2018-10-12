@@ -1,22 +1,18 @@
 package com.luckygames.wmxz.gamemaster.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.Page;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
+import com.luckygames.wmxz.gamemaster.data.GoodsConfig;
+import com.luckygames.wmxz.gamemaster.data.LogConsume;
 import com.luckygames.wmxz.gamemaster.model.entity.*;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
 import com.luckygames.wmxz.gamemaster.model.view.request.*;
 import com.luckygames.wmxz.gamemaster.service.*;
-import com.luckygames.wmxz.gamemaster.utils.JsonUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,17 +51,91 @@ public class PlayerCharacterController extends BaseController {
     private PlayerService playerService;
     @Autowired
     private ServerService serverService;
+    @Autowired
+    private ItemLogService itemLogService;
+    @Autowired
+    private DiamondsLogService diamondsLogService;
 
     //角色查询
     @RequestMapping(value = "/playerQuery", method = {RequestMethod.GET, RequestMethod.POST})
     public Response query(Player player) {
         Response response = new Response("player/playerQuery");
+        if (player.getPlayerId() != null) {
+            player.setSearchValue(player.getPlayerId().toString());
+        }
         playerService.queryPlayer(player);
         List<Server> serverList = serverService.searchList();
-        return response.request(player).data("player", player).data("serverList", serverList);
+        return response.request(player).data("serverList", serverList);
     }
 
+    //钻石日志列表
+    @RequestMapping(value = "/diamondsLogList", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response diamondsLogList(DiamondsLogSearchQuery query) {
+        Response response = new Response("player/diamondsLogList");
 
+        Player player = new Player();
+        if (query.getServerId() != null && query.getPlayerId() != null) {
+            Page<DiamondsLog> diamondsLogs = diamondsLogService.searchPage(query);
+            player.setServerId(query.getServerId());
+            player.setSearchValue(query.getPlayerId().toString());
+            playerService.queryPlayer(player);
+            int prev = player.getDiamond();
+
+            diamondsLogs.forEach(d -> {
+                d.setPrevValue(prev);
+                if (d.getOpType() == 1) {//增加
+                    d.setNextValue(prev + d.getCount());
+                } else if (d.getOpType() == 2) {//减少
+                    d.setNextValue(prev - d.getCount());
+                    d.setCount(-d.getCount());
+                }
+                d.setLev(Integer.valueOf(player.getLev()));
+
+                d.setReason(LogConsume.getLog(d.getItemId()).desc);
+            });
+            response.data("list", diamondsLogs);
+        }
+
+        return response.request(query).request(query).data("player", player);
+    }
+
+    //物品日志列表
+    @RequestMapping(value = "/itemLogList", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response itemLogList(ItemLogSearchQuery query) {
+        Response response = new Response("player/itemLogList");
+
+        Player player = new Player();
+        if (query.getServerId() != null && query.getPlayerId() != null) {
+            Page<ItemLog> itemLogs = itemLogService.searchPage(query);
+            player.setServerId(query.getServerId());
+            player.setSearchValue(query.getPlayerId().toString());
+            playerService.queryPlayer(player);
+            int prev = player.getDiamond();
+
+            itemLogs.forEach(d -> {
+                d.setPrevValue(prev);
+                if (d.getOp() == 1) {//增加
+                    d.setNextValue(prev + d.getCount());
+                } else if (d.getOp() == 2) {//减少
+                    d.setNextValue(prev - d.getCount());
+                    d.setCount(-d.getCount());
+                }
+                d.setLev(Integer.valueOf(player.getLev()));
+
+                for (GoodsConfig goodsConfig : OperatingToolsController.goodsList) {
+                    if (d.getGoodsId() == goodsConfig.id) {
+                        d.setGoodsName(goodsConfig.name);
+                        break;
+                    }
+                }
+
+                d.setReason(LogConsume.getLog(d.getType()).desc);
+            });
+            response.data("list", itemLogs);
+        }
+
+        return response.request(query).request(query).data("player", player);
+    }
 
     @RequestMapping(value = "/character", method = {RequestMethod.GET, RequestMethod.POST})
     public Response queryCharacter(PlayerCharacterSearchQuery playerCharacterSearchQuery) {

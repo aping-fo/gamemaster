@@ -1,13 +1,11 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
-import com.luckygames.wmxz.gamemaster.model.entity.base.BaseEntity;
-import com.luckygames.wmxz.gamemaster.model.enums.ForbiddenOperationType;
-import com.luckygames.wmxz.gamemaster.model.enums.ForbiddenType;
+import com.luckygames.wmxz.gamemaster.model.entity.base.BaseNewEntity;
 import java.util.Date;
 import javax.persistence.Table;
 
 @Table(name="forbidden_log")
-public class ForbiddenLogEntity extends BaseEntity {
+public class ForbiddenLogEntity extends BaseNewEntity {
     private Long serverId;
 
     private Long playerId;
@@ -16,13 +14,13 @@ public class ForbiddenLogEntity extends BaseEntity {
 
     private String ipAddress;
 
-    private ForbiddenType forbiddenType;
+    private Integer forbiddenType;
 
     private Date expireTime;
 
     private String reason;
 
-    private ForbiddenOperationType operateType;
+    private Integer operateType;
 
     private Date operateTime;
 
@@ -60,11 +58,11 @@ public class ForbiddenLogEntity extends BaseEntity {
         this.ipAddress = ipAddress == null ? null : ipAddress.trim();
     }
 
-    public ForbiddenType getForbiddenType() {
+    public Integer getForbiddenType() {
         return forbiddenType;
     }
 
-    public void setForbiddenType(ForbiddenType forbiddenType) {
+    public void setForbiddenType(Integer forbiddenType) {
         this.forbiddenType = forbiddenType;
     }
 
@@ -84,11 +82,11 @@ public class ForbiddenLogEntity extends BaseEntity {
         this.reason = reason == null ? null : reason.trim();
     }
 
-    public ForbiddenOperationType getOperateType() {
+    public Integer getOperateType() {
         return operateType;
     }
 
-    public void setOperateType(ForbiddenOperationType operateType) {
+    public void setOperateType(Integer operateType) {
         this.operateType = operateType;
     }
 

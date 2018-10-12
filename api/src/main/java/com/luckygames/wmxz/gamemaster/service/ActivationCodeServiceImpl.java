@@ -6,7 +6,7 @@ import com.luckygames.wmxz.gamemaster.dao.ActivationCodeEntity;
 import com.luckygames.wmxz.gamemaster.dao.mapper.ActivationCodeMapper;
 import com.luckygames.wmxz.gamemaster.model.entity.ActivationCode;
 import com.luckygames.wmxz.gamemaster.model.view.request.ActivationCodeSearchQuery;
-import com.luckygames.wmxz.gamemaster.service.base.BaseServiceImpl;
+import com.luckygames.wmxz.gamemaster.service.base.BaseNewServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
@@ -14,7 +14,7 @@ import tk.mybatis.mapper.common.Mapper;
 import java.util.List;
 
 @Service("ActivationCodeService")
-public class ActivationCodeServiceImpl extends BaseServiceImpl<ActivationCodeEntity> implements ActivationCodeService {
+public class ActivationCodeServiceImpl extends BaseNewServiceImpl<ActivationCodeEntity> implements ActivationCodeService {
     @Autowired
     private ActivationCodeMapper ActivationCodeMapper;
 

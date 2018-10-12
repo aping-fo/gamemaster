@@ -2,24 +2,19 @@ package com.luckygames.wmxz.gamemaster.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.luckygames.wmxz.gamemaster.dao.ChannelEntity;
 import com.luckygames.wmxz.gamemaster.dao.GiftpackageSyncEntity;
-import com.luckygames.wmxz.gamemaster.dao.ServerEntity;
 import com.luckygames.wmxz.gamemaster.dao.mapper.ChannelMapper;
 import com.luckygames.wmxz.gamemaster.dao.mapper.GiftpackageSyncMapper;
 import com.luckygames.wmxz.gamemaster.dao.mapper.ServerMapper;
 import com.luckygames.wmxz.gamemaster.model.entity.GiftpackageSync;
 import com.luckygames.wmxz.gamemaster.model.view.request.GiftpackageSyncSearchQuery;
-import com.luckygames.wmxz.gamemaster.service.base.BaseServiceImpl;
-import com.luckygames.wmxz.gamemaster.utils.DateUtils;
+import com.luckygames.wmxz.gamemaster.service.base.BaseNewServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
-import java.util.Date;
-
 @Service("GiftpackageSyncService")
-public class GiftpackageSyncServiceImpl extends BaseServiceImpl<GiftpackageSyncEntity> implements GiftpackageSyncService {
+public class GiftpackageSyncServiceImpl extends BaseNewServiceImpl<GiftpackageSyncEntity> implements GiftpackageSyncService {
     @Autowired
     private GiftpackageSyncMapper GiftpackageSyncMapper;
     @Autowired

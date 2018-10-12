@@ -85,7 +85,7 @@
         alert(selectIds);
         var url = "player/dialog_ban";
         url += "?charIds=" + selectIds;
-        url += "&opType=FORBIDDEN";
+        url += "&opType=1";
         $.pdialog.open(url, 'batchBan', '批量封禁', {mask: true});
     }
      $('#submit222').click(function () {

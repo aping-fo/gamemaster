@@ -1,12 +1,12 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
-import com.luckygames.wmxz.gamemaster.model.entity.base.BaseEntity;
+import com.luckygames.wmxz.gamemaster.model.entity.base.BaseNewEntity;
 import java.util.Date;
 import javax.persistence.Table;
 
-@Table(name="player")
-public class PlayerEntity extends BaseEntity {
-    private Integer playerid;
+@Table(name="player_new")
+public class PlayerEntity extends BaseNewEntity {
+    private Long playerId;
 
     private String accname;
 
@@ -28,8 +28,6 @@ public class PlayerEntity extends BaseEntity {
 
     private Integer energy;
 
-    private Short serverid;
-
     private Date regtime;
 
     private Date lastlogintime;
@@ -48,27 +46,15 @@ public class PlayerEntity extends BaseEntity {
 
     private Short lev;
 
-    private Integer physicattack;
-
-    private Integer physicdefense;
-
-    private Integer magicattack;
-
-    private Integer magicdefense;
-
     private Integer crit;
-
-    private Integer critdefense;
-
-    private Integer mp;
-
-    private Integer curmp;
 
     private Integer hp;
 
-    private Integer curhp;
+    private Integer symptom;
 
-    private Integer fightstrength;
+    private Integer fu;
+
+    private Integer fight;
 
     private Float z;
 
@@ -78,34 +64,34 @@ public class PlayerEntity extends BaseEntity {
 
     private Integer totalcoin;
 
-    private Integer totalreputation;
-
     private Integer weaponid;
-
-    private Integer contribute;
 
     private Long energytime;
 
-    private Integer reputation;
-
     private Integer totaldiamond;
-
-    private Integer soul;
-
-    private Integer lotteryscore;
-
-    private Integer freediamond;
 
     private String channel;
 
-    private Integer consumediamon;
+    private Integer attack;
 
-    public Integer getPlayerid() {
-        return playerid;
+    private Integer defense;
+
+    private Integer title;
+
+    private Integer achievement;
+
+    private Long serverId;
+
+    private Long type;
+
+    private Long amount;
+
+    public Long getPlayerId() {
+        return playerId;
     }
 
-    public void setPlayerid(Integer playerid) {
-        this.playerid = playerid;
+    public void setPlayerId(Long playerId) {
+        this.playerId = playerId;
     }
 
     public String getAccname() {
@@ -188,14 +174,6 @@ public class PlayerEntity extends BaseEntity {
         this.energy = energy;
     }
 
-    public Short getServerid() {
-        return serverid;
-    }
-
-    public void setServerid(Short serverid) {
-        this.serverid = serverid;
-    }
-
     public Date getRegtime() {
         return regtime;
     }
@@ -268,68 +246,12 @@ public class PlayerEntity extends BaseEntity {
         this.lev = lev;
     }
 
-    public Integer getPhysicattack() {
-        return physicattack;
-    }
-
-    public void setPhysicattack(Integer physicattack) {
-        this.physicattack = physicattack;
-    }
-
-    public Integer getPhysicdefense() {
-        return physicdefense;
-    }
-
-    public void setPhysicdefense(Integer physicdefense) {
-        this.physicdefense = physicdefense;
-    }
-
-    public Integer getMagicattack() {
-        return magicattack;
-    }
-
-    public void setMagicattack(Integer magicattack) {
-        this.magicattack = magicattack;
-    }
-
-    public Integer getMagicdefense() {
-        return magicdefense;
-    }
-
-    public void setMagicdefense(Integer magicdefense) {
-        this.magicdefense = magicdefense;
-    }
-
     public Integer getCrit() {
         return crit;
     }
 
     public void setCrit(Integer crit) {
         this.crit = crit;
-    }
-
-    public Integer getCritdefense() {
-        return critdefense;
-    }
-
-    public void setCritdefense(Integer critdefense) {
-        this.critdefense = critdefense;
-    }
-
-    public Integer getMp() {
-        return mp;
-    }
-
-    public void setMp(Integer mp) {
-        this.mp = mp;
-    }
-
-    public Integer getCurmp() {
-        return curmp;
-    }
-
-    public void setCurmp(Integer curmp) {
-        this.curmp = curmp;
     }
 
     public Integer getHp() {
@@ -340,20 +262,28 @@ public class PlayerEntity extends BaseEntity {
         this.hp = hp;
     }
 
-    public Integer getCurhp() {
-        return curhp;
+    public Integer getSymptom() {
+        return symptom;
     }
 
-    public void setCurhp(Integer curhp) {
-        this.curhp = curhp;
+    public void setSymptom(Integer symptom) {
+        this.symptom = symptom;
     }
 
-    public Integer getFightstrength() {
-        return fightstrength;
+    public Integer getFu() {
+        return fu;
     }
 
-    public void setFightstrength(Integer fightstrength) {
-        this.fightstrength = fightstrength;
+    public void setFu(Integer fu) {
+        this.fu = fu;
+    }
+
+    public Integer getFight() {
+        return fight;
+    }
+
+    public void setFight(Integer fight) {
+        this.fight = fight;
     }
 
     public Float getZ() {
@@ -388,28 +318,12 @@ public class PlayerEntity extends BaseEntity {
         this.totalcoin = totalcoin;
     }
 
-    public Integer getTotalreputation() {
-        return totalreputation;
-    }
-
-    public void setTotalreputation(Integer totalreputation) {
-        this.totalreputation = totalreputation;
-    }
-
     public Integer getWeaponid() {
         return weaponid;
     }
 
     public void setWeaponid(Integer weaponid) {
         this.weaponid = weaponid;
-    }
-
-    public Integer getContribute() {
-        return contribute;
-    }
-
-    public void setContribute(Integer contribute) {
-        this.contribute = contribute;
     }
 
     public Long getEnergytime() {
@@ -420,44 +334,12 @@ public class PlayerEntity extends BaseEntity {
         this.energytime = energytime;
     }
 
-    public Integer getReputation() {
-        return reputation;
-    }
-
-    public void setReputation(Integer reputation) {
-        this.reputation = reputation;
-    }
-
     public Integer getTotaldiamond() {
         return totaldiamond;
     }
 
     public void setTotaldiamond(Integer totaldiamond) {
         this.totaldiamond = totaldiamond;
-    }
-
-    public Integer getSoul() {
-        return soul;
-    }
-
-    public void setSoul(Integer soul) {
-        this.soul = soul;
-    }
-
-    public Integer getLotteryscore() {
-        return lotteryscore;
-    }
-
-    public void setLotteryscore(Integer lotteryscore) {
-        this.lotteryscore = lotteryscore;
-    }
-
-    public Integer getFreediamond() {
-        return freediamond;
-    }
-
-    public void setFreediamond(Integer freediamond) {
-        this.freediamond = freediamond;
     }
 
     public String getChannel() {
@@ -468,11 +350,59 @@ public class PlayerEntity extends BaseEntity {
         this.channel = channel == null ? null : channel.trim();
     }
 
-    public Integer getConsumediamon() {
-        return consumediamon;
+    public Integer getAttack() {
+        return attack;
     }
 
-    public void setConsumediamon(Integer consumediamon) {
-        this.consumediamon = consumediamon;
+    public void setAttack(Integer attack) {
+        this.attack = attack;
+    }
+
+    public Integer getDefense() {
+        return defense;
+    }
+
+    public void setDefense(Integer defense) {
+        this.defense = defense;
+    }
+
+    public Integer getTitle() {
+        return title;
+    }
+
+    public void setTitle(Integer title) {
+        this.title = title;
+    }
+
+    public Integer getAchievement() {
+        return achievement;
+    }
+
+    public void setAchievement(Integer achievement) {
+        this.achievement = achievement;
+    }
+
+    public Long getServerId() {
+        return serverId;
+    }
+
+    public void setServerId(Long serverId) {
+        this.serverId = serverId;
+    }
+
+    public Long getType() {
+        return type;
+    }
+
+    public void setType(Long type) {
+        this.type = type;
+    }
+
+    public Long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Long amount) {
+        this.amount = amount;
     }
 }

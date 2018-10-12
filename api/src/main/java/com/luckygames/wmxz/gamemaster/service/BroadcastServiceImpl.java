@@ -6,13 +6,13 @@ import com.luckygames.wmxz.gamemaster.dao.BroadcastEntity;
 import com.luckygames.wmxz.gamemaster.dao.mapper.BroadcastMapper;
 import com.luckygames.wmxz.gamemaster.model.entity.Broadcast;
 import com.luckygames.wmxz.gamemaster.model.view.request.BroadcastSearchQuery;
-import com.luckygames.wmxz.gamemaster.service.base.BaseServiceImpl;
+import com.luckygames.wmxz.gamemaster.service.base.BaseNewServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
 @Service("broadcastService")
-public class BroadcastServiceImpl extends BaseServiceImpl<BroadcastEntity> implements BroadcastService {
+public class BroadcastServiceImpl extends BaseNewServiceImpl<BroadcastEntity> implements BroadcastService {
 
     @Autowired
     private BroadcastMapper broadcastMapper;

@@ -1,6 +1,6 @@
 <div class="pageHeader">
     <form id="pagerForm" onsubmit="return closeNavTab(this);" action="operatingTools/forbiddenAdd" method="post">
-        <input type="hidden" name="operateType" value="FORBIDDEN"/>
+        <input type="hidden" name="operateType" value="1"/>
         <div class="searchBar">
             <table class="searchContent" width="100%">
                 <tr>
@@ -15,8 +15,8 @@
                     <td>
                         <label>封禁类型</label>
                         <select name="forbiddenType">
-                            <option value="LOGIN">封禁</option>
-                            <option value="CHAT">禁言</option>
+                            <option value="1">封禁</option>
+                            <option value="2">禁言</option>
                         </select>
                     </td>
                 </tr>

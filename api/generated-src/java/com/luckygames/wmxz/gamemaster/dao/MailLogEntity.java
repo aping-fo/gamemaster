@@ -1,10 +1,10 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
-import com.luckygames.wmxz.gamemaster.model.entity.base.BaseEntity;
+import com.luckygames.wmxz.gamemaster.model.entity.base.BaseNewEntity;
 import javax.persistence.Table;
 
 @Table(name="mail_log")
-public class MailLogEntity extends BaseEntity {
+public class MailLogEntity extends BaseNewEntity {
     private Long serverId;
 
     private Integer mailType;

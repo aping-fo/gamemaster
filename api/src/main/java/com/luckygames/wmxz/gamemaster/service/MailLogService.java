@@ -4,8 +4,8 @@ import com.github.pagehelper.Page;
 import com.luckygames.wmxz.gamemaster.dao.MailLogEntity;
 import com.luckygames.wmxz.gamemaster.model.entity.MailLog;
 import com.luckygames.wmxz.gamemaster.model.view.request.MailSearchQuery;
-import com.luckygames.wmxz.gamemaster.service.base.BaseService;
+import com.luckygames.wmxz.gamemaster.service.base.BaseNewService;
 
-public interface MailLogService extends BaseService<MailLogEntity> {
+public interface MailLogService extends BaseNewService<MailLogEntity> {
     Page<MailLog> searchPage(MailSearchQuery query);
 }

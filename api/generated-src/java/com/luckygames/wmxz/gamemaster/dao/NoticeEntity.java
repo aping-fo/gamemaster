@@ -1,10 +1,10 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
-import com.luckygames.wmxz.gamemaster.model.entity.base.BaseEntity;
+import com.luckygames.wmxz.gamemaster.model.entity.base.BaseNewEntity;
 import javax.persistence.Table;
 
 @Table(name="notice")
-public class NoticeEntity extends BaseEntity {
+public class NoticeEntity extends BaseNewEntity {
     private Long serverId;
 
     private Long channelId;

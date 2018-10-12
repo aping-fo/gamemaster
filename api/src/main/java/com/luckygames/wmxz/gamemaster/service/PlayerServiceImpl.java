@@ -9,7 +9,7 @@ import com.luckygames.wmxz.gamemaster.model.entity.Player;
 import com.luckygames.wmxz.gamemaster.model.entity.Server;
 import com.luckygames.wmxz.gamemaster.model.view.request.PlayerNameQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.PlayerSearchQuery;
-import com.luckygames.wmxz.gamemaster.service.base.BaseServiceImpl;
+import com.luckygames.wmxz.gamemaster.service.base.BaseNewServiceImpl;
 import com.luckygames.wmxz.gamemaster.utils.JsonUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import java.sql.Date;
 import java.util.Map;
 
 @Service("PlayerService")
-public class PlayerServiceImpl extends BaseServiceImpl<PlayerEntity> implements PlayerService {
+public class PlayerServiceImpl extends BaseNewServiceImpl<PlayerEntity> implements PlayerService {
     @Autowired
     private PlayerMapper PlayerMapper;
     @Autowired
@@ -40,7 +40,7 @@ public class PlayerServiceImpl extends BaseServiceImpl<PlayerEntity> implements 
     }
 
     @Override
-    public void queryPlayer(Player player) {
+    public Player queryPlayer(Player player) {
         if (StringUtils.isNotBlank(player.getSearchValue())) {
             String playerString = adminService.getPlayerName(new PlayerNameQuery(player.getServerId(), player.getSearchValue()));
             Map<String, Object> playerMap = JsonUtils.string2Map(playerString);
@@ -63,5 +63,6 @@ public class PlayerServiceImpl extends BaseServiceImpl<PlayerEntity> implements 
                 e.printStackTrace();
             }
         }
+        return player;
     }
 }

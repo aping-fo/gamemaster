@@ -6,13 +6,13 @@ import com.luckygames.wmxz.gamemaster.dao.OnlineEntity;
 import com.luckygames.wmxz.gamemaster.dao.mapper.OnlineMapper;
 import com.luckygames.wmxz.gamemaster.model.entity.Online;
 import com.luckygames.wmxz.gamemaster.model.view.request.CommonSearchQuery;
-import com.luckygames.wmxz.gamemaster.service.base.BaseServiceImpl;
+import com.luckygames.wmxz.gamemaster.service.base.BaseNewServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
 @Service("OnlineService")
-public class OnlineServiceImpl extends BaseServiceImpl<OnlineEntity> implements OnlineService {
+public class OnlineServiceImpl extends BaseNewServiceImpl<OnlineEntity> implements OnlineService {
     @Autowired
     private OnlineMapper OnlineMapper;
 

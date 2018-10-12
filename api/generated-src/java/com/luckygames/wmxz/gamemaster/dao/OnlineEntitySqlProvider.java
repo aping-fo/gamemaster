@@ -44,10 +44,6 @@ public class OnlineEntitySqlProvider {
             sql.VALUES("min_role_count", "#{minRoleCount,jdbcType=VARCHAR}");
         }
         
-        if (record.getStatus() != null) {
-            sql.VALUES("`status`", "#{status,jdbcType=INTEGER}");
-        }
-        
         if (record.getServerId() != null) {
             sql.VALUES("server_id", "#{serverId,jdbcType=BIGINT}");
         }
@@ -85,7 +81,6 @@ public class OnlineEntitySqlProvider {
         sql.SELECT("max_role_count");
         sql.SELECT("avg_role_count");
         sql.SELECT("min_role_count");
-        sql.SELECT("`status`");
         sql.SELECT("server_id");
         sql.SELECT("`server_name`");
         sql.SELECT("channel_id");
@@ -125,10 +120,6 @@ public class OnlineEntitySqlProvider {
             sql.SET("min_role_count = #{record.minRoleCount,jdbcType=VARCHAR}");
         }
         
-        if (record.getStatus() != null) {
-            sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
-        }
-        
         if (record.getServerId() != null) {
             sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
         }
@@ -165,7 +156,6 @@ public class OnlineEntitySqlProvider {
         sql.SET("max_role_count = #{record.maxRoleCount,jdbcType=VARCHAR}");
         sql.SET("avg_role_count = #{record.avgRoleCount,jdbcType=VARCHAR}");
         sql.SET("min_role_count = #{record.minRoleCount,jdbcType=VARCHAR}");
-        sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
         sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");
         sql.SET("channel_id = #{record.channelId,jdbcType=BIGINT}");

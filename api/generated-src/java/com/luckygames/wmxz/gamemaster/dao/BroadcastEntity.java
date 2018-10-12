@@ -1,11 +1,11 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
-import com.luckygames.wmxz.gamemaster.model.entity.base.BaseEntity;
+import com.luckygames.wmxz.gamemaster.model.entity.base.BaseNewEntity;
 import java.util.Date;
 import javax.persistence.Table;
 
 @Table(name="broadcast")
-public class BroadcastEntity extends BaseEntity {
+public class BroadcastEntity extends BaseNewEntity {
     private Long channelId;
 
     private Long serverId;

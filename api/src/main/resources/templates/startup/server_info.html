@@ -59,6 +59,7 @@
             <th width="80" align="right">付款通知地址</th>
             <th width="80" align="right">开服时间</th>
             <th width="80" align="right">备注</th>
+            <th width="80" align="right">服务器是否启动</th>
             <th width="80" align="right">操作</th>
         </tr>
         </thead>
@@ -88,6 +89,8 @@
             <td th:text="${row.payAddress}"></td>
             <td th:text="${row.openTime}"></td>
             <td th:text="${row.remarks}"></td>
+            <td th:if="${row.open==1}" th:text="已启动"></td>
+            <td th:if="${row.open!=1}" th:text="未启动"></td>
             <td><a title="修改" class="button" th:href="@{startup/server_edit(serverId=${row.serverId})}" target="dialog" width="820" height="400" rel="dialog_updatebroadcast" mask="true"><span>修改</span></a></td>
         </tr>
         <tr th:if="${serverList.size()==0}">

@@ -32,10 +32,6 @@ public class ServerEntitySqlProvider {
             sql.VALUES("id", "#{id,jdbcType=BIGINT}");
         }
         
-        if (record.getStatus() != null) {
-            sql.VALUES("`status`", "#{status,jdbcType=INTEGER}");
-        }
-        
         if (record.getCreateTime() != null) {
             sql.VALUES("create_time", "#{createTime,jdbcType=TIMESTAMP}");
         }
@@ -108,6 +104,10 @@ public class ServerEntitySqlProvider {
             sql.VALUES("channel", "#{channel,jdbcType=VARCHAR}");
         }
         
+        if (record.getOpen() != null) {
+            sql.VALUES("`open`", "#{open,jdbcType=INTEGER}");
+        }
+        
         if (record.getWhiteList() != null) {
             sql.VALUES("white_list", "#{whiteList,jdbcType=LONGVARCHAR}");
         }
@@ -122,7 +122,6 @@ public class ServerEntitySqlProvider {
         } else {
             sql.SELECT("id");
         }
-        sql.SELECT("`status`");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
         sql.SELECT("server_id");
@@ -141,6 +140,7 @@ public class ServerEntitySqlProvider {
         sql.SELECT("gm_port");
         sql.SELECT("server_group");
         sql.SELECT("channel");
+        sql.SELECT("`open`");
         sql.SELECT("white_list");
         sql.FROM("server");
         applyWhere(sql, example, false);
@@ -159,7 +159,6 @@ public class ServerEntitySqlProvider {
         } else {
             sql.SELECT("id");
         }
-        sql.SELECT("`status`");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
         sql.SELECT("server_id");
@@ -178,6 +177,7 @@ public class ServerEntitySqlProvider {
         sql.SELECT("gm_port");
         sql.SELECT("server_group");
         sql.SELECT("channel");
+        sql.SELECT("`open`");
         sql.FROM("server");
         applyWhere(sql, example, false);
         
@@ -197,10 +197,6 @@ public class ServerEntitySqlProvider {
         
         if (record.getId() != null) {
             sql.SET("id = #{record.id,jdbcType=BIGINT}");
-        }
-        
-        if (record.getStatus() != null) {
-            sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         }
         
         if (record.getCreateTime() != null) {
@@ -275,6 +271,10 @@ public class ServerEntitySqlProvider {
             sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         }
         
+        if (record.getOpen() != null) {
+            sql.SET("`open` = #{record.open,jdbcType=INTEGER}");
+        }
+        
         if (record.getWhiteList() != null) {
             sql.SET("white_list = #{record.whiteList,jdbcType=LONGVARCHAR}");
         }
@@ -288,7 +288,6 @@ public class ServerEntitySqlProvider {
         sql.UPDATE("server");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
-        sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
@@ -307,6 +306,7 @@ public class ServerEntitySqlProvider {
         sql.SET("gm_port = #{record.gmPort,jdbcType=INTEGER}");
         sql.SET("server_group = #{record.serverGroup,jdbcType=VARCHAR}");
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
+        sql.SET("`open` = #{record.open,jdbcType=INTEGER}");
         sql.SET("white_list = #{record.whiteList,jdbcType=LONGVARCHAR}");
         
         ServerEntityExample example = (ServerEntityExample) parameter.get("example");
@@ -319,7 +319,6 @@ public class ServerEntitySqlProvider {
         sql.UPDATE("server");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
-        sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
@@ -338,6 +337,7 @@ public class ServerEntitySqlProvider {
         sql.SET("gm_port = #{record.gmPort,jdbcType=INTEGER}");
         sql.SET("server_group = #{record.serverGroup,jdbcType=VARCHAR}");
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
+        sql.SET("`open` = #{record.open,jdbcType=INTEGER}");
         
         ServerEntityExample example = (ServerEntityExample) parameter.get("example");
         applyWhere(sql, example, true);

@@ -6,7 +6,7 @@
                     <td>服务器</td>
                     <td>
                         <select name="serverId" class="required">
-                            <option th:each="server:${serverList}" th:value="${server.serverId}" th:utext="${server.serverName}"></option>
+                            <option th:each="server:${serverList}" th:value="${server.serverId}" th:utext="${server.serverName}" th:selected="${server.serverId==request.serverId}"></option>
                         </select>
                     </td>
                     <td>

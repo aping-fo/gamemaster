@@ -1,11 +1,11 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
-import com.luckygames.wmxz.gamemaster.model.entity.base.BaseEntity;
+import com.luckygames.wmxz.gamemaster.model.entity.base.BaseNewEntity;
 import java.util.Date;
 import javax.persistence.Table;
 
 @Table(name="giftpackage_sync")
-public class GiftpackageSyncEntity extends BaseEntity {
+public class GiftpackageSyncEntity extends BaseNewEntity {
     private String minTermValidity;
 
     private String maxTermValidity;

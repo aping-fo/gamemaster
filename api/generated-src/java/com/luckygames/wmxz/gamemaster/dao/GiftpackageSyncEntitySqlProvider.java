@@ -32,10 +32,6 @@ public class GiftpackageSyncEntitySqlProvider {
             sql.VALUES("id", "#{id,jdbcType=BIGINT}");
         }
         
-        if (record.getStatus() != null) {
-            sql.VALUES("`status`", "#{status,jdbcType=INTEGER}");
-        }
-        
         if (record.getUpdateTime() != null) {
             sql.VALUES("update_time", "#{updateTime,jdbcType=TIMESTAMP}");
         }
@@ -78,7 +74,6 @@ public class GiftpackageSyncEntitySqlProvider {
         } else {
             sql.SELECT("id");
         }
-        sql.SELECT("`status`");
         sql.SELECT("update_time");
         sql.SELECT("create_time");
         sql.SELECT("min_term_validity");
@@ -106,10 +101,6 @@ public class GiftpackageSyncEntitySqlProvider {
         
         if (record.getId() != null) {
             sql.SET("id = #{record.id,jdbcType=BIGINT}");
-        }
-        
-        if (record.getStatus() != null) {
-            sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         }
         
         if (record.getUpdateTime() != null) {
@@ -153,7 +144,6 @@ public class GiftpackageSyncEntitySqlProvider {
         sql.UPDATE("giftpackage_sync");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
-        sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("min_term_validity = #{record.minTermValidity,jdbcType=VARCHAR}");

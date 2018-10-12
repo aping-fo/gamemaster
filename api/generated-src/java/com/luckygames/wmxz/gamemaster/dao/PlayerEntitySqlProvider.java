@@ -12,24 +12,24 @@ public class PlayerEntitySqlProvider {
 
     public String countByExample(PlayerEntityExample example) {
         SQL sql = new SQL();
-        sql.SELECT("count(*)").FROM("player");
+        sql.SELECT("count(*)").FROM("player_new");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
     public String deleteByExample(PlayerEntityExample example) {
         SQL sql = new SQL();
-        sql.DELETE_FROM("player");
+        sql.DELETE_FROM("player_new");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
     public String insertSelective(PlayerEntity record) {
         SQL sql = new SQL();
-        sql.INSERT_INTO("player");
+        sql.INSERT_INTO("player_new");
         
-        if (record.getPlayerid() != null) {
-            sql.VALUES("playerId", "#{playerid,jdbcType=INTEGER}");
+        if (record.getPlayerId() != null) {
+            sql.VALUES("player_id", "#{playerId,jdbcType=BIGINT}");
         }
         
         if (record.getAccname() != null) {
@@ -72,10 +72,6 @@ public class PlayerEntitySqlProvider {
             sql.VALUES("energy", "#{energy,jdbcType=INTEGER}");
         }
         
-        if (record.getServerid() != null) {
-            sql.VALUES("serverId", "#{serverid,jdbcType=SMALLINT}");
-        }
-        
         if (record.getRegtime() != null) {
             sql.VALUES("regTime", "#{regtime,jdbcType=TIMESTAMP}");
         }
@@ -112,48 +108,24 @@ public class PlayerEntitySqlProvider {
             sql.VALUES("lev", "#{lev,jdbcType=SMALLINT}");
         }
         
-        if (record.getPhysicattack() != null) {
-            sql.VALUES("physicAttack", "#{physicattack,jdbcType=INTEGER}");
-        }
-        
-        if (record.getPhysicdefense() != null) {
-            sql.VALUES("physicDefense", "#{physicdefense,jdbcType=INTEGER}");
-        }
-        
-        if (record.getMagicattack() != null) {
-            sql.VALUES("magicAttack", "#{magicattack,jdbcType=INTEGER}");
-        }
-        
-        if (record.getMagicdefense() != null) {
-            sql.VALUES("magicDefense", "#{magicdefense,jdbcType=INTEGER}");
-        }
-        
         if (record.getCrit() != null) {
             sql.VALUES("crit", "#{crit,jdbcType=INTEGER}");
-        }
-        
-        if (record.getCritdefense() != null) {
-            sql.VALUES("critDefense", "#{critdefense,jdbcType=INTEGER}");
-        }
-        
-        if (record.getMp() != null) {
-            sql.VALUES("mp", "#{mp,jdbcType=INTEGER}");
-        }
-        
-        if (record.getCurmp() != null) {
-            sql.VALUES("curMp", "#{curmp,jdbcType=INTEGER}");
         }
         
         if (record.getHp() != null) {
             sql.VALUES("hp", "#{hp,jdbcType=INTEGER}");
         }
         
-        if (record.getCurhp() != null) {
-            sql.VALUES("curHp", "#{curhp,jdbcType=INTEGER}");
+        if (record.getSymptom() != null) {
+            sql.VALUES("symptom", "#{symptom,jdbcType=INTEGER}");
         }
         
-        if (record.getFightstrength() != null) {
-            sql.VALUES("fightStrength", "#{fightstrength,jdbcType=INTEGER}");
+        if (record.getFu() != null) {
+            sql.VALUES("fu", "#{fu,jdbcType=INTEGER}");
+        }
+        
+        if (record.getFight() != null) {
+            sql.VALUES("fight", "#{fight,jdbcType=INTEGER}");
         }
         
         if (record.getZ() != null) {
@@ -172,48 +144,60 @@ public class PlayerEntitySqlProvider {
             sql.VALUES("totalCoin", "#{totalcoin,jdbcType=INTEGER}");
         }
         
-        if (record.getTotalreputation() != null) {
-            sql.VALUES("totalReputation", "#{totalreputation,jdbcType=INTEGER}");
-        }
-        
         if (record.getWeaponid() != null) {
             sql.VALUES("weaponId", "#{weaponid,jdbcType=INTEGER}");
-        }
-        
-        if (record.getContribute() != null) {
-            sql.VALUES("contribute", "#{contribute,jdbcType=INTEGER}");
         }
         
         if (record.getEnergytime() != null) {
             sql.VALUES("energyTime", "#{energytime,jdbcType=BIGINT}");
         }
         
-        if (record.getReputation() != null) {
-            sql.VALUES("reputation", "#{reputation,jdbcType=INTEGER}");
-        }
-        
         if (record.getTotaldiamond() != null) {
             sql.VALUES("totalDiamond", "#{totaldiamond,jdbcType=INTEGER}");
-        }
-        
-        if (record.getSoul() != null) {
-            sql.VALUES("soul", "#{soul,jdbcType=INTEGER}");
-        }
-        
-        if (record.getLotteryscore() != null) {
-            sql.VALUES("lotteryScore", "#{lotteryscore,jdbcType=INTEGER}");
-        }
-        
-        if (record.getFreediamond() != null) {
-            sql.VALUES("freeDiamond", "#{freediamond,jdbcType=INTEGER}");
         }
         
         if (record.getChannel() != null) {
             sql.VALUES("channel", "#{channel,jdbcType=VARCHAR}");
         }
         
-        if (record.getConsumediamon() != null) {
-            sql.VALUES("consumeDiamon", "#{consumediamon,jdbcType=INTEGER}");
+        if (record.getAttack() != null) {
+            sql.VALUES("attack", "#{attack,jdbcType=INTEGER}");
+        }
+        
+        if (record.getDefense() != null) {
+            sql.VALUES("defense", "#{defense,jdbcType=INTEGER}");
+        }
+        
+        if (record.getTitle() != null) {
+            sql.VALUES("title", "#{title,jdbcType=INTEGER}");
+        }
+        
+        if (record.getAchievement() != null) {
+            sql.VALUES("achievement", "#{achievement,jdbcType=INTEGER}");
+        }
+        
+        if (record.getId() != null) {
+            sql.VALUES("id", "#{id,jdbcType=BIGINT}");
+        }
+        
+        if (record.getServerId() != null) {
+            sql.VALUES("server_id", "#{serverId,jdbcType=BIGINT}");
+        }
+        
+        if (record.getCreateTime() != null) {
+            sql.VALUES("create_time", "#{createTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getUpdateTime() != null) {
+            sql.VALUES("update_time", "#{updateTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getType() != null) {
+            sql.VALUES("`type`", "#{type,jdbcType=BIGINT}");
+        }
+        
+        if (record.getAmount() != null) {
+            sql.VALUES("amount", "#{amount,jdbcType=BIGINT}");
         }
         
         return sql.toString();
@@ -222,9 +206,9 @@ public class PlayerEntitySqlProvider {
     public String selectByExample(PlayerEntityExample example) {
         SQL sql = new SQL();
         if (example != null && example.isDistinct()) {
-            sql.SELECT_DISTINCT("playerId");
+            sql.SELECT_DISTINCT("player_id");
         } else {
-            sql.SELECT("playerId");
+            sql.SELECT("player_id");
         }
         sql.SELECT("accName");
         sql.SELECT("`name`");
@@ -236,7 +220,6 @@ public class PlayerEntitySqlProvider {
         sql.SELECT("chargeDiamond");
         sql.SELECT("vip");
         sql.SELECT("energy");
-        sql.SELECT("serverId");
         sql.SELECT("regTime");
         sql.SELECT("lastLoginTime");
         sql.SELECT("lastLogoutTime");
@@ -246,33 +229,30 @@ public class PlayerEntitySqlProvider {
         sql.SELECT("y");
         sql.SELECT("lastSceneId");
         sql.SELECT("lev");
-        sql.SELECT("physicAttack");
-        sql.SELECT("physicDefense");
-        sql.SELECT("magicAttack");
-        sql.SELECT("magicDefense");
         sql.SELECT("crit");
-        sql.SELECT("critDefense");
-        sql.SELECT("mp");
-        sql.SELECT("curMp");
         sql.SELECT("hp");
-        sql.SELECT("curHp");
-        sql.SELECT("fightStrength");
+        sql.SELECT("symptom");
+        sql.SELECT("fu");
+        sql.SELECT("fight");
         sql.SELECT("z");
         sql.SELECT("fashionId");
         sql.SELECT("gangId");
         sql.SELECT("totalCoin");
-        sql.SELECT("totalReputation");
         sql.SELECT("weaponId");
-        sql.SELECT("contribute");
         sql.SELECT("energyTime");
-        sql.SELECT("reputation");
         sql.SELECT("totalDiamond");
-        sql.SELECT("soul");
-        sql.SELECT("lotteryScore");
-        sql.SELECT("freeDiamond");
         sql.SELECT("channel");
-        sql.SELECT("consumeDiamon");
-        sql.FROM("player");
+        sql.SELECT("attack");
+        sql.SELECT("defense");
+        sql.SELECT("title");
+        sql.SELECT("achievement");
+        sql.SELECT("id");
+        sql.SELECT("server_id");
+        sql.SELECT("create_time");
+        sql.SELECT("update_time");
+        sql.SELECT("`type`");
+        sql.SELECT("amount");
+        sql.FROM("player_new");
         applyWhere(sql, example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -287,10 +267,10 @@ public class PlayerEntitySqlProvider {
         PlayerEntityExample example = (PlayerEntityExample) parameter.get("example");
         
         SQL sql = new SQL();
-        sql.UPDATE("player");
+        sql.UPDATE("player_new");
         
-        if (record.getPlayerid() != null) {
-            sql.SET("playerId = #{record.playerid,jdbcType=INTEGER}");
+        if (record.getPlayerId() != null) {
+            sql.SET("player_id = #{record.playerId,jdbcType=BIGINT}");
         }
         
         if (record.getAccname() != null) {
@@ -333,10 +313,6 @@ public class PlayerEntitySqlProvider {
             sql.SET("energy = #{record.energy,jdbcType=INTEGER}");
         }
         
-        if (record.getServerid() != null) {
-            sql.SET("serverId = #{record.serverid,jdbcType=SMALLINT}");
-        }
-        
         if (record.getRegtime() != null) {
             sql.SET("regTime = #{record.regtime,jdbcType=TIMESTAMP}");
         }
@@ -373,48 +349,24 @@ public class PlayerEntitySqlProvider {
             sql.SET("lev = #{record.lev,jdbcType=SMALLINT}");
         }
         
-        if (record.getPhysicattack() != null) {
-            sql.SET("physicAttack = #{record.physicattack,jdbcType=INTEGER}");
-        }
-        
-        if (record.getPhysicdefense() != null) {
-            sql.SET("physicDefense = #{record.physicdefense,jdbcType=INTEGER}");
-        }
-        
-        if (record.getMagicattack() != null) {
-            sql.SET("magicAttack = #{record.magicattack,jdbcType=INTEGER}");
-        }
-        
-        if (record.getMagicdefense() != null) {
-            sql.SET("magicDefense = #{record.magicdefense,jdbcType=INTEGER}");
-        }
-        
         if (record.getCrit() != null) {
             sql.SET("crit = #{record.crit,jdbcType=INTEGER}");
-        }
-        
-        if (record.getCritdefense() != null) {
-            sql.SET("critDefense = #{record.critdefense,jdbcType=INTEGER}");
-        }
-        
-        if (record.getMp() != null) {
-            sql.SET("mp = #{record.mp,jdbcType=INTEGER}");
-        }
-        
-        if (record.getCurmp() != null) {
-            sql.SET("curMp = #{record.curmp,jdbcType=INTEGER}");
         }
         
         if (record.getHp() != null) {
             sql.SET("hp = #{record.hp,jdbcType=INTEGER}");
         }
         
-        if (record.getCurhp() != null) {
-            sql.SET("curHp = #{record.curhp,jdbcType=INTEGER}");
+        if (record.getSymptom() != null) {
+            sql.SET("symptom = #{record.symptom,jdbcType=INTEGER}");
         }
         
-        if (record.getFightstrength() != null) {
-            sql.SET("fightStrength = #{record.fightstrength,jdbcType=INTEGER}");
+        if (record.getFu() != null) {
+            sql.SET("fu = #{record.fu,jdbcType=INTEGER}");
+        }
+        
+        if (record.getFight() != null) {
+            sql.SET("fight = #{record.fight,jdbcType=INTEGER}");
         }
         
         if (record.getZ() != null) {
@@ -433,48 +385,60 @@ public class PlayerEntitySqlProvider {
             sql.SET("totalCoin = #{record.totalcoin,jdbcType=INTEGER}");
         }
         
-        if (record.getTotalreputation() != null) {
-            sql.SET("totalReputation = #{record.totalreputation,jdbcType=INTEGER}");
-        }
-        
         if (record.getWeaponid() != null) {
             sql.SET("weaponId = #{record.weaponid,jdbcType=INTEGER}");
-        }
-        
-        if (record.getContribute() != null) {
-            sql.SET("contribute = #{record.contribute,jdbcType=INTEGER}");
         }
         
         if (record.getEnergytime() != null) {
             sql.SET("energyTime = #{record.energytime,jdbcType=BIGINT}");
         }
         
-        if (record.getReputation() != null) {
-            sql.SET("reputation = #{record.reputation,jdbcType=INTEGER}");
-        }
-        
         if (record.getTotaldiamond() != null) {
             sql.SET("totalDiamond = #{record.totaldiamond,jdbcType=INTEGER}");
-        }
-        
-        if (record.getSoul() != null) {
-            sql.SET("soul = #{record.soul,jdbcType=INTEGER}");
-        }
-        
-        if (record.getLotteryscore() != null) {
-            sql.SET("lotteryScore = #{record.lotteryscore,jdbcType=INTEGER}");
-        }
-        
-        if (record.getFreediamond() != null) {
-            sql.SET("freeDiamond = #{record.freediamond,jdbcType=INTEGER}");
         }
         
         if (record.getChannel() != null) {
             sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         }
         
-        if (record.getConsumediamon() != null) {
-            sql.SET("consumeDiamon = #{record.consumediamon,jdbcType=INTEGER}");
+        if (record.getAttack() != null) {
+            sql.SET("attack = #{record.attack,jdbcType=INTEGER}");
+        }
+        
+        if (record.getDefense() != null) {
+            sql.SET("defense = #{record.defense,jdbcType=INTEGER}");
+        }
+        
+        if (record.getTitle() != null) {
+            sql.SET("title = #{record.title,jdbcType=INTEGER}");
+        }
+        
+        if (record.getAchievement() != null) {
+            sql.SET("achievement = #{record.achievement,jdbcType=INTEGER}");
+        }
+        
+        if (record.getId() != null) {
+            sql.SET("id = #{record.id,jdbcType=BIGINT}");
+        }
+        
+        if (record.getServerId() != null) {
+            sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
+        }
+        
+        if (record.getCreateTime() != null) {
+            sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getUpdateTime() != null) {
+            sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getType() != null) {
+            sql.SET("`type` = #{record.type,jdbcType=BIGINT}");
+        }
+        
+        if (record.getAmount() != null) {
+            sql.SET("amount = #{record.amount,jdbcType=BIGINT}");
         }
         
         applyWhere(sql, example, true);
@@ -483,9 +447,9 @@ public class PlayerEntitySqlProvider {
 
     public String updateByExample(Map<String, Object> parameter) {
         SQL sql = new SQL();
-        sql.UPDATE("player");
+        sql.UPDATE("player_new");
         
-        sql.SET("playerId = #{record.playerid,jdbcType=INTEGER}");
+        sql.SET("player_id = #{record.playerId,jdbcType=BIGINT}");
         sql.SET("accName = #{record.accname,jdbcType=VARCHAR}");
         sql.SET("`name` = #{record.name,jdbcType=VARCHAR}");
         sql.SET("sex = #{record.sex,jdbcType=TINYINT}");
@@ -496,7 +460,6 @@ public class PlayerEntitySqlProvider {
         sql.SET("chargeDiamond = #{record.chargediamond,jdbcType=INTEGER}");
         sql.SET("vip = #{record.vip,jdbcType=INTEGER}");
         sql.SET("energy = #{record.energy,jdbcType=INTEGER}");
-        sql.SET("serverId = #{record.serverid,jdbcType=SMALLINT}");
         sql.SET("regTime = #{record.regtime,jdbcType=TIMESTAMP}");
         sql.SET("lastLoginTime = #{record.lastlogintime,jdbcType=TIMESTAMP}");
         sql.SET("lastLogoutTime = #{record.lastlogouttime,jdbcType=TIMESTAMP}");
@@ -506,32 +469,29 @@ public class PlayerEntitySqlProvider {
         sql.SET("y = #{record.y,jdbcType=REAL}");
         sql.SET("lastSceneId = #{record.lastsceneid,jdbcType=INTEGER}");
         sql.SET("lev = #{record.lev,jdbcType=SMALLINT}");
-        sql.SET("physicAttack = #{record.physicattack,jdbcType=INTEGER}");
-        sql.SET("physicDefense = #{record.physicdefense,jdbcType=INTEGER}");
-        sql.SET("magicAttack = #{record.magicattack,jdbcType=INTEGER}");
-        sql.SET("magicDefense = #{record.magicdefense,jdbcType=INTEGER}");
         sql.SET("crit = #{record.crit,jdbcType=INTEGER}");
-        sql.SET("critDefense = #{record.critdefense,jdbcType=INTEGER}");
-        sql.SET("mp = #{record.mp,jdbcType=INTEGER}");
-        sql.SET("curMp = #{record.curmp,jdbcType=INTEGER}");
         sql.SET("hp = #{record.hp,jdbcType=INTEGER}");
-        sql.SET("curHp = #{record.curhp,jdbcType=INTEGER}");
-        sql.SET("fightStrength = #{record.fightstrength,jdbcType=INTEGER}");
+        sql.SET("symptom = #{record.symptom,jdbcType=INTEGER}");
+        sql.SET("fu = #{record.fu,jdbcType=INTEGER}");
+        sql.SET("fight = #{record.fight,jdbcType=INTEGER}");
         sql.SET("z = #{record.z,jdbcType=REAL}");
         sql.SET("fashionId = #{record.fashionid,jdbcType=INTEGER}");
         sql.SET("gangId = #{record.gangid,jdbcType=INTEGER}");
         sql.SET("totalCoin = #{record.totalcoin,jdbcType=INTEGER}");
-        sql.SET("totalReputation = #{record.totalreputation,jdbcType=INTEGER}");
         sql.SET("weaponId = #{record.weaponid,jdbcType=INTEGER}");
-        sql.SET("contribute = #{record.contribute,jdbcType=INTEGER}");
         sql.SET("energyTime = #{record.energytime,jdbcType=BIGINT}");
-        sql.SET("reputation = #{record.reputation,jdbcType=INTEGER}");
         sql.SET("totalDiamond = #{record.totaldiamond,jdbcType=INTEGER}");
-        sql.SET("soul = #{record.soul,jdbcType=INTEGER}");
-        sql.SET("lotteryScore = #{record.lotteryscore,jdbcType=INTEGER}");
-        sql.SET("freeDiamond = #{record.freediamond,jdbcType=INTEGER}");
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
-        sql.SET("consumeDiamon = #{record.consumediamon,jdbcType=INTEGER}");
+        sql.SET("attack = #{record.attack,jdbcType=INTEGER}");
+        sql.SET("defense = #{record.defense,jdbcType=INTEGER}");
+        sql.SET("title = #{record.title,jdbcType=INTEGER}");
+        sql.SET("achievement = #{record.achievement,jdbcType=INTEGER}");
+        sql.SET("id = #{record.id,jdbcType=BIGINT}");
+        sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
+        sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
+        sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
+        sql.SET("`type` = #{record.type,jdbcType=BIGINT}");
+        sql.SET("amount = #{record.amount,jdbcType=BIGINT}");
         
         PlayerEntityExample example = (PlayerEntityExample) parameter.get("example");
         applyWhere(sql, example, true);

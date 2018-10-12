@@ -11,34 +11,38 @@ public class BanQuery extends GMQuery {
         super(0L);
     }
 
-    public BanQuery(Integer type, Integer ban, Long id, Integer hour, Long serverId) {
+    public BanQuery(Long serverId, Integer ban, Integer type, Long hour, String closureAccount) {
         super(serverId);
         this.ban = ban;
         this.type = type;
-        this.id = id;
         this.hour = hour;
+        this.closureAccount = closureAccount;
     }
 
     /**
-     * 封禁操作类型，0：解封，1：封禁
+     * 封禁操作类型，1：封禁，2：解封
      */
     private Integer ban;
 
     /**
-     * 封禁类型，1：禁止登录，2：禁止聊天
+     * 封禁类型，1：禁言，2：封号，3：禁ip，4：禁IMEI，5：踢下线
      */
     private Integer type;
 
     /**
-     * 角色id
+     * 封禁时长（秒）
      */
-    private Long id;
+    private Long hour;
 
+    private String closureAccount;
 
-    /**
-     * 封禁时长
-     */
-    private Integer hour;
+    public String getClosureAccount() {
+        return closureAccount;
+    }
+
+    public void setClosureAccount(String closureAccount) {
+        this.closureAccount = closureAccount;
+    }
 
     public Integer getBan() {
         return ban;
@@ -56,29 +60,11 @@ public class BanQuery extends GMQuery {
         this.type = type;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Integer getHour() {
+    public Long getHour() {
         return hour;
     }
 
-    public void setHour(Integer hour) {
+    public void setHour(Long hour) {
         this.hour = hour;
-    }
-
-    public static void main(String[] args) {
-        BanQuery query = new BanQuery();
-        query.setBan(1);
-        query.setHour(1);
-        query.setId(1L);
-        query.setType(1);
-
-        System.out.println(query.encodeReqParams());
     }
 }

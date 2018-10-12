@@ -1,10 +1,10 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
-import com.luckygames.wmxz.gamemaster.model.entity.base.BaseEntity;
+import com.luckygames.wmxz.gamemaster.model.entity.base.BaseNewEntity;
 import javax.persistence.Table;
 
 @Table(name="online")
-public class OnlineEntity extends BaseEntity {
+public class OnlineEntity extends BaseNewEntity {
     private String maxRoleCount;
 
     private String avgRoleCount;

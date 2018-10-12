@@ -1,10 +1,10 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
-import com.luckygames.wmxz.gamemaster.model.entity.base.BaseEntity;
+import com.luckygames.wmxz.gamemaster.model.entity.base.BaseNewEntity;
 import javax.persistence.Table;
 
 @Table(name="goods_recovery")
-public class GoodsRecoveryEntity extends BaseEntity {
+public class GoodsRecoveryEntity extends BaseNewEntity {
     private Long playerId;
 
     private String goods;

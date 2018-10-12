@@ -6,13 +6,13 @@ import com.luckygames.wmxz.gamemaster.dao.AccountLogEntity;
 import com.luckygames.wmxz.gamemaster.dao.mapper.AccountLogMapper;
 import com.luckygames.wmxz.gamemaster.model.entity.AccountLog;
 import com.luckygames.wmxz.gamemaster.model.view.request.AccountLogSearchQuery;
-import com.luckygames.wmxz.gamemaster.service.base.BaseServiceImpl;
+import com.luckygames.wmxz.gamemaster.service.base.BaseNewServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
 @Service("AccountLogService")
-public class AccountLogServiceImpl extends BaseServiceImpl<AccountLogEntity> implements AccountLogService {
+public class AccountLogServiceImpl extends BaseNewServiceImpl<AccountLogEntity> implements AccountLogService {
     @Autowired
     private AccountLogMapper accountLogMapper;
 

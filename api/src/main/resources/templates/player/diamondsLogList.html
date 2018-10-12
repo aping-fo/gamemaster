@@ -1,0 +1,83 @@
+<div class="pageContent">
+    <div class="tabs" currentIndex="1">
+        <div class="tabsHeader">
+            <div class="tabsHeaderContent">
+                <ul id="player">
+                    <input type="hidden" th:value="${player.playerId}" id="playerId"/>
+                    <input type="hidden" th:value="${player.serverId}" id="serverId"/>
+                    <li class="selected"><a href="player/playerQuery" class="j-ajax" target="navTab"><span>角色查询</span></a></li>
+                    <li><a href="player/diamondsLogList" class="j-ajax" target="navTab"><span>钻石日志</span></a></li>
+                    <li><a href="player/itemLogList" class="j-ajax" target="navTab"><span>物品日志</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:if="${player.serverId!=null}">
+    <div class="pageHeader">
+        <form id="pagerForm" onsubmit="return navTabSearch(this);" action="player/diamondsLogList" method="post">
+            <input type="hidden" th:value="${player.playerId}" name="playerId"/>
+            <input type="hidden" th:value="${player.serverId}" name="serverId"/>
+            <div class="searchBar">
+                <table class="searchContent">
+                    <td class="dateRange">
+                        日期:
+                        <input name="startDate" class="date readonly" readonly="readonly" type="text" th:value="${request.startDate}">
+                        <span class="limit">-</span>
+                        <input name="endDate" class="date readonly" readonly="readonly" type="text" th:value="${request.endDate}">
+                    </td>
+                    <td>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit" id="retrieval">检索</button>
+                            </div>
+                        </div>
+                    </td>
+                </table>
+            </div>
+        </form>
+    </div>
+    <div class="pageContent">
+        <table class="table" width="100%" layoutH="137">
+            <thead>
+            <tr>
+                <th width="80">服务器</th>
+                <th width="80">等级</th>
+                <th width="80" align="right">变化前</th>
+                <th width="80" align="right">变化后</th>
+                <th width="80" align="right">变化量</th>
+                <th width="80" align="right">原因</th>
+                <th width="80" align="right">时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="row,iterStat:${list}">
+                <td th:text="${row.serverName}"></td>
+                <td th:text="${row.lev}"></td>
+                <td th:text="${row.prevValue}"></td>
+                <td th:text="${row.nextValue}"></td>
+                <td th:text="${row.count}"></td>
+                <td th:text="${row.reason}"></td>
+                <td th:text="${#dates.format(row.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            </tr>
+            <tr th:if="${list.size()==0}">
+                <td style="text-align: center">暂无数据</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div th:if="${player.serverId==null}">
+    请进行角色查询后查看
+</div>
+<script type="text/javascript">
+    function changeHref() {
+        var href = $('#player a')
+        var playerId = $('#playerId').val()
+        var serverId = $('#serverId').val()
+        href.eq(0).attr("href", "player/playerQuery?playerId=" + playerId + "&serverId=" + serverId)
+        href.eq(1).attr("href", "player/diamondsLogList?playerId=" + playerId + "&serverId=" + serverId)
+        href.eq(2).attr("href", "player/itemLogList?playerId=" + playerId + "&serverId=" + serverId)
+    }
+    changeHref()
+</script>

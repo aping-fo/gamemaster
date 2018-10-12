@@ -5,14 +5,14 @@
             <p>
                 <label>操作类型：</label>
                 <select name="forbiddenOperationType" class="combox">
-                    <option value="ALLOWED" th:selected="(${opType.toString() == 'ALLOWED'})">解封</option>
+                    <option value="0" th:selected="(${opType == 0})">解封</option>
                 </select>
             </p>
             <p>
                 <label>封禁类型：</label>
                 <select name="forbiddenType" class="combox">
-                    <option value="CHAT" th:if="${forbiddenLog.forbiddenType.toString() == 'LOGIN'}" th:text="禁止登录"></option>
-                    <option value="CHAT" th:if="${forbiddenLog.forbiddenType.toString() == 'CHAT'}" th:text="禁止聊天"></option>
+                    <option value="CHAT" th:if="${forbiddenLog.forbiddenType == 1}" th:text="禁止登录"></option>
+                    <option value="CHAT" th:if="${forbiddenLog.forbiddenType == 2}" th:text="禁止聊天"></option>
                 </select>
             </p>
             <p>

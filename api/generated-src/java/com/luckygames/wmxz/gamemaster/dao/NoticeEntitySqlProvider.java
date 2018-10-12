@@ -32,10 +32,6 @@ public class NoticeEntitySqlProvider {
             sql.VALUES("id", "#{id,jdbcType=BIGINT}");
         }
         
-        if (record.getStatus() != null) {
-            sql.VALUES("`status`", "#{status,jdbcType=INTEGER}");
-        }
-        
         if (record.getServerId() != null) {
             sql.VALUES("server_id", "#{serverId,jdbcType=BIGINT}");
         }
@@ -82,7 +78,6 @@ public class NoticeEntitySqlProvider {
         } else {
             sql.SELECT("id");
         }
-        sql.SELECT("`status`");
         sql.SELECT("server_id");
         sql.SELECT("channel_id");
         sql.SELECT("create_time");
@@ -111,10 +106,6 @@ public class NoticeEntitySqlProvider {
         
         if (record.getId() != null) {
             sql.SET("id = #{record.id,jdbcType=BIGINT}");
-        }
-        
-        if (record.getStatus() != null) {
-            sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         }
         
         if (record.getServerId() != null) {
@@ -162,7 +153,6 @@ public class NoticeEntitySqlProvider {
         sql.UPDATE("notice");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
-        sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
         sql.SET("channel_id = #{record.channelId,jdbcType=BIGINT}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");

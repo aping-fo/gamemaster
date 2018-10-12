@@ -2,9 +2,27 @@ package com.luckygames.wmxz.gamemaster.model.view.request;
 
 import com.luckygames.wmxz.gamemaster.utils.BeanUtils;
 
-public class ServerSearchQuery extends KeywordSearchQuery {
+public class ServerSearchQuery extends CommonSearchQuery {
     private Integer serverId;
     private String serverName;
+    private String keyword;
+    private Integer open;
+
+    public Integer getOpen() {
+        return open;
+    }
+
+    public void setOpen(Integer open) {
+        this.open = open;
+    }
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
 
     public Integer getServerId() {
         return serverId;

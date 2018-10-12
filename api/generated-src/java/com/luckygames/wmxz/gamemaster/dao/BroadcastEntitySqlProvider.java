@@ -68,10 +68,6 @@ public class BroadcastEntitySqlProvider {
             sql.VALUES("broadcast_status", "#{broadcastStatus,jdbcType=INTEGER}");
         }
         
-        if (record.getStatus() != null) {
-            sql.VALUES("`status`", "#{status,jdbcType=INTEGER}");
-        }
-        
         if (record.getCreateTime() != null) {
             sql.VALUES("create_time", "#{createTime,jdbcType=TIMESTAMP}");
         }
@@ -103,7 +99,6 @@ public class BroadcastEntitySqlProvider {
         sql.SELECT("title");
         sql.SELECT("content");
         sql.SELECT("broadcast_status");
-        sql.SELECT("`status`");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
         sql.SELECT("reason");
@@ -164,10 +159,6 @@ public class BroadcastEntitySqlProvider {
             sql.SET("broadcast_status = #{record.broadcastStatus,jdbcType=INTEGER}");
         }
         
-        if (record.getStatus() != null) {
-            sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
-        }
-        
         if (record.getCreateTime() != null) {
             sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         }
@@ -198,7 +189,6 @@ public class BroadcastEntitySqlProvider {
         sql.SET("title = #{record.title,jdbcType=VARCHAR}");
         sql.SET("content = #{record.content,jdbcType=VARCHAR}");
         sql.SET("broadcast_status = #{record.broadcastStatus,jdbcType=INTEGER}");
-        sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         sql.SET("reason = #{record.reason,jdbcType=VARCHAR}");

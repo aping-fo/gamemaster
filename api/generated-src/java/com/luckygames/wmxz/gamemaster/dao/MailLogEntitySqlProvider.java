@@ -32,10 +32,6 @@ public class MailLogEntitySqlProvider {
             sql.VALUES("id", "#{id,jdbcType=BIGINT}");
         }
         
-        if (record.getStatus() != null) {
-            sql.VALUES("`status`", "#{status,jdbcType=VARCHAR}");
-        }
-        
         if (record.getServerId() != null) {
             sql.VALUES("server_id", "#{serverId,jdbcType=BIGINT}");
         }
@@ -94,7 +90,6 @@ public class MailLogEntitySqlProvider {
         } else {
             sql.SELECT("id");
         }
-        sql.SELECT("`status`");
         sql.SELECT("server_id");
         sql.SELECT("mail_type");
         sql.SELECT("title");
@@ -126,10 +121,6 @@ public class MailLogEntitySqlProvider {
         
         if (record.getId() != null) {
             sql.SET("id = #{record.id,jdbcType=BIGINT}");
-        }
-        
-        if (record.getStatus() != null) {
-            sql.SET("`status` = #{record.status,jdbcType=VARCHAR}");
         }
         
         if (record.getServerId() != null) {
@@ -189,7 +180,6 @@ public class MailLogEntitySqlProvider {
         sql.UPDATE("mail_log");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
-        sql.SET("`status` = #{record.status,jdbcType=VARCHAR}");
         sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
         sql.SET("mail_type = #{record.mailType,jdbcType=INTEGER}");
         sql.SET("title = #{record.title,jdbcType=VARCHAR}");

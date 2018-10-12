@@ -4,7 +4,6 @@ import com.github.pagehelper.Page;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.data.GoodsConfig;
 import com.luckygames.wmxz.gamemaster.model.entity.*;
-import com.luckygames.wmxz.gamemaster.model.enums.ForbiddenOperationType;
 import com.luckygames.wmxz.gamemaster.model.enums.MailType;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
 import com.luckygames.wmxz.gamemaster.model.view.request.*;
@@ -74,7 +73,7 @@ public class OperatingToolsController extends BaseController {
 
     //id转名称
     private void goodid2name(MailLog ac) {
-        Map<Integer, Integer> reward = StringUtil.str2map(ac.getRewards(), ";", ":");
+        Map<Integer, Integer> reward = StringUtil.str2map(ac.getRewards().replaceAll("\r\n", ""), ";", ":");
         StringBuffer goods = new StringBuffer();
         goodId2goodString(reward, goods);
         ac.setRewards(goods.toString());
@@ -395,9 +394,9 @@ public class OperatingToolsController extends BaseController {
         Page<ForbiddenLog> forbiddenLogList = forbiddenLogService.searchPage(query);
 
         forbiddenLogList.parallelStream()
-                .filter(f -> f.getOperateType().equals(ForbiddenOperationType.FORBIDDEN) && f.getExpireTime().getTime() < new Date().getTime())
+                .filter(f -> f.getOperateType() == 1 && f.getExpireTime().getTime() < new Date().getTime())
                 .forEach(f -> {
-                    f.setOperateType(ForbiddenOperationType.ALLOWED);
+                    f.setOperateType(0);
                     forbiddenLogService.update(f);
                 });
 
@@ -435,12 +434,13 @@ public class OperatingToolsController extends BaseController {
             Page<ForbiddenLog> forbiddenLogList = forbiddenLogService.searchPage(query);
             response.request(query).data("list", forbiddenLogList);
 
-            new Thread(() -> adminService.banRole(new BanQuery(
-                    forbiddenLog.getForbiddenType().getCode(),
-                    forbiddenLog.getOperateType().getCode(),
-                    forbiddenLog.getPlayerId(),
-                    forbiddenLog.getHour(),
-                    forbiddenLog.getServerId()))).start();
+//            new Thread(() -> adminService.banRole(new BanQuery(
+//                    forbiddenLog.getServerId(),
+//                    forbiddenLog.getOperateType(),
+//                    forbiddenLog.getForbiddenType(),
+//                    forbiddenLog.getPlayerId(),
+//                    forbiddenLog.getHour()
+//            ))).start();
         } else {
             List<Server> serverList = serverService.searchList();
             response.data("serverList", serverList);
@@ -452,18 +452,18 @@ public class OperatingToolsController extends BaseController {
     @RequestMapping(value = "/forbiddenAllowed", method = {RequestMethod.GET, RequestMethod.POST})
     public Response forbiddenAllowed(ForbiddenLog forbiddenLog) {
         Response response = new Response("player/forbiddenList");
-        forbiddenLogService.update(forbiddenLog);
-        ForbiddenSearchQuery query = new ForbiddenSearchQuery();
-        Page<ForbiddenLog> forbiddenLogList = forbiddenLogService.searchPage(query);
-        response.request(query).data("list", forbiddenLogList);
-
-        new Thread(() -> adminService.banRole(new BanQuery(
-                forbiddenLog.getForbiddenType().getCode(),
-                forbiddenLog.getOperateType().getCode(),
-                forbiddenLog.getPlayerId(),
-                forbiddenLog.getHour(),
-                forbiddenLog.getServerId())
-        )).start();
+//        forbiddenLogService.update(forbiddenLog);
+//        ForbiddenSearchQuery query = new ForbiddenSearchQuery();
+//        Page<ForbiddenLog> forbiddenLogList = forbiddenLogService.searchPage(query);
+//        response.request(query).data("list", forbiddenLogList);
+//
+//        new Thread(() -> adminService.banRole(new BanQuery(
+//                forbiddenLog.getServerId(),
+//                forbiddenLog.getOperateType(),
+//                forbiddenLog.getForbiddenType(),
+//                forbiddenLog.getPlayerId(),
+//                forbiddenLog.getHour()
+//        ))).start();
 
         return response;
     }
@@ -477,9 +477,11 @@ public class OperatingToolsController extends BaseController {
         Page<ForbiddenLog> forbiddenLogList = forbiddenLogService.searchPage(query);
         response.request(query).data("list", forbiddenLogList);
 
-        new Thread(() -> adminService.kickLine(new KickLineQuery(
-                forbiddenLog.getPlayerId(),
-                forbiddenLog.getServerId())
+        new Thread(() -> adminService.kickLine(
+                new KickLineQuery(
+                        forbiddenLog.getServerId(),
+                        forbiddenLog.getPlayerId()
+                )
         )).start();
 
         return response;

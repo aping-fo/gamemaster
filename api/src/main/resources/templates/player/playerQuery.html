@@ -1,3 +1,18 @@
+<div class="pageContent">
+    <div class="tabs" currentIndex="0">
+        <div class="tabsHeader">
+            <div class="tabsHeaderContent">
+                <ul id="player">
+                    <input type="hidden" th:value="${request.playerId}" id="playerId"/>
+                    <input type="hidden" th:value="${request.serverId}" id="serverId"/>
+                    <li class="selected"><a href="player/playerQuery" class="noNewNavTab" target="navTab"><span>角色查询</span></a></li>
+                    <li><a href="player/diamondsLogList" class="j-ajax" target="navTab"><span>钻石日志</span></a></li>
+                    <li><a href="player/itemLogList" class="j-ajax" target="navTab"><span>物品日志</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="pageHeader">
     <form id="pagerForm" onsubmit="return navTabSearch(this);" action="player/playerQuery" method="post">
         <div class="searchBar">
@@ -5,7 +20,7 @@
                 <td>服务器</td>
                 <td>
                     <select name="serverId" class="required">
-                        <option th:each="server:${serverList}" th:value="${server.serverId}" th:utext="${server.serverName}"></option>
+                        <option th:each="server:${serverList}" th:value="${server.serverId}" th:utext="${server.serverName}" th:selected="${server.serverId==request.serverId}"></option>
                     </select>
                 </td>
                 <td>
@@ -61,3 +76,15 @@
         </tbody>
     </table>
 </div>
+<script type="text/javascript">
+    function changeHref() {
+        var href = $('#player a')
+        var playerId = $('#playerId').val()
+        var serverId = $('#serverId').val()
+        href.eq(0).attr("href", "player/playerQuery?playerId=" + playerId + "&serverId=" + serverId)
+        href.eq(1).attr("href", "player/diamondsLogList?playerId=" + playerId + "&serverId=" + serverId)
+        href.eq(2).attr("href", "player/itemLogList?playerId=" + playerId + "&serverId=" + serverId)
+    }
+
+    changeHref()
+</script>

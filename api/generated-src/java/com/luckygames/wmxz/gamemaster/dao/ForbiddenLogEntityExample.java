@@ -1,8 +1,5 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
-import com.luckygames.wmxz.gamemaster.model.enums.ForbiddenOperationType;
-import com.luckygames.wmxz.gamemaster.model.enums.ForbiddenType;
-import com.luckygames.wmxz.gamemaster.model.enums.Status;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -428,52 +425,52 @@ public class ForbiddenLogEntityExample {
             return (Criteria) this;
         }
 
-        public Criteria andForbiddenTypeEqualTo(ForbiddenType value) {
+        public Criteria andForbiddenTypeEqualTo(Integer value) {
             addCriterion("forbidden_type =", value, "forbiddenType");
             return (Criteria) this;
         }
 
-        public Criteria andForbiddenTypeNotEqualTo(ForbiddenType value) {
+        public Criteria andForbiddenTypeNotEqualTo(Integer value) {
             addCriterion("forbidden_type <>", value, "forbiddenType");
             return (Criteria) this;
         }
 
-        public Criteria andForbiddenTypeGreaterThan(ForbiddenType value) {
+        public Criteria andForbiddenTypeGreaterThan(Integer value) {
             addCriterion("forbidden_type >", value, "forbiddenType");
             return (Criteria) this;
         }
 
-        public Criteria andForbiddenTypeGreaterThanOrEqualTo(ForbiddenType value) {
+        public Criteria andForbiddenTypeGreaterThanOrEqualTo(Integer value) {
             addCriterion("forbidden_type >=", value, "forbiddenType");
             return (Criteria) this;
         }
 
-        public Criteria andForbiddenTypeLessThan(ForbiddenType value) {
+        public Criteria andForbiddenTypeLessThan(Integer value) {
             addCriterion("forbidden_type <", value, "forbiddenType");
             return (Criteria) this;
         }
 
-        public Criteria andForbiddenTypeLessThanOrEqualTo(ForbiddenType value) {
+        public Criteria andForbiddenTypeLessThanOrEqualTo(Integer value) {
             addCriterion("forbidden_type <=", value, "forbiddenType");
             return (Criteria) this;
         }
 
-        public Criteria andForbiddenTypeIn(List<ForbiddenType> values) {
+        public Criteria andForbiddenTypeIn(List<Integer> values) {
             addCriterion("forbidden_type in", values, "forbiddenType");
             return (Criteria) this;
         }
 
-        public Criteria andForbiddenTypeNotIn(List<ForbiddenType> values) {
+        public Criteria andForbiddenTypeNotIn(List<Integer> values) {
             addCriterion("forbidden_type not in", values, "forbiddenType");
             return (Criteria) this;
         }
 
-        public Criteria andForbiddenTypeBetween(ForbiddenType value1, ForbiddenType value2) {
+        public Criteria andForbiddenTypeBetween(Integer value1, Integer value2) {
             addCriterion("forbidden_type between", value1, value2, "forbiddenType");
             return (Criteria) this;
         }
 
-        public Criteria andForbiddenTypeNotBetween(ForbiddenType value1, ForbiddenType value2) {
+        public Criteria andForbiddenTypeNotBetween(Integer value1, Integer value2) {
             addCriterion("forbidden_type not between", value1, value2, "forbiddenType");
             return (Criteria) this;
         }
@@ -618,52 +615,52 @@ public class ForbiddenLogEntityExample {
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeEqualTo(ForbiddenOperationType value) {
+        public Criteria andOperateTypeEqualTo(Integer value) {
             addCriterion("operate_type =", value, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeNotEqualTo(ForbiddenOperationType value) {
+        public Criteria andOperateTypeNotEqualTo(Integer value) {
             addCriterion("operate_type <>", value, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeGreaterThan(ForbiddenOperationType value) {
+        public Criteria andOperateTypeGreaterThan(Integer value) {
             addCriterion("operate_type >", value, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeGreaterThanOrEqualTo(ForbiddenOperationType value) {
+        public Criteria andOperateTypeGreaterThanOrEqualTo(Integer value) {
             addCriterion("operate_type >=", value, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeLessThan(ForbiddenOperationType value) {
+        public Criteria andOperateTypeLessThan(Integer value) {
             addCriterion("operate_type <", value, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeLessThanOrEqualTo(ForbiddenOperationType value) {
+        public Criteria andOperateTypeLessThanOrEqualTo(Integer value) {
             addCriterion("operate_type <=", value, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeIn(List<ForbiddenOperationType> values) {
+        public Criteria andOperateTypeIn(List<Integer> values) {
             addCriterion("operate_type in", values, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeNotIn(List<ForbiddenOperationType> values) {
+        public Criteria andOperateTypeNotIn(List<Integer> values) {
             addCriterion("operate_type not in", values, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeBetween(ForbiddenOperationType value1, ForbiddenOperationType value2) {
+        public Criteria andOperateTypeBetween(Integer value1, Integer value2) {
             addCriterion("operate_type between", value1, value2, "operateType");
             return (Criteria) this;
         }
 
-        public Criteria andOperateTypeNotBetween(ForbiddenOperationType value1, ForbiddenOperationType value2) {
+        public Criteria andOperateTypeNotBetween(Integer value1, Integer value2) {
             addCriterion("operate_type not between", value1, value2, "operateType");
             return (Criteria) this;
         }
@@ -725,66 +722,6 @@ public class ForbiddenLogEntityExample {
 
         public Criteria andOperateTimeNotBetween(Date value1, Date value2) {
             addCriterion("operate_time not between", value1, value2, "operateTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusIsNull() {
-            addCriterion("`status` is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusIsNotNull() {
-            addCriterion("`status` is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusEqualTo(Status value) {
-            addCriterion("`status` =", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusNotEqualTo(Status value) {
-            addCriterion("`status` <>", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusGreaterThan(Status value) {
-            addCriterion("`status` >", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusGreaterThanOrEqualTo(Status value) {
-            addCriterion("`status` >=", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusLessThan(Status value) {
-            addCriterion("`status` <", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusLessThanOrEqualTo(Status value) {
-            addCriterion("`status` <=", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusIn(List<Status> values) {
-            addCriterion("`status` in", values, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusNotIn(List<Status> values) {
-            addCriterion("`status` not in", values, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusBetween(Status value1, Status value2) {
-            addCriterion("`status` between", value1, value2, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusNotBetween(Status value1, Status value2) {
-            addCriterion("`status` not between", value1, value2, "status");
             return (Criteria) this;
         }
 

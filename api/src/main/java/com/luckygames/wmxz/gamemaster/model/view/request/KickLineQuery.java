@@ -11,7 +11,7 @@ public class KickLineQuery extends GMQuery {
         super(0L);
     }
 
-    public KickLineQuery(Long id, Long serverId) {
+    public KickLineQuery(Long serverId, Long id) {
         super(serverId);
         this.id = id;
     }
