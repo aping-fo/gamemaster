@@ -12,7 +12,7 @@
             <tr>
                 <td><input type="checkbox" id="allSelect"/>全选</td>
                 <td>
-                    <input class="required" th:each="row:${serverList}" type="checkbox" name="ids" th:text="${row.serverName}" th:value="${row.id}"/>
+                    <input class="required" th:each="row:${serverList}" type="checkbox" name="ids" th:text="${row.serverName}" th:value="${row.serverId}"/>
                 </td>
             </tr>
             <tr>
@@ -38,14 +38,14 @@
             <tr>
                 <td>物品</td>
                 <td>
-                    <select id="mail_goods">
+                    <select id="role_goods">
                         <option th:each="goods:${goodsList}" th:text="${goods.name}" th:value="${goods.id}"></option>
                     </select>
                 </td>
             </tr>
             <tr>
                 <td>数量</td>
-                <td><input type="number" id="mail_count" min="1"/><input type="button" value="添加" id="addButton"/></td>
+                <td><input type="number" id="role_count" min="1"/><input type="button" value="添加" id="addButton"/></td>
             </tr>
             <tr>
                 <td>奖励</td>
@@ -76,6 +76,15 @@
             }else{
                 ids.eq(i).prop("checked",false);
             }
+        }
+    });
+    $('#addButton').click(function () {
+        var goods = $('#role_goods').val();
+        var count = $('#role_count').val();
+        if(count>0){
+            $('#reward').val($('#reward').val() + goods + ":" + count + ";\n");
+        }else{
+            alert("请选择物品数量");
         }
     });
 </script>

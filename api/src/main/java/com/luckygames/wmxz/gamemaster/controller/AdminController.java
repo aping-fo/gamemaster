@@ -9,6 +9,7 @@ import com.luckygames.wmxz.gamemaster.model.view.request.ActivationCodeQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.BanQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.KickLineQuery;
 import com.luckygames.wmxz.gamemaster.service.*;
+import com.luckygames.wmxz.gamemaster.utils.HttpRequestUtil;
 import com.luckygames.wmxz.gamemaster.utils.TimeUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -49,6 +51,9 @@ public class AdminController extends BaseController {
 
     public static final int QUERY_FAIL = -1;//未查找到数据
 
+    public static final String PAY_FAIL = "PAY_FAIL";//支付失败
+    public static final String PAY_SUCCESS = "SUCCESS";// 成功
+
     @Autowired
     private ActivationCodeService activationCodeService;
     @Autowired
@@ -59,6 +64,8 @@ public class AdminController extends BaseController {
     private AccountLogService accountLogService;
     @Autowired
     private ProhibitionService prohibitionService;
+    @Autowired
+    private ServerService serverService;
 
     //获取服务器列表
     @RequestMapping(value = "/serverList", method = {RequestMethod.GET, RequestMethod.POST})
@@ -302,5 +309,45 @@ public class AdminController extends BaseController {
         }
 
         jsonArray.add(jsonObject);
+    }
+
+    //支付分发
+    @RequestMapping(value = "/recharge", method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public String recharge(HttpServletRequest req) {
+        String agent = req.getParameter("agent"); //渠道代号
+        String cpOrderId = req.getParameter("cp_order_id"); //cp游戏订单号
+        String gameId = req.getParameter("game_id"); //平台游戏id
+        String orderId = req.getParameter("order_id"); //平台订单号
+        String orderStatus = req.getParameter("order_status"); //订单状态 2为支付成功，其他值统一为失败处理
+        String payTime = req.getParameter("pay_time"); //支付时间
+        String playerIdStr = req.getParameter("player_id"); //玩家平台id
+        String productId = req.getParameter("product_id"); //商品id
+        String productName = req.getParameter("product_name"); //商品名
+        String productPriceStr = req.getParameter("product_price"); //商品金额
+        String sign = req.getParameter("sign"); //签名
+        String ext = req.getParameter("ext"); //透传参数
+
+        String[] arr = ext.split("_");
+        if (arr.length < 6) {
+            logger.error("透传参数错误，透传参数=" + ext);
+            return PAY_FAIL;
+        }
+
+        StringBuffer parameter = new StringBuffer();
+        parameter.append("agent=").append(agent)
+                .append("&cp_order_id=").append(cpOrderId)
+                .append("&game_id=").append(gameId)
+                .append("&order_id=").append(orderId)
+                .append("&order_status=").append(orderStatus)
+                .append("&pay_time=").append(payTime)
+                .append("&player_id=").append(playerIdStr)
+                .append("&product_id=").append(productId)
+                .append("&product_name=").append(productName)
+                .append("&product_price=").append(productPriceStr)
+                .append("&sign=").append(sign)
+                .append("&ext=").append(ext);
+        HttpRequestUtil.sendPost(serverService.getByServerId(Long.parseLong(arr[5])).getPayAddress(), parameter.toString());
+        return PAY_SUCCESS;
     }
 }

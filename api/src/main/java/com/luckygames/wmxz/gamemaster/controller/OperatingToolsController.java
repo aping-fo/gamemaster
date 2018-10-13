@@ -102,36 +102,39 @@ public class OperatingToolsController extends BaseController {
     //发送邮件
     @RequestMapping(value = "/sendmail", method = {RequestMethod.GET, RequestMethod.POST})
     public Response sendmail(MailLog mailLog) {
-        //处理道具换行符
+        //处理换行符
         String payers = mailLog.getPlayerids();
-        String players = payers.replaceAll("\r\n", "");
+        String playersIds = "";
+        if (payers != null) {
+            playersIds = payers.replaceAll("\r\n", "");
+        }
+
         String rewardNames = mailLog.getRewards();
         String rewards = rewardNames.replaceAll("\r\n", "");
-        String result = "OK";
         try {
             if (mailLog.getIds() != null) {
                 Long[] ids = mailLog.getIds();
                 for (Long id : ids) {
-                    result = adminService.sendMail(new MailQuery(
+                    String result = adminService.sendMail(new MailQuery(
                             id,
                             mailLog.getTitle(),
                             mailLog.getContent(),
-                            players,
+                            playersIds,
                             mailLog.getMinLev(),
                             mailLog.getMaxLev(),
                             0,
                             rewards
                     ));
+                    if (SUCCESS.equals(result)) {
+                        mailLog.setServerId(id);
+                        mailLogService.save(mailLog);
+                    }
                 }
             }
         } catch (Exception e) {
             logger.error("发送邮件异常：", e);
         }
-        if (!SUCCESS.equals(result)) {
-            logger.error("发送邮件失败：{}", result);
-            return new Response().request(mailLog).json();
-        }
-        mailLogService.save(mailLog);
+
         return mailManage(new MailSearchQuery());
     }
 
