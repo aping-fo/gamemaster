@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @作者 周聪
@@ -37,7 +38,7 @@ public class OperatingToolsController extends BaseController {
     private static final String GOOD_NOT_EXISTENCE = "good_not_existence";// 物品不存在
 
     public static List<GoodsConfig> goodsList = new ArrayList<>();//物品列表
-    public static int Activation_Code_batch = 0;
+    public static AtomicInteger Activation_Code_batch = new AtomicInteger();
 
     @Autowired
     private MailLogService mailLogService;
@@ -270,12 +271,12 @@ public class OperatingToolsController extends BaseController {
             String rewards = activationCode.getRewards().replaceAll("\r\n", "");
             activationCode.setRewards(rewards);
 
-            Activation_Code_batch++;
+            Activation_Code_batch.incrementAndGet();
 
             String batch = "";
-            if (Activation_Code_batch < 10) {
+            if (Activation_Code_batch.get() < 10) {
                 batch = "00" + Activation_Code_batch;
-            } else if (Activation_Code_batch < 100) {
+            } else if (Activation_Code_batch.get() < 100) {
                 batch = "0" + Activation_Code_batch;
             }
 

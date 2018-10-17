@@ -4,10 +4,10 @@ import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.data.ChargeConfig;
 import com.luckygames.wmxz.gamemaster.data.GoodsConfig;
 import com.luckygames.wmxz.gamemaster.model.entity.ActivationCode;
-import com.luckygames.wmxz.gamemaster.model.view.request.PlayerQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.ServerSearchQuery;
-import com.luckygames.wmxz.gamemaster.service.*;
-import com.luckygames.wmxz.gamemaster.utils.JsonUtils;
+import com.luckygames.wmxz.gamemaster.service.ActivationCodeService;
+import com.luckygames.wmxz.gamemaster.service.NoticeService;
+import com.luckygames.wmxz.gamemaster.service.ServerService;
 import com.luckygames.wmxz.gamemaster.utils.XmlUtil2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -15,7 +15,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.Comparator;
 import java.util.stream.Collectors;
 
 /**
@@ -52,7 +52,7 @@ public class InitController extends BaseController implements ApplicationRunner 
         if (activationCode != null) {
             value = Integer.valueOf(activationCode.getName().substring(5, 8));
         }
-        OperatingToolsController.Activation_Code_batch = value;
+        OperatingToolsController.Activation_Code_batch.set(value);
 
         //初始化充值表
         initChargeConfig();

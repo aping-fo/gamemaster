@@ -52,7 +52,6 @@ public class AdminController extends BaseController {
     public static final int QUERY_FAIL = -1;//未查找到数据
 
     public static final String PAY_FAIL = "PAY_FAIL";//支付失败
-    public static final String PAY_SUCCESS = "SUCCESS";// 成功
 
     @Autowired
     private ActivationCodeService activationCodeService;
@@ -347,7 +346,6 @@ public class AdminController extends BaseController {
                 .append("&product_price=").append(productPriceStr)
                 .append("&sign=").append(sign)
                 .append("&ext=").append(ext);
-        HttpRequestUtil.sendPost(serverService.getByServerId(Long.parseLong(arr[5])).getPayAddress(), parameter.toString());
-        return PAY_SUCCESS;
+        return HttpRequestUtil.sendPost(serverService.getByServerId(Long.parseLong(arr[5])).getPayAddress(), parameter.toString());
     }
 }
