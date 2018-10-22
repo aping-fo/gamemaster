@@ -1,6 +1,7 @@
 package com.luckygames.wmxz.gamemaster.controller;
 
 import com.github.pagehelper.Page;
+import com.luckygames.wmxz.gamemaster.config.ThreadPoolConfig;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.data.GoodsConfig;
 import com.luckygames.wmxz.gamemaster.model.entity.*;
@@ -116,19 +117,29 @@ public class OperatingToolsController extends BaseController {
             if (mailLog.getIds() != null) {
                 Long[] ids = mailLog.getIds();
                 for (Long id : ids) {
-                    String result = adminService.sendMail(new MailQuery(
-                            id,
-                            mailLog.getTitle(),
-                            mailLog.getContent(),
-                            playersIds,
-                            mailLog.getMinLev(),
-                            mailLog.getMaxLev(),
-                            0,
-                            rewards
-                    ));
-                    if (SUCCESS.equals(result)) {
-                        mailLog.setServerId(id);
-                        mailLogService.save(mailLog);
+                    Server server = serverService.getByServerId(id);
+                    if (!server.getIp().startsWith("192.168")) {
+                        String finalPlayersIds = playersIds;
+                        ThreadPoolConfig.getExecutorService().execute(() -> {
+                            try {
+                                String result = adminService.sendMail(new MailQuery(
+                                        id,
+                                        mailLog.getTitle(),
+                                        mailLog.getContent(),
+                                        finalPlayersIds,
+                                        mailLog.getMinLev(),
+                                        mailLog.getMaxLev(),
+                                        0,
+                                        rewards
+                                ));
+                                if (SUCCESS.equals(result)) {
+                                    mailLog.setServerId(id);
+                                    mailLogService.save(mailLog);
+                                }
+                            } catch (Exception e) {
+                                System.out.println("服务器连接错误，服务器名称=" + server.getServerName());
+                            }
+                        });
                     }
                 }
             }
@@ -296,17 +307,26 @@ public class OperatingToolsController extends BaseController {
 
             response.view("game/activation_code");
 
-            new Thread(() -> {
-                //更新全部服务器
-                if (activationCode.getServerId() == 0) {
-                    //更新游戏服务器的激活码
-                    if (serverList != null && !serverList.isEmpty()) {
-                        serverList.forEach(server -> adminService.sendActivationCode(new ActivationCodeQuery(server.getServerId(), "update")));
-                    }
-                } else {
-                    adminService.sendActivationCode(new ActivationCodeQuery(activationCode.getServerId(), "update"));
+
+            //更新全部服务器
+            if (activationCode.getServerId() == 0) {
+                //更新游戏服务器的激活码
+                if (serverList != null && !serverList.isEmpty()) {
+                    serverList.forEach(server -> {
+                        if (!server.getIp().startsWith("192.168")) {
+                            ThreadPoolConfig.getExecutorService().execute(() -> {
+                                try {
+                                    adminService.sendActivationCode(new ActivationCodeQuery(server.getServerId(), "update"));
+                                } catch (Exception e) {
+                                    System.out.println("服务器连接错误，服务器名称=" + server.getServerName());
+                                }
+                            });
+                        }
+                    });
                 }
-            }).start();
+            } else {
+                adminService.sendActivationCode(new ActivationCodeQuery(activationCode.getServerId(), "update"));
+            }
         }
 
         GiftpackageSyncSearchQuery query = new GiftpackageSyncSearchQuery();
