@@ -8,13 +8,16 @@
             <table class="searchContent">
                 <tr>
                     <td>
+                        <label>服务器</label>
                         <select name="serverId">
-                            <option th:each="row,iterStat:${serverList}" th:text="${row.serverName}" th:value="${row.serverId}"></option>
+                            <option value="">全部</option>
+                            <option th:each="row,iterStat:${serverList}" th:text="${row.serverName}" th:value="${row.serverId}" th:selected="${row.serverId==request.serverId}"></option>
                         </select>
                     </td>
                     <td>
                         <label>邮件类型</label>
                         <select name="mailType" class="combox">
+                            <option value="">全部</option>
                             <option value="3" th:selected="${request.mailType==3}">角色群发</option>
                             <option value="2" th:selected="${request.mailType==2}">等级群发</option>
                         </select>

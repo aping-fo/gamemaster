@@ -5,31 +5,21 @@ import org.apache.commons.lang3.StringUtils;
 
 public class NewUserSqlProvider {
     public String searchPage(NewUserSearchQuery query) {
-        StringBuilder sql = new StringBuilder("SELECT t2.datelist update_time,IFNULL(t1.new_pay_number,0) first_charge_count,IFNULL(t1.role_number,0) new_user_count,IFNULL(t1.recharge_amount,0) new_pay_sum,IFNULL(t1.pay_arpu,0) new_pay_rate FROM comprehensive_report_data_collection t1 ");
-        sql.append("RIGHT JOIN ");
-        sql.append("(SELECT datelist FROM calendar WHERE 1=1 ");
-        if (StringUtils.isNotBlank(query.getStartDate())) {
-            sql.append(" and DATE_FORMAT(datelist,'%Y-%m-%d') >= #{startDate}  ");
-        } else {
-            sql.append(" and DATE_FORMAT(datelist,'%Y-%m-%d')>= DATE_SUB(CURDATE(), INTERVAL 30 DAY)  ");
-        }
+        StringBuilder sql = new StringBuilder("SELECT t1.*,t2.server_name serverName FROM new_user t1  LEFT JOIN server t2 on t1.server_id=t2.server_id where 1=1");
         if (StringUtils.isNotBlank(query.getEndDate())) {
-            sql.append(" and DATE_FORMAT(datelist,'%Y-%m-%d') <= #{endDate}  ");
-        } else {
-            sql.append(" and DATE_FORMAT(datelist,'%Y-%m-%d')<=now()  ");
+            sql.append(" and t1.create_time < #{endDate}");
+        }else{
+            sql.append(" and t1.create_time < DATE_SUB(curdate(),INTERVAL 0 DAY)");
         }
-        sql.append(") t2 ON DATE_FORMAT(t1.report_date,'%Y-%m-%d')=t2.datelist ");
-        if (query.getChannelId() != null ) {
-            sql.append(" and channel_id = #{channelId}");
+        if (StringUtils.isNotBlank(query.getStartDate())) {
+            sql.append(" and t1.create_time >= #{startDate}");
+        }else {
+            sql.append(" and t1.create_time >= DATE_SUB(curdate(),INTERVAL 1 DAY)");
         }
-        if (query.getServerIds() != null && !query.getServerIds().isEmpty()) {
-            String ids = StringUtils.join(query.getServerIds(), ",");
-            sql.append(" and server_id in (").append(ids).append(")  ");
+        if (query.getServerId() != null) {
+            sql.append(" and t1.server_id = #{serverId}");
         }
-        if (query.getPackageId()!=null) {
-            sql.append(" and package_id = #{packageId}");
-        }
-        sql.append(" ORDER BY update_time DESC");
+        sql.append(" GROUP BY t1.server_id");
         return sql.toString();
     }
 }

@@ -15,6 +15,7 @@
                     <td>区服</td>
                     <td>
                         <select name="serverId">
+                            <option value="">全部</option>
                             <option th:each="row,iterStat:${serverList}" th:text="${row.serverName}" th:value="${row.serverId}"></option>
                         </select>
                     </td>

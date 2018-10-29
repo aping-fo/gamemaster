@@ -20,4 +20,8 @@ public interface ActivationCodeService extends BaseNewService<ActivationCodeEnti
     ActivationCode searchLast();
 
     Page<ActivationCode> search(String remarks);
+
+    void updateAllActivationCode(String useServerId, String name);
+
+    void addAllActivationCode();
 }

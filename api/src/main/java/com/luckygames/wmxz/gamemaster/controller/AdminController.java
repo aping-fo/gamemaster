@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.dao.AccountLogEntity;
 import com.luckygames.wmxz.gamemaster.model.entity.*;
-import com.luckygames.wmxz.gamemaster.model.view.request.ActivationCodeQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.BanQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.KickLineQuery;
 import com.luckygames.wmxz.gamemaster.service.*;
@@ -26,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @作者 周聪
@@ -35,7 +35,7 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminController extends BaseController {
     public static List<Server> serverList = Collections.synchronizedList(new ArrayList<>());
-    public static Notice notice = new Notice();
+    public static List<Notice> noticeList = Collections.synchronizedList(new ArrayList<>());
     private static final Integer GAMEID = 2008;//密钥id
     private static final String GAMEKEY = "00c4392347b1865bd3fd6f0af5b8b26b";//密钥
     public static final String RETURN_SUCCESS = "success";// 成功
@@ -97,24 +97,26 @@ public class AdminController extends BaseController {
     //获取登录公告
     @RequestMapping(value = "/notice", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
-    public Notice getNotice() {
-        return notice;
+    public Notice getNotice(String group, String channel) {
+        return noticeList.stream().filter(n -> n.getNoticeGroup().equals(group)).collect(Collectors.toList()).get(0);
     }
 
     //获取激活码
     @RequestMapping(value = "/activationCode", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
-    public List<ActivationCode> getActivationCode(Long serverId) {
+    public List<ActivationCode> activationCode(Long serverId) {
         return activationCodeService.searchByServerId(serverId);
     }
 
     //更新激活码
     @RequestMapping(value = "/updateActivationCode", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
-    public void addActivationCode(ActivationCode activationCode) {
+    public void updateActivationCode(ActivationCode activationCode) {
         activationCode.setUseTime(new Date());
         activationCodeService.update(activationCode);
-        new Thread(() -> adminService.sendActivationCode(new ActivationCodeQuery(activationCode.getServerId(), "update"))).start();
+        if (activationCode.getServerId() == 0 && activationCode.getUniversal() != 1) {
+            activationCodeService.updateAllActivationCode(activationCode.getUseServerId(), activationCode.getName());
+        }
     }
 
     //当前在线人数

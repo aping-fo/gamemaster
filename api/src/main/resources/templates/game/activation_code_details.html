@@ -9,7 +9,7 @@
     </div>
 </div>
 <div class="pageHeader">
-    <form onsubmit="return ajaxNavTab(this);" action="operatingTools/activationCodeDetails" method="post">
+    <form id="pagerForm" onsubmit="return ajaxNavTab(this);" action="operatingTools/activationCodeDetails" method="post">
         <input type="hidden" name="orderField" th:value="${request.orderField}"/>
         <input type="hidden" name="orderDirection" th:value="${request.orderDirection}"/>
         <input type="hidden" name="pageNum" th:value="${Pager.pageNum}"/>

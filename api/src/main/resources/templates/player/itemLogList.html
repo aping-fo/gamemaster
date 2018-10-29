@@ -16,6 +16,10 @@
 <div th:if="${player.serverId!=null}">
     <div class="pageHeader">
         <form id="pagerForm" onsubmit="return navTabSearch(this);" action="player/itemLogList" method="post">
+            <input type="hidden" name="orderField" th:value="${request.orderField}"/>
+            <input type="hidden" name="orderDirection" th:value="${request.orderDirection}"/>
+            <input type="hidden" name="pageNum" th:value="${Pager.pageNum}"/>
+            <input type="hidden" name="pageSize" th:value="${Pager.pageSize}"/>
             <input type="hidden" th:value="${player.playerId}" name="playerId"/>
             <input type="hidden" th:value="${player.serverId}" name="serverId"/>
             <div class="searchBar">
@@ -55,8 +59,8 @@
             <tr th:each="row,iterStat:${list}">
                 <td th:text="${row.serverName}"></td>
                 <td th:text="${row.lev}"></td>
-                <td th:text="${row.prevValue}"></td>
-                <td th:text="${row.nextValue}"></td>
+                <td th:text="${row.prev}"></td>
+                <td th:text="${row.next}"></td>
                 <td th:text="${row.count}"></td>
                 <td th:text="${row.goodsName}"></td>
                 <td th:text="${row.reason}"></td>
@@ -67,6 +71,7 @@
             </tr>
             </tbody>
         </table>
+        <div th:replace="_include/pager"></div>
     </div>
 </div>
 <div th:if="${player.serverId==null}">

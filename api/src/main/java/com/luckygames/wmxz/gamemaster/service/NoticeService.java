@@ -6,6 +6,8 @@ import com.luckygames.wmxz.gamemaster.model.entity.Notice;
 import com.luckygames.wmxz.gamemaster.model.view.request.NoticeSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.base.BaseNewService;
 
+import java.util.List;
+
 public interface NoticeService extends BaseNewService<NoticeEntity> {
     Page<Notice> searchPage(NoticeSearchQuery query);
 
@@ -13,5 +15,5 @@ public interface NoticeService extends BaseNewService<NoticeEntity> {
 
     Notice searchById(Long id);
 
-    Notice searchLast();
+    List<Notice> searchLast();
 }

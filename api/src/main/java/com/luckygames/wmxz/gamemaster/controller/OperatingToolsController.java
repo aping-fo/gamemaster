@@ -1,7 +1,6 @@
 package com.luckygames.wmxz.gamemaster.controller;
 
 import com.github.pagehelper.Page;
-import com.luckygames.wmxz.gamemaster.config.ThreadPoolConfig;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.data.GoodsConfig;
 import com.luckygames.wmxz.gamemaster.model.entity.*;
@@ -113,38 +112,11 @@ public class OperatingToolsController extends BaseController {
 
         String rewardNames = mailLog.getRewards();
         String rewards = rewardNames.replaceAll("\r\n", "");
-        try {
-            if (mailLog.getIds() != null) {
-                Long[] ids = mailLog.getIds();
-                for (Long id : ids) {
-                    Server server = serverService.getByServerId(id);
-                    if (!server.getIp().startsWith("192.168")) {
-                        String finalPlayersIds = playersIds;
-                        ThreadPoolConfig.getExecutorService().execute(() -> {
-                            try {
-                                String result = adminService.sendMail(new MailQuery(
-                                        id,
-                                        mailLog.getTitle(),
-                                        mailLog.getContent(),
-                                        finalPlayersIds,
-                                        mailLog.getMinLev(),
-                                        mailLog.getMaxLev(),
-                                        0,
-                                        rewards
-                                ));
-                                if (SUCCESS.equals(result)) {
-                                    mailLog.setServerId(id);
-                                    mailLogService.save(mailLog);
-                                }
-                            } catch (Exception e) {
-                                System.out.println("服务器连接错误，服务器名称=" + server.getServerName());
-                            }
-                        });
-                    }
-                }
+        if (mailLog.getIds() != null) {
+            Long[] ids = mailLog.getIds();
+            for (Long id : ids) {
+                mailLogService.sendMail(id, playersIds, mailLog, rewards);
             }
-        } catch (Exception e) {
-            logger.error("发送邮件异常：", e);
         }
 
         return mailManage(new MailSearchQuery());
@@ -170,7 +142,7 @@ public class OperatingToolsController extends BaseController {
             noticeService.save(notice);
             response.view("game/noticeList");
         }
-        AdminController.notice = noticeService.searchLast();
+        AdminController.noticeList = noticeService.searchLast();
         return response.data("list", noticeService.searchPage(new NoticeSearchQuery()))
                 .request(new NoticeSearchQuery());
     }
@@ -183,7 +155,7 @@ public class OperatingToolsController extends BaseController {
             noticeService.update(notice);
             response.view("game/noticeList");
         }
-        AdminController.notice = noticeService.searchLast();
+        AdminController.noticeList = noticeService.searchLast();
         return response.data("list", noticeService.searchPage(new NoticeSearchQuery()))
                 .request(new NoticeSearchQuery())
                 .data("notice", noticeService.searchById(notice.getId()));
@@ -193,7 +165,7 @@ public class OperatingToolsController extends BaseController {
     @RequestMapping(value = {"/noticeDelete"}, method = {RequestMethod.GET, RequestMethod.POST})
     public Response noticeDelete(Notice notice) {
         noticeService.deleteById(notice.getId());
-        AdminController.notice = noticeService.searchLast();
+        AdminController.noticeList = noticeService.searchLast();
         return new Response("game/noticeList")
                 .data("list", noticeService.searchPage(new NoticeSearchQuery()))
                 .request(new NoticeSearchQuery());
@@ -284,7 +256,7 @@ public class OperatingToolsController extends BaseController {
 
             Activation_Code_batch.incrementAndGet();
 
-            String batch = "";
+            String batch = Activation_Code_batch + "";
             if (Activation_Code_batch.get() < 10) {
                 batch = "00" + Activation_Code_batch;
             } else if (Activation_Code_batch.get() < 100) {
@@ -307,25 +279,12 @@ public class OperatingToolsController extends BaseController {
 
             response.view("game/activation_code");
 
-
             //更新全部服务器
             if (activationCode.getServerId() == 0) {
                 //更新游戏服务器的激活码
-                if (serverList != null && !serverList.isEmpty()) {
-                    serverList.forEach(server -> {
-                        if (!server.getIp().startsWith("192.168")) {
-                            ThreadPoolConfig.getExecutorService().execute(() -> {
-                                try {
-                                    adminService.sendActivationCode(new ActivationCodeQuery(server.getServerId(), "update"));
-                                } catch (Exception e) {
-                                    System.out.println("服务器连接错误，服务器名称=" + server.getServerName());
-                                }
-                            });
-                        }
-                    });
-                }
+                activationCodeService.addAllActivationCode();
             } else {
-                adminService.sendActivationCode(new ActivationCodeQuery(activationCode.getServerId(), "update"));
+                adminService.sendActivationCode(new ActivationCodeQuery(activationCode.getServerId(), ""));
             }
         }
 

@@ -44,7 +44,7 @@ public class InitController extends BaseController implements ApplicationRunner 
         AdminController.serverList = serverService.searchPage(query);
 
         //初始化公告
-        AdminController.notice = noticeService.searchLast();
+        AdminController.noticeList = noticeService.searchLast();
 
         //初始化礼包序号
         ActivationCode activationCode = activationCodeService.searchLast();

@@ -38,18 +38,18 @@
     <table class="table" width="100%" layoutH="137">
         <thead>
         <tr>
-            <th>ID</th>
-            <th>标题</th>
-            <th>内容</th>
-            <th>开始时间</th>
-            <th>结束时间</th>
-            <th>状态</th>
-            <th>操作</th>
+            <th width="10%">组</th>
+            <th width="10%">标题</th>
+            <th width="40%">内容</th>
+            <th width="10%">开始时间</th>
+            <th width="10%">结束时间</th>
+            <th width="10%">状态</th>
+            <th width="10%">操作</th>
         </tr>
         </thead>
         <tbody>
         <tr th:if="${list.size()!=0}" th:each="row,iterStat:${list}">
-            <td th:text="${row.id}"></td>
+            <td th:text="${row.noticeGroup}"></td>
             <td th:text="${row.title}"></td>
             <td th:text="${row.content}"></td>
             <td th:text="${row.startTime}"></td>

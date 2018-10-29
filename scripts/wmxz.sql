@@ -11,7 +11,7 @@
  Target Server Version : 50543
  File Encoding         : 65001
 
- Date: 17/10/2018 11:03:38
+ Date: 17/10/2018 11:06:27
 */
 
 SET NAMES utf8mb4;
@@ -561,7 +561,7 @@ CREATE TABLE `item_log`  (
   `create_time` datetime NULL DEFAULT NULL,
   `server_id` bigint(20) NULL DEFAULT NULL COMMENT '服务器id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 341 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Fixed;
+) ENGINE = InnoDB AUTO_INCREMENT = 341 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for level_flow

@@ -6,13 +6,13 @@ import com.luckygames.wmxz.gamemaster.dao.NewUserEntity;
 import com.luckygames.wmxz.gamemaster.dao.mapper.NewUserMapper;
 import com.luckygames.wmxz.gamemaster.model.entity.NewUser;
 import com.luckygames.wmxz.gamemaster.model.view.request.NewUserSearchQuery;
-import com.luckygames.wmxz.gamemaster.service.base.BaseServiceImpl;
+import com.luckygames.wmxz.gamemaster.service.base.BaseNewServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
 @Service("NewUserService")
-public class NewUserServiceImpl extends BaseServiceImpl<NewUserEntity> implements NewUserService {
+public class NewUserServiceImpl extends BaseNewServiceImpl<NewUserEntity> implements NewUserService {
     @Autowired
     private NewUserMapper NewUserMapper;
 

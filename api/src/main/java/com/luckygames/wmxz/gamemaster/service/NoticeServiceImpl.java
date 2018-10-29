@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
+import java.util.List;
+
 @Service("NoticeService")
 public class NoticeServiceImpl extends BaseNewServiceImpl<NoticeEntity> implements NoticeService {
 
@@ -38,7 +40,7 @@ public class NoticeServiceImpl extends BaseNewServiceImpl<NoticeEntity> implemen
     }
 
     @Override
-    public Notice searchLast() {
+    public List<Notice> searchLast() {
         return noticeMapper.searchLast();
     }
 }

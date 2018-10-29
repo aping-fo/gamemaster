@@ -11,8 +11,8 @@
                         <td>服务器:</td>
                         <td>
                             <select name="serverId">
-                                <option th:each="row,iterStat:${serverList}" th:text="${row.serverName}"
-                                        th:value="${row.serverId}"></option>
+                                <option value="">全部</option>
+                                <option th:each="row,iterStat:${serverList}" th:text="${row.serverName}" th:value="${row.serverId}"></option>
                             </select>
                         </td>
                         <td>内容:</td>

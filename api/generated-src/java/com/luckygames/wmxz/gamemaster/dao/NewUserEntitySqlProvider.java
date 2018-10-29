@@ -32,24 +32,8 @@ public class NewUserEntitySqlProvider {
             sql.VALUES("id", "#{id,jdbcType=BIGINT}");
         }
         
-        if (record.getStatus() != null) {
-            sql.VALUES("`status`", "#{status,jdbcType=INTEGER}");
-        }
-        
         if (record.getServerId() != null) {
             sql.VALUES("server_id", "#{serverId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getServerName() != null) {
-            sql.VALUES("`server_name`", "#{serverName,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getChannelId() != null) {
-            sql.VALUES("channel_id", "#{channelId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getChannelName() != null) {
-            sql.VALUES("channel_name", "#{channelName,jdbcType=VARCHAR}");
         }
         
         if (record.getCreateTime() != null) {
@@ -60,28 +44,16 @@ public class NewUserEntitySqlProvider {
             sql.VALUES("update_time", "#{updateTime,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getFirstChargeCount() != null) {
-            sql.VALUES("first_charge_count", "#{firstChargeCount,jdbcType=INTEGER}");
-        }
-        
         if (record.getNewUserCount() != null) {
             sql.VALUES("new_user_count", "#{newUserCount,jdbcType=INTEGER}");
         }
         
-        if (record.getNewPaySum() != null) {
-            sql.VALUES("new_pay_sum", "#{newPaySum,jdbcType=INTEGER}");
+        if (record.getIncome() != null) {
+            sql.VALUES("income", "#{income,jdbcType=INTEGER}");
         }
         
-        if (record.getNewPayRate() != null) {
-            sql.VALUES("new_pay_rate", "#{newPayRate,jdbcType=DECIMAL}");
-        }
-        
-        if (record.getPackageName() != null) {
-            sql.VALUES("package_name", "#{packageName,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getPackageId() != null) {
-            sql.VALUES("package_id", "#{packageId,jdbcType=INTEGER}");
+        if (record.getArpu() != null) {
+            sql.VALUES("arpu", "#{arpu,jdbcType=DOUBLE}");
         }
         
         return sql.toString();
@@ -94,19 +66,12 @@ public class NewUserEntitySqlProvider {
         } else {
             sql.SELECT("id");
         }
-        sql.SELECT("`status`");
         sql.SELECT("server_id");
-        sql.SELECT("`server_name`");
-        sql.SELECT("channel_id");
-        sql.SELECT("channel_name");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
-        sql.SELECT("first_charge_count");
         sql.SELECT("new_user_count");
-        sql.SELECT("new_pay_sum");
-        sql.SELECT("new_pay_rate");
-        sql.SELECT("package_name");
-        sql.SELECT("package_id");
+        sql.SELECT("income");
+        sql.SELECT("arpu");
         sql.FROM("new_user");
         applyWhere(sql, example, false);
         
@@ -128,24 +93,8 @@ public class NewUserEntitySqlProvider {
             sql.SET("id = #{record.id,jdbcType=BIGINT}");
         }
         
-        if (record.getStatus() != null) {
-            sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
-        }
-        
         if (record.getServerId() != null) {
             sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getServerName() != null) {
-            sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getChannelId() != null) {
-            sql.SET("channel_id = #{record.channelId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getChannelName() != null) {
-            sql.SET("channel_name = #{record.channelName,jdbcType=VARCHAR}");
         }
         
         if (record.getCreateTime() != null) {
@@ -156,28 +105,16 @@ public class NewUserEntitySqlProvider {
             sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getFirstChargeCount() != null) {
-            sql.SET("first_charge_count = #{record.firstChargeCount,jdbcType=INTEGER}");
-        }
-        
         if (record.getNewUserCount() != null) {
             sql.SET("new_user_count = #{record.newUserCount,jdbcType=INTEGER}");
         }
         
-        if (record.getNewPaySum() != null) {
-            sql.SET("new_pay_sum = #{record.newPaySum,jdbcType=INTEGER}");
+        if (record.getIncome() != null) {
+            sql.SET("income = #{record.income,jdbcType=INTEGER}");
         }
         
-        if (record.getNewPayRate() != null) {
-            sql.SET("new_pay_rate = #{record.newPayRate,jdbcType=DECIMAL}");
-        }
-        
-        if (record.getPackageName() != null) {
-            sql.SET("package_name = #{record.packageName,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getPackageId() != null) {
-            sql.SET("package_id = #{record.packageId,jdbcType=INTEGER}");
+        if (record.getArpu() != null) {
+            sql.SET("arpu = #{record.arpu,jdbcType=DOUBLE}");
         }
         
         applyWhere(sql, example, true);
@@ -189,19 +126,12 @@ public class NewUserEntitySqlProvider {
         sql.UPDATE("new_user");
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
-        sql.SET("`status` = #{record.status,jdbcType=INTEGER}");
         sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
-        sql.SET("`server_name` = #{record.serverName,jdbcType=VARCHAR}");
-        sql.SET("channel_id = #{record.channelId,jdbcType=BIGINT}");
-        sql.SET("channel_name = #{record.channelName,jdbcType=VARCHAR}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
-        sql.SET("first_charge_count = #{record.firstChargeCount,jdbcType=INTEGER}");
         sql.SET("new_user_count = #{record.newUserCount,jdbcType=INTEGER}");
-        sql.SET("new_pay_sum = #{record.newPaySum,jdbcType=INTEGER}");
-        sql.SET("new_pay_rate = #{record.newPayRate,jdbcType=DECIMAL}");
-        sql.SET("package_name = #{record.packageName,jdbcType=VARCHAR}");
-        sql.SET("package_id = #{record.packageId,jdbcType=INTEGER}");
+        sql.SET("income = #{record.income,jdbcType=INTEGER}");
+        sql.SET("arpu = #{record.arpu,jdbcType=DOUBLE}");
         
         NewUserEntityExample example = (NewUserEntityExample) parameter.get("example");
         applyWhere(sql, example, true);

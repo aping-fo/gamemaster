@@ -5,10 +5,7 @@ import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.model.entity.*;
 import com.luckygames.wmxz.gamemaster.model.enums.LTVDaysType;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
-import com.luckygames.wmxz.gamemaster.model.view.request.LTVSearchQuery;
-import com.luckygames.wmxz.gamemaster.model.view.request.NewUserSearchQuery;
-import com.luckygames.wmxz.gamemaster.model.view.request.PackageSearchQuery;
-import com.luckygames.wmxz.gamemaster.model.view.request.PayRetentionRateSearchQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.*;
 import com.luckygames.wmxz.gamemaster.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +27,21 @@ public class PaidController extends BaseController {
     private ChannelBagService channelBagService;
     @Autowired
     private ChannelService channelService;
+    @Autowired
+    private ServerService serverService;
+
+
+    //新增用户数据
+    @RequestMapping(value = "/newuser", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response queryNewuser(NewUserSearchQuery query) {
+        Page<NewUser> newUserPage = newUserService.searchPage(query);
+
+        List<Server> serverList = serverService.searchList();
+        return new Response("paid/newuser")
+                .request(query)
+                .data("list", newUserPage)
+                .data("serverList", serverList);
+    }
 
     //ltv统计
     @RequestMapping(value = "/ltv", method = {RequestMethod.GET, RequestMethod.POST})
@@ -56,24 +68,6 @@ public class PaidController extends BaseController {
         return new Response("paid/stay")
                 .request(query)
                 .data("list", payRetentionRatePage)
-                .data("channelBagList", channelBagList)
-                .data("channelList", channelList);
-    }
-
-    //新增用户数据
-    @RequestMapping(value = "/newuser", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response queryNewuser(NewUserSearchQuery query) {
-        Page<NewUser> newUserPage = newUserService.searchPage(query);
-        List<ChannelBag> channelBagList;
-        if (query.getChannelId() != null) {
-            channelBagList = channelBagService.searchPageByChannelId(query.getChannelId());
-        } else {
-            channelBagList = channelBagService.searchPage(new PackageSearchQuery());
-        }
-        List<Channel> channelList = channelService.searchList();
-        return new Response("paid/newuser")
-                .request(query)
-                .data("list", newUserPage)
                 .data("channelBagList", channelBagList)
                 .data("channelList", channelList);
     }

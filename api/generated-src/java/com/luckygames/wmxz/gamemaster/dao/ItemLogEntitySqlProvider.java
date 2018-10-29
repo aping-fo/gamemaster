@@ -64,6 +64,18 @@ public class ItemLogEntitySqlProvider {
             sql.VALUES("server_id", "#{serverId,jdbcType=BIGINT}");
         }
         
+        if (record.getLev() != null) {
+            sql.VALUES("lev", "#{lev,jdbcType=INTEGER}");
+        }
+        
+        if (record.getPrev() != null) {
+            sql.VALUES("prev", "#{prev,jdbcType=INTEGER}");
+        }
+        
+        if (record.getNext() != null) {
+            sql.VALUES("`next`", "#{next,jdbcType=INTEGER}");
+        }
+        
         return sql.toString();
     }
 
@@ -82,6 +94,9 @@ public class ItemLogEntitySqlProvider {
         sql.SELECT("goods_type");
         sql.SELECT("create_time");
         sql.SELECT("server_id");
+        sql.SELECT("lev");
+        sql.SELECT("prev");
+        sql.SELECT("`next`");
         sql.FROM("item_log");
         applyWhere(sql, example, false);
         
@@ -135,6 +150,18 @@ public class ItemLogEntitySqlProvider {
             sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
         }
         
+        if (record.getLev() != null) {
+            sql.SET("lev = #{record.lev,jdbcType=INTEGER}");
+        }
+        
+        if (record.getPrev() != null) {
+            sql.SET("prev = #{record.prev,jdbcType=INTEGER}");
+        }
+        
+        if (record.getNext() != null) {
+            sql.SET("`next` = #{record.next,jdbcType=INTEGER}");
+        }
+        
         applyWhere(sql, example, true);
         return sql.toString();
     }
@@ -152,6 +179,9 @@ public class ItemLogEntitySqlProvider {
         sql.SET("goods_type = #{record.goodsType,jdbcType=INTEGER}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
+        sql.SET("lev = #{record.lev,jdbcType=INTEGER}");
+        sql.SET("prev = #{record.prev,jdbcType=INTEGER}");
+        sql.SET("`next` = #{record.next,jdbcType=INTEGER}");
         
         ItemLogEntityExample example = (ItemLogEntityExample) parameter.get("example");
         applyWhere(sql, example, true);

@@ -43,6 +43,7 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * 聊天监控
+     *
      * @param query
      * @return
      */
@@ -87,6 +88,7 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * 踢人
+     *
      * @param query
      * @return
      */
@@ -114,9 +116,14 @@ public class AdminServiceImpl implements AdminService {
         return commonRequest(query.encodeReqParams(), restTemplate, query.getServerId(), AdminUrl.PAY.getUrl());
     }
 
-    public String reqBackendCommond(BackendCommand command){
+    @Override
+    public String queryNewPlayer(GMQuery query) {
+        return commonRequest(query.encodeReqParams(), restTemplate, query.getServerId(), AdminUrl.NEW_PLAYER.getUrl());
+    }
+
+    public String reqBackendCommond(BackendCommand command) {
         String host = getHost(command.getServerId());
-        HttpEntity<String> entity = new HttpEntity<>(command.encodeReqParams(),headers);
+        HttpEntity<String> entity = new HttpEntity<>(command.encodeReqParams(), headers);
         ResponseEntity<String> result = restTemplate.postForEntity(host, entity, String.class);
         System.out.println(result.getBody());
         return result.getBody();

@@ -19,6 +19,12 @@ public class ItemLogEntity extends BaseNewEntity {
 
     private Long serverId;
 
+    private Integer lev;
+
+    private Integer prev;
+
+    private Integer next;
+
     public Integer getPlayerId() {
         return playerId;
     }
@@ -73,5 +79,29 @@ public class ItemLogEntity extends BaseNewEntity {
 
     public void setServerId(Long serverId) {
         this.serverId = serverId;
+    }
+
+    public Integer getLev() {
+        return lev;
+    }
+
+    public void setLev(Integer lev) {
+        this.lev = lev;
+    }
+
+    public Integer getPrev() {
+        return prev;
+    }
+
+    public void setPrev(Integer prev) {
+        this.prev = prev;
+    }
+
+    public Integer getNext() {
+        return next;
+    }
+
+    public void setNext(Integer next) {
+        this.next = next;
     }
 }

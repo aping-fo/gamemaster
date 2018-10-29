@@ -8,18 +8,18 @@ import com.luckygames.wmxz.gamemaster.model.view.base.GMQuery;
  * 激活码
  */
 public class ActivationCodeQuery extends GMQuery {
-    private String type;
+    private String name;
 
-    public ActivationCodeQuery(Long serverId, String type) {
+    public ActivationCodeQuery(Long serverId,  String name) {
         super(serverId);
-        this.type = type;
+        this.name = name;
     }
 
-    public String getType() {
-        return type;
+    public String getName() {
+        return name;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -1,7 +1,6 @@
 package com.luckygames.wmxz.gamemaster.controller;
 
 import com.github.pagehelper.Page;
-import com.luckygames.wmxz.gamemaster.common.constants.AdminUrl;
 import com.luckygames.wmxz.gamemaster.common.constants.ResultCode;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.model.entity.*;
@@ -12,7 +11,6 @@ import com.luckygames.wmxz.gamemaster.service.*;
 import com.luckygames.wmxz.gamemaster.utils.ExcelExportUtil;
 import com.luckygames.wmxz.gamemaster.utils.ExportUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.ss.formula.functions.Now;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -22,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -285,7 +283,7 @@ public class GameController extends BaseController {
                 noticeService.update(notice);
             }
 
-            AdminController.notice = noticeService.searchLast();
+            AdminController.noticeList = noticeService.searchLast();
         }
 
         NoticeSearchQuery query = new NoticeSearchQuery();

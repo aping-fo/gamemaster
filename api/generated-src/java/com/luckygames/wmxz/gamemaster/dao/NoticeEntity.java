@@ -7,8 +7,6 @@ import javax.persistence.Table;
 public class NoticeEntity extends BaseNewEntity {
     private Long serverId;
 
-    private Long channelId;
-
     private String title;
 
     private String content;
@@ -19,20 +17,16 @@ public class NoticeEntity extends BaseNewEntity {
 
     private String endTime;
 
+    private String noticeGroup;
+
+    private String channel;
+
     public Long getServerId() {
         return serverId;
     }
 
     public void setServerId(Long serverId) {
         this.serverId = serverId;
-    }
-
-    public Long getChannelId() {
-        return channelId;
-    }
-
-    public void setChannelId(Long channelId) {
-        this.channelId = channelId;
     }
 
     public String getTitle() {
@@ -73,5 +67,21 @@ public class NoticeEntity extends BaseNewEntity {
 
     public void setEndTime(String endTime) {
         this.endTime = endTime == null ? null : endTime.trim();
+    }
+
+    public String getNoticeGroup() {
+        return noticeGroup;
+    }
+
+    public void setNoticeGroup(String noticeGroup) {
+        this.noticeGroup = noticeGroup == null ? null : noticeGroup.trim();
+    }
+
+    public String getChannel() {
+        return channel;
+    }
+
+    public void setChannel(String channel) {
+        this.channel = channel == null ? null : channel.trim();
     }
 }

@@ -11,6 +11,7 @@
                         <td>服务器</td>
                         <td>
                             <select name="serverId" class="required">
+                                <option value="">全部</option>
                                 <option th:each="server:${serverList}" th:value="${server.serverId}" th:utext="${server.serverName}" th:selected="${server.serverId==request.serverId}"></option>
                             </select>
                         </td>

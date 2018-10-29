@@ -644,6 +644,186 @@ public class ItemLogEntityExample {
             addCriterion("server_id not between", value1, value2, "serverId");
             return (Criteria) this;
         }
+
+        public Criteria andLevIsNull() {
+            addCriterion("lev is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevIsNotNull() {
+            addCriterion("lev is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevEqualTo(Integer value) {
+            addCriterion("lev =", value, "lev");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevNotEqualTo(Integer value) {
+            addCriterion("lev <>", value, "lev");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevGreaterThan(Integer value) {
+            addCriterion("lev >", value, "lev");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevGreaterThanOrEqualTo(Integer value) {
+            addCriterion("lev >=", value, "lev");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevLessThan(Integer value) {
+            addCriterion("lev <", value, "lev");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevLessThanOrEqualTo(Integer value) {
+            addCriterion("lev <=", value, "lev");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevIn(List<Integer> values) {
+            addCriterion("lev in", values, "lev");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevNotIn(List<Integer> values) {
+            addCriterion("lev not in", values, "lev");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevBetween(Integer value1, Integer value2) {
+            addCriterion("lev between", value1, value2, "lev");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevNotBetween(Integer value1, Integer value2) {
+            addCriterion("lev not between", value1, value2, "lev");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrevIsNull() {
+            addCriterion("prev is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrevIsNotNull() {
+            addCriterion("prev is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrevEqualTo(Integer value) {
+            addCriterion("prev =", value, "prev");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrevNotEqualTo(Integer value) {
+            addCriterion("prev <>", value, "prev");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrevGreaterThan(Integer value) {
+            addCriterion("prev >", value, "prev");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrevGreaterThanOrEqualTo(Integer value) {
+            addCriterion("prev >=", value, "prev");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrevLessThan(Integer value) {
+            addCriterion("prev <", value, "prev");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrevLessThanOrEqualTo(Integer value) {
+            addCriterion("prev <=", value, "prev");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrevIn(List<Integer> values) {
+            addCriterion("prev in", values, "prev");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrevNotIn(List<Integer> values) {
+            addCriterion("prev not in", values, "prev");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrevBetween(Integer value1, Integer value2) {
+            addCriterion("prev between", value1, value2, "prev");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrevNotBetween(Integer value1, Integer value2) {
+            addCriterion("prev not between", value1, value2, "prev");
+            return (Criteria) this;
+        }
+
+        public Criteria andNextIsNull() {
+            addCriterion("`next` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNextIsNotNull() {
+            addCriterion("`next` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNextEqualTo(Integer value) {
+            addCriterion("`next` =", value, "next");
+            return (Criteria) this;
+        }
+
+        public Criteria andNextNotEqualTo(Integer value) {
+            addCriterion("`next` <>", value, "next");
+            return (Criteria) this;
+        }
+
+        public Criteria andNextGreaterThan(Integer value) {
+            addCriterion("`next` >", value, "next");
+            return (Criteria) this;
+        }
+
+        public Criteria andNextGreaterThanOrEqualTo(Integer value) {
+            addCriterion("`next` >=", value, "next");
+            return (Criteria) this;
+        }
+
+        public Criteria andNextLessThan(Integer value) {
+            addCriterion("`next` <", value, "next");
+            return (Criteria) this;
+        }
+
+        public Criteria andNextLessThanOrEqualTo(Integer value) {
+            addCriterion("`next` <=", value, "next");
+            return (Criteria) this;
+        }
+
+        public Criteria andNextIn(List<Integer> values) {
+            addCriterion("`next` in", values, "next");
+            return (Criteria) this;
+        }
+
+        public Criteria andNextNotIn(List<Integer> values) {
+            addCriterion("`next` not in", values, "next");
+            return (Criteria) this;
+        }
+
+        public Criteria andNextBetween(Integer value1, Integer value2) {
+            addCriterion("`next` between", value1, value2, "next");
+            return (Criteria) this;
+        }
+
+        public Criteria andNextNotBetween(Integer value1, Integer value2) {
+            addCriterion("`next` not between", value1, value2, "next");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -2,7 +2,6 @@ package com.luckygames.wmxz.gamemaster.service;
 
 import com.luckygames.wmxz.gamemaster.model.view.base.GMQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.ActivationCodeQuery;
-import com.luckygames.wmxz.gamemaster.model.view.request.ActivitySearchQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.RecoveryGoodsQuery;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -111,5 +110,8 @@ public interface AdminService {
 
     //模拟充值
     public String pay(GMQuery query);
+
+    //新增玩家
+    public String queryNewPlayer(GMQuery query);
 }
 

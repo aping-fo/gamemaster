@@ -225,66 +225,6 @@ public class NoticeEntityExample {
             return (Criteria) this;
         }
 
-        public Criteria andChannelIdIsNull() {
-            addCriterion("channel_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelIdIsNotNull() {
-            addCriterion("channel_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelIdEqualTo(Long value) {
-            addCriterion("channel_id =", value, "channelId");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelIdNotEqualTo(Long value) {
-            addCriterion("channel_id <>", value, "channelId");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelIdGreaterThan(Long value) {
-            addCriterion("channel_id >", value, "channelId");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("channel_id >=", value, "channelId");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelIdLessThan(Long value) {
-            addCriterion("channel_id <", value, "channelId");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelIdLessThanOrEqualTo(Long value) {
-            addCriterion("channel_id <=", value, "channelId");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelIdIn(List<Long> values) {
-            addCriterion("channel_id in", values, "channelId");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelIdNotIn(List<Long> values) {
-            addCriterion("channel_id not in", values, "channelId");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelIdBetween(Long value1, Long value2) {
-            addCriterion("channel_id between", value1, value2, "channelId");
-            return (Criteria) this;
-        }
-
-        public Criteria andChannelIdNotBetween(Long value1, Long value2) {
-            addCriterion("channel_id not between", value1, value2, "channelId");
-            return (Criteria) this;
-        }
-
         public Criteria andCreateTimeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;
@@ -742,6 +682,146 @@ public class NoticeEntityExample {
 
         public Criteria andEndTimeNotBetween(String value1, String value2) {
             addCriterion("end_time not between", value1, value2, "endTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoticeGroupIsNull() {
+            addCriterion("notice_group is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoticeGroupIsNotNull() {
+            addCriterion("notice_group is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoticeGroupEqualTo(String value) {
+            addCriterion("notice_group =", value, "noticeGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoticeGroupNotEqualTo(String value) {
+            addCriterion("notice_group <>", value, "noticeGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoticeGroupGreaterThan(String value) {
+            addCriterion("notice_group >", value, "noticeGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoticeGroupGreaterThanOrEqualTo(String value) {
+            addCriterion("notice_group >=", value, "noticeGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoticeGroupLessThan(String value) {
+            addCriterion("notice_group <", value, "noticeGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoticeGroupLessThanOrEqualTo(String value) {
+            addCriterion("notice_group <=", value, "noticeGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoticeGroupLike(String value) {
+            addCriterion("notice_group like", value, "noticeGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoticeGroupNotLike(String value) {
+            addCriterion("notice_group not like", value, "noticeGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoticeGroupIn(List<String> values) {
+            addCriterion("notice_group in", values, "noticeGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoticeGroupNotIn(List<String> values) {
+            addCriterion("notice_group not in", values, "noticeGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoticeGroupBetween(String value1, String value2) {
+            addCriterion("notice_group between", value1, value2, "noticeGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoticeGroupNotBetween(String value1, String value2) {
+            addCriterion("notice_group not between", value1, value2, "noticeGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelIsNull() {
+            addCriterion("channel is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelIsNotNull() {
+            addCriterion("channel is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelEqualTo(String value) {
+            addCriterion("channel =", value, "channel");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelNotEqualTo(String value) {
+            addCriterion("channel <>", value, "channel");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelGreaterThan(String value) {
+            addCriterion("channel >", value, "channel");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelGreaterThanOrEqualTo(String value) {
+            addCriterion("channel >=", value, "channel");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelLessThan(String value) {
+            addCriterion("channel <", value, "channel");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelLessThanOrEqualTo(String value) {
+            addCriterion("channel <=", value, "channel");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelLike(String value) {
+            addCriterion("channel like", value, "channel");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelNotLike(String value) {
+            addCriterion("channel not like", value, "channel");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelIn(List<String> values) {
+            addCriterion("channel in", values, "channel");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelNotIn(List<String> values) {
+            addCriterion("channel not in", values, "channel");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelBetween(String value1, String value2) {
+            addCriterion("channel between", value1, value2, "channel");
+            return (Criteria) this;
+        }
+
+        public Criteria andChannelNotBetween(String value1, String value2) {
+            addCriterion("channel not between", value1, value2, "channel");
             return (Criteria) this;
         }
     }

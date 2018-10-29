@@ -23,9 +23,11 @@ public class MailLogSqlProvider {
         if (StringUtils.isNotBlank(query.getEndDate())) {
             sql.append(" and ml.create_time < #{endDate}  ");
         }
-
+        if (query.getServerId() != null) {
+            sql.append(" and ml.server_id = #{serverId}  ");
+        }
         if (query.getMailType() != null) {
-            sql.append(" and ml.mail_type =#{mailType} ");
+            sql.append(" and ml.mail_type = #{mailType} ");
         }
         sql.append(" order by ml.create_time desc");
         return sql.toString();

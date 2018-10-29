@@ -3,16 +3,16 @@
         <div class="searchBar">
             <table class="searchContent">
                 <tr>
-                    <td>公告状态：</td>
+                    <td>公告状态</td>
                     <td>
                         <select name="enable">
                             <option value="1">显示</option>
                             <option value="0">隐藏</option>
                         </select>
                     </td>
-                    <td>标题：</td>
+                    <td>标题</td>
                     <td><input name="title" type="text" class="required"/></td>
-                    <td>有效时间：</td>
+                    <td>有效时间</td>
                     <td>
                         <input dateFmt="yyyy-MM-dd HH:mm:ss" name="startTime" class="date readonly" readonly="readonly" type="text">
                         <span class="limit">-</span>
@@ -28,6 +28,8 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>组</td>
+                    <td><input name="noticeGroup" type="text" class="required"/></td>
                     <td><input type="color" value="#2D9900" id="color"/></td>
                     <td><input type="button" value="改变颜色" id="test"></td>
                     <td><input type="button" value="预览" id="preview"></td>

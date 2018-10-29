@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Created by lucky on 2018/3/28.
@@ -79,19 +80,11 @@ public class PlayerCharacterController extends BaseController {
             player.setServerId(query.getServerId());
             player.setSearchValue(query.getPlayerId().toString());
             playerService.queryPlayer(player);
-            int prev = player.getDiamond();
-
             diamondsLogs.forEach(d -> {
-                d.setPrevValue(prev);
-                if (d.getOpType() == 1) {//增加
-                    d.setNextValue(prev + d.getCount());
-                } else if (d.getOpType() == 2) {//减少
-                    d.setNextValue(prev - d.getCount());
+                if (d.getOpType() == 2) {//减少
                     d.setCount(-d.getCount());
                 }
-                d.setLev(Integer.valueOf(player.getLev()));
-
-                d.setReason(LogConsume.getLog(d.getItemId()).desc);
+                d.setReason(Objects.requireNonNull(LogConsume.getLog(d.getItemId())).desc);
             });
             response.data("list", diamondsLogs);
         }
@@ -110,26 +103,17 @@ public class PlayerCharacterController extends BaseController {
             player.setServerId(query.getServerId());
             player.setSearchValue(query.getPlayerId().toString());
             playerService.queryPlayer(player);
-            int prev = player.getDiamond();
-
             itemLogs.forEach(d -> {
-                d.setPrevValue(prev);
-                if (d.getOp() == 1) {//增加
-                    d.setNextValue(prev + d.getCount());
-                } else if (d.getOp() == 2) {//减少
-                    d.setNextValue(prev - d.getCount());
+                if (d.getOp() == 2) {//减少
                     d.setCount(-d.getCount());
                 }
-                d.setLev(Integer.valueOf(player.getLev()));
-
                 for (GoodsConfig goodsConfig : OperatingToolsController.goodsList) {
                     if (d.getGoodsId() == goodsConfig.id) {
                         d.setGoodsName(goodsConfig.name);
                         break;
                     }
                 }
-
-                d.setReason(LogConsume.getLog(d.getType()).desc);
+                d.setReason(Objects.requireNonNull(LogConsume.getLog(d.getType())).desc);
             });
             response.data("list", itemLogs);
         }

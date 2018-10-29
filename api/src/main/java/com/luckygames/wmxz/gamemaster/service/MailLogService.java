@@ -8,4 +8,6 @@ import com.luckygames.wmxz.gamemaster.service.base.BaseNewService;
 
 public interface MailLogService extends BaseNewService<MailLogEntity> {
     Page<MailLog> searchPage(MailSearchQuery query);
+
+    void sendMail(Long id, String playersIds, MailLog mailLog, String rewards);
 }

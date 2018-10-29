@@ -36,10 +36,6 @@ public class NoticeEntitySqlProvider {
             sql.VALUES("server_id", "#{serverId,jdbcType=BIGINT}");
         }
         
-        if (record.getChannelId() != null) {
-            sql.VALUES("channel_id", "#{channelId,jdbcType=BIGINT}");
-        }
-        
         if (record.getCreateTime() != null) {
             sql.VALUES("create_time", "#{createTime,jdbcType=TIMESTAMP}");
         }
@@ -68,6 +64,14 @@ public class NoticeEntitySqlProvider {
             sql.VALUES("end_time", "#{endTime,jdbcType=VARCHAR}");
         }
         
+        if (record.getNoticeGroup() != null) {
+            sql.VALUES("notice_group", "#{noticeGroup,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getChannel() != null) {
+            sql.VALUES("channel", "#{channel,jdbcType=VARCHAR}");
+        }
+        
         return sql.toString();
     }
 
@@ -79,7 +83,6 @@ public class NoticeEntitySqlProvider {
             sql.SELECT("id");
         }
         sql.SELECT("server_id");
-        sql.SELECT("channel_id");
         sql.SELECT("create_time");
         sql.SELECT("update_time");
         sql.SELECT("title");
@@ -87,6 +90,8 @@ public class NoticeEntitySqlProvider {
         sql.SELECT("`enable`");
         sql.SELECT("start_time");
         sql.SELECT("end_time");
+        sql.SELECT("notice_group");
+        sql.SELECT("channel");
         sql.FROM("notice");
         applyWhere(sql, example, false);
         
@@ -110,10 +115,6 @@ public class NoticeEntitySqlProvider {
         
         if (record.getServerId() != null) {
             sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
-        }
-        
-        if (record.getChannelId() != null) {
-            sql.SET("channel_id = #{record.channelId,jdbcType=BIGINT}");
         }
         
         if (record.getCreateTime() != null) {
@@ -144,6 +145,14 @@ public class NoticeEntitySqlProvider {
             sql.SET("end_time = #{record.endTime,jdbcType=VARCHAR}");
         }
         
+        if (record.getNoticeGroup() != null) {
+            sql.SET("notice_group = #{record.noticeGroup,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getChannel() != null) {
+            sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
+        }
+        
         applyWhere(sql, example, true);
         return sql.toString();
     }
@@ -154,7 +163,6 @@ public class NoticeEntitySqlProvider {
         
         sql.SET("id = #{record.id,jdbcType=BIGINT}");
         sql.SET("server_id = #{record.serverId,jdbcType=BIGINT}");
-        sql.SET("channel_id = #{record.channelId,jdbcType=BIGINT}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         sql.SET("title = #{record.title,jdbcType=VARCHAR}");
@@ -162,6 +170,8 @@ public class NoticeEntitySqlProvider {
         sql.SET("`enable` = #{record.enable,jdbcType=INTEGER}");
         sql.SET("start_time = #{record.startTime,jdbcType=VARCHAR}");
         sql.SET("end_time = #{record.endTime,jdbcType=VARCHAR}");
+        sql.SET("notice_group = #{record.noticeGroup,jdbcType=VARCHAR}");
+        sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         
         NoticeEntityExample example = (NoticeEntityExample) parameter.get("example");
         applyWhere(sql, example, true);
