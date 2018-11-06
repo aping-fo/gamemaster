@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -52,6 +53,7 @@ public class AdminController extends BaseController {
     public static final int QUERY_FAIL = -1;//未查找到数据
 
     public static final String PAY_FAIL = "PAY_FAIL";//支付失败
+    public static final String PAY_FAIL_IOS = "FAILURE";//支付失败
 
     @Autowired
     private ActivationCodeService activationCodeService;
@@ -348,6 +350,64 @@ public class AdminController extends BaseController {
                 .append("&product_price=").append(productPriceStr)
                 .append("&sign=").append(sign)
                 .append("&ext=").append(ext);
-        return HttpRequestUtil.sendPost(serverService.getByServerId(Long.parseLong(arr[5])).getPayAddress(), parameter.toString());
+
+        Server server = serverService.getByServerId(Long.parseLong(arr[5]));
+        logger.info("安卓支付分发，分发服务器" + server.getServerName());
+
+        return HttpRequestUtil.sendPost(server.getPayAddress(), parameter.toString());
+    }
+
+    //支付分发
+    @RequestMapping(value = "/rechargeIOS", method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public String rechargeIOS(HttpServletRequest req) {
+        String appId = req.getParameter("app_id"); //游戏ID
+        String cpOrderId = req.getParameter("cp_order_id"); //游戏传入的外部订单号。服务器会根据这个订单号生成对应的平台订单号，请保证每笔订单传入的订单号的唯一性
+        String memId = req.getParameter("mem_id"); //玩家ID
+        String orderId = req.getParameter("order_id"); //平台订单号
+        String orderStatus = req.getParameter("order_status"); //平台订单状态,2为平台订单支付成功，非2是支付异常
+        String payTime = req.getParameter("pay_time"); //时间戳
+        String productId = req.getParameter("product_id"); //商品ID
+        String productPrice = req.getParameter("product_price"); //商品价格
+        String sign = req.getParameter("sign"); //签名
+        String ext = req.getParameter("ext"); //透传信息
+        String productName;
+        String[] arr;
+
+        try {
+            productName = URLEncoder.encode(req.getParameter("product_name"), "UTF-8"); //商品名
+            arr = ext.split("_");
+        } catch (Exception e) {
+            logger.error("透传参数解析错误，透传参数=" + ext);
+            return PAY_FAIL_IOS;
+        }
+
+        if (arr.length < 6) {
+            logger.error("透传参数错误，透传参数=" + ext);
+            return PAY_FAIL_IOS;
+        }
+
+        StringBuffer parameter = new StringBuffer();
+        parameter.append("app_id=").append(appId)
+                .append("&cp_order_id=").append(cpOrderId)
+                .append("&mem_id=").append(memId)
+                .append("&order_id=").append(orderId)
+                .append("&order_status=").append(orderStatus)
+                .append("&pay_time=").append(payTime)
+                .append("&product_id=").append(productId)
+                .append("&product_name=").append(productName)
+                .append("&product_price=").append(productPrice)
+                .append("&sign=").append(sign)
+                .append("&ext=").append(ext);
+
+        Server server = serverService.getByServerId(Long.parseLong(arr[5]));
+        if (server == null) {
+            logger.error("支付分发服务器不存在，服务器ID=" + Long.parseLong(arr[5]));
+            return PAY_FAIL_IOS;
+        }
+
+        logger.error("IOS支付分发，分发服务器" + server.getServerName());
+
+        return HttpRequestUtil.sendPost(server.getPayAddress() + "IOS", parameter.toString());
     }
 }
