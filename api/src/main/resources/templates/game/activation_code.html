@@ -50,12 +50,13 @@
             <td th:text="${row.maxTermValidity}"></td>
             <td th:text="${#dates.format(row.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
             <td>
-                <a class="button" th:href="@{operatingTools/activationCodeDetails(remarks=${row.cardType})}" target="navTab">
+                <a class="button" th:href="@{operatingTools/activationCodeDetails(remarks=${row.id+'_'+row.cardType},operation='check')}" target="navTab">
                     <span>查看详情</span>
                 </a>
                 <span class="limit"> | </span>
                 <a class="button" onclick="downloadFile(this)"><span>导出激活码</span></a>
                 <input type="hidden" id="remarks" th:value="${row.cardType}"/>
+                <input type="hidden" id="activationCodeId" th:value="${row.id}"/>
             </td>
         </tr>
         <tr th:if="${list.size()==0}">
@@ -67,7 +68,8 @@
 </div>
 <script type="text/javascript">
     function downloadFile(flag) {
-        var filename=$(flag).next().val();
-        $(flag).attr("href","operatingTools/activationCodeExport?remarks="+filename);
+        var filename = $(flag).next().val();
+        var id = $(flag).next().next().val();
+        $(flag).attr("href", "operatingTools/activationCodeExport?remarks=" + id + "_" + filename);
     }
 </script>

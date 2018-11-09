@@ -3,11 +3,8 @@ package com.luckygames.wmxz.gamemaster.controller;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.data.ChargeConfig;
 import com.luckygames.wmxz.gamemaster.data.GoodsConfig;
-import com.luckygames.wmxz.gamemaster.model.entity.ActivationCode;
 import com.luckygames.wmxz.gamemaster.model.view.request.ServerSearchQuery;
-import com.luckygames.wmxz.gamemaster.service.ActivationCodeService;
-import com.luckygames.wmxz.gamemaster.service.NoticeService;
-import com.luckygames.wmxz.gamemaster.service.ServerService;
+import com.luckygames.wmxz.gamemaster.service.*;
 import com.luckygames.wmxz.gamemaster.utils.XmlUtil2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -30,7 +27,9 @@ public class InitController extends BaseController implements ApplicationRunner 
     @Autowired
     private NoticeService noticeService;
     @Autowired
-    private ActivationCodeService activationCodeService;
+    private GiftpackageSyncService giftpackageSyncService;
+    @Autowired
+    private RechargeService rechargeService;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -47,15 +46,13 @@ public class InitController extends BaseController implements ApplicationRunner 
         AdminController.noticeList = noticeService.searchLast();
 
         //初始化礼包序号
-        ActivationCode activationCode = activationCodeService.searchLast();
-        int value = 0;
-        if (activationCode != null) {
-            value = Integer.valueOf(activationCode.getName().substring(5, 8));
-        }
-        OperatingToolsController.Activation_Code_batch.set(value);
+        OperatingToolsController.Activation_Code_batch.set(giftpackageSyncService.searchLast());
 
         //初始化充值表
         initChargeConfig();
+
+        //初始化返利表
+        AdminController.rechargeList=rechargeService.searchList();
 
         System.out.println("加载完毕...");
     }

@@ -2,6 +2,7 @@ package com.luckygames.wmxz.gamemaster.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.luckygames.wmxz.gamemaster.config.ThreadPoolConfig;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.dao.AccountLogEntity;
 import com.luckygames.wmxz.gamemaster.model.entity.*;
@@ -37,6 +38,7 @@ import java.util.stream.Collectors;
 public class AdminController extends BaseController {
     public static List<Server> serverList = Collections.synchronizedList(new ArrayList<>());
     public static List<Notice> noticeList = Collections.synchronizedList(new ArrayList<>());
+    public static List<Recharge> rechargeList = Collections.synchronizedList(new ArrayList<>());
     private static final Integer GAMEID = 2008;//密钥id
     private static final String GAMEKEY = "00c4392347b1865bd3fd6f0af5b8b26b";//密钥
     public static final String RETURN_SUCCESS = "success";// 成功
@@ -67,6 +69,8 @@ public class AdminController extends BaseController {
     private ProhibitionService prohibitionService;
     @Autowired
     private ServerService serverService;
+    @Autowired
+    private RechargeService rechargeService;
 
     //获取服务器列表
     @RequestMapping(value = "/serverList", method = {RequestMethod.GET, RequestMethod.POST})
@@ -409,5 +413,20 @@ public class AdminController extends BaseController {
         logger.error("IOS支付分发，分发服务器" + server.getServerName());
 
         return HttpRequestUtil.sendPost(server.getPayAddress() + "IOS", parameter.toString());
+    }
+
+    //查询充值返利是否已经领取
+    @RequestMapping(value = "/checkReceiveRebate", method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public boolean checkReceiveRebate(Recharge recharge) {
+        if (rechargeList.contains(recharge)) {
+            return true;
+        } else {
+            rechargeList.add(recharge);
+            ThreadPoolConfig.getExecutorService().execute(() -> {
+                rechargeService.save(recharge);
+            });
+            return false;
+        }
     }
 }

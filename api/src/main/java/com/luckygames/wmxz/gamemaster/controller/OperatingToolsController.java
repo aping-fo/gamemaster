@@ -92,12 +92,13 @@ public class OperatingToolsController extends BaseController {
 
     //邮件等级群发
     @RequestMapping(value = "/mailAddLevel", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response mailAddLevel() {
-        List<Server> serverList = serverService.searchList();
+    public Response mailAddLevel(ServerSearchQuery query) {
+        List<Server> serverList = serverService.searchPage(query);
         return new Response("game/mailAddLevel")
                 .data("mailType", MailType.SERVER)
                 .data("serverList", serverList)
-                .data("goodsList", goodsList);
+                .data("goodsList", goodsList)
+                .request(query);
     }
 
     //发送邮件
@@ -189,7 +190,13 @@ public class OperatingToolsController extends BaseController {
         }
 
         Response response = new Response("game/activation_code_details");
-        Page<ActivationCode> activationCodePage = activationCodeService.searchPage(query);
+        Page<ActivationCode> activationCodePage;
+
+        if (query.getOperation().equals("check")) {
+            activationCodePage = activationCodeService.exportPage(query);
+        } else {
+            activationCodePage = activationCodeService.searchPage(query);
+        }
 
         //物品名称化
         activationCodePage.forEach(ac -> {
@@ -271,8 +278,11 @@ public class OperatingToolsController extends BaseController {
             giftpackageSync.setServerId(activationCode.getServerId());
             giftpackageSyncService.save(giftpackageSync);
 
+            String ramarks = batch + "_" + activationCode.getRemarks();
+
             for (int i = 0; i < count; i++) {
                 activationCode.setName(RandomString.getSerialNo(5) + batch);
+                activationCode.setRemarks(ramarks);
                 activationCodeService.save(activationCode);
                 activationCode.setId(null);
             }

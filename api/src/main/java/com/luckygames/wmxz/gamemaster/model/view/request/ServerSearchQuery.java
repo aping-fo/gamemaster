@@ -7,6 +7,15 @@ public class ServerSearchQuery extends CommonSearchQuery {
     private String serverName;
     private String keyword;
     private Integer open;
+    private String serverGroup;
+
+    public String getServerGroup() {
+        return serverGroup;
+    }
+
+    public void setServerGroup(String serverGroup) {
+        this.serverGroup = serverGroup;
+    }
 
     public Integer getOpen() {
         return open;

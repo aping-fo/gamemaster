@@ -22,4 +22,13 @@ public class ActivationCodeSqlProvider {
         sql.append(" order by ac.create_time desc");
         return sql.toString();
     }
+
+    public String exportPage(ActivationCodeSearchQuery query) {
+        StringBuilder sql = new StringBuilder("SELECT ac.*,s.server_name,se.server_name useServerName FROM activation_code ac left join server s on ac.server_id=s.server_id left join server se on ac.use_server_id=se.server_id where 1=1 ");
+        if (StringUtils.isNotBlank(query.getRemarks())) {
+            sql.append(" and ac.remarks = #{remarks}");
+        }
+        sql.append(" order by ac.create_time desc");
+        return sql.toString();
+    }
 }

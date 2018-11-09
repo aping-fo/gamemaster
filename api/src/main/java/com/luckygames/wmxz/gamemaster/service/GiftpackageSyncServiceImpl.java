@@ -67,4 +67,9 @@ public class GiftpackageSyncServiceImpl extends BaseNewServiceImpl<GiftpackageSy
         return GiftpackageSyncMapper.selectById(id);
     }
 
+    @Override
+    public int searchLast() {
+        return GiftpackageSyncMapper.searchLast();
+    }
+
 }

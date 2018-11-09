@@ -10,6 +10,20 @@
             </thead>
             <tbody>
             <tr>
+                <td>
+                    <label>区服类型</label>
+                </td>
+                <td>
+                    <select name="serverGroup" id="serverType">
+                        <option value="">全部</option>
+                        <option value="ingcle" th:selected="${request.serverGroup=='ingcle'}">硬核专服</option>
+                        <option value="ingcle_mixture" th:selected="${request.serverGroup=='ingcle_mixture'}">大混服专服</option>
+                        <option value="ingcle_iOS" th:selected="${request.serverGroup=='ingcle_iOS'}">IOS专服</option>
+                        <option value="other" th:selected="${request.serverGroup=='other'}">其他</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
                 <td><input type="checkbox" id="allSelect"/>全选</td>
                 <td>
                     <input class="required" th:each="row:${serverList}" type="checkbox" name="ids" th:text="${row.serverName}" th:value="${row.serverId}"/>
@@ -45,7 +59,11 @@
             </tr>
             <tr>
                 <td>数量</td>
-                <td><input type="number" id="role_count" min="1"/><input type="button" value="添加" id="addButton"/></td>
+                <td>
+                    <input type="number" id="lev_count" min="1"/>
+                    <input type="button" value="添加" id="addButton"/>
+                    <input type="button" value="删除最后一个" id="deleteButton"/>
+                </td>
             </tr>
             <tr>
                 <td>奖励</td>
@@ -86,5 +104,29 @@
         }else{
             alert("请选择物品数量");
         }
+    });
+    $('#deleteButton').click(function () {
+        var reward = $('#reward').val();
+        if (reward != '') {
+            var strings = reward.split(";");
+            var rewardStr="";
+            for (var i = 0; i < strings.length - 2; i++) {
+                rewardStr += strings[i] + ";"
+            }
+            $('#reward').val(rewardStr);
+        } else {
+            alert("未添加奖励");
+        }
+    });
+    $('#serverType').change(function () {
+        $.post("startup/server_list", "serverGroup=" + $(this).val(), function (data) {
+            var serverList = $('#serverList');
+            serverList.empty();
+            for (var i = 0, l = data.length; i < l; i++) {
+                var serverName = data[i].serverName;
+                var serverId = data[i].serverId;
+                serverList.append("<input class='required' type='checkbox' name='ids' value='" + serverId + "'/>"+serverName)
+            }
+        });
     });
 </script>

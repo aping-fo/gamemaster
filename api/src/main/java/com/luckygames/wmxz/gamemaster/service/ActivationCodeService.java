@@ -11,6 +11,8 @@ import java.util.List;
 public interface ActivationCodeService extends BaseNewService<ActivationCodeEntity> {
     Page<ActivationCode> searchPage(ActivationCodeSearchQuery query);
 
+    Page<ActivationCode> exportPage(ActivationCodeSearchQuery query);
+
     ActivationCode searchById(Long id);
 
     Page<ActivationCode> add(ActivationCode activationCode);

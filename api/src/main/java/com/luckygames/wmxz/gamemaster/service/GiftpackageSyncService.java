@@ -14,4 +14,6 @@ public interface GiftpackageSyncService extends BaseNewService<GiftpackageSyncEn
     void delete(int id);
 
     GiftpackageSync searchById(Integer id);
+
+    int searchLast();
 }

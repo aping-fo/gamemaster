@@ -13,6 +13,13 @@ public class ServerSqlProvider extends ServerEntitySqlProvider {
         if (StringUtils.isNotBlank(query.getServerName())) {
             sql.append(" and server_name like \"%\"#{serverName}\"%\" ");
         }
+        if (StringUtils.isNotBlank(query.getServerGroup())) {
+            if(!query.getServerGroup().equals("other")){
+                sql.append(" and server_group = #{serverGroup}");
+            }else{
+                sql.append(" and server_group != 'ingcle' and server_group != 'ingcle_mixture' and server_group != 'ingcle_iOS'");
+            }
+        }
         sql.append(" order by update_time desc");
         return sql.toString();
     }

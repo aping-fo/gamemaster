@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -20,9 +21,17 @@ public class StartupController extends BaseController {
 
     //查询服务器列表
     @RequestMapping(value = "/server_info", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response getServerList(ServerSearchQuery query) {
+    public Response getServerInfo(ServerSearchQuery query) {
         List<Server> serverList = serverService.searchPage(query);
         return new Response("startup/server_info").request(query).data("serverList", serverList);
+    }
+
+    //查询服务器列表
+    @RequestMapping(value = "/server_list", method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public List<Server> getServerList(ServerSearchQuery query) {
+        List<Server> serverList = serverService.searchPage(query);
+        return serverList;
     }
 
     //新增服务器

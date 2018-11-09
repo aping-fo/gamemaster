@@ -16,6 +16,9 @@ public interface ActivationCodeMapper extends ActivationCodeEntityMapper<Activat
     @SelectProvider(type = ActivationCodeSqlProvider.class, method = "searchPage")
     Page<ActivationCode> searchPage(ActivationCodeSearchQuery query);
 
+    @SelectProvider(type = ActivationCodeSqlProvider.class, method = "exportPage")
+    Page<ActivationCode> exportPage(ActivationCodeSearchQuery query);
+
     @SelectProvider(type = ActivationCodeSqlProvider.class, method = "add")
     Page<ActivationCode> add(ActivationCode activationCode);
 

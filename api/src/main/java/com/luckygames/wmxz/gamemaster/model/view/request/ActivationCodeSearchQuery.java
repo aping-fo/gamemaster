@@ -5,6 +5,15 @@ public class ActivationCodeSearchQuery extends CommonSearchQuery {
     private String name;
     private Long id;
     private String remarks;
+    private String operation;
+
+    public String getOperation() {
+        return operation;
+    }
+
+    public void setOperation(String operation) {
+        this.operation = operation;
+    }
 
     public String getRemarks() {
         return remarks;

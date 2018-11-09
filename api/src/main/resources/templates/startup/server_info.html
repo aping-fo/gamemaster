@@ -8,14 +8,22 @@
             <table class="searchContent">
                 <tr>
                     <td>
-                        区服ID：
-                        <input name="serverId" type="text" value="" th:value="${request.serverId}" placeholder="输入区服ID"
-                               size="15">
+                        <label>区服ID</label>
+                        <input name="serverId" type="text" value="" th:value="${request.serverId}" placeholder="输入区服ID" size="15">
                     </td>
                     <td>
-                        区服名称：
-                        <input name="serverName" type="text" value="" th:value="${request.serverName}" placeholder="输入区服名"
-                               size="15">
+                        <label>区服名称</label>
+                        <input name="serverName" type="text" value="" th:value="${request.serverName}" placeholder="输入区服名" size="15">
+                    </td>
+                    <td>
+                        <label>区服类型</label>
+                        <select name="serverGroup">
+                            <option value="">全部</option>
+                            <option value="ingcle" th:selected="${request.serverGroup=='ingcle'}">硬核专服</option>
+                            <option value="ingcle_mixture" th:selected="${request.serverGroup=='ingcle_mixture'}">大混服专服</option>
+                            <option value="ingcle_iOS" th:selected="${request.serverGroup=='ingcle_iOS'}">IOS专服</option>
+                            <option value="other" th:selected="${request.serverGroup=='other'}">其他</option>
+                        </select>
                     </td>
                     <td>
                         <div class="buttonActive">
