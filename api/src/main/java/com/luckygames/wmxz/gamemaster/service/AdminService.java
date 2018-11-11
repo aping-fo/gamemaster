@@ -2,6 +2,7 @@ package com.luckygames.wmxz.gamemaster.service;
 
 import com.luckygames.wmxz.gamemaster.model.view.base.GMQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.ActivationCodeQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.MailLogQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.RecoveryGoodsQuery;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -38,7 +39,7 @@ public interface AdminService {
      * 邮件
      *
      *
-     * @param query {@link com.luckygames.wmxz.gamemaster.model.view.request.MailQuery}
+     * @param query {@link MailLogQuery}
      * @return
      */
     public String sendMail(GMQuery query);

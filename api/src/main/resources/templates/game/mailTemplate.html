@@ -1,0 +1,93 @@
+<div class="pageContent" xmlns:th="http://www.w3.org/1999/xhtml">
+    <form method="post" onsubmit="return closeNavTab(this);" action="operatingTools/mailTemplate" class="pageForm required-validate">
+        <input type="hidden" name="mailType" value="4"/>
+        <input type="hidden" name="id" th:value="${mailLog.id}"/>
+        <input type="hidden" name="serverId" th:value="0"/>
+        <table width="98%" style="height:100%;border-collapse:separate; border-spacing:5px;">
+            <thead>
+            <tr>
+                <th width="20%"></th>
+                <th width="80%"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>邮件标题</td>
+                <td><input type="text" title="标题" th:value="${mailLog.title}" name="title" class="required textInput"/></td>
+            </tr>
+            <tr>
+                <td>邮件内容</td>
+                <td>
+                    <textarea name="content" th:text="${mailLog.content}" class="required textArea" cols="30" rows="4" style="resize: none"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>物品</td>
+                <td>
+                    <select id="template_goods">
+                        <option th:each="goods:${goodsList}" th:text="${goods.name}" th:value="${goods.id}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>数量</td>
+                <td>
+                    <input type="number" id="template_count" min="1"/>
+                    <input type="button" value="添加" id="addButton"/>
+                    <input type="button" value="删除最后一个" id="deleteButton"/>
+                </td>
+            </tr>
+            <tr>
+                <td>奖励</td>
+                <td>
+                    <textarea name="rewards" th:text="${mailLog.rewards}" class="textArea readonly" cols="30" rows="4" style="resize: none;margin-top: 10px" id="reward" readonly="readonly"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button type="submit">保存/更新模板</button>
+                    <button class="close">取消</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#template_goods').searchableSelect();
+    });
+    $('#allSelect').click(function () {
+        var ids = $('input[name=ids]');
+        for (var i = 0; i < ids.length; i++) {
+            if ($(this).prop("checked")) {
+                ids.eq(i).prop("checked", true);
+            } else {
+                ids.eq(i).prop("checked", false);
+            }
+        }
+    });
+    $('#addButton').click(function () {
+        var goods = $('#template_goods').val();
+        var count = $('#template_count').val();
+        if (count > 0) {
+            $('#reward').val($('#reward').val() + goods + ":" + count + ";\n");
+        } else {
+            alert("请选择物品数量");
+        }
+    });
+    $('#deleteButton').click(function () {
+        var reward = $('#reward').val();
+        if (reward != '') {
+            var strings = reward.split(";");
+            var rewardStr = "";
+            for (var i = 0; i < strings.length - 2; i++) {
+                rewardStr += strings[i] + ";"
+            }
+            $('#reward').val(rewardStr);
+        } else {
+            alert("未添加奖励");
+        }
+    });
+</script>

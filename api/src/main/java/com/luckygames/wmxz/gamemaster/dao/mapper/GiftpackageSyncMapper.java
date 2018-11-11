@@ -18,6 +18,6 @@ public interface GiftpackageSyncMapper extends GiftpackageSyncEntityMapper<Giftp
     @SelectProvider(type = GiftpackageSyncSqlProvider.class, method = "selectById")
     GiftpackageSync selectById(Integer id);
 
-    @Select("SELECT id from giftpackage_sync order by update_time desc limit 1")
+    @Select("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA. TABLES WHERE TABLE_NAME = 'giftpackage_sync'")
     int searchLast();
 }

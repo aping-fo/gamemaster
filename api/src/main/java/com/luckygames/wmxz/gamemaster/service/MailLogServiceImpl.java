@@ -7,8 +7,8 @@ import com.luckygames.wmxz.gamemaster.dao.MailLogEntity;
 import com.luckygames.wmxz.gamemaster.dao.mapper.MailLogMapper;
 import com.luckygames.wmxz.gamemaster.model.entity.MailLog;
 import com.luckygames.wmxz.gamemaster.model.entity.Server;
-import com.luckygames.wmxz.gamemaster.model.view.request.MailQuery;
-import com.luckygames.wmxz.gamemaster.model.view.request.MailSearchQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.MailLogSearchQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.MailLogQuery;
 import com.luckygames.wmxz.gamemaster.service.base.BaseNewServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -36,7 +36,7 @@ public class MailLogServiceImpl extends BaseNewServiceImpl<MailLogEntity> implem
     }
 
     @Override
-    public Page<MailLog> searchPage(MailSearchQuery query) {
+    public Page<MailLog> searchPage(MailLogSearchQuery query) {
         return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> mailLogMapper.searchPage(query));
     }
 
@@ -46,7 +46,7 @@ public class MailLogServiceImpl extends BaseNewServiceImpl<MailLogEntity> implem
         if (environment.getProperty("spring.profiles.active").equals("dev") || !server.getIp().startsWith("192.168")) {
             ThreadPoolConfig.getExecutorService().execute(() -> {
                 try {
-                    String result = adminService.sendMail(new MailQuery(
+                    String result = adminService.sendMail(new MailLogQuery(
                             id,
                             mailLog.getTitle(),
                             mailLog.getContent(),
@@ -70,5 +70,10 @@ public class MailLogServiceImpl extends BaseNewServiceImpl<MailLogEntity> implem
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public MailLog searchLast() {
+        return mailLogMapper.searchLast();
     }
 }

@@ -4,8 +4,8 @@
         <table width="98%" style="height:100%;border-collapse:separate; border-spacing:5px;">
             <thead>
             <tr>
-                <th width="20%"></th>
-                <th width="80%"></th>
+                <th width="10%"></th>
+                <th width="90%"></th>
             </tr>
             </thead>
             <tbody>
@@ -26,7 +26,9 @@
             <tr>
                 <td><input type="checkbox" id="allSelect"/>全选</td>
                 <td>
-                    <input class="required" th:each="row:${serverList}" type="checkbox" name="ids" th:text="${row.serverName}" th:value="${row.serverId}"/>
+                    <ul id="serverList">
+                        <li th:each="row:${serverList}" style="width:200px;display: inline-block"><input class="required" type="checkbox" name="ids" th:text="${row.serverName}" th:value="${row.serverId}"/></li>
+                    </ul>
                 </td>
             </tr>
             <tr>
@@ -60,7 +62,7 @@
             <tr>
                 <td>数量</td>
                 <td>
-                    <input type="number" id="lev_count" min="1"/>
+                    <input type="number" id="role_count" min="1"/>
                     <input type="button" value="添加" id="addButton"/>
                     <input type="button" value="删除最后一个" id="deleteButton"/>
                 </td>
@@ -78,30 +80,49 @@
                     <button class="close">取消</button>
                 </td>
             </tr>
+            <tr th:if="${mailLog!=null}">
+                <td colspan="2">
+                    <span style="margin-right:10px;width: 100px;display:inline-block">标题</span>
+                    <span style="margin-right:10px;width: 400px;display:inline-block">内容</span>
+                    <span style="margin-right:10px;width: 300px;display:inline-block">附件</span>
+                    <span>操作</span>
+                </td>
+            </tr>
+            <tr th:if="${mailLog!=null}">
+                <td colspan="2" id="copyTd">
+                    <span th:text="${mailLog.title}" style="margin-right:10px;width: 100px;display:inline-block"></span>
+                    <span th:text="${mailLog.content}" style="margin-right:10px;width: 400px;display:inline-block"></span>
+                    <span th:text="${mailLog.rewards}" style="margin-right:10px;width: 300px;display:inline-block"></span>
+                    <input type="button" value="粘贴内容" id="copyContent"/>
+                </td>
+            </tr>
+            <tr th:if="${mailLog==null}">
+                <td colspan="2" style="text-align: center">暂无模板</td>
+            </tr>
             </tbody>
         </table>
     </form>
 </div>
 <script type="text/javascript">
     $(function () {
-        $('#mail_goods').searchableSelect();
+        $('#role_goods').searchableSelect();
     });
     $('#allSelect').click(function () {
         var ids = $('input[name=ids]');
-        for(var i=0;i<ids.length;i++){
-            if($(this).prop("checked")){
-                ids.eq(i).prop("checked",true);
-            }else{
-                ids.eq(i).prop("checked",false);
+        for (var i = 0; i < ids.length; i++) {
+            if ($(this).prop("checked")) {
+                ids.eq(i).prop("checked", true);
+            } else {
+                ids.eq(i).prop("checked", false);
             }
         }
     });
     $('#addButton').click(function () {
         var goods = $('#role_goods').val();
         var count = $('#role_count').val();
-        if(count>0){
+        if (count > 0) {
             $('#reward').val($('#reward').val() + goods + ":" + count + ";\n");
-        }else{
+        } else {
             alert("请选择物品数量");
         }
     });
@@ -109,7 +130,7 @@
         var reward = $('#reward').val();
         if (reward != '') {
             var strings = reward.split(";");
-            var rewardStr="";
+            var rewardStr = "";
             for (var i = 0; i < strings.length - 2; i++) {
                 rewardStr += strings[i] + ";"
             }
@@ -125,8 +146,14 @@
             for (var i = 0, l = data.length; i < l; i++) {
                 var serverName = data[i].serverName;
                 var serverId = data[i].serverId;
-                serverList.append("<input class='required' type='checkbox' name='ids' value='" + serverId + "'/>"+serverName)
+                serverList.append("<li style='width:200px;display: inline-block'><input class='required' type='checkbox' name='ids' value='" + serverId + "'/>" + serverName + "</li>")
             }
         });
+    });
+    $('#copyContent').click(function () {
+        var tds = $('#copyTd span');
+        $('form input[name="title"]').val(tds.eq(0).text());
+        $('form textarea[name="content"]').val(tds.eq(1).text());
+        $('form textarea[name="rewards"]').val(tds.eq(2).text() + "\n");
     });
 </script>

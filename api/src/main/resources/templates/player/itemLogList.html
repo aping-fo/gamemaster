@@ -8,6 +8,7 @@
                     <li class="selected"><a href="player/playerQuery" class="j-ajax" target="navTab"><span>角色查询</span></a></li>
                     <li><a href="player/diamondsLogList" class="j-ajax" target="navTab"><span>钻石日志</span></a></li>
                     <li><a href="player/itemLogList" class="j-ajax" target="navTab"><span>物品日志</span></a></li>
+                    <li><a href="player/mailLogList" class="j-ajax" target="navTab"><span>邮件日志</span></a></li>
                 </ul>
             </div>
         </div>
@@ -85,6 +86,7 @@
         href.eq(0).attr("href", "player/playerQuery?playerId=" + playerId + "&serverId=" + serverId)
         href.eq(1).attr("href", "player/diamondsLogList?playerId=" + playerId + "&serverId=" + serverId)
         href.eq(2).attr("href", "player/itemLogList?playerId=" + playerId + "&serverId=" + serverId)
+        href.eq(3).attr("href", "player/mailLogList?playerId=" + playerId + "&serverId=" + serverId)
     }
     changeHref()
 </script>

@@ -1,5 +1,5 @@
 <div class="pageContent">
-    <div class="tabs" currentIndex="1">
+    <div class="tabs" currentIndex="3">
         <div class="tabsHeader">
             <div class="tabsHeaderContent">
                 <ul id="player">
@@ -16,7 +16,7 @@
 </div>
 <div th:if="${player.serverId!=null}">
     <div class="pageHeader">
-        <form id="pagerForm" onsubmit="return navTabSearch(this);" action="player/diamondsLogList" method="post">
+        <form id="pagerForm" onsubmit="return navTabSearch(this);" action="player/mailLogList" method="post">
             <input type="hidden" name="orderField" th:value="${request.orderField}"/>
             <input type="hidden" name="orderDirection" th:value="${request.orderDirection}"/>
             <input type="hidden" name="pageNum" th:value="${Pager.pageNum}"/>
@@ -46,24 +46,22 @@
         <table class="table" width="100%" layoutH="137">
             <thead>
             <tr>
-                <th width="80">服务器</th>
-                <th width="80">等级</th>
-                <th width="80" align="right">变化前</th>
-                <th width="80" align="right">变化后</th>
-                <th width="80" align="right">变化量</th>
-                <th width="80" align="right">原因</th>
+                <th width="80">发送人</th>
+                <th width="80">标题</th>
+                <th width="80">内容</th>
+                <th width="80">奖励</th>
+                <th width="80">原因</th>
                 <th width="80" align="right">时间</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="row,iterStat:${list}">
-                <td th:text="${row.serverName}"></td>
-                <td th:text="${row.lev}"></td>
-                <td th:text="${row.prev}"></td>
-                <td th:text="${row.next}"></td>
-                <td th:text="${row.count}"></td>
+                <td th:text="${row.senderName}"></td>
+                <td th:text="${row.title}"></td>
+                <td th:text="${row.content}"></td>
+                <td th:text="${row.rewards}"></td>
                 <td th:text="${row.reason}"></td>
-                <td th:text="${#dates.format(row.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                <td th:text="${#dates.format(row.sendTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
             </tr>
             <tr th:if="${list.size()==0}">
                 <td style="text-align: center">暂无数据</td>

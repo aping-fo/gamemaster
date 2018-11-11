@@ -12,4 +12,8 @@ public interface BroadcastService extends BaseNewService<BroadcastEntity> {
     void deleteById(Long id);
 
     Broadcast searchById(Long id);
+
+    Broadcast searchTemplate();
+
+    void sendBroadcast(Broadcast broadcast);
 }

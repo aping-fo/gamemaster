@@ -70,6 +70,14 @@
     function downloadFile(flag) {
         var filename = $(flag).next().val();
         var id = $(flag).next().next().val();
-        $(flag).attr("href", "operatingTools/activationCodeExport?remarks=" + id + "_" + filename);
+
+        var batch = id;
+        if (id < 10) {
+            batch = "00" + id;
+        } else if (id < 100) {
+            batch = "0" + id;
+        }
+
+        $(flag).attr("href", "operatingTools/activationCodeExport?remarks=" + batch + "_" + filename);
     }
 </script>

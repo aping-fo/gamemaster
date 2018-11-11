@@ -1,16 +1,12 @@
 package com.luckygames.wmxz.gamemaster.dao;
 
-import com.luckygames.wmxz.gamemaster.model.view.request.MailSearchQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.MailLogSearchQuery;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class MailLogSqlProvider {
-    public String queryMailLog(MailSearchQuery query) {
-        StringBuilder sql = new StringBuilder(" select ml.* ")
-                .append(" ,s.server_name ")
-                .append(" from mail_log ml ")
-                .append(" left join server s on ml.server_id = s.server_id ")
-                .append(" where 1=1 ");
+    public String queryMailLog(MailLogSearchQuery query) {
+        StringBuilder sql = new StringBuilder(" select ml.*,s.server_name from mail_log ml left join server s on ml.server_id = s.server_id where 1=1 ");
 
         if (CollectionUtils.isNotEmpty(query.getServerIds())) {
             String ids = StringUtils.join(query.getServerIds(), ",");

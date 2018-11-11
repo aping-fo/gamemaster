@@ -17,4 +17,7 @@ public interface BroadcastMapper extends BroadcastEntityMapper<BroadcastEntity> 
 
     @Select("select * from broadcast where id=#{id}")
     Broadcast searchById(@Param("id") Long id);
+
+    @Select("select * from broadcast where broadcast_type = 3 order by update_time limit 1")
+    Broadcast searchTemplate();
 }

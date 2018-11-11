@@ -1,42 +1,12 @@
-<div class="pageHeader">
-    <form id="pagerForm" onsubmit="return ajaxNavTab(this);" action="game/broadcast" method="post" onreset="$(this).find('select.combox').comboxReset()">
-        <div th:fragment="searchBar">
-            <input type="hidden" name="orderField" th:value="${request.orderField}"/>
-            <input type="hidden" name="orderDirection" th:value="${request.orderDirection}"/>
-            <input type="hidden" name="pageNum" th:value="${Pager.pageNum}"/>
-            <input type="hidden" name="pageSize" th:value="${Pager.pageSize}"/>
-            <div class="searchBar">
-                <table class="searchContent">
-                    <tr>
-                        <td>服务器:</td>
-                        <td>
-                            <select name="serverId">
-                                <option value="">全部</option>
-                                <option th:each="row,iterStat:${serverList}" th:text="${row.serverName}" th:value="${row.serverId}"></option>
-                            </select>
-                        </td>
-                        <td>内容:</td>
-                        <td><input type="text" name="content" class="required"/></td>
-                        <td>滚动次数:</td>
-                        <td><input type="number" name="loopTimes" class="required"/></td>
-                        <td>滚动频率:</td>
-                        <td>间隔<input type="number" name="gapSecond" class="required"/>秒一次</td>
-                        <td>操作理由:</td>
-                        <td><input type="text" name="reason" class="required"/></td>
-                        <td>
-                            <div class="buttonActive">
-                                <div class="buttonContent">
-                                    <button type="submit">创建</button>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </form>
-</div>
 <div class="pageContent">
+    <div class="panelBar" style="height:30px">
+        <ul class="toolBar">
+            <li>
+                <a title="创建跑马灯" class="edit" href="operatingTools/broadcastAdd" target="dialog" width="1000" mask="true"><span style="font-size: 20px">创建跑马灯</span></a>
+                <a title="内容模板" class="edit" href="operatingTools/broadcastTemplate" target="dialog" width="500" mask="true"><span style="font-size: 20px">内容模板</span></a>
+            </li>
+        </ul>
+    </div>
     <table class="table" layoutH="137" width="100%">
         <thead>
         <tr>
@@ -49,13 +19,13 @@
         </thead>
         <tbody>
         <tr th:if="${list.size()!=0}" th:each="row,iterStat:${list}">
-            <td th:text="${row.serverName}"></td>
+            <td th:if="${row.serverId!=0}" th:text="${row.serverName}"></td>
+            <td th:if="${row.serverId==0}" th:text="模板"></td>
             <td th:text="${row.reason}"></td>
             <td th:text="${row.content}"></td>
             <td th:text="${#dates.format(row.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
             <td>
-                <a title="删除" class="button" th:href="@{game/broadcast(id=${row.id})}" target="navTab"><span>删除</span></a>
-                <!--<a title="修改" class="button" th:href="@{game/dialog_newbroadcast(id=${row.id})}"  target="dialog" width="480" height="500" rel="dialog_updatebroadcast" mask="true"><span>修改</span></a>-->
+                <a title="删除" class="button" th:href="@{operatingTools/broadcastDelete(id=${row.id})}" target="navTab"><span>删除</span></a>
             </td>
         </tr>
         </tr>

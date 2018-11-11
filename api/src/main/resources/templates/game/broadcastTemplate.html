@@ -1,0 +1,40 @@
+<div class="pageHeader">
+    <form id="pagerForm" onsubmit="return closeNavTab(this);" action="operatingTools/broadcastTemplate" method="post" onreset="$(this).find('select.combox').comboxReset()">
+        <input type="hidden" name="id" th:value="${broadcast.id}"/>
+        <input type="hidden" name="broadcastType" th:value="3"/>
+        <input type="hidden" name="serverId" th:value="0"/>
+        <table width="98%" style="height:100%;border-collapse:separate; border-spacing:5px;">
+            <thead>
+            <tr>
+                <th width="20%"></th>
+                <th width="80%"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>内容</td>
+                <td><input type="text" name="content" class="required" th:value="${broadcast.content}"/></td>
+            </tr>
+            <tr>
+                <td>滚动次数</td>
+                <td><input type="number" name="loopTimes" class="required" th:value="${broadcast.loopTimes}"/></td>
+            </tr>
+            <tr>
+                <td>滚动频率</td>
+                <td><input type="number" name="gapSecond" class="required" th:value="${broadcast.gapSecond}"/>秒一次</td>
+            </tr>
+            <tr>
+                <td>操作理由</td>
+                <td><input type="text" name="reason" class="required"  th:value="${broadcast.reason}"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button type="submit">保存/更新模板</button>
+                    <button class="close">取消</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>

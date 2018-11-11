@@ -8,6 +8,7 @@ import com.luckygames.wmxz.gamemaster.model.entity.*;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
 import com.luckygames.wmxz.gamemaster.model.view.request.*;
 import com.luckygames.wmxz.gamemaster.service.*;
+import com.luckygames.wmxz.gamemaster.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -56,6 +57,8 @@ public class PlayerCharacterController extends BaseController {
     private ItemLogService itemLogService;
     @Autowired
     private DiamondsLogService diamondsLogService;
+    @Autowired
+    private MailService mailService;
 
     //角色查询
     @RequestMapping(value = "/playerQuery", method = {RequestMethod.GET, RequestMethod.POST})
@@ -120,6 +123,39 @@ public class PlayerCharacterController extends BaseController {
 
         return response.request(query).request(query).data("player", player);
     }
+
+    //邮件日志列表
+    @RequestMapping(value = "/mailLogList", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response mailLogList(MailSearchQuery query) {
+        Response response = new Response("player/mailLogList");
+
+        Player player = new Player();
+        if (query.getServerId() != null && query.getPlayerId() != null) {
+            Page<Mail> list = mailService.searchPage(query);
+            player.setServerId(query.getServerId());
+            player.setSearchValue(query.getPlayerId().toString());
+            playerService.queryPlayer(player);
+            list.forEach(d -> {
+                Map<Integer, Integer> reward = StringUtil.str2map(d.getRewards().replaceAll("\r\n", ""), ";", ":");
+                StringBuffer goods = new StringBuffer();
+                reward.forEach((k, v) -> {
+                    for (GoodsConfig goodsConfig : OperatingToolsController.goodsList) {
+                        if (k == goodsConfig.id) {
+                            goods.append("物品:").append(goodsConfig.name).append(" 数量:").append(v).append("  ");
+                            break;
+                        }
+                    }
+                });
+                d.setRewards(goods.toString());
+                d.setReason(Objects.requireNonNull(LogConsume.getLog(d.getType())).desc);
+            });
+            response.data("list", list);
+        }
+
+        return response.request(query).request(query).data("player", player);
+    }
+
+//**********************************************************************************************
 
     @RequestMapping(value = "/character", method = {RequestMethod.GET, RequestMethod.POST})
     public Response queryCharacter(PlayerCharacterSearchQuery playerCharacterSearchQuery) {

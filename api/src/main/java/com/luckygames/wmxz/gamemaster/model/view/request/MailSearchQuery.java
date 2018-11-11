@@ -1,22 +1,22 @@
 package com.luckygames.wmxz.gamemaster.model.view.request;
 
 public class MailSearchQuery extends CommonSearchQuery {
-    private Integer mailType;
-    private Integer serverId;
+    private Long playerId;
+    private Long serverId;
 
-    public Integer getServerId() {
+    public Long getServerId() {
         return serverId;
     }
 
-    public void setServerId(Integer serverId) {
+    public void setServerId(Long serverId) {
         this.serverId = serverId;
     }
 
-    public Integer getMailType() {
-        return mailType;
+    public Long getPlayerId() {
+        return playerId;
     }
 
-    public void setMailType(Integer mailType) {
-        this.mailType = mailType;
+    public void setPlayerId(Long playerId) {
+        this.playerId = playerId;
     }
 }

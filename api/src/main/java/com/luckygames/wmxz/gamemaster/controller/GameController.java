@@ -217,7 +217,7 @@ public class GameController extends BaseController {
 
     //邮件列表
     @RequestMapping(value = "/mail", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response mail(MailSearchQuery query) {
+    public Response mail(MailLogSearchQuery query) {
         if (query.getMailType() != null && query.getMailType().equals(MailType.UNKNOWN)) {
             query.setMailType(null);
         }

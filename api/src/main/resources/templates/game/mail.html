@@ -44,8 +44,9 @@
     <div class="panelBar" style="height:30px">
         <ul class="toolBar">
             <li>
-                <a title="角色群发" class="edit" href="operatingTools/mailAddRole" target="dialog" width="480" height="550" mask="true"><span style="font-size: 20px">角色群发</span></a>
-                <a title="等级群发" class="edit" href="operatingTools/mailAddLevel" target="dialog" width="480" height="550" mask="true"><span style="font-size: 20px">等级群发</span></a>
+                <a title="角色群发" class="edit" href="operatingTools/mailAddRole" target="dialog" width="1000" height="700" mask="true"><span style="font-size: 20px">角色群发</span></a>
+                <a title="等级群发" class="edit" href="operatingTools/mailAddLevel" target="dialog" width="1000" height="700" mask="true"><span style="font-size: 20px">等级群发</span></a>
+                <a title="内容模板" class="edit" href="operatingTools/mailTemplate" target="dialog" width="500" height="500" mask="true"><span style="font-size: 20px">内容模板</span></a>
             </li>
         </ul>
     </div>
@@ -62,10 +63,12 @@
         </thead>
         <tbody>
         <tr th:each="row,iterStat:${list}">
-            <td th:text="${row.serverName}"></td>
+            <td th:if="${row.serverId!=0}" th:text="${row.serverName}"></td>
+            <td th:if="${row.serverId==0}" th:text="模板"></td>
             <td th:if="${row.mailType==1}" th:text="全服群发"></td>
             <td th:if="${row.mailType==2}" th:text="等级范围"></td>
             <td th:if="${row.mailType==3}" th:text="角色群发"></td>
+            <td th:if="${row.mailType==4}" th:text="模板"></td>
             <td th:text="${row.title}"></td>
             <td th:text="${row.content}"></td>
             <td th:text="${row.rewards}"></td>

@@ -55,15 +55,8 @@
 </div>
 <div class="pageHeader">
     <form id="creatForm" onsubmit="return closeNavTab(this);" action="simulationRecharge/add" method="post" style="height: 100%">
+        <input type="hidden" name="serverId" th:value="${player.serverId}"/>
         <table width="98%">
-            <tr>
-                <td>服务器</td>
-                <td>
-                    <select name="serverId" class="required">
-                        <option th:each="server:${serverList}" th:value="${server.serverId}" th:utext="${server.serverName}"></option>
-                    </select>
-                </td>
-            </tr>
             <tr>
                 <td>角色名称</td>
                 <td><input name="name" type="text" class="required"></td>

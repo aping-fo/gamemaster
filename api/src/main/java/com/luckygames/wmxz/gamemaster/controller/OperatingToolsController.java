@@ -58,10 +58,12 @@ public class OperatingToolsController extends BaseController {
     private NoticeService noticeService;
     @Autowired
     private ForbiddenLogService forbiddenLogService;
+    @Autowired
+    private BroadcastService broadcastService;
 
     //邮件查询
     @RequestMapping(value = "/mailManage", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response mailManage(MailSearchQuery query) {
+    public Response mailManage(MailLogSearchQuery query) {
         Response response = new Response("game/mail");
         Page<MailLog> mailLogs = mailLogService.searchPage(query);
 
@@ -82,23 +84,49 @@ public class OperatingToolsController extends BaseController {
 
     //邮件角色群发
     @RequestMapping(value = "/mailAddRole", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response mailAddRole() {
-        List<Server> serverList = serverService.searchList();
+    public Response mailAddRole(ServerSearchQuery query) {
+        List<Server> serverList = serverService.searchPage(query);
+        MailLog mailLog = mailLogService.searchLast();
         return new Response("game/mailAddRole")
                 .data("mailType", MailType.SERVER)
                 .data("serverList", serverList)
-                .data("goodsList", goodsList);
+                .data("goodsList", goodsList)
+                .data("mailLog", mailLog)
+                .request(query);
     }
 
     //邮件等级群发
     @RequestMapping(value = "/mailAddLevel", method = {RequestMethod.GET, RequestMethod.POST})
     public Response mailAddLevel(ServerSearchQuery query) {
         List<Server> serverList = serverService.searchPage(query);
+        MailLog mailLog = mailLogService.searchLast();
         return new Response("game/mailAddLevel")
                 .data("mailType", MailType.SERVER)
                 .data("serverList", serverList)
                 .data("goodsList", goodsList)
+                .data("mailLog", mailLog)
                 .request(query);
+    }
+
+    //邮件内容模板
+    @RequestMapping(value = "/mailTemplate", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response mailTemplate(MailLog mailLog) {
+        Response response = new Response();
+
+        if (mailLog.getMailType() != null) {
+            mailLogService.save(mailLog);
+            MailLogSearchQuery query = new MailLogSearchQuery();
+            Page<MailLog> mailLogs = mailLogService.searchPage(query);
+            mailLogs.forEach(this::goodid2name);
+            List<Server> serverList = serverService.searchList();
+            response.view("game/mail");
+            response.request(query).data("list", mailLogs).data("serverList", serverList);
+        } else {
+            MailLog mailTemplate = mailLogService.searchLast();
+            response.view("game/mailTemplate").data("mailLog", mailTemplate).data("goodsList", goodsList);
+        }
+
+        return response;
     }
 
     //发送邮件
@@ -120,7 +148,7 @@ public class OperatingToolsController extends BaseController {
             }
         }
 
-        return mailManage(new MailSearchQuery());
+        return mailManage(new MailLogSearchQuery());
     }
 
     //公告列表
@@ -192,7 +220,18 @@ public class OperatingToolsController extends BaseController {
         Response response = new Response("game/activation_code_details");
         Page<ActivationCode> activationCodePage;
 
-        if (query.getOperation().equals("check")) {
+        if ("check".equals(query.getOperation())) {
+            String[] split = query.getRemarks().split("_");
+            String substring = split[0];
+
+            String batch = substring;
+            if (Integer.valueOf(substring) < 10) {
+                batch = "00" + substring;
+            } else if (Integer.valueOf(substring) < 100) {
+                batch = "0" + substring;
+            }
+            query.setRemarks(batch + "_" + split[1]);
+
             activationCodePage = activationCodeService.exportPage(query);
         } else {
             activationCodePage = activationCodeService.searchPage(query);
@@ -261,14 +300,14 @@ public class OperatingToolsController extends BaseController {
             String rewards = activationCode.getRewards().replaceAll("\r\n", "");
             activationCode.setRewards(rewards);
 
-            Activation_Code_batch.incrementAndGet();
-
             String batch = Activation_Code_batch + "";
             if (Activation_Code_batch.get() < 10) {
                 batch = "00" + Activation_Code_batch;
             } else if (Activation_Code_batch.get() < 100) {
                 batch = "0" + Activation_Code_batch;
             }
+
+            Activation_Code_batch.incrementAndGet();
 
             GiftpackageSync giftpackageSync = new GiftpackageSync();
             giftpackageSync.setCardCount(count);
@@ -288,14 +327,6 @@ public class OperatingToolsController extends BaseController {
             }
 
             response.view("game/activation_code");
-
-            //更新全部服务器
-            if (activationCode.getServerId() == 0) {
-                //更新游戏服务器的激活码
-                activationCodeService.addAllActivationCode();
-            } else {
-                adminService.sendActivationCode(new ActivationCodeQuery(activationCode.getServerId(), ""));
-            }
         }
 
         GiftpackageSyncSearchQuery query = new GiftpackageSyncSearchQuery();
@@ -478,5 +509,69 @@ public class OperatingToolsController extends BaseController {
         )).start();
 
         return response;
+    }
+
+    //广播列表
+    @RequestMapping(value = {"/broadcast"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public Response broadcast(BroadcastSearchQuery query) {
+        Response response = new Response();
+        broadcastList(response, query);
+        return response;
+    }
+
+    //广播增加
+    @RequestMapping(value = {"/broadcastAdd"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public Response broadcastAdd(Broadcast broadcast) {
+        Response response = new Response();
+
+        //增加
+        if (broadcast.getIds() != null) {
+            broadcastService.sendBroadcast(broadcast);
+            broadcastList(response, new BroadcastSearchQuery());
+        } else {
+            ServerSearchQuery query = new ServerSearchQuery();
+            Broadcast broadcast1 = broadcastService.searchTemplate();
+            response.view("game/broadcastAdd")
+                    .request(query)
+                    .data("serverList", serverService.searchList())
+                    .data("broadcast", broadcast1);
+        }
+
+        return response;
+    }
+
+    //广播删除
+    @RequestMapping(value = {"/broadcastDelete"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public Response broadcastDelete(Broadcast broadcast) {
+        Response response = new Response();
+        broadcastService.deleteById(broadcast.getId());
+        broadcastList(response, new BroadcastSearchQuery());
+        return response;
+    }
+
+    //广播模板
+    @RequestMapping(value = {"/broadcastTemplate"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public Response broadcastTemplate(Broadcast broadcast) {
+        Response response = new Response();
+
+        if (broadcast.getBroadcastType() != null) {
+            broadcastService.save(broadcast);
+            broadcastList(response, new BroadcastSearchQuery());
+        } else {
+            Broadcast broadcast1 = broadcastService.searchTemplate();
+            response.view("game/broadcastTemplate").data("broadcast", broadcast1);
+        }
+
+        return response;
+    }
+
+    //广播列表
+    private void broadcastList(Response response, BroadcastSearchQuery query) {
+        Page<Broadcast> broadcastList = broadcastService.searchPage(query);
+        List<Server> serverList = serverService.searchList();
+        response.view("game/broadcast")
+                .request(query)
+                .data("list", broadcastList)
+                .data("serverList", serverList);
     }
 }

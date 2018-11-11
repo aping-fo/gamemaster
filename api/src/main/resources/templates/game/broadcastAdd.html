@@ -1,0 +1,100 @@
+<div class="pageHeader" xmlns:th="http://www.w3.org/1999/xhtml">
+    <form id="pagerForm" onsubmit="return closeNavTab(this);" action="operatingTools/broadcastAdd" method="post">
+        <table width="98%" style="height:100%;border-collapse:separate; border-spacing:5px;">
+            <thead>
+            <tr>
+                <th width="10%"></th>
+                <th width="90%"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <label>区服类型</label>
+                </td>
+                <td>
+                    <select name="serverGroup" id="serverType">
+                        <option value="">全部</option>
+                        <option value="ingcle" th:selected="${request.serverGroup=='ingcle'}">硬核专服</option>
+                        <option value="ingcle_mixture" th:selected="${request.serverGroup=='ingcle_mixture'}">大混服专服</option>
+                        <option value="ingcle_iOS" th:selected="${request.serverGroup=='ingcle_iOS'}">IOS专服</option>
+                        <option value="other" th:selected="${request.serverGroup=='other'}">其他</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" id="allSelect"/>全选</td>
+                <td>
+                    <ul id="serverList">
+                        <li th:each="row:${serverList}" style="width:200px;display: inline-block"><input class="required" type="checkbox" name="ids" th:text="${row.serverName}" th:value="${row.serverId}"/></li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>内容</td>
+                <td><input type="text" name="content" class="required"/></td>
+            </tr>
+            <tr>
+                <td>滚动次数</td>
+                <td><input type="number" name="loopTimes" class="required"/></td>
+            </tr>
+            <tr>
+                <td>滚动频率</td>
+                <td><input type="number" name="gapSecond" class="required"/>秒一次</td>
+            </tr>
+            <tr>
+                <td>操作理由</td>
+                <td><input type="text" name="reason" class="required"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button type="submit">发送</button>
+                    <button class="close">取消</button>
+                </td>
+            </tr>
+            <tr th:if="${broadcast.Id!=null}">
+                <td colspan="2">
+                    <span style="margin-right:10px;width: 300px;display:inline-block">内容</span>
+                    <span style="margin-right:10px;width: 100px;display:inline-block">滚动次数</span>
+                    <span style="margin-right:10px;width: 100px;display:inline-block">滚动频率</span>
+                    <span style="margin-right:10px;width: 100px;display:inline-block">操作理由</span>
+                    <span>操作</span>
+                </td>
+            </tr>
+            <tr th:if="${broadcast.Id!=null}">
+                <td colspan="2" id="copyTd">
+                    <span th:text="${broadcast.content}" style="margin-right:10px;width: 300px;display:inline-block"></span>
+                    <span th:text="${broadcast.loopTimes}" style="margin-right:10px;width: 100px;display:inline-block"></span>
+                    <span th:text="${broadcast.gapSecond}" style="margin-right:10px;width: 100px;display:inline-block"></span>
+                    <span th:text="${broadcast.reason}" style="margin-right:10px;width: 100px;display:inline-block"></span>
+                    <input type="button" value="粘贴内容" id="copyContent"/>
+                </td>
+            </tr>
+            <tr th:if="${broadcast.Id==null}">
+                <td colspan="2" style="text-align: center">暂无模板</td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+<script type="text/javascript">
+    $('#serverType').change(function () {
+        $.post("startup/server_list", "serverGroup=" + $(this).val(), function (data) {
+            var serverList = $('#serverList');
+            serverList.empty();
+            for (var i = 0, l = data.length; i < l; i++) {
+                var serverName = data[i].serverName;
+                var serverId = data[i].serverId;
+                serverList.append("<li style='width:200px;display: inline-block'><input class='required' type='checkbox' name='ids' value='" + serverId + "'/>" + serverName + "</li>")
+            }
+        });
+    });
+    $('#copyContent').click(function () {
+        var tds = $('#copyTd span');
+        $('form input[name="content"]').val(tds.eq(0).text());
+        $('form input[name="loopTimes"]').val(tds.eq(1).text());
+        $('form input[name="gapSecond"]').val(tds.eq(2).text());
+        $('form input[name="reason"]').val(tds.eq(3).text());
+    });
+</script>

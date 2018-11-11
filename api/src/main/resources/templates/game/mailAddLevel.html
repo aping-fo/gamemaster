@@ -4,8 +4,8 @@
         <table width="98%" style="height:100%;border-collapse:separate; border-spacing:5px;">
             <thead>
             <tr>
-                <th width="20%"></th>
-                <th width="80%"></th>
+                <th width="10%"></th>
+                <th width="90%"></th>
             </tr>
             </thead>
             <tbody>
@@ -25,8 +25,10 @@
             </tr>
             <tr>
                 <td><input type="checkbox" id="allSelect"/>全选</td>
-                <td id="serverList">
-                    <input class="required" th:each="row:${serverList}" type="checkbox" name="ids" th:text="${row.serverName}" th:value="${row.serverId}"/>
+                <td>
+                    <ul id="serverList">
+                        <li th:each="row:${serverList}" style="width:200px;display: inline-block"><input class="required" type="checkbox" name="ids" th:text="${row.serverName}" th:value="${row.serverId}"/></li>
+                    </ul>
                 </td>
             </tr>
             <tr>
@@ -80,13 +82,32 @@
                     <button class="close">取消</button>
                 </td>
             </tr>
+            <tr th:if="${mailLog!=null}">
+                <td colspan="2">
+                    <span style="margin-right:10px;width: 100px;display:inline-block">标题</span>
+                    <span style="margin-right:10px;width: 400px;display:inline-block">内容</span>
+                    <span style="margin-right:10px;width: 300px;display:inline-block">附件</span>
+                    <span>操作</span>
+                </td>
+            </tr>
+            <tr th:if="${mailLog!=null}">
+                <td colspan="2" id="copyTd">
+                    <span th:text="${mailLog.title}" style="margin-right:10px;width: 100px;display:inline-block"></span>
+                    <span th:text="${mailLog.content}" style="margin-right:10px;width: 400px;display:inline-block"></span>
+                    <span th:text="${mailLog.rewards}" style="margin-right:10px;width: 300px;display:inline-block"></span>
+                    <input type="button" value="粘贴内容" id="copyContent"/>
+                </td>
+            </tr>
+            <tr th:if="${mailLog==null}">
+                <td colspan="2" style="text-align: center">暂无模板</td>
+            </tr>
             </tbody>
         </table>
     </form>
 </div>
 <script type="text/javascript">
     $(function () {
-        $('#mail_goods').searchableSelect();
+        $('#lev_goods').searchableSelect();
     });
     $('#allSelect').click(function () {
         var ids = $('input[name=ids]');
@@ -127,8 +148,14 @@
             for (var i = 0, l = data.length; i < l; i++) {
                 var serverName = data[i].serverName;
                 var serverId = data[i].serverId;
-                serverList.append("<input class='required' type='checkbox' name='ids' value='" + serverId + "'/>"+serverName)
+                serverList.append("<li style='width:200px;display: inline-block'><input class='required' type='checkbox' name='ids' value='" + serverId + "'/>" + serverName + "</li>")
             }
         });
+    });
+    $('#copyContent').click(function () {
+        var tds = $('#copyTd span');
+        $('form input[name="title"]').val(tds.eq(0).text());
+        $('form textarea[name="content"]').val(tds.eq(1).text());
+        $('form textarea[name="rewards"]').val(tds.eq(2).text() + "\n");
     });
 </script>

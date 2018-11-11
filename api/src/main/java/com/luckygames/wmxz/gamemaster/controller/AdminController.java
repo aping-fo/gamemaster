@@ -38,7 +38,7 @@ import java.util.stream.Collectors;
 public class AdminController extends BaseController {
     public static List<Server> serverList = Collections.synchronizedList(new ArrayList<>());
     public static List<Notice> noticeList = Collections.synchronizedList(new ArrayList<>());
-    public static List<Recharge> rechargeList = Collections.synchronizedList(new ArrayList<>());
+    public static List<String> rechargeList = Collections.synchronizedList(new ArrayList<>());
     private static final Integer GAMEID = 2008;//密钥id
     private static final String GAMEKEY = "00c4392347b1865bd3fd6f0af5b8b26b";//密钥
     public static final String RETURN_SUCCESS = "success";// 成功
@@ -419,10 +419,10 @@ public class AdminController extends BaseController {
     @RequestMapping(value = "/checkReceiveRebate", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
     public boolean checkReceiveRebate(Recharge recharge) {
-        if (rechargeList.contains(recharge)) {
+        if (rechargeList.contains(recharge.getAccountName())) {
             return true;
         } else {
-            rechargeList.add(recharge);
+            rechargeList.add(recharge.getAccountName());
             ThreadPoolConfig.getExecutorService().execute(() -> {
                 rechargeService.save(recharge);
             });

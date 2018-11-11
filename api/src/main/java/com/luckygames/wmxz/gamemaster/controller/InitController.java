@@ -52,7 +52,7 @@ public class InitController extends BaseController implements ApplicationRunner 
         initChargeConfig();
 
         //初始化返利表
-        AdminController.rechargeList=rechargeService.searchList();
+        rechargeService.searchList().forEach(r -> AdminController.rechargeList.add(r.getAccountName()));
 
         System.out.println("加载完毕...");
     }
