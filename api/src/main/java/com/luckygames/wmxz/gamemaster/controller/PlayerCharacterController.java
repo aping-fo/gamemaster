@@ -10,9 +10,9 @@ import com.luckygames.wmxz.gamemaster.model.view.request.*;
 import com.luckygames.wmxz.gamemaster.service.*;
 import com.luckygames.wmxz.gamemaster.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +22,7 @@ import java.util.Objects;
 /**
  * Created by lucky on 2018/3/28.
  */
-@RestController
+@Controller
 @RequestMapping("/player")
 public class PlayerCharacterController extends BaseController {
     @Autowired
@@ -92,7 +92,7 @@ public class PlayerCharacterController extends BaseController {
             response.data("list", diamondsLogs);
         }
 
-        return response.request(query).request(query).data("player", player);
+        return response.request(query).data("player", player);
     }
 
     //物品日志列表
@@ -121,7 +121,7 @@ public class PlayerCharacterController extends BaseController {
             response.data("list", itemLogs);
         }
 
-        return response.request(query).request(query).data("player", player);
+        return response.request(query).data("player", player);
     }
 
     //邮件日志列表
@@ -152,7 +152,7 @@ public class PlayerCharacterController extends BaseController {
             response.data("list", list);
         }
 
-        return response.request(query).request(query).data("player", player);
+        return response.request(query).data("player", player);
     }
 
 //**********************************************************************************************

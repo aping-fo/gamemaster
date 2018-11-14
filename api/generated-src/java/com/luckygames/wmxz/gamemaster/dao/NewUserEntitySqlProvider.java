@@ -48,6 +48,14 @@ public class NewUserEntitySqlProvider {
             sql.VALUES("new_user_count", "#{newUserCount,jdbcType=INTEGER}");
         }
         
+        if (record.getChargeUserCount() != null) {
+            sql.VALUES("charge_user_count", "#{chargeUserCount,jdbcType=INTEGER}");
+        }
+        
+        if (record.getLoginUserCount() != null) {
+            sql.VALUES("login_user_count", "#{loginUserCount,jdbcType=INTEGER}");
+        }
+        
         if (record.getIncome() != null) {
             sql.VALUES("income", "#{income,jdbcType=INTEGER}");
         }
@@ -70,6 +78,8 @@ public class NewUserEntitySqlProvider {
         sql.SELECT("create_time");
         sql.SELECT("update_time");
         sql.SELECT("new_user_count");
+        sql.SELECT("charge_user_count");
+        sql.SELECT("login_user_count");
         sql.SELECT("income");
         sql.SELECT("arpu");
         sql.FROM("new_user");
@@ -109,6 +119,14 @@ public class NewUserEntitySqlProvider {
             sql.SET("new_user_count = #{record.newUserCount,jdbcType=INTEGER}");
         }
         
+        if (record.getChargeUserCount() != null) {
+            sql.SET("charge_user_count = #{record.chargeUserCount,jdbcType=INTEGER}");
+        }
+        
+        if (record.getLoginUserCount() != null) {
+            sql.SET("login_user_count = #{record.loginUserCount,jdbcType=INTEGER}");
+        }
+        
         if (record.getIncome() != null) {
             sql.SET("income = #{record.income,jdbcType=INTEGER}");
         }
@@ -130,6 +148,8 @@ public class NewUserEntitySqlProvider {
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         sql.SET("new_user_count = #{record.newUserCount,jdbcType=INTEGER}");
+        sql.SET("charge_user_count = #{record.chargeUserCount,jdbcType=INTEGER}");
+        sql.SET("login_user_count = #{record.loginUserCount,jdbcType=INTEGER}");
         sql.SET("income = #{record.income,jdbcType=INTEGER}");
         sql.SET("arpu = #{record.arpu,jdbcType=DOUBLE}");
         

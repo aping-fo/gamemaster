@@ -27,4 +27,6 @@ public interface ServerService extends BaseNewService<ServerEntity> {
     void updateServerState(Long id, int serverState);
 
     void updateWhitelist(Long id, int enable,String whiteList);
+
+    String combine(ServerSearchQuery query);
 }

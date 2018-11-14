@@ -1,5 +1,7 @@
 package com.luckygames.wmxz.gamemaster.controller;
 
+import com.github.pagehelper.Page;
+import com.luckygames.wmxz.gamemaster.common.constants.ResultCode;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.model.entity.Server;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
@@ -120,8 +122,20 @@ public class StartupController extends BaseController {
 
     //合服
     @RequestMapping(value = "/server_combine", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response combine(ServerSearchQuery request) {
-        List<Server> serverList = serverService.searchPage(request);
-        return new Response("startup/server_combine").request(request).data("serverList", serverList);
+    public Response combine(ServerSearchQuery query) {
+        Response response = new Response();
+        Page<Server> list = serverService.searchPage(query);
+        response.data("serverList", list).request(query);
+        if (query.getFromServer() != null) {
+            if (SUCCESS.equals(serverService.combine(query))) {
+                response.view("startup/server_info");
+            } else {
+                return new Response(ResultCode.MERGE_SERVER_FAILED).json();
+            }
+        } else {
+            response.view("startup/server_combine");
+        }
+
+        return response;
     }
 }

@@ -31,6 +31,8 @@ public enum ResultCode {
     CHAT_CHANNEL_INVALID(5001, "聊天频道参数错误"),
     CHAT_LOG_SAVE_FAILED(5002, "保存聊天记录失败"),
 
+    MERGE_SERVER_FAILED(5003, "合服失败"),
+
     EXISTENCE_UNFILLED_FIELDS(6001, "存在未填字段");
 
     private final int code;

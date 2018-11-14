@@ -8,6 +8,24 @@ public class ServerSearchQuery extends CommonSearchQuery {
     private String keyword;
     private Integer open;
     private String serverGroup;
+    private Long fromServer;
+    private Long toServer;
+
+    public Long getFromServer() {
+        return fromServer;
+    }
+
+    public void setFromServer(Long fromServer) {
+        this.fromServer = fromServer;
+    }
+
+    public Long getToServer() {
+        return toServer;
+    }
+
+    public void setToServer(Long toServer) {
+        this.toServer = toServer;
+    }
 
     public String getServerGroup() {
         return serverGroup;

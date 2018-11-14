@@ -7,14 +7,9 @@ public class NewUserSqlProvider {
     public String searchPage(NewUserSearchQuery query) {
         StringBuilder sql = new StringBuilder("SELECT t1.*,t2.server_name serverName FROM new_user t1  LEFT JOIN server t2 on t1.server_id=t2.server_id where 1=1");
         if (StringUtils.isNotBlank(query.getEndDate())) {
-            sql.append(" and t1.create_time < #{endDate}");
+            sql.append(" and datediff ( t1.create_time , #{endDate} ) = 0");
         }else{
-            sql.append(" and t1.create_time < DATE_SUB(curdate(),INTERVAL 0 DAY)");
-        }
-        if (StringUtils.isNotBlank(query.getStartDate())) {
-            sql.append(" and t1.create_time >= #{startDate}");
-        }else {
-            sql.append(" and t1.create_time >= DATE_SUB(curdate(),INTERVAL 1 DAY)");
+            sql.append(" and TO_DAYS( NOW( ) ) - TO_DAYS( t1.create_time) <= 1");
         }
         if (query.getServerId() != null) {
             sql.append(" and t1.server_id = #{serverId}");

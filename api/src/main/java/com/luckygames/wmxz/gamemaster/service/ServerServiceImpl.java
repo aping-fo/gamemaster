@@ -6,6 +6,7 @@ import com.luckygames.wmxz.gamemaster.dao.ServerEntity;
 import com.luckygames.wmxz.gamemaster.dao.ServerExample;
 import com.luckygames.wmxz.gamemaster.dao.mapper.ServerMapper;
 import com.luckygames.wmxz.gamemaster.model.entity.Server;
+import com.luckygames.wmxz.gamemaster.model.view.request.MergeServerQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.ServerSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.base.BaseNewServiceImpl;
 import com.luckygames.wmxz.gamemaster.utils.BeanUtils;
@@ -17,12 +18,15 @@ import tk.mybatis.mapper.common.Mapper;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service("serverService")
 public class ServerServiceImpl extends BaseNewServiceImpl<ServerEntity> implements ServerService {
 
     @Autowired
     private ServerMapper serverMapper;
+    @Autowired
+    private AdminService adminService;
 
     @Override
     public List<Server> searchList() {
@@ -44,6 +48,20 @@ public class ServerServiceImpl extends BaseNewServiceImpl<ServerEntity> implemen
     @Override
     public void updateWhitelist(Long id, int enable, String whiteList) {
         serverMapper.updateWhitelist(id, enable, whiteList);
+    }
+
+    @Override
+    public String combine(ServerSearchQuery query) {
+        try {
+            return adminService.combine(new MergeServerQuery(
+                    query.getToServer(),
+                    query.getFromServer(),
+                    Optional.ofNullable(getByServerId(query.getFromServer())).map(ServerEntity::getIp).get()
+            ));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return FAIL;
+        }
     }
 
     @Override

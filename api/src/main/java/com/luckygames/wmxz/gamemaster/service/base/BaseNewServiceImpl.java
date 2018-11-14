@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 public abstract class BaseNewServiceImpl<T extends BaseNewEntity> implements BaseNewService<T> {
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    protected static final String FAIL = "false";
+
     @Override
     public Long create(T entity) {
         entity.setCreateTime(DateUtils.Now());

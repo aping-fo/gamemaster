@@ -1,33 +1,60 @@
 <div class="pageContent">
-    <form id="pagerForm" onsubmit="return closeNavTab(this);" action="startup/server_combine" method="post"
-          onreset="$(this).find('select.combox').comboxReset()">
+    <form id="pagerForm" onsubmit="return closeNavTab(this);" action="startup/server_combine" method="post">
         <div class="pageFormContent" layoutH="57">
             <div class="searchBar">
-                <table class="searchContent">
+                <table width="98%" style="border-collapse:separate; border-spacing:5px;">
+                    <thead>
                     <tr>
-                        <td>原始服务器:</td>
+                        <th style="width: 136px"></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
                         <td>
-                            <select>
-                                <div class="col-xs-1" th:each="server:${serverList}">
-                                    <option value="${server.serverId}">
-                                        <span th:text="${server.serverName}"/>
-                                    </option>
-                                </div>
+                            <label>区服类型</label>
+                        </td>
+                        <td>
+                            <select name="serverGroup" id="serverTypeFrom">
+                                <option value="">全部</option>
+                                <option value="ingcle" th:selected="${request.serverGroup=='ingcle'}">硬核专服</option>
+                                <option value="ingcle_mixture" th:selected="${request.serverGroup=='ingcle_mixture'}">大混服专服</option>
+                                <option value="ingcle_iOS" th:selected="${request.serverGroup=='ingcle_iOS'}">IOS专服</option>
+                                <option value="other" th:selected="${request.serverGroup=='other'}">其他</option>
                             </select>
                         </td>
                     </tr>
                     <tr>
-                        <td>目标服务器:</td>
+                        <td>原始服务器</td>
                         <td>
-                            <select>
-                                <div class="col-xs-1" th:each="server:${serverList}">
-                                    <option value="${server.serverId}">
-                                        <span th:text="${server.serverName}"/>
-                                    </option>
-                                </div>
+                            <select name="fromServer">
+                                <option th:each="row,iterStat:${serverList}" th:text="${row.serverName}" th:value="${row.serverId}"></option>
                             </select>
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            <label>区服类型</label>
+                        </td>
+                        <td>
+                            <select name="serverGroup" id="serverTypeTo">
+                                <option value="">全部</option>
+                                <option value="ingcle" th:selected="${request.serverGroup=='ingcle'}">硬核专服</option>
+                                <option value="ingcle_mixture" th:selected="${request.serverGroup=='ingcle_mixture'}">大混服专服</option>
+                                <option value="ingcle_iOS" th:selected="${request.serverGroup=='ingcle_iOS'}">IOS专服</option>
+                                <option value="other" th:selected="${request.serverGroup=='other'}">其他</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>目标服务器</td>
+                        <td>
+                            <select name="toServer">
+                                <option th:each="row,iterStat:${serverList}" th:text="${row.serverName}" th:value="${row.serverId}"></option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tbody>
                 </table>
             </div>
         </div>
@@ -52,3 +79,27 @@
         </div>
     </form>
 </div>
+<script type="text/javascript">
+    $('#serverTypeFrom').change(function () {
+        $.post("startup/server_list", "serverGroup=" + $(this).val(), function (data) {
+            var serverList = $('select[name="fromServer"]');
+            serverList.empty();
+            for (var i = 0, l = data.length; i < l; i++) {
+                var serverName = data[i].serverName;
+                var serverId = data[i].serverId;
+                serverList.append("<option value=" + serverId + ">" + serverName + "</option>")
+            }
+        });
+    });
+    $('#serverTypeTo').change(function () {
+        $.post("startup/server_list", "serverGroup=" + $(this).val(), function (data) {
+            var serverList = $('select[name="toServer"]');
+            serverList.empty();
+            for (var i = 0, l = data.length; i < l; i++) {
+                var serverName = data[i].serverName;
+                var serverId = data[i].serverId;
+                serverList.append("<option value=" + serverId + ">" + serverName + "</option>")
+            }
+        });
+    });
+</script>

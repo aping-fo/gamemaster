@@ -405,6 +405,126 @@ public class NewUserEntityExample {
             return (Criteria) this;
         }
 
+        public Criteria andChargeUserCountIsNull() {
+            addCriterion("charge_user_count is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeUserCountIsNotNull() {
+            addCriterion("charge_user_count is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeUserCountEqualTo(Integer value) {
+            addCriterion("charge_user_count =", value, "chargeUserCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeUserCountNotEqualTo(Integer value) {
+            addCriterion("charge_user_count <>", value, "chargeUserCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeUserCountGreaterThan(Integer value) {
+            addCriterion("charge_user_count >", value, "chargeUserCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeUserCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("charge_user_count >=", value, "chargeUserCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeUserCountLessThan(Integer value) {
+            addCriterion("charge_user_count <", value, "chargeUserCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeUserCountLessThanOrEqualTo(Integer value) {
+            addCriterion("charge_user_count <=", value, "chargeUserCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeUserCountIn(List<Integer> values) {
+            addCriterion("charge_user_count in", values, "chargeUserCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeUserCountNotIn(List<Integer> values) {
+            addCriterion("charge_user_count not in", values, "chargeUserCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeUserCountBetween(Integer value1, Integer value2) {
+            addCriterion("charge_user_count between", value1, value2, "chargeUserCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeUserCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("charge_user_count not between", value1, value2, "chargeUserCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginUserCountIsNull() {
+            addCriterion("login_user_count is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginUserCountIsNotNull() {
+            addCriterion("login_user_count is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginUserCountEqualTo(Integer value) {
+            addCriterion("login_user_count =", value, "loginUserCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginUserCountNotEqualTo(Integer value) {
+            addCriterion("login_user_count <>", value, "loginUserCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginUserCountGreaterThan(Integer value) {
+            addCriterion("login_user_count >", value, "loginUserCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginUserCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("login_user_count >=", value, "loginUserCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginUserCountLessThan(Integer value) {
+            addCriterion("login_user_count <", value, "loginUserCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginUserCountLessThanOrEqualTo(Integer value) {
+            addCriterion("login_user_count <=", value, "loginUserCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginUserCountIn(List<Integer> values) {
+            addCriterion("login_user_count in", values, "loginUserCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginUserCountNotIn(List<Integer> values) {
+            addCriterion("login_user_count not in", values, "loginUserCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginUserCountBetween(Integer value1, Integer value2) {
+            addCriterion("login_user_count between", value1, value2, "loginUserCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginUserCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("login_user_count not between", value1, value2, "loginUserCount");
+            return (Criteria) this;
+        }
+
         public Criteria andIncomeIsNull() {
             addCriterion("income is null");
             return (Criteria) this;

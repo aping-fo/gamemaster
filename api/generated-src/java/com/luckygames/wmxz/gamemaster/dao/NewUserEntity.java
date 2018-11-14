@@ -9,6 +9,10 @@ public class NewUserEntity extends BaseNewEntity {
 
     private Integer newUserCount;
 
+    private Integer chargeUserCount;
+
+    private Integer loginUserCount;
+
     private Integer income;
 
     private Double arpu;
@@ -27,6 +31,22 @@ public class NewUserEntity extends BaseNewEntity {
 
     public void setNewUserCount(Integer newUserCount) {
         this.newUserCount = newUserCount;
+    }
+
+    public Integer getChargeUserCount() {
+        return chargeUserCount;
+    }
+
+    public void setChargeUserCount(Integer chargeUserCount) {
+        this.chargeUserCount = chargeUserCount;
+    }
+
+    public Integer getLoginUserCount() {
+        return loginUserCount;
+    }
+
+    public void setLoginUserCount(Integer loginUserCount) {
+        this.loginUserCount = loginUserCount;
     }
 
     public Integer getIncome() {

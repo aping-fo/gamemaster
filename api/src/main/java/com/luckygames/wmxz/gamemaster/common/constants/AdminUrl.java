@@ -16,6 +16,7 @@ public enum AdminUrl {
     GET_INFO_BY_PLAYER_NAME("/getInfo", "通过玩家名称获取玩家信息"),
     PAY("/pay", "充值"),
     NEW_PLAYER("/queryNewPlayer", "新玩家"),
+    MERGE_SERVER("/mergeServer", "新玩家"),
     BROADCAST("KICK_PLAYER", "发送广播");
 
     private final String url;

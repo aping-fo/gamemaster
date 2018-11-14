@@ -19,8 +19,6 @@
                         </td>
                         <td class="dateRange">
                             日期:
-                            <input name="startDate" class="date readonly" readonly="readonly" type="text" value="" th:value="${request.startDate}">
-                            <span class="limit">-</span>
                             <input name="endDate" class="date readonly" readonly="readonly" type="text" value="" th:value="${request.endDate}">
                         </td>
                         <td>
@@ -42,6 +40,8 @@
         <tr>
             <th width="100">服务器</th>
             <th width="100">新增玩家</th>
+            <th width="100">充值玩家</th>
+            <th width="100">登录玩家</th>
             <th width="100">收入</th>
             <th width="100">ARPU</th>
         </tr>
@@ -50,6 +50,8 @@
         <tr th:if="${list.size()!=0}" th:each="row,iterStat:${list}">
             <td th:text="${row.serverName}"></td>
             <td th:text="${row.newUserCount}"></td>
+            <td th:text="${row.chargeUserCount}"></td>
+            <td th:text="${row.loginUserCount}"></td>
             <td th:text="${row.income}"></td>
             <td th:text="${row.arpu}"></td>
         </tr>

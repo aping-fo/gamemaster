@@ -114,5 +114,8 @@ public interface AdminService {
 
     //新增玩家
     public String queryNewPlayer(GMQuery query);
+
+    //合服
+    public String combine(GMQuery query);
 }
 

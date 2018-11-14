@@ -9,10 +9,11 @@ import com.luckygames.wmxz.gamemaster.model.view.request.RecoveryGoodsQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -39,6 +40,12 @@ public class AdminServiceImpl implements AdminService {
         headers = new HttpHeaders();
         MediaType type = MediaType.parseMediaType("application/json; charset=UTF-8");
         headers.setContentType(type);
+
+        //复杂构造函数的使用
+        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+        requestFactory.setReadTimeout(999999);//设置读取超时
+        //利用复杂构造器可以实现超时设置，内部实际实现为 HttpClient
+        restTemplate = new RestTemplate(requestFactory);
     }
 
     /**
@@ -119,6 +126,11 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public String queryNewPlayer(GMQuery query) {
         return commonRequest(query.encodeReqParams(), restTemplate, query.getServerId(), AdminUrl.NEW_PLAYER.getUrl());
+    }
+
+    @Override
+    public String combine(GMQuery query) {
+        return commonRequest(query.encodeReqParams(), restTemplate, query.getServerId(), AdminUrl.MERGE_SERVER.getUrl());
     }
 
     public String reqBackendCommond(BackendCommand command) {
