@@ -1,55 +1,82 @@
 <div class="pageHeader">
     <form id="pagerForm" onsubmit="return closeNavTab(this);" action="operatingTools/forbiddenAdd" method="post">
-        <input type="hidden" name="operateType" value="1"/>
+        <input type="hidden" name="closureType" value="1"/>
         <div class="searchBar">
             <table class="searchContent" width="100%">
+                <thead>
+                <tr>
+                    <th style="width:30%"></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
                 <tr>
                     <td>
-                        <label>服务器</label>
-                        <select name="serverId" class="required">
-                            <option th:each="server:${serverList}" th:value="${server.serverId}" th:utext="${server.serverName}"></option>
+                        <label>区服类型</label>
+                    </td>
+                    <td>
+                        <select id="serverType">
+                            <option value="">全部</option>
+                            <option value="ingcle" th:selected="${request.serverGroup=='ingcle'}">硬核专服</option>
+                            <option value="ingcle_mixture" th:selected="${request.serverGroup=='ingcle_mixture'}">大混服专服</option>
+                            <option value="ingcle_iOS" th:selected="${request.serverGroup=='ingcle_iOS'}">IOS专服</option>
+                            <option value="other" th:selected="${request.serverGroup=='other'}">其他</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>服务器</label></td>
+                    <td>
+                        <select name="serverId">
+                            <option th:each="row,iterStat:${serverList}" th:text="${row.serverName}" th:value="${row.serverId}"></option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <label>封禁类型</label>
-                        <select name="forbiddenType">
-                            <option value="1">封禁</option>
-                            <option value="2">禁言</option>
+                        <label>封禁类型</label></td><td>
+                        <select name="closureWay">
+                            <option value="1">禁言</option>
+                            <option value="2">封号</option>
+                            <option value="3">禁IP</option>
+                            <option value="4">禁IMEI</option>
                         </select>
                     </td>
                 </tr>
-                <!--<tr>-->
-                <!--<td>-->
-                <!--<label>角色ID</label>-->
-                <!--<input class="textInput required" type="number" name="playerId"/>-->
-                <!--</td>-->
-                <!--</tr>-->
                 <tr>
-                    <td>
-                        <label>角色名称</label>
-                        <input class="textInput required" type="text" name="playerName"/>
-                    </td>
+                    <td><label>封禁目标</br>
+                        禁言-角色ID,封号-账号</br>
+                        禁IP-IP,禁IMEI-IMEI
+                    </label></td>
+                    <td><input class="textInput required" type="text" name="closureAccount"/></td>
                 </tr>
                 <tr>
                     <td>
-                        <label>封禁理由</label>
-                        <input class="textInput required" type="text" name="reason"/>
+                        <label>封禁时间(小时)</label></td><td>
+                        <input class="textInput required" type="number" name="closureTime"/>
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        <label>封禁时间(小时)</label>
-                        <input class="textInput required" type="number" name="hour"/>
-                    </td>
-                </tr>
-                <tr>
+                    <td></td>
                     <td>
                         <button id="submit" type="submit">提交</button>
                     </td>
                 </tr>
+                </tbody>
             </table>
         </div>
     </form>
 </div>
+<script type="text/javascript">
+    $('#serverType').change(function () {
+        $.post("startup/server_list", "serverGroup=" + $(this).val(), function (data) {
+            var serverList = $('select[name="serverId"]');
+            serverList.empty();
+            for (var i = 0, l = data.length; i < l; i++) {
+                var serverName = data[i].serverName;
+                var serverId = data[i].serverId;
+                serverList.append("<option value=" + serverId + ">" + serverName + "</option>")
+            }
+        });
+    });
+</script>

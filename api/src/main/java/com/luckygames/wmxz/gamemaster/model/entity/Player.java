@@ -7,6 +7,15 @@ public class Player extends PlayerEntity {
     private String searchValue;
     private String serverName;
     private boolean online;
+    private String accName;
+
+    public String getAccName() {
+        return accName;
+    }
+
+    public void setAccName(String accName) {
+        this.accName = accName;
+    }
 
     public boolean isOnline() {
         return online;

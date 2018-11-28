@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
+import java.util.List;
+
 @Service("ProhibitionService")
 public class ProhibitionServiceImpl extends BaseNewServiceImpl<ProhibitionEntity> implements ProhibitionService {
     @Autowired
@@ -29,5 +31,15 @@ public class ProhibitionServiceImpl extends BaseNewServiceImpl<ProhibitionEntity
     @Override
     public Prohibition checkInfo(Prohibition prohibition) {
         return prohibitionMapper.checkInfo(prohibition);
+    }
+
+    @Override
+    public List<Prohibition> searchList(Prohibition prohibition) {
+        return prohibitionMapper.searchList(prohibition);
+    }
+
+    @Override
+    public Prohibition searchByPlayerId(Long playerId) {
+        return prohibitionMapper.searchByPlayerId(playerId);
     }
 }

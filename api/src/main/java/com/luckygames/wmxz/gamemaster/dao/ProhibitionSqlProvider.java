@@ -6,12 +6,12 @@ import org.apache.commons.lang3.StringUtils;
 
 public class ProhibitionSqlProvider {
     public String searchPage(ProhibitionSearchQuery query) {
-        StringBuffer sql = new StringBuffer("SELECT t1.*,t2.server_name FROM account_log t1 left join server t2 on t1.server_id=t2.server_id where 1=1 ");
+        StringBuffer sql = new StringBuffer("SELECT t1.*,t2.server_name FROM prohibition t1 left join server t2 on t1.server_id=t2.server_id where 1=1 ");
         if (StringUtils.isNotBlank(query.getStartDate())) {
-            sql.append(" and t1.update_time >= #{startDate}  ");
+            sql.append(" and t1.create_time >= #{startDate}  ");
         }
         if (StringUtils.isNotBlank(query.getEndDate())) {
-            sql.append(" and t1.update_time < #{endDate}  ");
+            sql.append(" and t1.create_time < #{endDate}  ");
         }
 //        if (query.getServerId()!=null) {
 //            sql.append(" and t1.server_id = #{serverId}  ");
@@ -22,14 +22,22 @@ public class ProhibitionSqlProvider {
 
     public String checkInfo(Prohibition prohibition) {
         StringBuffer sql = new StringBuffer("SELECT t1.* FROM prohibition t1 where 1=1 ");
-        if (prohibition.getClosureWay()!=null) {
+        if (prohibition.getClosureWay() != null) {
             sql.append(" and t1.closure_way = #{closureWay}  ");
         }
         if (StringUtils.isNotBlank(prohibition.getClosureAccount())) {
             sql.append(" and t1.closure_account = #{closureAccount}  ");
         }
-        if (prohibition.getServerId()!=null) {
+        if (prohibition.getServerId() != null) {
             sql.append(" and t1.server_id = #{serverId}  ");
+        }
+        return sql.toString();
+    }
+
+    public String searchList(Prohibition prohibition) {
+        StringBuffer sql = new StringBuffer("select * from prohibition where closure_type=1");
+        if (prohibition.getServerId() != null) {
+            sql.append(" and server_id = " + prohibition.getServerId());
         }
         return sql.toString();
     }

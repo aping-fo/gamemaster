@@ -1,106 +1,110 @@
 <div class="pageContent" xmlns:th="http://www.w3.org/1999/xhtml">
     <form method="post" onsubmit="return closeNavTab(this);" action="operatingTools/sendmail" class="pageForm required-validate">
-        <input type="hidden" name="mailType" value="3"/>
-        <table width="98%" style="height:100%;border-collapse:separate; border-spacing:5px;">
-            <thead>
-            <tr>
-                <th width="10%"></th>
-                <th width="90%"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    <label>区服类型</label>
-                </td>
-                <td>
-                    <select name="serverGroup" id="serverType">
-                        <option value="">全部</option>
-                        <option value="ingcle" th:selected="${request.serverGroup=='ingcle'}">硬核专服</option>
-                        <option value="ingcle_mixture" th:selected="${request.serverGroup=='ingcle_mixture'}">大混服专服</option>
-                        <option value="ingcle_iOS" th:selected="${request.serverGroup=='ingcle_iOS'}">IOS专服</option>
-                        <option value="other" th:selected="${request.serverGroup=='other'}">其他</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" id="allSelect"/>全选</td>
-                <td>
-                    <ul id="serverList">
-                        <li th:each="row:${serverList}" style="width:200px;display: inline-block"><input class="required" type="checkbox" name="ids" th:text="${row.serverName}" th:value="${row.serverId}"/></li>
-                    </ul>
-                </td>
-            </tr>
-            <tr>
-                <td>角色ID<br/>玩家id1,玩家id2</td>
-                <td>
-                    <textarea name="playerids" class="textArea required" cols="30" rows="4" style="resize: none"></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td>发件人</td>
-                <td><input type="text" title="发件人" value="系统邮件" name="sender" class="required textInput"/></td>
-            </tr>
-            <tr>
-                <td>邮件标题</td>
-                <td><input type="text" title="标题" value="" name="title" class="required textInput"/></td>
-            </tr>
-            <tr>
-                <td>邮件内容</td>
-                <td>
-                    <textarea name="content" class="required textArea" cols="30" rows="4" style="resize: none"></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td>物品</td>
-                <td>
-                    <select id="role_goods">
-                        <option th:each="goods:${goodsList}" th:text="${goods.name}" th:value="${goods.id}"></option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>数量</td>
-                <td>
-                    <input type="number" id="role_count" min="1"/>
-                    <input type="button" value="添加" id="addButton"/>
-                    <input type="button" value="删除最后一个" id="deleteButton"/>
-                </td>
-            </tr>
-            <tr>
-                <td>奖励</td>
-                <td>
-                    <textarea name="rewards" class="textArea readonly" cols="30" rows="4" style="resize: none;margin-top: 10px" id="reward" readonly="readonly"></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <button type="submit">发送</button>
-                    <button class="close">取消</button>
-                </td>
-            </tr>
-            <tr th:if="${mailLog!=null}">
-                <td colspan="2">
-                    <span style="margin-right:10px;width: 100px;display:inline-block">标题</span>
-                    <span style="margin-right:10px;width: 400px;display:inline-block">内容</span>
-                    <span style="margin-right:10px;width: 300px;display:inline-block">附件</span>
-                    <span>操作</span>
-                </td>
-            </tr>
-            <tr th:if="${mailLog!=null}">
-                <td colspan="2" id="copyTd">
-                    <span th:text="${mailLog.title}" style="margin-right:10px;width: 100px;display:inline-block"></span>
-                    <span th:text="${mailLog.content}" style="margin-right:10px;width: 400px;display:inline-block"></span>
-                    <span th:text="${mailLog.rewards}" style="margin-right:10px;width: 300px;display:inline-block"></span>
-                    <input type="button" value="粘贴内容" id="copyContent"/>
-                </td>
-            </tr>
-            <tr th:if="${mailLog==null}">
-                <td colspan="2" style="text-align: center">暂无模板</td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="pageFormContent" layoutH="57">
+            <div class="searchBar">
+                <input type="hidden" name="mailType" value="3"/>
+                <table width="98%" style="height:100%;border-collapse:separate; border-spacing:5px;">
+                    <thead>
+                    <tr>
+                        <th width="10%"></th>
+                        <th width="90%"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <label>区服类型</label>
+                        </td>
+                        <td>
+                            <select name="serverGroup" id="serverType">
+                                <option value="">全部</option>
+                                <option value="ingcle" th:selected="${request.serverGroup=='ingcle'}">硬核专服</option>
+                                <option value="ingcle_mixture" th:selected="${request.serverGroup=='ingcle_mixture'}">大混服专服</option>
+                                <option value="ingcle_iOS" th:selected="${request.serverGroup=='ingcle_iOS'}">IOS专服</option>
+                                <option value="other" th:selected="${request.serverGroup=='other'}">其他</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" id="allSelect"/>全选</td>
+                        <td>
+                            <ul id="serverList">
+                                <li th:each="row:${serverList}" style="width:200px;display: inline-block"><input class="required" type="checkbox" name="ids" th:text="${row.serverName}" th:value="${row.serverId}"/></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>角色ID<br/>玩家id1,玩家id2</td>
+                        <td>
+                            <textarea name="playerids" class="textArea required" cols="30" rows="4" style="resize: none"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>发件人</td>
+                        <td><input type="text" title="发件人" value="系统邮件" name="sender" class="required textInput"/></td>
+                    </tr>
+                    <tr>
+                        <td>邮件标题</td>
+                        <td><input type="text" title="标题" value="" name="title" class="required textInput"/></td>
+                    </tr>
+                    <tr>
+                        <td>邮件内容</td>
+                        <td>
+                            <textarea name="content" class="required textArea" cols="30" rows="4" style="resize: none"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>物品</td>
+                        <td>
+                            <select id="role_goods">
+                                <option th:each="goods:${goodsList}" th:text="${goods.name}" th:value="${goods.id}"></option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>数量</td>
+                        <td>
+                            <input type="number" id="role_count" min="1"/>
+                            <input type="button" value="添加" id="addButton"/>
+                            <input type="button" value="删除最后一个" id="deleteButton"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>奖励</td>
+                        <td>
+                            <textarea name="rewards" class="textArea readonly" cols="30" rows="4" style="resize: none;margin-top: 10px" id="reward" readonly="readonly"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button type="submit">发送</button>
+                            <button class="close">取消</button>
+                        </td>
+                    </tr>
+                    <tr th:if="${mailLog!=null}">
+                        <td colspan="2">
+                            <span style="margin-right:10px;width: 100px;display:inline-block">标题</span>
+                            <span style="margin-right:10px;width: 400px;display:inline-block">内容</span>
+                            <span style="margin-right:10px;width: 300px;display:inline-block">附件</span>
+                            <span>操作</span>
+                        </td>
+                    </tr>
+                    <tr th:if="${mailLog!=null}">
+                        <td colspan="2" id="copyTd">
+                            <span th:text="${mailLog.title}" style="margin-right:10px;width: 100px;display:inline-block"></span>
+                            <span th:text="${mailLog.content}" style="margin-right:10px;width: 400px;display:inline-block"></span>
+                            <span th:text="${mailLog.rewards}" style="margin-right:10px;width: 300px;display:inline-block"></span>
+                            <input type="button" value="粘贴内容" id="copyContent"/>
+                        </td>
+                    </tr>
+                    <tr th:if="${mailLog==null}">
+                        <td colspan="2" style="text-align: center">暂无模板</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </form>
 </div>
 <script type="text/javascript">

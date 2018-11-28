@@ -2,6 +2,7 @@ package com.luckygames.wmxz.gamemaster.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.luckygames.wmxz.gamemaster.config.ThreadPoolConfig;
 import com.luckygames.wmxz.gamemaster.dao.ServerEntity;
 import com.luckygames.wmxz.gamemaster.dao.ServerExample;
 import com.luckygames.wmxz.gamemaster.dao.mapper.ServerMapper;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -41,8 +43,8 @@ public class ServerServiceImpl extends BaseNewServiceImpl<ServerEntity> implemen
     }
 
     @Override
-    public void updateServerState(Long id, int serverState) {
-        serverMapper.updateServerState(id, serverState);
+    public void updateServerState(Long id, int serverState, String maintenanceTips) {
+        serverMapper.updateServerState(id, serverState, maintenanceTips);
     }
 
     @Override
@@ -53,14 +55,73 @@ public class ServerServiceImpl extends BaseNewServiceImpl<ServerEntity> implemen
     @Override
     public String combine(ServerSearchQuery query) {
         try {
+            Optional<Server> server = Optional.ofNullable(getByServerId(query.getFromServer()));
             return adminService.combine(new MergeServerQuery(
                     query.getToServer(),
                     query.getFromServer(),
-                    Optional.ofNullable(getByServerId(query.getFromServer())).map(ServerEntity::getIp).get()
+                    server.map(ServerEntity::getIp).get(),
+                    server.map(ServerEntity::getDbName).get()
             ));
         } catch (Exception e) {
             e.printStackTrace();
             return FAIL;
+        }
+    }
+
+    @Override
+    public List<Server> servers(ServerSearchQuery query) {
+        return serverMapper.servers(query);
+    }
+
+    @Override
+    public void updateServer(Server server) {
+        for (Long serverId : server.getIds()) {
+            Server server1 = getByServerId(serverId);
+
+            String dbName = server1.getDbName();
+            String catalog = "app";
+            if (dbName.length() > 4) {
+                catalog += dbName.substring(4);
+            }
+
+            StringBuffer cmd = new StringBuffer("ssh -o StrictHostKeyChecking=no -p 23232 -i /root/my_world_ras root@");
+            cmd.append(server1.getIp())
+                    .append(" sh /root/")
+                    .append(catalog)
+                    .append("/server_new/update.sh");
+            ThreadPoolConfig.getExecutorService().execute(() -> {
+                try {
+                    Process proc = Runtime.getRuntime().exec(cmd.toString());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
+    }
+
+    @Override
+    public void stop(Server server) {
+        for (Long serverId : server.getIds()) {
+            Server server1 = getByServerId(serverId);
+
+            String dbName = server1.getDbName();
+            String catalog = "app";
+            if (dbName.length() > 4) {
+                catalog += dbName.substring(4);
+            }
+
+            StringBuffer cmd = new StringBuffer("ssh -o StrictHostKeyChecking=no -p 23232 -i /root/my_world_ras root@");
+            cmd.append(server1.getIp())
+                    .append(" sh /root/")
+                    .append(catalog)
+                    .append("/server_new/stop.sh");
+            ThreadPoolConfig.getExecutorService().execute(() -> {
+                try {
+                    Process proc = Runtime.getRuntime().exec(cmd.toString());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
         }
     }
 
@@ -81,7 +142,7 @@ public class ServerServiceImpl extends BaseNewServiceImpl<ServerEntity> implemen
             }
         }
 
-        return BeanUtils.copyListProperties(serverMapper.selectByExample(example), Server.class);
+        return BeanUtils.copyListProperties(serverMapper.searchList(request), Server.class);
     }
 
     @Override

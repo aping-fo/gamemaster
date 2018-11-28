@@ -6,7 +6,11 @@ import com.luckygames.wmxz.gamemaster.dao.ProhibitionEntityMapper;
 import com.luckygames.wmxz.gamemaster.dao.ProhibitionSqlProvider;
 import com.luckygames.wmxz.gamemaster.model.entity.Prohibition;
 import com.luckygames.wmxz.gamemaster.model.view.request.ProhibitionSearchQuery;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
+
+import java.util.List;
 
 public interface ProhibitionMapper extends ProhibitionEntityMapper<ProhibitionEntity> {
     @SelectProvider(type = ProhibitionSqlProvider.class, method = "searchPage")
@@ -14,4 +18,10 @@ public interface ProhibitionMapper extends ProhibitionEntityMapper<ProhibitionEn
 
     @SelectProvider(type = ProhibitionSqlProvider.class, method = "checkInfo")
     Prohibition checkInfo(Prohibition prohibition);
+
+    @SelectProvider(type = ProhibitionSqlProvider.class, method = "searchList")
+    List<Prohibition> searchList(Prohibition prohibition);
+
+    @Select("SELECT * FROM prohibition where player_id = #{playerId}")
+    Prohibition searchByPlayerId(@Param("playerId") Long playerId);
 }

@@ -9,6 +9,24 @@ public class Prohibition extends ProhibitionEntity {
     private String sign;
     private String checkInfo;
     private Integer checkType;
+    private String serverName;
+    private Integer status;
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getServerName() {
+        return serverName;
+    }
+
+    public void setServerName(String serverName) {
+        this.serverName = serverName;
+    }
 
     public Integer getCheckType() {
         return checkType;

@@ -1,26 +1,22 @@
 package com.luckygames.wmxz.gamemaster.controller;
 
 import com.github.pagehelper.Page;
+import com.luckygames.wmxz.gamemaster.common.constants.ResultCode;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.data.ChargeConfig;
-import com.luckygames.wmxz.gamemaster.data.GoodsConfig;
 import com.luckygames.wmxz.gamemaster.model.entity.Player;
-import com.luckygames.wmxz.gamemaster.model.entity.RechargeSimulation;
 import com.luckygames.wmxz.gamemaster.model.entity.Server;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
-import com.luckygames.wmxz.gamemaster.model.view.request.*;
+import com.luckygames.wmxz.gamemaster.model.view.request.PayQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.PlayerSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.*;
-import com.luckygames.wmxz.gamemaster.utils.JsonUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/simulationRecharge")
@@ -53,7 +49,13 @@ public class SimulationRechargeController extends BaseController {
     @RequestMapping(value = "/selectPlayer", method = {RequestMethod.GET, RequestMethod.POST})
     public Response selectPlayer(Player player) {
         Response response = new Response("simulationRecharge/add");
-        playerService.queryPlayer(player);
+
+        try {
+            playerService.queryPlayer(player);
+        } catch (Exception e) {
+            return new Response(ResultCode.PLAYERS_NOT_EXIST).json();
+        }
+
         List<Server> serverList = serverService.searchList();
         return response.request(player).data("player", player).data("serverList", serverList).data("chargeList", chargeList);
     }

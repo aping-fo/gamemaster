@@ -2,14 +2,14 @@ package com.luckygames.wmxz.gamemaster.model.view.request;
 
 import com.luckygames.wmxz.gamemaster.model.view.base.GMQuery;
 
-public class MailQuery extends GMQuery {
+public class ItemLogQuery extends GMQuery {
     private Long playerId;
     private String startDate;
     private String endDate;
     private Integer pageNumber;
     private Integer pageSize;
 
-    public MailQuery(Long serverId, Long playerId, String startDate, String endDate, Integer pageNumber, Integer pageSize) {
+    public ItemLogQuery(Long serverId, Long playerId, String startDate, String endDate, Integer pageNumber, Integer pageSize) {
         super(serverId);
         this.playerId = playerId;
         this.startDate = startDate;

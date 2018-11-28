@@ -26,10 +26,6 @@
                                 <option th:selected="${server.serverState==4}" value="4">关闭</option>
                             </select>
                         </td>
-                        <td>显示编号</td>
-                        <td><input name="showNumber" type="text" th:value="${server.showNumber}" class="required"></td>
-                    </tr>
-                    <tr>
                         <td>标签显示</td>
                         <td>
                             <div class="col-xs-1">
@@ -42,18 +38,24 @@
                                 <input th:checked="${server.label==7}" type="radio" name="label" value="7"/>代理服
                             </div>
                         </td>
-                        <td>后台端口</td>
-                        <td><input name="gmPort" type="text" class="required" th:value="${server.gmPort}"></td>
                     </tr>
                     <tr>
+                        <td>显示编号</td>
+                        <td><input name="showNumber" type="text" th:value="${server.showNumber}" class="required"></td>
                         <td>服务器IP</td>
                         <td><input type="text" name="ip" th:value="${server.ip}" class="required"/></td>
+                    </tr>
+                    <tr>
+                        <td>后台端口</td>
+                        <td><input name="gmPort" type="text" class="required" th:value="${server.gmPort}"></td>
                         <td>服务器端口</td>
                         <td><input type="text" name="port" th:value="${server.port}" class="required"/></td>
                     </tr>
                     <tr>
-                        <td>付款通知地址</td>
-                        <td><input type="text" name="payAddress" th:value="${server.payAddress}" class="required"></td>
+                        <td>充值端口</td>
+                        <td><input name="chargePort" type="text" th:value="${server.chargePort}" class="required"></td>
+                        <td>SDK端口</td>
+                        <td><input name="sdkPort" type="text" class="required" th:value="${server.sdkPort}"></td>
                     </tr>
                     <tr>
                         <td>开服时间</td>
@@ -73,8 +75,8 @@
                     <tr>
                         <td>白名单(账户1,账户2)</td>
                         <td><textarea name="whiteList" rows="3" style="resize:none;width: 152px" th:text="${server.whiteList}"></textarea></td>
-                        <td></td>
-                        <td></td>
+                        <td>数据库名称</td>
+                        <td><input name="dbName" type="text" class="required" th:value="${server.dbName}"></td>
                     </tr>
                 </table>
             </div>

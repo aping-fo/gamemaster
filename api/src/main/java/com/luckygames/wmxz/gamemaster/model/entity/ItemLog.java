@@ -7,6 +7,15 @@ public class ItemLog extends ItemLogEntity {
     private String serverName;
     private String reason;
     private String goodsName;
+    private Integer size;
+
+    public Integer getSize() {
+        return size;
+    }
+
+    public void setSize(Integer size) {
+        this.size = size;
+    }
 
     public String getGoodsName() {
         return goodsName;

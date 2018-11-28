@@ -1,9 +1,11 @@
 package com.luckygames.wmxz.gamemaster.controller;
 
 import com.github.pagehelper.Page;
+import com.luckygames.wmxz.gamemaster.common.constants.ResultCode;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.data.GoodsConfig;
 import com.luckygames.wmxz.gamemaster.model.entity.*;
+import com.luckygames.wmxz.gamemaster.model.entity.base.Title;
 import com.luckygames.wmxz.gamemaster.model.enums.MailType;
 import com.luckygames.wmxz.gamemaster.model.view.base.Response;
 import com.luckygames.wmxz.gamemaster.model.view.request.*;
@@ -36,6 +38,7 @@ public class OperatingToolsController extends BaseController {
     private static final String SUCCESS = "success";
     private static final String PLAYERID_NOT_EXISTENCE = "playerid_not_existence";// 玩家id不存在
     private static final String GOOD_NOT_EXISTENCE = "good_not_existence";// 物品不存在
+    public static final String RETURN_SUCCESS = "success";// 成功
 
     public static List<GoodsConfig> goodsList = new ArrayList<>();//物品列表
     public static AtomicInteger Activation_Code_batch = new AtomicInteger();
@@ -60,6 +63,8 @@ public class OperatingToolsController extends BaseController {
     private ForbiddenLogService forbiddenLogService;
     @Autowired
     private BroadcastService broadcastService;
+    @Autowired
+    private ProhibitionService prohibitionService;
 
     //邮件查询
     @RequestMapping(value = "/mailManage", method = {RequestMethod.GET, RequestMethod.POST})
@@ -85,7 +90,7 @@ public class OperatingToolsController extends BaseController {
     //邮件角色群发
     @RequestMapping(value = "/mailAddRole", method = {RequestMethod.GET, RequestMethod.POST})
     public Response mailAddRole(ServerSearchQuery query) {
-        List<Server> serverList = serverService.searchPage(query);
+        List<Server> serverList = serverService.searchList(query);
         MailLog mailLog = mailLogService.searchLast();
         return new Response("game/mailAddRole")
                 .data("mailType", MailType.SERVER)
@@ -98,7 +103,7 @@ public class OperatingToolsController extends BaseController {
     //邮件等级群发
     @RequestMapping(value = "/mailAddLevel", method = {RequestMethod.GET, RequestMethod.POST})
     public Response mailAddLevel(ServerSearchQuery query) {
-        List<Server> serverList = serverService.searchPage(query);
+        List<Server> serverList = serverService.searchList(query);
         MailLog mailLog = mailLogService.searchLast();
         return new Response("game/mailAddLevel")
                 .data("mailType", MailType.SERVER)
@@ -414,80 +419,94 @@ public class OperatingToolsController extends BaseController {
 
     //封禁列表
     @RequestMapping(value = "/forbiddenList", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response forbiddenList(ForbiddenSearchQuery query) {
-        Page<ForbiddenLog> forbiddenLogList = forbiddenLogService.searchPage(query);
+    public Response forbiddenList(ProhibitionSearchQuery query) {
+        return getForbiddenList(query);
+    }
 
-        forbiddenLogList.parallelStream()
-                .filter(f -> f.getOperateType() == 1 && f.getExpireTime().getTime() < new Date().getTime())
-                .forEach(f -> {
-                    f.setOperateType(0);
-                    forbiddenLogService.update(f);
-                });
-
-        return new Response("player/forbiddenList")
-                .request(query)
-                .data("list", forbiddenLogList);
+    private Response getForbiddenList(ProhibitionSearchQuery query) {
+        Response response = new Response();
+        Page<Prohibition> prohibitions = prohibitionService.searchPage(query);
+        prohibitions.forEach(p -> {
+            if (p.getClosureType() == 2) {
+                p.setStatus(3);
+            } else if (p.getEndTime().getTime() < System.currentTimeMillis()) {
+                p.setStatus(2);
+            } else {
+                p.setStatus(1);
+            }
+        });
+        response.view("player/forbiddenList").request(query).data("list", prohibitions);
+        return response;
     }
 
     //封禁增加
     @RequestMapping(value = "/forbiddenAdd", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response forbiddenAdd(ForbiddenLog forbiddenLog) {
+    public Response forbiddenAdd(Prohibition prohibition) {
         Response response = new Response("player/forbiddenAdd");
 
-        if (forbiddenLog.getPlayerName() != null) {
-            String playerString = adminService.getPlayerName(new PlayerNameQuery(forbiddenLog.getServerId(), forbiddenLog.getPlayerName()));
-            Map<String, Object> playerMap = JsonUtils.string2Map(playerString);
-            try {
-                if (playerMap != null) {
-                    forbiddenLog.setPlayerName(new String(playerMap.get("name").toString().getBytes("ISO-8859-1"), "utf-8"));
-                    forbiddenLog.setPlayerId(Long.valueOf(playerMap.get("playerId").toString()));
+        if (prohibition.getClosureAccount() != null) {
+            Date time = new Date();
+            time.setTime(time.getTime() + TimeUtil.ONE_HOUR * prohibition.getClosureTime());
+            prohibition.setEndTime(time);
+            String result = adminService.banRole(
+                    new BanQuery(
+                            prohibition.getServerId(),
+                            prohibition.getClosureType(),
+                            prohibition.getClosureWay(),
+                            prohibition.getClosureTime(),
+                            prohibition.getClosureAccount()
+                    )
+            );
+            if (result.equals(RETURN_SUCCESS)) {
+                Prohibition prohibition1 = prohibitionService.checkInfo(prohibition);
+                if (prohibition1 == null) {
+                    prohibitionService.save(prohibition);
+                } else {
+                    prohibition.setId(prohibition1.getId());
+                    prohibitionService.update(prohibition);
                 }
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
             }
-
-            //设置过期时间
-            Date date = new Date();
-            date.setTime(date.getTime() + forbiddenLog.getHour() * 1000 * 60 * 60);
-            forbiddenLog.setExpireTime(date);
-
-            forbiddenLogService.save(forbiddenLog);
-
-            response.view("player/forbiddenList");
-            ForbiddenSearchQuery query = new ForbiddenSearchQuery();
-            Page<ForbiddenLog> forbiddenLogList = forbiddenLogService.searchPage(query);
-            response.request(query).data("list", forbiddenLogList);
-
-//            new Thread(() -> adminService.banRole(new BanQuery(
-//                    forbiddenLog.getServerId(),
-//                    forbiddenLog.getOperateType(),
-//                    forbiddenLog.getForbiddenType(),
-//                    forbiddenLog.getPlayerId(),
-//                    forbiddenLog.getHour()
-//            ))).start();
+            return getForbiddenList(new ProhibitionSearchQuery());
         } else {
             List<Server> serverList = serverService.searchList();
-            response.data("serverList", serverList);
+            response.data("serverList", serverList).request(new ServerSearchQuery());
         }
+
         return response;
     }
 
     //封禁解除
     @RequestMapping(value = "/forbiddenAllowed", method = {RequestMethod.GET, RequestMethod.POST})
-    public Response forbiddenAllowed(ForbiddenLog forbiddenLog) {
-        Response response = new Response("player/forbiddenList");
-//        forbiddenLogService.update(forbiddenLog);
-//        ForbiddenSearchQuery query = new ForbiddenSearchQuery();
-//        Page<ForbiddenLog> forbiddenLogList = forbiddenLogService.searchPage(query);
-//        response.request(query).data("list", forbiddenLogList);
-//
-//        new Thread(() -> adminService.banRole(new BanQuery(
-//                forbiddenLog.getServerId(),
-//                forbiddenLog.getOperateType(),
-//                forbiddenLog.getForbiddenType(),
-//                forbiddenLog.getPlayerId(),
-//                forbiddenLog.getHour()
-//        ))).start();
+    public Response forbiddenAllowed(Prohibition prohibition) {
+        Response response = new Response("player/forbiddenAdd");
+
+        if (prohibition.getClosureAccount() != null) {
+            Date time = new Date();
+            time.setTime(time.getTime() + TimeUtil.ONE_HOUR * prohibition.getClosureTime());
+            prohibition.setEndTime(time);
+            String result = adminService.banRole(
+                    new BanQuery(
+                            prohibition.getServerId(),
+                            prohibition.getClosureType(),
+                            prohibition.getClosureWay(),
+                            prohibition.getClosureTime(),
+                            prohibition.getClosureAccount()
+                    )
+            );
+            if (result.equals(RETURN_SUCCESS)) {
+                Prohibition prohibition1 = prohibitionService.checkInfo(prohibition);
+                if (prohibition1 == null) {
+                    prohibitionService.save(prohibition);
+                } else {
+                    prohibition.setId(prohibition1.getId());
+                    prohibitionService.update(prohibition);
+                }
+            }
+            return getForbiddenList(new ProhibitionSearchQuery());
+        } else {
+            List<Server> serverList = serverService.searchList();
+            response.data("serverList", serverList).request(new ServerSearchQuery());
+        }
 
         return response;
     }
@@ -573,5 +592,20 @@ public class OperatingToolsController extends BaseController {
                 .request(query)
                 .data("list", broadcastList)
                 .data("serverList", serverList);
+    }
+
+    //称号激活
+    @RequestMapping(value = {"/activationTitle"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public Response activationTitle(Title title) {
+        if (title.getServerId() != null) {
+            String s = adminService.activationTitle(new ActivationTitleQuery(title.getServerId(), title.getPlayerId(), title.getType(), title.getValue()));
+            if ("success".equals(s)) {
+                return new Response(ResultCode.ACTIVATION_TITLE_SUCCESS).json();
+            } else {
+                return new Response(ResultCode.ACTIVATION_TITLE_FAILED).json();
+            }
+        } else {
+            return new Response("game/activationTitle");
+        }
     }
 }

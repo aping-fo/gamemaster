@@ -1394,6 +1394,196 @@ public class ServerEntityExample {
             addCriterion("`open` not between", value1, value2, "open");
             return (Criteria) this;
         }
+
+        public Criteria andDbNameIsNull() {
+            addCriterion("db_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbNameIsNotNull() {
+            addCriterion("db_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbNameEqualTo(String value) {
+            addCriterion("db_name =", value, "dbName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbNameNotEqualTo(String value) {
+            addCriterion("db_name <>", value, "dbName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbNameGreaterThan(String value) {
+            addCriterion("db_name >", value, "dbName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbNameGreaterThanOrEqualTo(String value) {
+            addCriterion("db_name >=", value, "dbName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbNameLessThan(String value) {
+            addCriterion("db_name <", value, "dbName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbNameLessThanOrEqualTo(String value) {
+            addCriterion("db_name <=", value, "dbName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbNameLike(String value) {
+            addCriterion("db_name like", value, "dbName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbNameNotLike(String value) {
+            addCriterion("db_name not like", value, "dbName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbNameIn(List<String> values) {
+            addCriterion("db_name in", values, "dbName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbNameNotIn(List<String> values) {
+            addCriterion("db_name not in", values, "dbName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbNameBetween(String value1, String value2) {
+            addCriterion("db_name between", value1, value2, "dbName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDbNameNotBetween(String value1, String value2) {
+            addCriterion("db_name not between", value1, value2, "dbName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargePortIsNull() {
+            addCriterion("charge_port is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargePortIsNotNull() {
+            addCriterion("charge_port is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargePortEqualTo(Integer value) {
+            addCriterion("charge_port =", value, "chargePort");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargePortNotEqualTo(Integer value) {
+            addCriterion("charge_port <>", value, "chargePort");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargePortGreaterThan(Integer value) {
+            addCriterion("charge_port >", value, "chargePort");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargePortGreaterThanOrEqualTo(Integer value) {
+            addCriterion("charge_port >=", value, "chargePort");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargePortLessThan(Integer value) {
+            addCriterion("charge_port <", value, "chargePort");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargePortLessThanOrEqualTo(Integer value) {
+            addCriterion("charge_port <=", value, "chargePort");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargePortIn(List<Integer> values) {
+            addCriterion("charge_port in", values, "chargePort");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargePortNotIn(List<Integer> values) {
+            addCriterion("charge_port not in", values, "chargePort");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargePortBetween(Integer value1, Integer value2) {
+            addCriterion("charge_port between", value1, value2, "chargePort");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargePortNotBetween(Integer value1, Integer value2) {
+            addCriterion("charge_port not between", value1, value2, "chargePort");
+            return (Criteria) this;
+        }
+
+        public Criteria andSdkPortIsNull() {
+            addCriterion("sdk_port is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSdkPortIsNotNull() {
+            addCriterion("sdk_port is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSdkPortEqualTo(Integer value) {
+            addCriterion("sdk_port =", value, "sdkPort");
+            return (Criteria) this;
+        }
+
+        public Criteria andSdkPortNotEqualTo(Integer value) {
+            addCriterion("sdk_port <>", value, "sdkPort");
+            return (Criteria) this;
+        }
+
+        public Criteria andSdkPortGreaterThan(Integer value) {
+            addCriterion("sdk_port >", value, "sdkPort");
+            return (Criteria) this;
+        }
+
+        public Criteria andSdkPortGreaterThanOrEqualTo(Integer value) {
+            addCriterion("sdk_port >=", value, "sdkPort");
+            return (Criteria) this;
+        }
+
+        public Criteria andSdkPortLessThan(Integer value) {
+            addCriterion("sdk_port <", value, "sdkPort");
+            return (Criteria) this;
+        }
+
+        public Criteria andSdkPortLessThanOrEqualTo(Integer value) {
+            addCriterion("sdk_port <=", value, "sdkPort");
+            return (Criteria) this;
+        }
+
+        public Criteria andSdkPortIn(List<Integer> values) {
+            addCriterion("sdk_port in", values, "sdkPort");
+            return (Criteria) this;
+        }
+
+        public Criteria andSdkPortNotIn(List<Integer> values) {
+            addCriterion("sdk_port not in", values, "sdkPort");
+            return (Criteria) this;
+        }
+
+        public Criteria andSdkPortBetween(Integer value1, Integer value2) {
+            addCriterion("sdk_port between", value1, value2, "sdkPort");
+            return (Criteria) this;
+        }
+
+        public Criteria andSdkPortNotBetween(Integer value1, Integer value2) {
+            addCriterion("sdk_port not between", value1, value2, "sdkPort");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

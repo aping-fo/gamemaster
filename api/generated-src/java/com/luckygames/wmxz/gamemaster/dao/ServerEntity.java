@@ -39,6 +39,12 @@ public class ServerEntity extends BaseNewEntity {
 
     private Integer open;
 
+    private String dbName;
+
+    private Integer chargePort;
+
+    private Integer sdkPort;
+
     private String whiteList;
 
     public Long getServerId() {
@@ -175,6 +181,30 @@ public class ServerEntity extends BaseNewEntity {
 
     public void setOpen(Integer open) {
         this.open = open;
+    }
+
+    public String getDbName() {
+        return dbName;
+    }
+
+    public void setDbName(String dbName) {
+        this.dbName = dbName == null ? null : dbName.trim();
+    }
+
+    public Integer getChargePort() {
+        return chargePort;
+    }
+
+    public void setChargePort(Integer chargePort) {
+        this.chargePort = chargePort;
+    }
+
+    public Integer getSdkPort() {
+        return sdkPort;
+    }
+
+    public void setSdkPort(Integer sdkPort) {
+        this.sdkPort = sdkPort;
     }
 
     public String getWhiteList() {

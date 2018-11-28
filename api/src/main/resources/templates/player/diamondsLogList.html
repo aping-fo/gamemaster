@@ -46,7 +46,6 @@
         <table class="table" width="100%" layoutH="137">
             <thead>
             <tr>
-                <th width="80">服务器</th>
                 <th width="80">等级</th>
                 <th width="80" align="right">变化前</th>
                 <th width="80" align="right">变化后</th>
@@ -57,7 +56,6 @@
             </thead>
             <tbody>
             <tr th:each="row,iterStat:${list}">
-                <td th:text="${row.serverName}"></td>
                 <td th:text="${row.lev}"></td>
                 <td th:text="${row.prev}"></td>
                 <td th:text="${row.next}"></td>

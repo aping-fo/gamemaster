@@ -8,6 +8,15 @@ public class DiamondsLog extends DiamondLogsEntity {
     private Integer diamond;
     private Integer count;
     private String reason;
+    private Integer size;
+
+    public Integer getSize() {
+        return size;
+    }
+
+    public void setSize(Integer size) {
+        this.size = size;
+    }
 
     public String getReason() {
         return reason;

@@ -40,7 +40,7 @@ public class InitController extends BaseController implements ApplicationRunner 
 
         //初始化服务器列表
         ServerSearchQuery query = new ServerSearchQuery();
-        AdminController.serverList = serverService.searchPage(query);
+        AdminController.serverList = serverService.searchList(query);
 
         //初始化公告
         AdminController.noticeList = noticeService.searchLast();

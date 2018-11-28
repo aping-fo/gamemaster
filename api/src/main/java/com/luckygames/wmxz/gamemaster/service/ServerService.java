@@ -24,9 +24,15 @@ public interface ServerService extends BaseNewService<ServerEntity> {
 
     List<Server> searchAllList();
 
-    void updateServerState(Long id, int serverState);
+    void updateServerState(Long id, int serverState,String maintenanceTips);
 
     void updateWhitelist(Long id, int enable,String whiteList);
 
     String combine(ServerSearchQuery query);
+
+    List<Server> servers(ServerSearchQuery query);
+
+    void updateServer(Server server);
+
+    void stop(Server server);
 }

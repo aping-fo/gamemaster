@@ -40,27 +40,23 @@ public class PlayerServiceImpl extends BaseNewServiceImpl<PlayerEntity> implemen
     }
 
     @Override
-    public Player queryPlayer(Player player) {
+    public Player queryPlayer(Player player) throws UnsupportedEncodingException {
         if (StringUtils.isNotBlank(player.getSearchValue())) {
             String playerString = adminService.getPlayerName(new PlayerNameQuery(player.getServerId(), player.getSearchValue()));
             Map<String, Object> playerMap = JsonUtils.string2Map(playerString);
-            try {
-                if (playerMap != null) {
-                    player.setName(new String(playerMap.get("name").toString().getBytes("ISO-8859-1"), "utf-8"));
-                    player.setPlayerId(Long.valueOf(playerMap.get("playerId").toString()));
-                    player.setLev(Short.valueOf(playerMap.get("lev").toString()));
-                    player.setSex(Byte.valueOf(playerMap.get("sex").toString()));
-                    player.setVocation(Byte.valueOf(playerMap.get("vocation").toString()));
-                    player.setCoin(Integer.valueOf(playerMap.get("coin").toString()));
-                    player.setDiamond(Integer.valueOf(playerMap.get("diamond").toString()));
-                    Server server = serverMapper.getByServerId(player.getServerId());
-                    player.setServerName(server.getServerName());
-                    player.setChargediamond(Integer.valueOf(playerMap.get("chargeDiamond").toString()));
-                    player.setRegtime(new Date(Long.parseLong(playerMap.get("regTime").toString())));
-                    player.setOnline(Boolean.parseBoolean(playerMap.get("online").toString()));
-                }
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
+            if (playerMap != null) {
+                player.setName(new String(playerMap.get("name").toString().getBytes("ISO-8859-1"), "utf-8"));
+                player.setPlayerId(Long.valueOf(playerMap.get("playerId").toString()));
+                player.setLev(Short.valueOf(playerMap.get("lev").toString()));
+                player.setSex(Byte.valueOf(playerMap.get("sex").toString()));
+                player.setVocation(Byte.valueOf(playerMap.get("vocation").toString()));
+                player.setCoin(Integer.valueOf(playerMap.get("coin").toString()));
+                player.setDiamond(Integer.valueOf(playerMap.get("diamond").toString()));
+                Server server = serverMapper.getByServerId(player.getServerId());
+                player.setServerName(server.getServerName());
+                player.setChargediamond(Integer.valueOf(playerMap.get("chargeDiamond").toString()));
+                player.setRegtime(new Date(Long.parseLong(playerMap.get("regTime").toString())));
+                player.setOnline(Boolean.parseBoolean(playerMap.get("online").toString()));
             }
         }
         return player;

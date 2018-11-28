@@ -5,11 +5,21 @@ import com.luckygames.wmxz.gamemaster.model.view.base.GMQuery;
 public class MergeServerQuery extends GMQuery {
     private Long fromServer;
     private String fromIp;
+    private String dbName;
 
-    public MergeServerQuery(Long serverId, Long fromServer, String fromIp) {
+    public MergeServerQuery(Long serverId, Long fromServer, String fromIp, String dbName) {
         super(serverId);
         this.fromServer = fromServer;
         this.fromIp = fromIp;
+        this.dbName = dbName;
+    }
+
+    public String getDbName() {
+        return dbName;
+    }
+
+    public void setDbName(String dbName) {
+        this.dbName = dbName;
     }
 
     public Long getFromServer() {

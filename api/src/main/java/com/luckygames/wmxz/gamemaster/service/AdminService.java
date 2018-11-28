@@ -1,9 +1,7 @@
 package com.luckygames.wmxz.gamemaster.service;
 
 import com.luckygames.wmxz.gamemaster.model.view.base.GMQuery;
-import com.luckygames.wmxz.gamemaster.model.view.request.ActivationCodeQuery;
-import com.luckygames.wmxz.gamemaster.model.view.request.MailLogQuery;
-import com.luckygames.wmxz.gamemaster.model.view.request.RecoveryGoodsQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,10 +13,12 @@ import java.util.Map;
 public interface AdminService {
     /**
      * 聊天监控
+     *
      * @param conten
      * @return
      */
-    public  String chatMonitoring(GMQuery conten);
+    public String chatMonitoring(GMQuery conten);
+
     /**
      * 公告
      *
@@ -37,7 +37,6 @@ public interface AdminService {
 
     /**
      * 邮件
-     *
      *
      * @param query {@link MailLogQuery}
      * @return
@@ -117,5 +116,23 @@ public interface AdminService {
 
     //合服
     public String combine(GMQuery query);
+
+    //更新服务器
+    public String updateServer(GMQuery query);
+
+    //钻石日志
+    public String diamondsLogList(GMQuery query);
+
+    //物品日志
+    public String itemLogList(GMQuery query);
+
+    //邮件日志
+    public String mailLogList(GMQuery query);
+
+    //激活称号
+    public String activationTitle(GMQuery query);
+
+    //获取玩家信息
+    public String getPlayerByPlayerId(GMQuery query);
 }
 

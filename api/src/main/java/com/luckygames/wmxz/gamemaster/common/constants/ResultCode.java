@@ -32,6 +32,12 @@ public enum ResultCode {
     CHAT_LOG_SAVE_FAILED(5002, "保存聊天记录失败"),
 
     MERGE_SERVER_FAILED(5003, "合服失败"),
+    ACTIVATION_TITLE_SUCCESS(5004, "激活成功"),
+    ACTIVATION_TITLE_FAILED(5005, "激活失败"),
+    PLAYERS_NOT_EXIST(5006, "玩家不存在"),
+    KICK_LINE_FAIL(5007, "踢人失败"),
+    KICK_LINE_SUCCESS(5008, "踢人成功"),
+    PROHIBITION_FAIL(5009, "封禁失败"),
 
     EXISTENCE_UNFILLED_FIELDS(6001, "存在未填字段");
 

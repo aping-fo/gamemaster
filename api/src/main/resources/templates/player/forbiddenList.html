@@ -7,10 +7,15 @@
         <div class="searchBar">
             <table class="searchContent">
                 <tr>
-                    <td>玩家名称</td>
-                    <td>
-                        <input type="text" name="playerName" th:value="${request.playerName}"/>
-                    </td>
+                    <!--<td>封禁类型</td>-->
+                    <!--<td><select name="closureWay">-->
+                        <!--<option th:value="1" th:selected="">禁言</option>-->
+                        <!--<option th:value="2">封号</option>-->
+                        <!--<option th:value="3">封IP</option>-->
+                        <!--<option th:value="4">封IMEI</option>-->
+                        <!--</select>-->
+                    <!--</td>-->
+                    <!--<td>封禁状态</td>-->
                     <td class="dateRange">
                         日期:
                         <input name="startDate" class="date readonly" readonly="readonly" type="text" th:value="${request.startDate}">
@@ -42,30 +47,30 @@
     <table class="table" layoutH="137" width="100%">
         <thead>
         <tr>
-            <th width="120">角色ID</th>
-            <th width="120">角色名</th>
             <th width="120">服务器</th>
+            <th width="120">创建时间</th>
             <th width="120">过期时间</th>
-            <th width="120">封禁时间</th>
-            <th width="120">状态</th>
-            <th width="120">原因</th>
+            <th width="120">封禁类型</th>
+            <th width="120">封禁目标</th>
+            <th width="120">当前状态</th>
             <th width="120">操作</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="row,iterStat:${list}">
-            <td th:text="${row.playerId}"></td>
-            <td th:text="${row.playerName}"></td>
             <td th:text="${row.serverName}"></td>
-            <td th:text="${#dates.format(row.expireTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
             <td th:text="${#dates.format(row.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-            <td th:if="${row.operateType==1 and row.forbiddenType==1}" th:text="禁止登录"></td>
-            <td th:if="${row.operateType==1 and row.forbiddenType==2}"  th:text="禁止聊天"></td>
-            <td th:if="${row.operateType!=1}" th:text="已解封"></td>
-            <td th:text="${row.reason}"></td>
+            <td th:text="${#dates.format(row.endTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:if="${row.closureWay==1}" th:text="禁言"></td>
+            <td th:if="${row.closureWay==2}" th:text="封号"></td>
+            <td th:if="${row.closureWay==3}" th:text="禁IP"></td>
+            <td th:if="${row.closureWay==4}" th:text="禁IMEI"></td>
+            <td th:text="${row.closureAccount}"></td>
+            <td th:if="${row.status==3}" th:text="已解封"></td>
+            <td th:if="${row.status==2}" th:text="已失效"></td>
+            <td th:if="${row.status==1}" th:text="封禁中"></td>
             <td>
-                <a title="踢下线" class="button" th:href="@{operatingTools/kickLine(playerId=${row.playerId},serverId=${row.serverId})}" target="navTab" mask="true"><span>踢下线</span></a>
-                <a th:if="${row.operateType==1}" title="解封" class="button" th:href="@{operatingTools/forbiddenAllowed(id=${row.id},playerId=${row.playerId},serverId=${row.serverId},operateType='2',forbiddenType=${row.forbiddenType})}" target="navTab" mask="true"><span>解封</span></a>
+                <a th:if="${row.status==1}" title="解封" class="button" th:href="@{operatingTools/forbiddenAllowed(serverId=${row.serverId},closureType=2,closureWay=${row.closureWay},closureAccount=${row.closureAccount},closureTime=${row.closureTime})}" target="navTab" mask="true"><span>解封</span></a>
             </td>
         </tr>
         <tr th:if="${list.size()==0}">

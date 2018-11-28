@@ -1,6 +1,5 @@
 package com.luckygames.wmxz.gamemaster.controller;
 
-import com.github.pagehelper.Page;
 import com.luckygames.wmxz.gamemaster.common.constants.ResultCode;
 import com.luckygames.wmxz.gamemaster.controller.base.BaseController;
 import com.luckygames.wmxz.gamemaster.model.entity.Server;
@@ -32,7 +31,7 @@ public class StartupController extends BaseController {
     @RequestMapping(value = "/server_list", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
     public List<Server> getServerList(ServerSearchQuery query) {
-        List<Server> serverList = serverService.searchPage(query);
+        List<Server> serverList = serverService.searchList(query);
         return serverList;
     }
 
@@ -43,10 +42,11 @@ public class StartupController extends BaseController {
         List<Server> list;
         ServerSearchQuery query = new ServerSearchQuery();
         if (server.getServerId() != null) {
+            server.setPayAddress("http://" + server.getIp() + ":" + server.getChargePort() + "/ingcle/recharge");
             serverService.save(server);
             response.view("startup/server_info");
             list = serverService.searchPage(query);
-            AdminController.serverList = list;
+            AdminController.serverList = serverService.searchList(query);
         } else {
             list = serverService.searchPage(query);
             response.view("startup/server_createnew");
@@ -65,13 +65,13 @@ public class StartupController extends BaseController {
             Long[] ids = server.getIds();
             int serverState = server.getServerState();
             for (Long id : ids) {
-                serverService.updateServerState(id, serverState);
+                serverService.updateServerState(id, serverState, server.getMaintenanceTips());
             }
             list = serverService.searchPage(query);
-            AdminController.serverList = list;
+            AdminController.serverList = serverService.searchList(query);
             response.view("startup/server_info");
         } else {
-            list = serverService.searchPage(query);
+            list = serverService.searchList(query);
             response.view("startup/server_changestate");
         }
         response.request(query).data("serverList", list);
@@ -83,11 +83,12 @@ public class StartupController extends BaseController {
     public Response edit(Server server) {
         Response response = new Response();
         if (server.getId() != null) {
+            server.setPayAddress("http://" + server.getIp() + ":" + server.getChargePort() + "/ingcle/recharge");
             serverService.update(server);
             ServerSearchQuery query = new ServerSearchQuery();
             List<Server> list = serverService.searchPage(query);
             response.request(query).data("serverList", list);
-            AdminController.serverList = list;
+            AdminController.serverList = serverService.searchList(query);
             response.view("startup/server_info");
         } else {
             Server server1 = serverService.getByServerId(server.getServerId());
@@ -102,6 +103,7 @@ public class StartupController extends BaseController {
     public Response whitelist(Server server) {
         Response response = new Response();
         ServerSearchQuery query = new ServerSearchQuery();
+        response.request(query);
         if (server.getIds() != null) {
             Long[] ids = server.getIds();
             int enable = server.getWhiteListEnable();
@@ -109,14 +111,14 @@ public class StartupController extends BaseController {
             for (Long id : ids) {
                 serverService.updateWhitelist(id, enable, whiteList);
             }
-            AdminController.serverList = serverService.searchPage(query);
+            AdminController.serverList = serverService.searchList(query);
             response.view("startup/server_info");
+            response.data("serverList", serverService.searchPage(query));
         } else {
             response.view("startup/server_whitelist");
+            response.data("serverList", serverService.searchList(query));
         }
 
-        List<Server> list = serverService.searchPage(query);
-        response.request(query).data("serverList", list);
         return response;
     }
 
@@ -124,18 +126,53 @@ public class StartupController extends BaseController {
     @RequestMapping(value = "/server_combine", method = {RequestMethod.GET, RequestMethod.POST})
     public Response combine(ServerSearchQuery query) {
         Response response = new Response();
-        Page<Server> list = serverService.searchPage(query);
-        response.data("serverList", list).request(query);
+        response.request(query);
         if (query.getFromServer() != null) {
             if (SUCCESS.equals(serverService.combine(query))) {
                 response.view("startup/server_info");
+                response.data("serverList",serverService.searchPage(query));
             } else {
                 return new Response(ResultCode.MERGE_SERVER_FAILED).json();
             }
         } else {
             response.view("startup/server_combine");
+            response.data("serverList",serverService.searchList(query));
         }
 
+        return response;
+    }
+
+    //更新服务器
+    @RequestMapping(value = "/update", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response update(Server server) {
+        Response response = new Response();
+        ServerSearchQuery query = new ServerSearchQuery();
+        response.request(query);
+        if (server.getIds() != null) {
+            serverService.updateServer(server);
+            response.view("startup/server_info")
+                    .data("serverList", serverService.searchPage(query));
+        } else {
+            response.view("startup/update")
+                    .data("serverList", serverService.searchList(query));
+        }
+        return response;
+    }
+
+    //停止服务器
+    @RequestMapping(value = "/stop", method = {RequestMethod.GET, RequestMethod.POST})
+    public Response stop(Server server) {
+        Response response = new Response();
+        ServerSearchQuery query = new ServerSearchQuery();
+        response.request(query);
+        if (server.getIds() != null) {
+            serverService.stop(server);
+            response.view("startup/server_info")
+                    .data("serverList", serverService.searchPage(query));
+        } else {
+            response.view("startup/stop")
+                    .data("serverList", serverService.searchList(query));
+        }
         return response;
     }
 }

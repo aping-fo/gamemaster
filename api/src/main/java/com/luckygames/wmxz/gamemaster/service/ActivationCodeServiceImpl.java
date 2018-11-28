@@ -41,7 +41,6 @@ public class ActivationCodeServiceImpl extends BaseNewServiceImpl<ActivationCode
     @Override
     public Page<ActivationCode> exportPage(ActivationCodeSearchQuery query) {
         return PageHelper.startPage(query.getPageNum(), query.getPageSize()).doSelectPage(() -> ActivationCodeMapper.exportPage(query));
-
     }
 
     @Override

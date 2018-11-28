@@ -1,5 +1,5 @@
 <div class="pageContent">
-    <form id="pagerForm" onsubmit="return closeNavTab(this);" action="startup/server_changestate" method="post">
+    <form id="pagerForm" onsubmit="return closeNavTab(this);" action="startup/update" method="post">
         <div class="pageFormContent" layoutH="57">
             <div class="searchBar">
                 <table width="98%" style="border-collapse:separate; border-spacing:5px;">
@@ -10,21 +10,6 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>修改服务器状态为</td>
-                        <td>
-                            <select name="serverState">
-                                <option value="1">开放</option>
-                                <option value="2">维护</option>
-                                <option value="3">隐藏</option>
-                                <option value="4">关闭</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>修改维护提示为</td>
-                        <td><textarea name="maintenanceTips" rows="3" style="resize:none;width: 152px" ></textarea></td>
-                    </tr>
                     <tr>
                         <td>
                             <label>区服类型</label>
@@ -47,7 +32,7 @@
                             </ul>
                         </td>
                     </tr>
-                    </tbody>
+                    <tbody>
                 </table>
             </div>
         </div>

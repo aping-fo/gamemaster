@@ -108,6 +108,18 @@ public class ServerEntitySqlProvider {
             sql.VALUES("`open`", "#{open,jdbcType=INTEGER}");
         }
         
+        if (record.getDbName() != null) {
+            sql.VALUES("db_name", "#{dbName,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getChargePort() != null) {
+            sql.VALUES("charge_port", "#{chargePort,jdbcType=INTEGER}");
+        }
+        
+        if (record.getSdkPort() != null) {
+            sql.VALUES("sdk_port", "#{sdkPort,jdbcType=INTEGER}");
+        }
+        
         if (record.getWhiteList() != null) {
             sql.VALUES("white_list", "#{whiteList,jdbcType=LONGVARCHAR}");
         }
@@ -141,6 +153,9 @@ public class ServerEntitySqlProvider {
         sql.SELECT("server_group");
         sql.SELECT("channel");
         sql.SELECT("`open`");
+        sql.SELECT("db_name");
+        sql.SELECT("charge_port");
+        sql.SELECT("sdk_port");
         sql.SELECT("white_list");
         sql.FROM("server");
         applyWhere(sql, example, false);
@@ -178,6 +193,9 @@ public class ServerEntitySqlProvider {
         sql.SELECT("server_group");
         sql.SELECT("channel");
         sql.SELECT("`open`");
+        sql.SELECT("db_name");
+        sql.SELECT("charge_port");
+        sql.SELECT("sdk_port");
         sql.FROM("server");
         applyWhere(sql, example, false);
         
@@ -275,6 +293,18 @@ public class ServerEntitySqlProvider {
             sql.SET("`open` = #{record.open,jdbcType=INTEGER}");
         }
         
+        if (record.getDbName() != null) {
+            sql.SET("db_name = #{record.dbName,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getChargePort() != null) {
+            sql.SET("charge_port = #{record.chargePort,jdbcType=INTEGER}");
+        }
+        
+        if (record.getSdkPort() != null) {
+            sql.SET("sdk_port = #{record.sdkPort,jdbcType=INTEGER}");
+        }
+        
         if (record.getWhiteList() != null) {
             sql.SET("white_list = #{record.whiteList,jdbcType=LONGVARCHAR}");
         }
@@ -307,6 +337,9 @@ public class ServerEntitySqlProvider {
         sql.SET("server_group = #{record.serverGroup,jdbcType=VARCHAR}");
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         sql.SET("`open` = #{record.open,jdbcType=INTEGER}");
+        sql.SET("db_name = #{record.dbName,jdbcType=VARCHAR}");
+        sql.SET("charge_port = #{record.chargePort,jdbcType=INTEGER}");
+        sql.SET("sdk_port = #{record.sdkPort,jdbcType=INTEGER}");
         sql.SET("white_list = #{record.whiteList,jdbcType=LONGVARCHAR}");
         
         ServerEntityExample example = (ServerEntityExample) parameter.get("example");
@@ -338,6 +371,9 @@ public class ServerEntitySqlProvider {
         sql.SET("server_group = #{record.serverGroup,jdbcType=VARCHAR}");
         sql.SET("channel = #{record.channel,jdbcType=VARCHAR}");
         sql.SET("`open` = #{record.open,jdbcType=INTEGER}");
+        sql.SET("db_name = #{record.dbName,jdbcType=VARCHAR}");
+        sql.SET("charge_port = #{record.chargePort,jdbcType=INTEGER}");
+        sql.SET("sdk_port = #{record.sdkPort,jdbcType=INTEGER}");
         
         ServerEntityExample example = (ServerEntityExample) parameter.get("example");
         applyWhere(sql, example, true);

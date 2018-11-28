@@ -18,6 +18,6 @@ public interface NoticeMapper extends BroadcastEntityMapper<NoticeEntity> {
     @Select("select * from notice where id = #{id}")
     Notice selectById(@Param("id") Long id);
 
-    @Select("SELECT * from(SELECT * FROM notice ORDER by update_time desc) t1 group by t1.notice_group ORDER BY t1.update_time desc")
+    @Select("SELECT * from(SELECT * FROM notice where enable=1 ORDER by update_time desc) t1 group by t1.notice_group ORDER BY t1.update_time desc")
     List<Notice> searchLast();
 }

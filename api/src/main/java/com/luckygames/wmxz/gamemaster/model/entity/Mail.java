@@ -7,6 +7,15 @@ public class Mail extends MailEntity {
     private String serverName;
     private String reason;
     private String goodsName;
+    private Integer size;
+
+    public Integer getSize() {
+        return size;
+    }
+
+    public void setSize(Integer size) {
+        this.size = size;
+    }
 
     public String getReason() {
         return reason;

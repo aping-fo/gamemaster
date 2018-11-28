@@ -8,6 +8,7 @@ import com.luckygames.wmxz.gamemaster.dao.AccountLogEntity;
 import com.luckygames.wmxz.gamemaster.model.entity.*;
 import com.luckygames.wmxz.gamemaster.model.view.request.BanQuery;
 import com.luckygames.wmxz.gamemaster.model.view.request.KickLineQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.ServerSearchQuery;
 import com.luckygames.wmxz.gamemaster.service.*;
 import com.luckygames.wmxz.gamemaster.utils.HttpRequestUtil;
 import com.luckygames.wmxz.gamemaster.utils.TimeUtil;
@@ -145,7 +146,7 @@ public class AdminController extends BaseController {
     //封禁
     @RequestMapping(value = "/prohibition", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
-    public String accountLog(Prohibition prohibition) {
+    public String prohibition(Prohibition prohibition) {
         JSONObject json = new JSONObject();
         if (!GAMEID.equals(prohibition.getGameId())) {
             json.put("code", 2);
@@ -428,5 +429,12 @@ public class AdminController extends BaseController {
             });
             return false;
         }
+    }
+
+    //获取服务器列表
+    @RequestMapping(value = "/servers", method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public List<Server> servers(ServerSearchQuery query) {
+        return serverService.servers(query);
     }
 }

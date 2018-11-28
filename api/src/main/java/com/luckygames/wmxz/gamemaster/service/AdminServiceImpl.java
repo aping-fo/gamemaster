@@ -3,9 +3,7 @@ package com.luckygames.wmxz.gamemaster.service;
 import com.luckygames.wmxz.gamemaster.common.constants.AdminUrl;
 import com.luckygames.wmxz.gamemaster.model.entity.Server;
 import com.luckygames.wmxz.gamemaster.model.view.base.GMQuery;
-import com.luckygames.wmxz.gamemaster.model.view.request.ActivationCodeQuery;
-import com.luckygames.wmxz.gamemaster.model.view.request.BackendCommand;
-import com.luckygames.wmxz.gamemaster.model.view.request.RecoveryGoodsQuery;
+import com.luckygames.wmxz.gamemaster.model.view.request.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -131,6 +129,36 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public String combine(GMQuery query) {
         return commonRequest(query.encodeReqParams(), restTemplate, query.getServerId(), AdminUrl.MERGE_SERVER.getUrl());
+    }
+
+    @Override
+    public String updateServer(GMQuery query) {
+        return commonRequest(query.encodeReqParams(), restTemplate, query.getServerId(), AdminUrl.UPDATE_SERVER.getUrl());
+    }
+
+    @Override
+    public String diamondsLogList(GMQuery query) {
+        return commonRequest(query.encodeReqParams(), restTemplate, query.getServerId(), AdminUrl.DIAMONDS_LOG.getUrl());
+    }
+
+    @Override
+    public String itemLogList(GMQuery query) {
+        return commonRequest(query.encodeReqParams(), restTemplate, query.getServerId(), AdminUrl.ITEM_LOG.getUrl());
+    }
+
+    @Override
+    public String mailLogList(GMQuery query) {
+        return commonRequest(query.encodeReqParams(), restTemplate, query.getServerId(), AdminUrl.MAIL_LOG.getUrl());
+    }
+
+    @Override
+    public String activationTitle(GMQuery query) {
+        return commonRequest(query.encodeReqParams(), restTemplate, query.getServerId(), AdminUrl.ACTIVATION_TITLE.getUrl());
+    }
+
+    @Override
+    public String getPlayerByPlayerId(GMQuery query) {
+        return commonRequest(query.encodeReqParams(), restTemplate, query.getServerId(), AdminUrl.GETINFO.getUrl());
     }
 
     public String reqBackendCommond(BackendCommand command) {
